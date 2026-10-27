@@ -1,0 +1,31 @@
+# 运行环境
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# 模型与大数据（引用哈希，不反复提交）
+*.pt
+*.npz
+*.zip
+models/
+
+# 实验与运行产物
+runs/
+experiments/runs/
+
+# AI 协作工具痕迹
+.superpowers/
+
+# 前端（未来）
+node_modules/
+dist/
+frontend/dist/
+*.tsbuildinfo
+
+# 操作系统
+Thumbs.db
+Desktop.ini
+.DS_Store

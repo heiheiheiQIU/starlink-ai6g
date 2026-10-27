@@ -1,0 +1,15 @@
+{
+  "kind": "A1_checkpoint_evidence",
+  "model_id": "battery_lstm_source_only",
+  "raw_fraction": [
+    0.8055816292762756,
+    0.7995225787162781
+  ],
+  "reason_codes": [
+    "NATIVE_RUL_RESTORE_REQUIRES_FUTURE_RUN_MAX"
+  ],
+  "rul_est": null,
+  "rul_unit": "cycles",
+  "status": "native_rul_unavailable",
+  "step_unit": "cycle"
+}

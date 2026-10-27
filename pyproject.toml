@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools==75.8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "starlink-ai6g"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy==2.1.3", "torch==2.5.1"]
+
+[project.optional-dependencies]
+test = ["pytest==8.3.5"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

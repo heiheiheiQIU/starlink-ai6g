@@ -1,0 +1,10 @@
+{
+  "error_code": "WINDOW_NOT_AVAILABLE",
+  "message": "WINDOW_NOT_AVAILABLE: A selected window extends past now_index",
+  "now_index": 13,
+  "sample_indices": [
+    0
+  ],
+  "status": "rejected",
+  "step_unit": "cycle"
+}

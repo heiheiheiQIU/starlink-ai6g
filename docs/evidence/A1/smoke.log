@@ -1,0 +1,3 @@
+A1 audit generated: 7 manifest-verified assets; source SHA256=DE8EA216CC7F604B277EEFCAC7054CD6E439C22F413BDB18B870F59B11F55499
+Lineage: fixed=585/585; original=262/384, missing=201
+Inference: two source LSTM and two target BiLSTM windows; native RUL unavailable

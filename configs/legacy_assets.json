@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "legacy_root": "../交付包/星地智调_团队研发包_2026-10-26_v3/assets/legacy_battery",
+  "source_npz": "data/processed/battery_source_windows.npz",
+  "target_npz": "data/processed/battery_target_windows.npz",
+  "source_csv": "data/processed/public_battery.csv",
+  "fixed_source_csv": "results/p3-1/public_battery_fixed.csv",
+  "checkpoints": {
+    "lstm_source": "results/models/battery_lstm_source_only.pt",
+    "lstm_finetune": "results/models/battery_lstm_finetune_best.pt",
+    "bilstm_coral": "results/models/battery_bilstm_coral_best.pt"
+  }
+}

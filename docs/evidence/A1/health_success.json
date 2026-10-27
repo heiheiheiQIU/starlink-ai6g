@@ -1,0 +1,45 @@
+{
+  "kind": "A1_checkpoint_evidence",
+  "models": {
+    "bilstm_coral": {
+      "checkpoint_sha256": "756B58B7D528A49F3CFD03FB706B175139CEB3A1E3F4A834BAD6F2499F425694",
+      "model_id": "battery_bilstm_coral_best",
+      "step_unit": "orbit",
+      "windows": [
+        {
+          "available_index": 14,
+          "raw_fraction": 1.1702452898025513,
+          "run_id": "battery_0001",
+          "start_index": 0
+        },
+        {
+          "available_index": 17,
+          "raw_fraction": 1.1421915292739868,
+          "run_id": "battery_0001",
+          "start_index": 3
+        }
+      ]
+    },
+    "lstm_source": {
+      "checkpoint_sha256": "3145020C539630E53DF15742033167B1F7FB667C946D01A7DD0A7D4106B9D893",
+      "model_id": "battery_lstm_source_only",
+      "step_unit": "cycle",
+      "windows": [
+        {
+          "available_index": 14,
+          "raw_fraction": 0.8055816292762756,
+          "run_id": "B0005",
+          "start_index": 0
+        },
+        {
+          "available_index": 17,
+          "raw_fraction": 0.7995225787162781,
+          "run_id": "B0005",
+          "start_index": 3
+        }
+      ]
+    }
+  },
+  "note": "Raw normalized predictions from delivered NPZ windows; not a B HealthEstimate",
+  "status": "success"
+}
