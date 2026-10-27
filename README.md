@@ -4,6 +4,18 @@
 
 团队先读：[协作规则](CONTRIBUTING.md)、[公共接口合同](docs/contracts/README.md)、[下一阶段任务](docs/team/NEXT_TASKS_2026-10-27.md)和[任务板](docs/task_board.csv)。三人只在本仓库协作，不再通过反复制作ZIP同步日常代码。
 
+远程私有仓库：<https://github.com/heiheiheiQIU/starlink-ai6g>。成员获得访问权限后执行：
+
+```powershell
+git clone https://github.com/heiheiheiQIU/starlink-ai6g.git
+cd starlink-ai6g
+git switch feature/ai          # A
+git switch feature/simulator   # B（在自己的克隆目录执行）
+git switch feature/frontend    # C（在自己的克隆目录执行）
+```
+
+不要三人共用同一个本地目录；每人独立克隆，只向自己的角色分支提交，再通过Pull Request合入`main`。
+
 ## 当前验收状态
 
 - A1离线资产审计和严格权重推理：accepted_with_notes；本机原47项测试通过，增加14项边界测试并修复后61项通过。
@@ -51,6 +63,6 @@ Remove-Item Env:PYTHONPATH
 - 新审查日志及重新生成的证据在工作区`审查输出/成员A验收_2026-10-27/`，不要混淆作者原日志与本机重跑日志。
 - 审查结论见`../审查输出/成员A验收_2026-10-27/审查与合并报告.md`。
 
-原目录的`.git`指向队友电脑worktree，原`.venv`绑定队友解释器；两者均未复制。本站已为集成目录重新初始化独立Git仓库，并建立`main`、`feature/ai`、`feature/simulator`、`feature/frontend`；当前提交以`git rev-parse HEAD`为准。这不是恢复队友提交历史，当前也没有远程推送。
+原目录的`.git`指向队友电脑worktree，原`.venv`绑定队友解释器；两者均未复制。本站已为集成目录重新初始化独立Git仓库，并建立`main`、`feature/ai`、`feature/simulator`、`feature/frontend`；当前提交以`git rev-parse HEAD`为准。这不是恢复队友提交历史。远程`origin`为上述私有仓库，协作与合并以远程分支和Pull Request记录为准。
 
 禁止把raw_fraction直接当SOC、容量、能量或在线原生RUL；允许预测大于1，不私自裁剪。旧CSV标签吻合只能证明标签对应，不证明全部X、标准化器和原始数据谱系已经重建。
