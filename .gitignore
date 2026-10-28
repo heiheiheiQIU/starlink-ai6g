@@ -12,6 +12,7 @@ __pycache__/
 *.npz
 *.zip
 models/
+交付包/
 
 # 实验与运行产物
 runs/

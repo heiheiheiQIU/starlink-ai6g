@@ -31,7 +31,7 @@ git switch feature/frontend    # C（在自己的克隆目录执行）
 
 ## 输入与环境
 
-`configs/legacy_assets.json`已适配本工作区，指向`../交付包/星地智调_团队研发包_2026-10-26_v3/assets/legacy_battery`。使用v3是为了保持A原始审计的资产基准，不表示v3是最新团队说明。不要移动或改写冻结资产。
+`configs/legacy_assets.json`已适配统一工作区，指向仓库内被Git忽略的`交付包/星地智调_团队研发包_2026-10-26_v3/assets/legacy_battery`。使用v3是为了保持A原始审计的资产基准，不表示v3是最新团队说明。不要改写冻结资产，也不要把`交付包/`提交到Git。
 
 推荐独立环境（需机器安装Python 3.12；安装依赖需要网络/本地轮子）：
 
