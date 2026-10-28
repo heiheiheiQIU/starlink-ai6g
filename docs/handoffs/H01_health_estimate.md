@@ -32,6 +32,7 @@ estimate_health_core(
 ## 复现
 
 ```powershell
+New-Item -ItemType Directory -Force runs\h01_draft_test | Out-Null
 .\.venv\Scripts\python.exe -m pytest tests\test_health_estimator.py -q `
   --noconftest -p no:cacheprovider --basetemp runs\h01_draft_test\pytest
 ```
