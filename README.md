@@ -1,5 +1,7 @@
 # 星地智调产品集成目录
 
+2026-10-29 H00审查修复：三项候选集合/预测版本/缺测原因问题已修，新增显式教师任务引用校验；契约117项及主工作区全库178项通过。当前仍待A/C签收，见[修订交接](docs/handoffs/H00_revision_2026-10-29.md)和[本次验证证据](docs/evidence/B/H00_revision_2026-10-29/README.md)。下列2026-10-28记录为历史状态。
+
 2026-10-28 H00候选进展：B已提供公共类型、JSON Schema、六场景fixture及75项契约测试，等待A/C签收；仿真/guard/API未实现。先看[合同与字段说明](docs/contracts/README.md)、[H00交接](docs/handoffs/H00_contract.md)及[验证记录](docs/evidence/B/H00_2026-10-28/README.md)。
 
 2026-10-28 B本机准备进展：独立环境安装、资产核验与离线真实推理已执行；默认资产路径仍不适配本机。同提交隔离快照仅替换配置后61项测试通过，不能等同于主仓库默认命令通过。详细条件、失败项及日志见[B的R0基线报告](docs/evidence/B/R0_2026-10-28/README.md)，日常入口见[B_WORKSPACE.md](B_WORKSPACE.md)。以下2026-10-27记录保留为历史集成说明。

@@ -1606,6 +1606,7 @@
           "items": {
             "$ref": "#/$defs/TeacherCandidateScore"
           },
+          "minItems": 1,
           "title": "Candidate Scores",
           "type": "array"
         },

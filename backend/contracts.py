@@ -159,6 +159,8 @@ class Observation(ContractModel):
         window_ids = [window.window_id for window in self.forecast_windows]
         if len(ids) != len(set(ids)) or len(window_ids) != len(set(window_ids)):
             raise ValueError("Task and window IDs must be unique")
+        if any(window.forecast_version != self.forecast_version for window in self.forecast_windows):
+            raise ValueError("All windows must belong to the Observation forecast batch")
         if self.health.available_at_s > self.sim_time_s:
             raise ValueError("Health is not yet available")
         if any(task.arrival_s > self.sim_time_s for task in self.tasks):
@@ -458,6 +460,8 @@ class PolicyResult(ContractModel):
                 raise ValueError(f"Missing metric {name} requires a reason")
         if set(self.metric_reasons) - metric_names:
             raise ValueError("Unknown metric reason key")
+        if any(getattr(self, name) is not None for name in self.metric_reasons):
+            raise ValueError("Only null metrics may have missing-value reasons")
         if self.sample_count == 0 and self.weighted_on_time_rate is not None:
             raise ValueError("Empty task denominator must not produce a rate")
         if self.success_payload_bytes == 0:
@@ -503,10 +507,33 @@ class TeacherCandidateScore(CandidateScore):
 
 
 class TeacherResult(ContractModel):
-    candidate_scores: list[TeacherCandidateScore]
+    candidate_scores: Annotated[list[TeacherCandidateScore], Field(min_length=1)]
     solver_status: NonEmpty
     gap: NonNegativeFloat | None
     elapsed_ms: NonNegativeFloat
+
+    @model_validator(mode="after")
+    def complete_candidate_set(self):
+        keys = [(score.task_id, score.mode) for score in self.candidate_scores]
+        if len(keys) != len(set(keys)):
+            raise ValueError("Teacher candidate keys must be unique")
+        idle = [score for score in self.candidate_scores if score.mode == "idle"]
+        if len(idle) != 1 or not idle[0].feasible:
+            raise ValueError("Teacher candidates require exactly one feasible idle")
+        return self
+
+
+def validate_teacher_result(obs: Observation, result: TeacherResult | dict) -> TeacherResult:
+    """Validate full teacher labels against the visible Observation, without mutation."""
+    try:
+        observed = Observation.model_validate(obs)
+        parsed = TeacherResult.model_validate(result)
+        task_ids = {task.task_id for task in observed.tasks}
+        if any(score.mode != "idle" and score.task_id not in task_ids for score in parsed.candidate_scores):
+            raise ValueError("Teacher candidate must reference the visible queue")
+        return parsed
+    except (ValidationError, ValueError, TypeError) as error:
+        raise ContractViolation("INVALID_TEACHER_RESULT", str(error)) from error
 
 
 class SimulatorState(Protocol):

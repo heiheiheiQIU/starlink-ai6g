@@ -1,5 +1,7 @@
 # H00公共合同候选交接
 
+2026-10-29修订入口：[H00审查修复交接](H00_revision_2026-10-29.md)。A/C对旧提交的changes_requested已按三项要求修复，原文和旧证据保留历史条件；当前等待修复提交的新回执。
+
 日期：2026-10-28（Asia/Hong_Kong）。B → A/C。任务B-N1/R1，schema_version=1.0，**ready_for_review，尚未accepted**。
 
 ## 交付范围

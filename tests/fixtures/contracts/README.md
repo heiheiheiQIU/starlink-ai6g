@@ -13,3 +13,6 @@
 NaN/Inf不是合法JSON，文件用字符串错误样例示意；运行时非有限浮点由pytest直接构造验证。健康参数和输出全部synthetic。
 
 在仓库根运行 `python -m pytest tests/test_contracts.py -q --noconftest -p no:cacheprovider`，可用Pydantic及独立JSON Schema校验器检查样例。完整字段/单位及语义限制见docs/contracts/README.md。
+## 2026-10-29审查补充
+
+`review_regressions.json`包含教师候选集合、预测版本与缺测原因反例；取`examples[].payload`校验。`schema_rejects=false`表示结构Schema可通过，必须用Python模型验证语义。跨Observation的教师任务引用还须调用`validate_teacher_result`。所有新增样例仍为契约样例、非实验结果。

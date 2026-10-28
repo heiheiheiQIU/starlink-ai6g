@@ -2,13 +2,15 @@
 
 更新：2026-10-28。角色：通信仿真、公共合同、后端与集成。
 
+2026-10-29修复：H00三项审查问题已修，新增显式教师任务引用校验；契约117项、全库178项通过，等待A/C对修复提交复测。当前入口为[H00修订交接](docs/handoffs/H00_revision_2026-10-29.md)，下文同步记录中的changes_requested是修复前状态。
+
 2026-10-29同步：A/C最新分支已合入本地；R0已获A的`accepted_with_notes`，H00为`changes_requested`，下一项是修复三类合同缺口。资产已按A的新默认布局恢复，主工作区全库136项通过。最新状态、版本及复现条件见[同步与后续工作准备](docs/handoffs/B_sync_2026-10-29.md)；下文2026-10-28记录保留为历史条件。
 
 ## 从哪里开始
 
 本阶段交付先看[B阶段总结与交付说明](docs/contributions/B/阶段总结与交付_2026-10-28.md)，其中列出已完成内容、验证条件、A/C接收步骤和遗留事项。
 
-1. 先读[最新同步记录](docs/handoffs/B_sync_2026-10-29.md)及[我的工作路线](docs/superpowers/plans/2026-10-28-b-work-roadmap.md)。当前先处理A/C的H00修改要求，复测签收后推进R2最小环境。
+1. 先读[H00修订交接](docs/handoffs/H00_revision_2026-10-29.md)及[我的工作路线](docs/superpowers/plans/2026-10-28-b-work-roadmap.md)。当前等待A/C对修复提交复测签收，随后推进R2最小环境。
 2. 开发目录是本文件所在的 `starlink-ai6g`；使用 `feature/simulator`，通过PR交接到main。
 3. 开工先执行 `git status --short --branch`，确认分支、已有修改及队友交接。不要用reset/clean删除看不懂的修改。
 4. 任务做到 `ready_for_review` 后交给对应成员；只有接收人能标记 `accepted`。

@@ -1,10 +1,10 @@
 task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
-B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
+B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,,默认资产布局已按A方案恢复并核验;主工作区178测试通过;见B_sync_2026-10-29
 A-N1,A,in_progress,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,H00未冻结前不接合同,先内部实现+三样例；证据补F1输出交叉核对与F5输入哈希
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
 A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试；补F3权重对应冻结JSON映射
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
-B-N1,B,changes_requested,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均changes_requested修复清单已收敛,修复3项后通知A/C复跑,"①TeacherResult非空+键唯一+恰一个idle且feasible=true；②forecast_version全Window=顶层；③metric_reasons只允许null指标携带原因；各补失败测试"
+B-N1,B,ready_for_review,2026-10-28T18:00:00+08:00,docs/handoffs/H00_revision_2026-10-29.md,A+C,三项审查已修;原75+新增42契约通过;待A/C复测,等待修复提交的A/C签收,A/C复跑反例及Schema;本人新增回执;随后进入B-N2
 B-N2,B,not_started,2026-10-30T20:00:00+08:00,backend/simulator/,A,,依赖B-N1,先打通六个契约样例
 B-N3,B,not_started,2026-10-31T20:00:00+08:00,backend/api/,C,,依赖B-N2,提供三类run fixture
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
