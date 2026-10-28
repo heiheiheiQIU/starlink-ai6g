@@ -71,3 +71,142 @@ def test_rejects_integer_token_exceeding_parser_limit(tmp_path):
     with pytest.raises(HealthInputError) as error:
         load_health_observation_config(path)
     assert error.value.code == "HEALTH_CONFIG_INVALID"
+
+
+from backend.health.estimator import estimate_health_core
+
+
+def synthetic_observation(**changes):
+    payload = {
+        "source": "synthetic",
+        "soc_observed": 0.60,
+        "capacity_Wh_observed": 12.0,
+        "observed_at_s": 8.0,
+        "available_at_s": 10.0,
+    }
+    payload.update(changes)
+    return payload
+
+
+def test_estimates_deterministic_conservative_health_bounds():
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    history = [synthetic_observation()]
+
+    first = estimate_health_core(history, 10.0, config)
+    second = estimate_health_core(history, 10.0, config)
+
+    assert first == second
+    assert first.soc_est == 0.60
+    assert first.soc_lower == pytest.approx(0.55)
+    assert first.capacity_Wh_est == 12.0
+    assert first.capacity_lower_Wh == 11.0
+    assert first.energy_lower_Wh == pytest.approx(6.05)
+    assert first.observed_at_s == 8.0
+    assert first.available_at_s == 10.0
+    assert first.config_sha256 == config.config_sha256
+    assert first.rul_est is None
+    assert first.rul_unit is None
+    assert first.reason_codes == (
+        "SYNTHETIC_HEALTH_OBSERVATION",
+        "SCENARIO_CONSERVATIVE_BOUND",
+        "RUL_UNAVAILABLE",
+    )
+
+
+def test_energy_lower_bound_has_explicit_wh_units(tmp_path):
+    payload = valid_config_payload() | {
+        "soc_abs_error": 0.10,
+        "capacity_abs_error_Wh": 2.0,
+    }
+    path = tmp_path / "units.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+    config = load_health_observation_config(path)
+
+    estimate = estimate_health_core([synthetic_observation()], 10.0, config)
+
+    assert estimate.soc_lower == pytest.approx(0.5)
+    assert estimate.capacity_lower_Wh == pytest.approx(10.0)
+    assert estimate.energy_lower_Wh == pytest.approx(5.0)
+
+
+
+def assert_health_error(code, history, now_s=10.0):
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    with pytest.raises(HealthInputError) as error:
+        estimate_health_core(history, now_s, config)
+    assert error.value.code == code
+
+
+def test_unordered_history_uses_latest_available_observation():
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    older = synthetic_observation(soc_observed=0.4, observed_at_s=2.0, available_at_s=3.0)
+    newest = synthetic_observation(soc_observed=0.7, observed_at_s=7.0, available_at_s=9.0)
+
+    estimate = estimate_health_core([older, newest], 9.0, config)
+
+    assert estimate.soc_est == 0.7
+
+
+def test_future_observation_does_not_change_current_estimate():
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    future = synthetic_observation(soc_observed=0.99, observed_at_s=20.0, available_at_s=21.0)
+    current = synthetic_observation(soc_observed=0.6)
+
+    estimate = estimate_health_core([future, current], 10.0, config)
+
+    assert estimate.soc_est == 0.6
+
+
+def test_only_future_observation_has_no_available_result():
+    assert_health_error(
+        "NO_AVAILABLE_OBSERVATION",
+        [synthetic_observation(observed_at_s=20.0, available_at_s=21.0)],
+    )
+
+
+def test_empty_history_has_no_available_result():
+    assert_health_error("NO_AVAILABLE_OBSERVATION", [])
+
+
+def test_latest_time_tie_is_rejected_without_input_order_guessing():
+    first = synthetic_observation(soc_observed=0.6)
+    second = synthetic_observation(soc_observed=0.7)
+    assert_health_error("AMBIGUOUS_OBSERVATION", [first, second])
+
+
+
+@pytest.mark.parametrize("history", [None, {}, "synthetic", ["not-a-record"]])
+def test_invalid_history_shape_is_controlled(history):
+    expected = "HISTORY_INVALID" if not isinstance(history, list) else "OBSERVATION_INVALID"
+    assert_health_error(expected, history)
+
+
+@pytest.mark.parametrize(
+    "record",
+    [
+        synthetic_observation(source="simulation_truth"),
+        synthetic_observation(soc_observed=True),
+        synthetic_observation(soc_observed=float("nan")),
+        synthetic_observation(soc_observed=1.1),
+        synthetic_observation(capacity_Wh_observed=0.0),
+        synthetic_observation(capacity_Wh_observed=float("inf")),
+        synthetic_observation(observed_at_s=-1.0),
+        synthetic_observation(observed_at_s=11.0, available_at_s=10.0),
+        synthetic_observation() | {"soc_true": 0.9},
+        synthetic_observation() | {"capacity_true_Wh": 14.0},
+        synthetic_observation() | {"raw_fraction": 0.8},
+    ],
+)
+def test_invalid_or_truth_bearing_observation_is_rejected(record):
+    assert_health_error("OBSERVATION_INVALID", [record])
+
+
+@pytest.mark.parametrize("now_s", [True, -1.0, float("nan"), float("inf")])
+def test_invalid_now_s_is_rejected(now_s):
+    assert_health_error("NOW_S_INVALID", [synthetic_observation()], now_s=now_s)
+
+
+def test_invalid_config_object_is_rejected():
+    with pytest.raises(HealthInputError) as error:
+        estimate_health_core([synthetic_observation()], 10.0, {})
+    assert error.value.code == "HEALTH_CONFIG_INVALID"
