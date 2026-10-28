@@ -1,5 +1,6 @@
 # 运行环境
 .venv/
+configs/legacy_assets.local.json
 __pycache__/
 *.py[cod]
 .pytest_cache/
