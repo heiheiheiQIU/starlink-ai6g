@@ -66,11 +66,13 @@
 
 Files：`.venv/`、`configs/legacy_assets.local.json`、`runs/workspace_baseline/`；必要的环境说明写入README，跨A模块变更先登记。
 
-- [ ] 安装仓库固定的直接依赖到独立venv，记录解释器、平台和实际依赖版本；不借用队友venv。
-- [ ] 检查本机配置引用的NPZ、CSV、权重及来源清单，哈希核对后再做旧资产相关运行。
+- [x] 安装仓库固定的直接依赖到独立venv，记录解释器、平台和实际依赖版本；不借用队友venv。
+- [x] 检查本机配置引用的NPZ、CSV、权重及来源清单，哈希核对后再做旧资产相关运行。
 - [ ] 记录默认配置与本机布局的差异；现有测试硬编码默认配置，先与A约定可复用的配置注入方式，不改legacy原件。
-- [ ] 用 `.\.venv\Scripts\python.exe -m pytest tests -q --noconftest -p no:cacheprovider` 建立基线；保存命令、退出码及失败原因到runs，不把路径/依赖失败当算法失败。
-- [ ] A1重跑若需要，使用本机配置和独立输出路径；不覆盖docs/evidence/A1。
+- [x] 用 `.\.venv\Scripts\python.exe -m pytest tests -q --noconftest -p no:cacheprovider` 建立基线；保存命令、退出码及失败原因到runs，不把路径/依赖失败当算法失败。
+- [x] A1重跑若需要，使用本机配置和独立输出路径；不覆盖docs/evidence/A1。
+
+2026-10-28执行记录：安装/哈希/真实前向已通过。原命令4通过、5失败、52错误；将pytest临时目录放入工作区后36通过、5失败、20错误，剩余均为默认资产路径缺失。提交9acbd6b的隔离快照仅替换资产配置后61通过。主仓库配置未修改，A尚未复核通用配置注入方案；状态ready_for_review，不能标accepted。证据见 `docs/evidence/B/R0_2026-10-28/README.md`。可继续R1合同工作，不得把这批证据称为通信实验。
 
 出口：依赖/路径问题有明确结论，基线结果可定位。未通过不宣称运行就绪；H00文档工作可继续。
 
