@@ -28,7 +28,10 @@ _CONFIG_FIELDS = frozenset(
 def _finite_number(value: Any, *, field: str, code: str) -> float:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         raise HealthInputError(code, f"{field} must be a finite number")
-    converted = float(value)
+    try:
+        converted = float(value)
+    except OverflowError as exc:
+        raise HealthInputError(code, f"{field} must be a finite number") from exc
     if not math.isfinite(converted):
         raise HealthInputError(code, f"{field} must be a finite number")
     return converted

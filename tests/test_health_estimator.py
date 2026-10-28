@@ -37,6 +37,8 @@ def valid_config_payload():
         valid_config_payload() | {"schema_version": "2.0"},
         valid_config_payload() | {"method": "gaussian"},
         valid_config_payload() | {"model_version": "unknown"},
+        valid_config_payload() | {"soc_abs_error": 10**400},
+        valid_config_payload() | {"capacity_abs_error_Wh": 10**400},
         valid_config_payload() | {"soc_abs_error": True},
         valid_config_payload() | {"soc_abs_error": float("nan")},
         valid_config_payload() | {"soc_abs_error": 1.01},
