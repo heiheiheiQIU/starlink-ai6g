@@ -1,13 +1,14 @@
 task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
-A-N1,A,not_started,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,等待B-N1类型,先评审合同并准备三样例测试
-A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界
-A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试
+B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
+A-N1,A,in_progress,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,H00未冻结前不接合同,先内部实现+三样例；证据补F1输出交叉核对与F5输入哈希
+A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
+A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试；补F3权重对应冻结JSON映射
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
-B-N1,B,in_progress,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,,,评审docs/contracts并实现fixture
+B-N1,B,changes_requested,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均changes_requested修复清单已收敛,修复3项后通知A/C复跑,"①TeacherResult非空+键唯一+恰一个idle且feasible=true；②forecast_version全Window=顶层；③metric_reasons只允许null指标携带原因；各补失败测试"
 B-N2,B,not_started,2026-10-30T20:00:00+08:00,backend/simulator/,A,,依赖B-N1,先打通六个契约样例
 B-N3,B,not_started,2026-10-31T20:00:00+08:00,backend/api/,C,,依赖B-N2,提供三类run fixture
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
-C-N1,C,in_progress,2026-10-28T22:00:00+08:00,frontend/,B,,,完成接管报告与两页信息架构
-C-N2,C,blocked,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,等待B-N1,先搭视觉状态外壳
+C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v4设计文档与草图
+C-N2,C,blocked,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,等待B-N1修复并三方签收,先搭视觉状态外壳
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
