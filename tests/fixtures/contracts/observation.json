@@ -1,0 +1,112 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "type": "Observation",
+      "valid": true,
+      "payload": {
+        "schema_version": "1.0",
+        "run_id": "fixture_run",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "tasks": [
+          {
+            "task_id": "T1",
+            "arrival_s": 0.0,
+            "deadline_s": 20.0,
+            "payload_bytes": 2048,
+            "remaining_bytes": 2048,
+            "priority_weight": 2.0,
+            "business_class": "periodic",
+            "data_location": "satellite_1"
+          }
+        ],
+        "forecast_windows": [
+          {
+            "window_id": "W1",
+            "start_s": 0.0,
+            "end_s": 20.0,
+            "rate_profile": [
+              {
+                "time_s": 0.0,
+                "robust_bps": 8192.0,
+                "fast_bps": 16384.0
+              }
+            ],
+            "loss_profile": [
+              {
+                "time_s": 0.0,
+                "robust_loss_prob": 0.1,
+                "fast_loss_prob": 0.2
+              }
+            ],
+            "source": "synthetic",
+            "forecast_version": "forecast_v1"
+          }
+        ],
+        "health": {
+          "soc_est": 0.6,
+          "soc_lower": 0.5,
+          "capacity_Wh_est": 10.0,
+          "capacity_lower_Wh": 8.0,
+          "energy_lower_Wh": 4.0,
+          "rul_est": null,
+          "rul_unit": null,
+          "uncertainty_method": "synthetic_bounds",
+          "model_version": "synthetic_v1",
+          "observed_at_s": 0.0,
+          "available_at_s": 0.0,
+          "reason_codes": [
+            "RUL_UNAVAILABLE"
+          ]
+        },
+        "inflight": null,
+        "cache_bytes": 2048,
+        "forecast_version": "forecast_v1"
+      }
+    },
+    {
+      "type": "HealthEstimate",
+      "valid": true,
+      "payload": {
+        "soc_est": 0.6,
+        "soc_lower": 0.5,
+        "capacity_Wh_est": 10.0,
+        "capacity_lower_Wh": 8.0,
+        "energy_lower_Wh": 4.0,
+        "rul_est": null,
+        "rul_unit": null,
+        "uncertainty_method": "synthetic_bounds",
+        "model_version": "synthetic_v1",
+        "observed_at_s": 0.0,
+        "available_at_s": 0.0,
+        "reason_codes": [
+          "RUL_UNAVAILABLE"
+        ]
+      }
+    },
+    {
+      "type": "SnapshotData",
+      "valid": true,
+      "payload": {
+        "soc_est": 0.6,
+        "energy_est_Wh": 6.0,
+        "energy_lower_Wh": 4.0,
+        "queue_count": 1,
+        "forecast_energy_band": null,
+        "policy_version": "edf_v1",
+        "evaluation_truth": {
+          "label": "posthoc_simulation",
+          "soc_true": 0.55,
+          "energy_true_Wh": 5.5,
+          "capacity_true_Wh": 10.0
+        },
+        "reason_codes": [
+          "FORECAST_UNAVAILABLE"
+        ]
+      }
+    }
+  ]
+}

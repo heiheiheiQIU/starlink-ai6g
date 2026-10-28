@@ -1,0 +1,36 @@
+{
+  "kind": "contract_fixture_catalog",
+  "is_experimental_result": false,
+  "files": [
+    {
+      "path": "observation.json"
+    },
+    {
+      "path": "invalid.json"
+    },
+    {
+      "path": "01_empty_queue.json"
+    },
+    {
+      "path": "02_no_window.json"
+    },
+    {
+      "path": "03_low_energy.json"
+    },
+    {
+      "path": "04_ack_loss.json"
+    },
+    {
+      "path": "05_model_failure.json"
+    },
+    {
+      "path": "06_page_refresh.json"
+    },
+    {
+      "path": "results.json"
+    },
+    {
+      "path": "http.json"
+    }
+  ]
+}

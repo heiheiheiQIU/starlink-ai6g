@@ -1,6 +1,6 @@
 # 星地智调 B角色工作路线与实施计划
 
-> 后续执行者：按任务逐项使用 superpowers:executing-plans；本路线不授权立即实现所有产品模块。每项先做有意义的失败用例，再最小实现、验证和交接；本轮仅建立路线及工作区。
+> 后续执行者：按任务逐项使用 superpowers:executing-plans；本路线不授权立即实现所有产品模块。每项先做有意义的失败用例，再最小实现、验证和交接；执行状态以勾选及交接证据为准，未获授权不自动跨阶段。
 
 **Goal：** 建立可信、可复现的单星回传系统，让A的评分真正影响通信动作，让C可以展示同一运行的过程、结果和证据。
 
@@ -82,13 +82,15 @@ Files：创建 `backend/contracts.py`、`configs/schema.json`、`tests/test_cont
 
 接口：集中定义Task、Window、HealthEstimate、InFlight、Observation、CandidateScore、Action、Decision、Event、SimulatorState、StepResult、TeacherResult及结果合同。保留00规定函数签名，后续任务不得另造类型。
 
-- [ ] 列字段差异：09的decision事件使用latency_ms；仓库Decision使用decision_latency_ms。按09明确事件序列化映射，内部字段与线上字段不能混用。
-- [ ] 写失败契约用例：负字节、NaN/Inf、deadline<=arrival、错误位置、非法概率、重复候选、非队列任务引用、缺失/多个idle均拒绝；合法缺失RUL保留null+reason。
-- [ ] 运行契约测试确认失败，再实现最小类型及schema校验。
-- [ ] 验证Observation不包含真实容量、未来实际任务/信道或接收端未ACK真值；为环境内部状态定义清晰边界。
-- [ ] 补齐09的事件分页、错误码、decision/snapshot字段和六个契约场景fixture。fixture显式标识非实测；行为实现分别由R3—R6验收。
-- [ ] 运行 `python -m pytest tests/test_contracts.py -q`，给A/C交字段字典、合法/非法样例、CHANGELOG和H00发送单。
+- [x] 列字段差异：09的decision事件使用latency_ms；仓库Decision使用decision_latency_ms。按09明确事件序列化映射，内部字段与线上字段不能混用。
+- [x] 写失败契约用例：负字节、NaN/Inf、deadline<=arrival、错误位置、非法概率、重复候选、非队列任务引用、缺失/多个idle均拒绝；合法缺失RUL保留null+reason。
+- [x] 运行契约测试确认失败，再实现最小类型及schema校验。
+- [x] 验证Observation不包含真实容量、未来实际任务/信道或接收端未ACK真值；为环境内部状态定义清晰边界。
+- [x] 补齐09的事件分页、错误码、decision/snapshot字段和六个契约场景fixture。fixture显式标识非实测；行为实现分别由R3—R6验收。
+- [x] 运行 `python -m pytest tests/test_contracts.py -q`，准备A/C字段字典、合法/非法样例、CHANGELOG和H00发送单（尚未代发或签收）。
 - [ ] A/C独立检查后填写回执；此前状态只到ready_for_review，不自行标accepted。
+
+2026-10-28：H00候选实现及75项契约测试完成；同环境旧代码回归需本机资产配置。详见 `docs/handoffs/H00_contract.md` 和 `docs/evidence/B/H00_2026-10-28/README.md`。真实guard、仿真与API尚未实现；对09留白的字段细化列入合同CHANGELOG等待A/C确认。
 
 ### R2：最小窗口、队列与能量
 
