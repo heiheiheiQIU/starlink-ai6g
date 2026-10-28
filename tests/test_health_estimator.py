@@ -58,3 +58,16 @@ def test_missing_health_config_is_controlled_error(tmp_path):
     with pytest.raises(HealthInputError) as error:
         load_health_observation_config(tmp_path / "missing.json")
     assert error.value.code == "HEALTH_CONFIG_INVALID"
+
+
+def test_rejects_integer_token_exceeding_parser_limit(tmp_path):
+    path = tmp_path / "oversized.json"
+    path.write_text(
+        '{"schema_version":"1.0","method":"synthetic_absolute_margin",'
+        '"soc_abs_error":' + "1" * 4301 + ','
+        '"capacity_abs_error_Wh":1.0,"model_version":"synthetic-health-v1"}',
+        encoding="utf-8",
+    )
+    with pytest.raises(HealthInputError) as error:
+        load_health_observation_config(path)
+    assert error.value.code == "HEALTH_CONFIG_INVALID"

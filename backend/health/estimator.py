@@ -41,8 +41,12 @@ def load_health_observation_config(path: Path) -> HealthObservationConfig:
     config_path = Path(path)
     try:
         raw = config_path.read_bytes()
-        payload = json.loads(raw.decode("utf-8"))
-    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        text = raw.decode("utf-8")
+    except (OSError, UnicodeDecodeError) as exc:
+        raise HealthInputError("HEALTH_CONFIG_INVALID", f"Could not read health config: {exc}") from exc
+    try:
+        payload = json.loads(text)
+    except ValueError as exc:
         raise HealthInputError("HEALTH_CONFIG_INVALID", f"Could not read health config: {exc}") from exc
     if not isinstance(payload, dict) or set(payload) != _CONFIG_FIELDS:
         raise HealthInputError("HEALTH_CONFIG_INVALID", "Health config fields do not match schema 1.0")
