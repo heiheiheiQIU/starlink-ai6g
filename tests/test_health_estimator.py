@@ -210,3 +210,48 @@ def test_invalid_config_object_is_rejected():
     with pytest.raises(HealthInputError) as error:
         estimate_health_core([synthetic_observation()], 10.0, {})
     assert error.value.code == "HEALTH_CONFIG_INVALID"
+
+@pytest.mark.parametrize("field,value", [
+    ("schema_version", "2.0"), ("method", "gaussian"), ("model_version", "unknown"),
+    ("soc_abs_error", True), ("soc_abs_error", "0.1"), ("soc_abs_error", float("nan")),
+    ("soc_abs_error", float("inf")), ("soc_abs_error", -0.1), ("soc_abs_error", 1.1),
+    ("soc_abs_error", 10**400), ("capacity_abs_error_Wh", False),
+    ("capacity_abs_error_Wh", "1"), ("capacity_abs_error_Wh", float("nan")),
+    ("capacity_abs_error_Wh", float("inf")), ("capacity_abs_error_Wh", -1),
+    ("capacity_abs_error_Wh", 10**400), ("config_sha256", None),
+    ("config_sha256", "A" * 63), ("config_sha256", "a" * 64),
+    ("config_sha256", "G" * 64), ("config_sha256", "A" * 65),
+])
+def test_estimate_rejects_invalid_config_contents(field, value):
+    from dataclasses import replace
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    with pytest.raises(HealthInputError) as error:
+        estimate_health_core([synthetic_observation()], 10.0, replace(config, **{field: value}))
+    assert error.value.code == "HEALTH_CONFIG_INVALID"
+
+
+def test_selection_is_independent_of_input_order():
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    records = [synthetic_observation(soc_observed=0.4, observed_at_s=2, available_at_s=3),
+               synthetic_observation(soc_observed=0.7, observed_at_s=7, available_at_s=9)]
+    assert estimate_health_core(records, 10, config) == estimate_health_core(records[::-1], 10, config)
+    assert estimate_health_core(records, 10, config).soc_est == 0.7
+
+
+def test_availability_time_precedes_observation_time():
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    records = [synthetic_observation(soc_observed=0.4, observed_at_s=8, available_at_s=9),
+               synthetic_observation(soc_observed=0.7, observed_at_s=5, available_at_s=10)]
+    assert estimate_health_core(records, 10, config).soc_est == 0.7
+
+
+def test_observation_time_breaks_equal_availability_tie():
+    config = load_health_observation_config(Path("configs/health_observation.json"))
+    records = [synthetic_observation(soc_observed=0.4, observed_at_s=5, available_at_s=10),
+               synthetic_observation(soc_observed=0.7, observed_at_s=8, available_at_s=10)]
+    assert estimate_health_core(records, 10, config).soc_est == 0.7
+
+
+def test_invalid_future_record_is_rejected_before_filtering():
+    future = synthetic_observation(observed_at_s=20, available_at_s=21) | {"soc_true": 0.9}
+    assert_health_error("OBSERVATION_INVALID", [synthetic_observation(), future])

@@ -50,28 +50,36 @@ def load_health_observation_config(path: Path) -> HealthObservationConfig:
         raise HealthInputError("HEALTH_CONFIG_INVALID", f"Could not read health config: {exc}") from exc
     if not isinstance(payload, dict) or set(payload) != _CONFIG_FIELDS:
         raise HealthInputError("HEALTH_CONFIG_INVALID", "Health config fields do not match schema 1.0")
-    if payload["schema_version"] != "1.0":
-        raise HealthInputError("HEALTH_CONFIG_INVALID", "Unsupported health config schema_version")
-    if payload["method"] != "synthetic_absolute_margin":
-        raise HealthInputError("HEALTH_CONFIG_INVALID", "Unsupported health uncertainty method")
-    if payload["model_version"] != "synthetic-health-v1":
-        raise HealthInputError("HEALTH_CONFIG_INVALID", "Unsupported health model_version")
-    soc_abs_error = _finite_number(
-        payload["soc_abs_error"], field="soc_abs_error", code="HEALTH_CONFIG_INVALID"
-    )
-    capacity_abs_error_Wh = _finite_number(
-        payload["capacity_abs_error_Wh"], field="capacity_abs_error_Wh", code="HEALTH_CONFIG_INVALID"
-    )
-    if not 0.0 <= soc_abs_error <= 1.0 or capacity_abs_error_Wh < 0.0:
-        raise HealthInputError("HEALTH_CONFIG_INVALID", "Health error margins are outside valid ranges")
-    return HealthObservationConfig(
-        schema_version="1.0",
-        method="synthetic_absolute_margin",
-        soc_abs_error=soc_abs_error,
-        capacity_abs_error_Wh=capacity_abs_error_Wh,
-        model_version="synthetic-health-v1",
+    return _validate_config(HealthObservationConfig(
+        schema_version=payload["schema_version"],
+        method=payload["method"],
+        soc_abs_error=payload["soc_abs_error"],
+        capacity_abs_error_Wh=payload["capacity_abs_error_Wh"],
+        model_version=payload["model_version"],
         config_sha256=hashlib.sha256(raw).hexdigest().upper(),
+    ))
+
+
+def _validate_config(config: HealthObservationConfig) -> HealthObservationConfig:
+    if not isinstance(config, HealthObservationConfig):
+        raise HealthInputError("HEALTH_CONFIG_INVALID", "Expected HealthObservationConfig")
+    if config.schema_version != "1.0":
+        raise HealthInputError("HEALTH_CONFIG_INVALID", "Unsupported health config schema_version")
+    if config.method != "synthetic_absolute_margin":
+        raise HealthInputError("HEALTH_CONFIG_INVALID", "Unsupported health uncertainty method")
+    if config.model_version != "synthetic-health-v1":
+        raise HealthInputError("HEALTH_CONFIG_INVALID", "Unsupported health model_version")
+    soc = _finite_number(config.soc_abs_error, field="soc_abs_error", code="HEALTH_CONFIG_INVALID")
+    capacity = _finite_number(
+        config.capacity_abs_error_Wh, field="capacity_abs_error_Wh", code="HEALTH_CONFIG_INVALID"
     )
+    if not 0.0 <= soc <= 1.0 or capacity < 0.0:
+        raise HealthInputError("HEALTH_CONFIG_INVALID", "Health error margins are outside valid ranges")
+    digest = config.config_sha256
+    if not isinstance(digest, str) or len(digest) != 64 or any(c not in "0123456789ABCDEF" for c in digest):
+        raise HealthInputError("HEALTH_CONFIG_INVALID", "Invalid health config SHA-256")
+    return HealthObservationConfig(config.schema_version, config.method, soc, capacity, config.model_version, digest)
+
 
 
 @dataclass(frozen=True)
@@ -162,8 +170,7 @@ def estimate_health_core(
     now_s: float,
     config: HealthObservationConfig,
 ) -> HealthCoreEstimate:
-    if not isinstance(config, HealthObservationConfig):
-        raise HealthInputError("HEALTH_CONFIG_INVALID", "Expected HealthObservationConfig")
+    config = _validate_config(config)
     now = _finite_number(now_s, field="now_s", code="NOW_S_INVALID")
     if now < 0.0:
         raise HealthInputError("NOW_S_INVALID", "now_s must be non-negative")
