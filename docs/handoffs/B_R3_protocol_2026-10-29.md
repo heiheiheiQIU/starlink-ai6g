@@ -34,3 +34,5 @@ status.json是运行包是否完成的唯一状态依据：仅status=completed�
 单run单policy、零随机误包、完整块在一个step内发送。精确违例持续时间、关键任务集合及模型/决策耗时未测，结果中为null+reason；违例次数目前指负值账本分段数，不能当独立负值事件频率。未实现统一R4 guard/公平基线/优化教师/学习接入/五API；不宣称策略优越性或完整B-N2已验收。
 
 R2 PR #3保持原有验收范围；本次为独立依赖R2的分支，待R2入main后再整理目标分支。A/C在各自回执中填写实际提交SHA、命令、文件哈希、结果和accepted/changes_requested，B不代填。
+
+Git交付：feature/simulator-r3；草稿PR #4： https://github.com/heiheiheiQIU/starlink-ai6g/pull/4 ，base暂为feature/simulator-r2。
