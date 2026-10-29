@@ -109,3 +109,14 @@ def test_aligned_partial_task_continues_to_full_delivery():
     result=solve_teacher(observed,1000)
     assert result.solver_status=='OPTIMAL'
     assert score(result,'T1','fast').score==1.0
+
+def test_preflight_without_git_records_source_hashes(tmp_path,monkeypatch):
+    import backend.policies.teacher as module
+    def missing(*args,**kwargs): raise OSError('git absent')
+    monkeypatch.setattr(module.subprocess,'check_output',missing)
+    summary=module.preflight(tmp_path/'teacher')
+    import json
+    manifest=json.loads((tmp_path/'teacher/manifest.json').read_text())
+    assert summary['count']==20
+    assert manifest['code_revision'].startswith('unversioned-source-sha256:')
+    assert manifest['source_sha256']

@@ -1,0 +1,18 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "Manual UI state example; completed events/results must be fetched from a real run.",
+  "status": {
+    "run_id": "fixture_api_completed",
+    "status": "completed",
+    "progress": 1.0,
+    "active_policies": [],
+    "error": null
+  },
+  "events": {
+    "run_id": "fixture_api_completed",
+    "events": [],
+    "next_after": 0,
+    "has_more": false
+  }
+}

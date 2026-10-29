@@ -213,10 +213,15 @@ def preflight(output: Path):
     files=[root/'backend/contracts.py',root/'backend/cli.py',root/'backend/evaluation.py',
            *sorted((root/'backend/policies').glob('*.py')),*sorted((root/'backend/simulator').glob('*.py'))]
     sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+    source_hashes={p.relative_to(root).as_posix():sha(p) for p in files}
+    try:
+        revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True,stderr=subprocess.DEVNULL).strip()
+    except (OSError,subprocess.CalledProcessError):
+        revision='unversioned-source-sha256:'+hashlib.sha256(json.dumps(source_hashes,sort_keys=True).encode()).hexdigest()
     manifest=dict(kind='teacher_preflight_synthetic',teacher_version=_config(None).version,
         solver='bounded_tree_enumeration',source='synthetic',model_hash=None,
-        code_revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
-        source_sha256={p.relative_to(root).as_posix():sha(p) for p in files},
+        code_revision=revision,
+        source_sha256=source_hashes,
         configuration_sha256={p.relative_to(root).as_posix():sha(p) for p in
             (root/'configs/teacher.json',root/'configs/policy.json')},
         observations_sha256=hashlib.sha256(json.dumps([r['observation'] for r in rows],sort_keys=True).encode()).hexdigest(),
