@@ -9,6 +9,7 @@ from dataclasses import asdict
 import hashlib
 import json
 import math
+import subprocess
 from pathlib import Path
 from time import perf_counter as _clock, process_time
 from typing import Annotated
@@ -203,6 +204,20 @@ def preflight(output: Path):
         total_elapsed_ms=sum(r['elapsed_ms'] for r in rows),diagnostics=details,
         samples_sha256=hashlib.sha256((output/'samples.jsonl').read_bytes()).hexdigest(),config=_config(None).model_dump())
     (output/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
+    root=Path(__file__).resolve().parents[2]
+    files=[root/'backend/contracts.py',root/'backend/cli.py',root/'backend/evaluation.py',
+           *sorted((root/'backend/policies').glob('*.py')),*sorted((root/'backend/simulator').glob('*.py'))]
+    sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+    manifest=dict(kind='teacher_preflight_synthetic',teacher_version=_config(None).version,
+        solver='bounded_tree_enumeration',source='synthetic',model_hash=None,
+        code_revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),
+        source_sha256={p.relative_to(root).as_posix():sha(p) for p in files},
+        configuration_sha256={p.relative_to(root).as_posix():sha(p) for p in
+            (root/'configs/teacher.json',root/'configs/policy.json')},
+        observations_sha256=hashlib.sha256(json.dumps([r['observation'] for r in rows],sort_keys=True).encode()).hexdigest(),
+        artifacts_sha256={name:sha(output/name) for name in ('samples.jsonl','summary.json')},
+        note='20 initial synthetic states; no batch training or policy performance claim')
+    (output/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8',newline='\n')
     return summary
 
 

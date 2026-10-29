@@ -10,4 +10,6 @@
 - minimum_soc_true：初值及各分段clip前事后snapshot的最小值。energy_violation_count是负值账本分段数，受快照分段影响，不冒称独立违例事件次数；精确持续时间尚未测量，为null+原因。
 - 未定义关键任务集合/未运行学习策略时，相关指标为null+reason；真实测得0不附缺失原因。协议ACK_TIMEOUT事件不冒充求解器超时率。
 
+R4规则运行有真实decision事件时，decision_p50/p95_ms由事件latency_ms线性插值重算；timeout_rate为MODEL_TIMEOUT决策次数/全部决策次数（MODEL_BUSY另由原因码追溯）。无decision的R3手工运行仍为null。规则回退也计入诊断样本；跨机器壁钟耗时不要求逐字节一致，重放使用保存的原事件。
+
 这些是确定性manual_validation结果，尚不支持策略优越性、真实卫星或物理安全保证。对照实验前须扩展统一guard、基线、共享外部轨迹与最终全部指标。
