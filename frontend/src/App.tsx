@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { AppSidebar } from './components/AppSidebar'
 import { FixtureBanner } from './components/FixtureBanner'
 import { FloatingAssistant } from './components/FloatingAssistant'
-import { PagePlaceholder } from './components/PagePlaceholder'
 import type { PageId } from './domain/navigation'
 import { getPageLabel } from './domain/navigation'
 import { AssistantPage } from './pages/AssistantPage'
@@ -11,6 +10,7 @@ import { AssetsPage } from './pages/AssetsPage'
 import { ComparePage } from './pages/ComparePage'
 import { EvidencePage } from './pages/EvidencePage'
 import { FlowWorkspace } from './pages/FlowWorkspace'
+import { OverviewPage } from './pages/OverviewPage'
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('flow')
@@ -42,6 +42,8 @@ export default function App() {
         <div className="page-stage">
           {currentPage === 'flow' ? (
             <FlowWorkspace />
+          ) : currentPage === 'overview' ? (
+            <OverviewPage onNavigate={setCurrentPage} />
           ) : currentPage === 'assistant' ? (
             <AssistantPage />
           ) : currentPage === 'compare' ? (
@@ -50,9 +52,7 @@ export default function App() {
             <EvidencePage />
           ) : currentPage === 'assets' ? (
             <AssetsPage />
-          ) : (
-            <PagePlaceholder pageId={currentPage} />
-          )}
+          ) : null}
         </div>
       </main>
 
