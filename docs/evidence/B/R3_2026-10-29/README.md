@@ -8,4 +8,6 @@
 
 status.json是完成状态依据，须结合manifest哈希完整性；存在results.json不代表运行完成。所有sample的源文件SHA及产物SHA在交付时已与当前源码/原始run核对。
 
+执行日志保留实际生成字节（含Windows换行），由.gitattributes关闭文本规范化，避免克隆时Git换行转换破坏manifest哈希；其他JSON/JSONL按LF保存。
+
 A/C尚未签收，本目录不能替代其独立验收。R3不证明统一guard、基线、教师、学习策略或API已实现；R2历史证据保持原样。
