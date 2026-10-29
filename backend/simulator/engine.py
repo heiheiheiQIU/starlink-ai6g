@@ -118,6 +118,27 @@ def observe(state: SimulatorState) -> Observation:
     if not available:
         raise ValueError("No health observation available")
     health = max(available, key=lambda item: item.available_at_s)
+    if state.config.protocol is not None:
+        # Propagate only observable modeled flows, never energy_before/after truth.
+        lower, estimate = health.energy_lower_Wh, health.soc_est * health.capacity_Wh_est
+        propagated = False
+        for row in state.energy_ledger:
+            left = max(row.start_s, health.observed_at_s)
+            right = min(row.end_s, state.sim_time_s)
+            if right <= left:
+                continue
+            fraction = (right-left)/(row.end_s-row.start_s)
+            entry = row.entry
+            change = (entry.solar_input_Wh-entry.consumed_Wh)*fraction
+            lower = min(health.capacity_lower_Wh, max(0.0, lower+change))
+            estimate = min(health.capacity_Wh_est, max(0.0, estimate+change))
+            propagated = True
+        if propagated:
+            soc = estimate/health.capacity_Wh_est
+            soc_lower = min(soc,lower/health.capacity_lower_Wh) if health.capacity_lower_Wh else 0.0
+            health = health.model_copy(update=dict(soc_est=soc,soc_lower=soc_lower,
+                energy_lower_Wh=soc_lower*health.capacity_lower_Wh,
+                reason_codes=list(dict.fromkeys([*health.reason_codes,'ENERGY_PROPAGATED']))))
     tasks = visible_tasks(state.tasks, state.sim_time_s)
     # Retain only the metadata needed to reference an unacknowledged block,
     # even when its business deadline passes. It is not a new schedulable task.

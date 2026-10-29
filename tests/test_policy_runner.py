@@ -58,3 +58,18 @@ def test_rule_cli_entry_runs_without_manual_actions(tmp_path):
     path=tmp_path/'input.json';path.write_text(json.dumps(run_config()),encoding='utf-8')
     result=subprocess.run([sys.executable,'-m','backend.cli','policy-run','--config',str(path),'--policy','edf','--output',str(tmp_path/'run')],capture_output=True,text=True)
     assert result.returncode==0,result.stderr
+
+def test_retry_obligation_from_public_events_prevents_other_task_starvation(tmp_path):
+    import copy
+    from tests.test_protocol import loss_config
+    data=loss_config()
+    data['true_windows'][0]['end_s']=1.4
+    data['forecast_windows']=copy.deepcopy(data['true_windows'])
+    second=copy.deepcopy(data['tasks'][0]);second.update(task_id='T2',arrival_s=4.0,deadline_s=10.0)
+    data['tasks'].append(second)
+    result=run_policy(run_config(data,actions=[],end=16.0),tmp_path/'retry',policy_id='edf')
+    events=[json.loads(line) for line in (tmp_path/'retry/events.jsonl').read_text().splitlines()]
+    assert any(e['reason_code']=='ACK_TIMEOUT' for e in events)
+    assert not any(e['reason_code']=='RETRY_REQUIRED' and e['event_type']=='fallback' for e in events)
+    assert next(e for e in events if e['event_type']=='sent' and e['sim_time_s']==4.0)['task_id']=='T1'
+    assert result['by_policy'][0]['weighted_on_time_rate']==1.0

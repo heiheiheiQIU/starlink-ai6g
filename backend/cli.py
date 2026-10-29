@@ -26,6 +26,7 @@ class RunConfig(ContractModel):
     evaluation_end_s: PositiveFloat
     actions: list[TimedAction]
     policy_runtime: dict[str,JsonValue] | None = None
+    code_revision: str | None = None
 
     @model_validator(mode='after')
     def executable_script(self):
@@ -72,7 +73,7 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
     status('running')
     try:
         _write_json(output/'config.json',config_data)
-        log.write_text('R3 synthetic manual validation started\n',encoding='utf-8')
+        log.write_text('R4 synthetic validation started\n',encoding='utf-8',newline='\n')
         script = list(parsed.actions) if _executor is None else []
         if _executor is None and (not script or script[0].time_s > 0):
             script.insert(0,TimedAction(time_s=0.0,action=Action(task_id=None,mode='idle',scheduled_bytes=0,
@@ -90,12 +91,17 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         metrics = evaluate(events,dict(scenario=parsed.scenario.model_dump(),
             evaluation_end_s=parsed.evaluation_end_s,policy_id=_policy_id))
         root = Path(__file__).resolve().parents[1]
-        revision = subprocess.run(['git','rev-parse','HEAD'],cwd=root,capture_output=True,text=True,check=True).stdout.strip()
         files = [root/'backend/contracts.py',root/'backend/evaluation.py',root/'backend/cli.py',
                  *sorted((root/'backend/simulator').glob('*.py'))]
         if _executor is not None: files.extend(sorted((root/'backend/policies').glob('*.py')))
-        external = {name:parsed.scenario.model_dump()[name] for name in
-                    ('tasks','true_windows','forecast_windows','health_observations','protocol','powers')}
+        source_hashes={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+        try:
+            git = subprocess.run(['git','rev-parse','HEAD'],cwd=root,capture_output=True,text=True,check=False)
+            revision = git.stdout.strip() if git.returncode == 0 else None
+        except OSError:
+            revision = None
+        revision = revision or parsed.code_revision or 'unversioned-source-sha256:'+_hash(source_hashes)
+        external = parsed.scenario.model_dump()
         config_hash,input_hash = _hash(config_data),_hash(external)
         definitions = dict(weighted_on_time_rate='Sum on-time complete task weights / all arrived due task weights',
             success_payload_bytes='Unique received payload bytes including partial tasks and late data',
@@ -110,13 +116,13 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
             input_hash=input_hash,model_hash=None,code_revision=revision,seed=0,by_policy=[metrics],
             metric_definitions=definitions,artifact_paths=paths).model_dump()
         _write_json(output/'results.json',result)
-        with log.open('a',encoding='utf-8') as stream:
+        with log.open('a',encoding='utf-8',newline='\n') as stream:
             stream.write(f'validated {len(events)} events through {state.sim_time_s} seconds\n')
         manifest = dict(kind=parsed.kind,source='synthetic',run_id=identity,policy_id=_policy_id,
             protocol_stage='receive_ack_retry_dedup',is_real_satellite_measurement=False,
             is_policy_benchmark=False,config_hash=config_hash,input_hash=input_hash,trace_hash=_hash(external),
             model_hash=None,policy_version=_runtime['policy_version'] if _runtime else 'manual-r3-v1',code_revision=revision,
-            source_sha256={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
+            source_sha256=source_hashes,
             artifacts_sha256={name:hashlib.sha256((output/name).read_bytes()).hexdigest() for name in
                 ('config.json','events.jsonl','results.json','energy_ledger.json','execution.log')},
             status_hash_note='status written last; manifest and status excluded from self-referential hashes')
@@ -127,7 +133,7 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
     except BaseException as error:
         if (output/'results.json').exists():
             (output/'results.json').replace(output/'results.partial.json')
-        with log.open('a',encoding='utf-8') as stream:
+        with log.open('a',encoding='utf-8',newline='\n') as stream:
             stream.write(f'failed: {type(error).__name__}\n')
         status('failed',dict(code='INTERNAL_RUN_ERROR',message='Run execution failed',
                             details={'exception_type':type(error).__name__}))

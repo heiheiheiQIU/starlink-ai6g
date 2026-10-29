@@ -13,6 +13,7 @@
 在仓库根PowerShell运行；输出目录用新名称：
 
 ```powershell
+New-Item -ItemType Directory -Force runs | Out-Null
 .\.venv\Scripts\python.exe -m pytest tests/test_protocol.py tests/test_evaluation.py tests/test_run_export.py tests/test_simulator.py -q --noconftest -p no:cacheprovider --basetemp=runs/r3_receiver_tmp
 .\.venv\Scripts\python.exe -m backend.cli run --config configs/scenarios/r3_ack_loss.json --output runs/r3_receiver_ack_loss
 ```
@@ -36,3 +37,15 @@ status.json是运行包是否完成的唯一状态依据：仅status=completed�
 R2 PR #3保持原有验收范围；本次为独立依赖R2的分支，待R2入main后再整理目标分支。A/C在各自回执中填写实际提交SHA、命令、文件哈希、结果和accepted/changes_requested，B不代填。
 
 Git交付：feature/simulator-r3；草稿PR #4： https://github.com/heiheiheiQIU/starlink-ai6g/pull/4 ，base暂为feature/simulator-r2。
+
+## C回执修订回应
+
+本轮仅提供H00兼容离线文件，不提供EventsPage在线服务，也未完成C前端导入或端到端接入。五API留B-N3；C回执changes_requested保持原裁定，需C复跑后自行签收。
+
+I-01：超时锁定retry_required_key，只允许同task/block重传；有效ACK解锁。已过期任务等待残留接收/ACK事件处理后明确退休，不能以超时为由改发另一个未完成协议键。
+
+I-02：R3 Observation健康下界从最近可用观测的observed_at_s起，按已知背景/计算/收发/太阳能量传播；新观测可用后重新锚定。计算不读取物理energy_Wh或clip后真值，健康估计乐观仍可能留下实际违例。R2历史发送验证机制保留。
+
+M-01/02/03/04：新日志显式LF；input_hash与trace_hash覆盖完整scenario（所有物理参数），config_hash另外覆盖动作等运行配置；命令先建runs父目录。无git仓库/无git命令时，code_revision使用显式发行版标识或unversioned-source-sha256前缀，manifest仍保存逐源码哈希，不能将该标识当Git提交号。
+
+原R3样例是90ae9bb阶段的历史运行，保持原样；修订证据在docs/evidence/B/R3_review_2026-10-29/。请复跑新增tests/test_r3_feedback.py及原定向套件。

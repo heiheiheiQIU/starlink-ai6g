@@ -71,3 +71,41 @@ def test_input_unchanged_and_true_environment_not_used():
     assert left.solver_status==right.solver_status=='OPTIMAL'
     assert [c.model_dump() for c in left.candidate_scores]==[c.model_dump() for c in right.candidate_scores]
     assert observed.model_dump()==before
+
+@pytest.mark.parametrize('remaining',[1,2000])
+def test_misaligned_partial_block_is_unsupported(remaining):
+    observed=obs(config(payload=2500,deadline=4.0))
+    observed.tasks[0].remaining_bytes=remaining
+    observed.cache_bytes=remaining
+    result=solve_teacher(observed,1000)
+    assert result.solver_status=='UNSUPPORTED_BLOCK_STATE'
+    assert result.gap is None
+
+
+def test_large_historical_payload_rejected_before_reconstruction(monkeypatch):
+    import backend.policies.teacher as module
+    observed=obs(config(payload=500000000,deadline=4.0))
+    observed.tasks[0].remaining_bytes=1280
+    observed.cache_bytes=1280
+    def forbidden(*args): raise AssertionError('must reject before building historical blocks')
+    monkeypatch.setattr(module,'_predicted_state',forbidden)
+    result=solve_teacher(observed,1)
+    assert result.solver_status=='UNSUPPORTED_PAYLOAD_RANGE'
+    assert result.gap is None
+
+
+def test_excess_tasks_return_only_idle_without_candidate_expansion():
+    data=config(deadline=4.0)
+    data['tasks']=[dict(data['tasks'][0],task_id=f'T{i}') for i in range(14)]
+    result=solve_teacher(obs(data),1)
+    assert result.solver_status=='UNSUPPORTED_TASK_COUNT'
+    assert len(result.candidate_scores)==1 and result.candidate_scores[0].mode=='idle'
+
+
+def test_aligned_partial_task_continues_to_full_delivery():
+    observed=obs(config(payload=2500,deadline=4.0))
+    observed.tasks[0].remaining_bytes=1476
+    observed.cache_bytes=1476
+    result=solve_teacher(observed,1000)
+    assert result.solver_status=='OPTIMAL'
+    assert score(result,'T1','fast').score==1.0

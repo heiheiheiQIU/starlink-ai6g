@@ -57,6 +57,7 @@ def run_policy(config, output, *, policy_id='edf', run_id=None):
 
     def execute(state,horizon):
         events=[]
+        retry_key=None  # Controller memory derived only from public protocol events.
         def record(event):
             events.append(event); state.next_event_id+=1
         # Initial environmental arrivals/window changes precede the first decision.
@@ -76,7 +77,23 @@ def run_policy(config, output, *, policy_id='edf', run_id=None):
         while state.sim_time_s < horizon:
             end=min(state.sim_time_s+cfg.decision_dt_s,horizon)
             gateway.config=cfg.model_copy(update={'decision_dt_s':end-state.sim_time_s})
-            decision=gateway.decide(observe(state))
+            started=perf_counter()
+            visible=observe(state)
+            decision=gateway.decide(visible)
+            if retry_key is not None:
+                # Keep the complete candidate set, but rank only the required block above idle.
+                # Task/block identity is inferred from public remaining bytes and ACK events.
+                retry_scores=[row.model_copy(update={'score':(
+                    1.0 if row.task_id==retry_key[0] and any(
+                        t.task_id==row.task_id and (t.payload_bytes-t.remaining_bytes)//1024==retry_key[1]
+                        for t in visible.tasks) else (0.0 if row.mode=='idle' else -1.0))})
+                    for row in decision.candidate_scores]
+                decoded=decode_safe(visible,retry_scores,config=gateway.config)
+                action=decoded.action.model_copy(update={
+                    'fallback':decision.fallback,
+                    'reason_codes':list(dict.fromkeys([*decision.action.reason_codes,*decoded.action.reason_codes,'RETRY_REQUIRED']))})
+                decision=decoded.model_copy(update={'action':action,'fallback':decision.fallback})
+            decision=decision.model_copy(update={'decision_latency_ms':(perf_counter()-started)*1000})
             decision=decision.model_copy(update={'policy_version':policy_id+'-r4-v1'})
             record(Event(event_id=state.next_event_id,run_id=state.run_id,policy_id=policy_id,
                 sim_time_s=state.sim_time_s,event_type='decision',task_id=decision.action.task_id,
@@ -85,6 +102,11 @@ def run_policy(config, output, *, policy_id='edf', run_id=None):
             result=step(state,decision.action,end-state.sim_time_s)
             state=result.next_state
             for event in result.events:
+                key=(event.task_id,event.block_id)
+                if event.reason_code=='ACK_TIMEOUT': retry_key=key
+                elif key==retry_key and ((event.event_type=='acked' and event.reason_code is None)
+                        or event.reason_code=='RETRY_RETIRED_EXPIRED'):
+                    retry_key=None
                 if event.event_type=='snapshot': event.data.policy_version=policy_id+'-r4-v1'
             events.extend(result.events)
         return state,events

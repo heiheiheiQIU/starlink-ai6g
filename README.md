@@ -6,6 +6,7 @@
 .\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy edf --output runs/my_r4_edf
 .\.venv\Scripts\python.exe -m backend.policies.teacher --preflight --output runs/my_r4_teacher
 ```
+2026-10-29 R3回执修复：按C的changes_requested锁定超时重传块、传播公开能量下界，并支持无Git发行副本；新增6项回归，定向70/全库248通过，待C复验。当前提供H00兼容离线产物；五API和C前端导入仍待后续。见[修复记录](docs/evidence/B/R3_review_2026-10-29/README.md)。
 
 2026-10-29 R3：B已增加显式启用的确定性接收/ACK/超时重传/去重环境、事件评价器和单策略运行导出；使用synthetic健康输入与manual动作脚本。可独立复跑，不依赖A模型或C页面。实现与验收范围见[R3交接](docs/handoffs/B_R3_protocol_2026-10-29.md)；尚未签收时不视为B-N2整体完成。
 

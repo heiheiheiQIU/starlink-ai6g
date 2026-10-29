@@ -83,7 +83,7 @@ def solve_teacher(obs: Observation, budget_ms: int, *, config=None, diagnostics=
     try: observed=Observation.model_validate(obs)
     except (ValueError,TypeError) as error: raise ContractViolation('INVALID_OBSERVATION',str(error)) from error
     candidates=[TeacherCandidateScore(task_id=t.task_id,mode=m,score=0.0,feasible=False)
-                for t in observed.tasks for m in ('robust','fast')]
+                for t in (observed.tasks if len(observed.tasks)<=cfg.max_tasks else []) for m in ('robust','fast')]
     candidates.append(TeacherCandidateScore(task_id=None,mode='idle',score=0.0,feasible=True))
     diag={'teacher_version':cfg.version,'candidates':[]}
     def finish(status,gap):
@@ -92,6 +92,11 @@ def solve_teacher(obs: Observation, budget_ms: int, *, config=None, diagnostics=
                              elapsed_ms=max(0.0,(_clock()-start)*1000))
         return validate_teacher_result(observed,result)
     if len(observed.tasks)>cfg.max_tasks: return finish('UNSUPPORTED_TASK_COUNT',None)
+    # Bound historical prefix reconstruction before allocating protocol block sets.
+    if any(t.payload_bytes > 1024*cfg.max_steps for t in observed.tasks):
+        return finish('UNSUPPORTED_PAYLOAD_RANGE',None)
+    if any(t.remaining_bytes<=0 or (t.payload_bytes-t.remaining_bytes)%1024 for t in observed.tasks):
+        return finish('UNSUPPORTED_BLOCK_STATE',None)
     if observed.inflight is not None: return finish('UNSUPPORTED_INFLIGHT',None)
     if len(observed.forecast_windows)>cfg.max_windows: return finish('UNSUPPORTED_WINDOW_COUNT',None)
     if any(p.robust_loss_prob or p.fast_loss_prob for w in observed.forecast_windows for p in w.loss_profile):
