@@ -1,0 +1,98 @@
+[
+  {
+    "end_s": 1.03125,
+    "entry": {
+      "background_Wh": 0.0103125,
+      "compute_Wh": 0.0,
+      "duration_s": 1.03125,
+      "energy_after_Wh": 9.979375000000001,
+      "energy_before_Wh": 10.0,
+      "energy_unclipped_Wh": 9.979375000000001,
+      "lower_violation": false,
+      "receive_Wh": 0.0,
+      "solar_input_Wh": 0.0,
+      "transmit_Wh": 0.0103125
+    },
+    "start_s": 0.0
+  },
+  {
+    "end_s": 1.90625,
+    "entry": {
+      "background_Wh": 0.00875,
+      "compute_Wh": 0.0,
+      "duration_s": 0.875,
+      "energy_after_Wh": 9.970625000000002,
+      "energy_before_Wh": 9.979375000000001,
+      "energy_unclipped_Wh": 9.970625000000002,
+      "lower_violation": false,
+      "receive_Wh": 0.0,
+      "solar_input_Wh": 0.0,
+      "transmit_Wh": 0.0
+    },
+    "start_s": 1.03125
+  },
+  {
+    "end_s": 2.03125,
+    "entry": {
+      "background_Wh": 0.00125,
+      "compute_Wh": 0.0,
+      "duration_s": 0.125,
+      "energy_after_Wh": 9.969097222222224,
+      "energy_before_Wh": 9.970625000000002,
+      "energy_unclipped_Wh": 9.969097222222224,
+      "lower_violation": false,
+      "receive_Wh": 0.0002777777777777778,
+      "solar_input_Wh": 0.0,
+      "transmit_Wh": 0.0
+    },
+    "start_s": 1.90625
+  },
+  {
+    "end_s": 3.03125,
+    "entry": {
+      "background_Wh": 0.01,
+      "compute_Wh": 0.0,
+      "duration_s": 1.0,
+      "energy_after_Wh": 9.959097222222224,
+      "energy_before_Wh": 9.969097222222224,
+      "energy_unclipped_Wh": 9.959097222222224,
+      "lower_violation": false,
+      "receive_Wh": 0.0,
+      "solar_input_Wh": 0.0,
+      "transmit_Wh": 0.0
+    },
+    "start_s": 2.03125
+  },
+  {
+    "end_s": 5.0,
+    "entry": {
+      "background_Wh": 0.0196875,
+      "compute_Wh": 0.0,
+      "duration_s": 1.96875,
+      "energy_after_Wh": 9.939409722222225,
+      "energy_before_Wh": 9.959097222222224,
+      "energy_unclipped_Wh": 9.939409722222225,
+      "lower_violation": false,
+      "receive_Wh": 0.0,
+      "solar_input_Wh": 0.0,
+      "transmit_Wh": 0.0
+    },
+    "start_s": 3.03125
+  },
+  {
+    "end_s": 7.0,
+    "entry": {
+      "background_Wh": 0.02,
+      "compute_Wh": 0.0,
+      "duration_s": 2.0,
+      "energy_after_Wh": 9.919409722222225,
+      "energy_before_Wh": 9.939409722222225,
+      "energy_unclipped_Wh": 9.919409722222225,
+      "lower_violation": false,
+      "receive_Wh": 0.0,
+      "solar_input_Wh": 0.0,
+      "transmit_Wh": 0.0
+    },
+    "start_s": 5.0
+  }
+]

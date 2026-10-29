@@ -16,6 +16,7 @@ from backend.contracts import (Action, ContractModel, Event, HealthEstimate, InF
 from .energy import EnergyLedgerEntry, PowerProfile, advance_energy, finite_number
 from .link import transmission_time
 from .queue import visible_tasks
+from .protocol import ProtocolConfig, ProtocolState
 
 
 class TransmitPower(ContractModel):
@@ -39,9 +40,16 @@ class ScenarioConfig(ContractModel):
     true_windows: list[Window]
     forecast_windows: list[Window]
     health_observations: list[HealthEstimate]
+    protocol: ProtocolConfig | None = None
 
     @model_validator(mode="after")
     def supported_deterministic_scenario(self):
+        if self.protocol is not None:
+            control_time = 128 / self.protocol.control_bps + self.protocol.ack_propagation_s
+            if control_time > self.slot_s:
+                raise ValueError('ACK control/propagation must fit one slot')
+            if self.powers.base_W + self.powers.compute_W + self.protocol.ack_rx_W > self.max_power_W:
+                raise ValueError('Active ACK reception exceeds power limit')
         if max(self.initial_energy_Wh, self.reserve_Wh) > self.capacity_Wh:
             raise ValueError("Initial energy/reserve cannot exceed capacity")
         ids = [task.task_id for task in self.tasks]
@@ -88,6 +96,7 @@ class SimulatorState:
     announced: set[str] = field(default_factory=set)
     expired: set[str] = field(default_factory=set)
     energy_ledger: list[TimedEnergy] = field(default_factory=list)
+    protocol_state: ProtocolState = field(default_factory=ProtocolState)
 
 
 def load_scenario(path: Path) -> ScenarioConfig:
@@ -109,6 +118,27 @@ def observe(state: SimulatorState) -> Observation:
     if not available:
         raise ValueError("No health observation available")
     health = max(available, key=lambda item: item.available_at_s)
+    if state.config.protocol is not None:
+        # Propagate only observable modeled flows, never energy_before/after truth.
+        lower, estimate = health.energy_lower_Wh, health.soc_est * health.capacity_Wh_est
+        propagated = False
+        for row in state.energy_ledger:
+            left = max(row.start_s, health.observed_at_s)
+            right = min(row.end_s, state.sim_time_s)
+            if right <= left:
+                continue
+            fraction = (right-left)/(row.end_s-row.start_s)
+            entry = row.entry
+            change = (entry.solar_input_Wh-entry.consumed_Wh)*fraction
+            lower = min(health.capacity_lower_Wh, max(0.0, lower+change))
+            estimate = min(health.capacity_Wh_est, max(0.0, estimate+change))
+            propagated = True
+        if propagated:
+            soc = estimate/health.capacity_Wh_est
+            soc_lower = min(soc,lower/health.capacity_lower_Wh) if health.capacity_lower_Wh else 0.0
+            health = health.model_copy(update=dict(soc_est=soc,soc_lower=soc_lower,
+                energy_lower_Wh=soc_lower*health.capacity_lower_Wh,
+                reason_codes=list(dict.fromkeys([*health.reason_codes,'ENERGY_PROPAGATED']))))
     tasks = visible_tasks(state.tasks, state.sim_time_s)
     # Retain only the metadata needed to reference an unacknowledged block,
     # even when its business deadline passes. It is not a new schedulable task.
@@ -140,6 +170,9 @@ def _energy_segments(state: SimulatorState, dt: float, airtime: float, tx: float
 
 
 def step(state: SimulatorState, action: Action, dt_s: float) -> StepResult:
+    if state.config.protocol is not None:
+        from .r3_engine import protocol_step
+        return protocol_step(state, action, dt_s)
     dt = finite_number(dt_s, "dt_s", positive=True)
     end = finite_number(state.sim_time_s + dt, "step end")
     if end <= state.sim_time_s:
