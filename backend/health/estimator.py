@@ -6,7 +6,9 @@ import json
 import math
 from pathlib import Path
 from typing import Any
+from pydantic import ValidationError
 
+from backend.contracts import HealthEstimate
 from backend.health.legacy_adapter import HealthInputError
 
 
@@ -23,6 +25,7 @@ class HealthObservationConfig:
 _CONFIG_FIELDS = frozenset(
     {"schema_version", "method", "soc_abs_error", "capacity_abs_error_Wh", "model_version"}
 )
+_HEALTH_CONFIG_PATH = Path(__file__).resolve().parents[2] / "configs" / "health_observation.json"
 
 
 def _finite_number(value: Any, *, field: str, code: str) -> float:
@@ -189,3 +192,28 @@ def estimate_health_core(
     if len(latest) != 1:
         raise HealthInputError("AMBIGUOUS_OBSERVATION", "Latest health observation is not unique")
     return _build_estimate(latest[0], config)
+
+
+def _estimate_health_with_config(
+    history: list[dict], now_s: float, config: HealthObservationConfig,
+) -> HealthEstimate:
+    core = estimate_health_core(history, now_s, config)
+    try:
+        return HealthEstimate(
+            soc_est=core.soc_est, soc_lower=core.soc_lower,
+            capacity_Wh_est=core.capacity_Wh_est, capacity_lower_Wh=core.capacity_lower_Wh,
+            energy_lower_Wh=core.energy_lower_Wh, rul_est=core.rul_est, rul_unit=core.rul_unit,
+            uncertainty_method=core.uncertainty_method, model_version=core.model_version,
+            observed_at_s=core.observed_at_s, available_at_s=core.available_at_s,
+            reason_codes=list(core.reason_codes),
+        )
+    except ValidationError as exc:
+        raise HealthInputError(
+            "HEALTH_CONTRACT_INVALID",
+            "Internal health estimate does not satisfy frozen HealthEstimate",
+        ) from exc
+
+
+def estimate_health(history: list[dict], now_s: float) -> HealthEstimate:
+    config = load_health_observation_config(_HEALTH_CONFIG_PATH)
+    return _estimate_health_with_config(history, now_s, config)
