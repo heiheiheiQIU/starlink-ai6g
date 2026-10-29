@@ -11,4 +11,4 @@ C-N1,C,in_progress,2026-10-28T22:00:00+08:00,frontend/,B,,,完成接管报告与
 C-N2,C,blocked,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,等待B-N1,先搭视觉状态外壳
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
-B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,R3新增23项/全库242通过;独立审查两项已修复,,复算ACK去重与能量指标;不阻塞B后续R4
+B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,C退回I-01/I-02已修;定向70/全库248通过;待C复验,,C复跑新增回归及发行副本;R4保留独立分支
