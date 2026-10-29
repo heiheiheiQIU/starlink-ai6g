@@ -1,0 +1,28 @@
+:root {
+  --ink-950: #08111f;
+  --ink-900: #0e1b2d;
+  --ink-800: #17283d;
+  --ink-700: #33465f;
+  --ink-500: #667890;
+  --surface: #f4f7fb;
+  --surface-raised: rgba(255, 255, 255, 0.84);
+  --line: rgba(33, 58, 88, 0.13);
+  --line-strong: rgba(33, 58, 88, 0.22);
+  --cyan-600: #087f9f;
+  --cyan-500: #0b9bc1;
+  --indigo-600: #4054c7;
+  --amber-500: #c77916;
+  --green-500: #1b8c66;
+  --font-body: 14px;
+  --font-metric: 24px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  font-family:
+    Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", system-ui,
+    sans-serif;
+  color: var(--ink-900);
+  background: var(--surface);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
