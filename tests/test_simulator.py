@@ -213,6 +213,21 @@ def test_step_rejects_positive_dt_that_cannot_advance_floating_clock():
     assert state.sim_time_s == 100.0
 
 
+def test_segment_end_cannot_emit_future_snapshot_or_reveal_future_health():
+    from backend.simulator.engine import step
+    data = scenario_data()
+    future = copy.deepcopy(data["health_observations"][0])
+    future.update(observed_at_s=2.4, available_at_s=2.4000000000000004,
+                  soc_est=0.9, soc_lower=0.8, energy_lower_Wh=16.0)
+    data["health_observations"].append(future)
+    state = step(create_state(data), idle_action(), 0.3).next_state
+    result = step(state, send_action(), 2.1)
+    assert all(event.sim_time_s <= result.next_state.sim_time_s for event in result.events)
+    assert result.next_state.energy_ledger[-1].end_s == result.next_state.sim_time_s
+    snapshots = [e.data for e in result.events if e.event_type == "snapshot"]
+    assert all(snapshot.soc_est == 0.5 for snapshot in snapshots)
+
+
 def test_instances_observations_and_next_state_are_isolated():
     from backend.simulator.engine import observe, step
     data = scenario_data(); left = create_state(data); right = create_state(data)

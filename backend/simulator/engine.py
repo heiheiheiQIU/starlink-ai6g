@@ -126,11 +126,14 @@ def _energy_segments(state: SimulatorState, dt: float, airtime: float, tx: float
     capacity = state.config.capacity_Wh if initial is None else max(state.config.capacity_Wh, energy)
     cursor = state.sim_time_s
     result = []
-    for duration, power in ((airtime, tx), (dt - airtime, 0.0)):
+    step_end = finite_number(state.sim_time_s + dt, "step end")
+    cuts = ([(min(step_end, state.sim_time_s + airtime), tx)] if airtime > 0 else [])
+    cuts.append((step_end, 0.0))
+    for end, power in cuts:
+        duration = end - cursor
         if duration <= 0:
             continue
         entry = advance_energy(energy, capacity, duration, state.config.powers, power)
-        end = finite_number(cursor + duration, "segment end")
         result.append(TimedEnergy(cursor, end, entry))
         energy, cursor = entry.energy_after_Wh, end
     return result
