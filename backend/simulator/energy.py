@@ -35,25 +35,28 @@ class EnergyLedgerEntry:
     energy_unclipped_Wh: float
     energy_after_Wh: float
     lower_violation: bool
+    receive_Wh: float = 0.0
 
     @property
     def consumed_Wh(self) -> float:
-        return self.background_Wh + self.compute_Wh + self.transmit_Wh
+        return self.background_Wh + self.compute_Wh + self.transmit_Wh + self.receive_Wh
 
 
 def advance_energy(energy_Wh: float, capacity_Wh: float, duration_s: float,
-                   powers: PowerProfile, tx_W: float = 0.0) -> EnergyLedgerEntry:
+                   powers: PowerProfile, tx_W: float = 0.0, rx_W: float = 0.0) -> EnergyLedgerEntry:
     energy = finite_number(energy_Wh, "energy_Wh")
     capacity = finite_number(capacity_Wh, "capacity_Wh", positive=True)
     duration = finite_number(duration_s, "duration_s", positive=True)
     transmit = finite_number(tx_W, "tx_W")
+    receive = finite_number(rx_W, "rx_W")
     profile = PowerProfile.model_validate(powers)
     if energy > capacity:
         raise ValueError("Initial energy exceeds capacity")
     solar, base, compute, tx = [power * duration / 3600.0 for power in
                                 (profile.solar_W, profile.base_W, profile.compute_W, transmit)]
-    raw = energy + solar - base - compute - tx
-    if not all(math.isfinite(value) for value in (solar, base, compute, tx, raw)):
+    rx = receive * duration / 3600.0
+    raw = energy + solar - base - compute - tx - rx
+    if not all(math.isfinite(value) for value in (solar, base, compute, tx, rx, raw)):
         raise ValueError("Energy arithmetic overflow")
     return EnergyLedgerEntry(duration, energy, solar, base, compute, tx, raw,
-                             min(capacity, max(0.0, raw)), raw < 0.0)
+                             min(capacity, max(0.0, raw)), raw < 0.0, rx)
