@@ -116,7 +116,7 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         # Successful status is the final write, after all required artifacts validate.
         status('completed')
         return result
-    except Exception as error:
+    except BaseException as error:
         if (output/'results.json').exists():
             (output/'results.json').replace(output/'results.partial.json')
         with log.open('a',encoding='utf-8') as stream:

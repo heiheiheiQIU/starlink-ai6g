@@ -133,3 +133,22 @@ def test_protocol_rejects_invalid_dt_and_excludes_future_health():
     for bad in (0.0,-1.0,float('inf'),float('nan'),True):
         with pytest.raises(ValueError): step(state, idle_action(),bad)
     assert state.sim_time_s==0 and state.protocol_state.pending==[]
+
+
+def test_ack_rx_energy_occurs_after_propagation_not_during_ground_transmit():
+    data=config(); data['protocol']['ack_propagation_s']=0.5
+    first=step(create_state(data),send(),1.8)
+    assert sum(r.entry.receive_Wh for r in first.next_state.energy_ledger)==0.0
+    second=step(first.next_state,idle_action(),0.7)
+    rows=[r for r in second.next_state.energy_ledger if r.entry.receive_Wh]
+    assert [(r.start_s,r.end_s) for r in rows]==[(1.90625,2.03125)]
+    assert sum(r.entry.receive_Wh for r in rows)==pytest.approx(1/3600)
+
+
+def test_lost_ack_rx_energy_counts_only_signal_arriving_before_close():
+    from tests.test_simulator import window
+    data=config(); data['protocol']['ack_propagation_s']=0.5
+    data['true_windows']=[window(0.0,1.95).model_dump()]
+    result=step(create_state(data),send(),4.0)
+    assert sum(r.entry.receive_Wh for r in result.next_state.energy_ledger)==pytest.approx(8*(1.95-1.90625)/3600)
+    assert any(e.reason_code=='ACK_LOST_WINDOW_CLOSED' for e in result.events)

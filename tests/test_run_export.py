@@ -60,3 +60,17 @@ def test_cli_module_actual_command(tmp_path):
                             capture_output=True,text=True)
     assert process.returncode==0,process.stderr
     assert json.loads((output/'results.json').read_text())['status']=='completed'
+
+
+def test_keyboard_interrupt_after_results_leaves_failed_status(tmp_path,monkeypatch):
+    import backend.cli as cli
+    original=cli._write_json
+    def interrupted(path,value):
+        if path.name=='manifest.json': raise KeyboardInterrupt()
+        original(path,value)
+    monkeypatch.setattr(cli,'_write_json',interrupted)
+    output=tmp_path/'interrupted'
+    with pytest.raises(KeyboardInterrupt): run_experiment(run_config(),output)
+    assert json.loads((output/'status.json').read_text())['status']=='failed'
+    assert not (output/'results.json').exists()
+    assert (output/'results.partial.json').exists()

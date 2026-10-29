@@ -14,7 +14,7 @@ timeout_at=send_end+2*slot_s，保留R2起点。ACK、接收、到达先于同�
 
 ## 能量与资源
 
-数据发射W按实际airtime计；背景/计算持续计；卫星ACK活动接收用增量ack_rx_W（背景已含待机）。控制16byte占独立预留时间，不从数据wire rate再扣一次。重试数据发送不得覆盖已知控制保留区间。发射与接收各记录一次；sent计发射能耗，snapshot计背景/计算/接收增量，账本另列receive_Wh。失败ACK最多按窗口关闭前的实际活动接收时间计。max_power_W同时检查背景/计算与活动功率。储备仅依据Observation下界，真实负值始终保留，不能视为完整R4安全guard。
+数据发射W按实际airtime计；背景/计算持续计；卫星ACK活动接收用增量ack_rx_W（背景已含待机），接收区间为控制发射区间加ACK传播延迟，关窗截断卫星实际接收时间。控制16byte占独立预留时间，不从数据wire rate再扣一次。重试数据发送不得覆盖已知控制发送或卫星接收保留区间。发射与接收各记录一次；sent计发射能耗，snapshot计背景/计算/接收增量，账本另列receive_Wh。max_power_W同时检查背景/计算与活动功率。储备仅依据Observation下界，真实负值始终保留，不能视为完整R4安全guard。
 
 ## 评价与导出
 
@@ -23,3 +23,5 @@ evaluate(events,config)仅用单policy事件及公开配置；拒绝混run/polic
 最低SOC与违例次数依据事后snapshot；精确违例持续时间、未设置关键任务集合、未测模型/算法诊断保留null+reason。此处违例次数是负值账本分段数，非连续负值事件次数，在指标字典明示。
 
 CLI单policy=manual，配置包含scenario/evaluation_end_s及按时间排序的显式Action脚本。执行到时域终点后落盘六件套与能量账本，最后写completed；异常保留failed和日志，不能返回正式成功结果。固定输入事件与指标可复现，run_id单独标识。manifest记录代码和源文件SHA、配置/外部轨迹SHA；模型hash=null，清楚标记synthetic和manual_validation。
+
+status.json是完成状态的唯一依据。可捕获异常（包括KeyboardInterrupt）须清理正式结果并记failed；强制杀进程/断电可能保留running及部分文件，消费者不得仅以results.json存在而视为正式完成。

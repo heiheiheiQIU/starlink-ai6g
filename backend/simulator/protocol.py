@@ -31,6 +31,8 @@ class Pending:
     ack_end_s: float = 0.0
     ack_visible_end_s: float = 0.0
     valid_ack: bool = False
+    rx_start_s: float = 0.0
+    rx_visible_end_s: float = 0.0
 
 
 @dataclass

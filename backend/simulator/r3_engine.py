@@ -80,7 +80,8 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
             power = getattr(cfg.tx_power_W, command.mode)
             if air is None:
                 reason = 'INSUFFICIENT_LINK_TIME'
-            elif any(p.kind == 'acked' and start < p.ack_visible_end_s and start+air > p.ack_start_s
+            elif any(p.kind == 'acked' and ((start < p.ack_visible_end_s and start+air > p.ack_start_s)
+                     or (start < p.rx_visible_end_s and start+air > p.rx_start_s))
                      for p in protocol.pending):
                 reason = 'CONTROL_RESERVED'
             elif cfg.powers.base_W + cfg.powers.compute_W + power > cfg.max_power_W:
@@ -101,6 +102,8 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
                     w = next((w for w in cfg.true_windows if w.start_s <= control_start < w.end_s), None)
                     valid = w is not None and ack < w.end_s
                     visible_end = min(control_end, w.end_s) if w is not None else control_start
+                    rx_start = control_start+params.ack_propagation_s
+                    rx_visible_end = min(ack,w.end_s) if w is not None else rx_start
                     block = (selected.payload_bytes-selected.remaining_bytes)//1024
                     key = (selected.task_id, block)
                     attempt = protocol.attempts.get(key, 0)+1
@@ -111,7 +114,8 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
                     protocol.pending.extend([
                         Pending(receive, 'received', selected.task_id, block, command.scheduled_bytes, attempt),
                         Pending(ack, 'acked', selected.task_id, block, command.scheduled_bytes, attempt,
-                                control_start, control_end, visible_end, valid),
+                                control_start, control_end, visible_end, valid,
+                                rx_start, max(rx_start,rx_visible_end)),
                         Pending(timeout, 'timeout', selected.task_id, block, command.scheduled_bytes, attempt)])
                     tx_power = power
                     emit(start, 'sent', task=selected.task_id, block=block, payload=command.scheduled_bytes,
@@ -123,7 +127,8 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
     boundaries.update(p.time_s for p in protocol.pending if start < p.time_s <= end)
     for p in protocol.pending:
         if p.kind == 'acked':
-            boundaries.update(t for t in (p.ack_start_s, p.ack_visible_end_s) if start < t <= end)
+            boundaries.update(t for t in (p.ack_start_s, p.ack_visible_end_s,p.rx_start_s,p.rx_visible_end_s)
+                              if start < t <= end)
     if start < tx_end <= end: boundaries.add(tx_end)
     boundaries.update(t.arrival_s for t in s.tasks if start < t.arrival_s <= end)
     # Equality at deadline is on time; expiration is checked at the next boundary.
@@ -139,7 +144,7 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
         duration = target-s.sim_time_s
         if duration <= 0: continue
         rx = sum(params.ack_rx_W for p in protocol.pending if p.kind == 'acked'
-                 and p.ack_start_s <= s.sim_time_s < p.ack_visible_end_s)
+                 and p.rx_start_s <= s.sim_time_s < p.rx_visible_end_s)
         tx = tx_power if s.sim_time_s < tx_end else 0.0
         row = advance_energy(s.energy_Wh, cfg.capacity_Wh, duration, cfg.powers, tx, rx)
         s.energy_ledger.append(TimedEnergy(s.sim_time_s, target, row))
