@@ -21,6 +21,7 @@ Verified evidence directory: `docs/evidence/A/H01_2026-10-29`; manifest:
 `docs/evidence/A/H01_2026-10-29/manifest.json`.
 The manifest binds source revision, input and config hashes, and the success,
 missing-RUL and invalid-input artifacts.
+Missing-RUL view: `docs/evidence/A/H01_2026-10-29/health_missing_rul.json`.
 
 Task 4 CLI commands (from repository root, with the Task 4 environment):
 

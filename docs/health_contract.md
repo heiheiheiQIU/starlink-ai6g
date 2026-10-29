@@ -10,7 +10,7 @@ The caller must provide `now_index` in the NPZ native step unit. A window is eli
 
 The checkpoint's raw normalized prediction is not a validated online native RUL estimate. Restoring native RUL with a future run maximum would leak future information. Therefore `rul_est` remains `null` with reason code `NATIVE_RUL_RESTORE_REQUIRES_FUTURE_RUN_MAX` until an online-safe restoration method is demonstrated. Preserve the native RUL unit (`cycles` or `orbits`) as metadata; do not turn a missing value into zero.
 
-RUL must never be substituted for SOC, capacity, energy, or a battery control state. B may use explicitly labeled synthetic health in its own simulations. A1 evidence JSON files are examples of checkpoint behavior, not B's formal `HealthEstimate` schema. The formal type and its API semantics wait for B's H00 contract and remain B-owned.
+RUL must never be substituted for SOC, capacity, energy, or a battery control state. B may use explicitly labeled synthetic health in its own simulations. A1 evidence JSON files are examples of checkpoint behavior, not B's formal `HealthEstimate` schema. H00 now owns and has frozen the formal type and its API semantics; legacy A1 checkpoint evidence remains non-formal.
 
 ## Failure behavior
 
