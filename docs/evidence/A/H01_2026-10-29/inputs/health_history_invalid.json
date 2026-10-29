@@ -1,0 +1,9 @@
+[
+  {
+    "source": "simulation_truth",
+    "soc_observed": 0.6,
+    "capacity_Wh_observed": 12.0,
+    "observed_at_s": 8.0,
+    "available_at_s": 10.0
+  }
+]

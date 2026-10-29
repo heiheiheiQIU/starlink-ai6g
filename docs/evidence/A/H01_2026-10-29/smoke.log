@@ -1,0 +1,15 @@
+H01 formal adapter smoke
+python=3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]
+pip_command=D:\pro2\.worktrees\a-n1-formal-adapter\runs\a_n1_formal_env\venv\Scripts\python.exe -m pip check
+pip_exit=0
+No broken requirements found.
+success_command=D:\pro2\.worktrees\a-n1-formal-adapter\runs\a_n1_formal_env\venv\Scripts\python.exe -m backend.health.estimator --history D:\pro2\.worktrees\a-n1-formal-adapter\docs\evidence\A\H01_2026-10-29\inputs\health_history_success.json --now-s 10
+success_exit=0
+invalid_command=D:\pro2\.worktrees\a-n1-formal-adapter\runs\a_n1_formal_env\venv\Scripts\python.exe -m backend.health.estimator --history D:\pro2\.worktrees\a-n1-formal-adapter\docs\evidence\A\H01_2026-10-29\inputs\health_history_invalid.json --now-s 10
+invalid_exit=2
+test_command=D:\pro2\.worktrees\a-n1-formal-adapter\runs\a_n1_formal_env\venv\Scripts\python.exe -m pytest tests/test_health_contract_adapter.py tests/test_health_estimator.py tests/test_contracts.py tests/test_h00_review_regressions.py -q --noconftest -p no:cacheprovider --basetemp D:\pro2\.worktrees\a-n1-formal-adapter\runs\h01_evidence_pytest_cd9b268700a34c56bfbb6cdb18ce76e2
+test_exit=0
+........................................................................ [ 36%]
+........................................................................ [ 73%]
+....................................................                     [100%]
+196 passed in 1.81s
