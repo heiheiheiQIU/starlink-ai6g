@@ -5,7 +5,7 @@ A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,
 A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,教师接口已交付（bounded-forecast-r4-v1）,基于solve_teacher扩样训练；补F3权重对应冻结JSON映射
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
-B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,H02教师/guard/基线已交付,R2-R4依序合main；补参数台账与共享随机信道
+B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,共享信道+180轨迹规则矩阵已交付（PR#6）,R2-R5依序合main；成熟优化器与AI接入仍待后续
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,C,C已复核accepted_with_notes,等A对H02回执后合入,完整HTTP复跑并入11/08换机验收
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,R2 41项已交付（PR#3）,PR#3待R3修复后一并入main,复核R2手算与send-only轨迹
