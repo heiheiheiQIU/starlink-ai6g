@@ -9,7 +9,7 @@ B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,R2/R3已交�
 B-N3,B,not_started,2026-10-31T20:00:00+08:00,backend/api/,C,,依赖B-N2,提供三类run fixture
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,R2 41项已交付（PR#3）,PR#3待R3修复后一并入main,复核R2手算与send-only轨迹
-B-R3,B,changes_requested,2026-10-30T20:00:00+08:00,feature/simulator-r3,C,C独立复核：I-01/I-02阻塞+M-04,修复三处,单在途语义、陈旧能量下界、git依赖回退
+B-R3,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,C对cac4b90修复已accepted,等A对cac4b90的新回执,A必须基于新提交cac4b90复核并推送回执；三方齐后R2先入main再合R3
 C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
 C-N2,C,ready_for_review,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,待B复核镜像语义,类型镜像+展示守卫+7项语义测试已提交（3c55815）
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
