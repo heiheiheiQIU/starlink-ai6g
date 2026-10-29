@@ -1,13 +1,23 @@
 import { useState } from 'react'
 
+import type { StageTask } from '../domain/flow'
+
 interface StageExperienceProps {
   stepId: string
+  tasks: readonly StageTask[]
+  onTasksChange: (tasks: StageTask[]) => void
 }
 
-export function StageExperience({ stepId }: StageExperienceProps) {
-  const [queueCount, setQueueCount] = useState(3)
+const SCORE_TABLE: Record<string, { factors: [number, number, number]; total: string }> = {
+  '3.0': { factors: [92, 95, 55], total: '0.861' },
+  '1.5': { factors: [55, 68, 40], total: '0.562' },
+  '1.0': { factors: [30, 22, 60], total: '0.318' },
+}
+
+export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienceProps) {
   const [windowStart, setWindowStart] = useState(68)
   const [disturbance, setDisturbance] = useState(false)
+  const [showReal, setShowReal] = useState(false)
   const [scored, setScored] = useState(false)
   const [scoreTask, setScoreTask] = useState('T-101')
   const [mode, setMode] = useState('robust')
@@ -20,22 +30,29 @@ export function StageExperience({ stepId }: StageExperienceProps) {
       <div className="experience experience--queue">
         <div className="experience-toolbar">
           <span className="live-pill">LIVE FIXTURE</span>
-          <strong>队列任务 {String(queueCount).padStart(2, '0')}</strong>
+          <strong>队列任务 {String(tasks.length).padStart(2, '0')}</strong>
         </div>
         <div className="task-stack">
-          {Array.from({ length: queueCount }, (_, index) => (
-            <button className="task-card task-drop" key={index} type="button">
-              <span>{index === 0 ? '异常摘要' : index === 1 ? '周期记录' : '批量历史'}</span>
-              <strong>T-{101 + index}</strong>
-              <small>w={index === 0 ? '3.0' : index === 1 ? '1.5' : '1.0'}</small>
+          {tasks.map((task) => (
+            <button className="task-card task-drop" key={task.id} type="button">
+              <span>{task.name}</span>
+              <strong>{task.id}</strong>
+              <small>w={task.weight}</small>
             </button>
           ))}
         </div>
         <div className="experience-actions">
-          <button type="button" onClick={() => setQueueCount((count) => count + 1)}>
+          <button
+            type="button"
+            onClick={() => onTasksChange([...tasks, { id: `T-${104 + tasks.length - 3}`, name: '异常摘要', weight: '3.0', kind: 'a', deadline: '600s', remaining: '8KB' }])}
+          >
             添加异常摘要
           </button>
-          <button type="button" onClick={() => setQueueCount((count) => Math.max(0, count - 1))}>
+          <button
+            type="button"
+            disabled={tasks.length === 0}
+            onClick={() => onTasksChange(tasks.slice(0, -1))}
+          >
             移除末项
           </button>
         </div>
@@ -53,6 +70,9 @@ export function StageExperience({ stepId }: StageExperienceProps) {
             className="timeline-window timeline-window--forecast"
             style={{ left: `${windowStart}%` }}
           />
+          {showReal ? (
+            <span className="timeline-window timeline-window--real" title="事后真实窗口，仅供对比，策略不可见" />
+          ) : null}
           <div className="timeline-axis"><span>0s</span><span>300s</span><span>600s</span></div>
         </div>
         <label>
@@ -65,37 +85,67 @@ export function StageExperience({ stepId }: StageExperienceProps) {
             onChange={(event) => setWindowStart(Number(event.target.value))}
           />
         </label>
-        <button type="button" data-active={disturbance} onClick={() => setDisturbance((v) => !v)}>
-          {disturbance ? '已注入链路扰动' : '注入链路扰动'}
-        </button>
+        <p className="experience-hint">
+          拖动滑杆=提前或推迟第三个预测窗口：观察下一步发送安排如何变化（策略对窗口的敏感度演示）。
+        </p>
+        <div className="experience-actions">
+          <button type="button" data-active={showReal} onClick={() => setShowReal((value) => !value)}>
+            {showReal ? '隐藏事后真实窗口' : '显示事后真实窗口'}
+          </button>
+          <button type="button" data-active={disturbance} onClick={() => setDisturbance((value) => !value)}>
+            {disturbance ? '已注入链路扰动' : '注入链路扰动'}
+          </button>
+        </div>
+        {showReal ? (
+          <p className="experience-hint">灰色虚线=事后评估参考，在线策略不可见（防未来信息泄漏）。</p>
+        ) : null}
       </div>
     )
   }
 
   if (stepId === 'score') {
-    const scores = scoreTask === 'T-101' ? [92, 95, 55] : [55, 68, 40]
+    const current = tasks.find((task) => task.id === scoreTask) ?? tasks[0]
+    const table = SCORE_TABLE[current.weight] ?? SCORE_TABLE['1.0']
+    const top = [...tasks].sort((a, b) => Number(b.weight) - Number(a.weight))[0]
     return (
       <div className="experience experience--score">
         <div className="score-tabs">
-          {['T-101', 'T-102', 'T-103'].map((task) => (
-            <button key={task} type="button" data-active={task === scoreTask} onClick={() => { setScoreTask(task); setScored(false) }}>
-              {task}
+          {tasks.map((task) => (
+            <button
+              key={task.id}
+              type="button"
+              data-active={task.id === current.id}
+              onClick={() => { setScoreTask(task.id); setScored(false) }}
+            >
+              {task.id}
             </button>
           ))}
         </div>
         {['风险权重', '期限紧迫度', '能耗影响'].map((label, index) => (
           <div className="score-factor" key={label}>
             <span>{label}</span>
-            <i><b style={{ width: scored ? `${scores[index]}%` : 0 }} /></i>
-            <strong>{scored ? `${scores[index]}%` : '—'}</strong>
+            <i><b style={{ width: scored ? `${table.factors[index]}%` : 0 }} /></i>
+            <strong>{scored ? `${table.factors[index]}%` : '—'}</strong>
           </div>
         ))}
         <button className="experience-primary" type="button" onClick={() => setScored(true)}>运行 AI 评分</button>
+        {scored ? (
+          <div className="score-verdict">
+            <span>决策候选</span>
+            <strong>{top.id} × robust</strong>
+            <small>综合评分 {SCORE_TABLE[top.weight].total}（队列最高）→ 交给下一步约束解码</small>
+          </div>
+        ) : null}
       </div>
     )
   }
 
   if (stepId === 'decode') {
+    const quota = mode === 'idle'
+      ? ['本时隙无可见窗口 → 不发送', '字节配额 = 0 B']
+      : mode === 'fast'
+        ? ['fast 功耗 16W 将触及能量储备 → 被否决', '回退 robust：8000 bit/s × 60s = 480000 bit', '÷ 8 = 60000 B → min(1024, 60000) = 1024 B']
+        : ['8000 bit/s × 剩余窗口 60s = 480000 bit', '÷ 8 = 60000 B → min(1024, 60000)', '本时隙字节配额 = 1024 B']
     return (
       <div className="experience experience--checks">
         <div className="mode-picker">
@@ -107,6 +157,11 @@ export function StageExperience({ stepId }: StageExperienceProps) {
           const failed = mode === 'fast' && index === 3
           return <div className={`constraint-row ${failed ? 'constraint-row--failed' : ''}`} key={check}><span>{failed ? '×' : '✓'}</span><strong>{check}</strong><small>{failed ? 'ENERGY_GUARD_REJECTED' : 'PASS'}</small></div>
         })}
+        <div className="quota-panel" key={mode}>
+          {quota.map((line, index) => (
+            <p key={line} style={{ animationDelay: `${index * 380}ms` }}>{line}</p>
+          ))}
+        </div>
       </div>
     )
   }
@@ -122,6 +177,11 @@ export function StageExperience({ stepId }: StageExperienceProps) {
           <span className="signal-beam" />
           <span className="packet">1024B</span>
           {!ackLost ? <span className="ack-packet">ACK</span> : null}
+        </div>
+        <div className="orbit-legend" aria-label="链路动画图例">
+          <span>光束=数据发送</span>
+          <span>1024B=数据块</span>
+          <span>ACK=网关确认回传</span>
         </div>
         <p className="orbit-status">{ackLost ? 'ACK 已丢失 · 下一窗口重传 · 网关去重' : playing ? '链路播放中 · 数据块传输' : '链路已暂停 · 等待操作'}</p>
         <div className="experience-actions">

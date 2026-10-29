@@ -11,6 +11,39 @@ export interface FlowStep {
   status: 'ready' | 'decision' | 'evidence'
 }
 
+export interface StageTask {
+  id: string
+  name: string
+  weight: string
+  kind: 'a' | 'b' | 'c'
+  deadline: string
+  remaining: string
+}
+
+export const INITIAL_TASKS: readonly StageTask[] = [
+  { id: 'T-101', name: '异常摘要', weight: '3.0', kind: 'a', deadline: '480s', remaining: '12KB' },
+  { id: 'T-102', name: '周期记录', weight: '1.5', kind: 'b', deadline: '540s', remaining: '48KB' },
+  { id: 'T-103', name: '批量历史', weight: '1.0', kind: 'c', deadline: '900s', remaining: '200KB' },
+]
+
+const ADD_TASK_KINDS = [
+  { name: '异常摘要', weight: '3.0', kind: 'a' as const },
+  { name: '周期记录', weight: '1.5', kind: 'b' as const },
+  { name: '批量历史', weight: '1.0', kind: 'c' as const },
+]
+
+export function makeAdditionalTask(index: number): StageTask {
+  const spec = ADD_TASK_KINDS[index % ADD_TASK_KINDS.length]
+  return {
+    id: `T-${104 + index}`,
+    name: spec.name,
+    weight: spec.weight,
+    kind: spec.kind,
+    deadline: '600s',
+    remaining: '8KB',
+  }
+}
+
 export const FLOW_STEPS: readonly FlowStep[] = [
   {
     id: 'arrival',

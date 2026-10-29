@@ -1,9 +1,9 @@
-import type { FlowStep } from '../domain/flow'
+import type { FlowStep, StageTask } from '../domain/flow'
 import { StageExperience } from './StageExperience'
 
 const STAGE_METRICS: Record<FlowStep['id'], readonly [string, string][]> = {
   arrival: [
-    ['队列任务', '03'],
+    ['队列任务', ''],
     ['缓存占用', '4.8 KB'],
     ['最高权重', '3.0'],
   ],
@@ -37,9 +37,15 @@ const STAGE_METRICS: Record<FlowStep['id'], readonly [string, string][]> = {
 interface StagePanelProps {
   step: FlowStep
   stepNumber: number
+  tasks: readonly StageTask[]
+  onTasksChange: (tasks: StageTask[]) => void
 }
 
-export function StagePanel({ step, stepNumber }: StagePanelProps) {
+export function StagePanel({ step, stepNumber, tasks, onTasksChange }: StagePanelProps) {
+  const metrics =
+    step.id === 'arrival'
+      ? [['队列任务', String(tasks.length).padStart(2, '0')], ['缓存占用', '4.8 KB'], ['最高权重', '3.0']]
+      : STAGE_METRICS[step.id]
   return (
     <section className="stage-panel">
       <div className="stage-panel__header">
@@ -61,10 +67,10 @@ export function StagePanel({ step, stepNumber }: StagePanelProps) {
 
       <p className="stage-description">{step.description}</p>
 
-      <StageExperience key={step.id} stepId={step.id} />
+      <StageExperience key={step.id} stepId={step.id} tasks={tasks} onTasksChange={onTasksChange} />
 
       <div className="stage-metrics" aria-label="当前步骤样例指标">
-        {STAGE_METRICS[step.id].map(([label, value]) => (
+        {metrics.map(([label, value]) => (
           <div className="stage-metric" key={label}>
             <span>{label}</span>
             <strong>{value}</strong>

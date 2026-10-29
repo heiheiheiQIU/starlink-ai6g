@@ -51,4 +51,30 @@ describe('six-step operations stage', () => {
     await user.click(screen.getByRole('button', { name: '注入 ACK 丢失' }))
     expect(screen.getByText(/ACK 已丢失/)).toBeInTheDocument()
   })
+
+  it('keeps tasks added at arrival visible in later steps', async () => {
+    const user = userEvent.setup()
+    render(<FlowWorkspace />)
+
+    await user.click(screen.getByRole('button', { name: '添加异常摘要' }))
+    await user.click(screen.getByRole('button', { name: '下一步' }))
+    await user.click(screen.getByRole('button', { name: '下一步' }))
+
+    expect(screen.getByRole('button', { name: 'T-104' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'T-104' }))
+    await user.click(screen.getByRole('button', { name: '运行 AI 评分' }))
+    expect(screen.getByText(/综合评分 0.861/)).toBeInTheDocument()
+  })
+
+  it('shows quota computation and link legend at decode and confirm steps', async () => {
+    const user = userEvent.setup()
+    render(<FlowWorkspace />)
+
+    await user.click(screen.getByRole('button', { name: '步骤 4：约束解码' }))
+    expect(screen.getByText(/本时隙字节配额 = 1024 B/)).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '步骤 5：发送/确认' }))
+    expect(screen.getByText('光束=数据发送')).toBeInTheDocument()
+    expect(screen.getByText('ACK=网关确认回传')).toBeInTheDocument()
+  })
 })

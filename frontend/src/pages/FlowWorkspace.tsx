@@ -4,11 +4,12 @@ import { EngineerDetails } from '../components/EngineerDetails'
 import { FlowStepper } from '../components/FlowStepper'
 import { StagePanel } from '../components/StagePanel'
 import { StepContextPanel } from '../components/StepContextPanel'
-import { clampStep, FLOW_STEPS } from '../domain/flow'
+import { clampStep, FLOW_STEPS, INITIAL_TASKS, type StageTask } from '../domain/flow'
 
 export function FlowWorkspace() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [autoMode, setAutoMode] = useState(false)
+  const [tasks, setTasks] = useState<StageTask[]>(() => [...INITIAL_TASKS])
   const activeStep = FLOW_STEPS[activeIndex]
 
   function selectStep(index: number) {
@@ -59,7 +60,12 @@ export function FlowWorkspace() {
           onSelect={selectStep}
         />
         <div className="flow-workspace__content">
-          <StagePanel step={activeStep} stepNumber={activeIndex + 1} />
+          <StagePanel
+            step={activeStep}
+            stepNumber={activeIndex + 1}
+            tasks={tasks}
+            onTasksChange={setTasks}
+          />
           <div className="stage-controls">
             <button
               type="button"
