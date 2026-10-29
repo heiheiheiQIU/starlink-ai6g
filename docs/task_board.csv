@@ -3,7 +3,7 @@ A-N1,A,not_started,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,等�
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界
 A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
-B-N1,B,in_progress,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,,,评审docs/contracts并实现fixture
+B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,干净集成进入main后推进B-N2最小环境
 B-N2,B,not_started,2026-10-30T20:00:00+08:00,backend/simulator/,A,,依赖B-N1,先打通六个契约样例
 B-N3,B,not_started,2026-10-31T20:00:00+08:00,backend/api/,C,,依赖B-N2,提供三类run fixture
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义

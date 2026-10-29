@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-29",
+  "task": "H00_review_fixes",
+  "status": "ready_for_review",
+  "implementation_base": "4cf2b7e",
+  "reviewed_original_candidate": "8497a3b",
+  "schema_version": "1.0",
+  "tests": {
+    "red": {
+      "tests": 42,
+      "passed": 6,
+      "failed": 36,
+      "errors": 0,
+      "seconds": 0.436
+    },
+    "contracts": {
+      "tests": 117,
+      "passed": 117,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 0.876
+    },
+    "full": {
+      "tests": 178,
+      "passed": 178,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 9.361
+    }
+  },
+  "original_75_tests_unchanged": true,
+  "default_asset_config_used": true,
+  "main_checkout_full_suite": true,
+  "schema_sha256": "D1A19C098B8C69BA7EBEFC19DB60C1E3F0F321C38B5F669518E7F05676B89FCB",
+  "schema_reexport_byte_equal": true,
+  "independent_review": {
+    "critical": 0,
+    "important": 0,
+    "minor": 0,
+    "contract_tests_passed": 117
+  },
+  "A_C_accepted": false,
+  "fixture_behavior_verified": false,
+  "python": "3.12.14"
+}

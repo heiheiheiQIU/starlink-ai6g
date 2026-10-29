@@ -1,0 +1,221 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "valid": true,
+      "payload": {
+        "rate_profile": [
+          {
+            "time_s": 0.0,
+            "robust_bps": 8192.0,
+            "fast_bps": 16384.0
+          }
+        ],
+        "loss_profile": [
+          {
+            "time_s": 0.0,
+            "robust_loss_prob": 0.1,
+            "fast_loss_prob": 0.2
+          }
+        ],
+        "window_id": "W1",
+        "end_s": 2.0,
+        "start_s": 0.0,
+        "source": "synthetic",
+        "forecast_version": "forecast_v1"
+      },
+      "type": "Window"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "schema_version": "1.0",
+        "run_id": "fixture_run",
+        "policy_id": "edf",
+        "sim_time_s": 4.0,
+        "tasks": [
+          {
+            "task_id": "T1",
+            "arrival_s": 0.0,
+            "deadline_s": 4.0,
+            "payload_bytes": 1024,
+            "remaining_bytes": 1024,
+            "priority_weight": 2.0,
+            "business_class": "periodic",
+            "data_location": "satellite_1"
+          }
+        ],
+        "forecast_windows": [
+          {
+            "rate_profile": [
+              {
+                "time_s": 4.0,
+                "robust_bps": 8192.0,
+                "fast_bps": 16384.0
+              }
+            ],
+            "loss_profile": [
+              {
+                "time_s": 4.0,
+                "robust_loss_prob": 0.1,
+                "fast_loss_prob": 0.2
+              }
+            ],
+            "window_id": "W2",
+            "end_s": 20.0,
+            "start_s": 4.0,
+            "source": "synthetic",
+            "forecast_version": "forecast_v1"
+          }
+        ],
+        "health": {
+          "soc_est": 0.6,
+          "soc_lower": 0.5,
+          "capacity_Wh_est": 10.0,
+          "capacity_lower_Wh": 8.0,
+          "energy_lower_Wh": 4.0,
+          "rul_est": null,
+          "rul_unit": null,
+          "uncertainty_method": "synthetic_bounds",
+          "model_version": "synthetic_v1",
+          "observed_at_s": 0.0,
+          "available_at_s": 0.0,
+          "reason_codes": [
+            "RUL_UNAVAILABLE"
+          ]
+        },
+        "inflight": {
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "mode": "robust",
+          "sent_at_s": 0.0,
+          "timeout_at_s": 2.0,
+          "retries": 0
+        },
+        "cache_bytes": 1024,
+        "forecast_version": "forecast_v1"
+      },
+      "type": "Observation"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "sim_time_s": 0.0,
+        "event_id": 1,
+        "task_id": "T1",
+        "energy_Wh": 0.0,
+        "policy_id": "edf",
+        "data": null,
+        "run_id": "fixture_run",
+        "payload_bytes": 1024,
+        "overhead_bytes": 32,
+        "reason_code": null,
+        "event_type": "sent",
+        "block_id": 0
+      },
+      "type": "Event"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "sim_time_s": 1.0,
+        "event_id": 2,
+        "task_id": "T1",
+        "energy_Wh": 0.0,
+        "policy_id": "edf",
+        "data": null,
+        "run_id": "fixture_run",
+        "payload_bytes": 1024,
+        "overhead_bytes": 0,
+        "reason_code": null,
+        "event_type": "received",
+        "block_id": 0
+      },
+      "type": "Event"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "sim_time_s": 2.0,
+        "event_id": 3,
+        "task_id": "T1",
+        "energy_Wh": 0.0,
+        "policy_id": "edf",
+        "data": null,
+        "run_id": "fixture_run",
+        "payload_bytes": 0,
+        "overhead_bytes": 16,
+        "reason_code": "ACK_LOST_WINDOW_CLOSED",
+        "event_type": "dropped",
+        "block_id": 0
+      },
+      "type": "Event"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "sim_time_s": 4.0,
+        "event_id": 4,
+        "task_id": "T1",
+        "energy_Wh": 0.0,
+        "policy_id": "edf",
+        "data": null,
+        "run_id": "fixture_run",
+        "payload_bytes": 1024,
+        "overhead_bytes": 32,
+        "reason_code": null,
+        "event_type": "sent",
+        "block_id": 0
+      },
+      "type": "Event"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "sim_time_s": 5.0,
+        "event_id": 5,
+        "task_id": "T1",
+        "energy_Wh": 0.0,
+        "policy_id": "edf",
+        "data": null,
+        "run_id": "fixture_run",
+        "payload_bytes": 1024,
+        "overhead_bytes": 0,
+        "reason_code": null,
+        "event_type": "received",
+        "block_id": 0
+      },
+      "type": "Event"
+    },
+    {
+      "valid": true,
+      "payload": {
+        "sim_time_s": 6.0,
+        "event_id": 6,
+        "task_id": "T1",
+        "energy_Wh": 0.0,
+        "policy_id": "edf",
+        "data": null,
+        "run_id": "fixture_run",
+        "payload_bytes": 0,
+        "overhead_bytes": 16,
+        "reason_code": null,
+        "event_type": "acked",
+        "block_id": 0
+      },
+      "type": "Event"
+    }
+  ],
+  "scenario_id": "ack_loss",
+  "expected_behavior": {
+    "first_complete_receive_s": 1.0,
+    "unique_success_payload_bytes": 1024,
+    "business_success": true,
+    "note": "第一窗[0,2)，ACK在2秒遇关闭；第二窗[4,20)重传。首次完整接收1秒，期限4秒，成功有效字节仍为1024；待R3验证行为。",
+    "implementation_owner": "R3"
+  },
+  "behavior_verified": false
+}

@@ -1,0 +1,121 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "type": "RunResult",
+      "valid": true,
+      "payload": {
+        "schema_version": "1.0",
+        "run_id": "fixture_run",
+        "status": "completed",
+        "config_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "input_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "model_hash": null,
+        "code_revision": "fixture-not-real-code",
+        "seed": 0,
+        "by_policy": [
+          {
+            "policy_id": "edf",
+            "model_hash": null,
+            "sample_count": 2,
+            "evaluation_end_s": 20.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 0.5,
+            "critical_task_success_rate": null,
+            "goodput_bps": 409.6,
+            "minimum_soc_true": 0.5,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": 0.0,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": null,
+            "wait_p50_s": null,
+            "wait_p95_s": null,
+            "decision_p50_ms": null,
+            "decision_p95_ms": null,
+            "timeout_rate": null,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NOT_MEASURED_IN_FIXTURE",
+              "joule_per_success_bit": "NOT_MEASURED_IN_FIXTURE",
+              "wait_p50_s": "NOT_MEASURED_IN_FIXTURE",
+              "wait_p95_s": "NOT_MEASURED_IN_FIXTURE",
+              "decision_p50_ms": "NOT_MEASURED_IN_FIXTURE",
+              "decision_p95_ms": "NOT_MEASURED_IN_FIXTURE",
+              "timeout_rate": "NOT_MEASURED_IN_FIXTURE",
+              "parameter_count": "NOT_MEASURED_IN_FIXTURE",
+              "memory_bytes": "NOT_MEASURED_IN_FIXTURE"
+            }
+          }
+        ],
+        "metric_definitions": {
+          "weighted_on_time_rate": "到达且截止不晚于评价终点的任务按权重统计完整按时交付比例",
+          "goodput_bps": "去重成功有效载荷bit/评价时长s"
+        },
+        "artifact_paths": {
+          "events": "events.jsonl",
+          "config": "config.json"
+        }
+      }
+    },
+    {
+      "type": "RunResult",
+      "valid": true,
+      "payload": {
+        "schema_version": "1.0",
+        "run_id": "fixture_run",
+        "status": "completed",
+        "config_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+        "input_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+        "model_hash": null,
+        "code_revision": "fixture-not-real-code",
+        "seed": 0,
+        "by_policy": [
+          {
+            "policy_id": "edf",
+            "model_hash": null,
+            "sample_count": 2,
+            "evaluation_end_s": 20.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 0.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 0.0,
+            "minimum_soc_true": 0.5,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": 0.0,
+            "success_payload_bytes": 0,
+            "joule_per_success_bit": null,
+            "wait_p50_s": null,
+            "wait_p95_s": null,
+            "decision_p50_ms": null,
+            "decision_p95_ms": null,
+            "timeout_rate": null,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NOT_MEASURED_IN_FIXTURE",
+              "joule_per_success_bit": "NO_DELIVERY",
+              "wait_p50_s": "NOT_MEASURED_IN_FIXTURE",
+              "wait_p95_s": "NOT_MEASURED_IN_FIXTURE",
+              "decision_p50_ms": "NOT_MEASURED_IN_FIXTURE",
+              "decision_p95_ms": "NOT_MEASURED_IN_FIXTURE",
+              "timeout_rate": "NOT_MEASURED_IN_FIXTURE",
+              "parameter_count": "NOT_MEASURED_IN_FIXTURE",
+              "memory_bytes": "NOT_MEASURED_IN_FIXTURE"
+            }
+          }
+        ],
+        "metric_definitions": {
+          "weighted_on_time_rate": "到达且截止不晚于评价终点的任务按权重统计完整按时交付比例",
+          "goodput_bps": "去重成功有效载荷bit/评价时长s"
+        },
+        "artifact_paths": {
+          "events": "events.jsonl",
+          "config": "config.json"
+        }
+      }
+    }
+  ]
+}
