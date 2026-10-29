@@ -1,0 +1,30 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "Manual UI state example; completed events/results must be fetched from a real run.",
+  "status": {
+    "run_id": "fixture_api_running",
+    "status": "running",
+    "progress": null,
+    "active_policies": [
+      "edf"
+    ],
+    "error": null
+  },
+  "events": {
+    "run_id": "fixture_api_running",
+    "events": [],
+    "next_after": 0,
+    "has_more": false
+  },
+  "results_error": {
+    "http_status": 409,
+    "body": {
+      "code": "RUN_NOT_COMPLETE",
+      "message": "Run is not complete",
+      "details": {
+        "status": "running"
+      }
+    }
+  }
+}

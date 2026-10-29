@@ -1,0 +1,37 @@
+{
+  "kind": "teacher_preflight_synthetic",
+  "teacher_version": "bounded-forecast-r4-v1",
+  "solver": "bounded_tree_enumeration",
+  "source": "synthetic",
+  "model_hash": null,
+  "code_revision": "cccca9892086522624a5979216d7a2ab73209803",
+  "source_sha256": {
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/cli.py": "892b7629fb229fbca6c4981feb6d5bde9fed5b5e0857f75236a76f6146e4e964",
+    "backend/evaluation.py": "1c86e349d0c3256e6f8ae82f53d30e4f5abd6cffd77596cd56fe4229359ecd53",
+    "backend/policies/__init__.py": "76940b2a453bc01e9b8844a1e61c4ecc11ab69f6beb2fc88f94a48d2e8e06d26",
+    "backend/policies/common.py": "ee035d8547a63437fcd09fa3f521e9cafacf97dc26f042f0b05e2d69cb97f6cb",
+    "backend/policies/edf.py": "9806c2a9e9da72104f7a1e102f4d4e84f4ef02133510a073086e49cfbc97827c",
+    "backend/policies/guard.py": "d241aaa4e04db42bf0fca53faaacf1b5cb12b95938629245b2007c74744d049e",
+    "backend/policies/runner.py": "1255e0cad5333d4f2261a7efe801134b240cc63f15f2ba4c0dcf4e79cd41d8a8",
+    "backend/policies/teacher.py": "8e6178726bb763ddc28563bf382ec3b1cc5ddf9d7636e5ed6525cf144444d573",
+    "backend/policies/value.py": "1d9be9699746cff53b80f75d5f8c77c679b9b947db52835099efb6ac3f52a817",
+    "backend/simulator/__init__.py": "b94dc8d98b60b9219d00698c6622023dc45e6853436edbb0ae2c344c9492d59f",
+    "backend/simulator/energy.py": "b1afe137f9284647face8f3cfc86d4594d7843191ae5f2c1ccc630537d64bef3",
+    "backend/simulator/engine.py": "61dbbcbad90dfdf192541befff1f9f0e74c6872096b3c1361066f36e1be02731",
+    "backend/simulator/link.py": "90556f6431f90423b888f9060c826f638dc2086445e331909ff9d95ff1e34b49",
+    "backend/simulator/protocol.py": "863501f5531ce72da0d07b0b8543845e09c2977f3f4e80fcf21a709044db579f",
+    "backend/simulator/queue.py": "059099298309f5c34a8051e198a6ec62729537118b32d7a8409d40a0044ee852",
+    "backend/simulator/r3_engine.py": "b2d56d490c4880ebc2e3cd44b99e66a1270e939cd4086c36eb279acb9947f90c"
+  },
+  "configuration_sha256": {
+    "configs/teacher.json": "1497a5f02754f76a3f355893d3f2cd9178525fc0d9d329eba03466faee62c795",
+    "configs/policy.json": "c4f8f69ea11f3d3091c94bd50ce7441c415ac5e5668c8119b245ae143808b25e"
+  },
+  "observations_sha256": "0a11d9796301c5a339cdec612d7d27da6e4b4a16f198dbbfe8fa363de4a8c48b",
+  "artifacts_sha256": {
+    "samples.jsonl": "3eec464b6cef0389458a8927b32b6e60d521cb295498722321a4ab533c43c062",
+    "summary.json": "81625e7399c69794b643af2eefd0f81a1c726cc790a9bbd38d8bc0d556aa6d90"
+  },
+  "note": "20 initial synthetic states; no batch training or policy performance claim"
+}

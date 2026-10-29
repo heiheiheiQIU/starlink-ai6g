@@ -1,0 +1,1445 @@
+{
+  "schema_version": "1.0",
+  "kind": "experiment_plan_not_results",
+  "status": "draft_pending_review",
+  "reference": "06 section7 and 09 section11",
+  "cell_count": 18,
+  "trajectory_count": 180,
+  "cells": [
+    {
+      "cell_id": "cell_00",
+      "load_level": "low",
+      "energy_margin": "low",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_01",
+      "load_level": "low",
+      "energy_margin": "low",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_02",
+      "load_level": "low",
+      "energy_margin": "medium",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_03",
+      "load_level": "low",
+      "energy_margin": "medium",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_04",
+      "load_level": "low",
+      "energy_margin": "ample",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_05",
+      "load_level": "low",
+      "energy_margin": "ample",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_06",
+      "load_level": "near_capacity",
+      "energy_margin": "low",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_07",
+      "load_level": "near_capacity",
+      "energy_margin": "low",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_08",
+      "load_level": "near_capacity",
+      "energy_margin": "medium",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_09",
+      "load_level": "near_capacity",
+      "energy_margin": "medium",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_10",
+      "load_level": "near_capacity",
+      "energy_margin": "ample",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_11",
+      "load_level": "near_capacity",
+      "energy_margin": "ample",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_12",
+      "load_level": "overload",
+      "energy_margin": "low",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_13",
+      "load_level": "overload",
+      "energy_margin": "low",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_14",
+      "load_level": "overload",
+      "energy_margin": "medium",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_15",
+      "load_level": "overload",
+      "energy_margin": "medium",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_16",
+      "load_level": "overload",
+      "energy_margin": "ample",
+      "link_disturbance": "mild",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    },
+    {
+      "cell_id": "cell_17",
+      "load_level": "overload",
+      "energy_margin": "ample",
+      "link_disturbance": "strong",
+      "config_status": "parameters_not_frozen",
+      "config_path": null,
+      "parameter_source": "synthetic_pending_documentation"
+    }
+  ],
+  "trajectories": [
+    {
+      "trajectory_id": "cell_00_trace_00",
+      "cell_id": "cell_00",
+      "environment_seed": 10000,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_01",
+      "cell_id": "cell_00",
+      "environment_seed": 10001,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_02",
+      "cell_id": "cell_00",
+      "environment_seed": 10002,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_03",
+      "cell_id": "cell_00",
+      "environment_seed": 10003,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_04",
+      "cell_id": "cell_00",
+      "environment_seed": 10004,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_05",
+      "cell_id": "cell_00",
+      "environment_seed": 10005,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_06",
+      "cell_id": "cell_00",
+      "environment_seed": 10006,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_07",
+      "cell_id": "cell_00",
+      "environment_seed": 10007,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_08",
+      "cell_id": "cell_00",
+      "environment_seed": 10008,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_00_trace_09",
+      "cell_id": "cell_00",
+      "environment_seed": 10009,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_00",
+      "cell_id": "cell_01",
+      "environment_seed": 10010,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_01",
+      "cell_id": "cell_01",
+      "environment_seed": 10011,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_02",
+      "cell_id": "cell_01",
+      "environment_seed": 10012,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_03",
+      "cell_id": "cell_01",
+      "environment_seed": 10013,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_04",
+      "cell_id": "cell_01",
+      "environment_seed": 10014,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_05",
+      "cell_id": "cell_01",
+      "environment_seed": 10015,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_06",
+      "cell_id": "cell_01",
+      "environment_seed": 10016,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_07",
+      "cell_id": "cell_01",
+      "environment_seed": 10017,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_08",
+      "cell_id": "cell_01",
+      "environment_seed": 10018,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_01_trace_09",
+      "cell_id": "cell_01",
+      "environment_seed": 10019,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_00",
+      "cell_id": "cell_02",
+      "environment_seed": 10020,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_01",
+      "cell_id": "cell_02",
+      "environment_seed": 10021,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_02",
+      "cell_id": "cell_02",
+      "environment_seed": 10022,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_03",
+      "cell_id": "cell_02",
+      "environment_seed": 10023,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_04",
+      "cell_id": "cell_02",
+      "environment_seed": 10024,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_05",
+      "cell_id": "cell_02",
+      "environment_seed": 10025,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_06",
+      "cell_id": "cell_02",
+      "environment_seed": 10026,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_07",
+      "cell_id": "cell_02",
+      "environment_seed": 10027,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_08",
+      "cell_id": "cell_02",
+      "environment_seed": 10028,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_02_trace_09",
+      "cell_id": "cell_02",
+      "environment_seed": 10029,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_00",
+      "cell_id": "cell_03",
+      "environment_seed": 10030,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_01",
+      "cell_id": "cell_03",
+      "environment_seed": 10031,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_02",
+      "cell_id": "cell_03",
+      "environment_seed": 10032,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_03",
+      "cell_id": "cell_03",
+      "environment_seed": 10033,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_04",
+      "cell_id": "cell_03",
+      "environment_seed": 10034,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_05",
+      "cell_id": "cell_03",
+      "environment_seed": 10035,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_06",
+      "cell_id": "cell_03",
+      "environment_seed": 10036,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_07",
+      "cell_id": "cell_03",
+      "environment_seed": 10037,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_08",
+      "cell_id": "cell_03",
+      "environment_seed": 10038,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_03_trace_09",
+      "cell_id": "cell_03",
+      "environment_seed": 10039,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_00",
+      "cell_id": "cell_04",
+      "environment_seed": 10040,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_01",
+      "cell_id": "cell_04",
+      "environment_seed": 10041,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_02",
+      "cell_id": "cell_04",
+      "environment_seed": 10042,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_03",
+      "cell_id": "cell_04",
+      "environment_seed": 10043,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_04",
+      "cell_id": "cell_04",
+      "environment_seed": 10044,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_05",
+      "cell_id": "cell_04",
+      "environment_seed": 10045,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_06",
+      "cell_id": "cell_04",
+      "environment_seed": 10046,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_07",
+      "cell_id": "cell_04",
+      "environment_seed": 10047,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_08",
+      "cell_id": "cell_04",
+      "environment_seed": 10048,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_04_trace_09",
+      "cell_id": "cell_04",
+      "environment_seed": 10049,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_00",
+      "cell_id": "cell_05",
+      "environment_seed": 10050,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_01",
+      "cell_id": "cell_05",
+      "environment_seed": 10051,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_02",
+      "cell_id": "cell_05",
+      "environment_seed": 10052,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_03",
+      "cell_id": "cell_05",
+      "environment_seed": 10053,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_04",
+      "cell_id": "cell_05",
+      "environment_seed": 10054,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_05",
+      "cell_id": "cell_05",
+      "environment_seed": 10055,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_06",
+      "cell_id": "cell_05",
+      "environment_seed": 10056,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_07",
+      "cell_id": "cell_05",
+      "environment_seed": 10057,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_08",
+      "cell_id": "cell_05",
+      "environment_seed": 10058,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_05_trace_09",
+      "cell_id": "cell_05",
+      "environment_seed": 10059,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_00",
+      "cell_id": "cell_06",
+      "environment_seed": 10060,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_01",
+      "cell_id": "cell_06",
+      "environment_seed": 10061,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_02",
+      "cell_id": "cell_06",
+      "environment_seed": 10062,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_03",
+      "cell_id": "cell_06",
+      "environment_seed": 10063,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_04",
+      "cell_id": "cell_06",
+      "environment_seed": 10064,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_05",
+      "cell_id": "cell_06",
+      "environment_seed": 10065,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_06",
+      "cell_id": "cell_06",
+      "environment_seed": 10066,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_07",
+      "cell_id": "cell_06",
+      "environment_seed": 10067,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_08",
+      "cell_id": "cell_06",
+      "environment_seed": 10068,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_06_trace_09",
+      "cell_id": "cell_06",
+      "environment_seed": 10069,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_00",
+      "cell_id": "cell_07",
+      "environment_seed": 10070,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_01",
+      "cell_id": "cell_07",
+      "environment_seed": 10071,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_02",
+      "cell_id": "cell_07",
+      "environment_seed": 10072,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_03",
+      "cell_id": "cell_07",
+      "environment_seed": 10073,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_04",
+      "cell_id": "cell_07",
+      "environment_seed": 10074,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_05",
+      "cell_id": "cell_07",
+      "environment_seed": 10075,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_06",
+      "cell_id": "cell_07",
+      "environment_seed": 10076,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_07",
+      "cell_id": "cell_07",
+      "environment_seed": 10077,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_08",
+      "cell_id": "cell_07",
+      "environment_seed": 10078,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_07_trace_09",
+      "cell_id": "cell_07",
+      "environment_seed": 10079,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_00",
+      "cell_id": "cell_08",
+      "environment_seed": 10080,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_01",
+      "cell_id": "cell_08",
+      "environment_seed": 10081,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_02",
+      "cell_id": "cell_08",
+      "environment_seed": 10082,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_03",
+      "cell_id": "cell_08",
+      "environment_seed": 10083,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_04",
+      "cell_id": "cell_08",
+      "environment_seed": 10084,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_05",
+      "cell_id": "cell_08",
+      "environment_seed": 10085,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_06",
+      "cell_id": "cell_08",
+      "environment_seed": 10086,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_07",
+      "cell_id": "cell_08",
+      "environment_seed": 10087,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_08",
+      "cell_id": "cell_08",
+      "environment_seed": 10088,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_08_trace_09",
+      "cell_id": "cell_08",
+      "environment_seed": 10089,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_00",
+      "cell_id": "cell_09",
+      "environment_seed": 10090,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_01",
+      "cell_id": "cell_09",
+      "environment_seed": 10091,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_02",
+      "cell_id": "cell_09",
+      "environment_seed": 10092,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_03",
+      "cell_id": "cell_09",
+      "environment_seed": 10093,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_04",
+      "cell_id": "cell_09",
+      "environment_seed": 10094,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_05",
+      "cell_id": "cell_09",
+      "environment_seed": 10095,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_06",
+      "cell_id": "cell_09",
+      "environment_seed": 10096,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_07",
+      "cell_id": "cell_09",
+      "environment_seed": 10097,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_08",
+      "cell_id": "cell_09",
+      "environment_seed": 10098,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_09_trace_09",
+      "cell_id": "cell_09",
+      "environment_seed": 10099,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_00",
+      "cell_id": "cell_10",
+      "environment_seed": 10100,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_01",
+      "cell_id": "cell_10",
+      "environment_seed": 10101,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_02",
+      "cell_id": "cell_10",
+      "environment_seed": 10102,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_03",
+      "cell_id": "cell_10",
+      "environment_seed": 10103,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_04",
+      "cell_id": "cell_10",
+      "environment_seed": 10104,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_05",
+      "cell_id": "cell_10",
+      "environment_seed": 10105,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_06",
+      "cell_id": "cell_10",
+      "environment_seed": 10106,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_07",
+      "cell_id": "cell_10",
+      "environment_seed": 10107,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_08",
+      "cell_id": "cell_10",
+      "environment_seed": 10108,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_10_trace_09",
+      "cell_id": "cell_10",
+      "environment_seed": 10109,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_00",
+      "cell_id": "cell_11",
+      "environment_seed": 10110,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_01",
+      "cell_id": "cell_11",
+      "environment_seed": 10111,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_02",
+      "cell_id": "cell_11",
+      "environment_seed": 10112,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_03",
+      "cell_id": "cell_11",
+      "environment_seed": 10113,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_04",
+      "cell_id": "cell_11",
+      "environment_seed": 10114,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_05",
+      "cell_id": "cell_11",
+      "environment_seed": 10115,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_06",
+      "cell_id": "cell_11",
+      "environment_seed": 10116,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_07",
+      "cell_id": "cell_11",
+      "environment_seed": 10117,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_08",
+      "cell_id": "cell_11",
+      "environment_seed": 10118,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_11_trace_09",
+      "cell_id": "cell_11",
+      "environment_seed": 10119,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_00",
+      "cell_id": "cell_12",
+      "environment_seed": 10120,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_01",
+      "cell_id": "cell_12",
+      "environment_seed": 10121,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_02",
+      "cell_id": "cell_12",
+      "environment_seed": 10122,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_03",
+      "cell_id": "cell_12",
+      "environment_seed": 10123,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_04",
+      "cell_id": "cell_12",
+      "environment_seed": 10124,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_05",
+      "cell_id": "cell_12",
+      "environment_seed": 10125,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_06",
+      "cell_id": "cell_12",
+      "environment_seed": 10126,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_07",
+      "cell_id": "cell_12",
+      "environment_seed": 10127,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_08",
+      "cell_id": "cell_12",
+      "environment_seed": 10128,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_12_trace_09",
+      "cell_id": "cell_12",
+      "environment_seed": 10129,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_00",
+      "cell_id": "cell_13",
+      "environment_seed": 10130,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_01",
+      "cell_id": "cell_13",
+      "environment_seed": 10131,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_02",
+      "cell_id": "cell_13",
+      "environment_seed": 10132,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_03",
+      "cell_id": "cell_13",
+      "environment_seed": 10133,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_04",
+      "cell_id": "cell_13",
+      "environment_seed": 10134,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_05",
+      "cell_id": "cell_13",
+      "environment_seed": 10135,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_06",
+      "cell_id": "cell_13",
+      "environment_seed": 10136,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_07",
+      "cell_id": "cell_13",
+      "environment_seed": 10137,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_08",
+      "cell_id": "cell_13",
+      "environment_seed": 10138,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_13_trace_09",
+      "cell_id": "cell_13",
+      "environment_seed": 10139,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_00",
+      "cell_id": "cell_14",
+      "environment_seed": 10140,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_01",
+      "cell_id": "cell_14",
+      "environment_seed": 10141,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_02",
+      "cell_id": "cell_14",
+      "environment_seed": 10142,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_03",
+      "cell_id": "cell_14",
+      "environment_seed": 10143,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_04",
+      "cell_id": "cell_14",
+      "environment_seed": 10144,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_05",
+      "cell_id": "cell_14",
+      "environment_seed": 10145,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_06",
+      "cell_id": "cell_14",
+      "environment_seed": 10146,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_07",
+      "cell_id": "cell_14",
+      "environment_seed": 10147,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_08",
+      "cell_id": "cell_14",
+      "environment_seed": 10148,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_14_trace_09",
+      "cell_id": "cell_14",
+      "environment_seed": 10149,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_00",
+      "cell_id": "cell_15",
+      "environment_seed": 10150,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_01",
+      "cell_id": "cell_15",
+      "environment_seed": 10151,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_02",
+      "cell_id": "cell_15",
+      "environment_seed": 10152,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_03",
+      "cell_id": "cell_15",
+      "environment_seed": 10153,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_04",
+      "cell_id": "cell_15",
+      "environment_seed": 10154,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_05",
+      "cell_id": "cell_15",
+      "environment_seed": 10155,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_06",
+      "cell_id": "cell_15",
+      "environment_seed": 10156,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_07",
+      "cell_id": "cell_15",
+      "environment_seed": 10157,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_08",
+      "cell_id": "cell_15",
+      "environment_seed": 10158,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_15_trace_09",
+      "cell_id": "cell_15",
+      "environment_seed": 10159,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_00",
+      "cell_id": "cell_16",
+      "environment_seed": 10160,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_01",
+      "cell_id": "cell_16",
+      "environment_seed": 10161,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_02",
+      "cell_id": "cell_16",
+      "environment_seed": 10162,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_03",
+      "cell_id": "cell_16",
+      "environment_seed": 10163,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_04",
+      "cell_id": "cell_16",
+      "environment_seed": 10164,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_05",
+      "cell_id": "cell_16",
+      "environment_seed": 10165,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_06",
+      "cell_id": "cell_16",
+      "environment_seed": 10166,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_07",
+      "cell_id": "cell_16",
+      "environment_seed": 10167,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_08",
+      "cell_id": "cell_16",
+      "environment_seed": 10168,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_16_trace_09",
+      "cell_id": "cell_16",
+      "environment_seed": 10169,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_00",
+      "cell_id": "cell_17",
+      "environment_seed": 10170,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_01",
+      "cell_id": "cell_17",
+      "environment_seed": 10171,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_02",
+      "cell_id": "cell_17",
+      "environment_seed": 10172,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_03",
+      "cell_id": "cell_17",
+      "environment_seed": 10173,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_04",
+      "cell_id": "cell_17",
+      "environment_seed": 10174,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_05",
+      "cell_id": "cell_17",
+      "environment_seed": 10175,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_06",
+      "cell_id": "cell_17",
+      "environment_seed": 10176,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_07",
+      "cell_id": "cell_17",
+      "environment_seed": 10177,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_08",
+      "cell_id": "cell_17",
+      "environment_seed": 10178,
+      "status": "planned_not_run",
+      "input_sha256": null
+    },
+    {
+      "trajectory_id": "cell_17_trace_09",
+      "cell_id": "cell_17",
+      "environment_seed": 10179,
+      "status": "planned_not_run",
+      "input_sha256": null
+    }
+  ],
+  "review_required": [
+    "A verifies split disjointness before freeze",
+    "B records numeric parameter ranges and hashes before execution"
+  ],
+  "must_include_counterexample": "Ample energy and accurate health where extra health information gives no benefit",
+  "blockers": [
+    "Time-indexed shared random channel not implemented",
+    "Mature strong optimizer pending",
+    "A health/model package and split audit pending"
+  ],
+  "fairness": "All policies share each immutable external trajectory; no packet-count-indexed randomness; oracle separate"
+}

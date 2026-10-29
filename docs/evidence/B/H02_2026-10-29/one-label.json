@@ -1,0 +1,110 @@
+{
+  "source_commit": "cccca9892086522624a5979216d7a2ab73209803",
+  "observation": {
+    "schema_version": "1.0",
+    "run_id": "preflight_00",
+    "policy_id": "teacher",
+    "sim_time_s": 0.0,
+    "tasks": [
+      {
+        "task_id": "T1",
+        "arrival_s": 0.0,
+        "deadline_s": 1.0,
+        "payload_bytes": 1024,
+        "remaining_bytes": 1024,
+        "priority_weight": 1.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1"
+      },
+      {
+        "task_id": "T2",
+        "arrival_s": 0.0,
+        "deadline_s": 4.0,
+        "payload_bytes": 1024,
+        "remaining_bytes": 1024,
+        "priority_weight": 1.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1"
+      }
+    ],
+    "forecast_windows": [
+      {
+        "window_id": "W1",
+        "start_s": 0.0,
+        "end_s": 120.0,
+        "rate_profile": [
+          {
+            "time_s": 0.0,
+            "robust_bps": 8192.0,
+            "fast_bps": 16384.0
+          }
+        ],
+        "loss_profile": [
+          {
+            "time_s": 0.0,
+            "robust_loss_prob": 0.0,
+            "fast_loss_prob": 0.0
+          }
+        ],
+        "source": "synthetic",
+        "forecast_version": "r2-synthetic-v1"
+      }
+    ],
+    "health": {
+      "soc_est": 0.5,
+      "soc_lower": 0.45,
+      "capacity_Wh_est": 20.0,
+      "capacity_lower_Wh": 20.0,
+      "energy_lower_Wh": 9.0,
+      "rul_est": null,
+      "rul_unit": null,
+      "uncertainty_method": "synthetic_fixed_bounds",
+      "model_version": "synthetic-r2-v1",
+      "observed_at_s": 0.0,
+      "available_at_s": 0.0,
+      "reason_codes": [
+        "RUL_UNAVAILABLE"
+      ]
+    },
+    "inflight": null,
+    "cache_bytes": 2048,
+    "forecast_version": "r2-synthetic-v1"
+  },
+  "result": {
+    "candidate_scores": [
+      {
+        "task_id": "T1",
+        "mode": "robust",
+        "score": 0.0,
+        "feasible": false
+      },
+      {
+        "task_id": "T1",
+        "mode": "fast",
+        "score": 1.0,
+        "feasible": true
+      },
+      {
+        "task_id": "T2",
+        "mode": "robust",
+        "score": 0.5,
+        "feasible": true
+      },
+      {
+        "task_id": "T2",
+        "mode": "fast",
+        "score": 0.5,
+        "feasible": true
+      },
+      {
+        "task_id": null,
+        "mode": "idle",
+        "score": 0.5,
+        "feasible": true
+      }
+    ],
+    "solver_status": "OPTIMAL",
+    "gap": 0.0,
+    "elapsed_ms": 27.762099998653866
+  }
+}

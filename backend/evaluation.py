@@ -69,4 +69,10 @@ def evaluate(events: list[Event], config: dict) -> dict:
     reasons.pop('model_hash', None)  # Provenance field, not a nullable metric.
     reasons['critical_task_success_rate']='NO_CRITICAL_TASK_SET'
     reasons['energy_violation_duration_s']='EXACT_DURATION_NOT_MEASURED'
+    decisions=[e.data for e in parsed if e.event_type=='decision']
+    if decisions:
+        values['decision_p50_ms']=_percentile([d.latency_ms for d in decisions],0.5)
+        values['decision_p95_ms']=_percentile([d.latency_ms for d in decisions],0.95)
+        values['timeout_rate']=sum('MODEL_TIMEOUT' in d.action.reason_codes for d in decisions)/len(decisions)
+        for key in ('decision_p50_ms','decision_p95_ms','timeout_rate'): reasons.pop(key,None)
     return PolicyResult.model_validate(dict(**values,metric_reasons=reasons)).model_dump()
