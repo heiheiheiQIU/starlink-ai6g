@@ -1,18 +1,308 @@
 {
   "kind": "contract_fixture",
   "is_experimental_result": false,
-  "note": "Manual UI state example; completed events/results must be fetched from a real run.",
+  "note": "Contract example copied from a synthetic functional run, not policy performance evidence.",
   "status": {
-    "run_id": "fixture_api_completed",
+    "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
     "status": "completed",
     "progress": 1.0,
     "active_policies": [],
     "error": null
   },
   "events": {
-    "run_id": "fixture_api_completed",
-    "events": [],
-    "next_after": 0,
-    "has_more": false
-  }
+    "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+    "events": [
+      {
+        "event_id": 1,
+        "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "event_type": "arrived",
+        "task_id": "T1",
+        "block_id": null,
+        "payload_bytes": 2500,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": null
+      },
+      {
+        "event_id": 2,
+        "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "event_type": "window_changed",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "window_id": "W1",
+          "is_visible": true
+        }
+      },
+      {
+        "event_id": 3,
+        "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "event_type": "decision",
+        "task_id": "T1",
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": "T1",
+            "mode": "fast",
+            "scheduled_bytes": 1024,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T1",
+              "mode": "robust",
+              "score": 1.0
+            },
+            {
+              "task_id": "T1",
+              "mode": "fast",
+              "score": 1.0
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.0
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T1",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 1.989199998206459,
+          "fallback": false,
+          "model_version": null,
+          "policy_version": "edf-r4-v1"
+        }
+      }
+    ],
+    "next_after": 3,
+    "has_more": true
+  },
+  "results": {
+    "schema_version": "1.0",
+    "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+    "status": "completed",
+    "config_hash": "e8678314a72adc83235036a6d6bd4209a4a9cf6aaa5f930be856e187b33f8bf6",
+    "input_hash": "b928d504ce5c9b5f9a57457649736b3a503ce6b7dc9562c163c5bc82601b8602",
+    "model_hash": null,
+    "code_revision": "cccca9892086522624a5979216d7a2ab73209803",
+    "seed": 7,
+    "by_policy": [
+      {
+        "policy_id": "edf",
+        "model_hash": null,
+        "sample_count": 1,
+        "evaluation_end_s": 10.0,
+        "pending_task_count": 0,
+        "weighted_on_time_rate": 1.0,
+        "critical_task_success_rate": null,
+        "goodput_bps": 2000.0,
+        "minimum_soc_true": 0.4936907552083335,
+        "energy_violation_count": 0,
+        "energy_violation_duration_s": null,
+        "success_payload_bytes": 2500,
+        "joule_per_success_bit": 0.02271328125,
+        "wait_p50_s": 0.0,
+        "wait_p95_s": 0.0,
+        "decision_p50_ms": 1.214700001582969,
+        "decision_p95_ms": 1.8503799990867265,
+        "timeout_rate": 0.0,
+        "parameter_count": null,
+        "memory_bytes": null,
+        "metric_reasons": {
+          "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+          "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+          "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+          "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+        }
+      },
+      {
+        "policy_id": "value",
+        "model_hash": null,
+        "sample_count": 1,
+        "evaluation_end_s": 10.0,
+        "pending_task_count": 0,
+        "weighted_on_time_rate": 1.0,
+        "critical_task_success_rate": null,
+        "goodput_bps": 2000.0,
+        "minimum_soc_true": 0.4936907552083335,
+        "energy_violation_count": 0,
+        "energy_violation_duration_s": null,
+        "success_payload_bytes": 2500,
+        "joule_per_success_bit": 0.02271328125,
+        "wait_p50_s": 0.0,
+        "wait_p95_s": 0.0,
+        "decision_p50_ms": 1.9124999998894054,
+        "decision_p95_ms": 3.5773799994785804,
+        "timeout_rate": 0.0,
+        "parameter_count": null,
+        "memory_bytes": null,
+        "metric_reasons": {
+          "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+          "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+          "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+          "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+        }
+      }
+    ],
+    "metric_definitions": {
+      "details": "docs/metrics.md; synthetic manual validation; no comparative performance claim",
+      "energy_violation_count": "Count of negative unclipped energy ledger segments; not independent episodes",
+      "goodput_bps": "Unique payload bits / evaluation_end_s",
+      "joule_per_success_bit": "All satellite consumption J / unique received payload bits",
+      "pending_task_count": "Arrived tasks with deadline after evaluation end, regardless of early receipt",
+      "success_payload_bytes": "Unique received payload bytes including partial tasks and late data",
+      "weighted_on_time_rate": "Sum on-time complete task weights / all arrived due task weights"
+    },
+    "artifact_paths": {
+      "config.json": "config.json",
+      "events.jsonl": "events.jsonl",
+      "manifest.json": "manifest.json",
+      "results.json": "results.json",
+      "status.json": "status.json"
+    }
+  },
+  "source_commit": "cccca9892086522624a5979216d7a2ab73209803"
 }

@@ -12,4 +12,4 @@
 
 R4规则运行有真实decision事件时，decision_p50/p95_ms由事件latency_ms线性插值重算；timeout_rate为MODEL_TIMEOUT决策次数/全部决策次数（MODEL_BUSY另由原因码追溯）。无decision的R3手工运行仍为null。规则回退也计入诊断样本；跨机器壁钟耗时不要求逐字节一致，重放使用保存的原事件。
 
-这些是确定性manual_validation结果，尚不支持策略优越性、真实卫星或物理安全保证。对照实验前须扩展统一guard、基线、共享外部轨迹与最终全部指标。
+当前manual_validation与rule_validation均为确定性合成验证结果，尚不支持策略优越性、真实卫星或物理安全保证。guard与规则基线已实现；正式对照前仍须补共享外部轨迹、成熟优化基线与最终全部指标。

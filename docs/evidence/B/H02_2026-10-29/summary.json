@@ -1,0 +1,496 @@
+{
+  "kind": "teacher_preflight_synthetic",
+  "count": 20,
+  "cpu_seconds": 0.15625,
+  "optimal": 20,
+  "timeouts": 0,
+  "failed_or_unsupported": 0,
+  "all_zero_labels": 10,
+  "total_elapsed_ms": 138.2828999958292,
+  "diagnostics": [
+    {
+      "sample_id": "r4_00",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 2,
+          "elapsed_ms": 6.83019999996759,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 2.0726000002468936,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.676100000826409,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.328200000396464,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_01",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 1.8046000004687812,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_02",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.444800000579562,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_03",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.945199997862801,
+          "limited": null
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.109199998812983,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 1,
+          "elapsed_ms": 0.8474999995087273,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_04",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 2,
+          "elapsed_ms": 4.475800000363961,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.979200002097059,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.3656000012124423,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.112499998678686,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_05",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 1.9939000012527686,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_06",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 2.9600000016216654,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_07",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.6060999987530522,
+          "limited": null
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 1.8067999990307726,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 1,
+          "elapsed_ms": 0.7534999967901967,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_08",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 2,
+          "elapsed_ms": 4.428700001881225,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.96219999997993,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.0734000027005095,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 2.9977000012877397,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_09",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 2.0413000020198524,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_10",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.333200002089143,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_11",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.7908999980136286,
+          "limited": null
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 1.9130000000586733,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 1,
+          "elapsed_ms": 0.8113000003504567,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_12",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 2,
+          "elapsed_ms": 4.639800001314143,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 2.0714999991469085,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.458499999193009,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.474699999060249,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_13",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 1.940199999808101,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_14",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.022699998837197,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_15",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.7073999988497235,
+          "limited": null
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.334499997232342,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 1,
+          "elapsed_ms": 0.9592999995220453,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_16",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 2,
+          "elapsed_ms": 5.392500002926681,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 2.2827000029792544,
+          "limited": null
+        },
+        {
+          "task_id": "T2",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.387500000622822,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 3.3722999978635926,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_17",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 2.0177000005787704,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_18",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 2,
+          "elapsed_ms": 2.7874999977939297,
+          "limited": null
+        }
+      ]
+    },
+    {
+      "sample_id": "r4_19",
+      "label_eligible": true,
+      "teacher_version": "bounded-forecast-r4-v1",
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "nodes": 1,
+          "elapsed_ms": 1.9078999976045452,
+          "limited": null
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "nodes": 1,
+          "elapsed_ms": 2.0697000036307145,
+          "limited": null
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "nodes": 1,
+          "elapsed_ms": 0.8368000017071608,
+          "limited": null
+        }
+      ]
+    }
+  ],
+  "samples_sha256": "3eec464b6cef0389458a8927b32b6e60d521cb295498722321a4ab533c43c062",
+  "config": {
+    "version": "bounded-forecast-r4-v1",
+    "policy": {
+      "decision_dt_s": 2.0,
+      "slot_s": 1.0,
+      "base_W": 36.0,
+      "compute_W": 0.0,
+      "solar_W": 0.0,
+      "max_power_W": 150.0,
+      "reserve_Wh": 0.5,
+      "tx_power_W": {
+        "robust": 36.0,
+        "fast": 72.0
+      },
+      "protocol": {
+        "data_propagation_s": 0.0,
+        "ack_propagation_s": 0.0,
+        "control_bps": 1024.0,
+        "ack_rx_W": 8.0
+      }
+    },
+    "max_tasks": 12,
+    "max_steps": 120,
+    "max_windows": 3,
+    "max_nodes": 20000,
+    "candidate_budget_ms": 200.0,
+    "horizon_s": 240.0
+  }
+}
