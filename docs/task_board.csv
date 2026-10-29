@@ -1,4 +1,4 @@
-task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
+﻿task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
 B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
 A-N1,A,in_progress,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,C已复核内部核心accepted_with_notes,正式适配未完成,H00已合main后输出正式HealthEstimate适配层+三样例+B主验；补F5输入哈希与F1遗留证据
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
@@ -11,6 +11,6 @@ B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,R2 41项已交付（PR#3）,PR#3待R3修复后一并入main,复核R2手算与send-only轨迹
 B-R3,B,changes_requested,2026-10-30T20:00:00+08:00,feature/simulator-r3,C,C独立复核：I-01/I-02阻塞+M-04,修复三处,单在途语义、陈旧能量下界、git依赖回退
 C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
-C-N2,C,not_started,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,H00已合main可开工,镜像contracts.ts并写null+reason/实测0/单批次/教师边界消费测试
+C-N2,C,ready_for_review,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,待B复核镜像语义,类型镜像+展示守卫+7项语义测试已提交（3c55815）
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
