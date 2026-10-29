@@ -78,8 +78,8 @@ describe('run api client', () => {
 
   it('builds event pagination query only for provided fields', async () => {
     const fetchFn = mockFetch()
-    fetchFn.mockResolvedValue(
-      jsonResponse({ run_id: 'run-1', events: [], next_after: 0, has_more: false } satisfies EventsPage),
+    fetchFn.mockImplementation(() =>
+      Promise.resolve(jsonResponse({ run_id: 'run-1', events: [], next_after: 0, has_more: false } satisfies EventsPage)),
     )
     const api = createRunApi({ baseUrl: 'http://x/', fetchFn })
 
