@@ -37,6 +37,7 @@ class Pending:
 
 @dataclass
 class ProtocolState:
+    retry_required_key: tuple[str, int] | None = None
     pending: list[Pending] = field(default_factory=list)
     gateway: set[tuple[str, int]] = field(default_factory=set)
     confirmed: set[tuple[str, int]] = field(default_factory=set)

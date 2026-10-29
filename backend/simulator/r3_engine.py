@@ -41,6 +41,8 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
                          reason='ACK_LOST_WINDOW_CLOSED')
                 elif key not in protocol.confirmed:
                     protocol.confirmed.add(key)
+                    if protocol.retry_required_key == key:
+                        protocol.retry_required_key = None
                     task = next(t for t in s.tasks if t.task_id == p.task_id)
                     task.remaining_bytes -= p.payload_bytes
                     if s.inflight is not None and (s.inflight.task_id, s.inflight.block_id) == key:
@@ -52,6 +54,7 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
             elif (s.inflight is not None and (s.inflight.task_id, s.inflight.block_id) == key
                   and protocol.attempts[key] == p.attempt):
                 s.inflight = None
+                protocol.retry_required_key = key
                 emit(p.time_s, 'fallback', task=p.task_id, block=p.block_id, reason='ACK_TIMEOUT')
         for task in s.tasks:
             if task.arrival_s <= now and task.task_id not in s.announced:
@@ -60,6 +63,13 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
             if task.deadline_s < now and task.remaining_bytes and task.task_id not in s.expired:
                 s.expired.add(task.task_id)
                 emit(now, 'dropped', task=task.task_id, payload=task.remaining_bytes, reason='DEADLINE_EXPIRED')
+        key = protocol.retry_required_key
+        if key is not None:
+            task = next(t for t in s.tasks if t.task_id == key[0])
+            if task.deadline_s < now and not any((p.task_id,p.block_id)==key and
+                    p.kind in ('received','acked') for p in protocol.pending):
+                protocol.retry_required_key = None
+                emit(now,'dropped',task=key[0],block=key[1],reason='RETRY_RETIRED_EXPIRED')
 
     process(s.sim_time_s)
     start = s.sim_time_s
@@ -71,6 +81,9 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
             reason = 'INFLIGHT_BLOCK'
         elif selected is None:
             reason = 'TASK_NOT_AVAILABLE'
+        elif protocol.retry_required_key is not None and protocol.retry_required_key != (
+                selected.task_id,(selected.payload_bytes-selected.remaining_bytes)//1024):
+            reason = 'RETRY_REQUIRED'
         elif command.scheduled_bytes != min(1024, selected.remaining_bytes):
             reason = 'INVALID_BLOCK_SIZE'
         elif not any(w.start_s <= start < w.end_s for w in cfg.true_windows):
