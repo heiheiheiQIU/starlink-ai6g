@@ -13,6 +13,7 @@
 - 发送功率只计真实发送持续时间，背景/计算功率计整个step，太阳输入单独记账；背景含未单列的接收待机，不重复扣接收能耗。ACK尚未发生，16byte控制开销不提前算作已发送。
 - 按发送结束切分能量账本，先记录unclipped值及负值违例，再clip到[0,capacity]；snapshot事后真值可保留负值。sent事件计发送耗能，snapshot仅计背景/计算耗能，两者不重复；账本同时给出太阳输入。
 - step不修改传入state；observe不泄露真实/未来字段。create_state复制配置，健康输入按available_at选择最近已知观测。支持独立实例重跑；当前每个run仅一个policy，event_id在该run单调递增。
+- 储备检查使用Observation的energy_lower_Wh而非隐藏真实能量，避免oracle守卫掩盖预测过于乐观造成的实际违例；这只是R2最小动作验证，不替代R4统一guard。过期但未ACK的块保留任务引用元数据，普通过期队列任务不可调度。
 - 当t>deadline才过期；恰等于deadline仍可见。跨step到达和过期按实际时刻/step终点记录。没有ACK前不减少Task.remaining_bytes，避免将尝试发送伪装为业务交付。
 - R2发送后保留单在途状态，超时字段为发送完成后2个slot；ACK、重传、网关去重、成功率/最终results均留R3，不能自动生成成功指标。
 
