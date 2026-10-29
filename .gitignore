@@ -19,6 +19,7 @@ experiments/runs/
 
 # AI 协作工具痕迹
 .superpowers/
+.worktrees/
 
 # 前端（未来）
 node_modules/
