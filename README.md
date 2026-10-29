@@ -1,5 +1,13 @@
 # 星地智调产品集成目录
 
+2026-10-29 R3：B已增加显式启用的确定性接收/ACK/超时重传/去重环境、事件评价器和单策略运行导出；使用synthetic健康输入与manual动作脚本。可独立复跑，不依赖A模型或C页面。实现与验收范围见[R3交接](docs/handoffs/B_R3_protocol_2026-10-29.md)；尚未签收时不视为B-N2整体完成。
+
+```powershell
+.\.venv\Scripts\python.exe -m backend.cli run --config configs/scenarios/r3_ack_loss.json --output runs/my_r3_ack_loss
+```
+
+输出目录必须新建或为空。四个`r3_*.json`是可执行合成场景；`minimal.json`仍用于R2发送验证。完成的运行包含config、manifest、status、events、results、execution.log及能量账本。完整运行状态不表示所有任务成功；基线、统一guard、教师和API仍属后续任务。
+
 2026-10-29 B-N2/R2首轮：已实现单策略、确定性合成场景的任务/窗口/能量/发送环境；接收与ACK尚在后续R3。运行与四项手算验收见[R2交接](docs/handoffs/B_N2_R2_2026-10-29.md)。日志由真实执行生成，不能作为卫星实测或策略收益结果。
 
 2026-10-29 H00干净集成：合同修订c54c79d已获A/C对同一提交的accepted。本次仅纳入合同、Schema、测试、证据与回执，进入main后作为v1.0冻结基线；未捆绑C设计或A内部健康核心。详见[冻结与范围记录](docs/contracts/FREEZE_2026-10-29.md)。仿真/API仍待B-N2后续实现。
@@ -25,7 +33,7 @@ git switch feature/frontend    # C（在自己的克隆目录执行）
 - A1离线资产审计和严格权重推理：accepted_with_notes；本机原47项测试通过，增加14项边界测试并修复后61项通过。
 - H01正式HealthEstimate交接：未通过完整验收；当前返回内部LegacyPrediction，无estimate_health(history, now_s)。需B的H00合同和A2适配。
 - A2健康估计、A3通信评分器、A4消融与技术供稿：未交付。
-- B仿真/API、C前端：当前目录未实现。
+- B仿真：R2发送验证与R3合成协议/评价已实现，待接收人验收；统一guard、基线、教师和API尚待后续。C前端尚未集成到本分支。
 
 原始交付保留在工作区`星地智调/`。不要在原件继续开发；后续A/B/C在此目录按各自所有权协作。
 
