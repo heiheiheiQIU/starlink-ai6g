@@ -1,0 +1,22 @@
+{
+  "kind": "actual_synthetic_validation",
+  "is_policy_benchmark": false,
+  "code_revision": "39d7d11f86b25813293ab50207a47acaf19190ec",
+  "idle_100s": {
+    "expected_consumption_Wh": 1.0,
+    "actual_consumption_Wh": 1.0
+  },
+  "no_window": {
+    "expected_sent_bytes": 0,
+    "actual_sent_bytes": 0
+  },
+  "preclip": {
+    "expected_raw_Wh": -0.9,
+    "actual_raw_Wh": -0.9,
+    "actual_clipped_Wh": 0.0
+  },
+  "future_arrival": {
+    "expected_visible_count": 0,
+    "actual_visible_count": 0
+  }
+}

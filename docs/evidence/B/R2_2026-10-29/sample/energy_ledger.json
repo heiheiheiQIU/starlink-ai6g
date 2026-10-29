@@ -1,0 +1,32 @@
+[
+  {
+    "start_s": 0.0,
+    "end_s": 1.03125,
+    "entry": {
+      "duration_s": 1.03125,
+      "energy_before_Wh": 10.0,
+      "solar_input_Wh": 0.0,
+      "background_Wh": 0.0103125,
+      "compute_Wh": 0.0,
+      "transmit_Wh": 0.0103125,
+      "energy_unclipped_Wh": 9.979375000000001,
+      "energy_after_Wh": 9.979375000000001,
+      "lower_violation": false
+    }
+  },
+  {
+    "start_s": 1.03125,
+    "end_s": 2.0,
+    "entry": {
+      "duration_s": 0.96875,
+      "energy_before_Wh": 9.979375000000001,
+      "solar_input_Wh": 0.0,
+      "background_Wh": 0.0096875,
+      "compute_Wh": 0.0,
+      "transmit_Wh": 0.0,
+      "energy_unclipped_Wh": 9.969687500000001,
+      "energy_after_Wh": 9.969687500000001,
+      "lower_violation": false
+    }
+  }
+]

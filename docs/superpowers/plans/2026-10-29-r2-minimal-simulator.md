@@ -1,6 +1,6 @@
 # R2最小确定性环境 Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** 实现可手算复核的任务—窗口—能量—发送最小闭环，完成用户指定四项首轮验收。
 
@@ -31,10 +31,10 @@
 
 **Interfaces:** energy.advance_energy(E,capacity,dt,powers,tx_W)->EnergyLedgerEntry；link.transmission_time(windows,start,mode,wire_bytes,dt)->float|None；queue.visible_tasks(tasks,now)->list[Task]。
 
-- [ ] 写失败测试：36W×100s从10到9Wh；0.1Wh遇36W×100s先记录-0.9再clip0；未来/过期任务过滤；无窗口/窗口末端/零速率不可发，8192bit/s发送1056byte耗时1.03125s。
-- [ ] 运行pytest tests/test_simulator.py确认失败源于模块未实现。
-- [ ] 实现有限数值验证、能量账本、分段速率积分与复制后的任务过滤。
-- [ ] 运行上述测试通过并保存日志；提交原语及其测试。
+- [x] 写失败测试：36W×100s从10到9Wh；0.1Wh遇36W×100s先记录-0.9再clip0；未来/过期任务过滤；无窗口/窗口末端/零速率不可发，8192bit/s发送1056byte耗时1.03125s。
+- [x] 运行pytest tests/test_simulator.py确认失败源于模块未实现。
+- [x] 实现有限数值验证、能量账本、分段速率积分与复制后的任务过滤。
+- [x] 运行上述测试通过并保存日志；提交原语及其测试。
 
 ### Task 2: 场景、observe/step与真实合成日志
 
@@ -42,8 +42,8 @@
 
 **Interfaces:** 消费Task1原语及H00；create_state(config,run_id,policy_id)->SimulatorState、observe(state)->Observation、step(state,action,dt_s)->StepResult。
 
-- [ ] 写失败测试：四项验收、单在途、无ACK不减remaining、功率/储备拦截、发送只扣实际时长、实例隔离、非法dt/config和预测/真值分离。
-- [ ] 运行确认失败，再实现严格场景加载、深复制内部state、因果事件及演示导出。
-- [ ] 运行场景和全库测试；演示导出与手算数值核对；验证Schema未改变。
-- [ ] 一次独立完整审查，必要时通过失败测试修复重要问题；记录证据与A/C交接。
-- [ ] 提交/推送B角色R2分支，创建草稿PR等待A验收；本轮不自动代签/合main。
+- [x] 写失败测试：四项验收、单在途、无ACK不减remaining、功率/储备拦截、发送只扣实际时长、实例隔离、非法dt/config和预测/真值分离。
+- [x] 运行确认失败，再实现严格场景加载、深复制内部state、因果事件及演示导出。
+- [x] 运行场景和全库测试；演示导出与手算数值核对；验证Schema未改变。
+- [x] 一次独立完整审查，必要时通过失败测试修复重要问题；记录证据与A/C交接。
+- [x] 提交/推送B角色R2分支，创建草稿PR等待A验收；本轮不自动代签/合main。
