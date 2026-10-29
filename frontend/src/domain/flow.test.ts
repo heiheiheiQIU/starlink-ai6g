@@ -5,12 +5,12 @@ import { clampStep, FLOW_STEPS } from './flow'
 describe('six-step decision flow contract', () => {
   it('keeps the approved operational order and evidence artifact', () => {
     expect(FLOW_STEPS.map(({ title }) => title)).toEqual([
-      '健康估计',
+      '任务到达',
       '窗口预测',
-      '信息价值评估',
-      '通信资源分配',
+      'AI评分',
+      '约束解码',
       '发送/确认',
-      '证据归档',
+      '评估与证据',
     ])
     expect(FLOW_STEPS[4]).toMatchObject({
       title: '发送/确认',

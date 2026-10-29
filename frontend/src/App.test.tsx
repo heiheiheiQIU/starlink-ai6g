@@ -12,7 +12,7 @@ describe('v4 application shell', () => {
     expect(
       screen.getByRole('heading', { name: '流程主舞台', level: 1 }),
     ).toBeInTheDocument()
-    expect(screen.getByText(/契约样例/)).toBeInTheDocument()
+    expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
     expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
 
     const assistantEntry = screen.getByRole('button', { name: 'AI 助手' })
@@ -26,7 +26,7 @@ describe('v4 application shell', () => {
       screen.getByRole('heading', { name: 'AI 助手', level: 1 }),
     ).toBeInTheDocument()
     expect(assistantEntry).toHaveAttribute('aria-current', 'page')
-    expect(screen.getByText(/契约样例/)).toBeInTheDocument()
+    expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
     expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
   })
 })

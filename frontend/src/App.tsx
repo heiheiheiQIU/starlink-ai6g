@@ -5,6 +5,7 @@ import { FixtureBanner } from './components/FixtureBanner'
 import { PagePlaceholder } from './components/PagePlaceholder'
 import type { PageId } from './domain/navigation'
 import { getPageLabel } from './domain/navigation'
+import { AssistantPage } from './pages/AssistantPage'
 import { FlowWorkspace } from './pages/FlowWorkspace'
 
 export default function App() {
@@ -37,6 +38,8 @@ export default function App() {
         <div className="page-stage">
           {currentPage === 'flow' ? (
             <FlowWorkspace />
+          ) : currentPage === 'assistant' ? (
+            <AssistantPage />
           ) : (
             <PagePlaceholder pageId={currentPage} />
           )}
