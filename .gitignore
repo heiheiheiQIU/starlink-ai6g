@@ -1,5 +1,6 @@
 # 运行环境
 .venv/
+configs/legacy_assets.local.json
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -11,6 +12,7 @@ __pycache__/
 *.npz
 *.zip
 models/
+交付包/
 
 # 实验与运行产物
 runs/

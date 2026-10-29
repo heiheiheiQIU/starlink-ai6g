@@ -1,0 +1,94 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "type": "Observation",
+      "valid": true,
+      "payload": {
+        "schema_version": "1.0",
+        "run_id": "fixture_run",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "tasks": [
+          {
+            "task_id": "T1",
+            "arrival_s": 0.0,
+            "deadline_s": 20.0,
+            "payload_bytes": 2048,
+            "remaining_bytes": 2048,
+            "priority_weight": 2.0,
+            "business_class": "periodic",
+            "data_location": "satellite_1"
+          }
+        ],
+        "forecast_windows": [],
+        "health": {
+          "soc_est": 0.6,
+          "soc_lower": 0.5,
+          "capacity_Wh_est": 10.0,
+          "capacity_lower_Wh": 8.0,
+          "energy_lower_Wh": 4.0,
+          "rul_est": null,
+          "rul_unit": null,
+          "uncertainty_method": "synthetic_bounds",
+          "model_version": "synthetic_v1",
+          "observed_at_s": 0.0,
+          "available_at_s": 0.0,
+          "reason_codes": [
+            "RUL_UNAVAILABLE"
+          ]
+        },
+        "inflight": null,
+        "cache_bytes": 2048,
+        "forecast_version": "forecast_v1"
+      }
+    },
+    {
+      "type": "DecisionData",
+      "valid": true,
+      "payload": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "NO_VISIBLE_WINDOW"
+          ],
+          "fallback": false
+        },
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          },
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0
+          }
+        ],
+        "constraint_checks": [
+          {
+            "code": "NO_VISIBLE_WINDOW",
+            "passed": false,
+            "details": {}
+          }
+        ],
+        "latency_ms": 0.1,
+        "fallback": false,
+        "model_version": null,
+        "policy_version": "edf_v1"
+      }
+    }
+  ],
+  "scenario_id": "no_window",
+  "expected_behavior": {
+    "reason_code": "NO_VISIBLE_WINDOW",
+    "scheduled_bytes": 0,
+    "implementation_owner": "R4"
+  },
+  "behavior_verified": false
+}
