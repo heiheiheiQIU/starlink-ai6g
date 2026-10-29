@@ -22,3 +22,5 @@ docs/evidence/B/R4_batch_2026-10-29/**/execution.log text eol=lf
 # Preserve exact bytes of the recorded HTTP validation logs
 docs/evidence/B/B_N3_2026-10-29/**/*.log -text -diff
 docs/evidence/B/B_N3_2026-10-29/server.log -text -diff
+
+docs/evidence/B/R5_2026-10-29/**/*.log -text -diff

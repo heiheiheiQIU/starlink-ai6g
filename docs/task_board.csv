@@ -13,3 +13,4 @@ C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
 B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,C在68cc9ee回执对cac4b90修复accepted;待A新回执,,A复验cac4b90;三方对齐前不合main
 B-R4,B,ready_for_review,,docs/handoffs/H02_teacher_2026-10-29.md,A,H02首版20状态和单标签可复跑;全库293通过,待A复验,独立生成一条标签并核验状态和限制
+B-R5,B,ready_for_review,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,共享信道与180轨迹360规则运行已交;全库303通过,待复验,核对公平输入和随机协议;成熟优化器另行实现
