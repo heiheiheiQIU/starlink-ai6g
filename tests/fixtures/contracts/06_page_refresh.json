@@ -1,0 +1,121 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "type": "EventsQuery",
+      "valid": true,
+      "payload": {
+        "after": 0,
+        "limit": 500
+      }
+    },
+    {
+      "type": "EventsPage",
+      "valid": true,
+      "payload": {
+        "run_id": "fixture_run",
+        "events": [
+          {
+            "event_id": 1,
+            "run_id": "fixture_run",
+            "policy_id": "edf",
+            "sim_time_s": 0.0,
+            "event_type": "arrived",
+            "task_id": "T1",
+            "block_id": null,
+            "payload_bytes": 2048,
+            "overhead_bytes": 0,
+            "energy_Wh": 0.0,
+            "reason_code": null,
+            "data": null
+          },
+          {
+            "event_id": 2,
+            "run_id": "fixture_run",
+            "policy_id": "value",
+            "sim_time_s": 0.0,
+            "event_type": "arrived",
+            "task_id": "T1",
+            "block_id": null,
+            "payload_bytes": 2048,
+            "overhead_bytes": 0,
+            "energy_Wh": 0.0,
+            "reason_code": null,
+            "data": null
+          }
+        ],
+        "next_after": 2,
+        "has_more": true
+      }
+    },
+    {
+      "type": "EventsQuery",
+      "valid": true,
+      "payload": {
+        "after": 2,
+        "limit": 500
+      }
+    },
+    {
+      "type": "EventsPage",
+      "valid": true,
+      "payload": {
+        "run_id": "fixture_run",
+        "events": [
+          {
+            "event_id": 3,
+            "run_id": "fixture_run",
+            "policy_id": "edf",
+            "sim_time_s": 1.0,
+            "event_type": "snapshot",
+            "task_id": null,
+            "block_id": null,
+            "payload_bytes": 0,
+            "overhead_bytes": 0,
+            "energy_Wh": 0.0,
+            "reason_code": null,
+            "data": {
+              "soc_est": 0.6,
+              "energy_est_Wh": 6.0,
+              "energy_lower_Wh": 4.0,
+              "queue_count": 1,
+              "forecast_energy_band": null,
+              "policy_version": "edf_v1",
+              "evaluation_truth": {
+                "label": "posthoc_simulation",
+                "soc_true": 0.55,
+                "energy_true_Wh": 5.5,
+                "capacity_true_Wh": 10.0
+              },
+              "reason_codes": [
+                "FORECAST_UNAVAILABLE"
+              ]
+            }
+          }
+        ],
+        "next_after": 3,
+        "has_more": false
+      }
+    },
+    {
+      "type": "EventsPage",
+      "valid": true,
+      "payload": {
+        "run_id": "fixture_run",
+        "events": [],
+        "next_after": 3,
+        "has_more": false
+      }
+    }
+  ],
+  "scenario_id": "page_refresh",
+  "expected_behavior": {
+    "resume_run_id": "fixture_run",
+    "resume_after": 2,
+    "create_new_run": false,
+    "implementation_owner": "R5/C"
+  },
+  "behavior_verified": false
+}
