@@ -1,13 +1,24 @@
 import { useState } from 'react'
 
+import { FIXTURE_HASH, FIXTURE_RUN_RESULT } from '../fixtures/contracts'
+import type { RunResult } from '../types/contracts'
+
+function completedMetrics(result: RunResult): string {
+  const learned = result.by_policy.find((policy) => policy.policy_id === 'learned')
+  if (learned?.weighted_on_time_rate === null || learned?.weighted_on_time_rate === undefined) {
+    return '—（契约样例）'
+  }
+  return `${(learned.weighted_on_time_rate * 100).toFixed(1)}%（占位）`
+}
+
 const RUNS = [
   {
-    id: 'demo_fixture_001',
+    id: FIXTURE_RUN_RESULT.run_id,
     scenario: '中载 / 紧张 / 扰动',
     policies: 'edf + learned',
     status: 'completed',
     statusLabel: 'completed',
-    metrics: '66.7%（占位）',
+    metrics: completedMetrics(FIXTURE_RUN_RESULT),
   },
   {
     id: 'fixture_running_002',
@@ -64,6 +75,10 @@ export function EvidencePage() {
 
       <div className="console-card">
         <h2>实验列表</h2>
+        <p className="panel-note" style={{ marginBottom: 10 }}>
+          已完成 run 的指标来自单一事实源 fixtures/contracts.ts（config_hash={FIXTURE_HASH}，占位）；
+          正式版由 GET /runs 提供，页面不重算。
+        </p>
         <table className="console-table">
           <thead>
             <tr>
