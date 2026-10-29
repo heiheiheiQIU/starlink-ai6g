@@ -59,3 +59,40 @@ def test_contract_mismatch_is_wrapped_as_controlled_health_error(monkeypatch):
     with pytest.raises(HealthInputError) as error:
         estimator._estimate_health_with_config([synthetic_observation()], 10.0, config)
     assert error.value.code == "HEALTH_CONTRACT_INVALID"
+import json
+import subprocess
+import sys
+
+
+def run_cli(history_path: Path, now_s: str):
+    root = Path(estimator.__file__).resolve().parents[2]
+    return subprocess.run(
+        [sys.executable, "-m", "backend.health.estimator", "--history", str(history_path), "--now-s", now_s],
+        cwd=root, capture_output=True, text=True, check=False,
+    )
+
+
+def test_cli_prints_only_formal_health_json_on_success(tmp_path):
+    path = tmp_path / "history.json"
+    path.write_text(json.dumps([synthetic_observation()]), encoding="utf-8")
+    process = run_cli(path, "10")
+    assert process.returncode == 0
+    assert process.stderr == ""
+    HealthEstimate.model_validate_json(process.stdout)
+
+
+def test_cli_rejects_invalid_observation_with_json_error(tmp_path):
+    path = tmp_path / "invalid.json"
+    path.write_text(json.dumps([synthetic_observation(source="simulation_truth")]), encoding="utf-8")
+    process = run_cli(path, "10")
+    assert process.returncode == 2
+    assert process.stdout == ""
+    error = json.loads(process.stderr)
+    assert error["status"] == "rejected"
+    assert error["error_code"] == "OBSERVATION_INVALID"
+
+
+def test_cli_rejects_unreadable_history_as_controlled_json(tmp_path):
+    process = run_cli(tmp_path / "missing.json", "10")
+    assert process.returncode == 2
+    assert json.loads(process.stderr)["error_code"] == "HISTORY_FILE_INVALID"

@@ -217,3 +217,34 @@ def _estimate_health_with_config(
 def estimate_health(history: list[dict], now_s: float) -> HealthEstimate:
     config = load_health_observation_config(_HEALTH_CONFIG_PATH)
     return _estimate_health_with_config(history, now_s, config)
+import argparse
+import sys
+
+
+def _load_history_file(path: Path) -> list[dict]:
+    try:
+        payload = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, ValueError) as exc:
+        raise HealthInputError("HISTORY_FILE_INVALID", "Could not read history JSON") from exc
+    if not isinstance(payload, list):
+        raise HealthInputError("HISTORY_INVALID", "history JSON must contain a list")
+    return payload
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Generate one formal HealthEstimate")
+    parser.add_argument("--history", type=Path, required=True)
+    parser.add_argument("--now-s", type=float, required=True)
+    args = parser.parse_args(argv)
+    try:
+        result = estimate_health(_load_history_file(args.history), args.now_s)
+    except HealthInputError as error:
+        payload = {"status": "rejected", "error_code": error.code, "message": str(error)}
+        print(json.dumps(payload, ensure_ascii=False, sort_keys=True), file=sys.stderr)
+        return 2
+    print(result.model_dump_json(indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
