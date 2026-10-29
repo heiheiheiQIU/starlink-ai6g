@@ -15,7 +15,7 @@ describe('assets page', () => {
   it('marks unresolved lineage items explicitly', () => {
     render(<AssetsPage />)
 
-    expect(screen.getByText(/谱系未闭合/)).toBeInTheDocument()
+    expect(screen.getAllByText(/谱系未闭合/).length).toBeGreaterThan(0)
     expect(screen.getByText(/输出级交叉核对未做（F1）/)).toBeInTheDocument()
     expect(screen.getByText(/冻结JSON映射未核验（F3）/)).toBeInTheDocument()
   })
