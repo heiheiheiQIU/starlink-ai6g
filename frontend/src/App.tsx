@@ -2,10 +2,14 @@ import { useState } from 'react'
 
 import { AppSidebar } from './components/AppSidebar'
 import { FixtureBanner } from './components/FixtureBanner'
+import { FloatingAssistant } from './components/FloatingAssistant'
 import { PagePlaceholder } from './components/PagePlaceholder'
 import type { PageId } from './domain/navigation'
 import { getPageLabel } from './domain/navigation'
 import { AssistantPage } from './pages/AssistantPage'
+import { AssetsPage } from './pages/AssetsPage'
+import { ComparePage } from './pages/ComparePage'
+import { EvidencePage } from './pages/EvidencePage'
 import { FlowWorkspace } from './pages/FlowWorkspace'
 
 export default function App() {
@@ -40,11 +44,19 @@ export default function App() {
             <FlowWorkspace />
           ) : currentPage === 'assistant' ? (
             <AssistantPage />
+          ) : currentPage === 'compare' ? (
+            <ComparePage />
+          ) : currentPage === 'evidence' ? (
+            <EvidencePage />
+          ) : currentPage === 'assets' ? (
+            <AssetsPage />
           ) : (
             <PagePlaceholder pageId={currentPage} />
           )}
         </div>
       </main>
+
+      <FloatingAssistant onOpenAssistant={() => setCurrentPage('assistant')} />
     </div>
   )
 }
