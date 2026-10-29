@@ -1,49 +1,45 @@
-# H01 HealthEstimate交接草稿（A-N1内部核心）
+# H01 HealthEstimate handoff
 
-日期：2026-10-28。状态：`internal_core_ready_for_review`，不是正式H01 accepted。
+Date: 2026-10-29. Status: `ready_for_review`; not accepted by B.
 
-## 已交付
+Source revision (Task 3): `744b4062c320b875fb860a4c60556a8add709f4f`.
+The verified evidence commit is `5871a64abaf0a7b03d03aeca6579b7de59f63e45`.
 
-- `backend/health/estimator.py`：只消费明确标注为synthetic的SOC/容量观测。
-- `configs/health_observation.json`：绝对误差场景参数及版本。
-- `tests/test_health_estimator.py`：时间过滤、单位、下界、RUL缺失和错误边界。
+## Frozen adapter
 
-内部入口：
+`backend.health.estimator.estimate_health(history: list[dict], now_s: float) -> backend.contracts.HealthEstimate`
+returns the frozen `HealthEstimate` contract. It loads
+`configs/health_observation.json` relative to the module. Observations must be
+explicitly synthetic SOC/capacity observations; SOC is a 0–1 fraction, capacity
+and energy are Wh, and timestamps are seconds. Records with `available_at_s >
+now_s` are excluded. RUL unavailable remains `null` with `RUL_UNAVAILABLE`.
+This synthetic adapter does not consume legacy checkpoint `raw_fraction`.
 
-```python
-load_health_observation_config(path: Path) -> HealthObservationConfig
-estimate_health_core(
-    history: list[dict],
-    now_s: float,
-    config: HealthObservationConfig,
-) -> HealthCoreEstimate
-```
+## Evidence
 
-`HealthCoreEstimate`是A内部不可变结果，不是B的公共`HealthEstimate`。
+Verified evidence directory: `docs/evidence/A/H01_2026-10-29`; manifest:
+`docs/evidence/A/H01_2026-10-29/manifest.json`.
+The manifest binds source revision, input and config hashes, and the success,
+missing-RUL and invalid-input artifacts.
 
-## 数据与单位边界
-
-- SOC是0—1比例；容量与能量单位为Wh；时间单位为秒。
-- 只使用`available_at_s <= now_s`的synthetic记录。
-- 下界采用配置中的确定性绝对误差，只能称为场景保守边界。
-- `energy_lower_Wh = soc_lower * capacity_lower_Wh`。
-- RUL固定为null；旧`raw_fraction`不进入SOC、容量或能量计算。
-
-## 复现
+Task 4 CLI commands (from repository root, with the Task 4 environment):
 
 ```powershell
-New-Item -ItemType Directory -Force runs\h01_draft_test | Out-Null
-.\.venv\Scripts\python.exe -m pytest tests\test_health_estimator.py -q `
-  --noconftest -p no:cacheprovider --basetemp runs\h01_draft_test\pytest
+.\runs\a_n1_formal_env\venv\Scripts\python.exe -m backend.health.estimator --history docs/evidence/A/H01_2026-10-29/inputs/health_history_success.json --now-s 10
+.\runs\a_n1_formal_env\venv\Scripts\python.exe -m backend.health.estimator --history docs/evidence/A/H01_2026-10-29/inputs/health_history_invalid.json --now-s 10
 ```
 
-配置SHA256由`load_health_observation_config`从原始JSON字节计算并随结果返回。
+## B acceptance steps
 
-## 尚未交付
+Run one success command, inspect the missing-RUL view, run one rejection command,
+validate the returned `HealthEstimate` against the frozen contract, and recompute
+the evidence hashes against the manifest. B acceptance has not yet occurred.
 
-- 尚未导入或复制B的`backend/contracts.py`。
-- 尚未生成正式`HealthEstimate`成功、RUL缺失、输入错误三份样例。
-- 尚未完成B主验或C字段展示检查。
+Reject the handoff for future leakage, `raw_fraction` substitution, zero-filled
+RUL, non-Wh energy, or a non-H00 return type.
 
-以上工作等待H00阻塞项修复、A/C重新签收并合入`main`后完成。当前草稿不得用于宣称
-在线健康校准、真实传感器精度或新通信实验结果。
+## Explicit exclusions
+
+This handoff makes no claims about A-N2, A-N3, guard, simulator, API, real
+measurements, or performance. The synthetic evidence is not real telemetry,
+online calibration, or a performance result.

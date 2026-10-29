@@ -15,3 +15,13 @@ RUL must never be substituted for SOC, capacity, energy, or a battery control st
 ## Failure behavior
 
 Missing assets, manifest mismatch, invalid features or windows, future windows, invalid checkpoint state, and non-finite outputs are explicit failures. In particular, `WINDOW_NOT_AVAILABLE` is a rejected input, not a successful inference with a degraded score. Model errors must not silently fall back to synthetic health.
+
+## Formal synthetic HealthEstimate adapter
+
+`backend.health.estimator.estimate_health(history, now_s)` returns the frozen
+`backend.contracts.HealthEstimate`. It accepts only explicit synthetic SOC/capacity
+observations in seconds, loads `configs/health_observation.json` relative to the
+module, and preserves unavailable RUL as `null` plus `RUL_UNAVAILABLE`.
+
+The adapter does not consume the legacy checkpoint `raw_fraction`. The legacy A1
+evidence remains checkpoint-behavior evidence and is not a formal HealthEstimate.
