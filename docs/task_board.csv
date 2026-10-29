@@ -2,11 +2,11 @@
 B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
 A-N1,A,in_progress,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,C已复核内部核心accepted_with_notes,正式适配未完成,H00已合main后输出正式HealthEstimate适配层+三样例+B主验；补F5输入哈希与F1遗留证据
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
-A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试；补F3权重对应冻结JSON映射
+A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,教师接口已交付（bounded-forecast-r4-v1）,基于solve_teacher扩样训练；补F3权重对应冻结JSON映射
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
-B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,R2/R3已交付待签收,先修R3的I-01/I-02/M-04再继续R4
-B-N3,B,not_started,2026-10-31T20:00:00+08:00,backend/api/,C,,依赖B-N2,提供三类run fixture
+B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,H02教师/guard/基线已交付,R2-R4依序合main；补参数台账与共享随机信道
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,C,C已复核accepted_with_notes,等A对H02回执后合入,完整HTTP复跑并入11/08换机验收
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,R2 41项已交付（PR#3）,PR#3待R3修复后一并入main,复核R2手算与send-only轨迹
 B-R3,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,C对cac4b90修复已accepted,等A对cac4b90的新回执,A必须基于新提交cac4b90复核并推送回执；三方齐后R2先入main再合R3
