@@ -27,6 +27,15 @@ def _write_json(path,value):
     publish(temporary,path)
 
 
+def read_text(path):
+    deadline=time.monotonic()+2.0
+    while True:
+        try:return path.read_text(encoding='utf-8')
+        except PermissionError:
+            if time.monotonic()>=deadline:raise
+            time.sleep(.01)
+
+
 def write_status(folder, status, *, progress=None, active=None, error=None):
     value=RunStatusResponse(run_id=folder.name,status=status,progress=progress,
                             active_policies=active or [],error=error)
@@ -71,7 +80,7 @@ def execute_run(folder: Path, payload: dict):
         root=Path(__file__).resolve().parents[2]
         _write_json(folder/'manifest.json',dict(kind='synthetic_rule_comparison',
             run_id=folder.name,policy_ids=request.policy_ids,seed=request.seed,
-            seed_semantics='Recorded only; deterministic zero-loss scenarios use no random draws',
+            seed_semantics='Optional channel uses time-indexed draws; without channel seed is recorded only',
             config_hash=result.config_hash,input_hash=result.input_hash,code_revision=result.code_revision,
             source_sha256={p.relative_to(root).as_posix():sha(p) for p in sorted((root/'backend/api').glob('*.py'))},
             artifacts_sha256={n:sha(folder/n) for n in names},

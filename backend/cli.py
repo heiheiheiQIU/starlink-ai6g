@@ -113,7 +113,7 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         paths = {name:name for name in ('config.json','manifest.json','status.json','events.jsonl',
                                         'results.json','execution.log','energy_ledger.json')}
         result = RunResult(schema_version='1.0',run_id=identity,status='completed',config_hash=config_hash,
-            input_hash=input_hash,model_hash=None,code_revision=revision,seed=0,by_policy=[metrics],
+            input_hash=input_hash,model_hash=None,code_revision=revision,seed=parsed.scenario.channel.seed if parsed.scenario.channel else 0,by_policy=[metrics],
             metric_definitions=definitions,artifact_paths=paths).model_dump()
         _write_json(output/'results.json',result)
         with log.open('a',encoding='utf-8',newline='\n') as stream:
@@ -121,6 +121,7 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         manifest = dict(kind=parsed.kind,source='synthetic',run_id=identity,policy_id=_policy_id,
             protocol_stage='receive_ack_retry_dedup',is_real_satellite_measurement=False,
             is_policy_benchmark=False,config_hash=config_hash,input_hash=input_hash,trace_hash=_hash(external),
+            channel=parsed.scenario.channel.model_dump() if parsed.scenario.channel else None,
             model_hash=None,policy_version=_runtime['policy_version'] if _runtime else 'manual-r3-v1',code_revision=revision,
             source_sha256=source_hashes,
             artifacts_sha256={name:hashlib.sha256((output/name).read_bytes()).hexdigest() for name in

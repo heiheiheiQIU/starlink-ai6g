@@ -188,3 +188,31 @@ def test_restart_recovers_directory_created_before_first_status(tmp_path):
         status=client.get('/runs/'+identity).json()
         assert status['status']=='failed'
         assert status['error']['details']['reason']=='INCOMPLETE_RUN_RECORD'
+
+
+def test_api_channel_seed_matches_request_seed(tmp_path):
+    from backend.simulator.channel import ChannelConfig
+    payload=request(['edf']);payload['config']['scenario']['channel']=ChannelConfig(seed=8).model_dump()
+    with TestClient(create_app(tmp_path/'runs')) as client:
+        assert client.post('/runs',json=payload).status_code==422
+        payload['config']['scenario']['channel']['seed']=7
+        created=client.post('/runs',json=payload)
+        assert created.status_code==202
+        identity=created.json()['run_id']
+        assert wait(client,identity)['status']=='completed'
+        assert client.get('/runs/'+identity+'/results').json()['seed']==7
+
+
+def test_status_read_retries_windows_atomic_replace_lock(tmp_path,monkeypatch):
+    from pathlib import Path
+    from backend.api.worker import write_status
+    folder=tmp_path/('run_'+'d'*32);folder.mkdir();write_status(folder,'completed',progress=1.0)
+    with TestClient(create_app(tmp_path)) as client:
+        original=Path.read_text;blocked=[]
+        def locked_once(path,*args,**kwargs):
+            if path.name=='status.json' and not blocked:
+                blocked.append(True);raise PermissionError('replace sharing violation')
+            return original(path,*args,**kwargs)
+        monkeypatch.setattr(Path,'read_text',locked_once)
+        assert client.get('/runs/'+folder.name).json()['status']=='completed'
+        assert blocked

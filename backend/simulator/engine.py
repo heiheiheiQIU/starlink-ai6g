@@ -17,6 +17,7 @@ from .energy import EnergyLedgerEntry, PowerProfile, advance_energy, finite_numb
 from .link import transmission_time
 from .queue import visible_tasks
 from .protocol import ProtocolConfig, ProtocolState
+from .channel import ChannelConfig
 
 
 class TransmitPower(ContractModel):
@@ -41,9 +42,12 @@ class ScenarioConfig(ContractModel):
     forecast_windows: list[Window]
     health_observations: list[HealthEstimate]
     protocol: ProtocolConfig | None = None
+    channel: ChannelConfig | None = None
 
     @model_validator(mode="after")
     def supported_deterministic_scenario(self):
+        if self.channel is not None and self.protocol is None:
+            raise ValueError('Stochastic channel requires the R3 protocol')
         if self.protocol is not None:
             control_time = 128 / self.protocol.control_bps + self.protocol.ack_propagation_s
             if control_time > self.slot_s:
@@ -62,7 +66,7 @@ class ScenarioConfig(ContractModel):
         actual = sorted(self.true_windows, key=lambda w: w.start_s)
         if any(left.end_s > right.start_s for left, right in zip(actual, actual[1:])):
             raise ValueError("Overlapping actual windows are ambiguous")
-        if any(point.robust_loss_prob != 0 or point.fast_loss_prob != 0
+        if self.channel is None and any(point.robust_loss_prob != 0 or point.fast_loss_prob != 0
                for window in actual for point in window.loss_profile):
             raise ValueError("R2 only supports deterministic zero actual loss")
         if any(w.forecast_version != self.forecast_version for w in self.forecast_windows):
