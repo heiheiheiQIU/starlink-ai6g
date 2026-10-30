@@ -1,9 +1,10 @@
 import { afterEach, describe, expect, it, vi, type Mock } from 'vitest'
 
-import { ApiError, createRunApi, TransportError } from './runs'
+import { ApiError, createRunApi, ResponseFormatError, TransportError } from './runs'
 import { FIXTURE_RUN_RESULT } from '../fixtures/contracts'
 import type {
   ErrorBody,
+  Event,
   EventsPage,
   RunCreated,
   RunRequest,
@@ -32,6 +33,23 @@ const CREATED: RunCreated = { run_id: 'run-1', status: 'queued', schema_version:
 
 function mockFetch(): Mock<typeof fetch> {
   return vi.fn()
+}
+
+function event(eventId: number): Event {
+  return {
+    event_id: eventId,
+    run_id: 'run-1',
+    policy_id: 'edf',
+    sim_time_s: eventId,
+    event_type: 'snapshot',
+    task_id: null,
+    block_id: null,
+    payload_bytes: 0,
+    overhead_bytes: 0,
+    energy_Wh: 0,
+    reason_code: null,
+    data: null,
+  }
 }
 
 describe('run api client', () => {
@@ -99,6 +117,45 @@ describe('run api client', () => {
     expect(error).toBeInstanceOf(TransportError)
   })
 
+  it('reports malformed successful JSON as an explicit response format error', async () => {
+    const fetchFn = mockFetch()
+    fetchFn.mockResolvedValue(new Response('{not-json', { status: 200 }))
+    const api = createRunApi({ baseUrl: 'http://x/', fetchFn })
+
+    const error = await api.getRunStatus('run-1').catch((value: unknown) => value)
+    expect(error).toBeInstanceOf(ResponseFormatError)
+    expect((error as Error).message).toMatch(/JSON/)
+  })
+
+  it('collects all event pages in backend order', async () => {
+    const pages: EventsPage[] = [
+      { run_id: 'run-1', events: [event(1), event(2)], next_after: 2, has_more: true },
+      { run_id: 'run-1', events: [event(3)], next_after: 3, has_more: false },
+    ]
+    const fetchFn = mockFetch()
+    fetchFn.mockImplementation(() => Promise.resolve(jsonResponse(pages.shift())))
+    const api = createRunApi({ baseUrl: 'http://x/', fetchFn })
+
+    await expect(api.getAllEvents('run-1', 2)).resolves.toEqual([event(1), event(2), event(3)])
+    expect(fetchFn).toHaveBeenNthCalledWith(1, 'http://x/runs/run-1/events?after=0&limit=2', undefined)
+    expect(fetchFn).toHaveBeenNthCalledWith(2, 'http://x/runs/run-1/events?after=2&limit=2', undefined)
+  })
+
+  it('rejects an event page whose cursor does not advance', async () => {
+    const fetchFn = mockFetch()
+    fetchFn
+      .mockResolvedValueOnce(
+        jsonResponse({ run_id: 'run-1', events: [event(1)], next_after: 0, has_more: true } satisfies EventsPage),
+      )
+      .mockRejectedValueOnce(new Error('unexpected second page request'))
+    const api = createRunApi({ baseUrl: 'http://x/', fetchFn })
+
+    const error = await api.getAllEvents('run-1', 2).catch((value: unknown) => value)
+    expect(error).toBeInstanceOf(ResponseFormatError)
+    expect((error as Error).message).toMatch(/游标/)
+    expect(fetchFn).toHaveBeenCalledTimes(1)
+  })
+
   it('polls until completed and returns formal results only then', async () => {
     const statuses: RunStatusResponse[] = [
       { run_id: 'run-1', status: 'queued', progress: null, active_policies: [], error: null },
@@ -138,5 +195,40 @@ describe('run api client', () => {
     const error = await api.pollUntilComplete('run-1', { intervalMs: 5 }).catch((value: unknown) => value)
     expect(error).toBeInstanceOf(ApiError)
     expect((error as ApiError).code).toBe('INTERNAL_RUN_ERROR')
+  })
+
+  it('aborts promptly while waiting between status polls', async () => {
+    const fetchFn = mockFetch()
+    fetchFn.mockResolvedValue(
+      jsonResponse({
+        run_id: 'run-1',
+        status: 'running',
+        progress: 0.2,
+        active_policies: ['edf'],
+        error: null,
+      } satisfies RunStatusResponse),
+    )
+    const api = createRunApi({ baseUrl: 'http://x/', fetchFn })
+    const controller = new AbortController()
+    const polling = api.pollUntilComplete('run-1', {
+      intervalMs: 80,
+      timeoutMs: 1000,
+      signal: controller.signal,
+    })
+
+    await new Promise((resolve) => setTimeout(resolve, 5))
+    controller.abort()
+    let outcome: string
+    try {
+      outcome = await Promise.race([
+        polling.then(() => 'completed', (error: unknown) =>
+          error instanceof TransportError && error.message === '轮询已中止' ? 'aborted' : 'wrong-error',
+        ),
+        new Promise<string>((resolve) => setTimeout(() => resolve('still-waiting'), 25)),
+      ])
+      expect(outcome).toBe('aborted')
+    } finally {
+      await polling.catch(() => undefined)
+    }
   })
 })

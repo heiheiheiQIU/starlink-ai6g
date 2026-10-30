@@ -9,6 +9,7 @@
 import type {
   ErrorBody,
   ErrorCode,
+  Event,
   EventsPage,
   RunCreated,
   RunRequest,
@@ -37,6 +38,16 @@ export class TransportError extends Error {
   }
 }
 
+export class ResponseFormatError extends Error {
+  readonly path: string
+
+  constructor(path: string, message: string) {
+    super(message)
+    this.name = 'ResponseFormatError'
+    this.path = path
+  }
+}
+
 export interface RunApiOptions {
   /** 例如 http://127.0.0.1:8000；末尾斜杠会被忽略。 */
   baseUrl: string
@@ -52,6 +63,22 @@ export interface PollOptions {
 
 const JSON_HEADERS = { 'Content-Type': 'application/json' }
 
+function waitForPoll(intervalMs: number, signal?: AbortSignal): Promise<void> {
+  if (signal?.aborted) return Promise.reject(new TransportError('轮询已中止'))
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', abort)
+      resolve()
+    }, intervalMs)
+    function abort() {
+      clearTimeout(timer)
+      signal?.removeEventListener('abort', abort)
+      reject(new TransportError('轮询已中止'))
+    }
+    signal?.addEventListener('abort', abort, { once: true })
+  })
+}
+
 export function createRunApi({ baseUrl, fetchFn }: RunApiOptions) {
   const base = baseUrl.replace(/\/+$/, '')
   const fetcher = fetchFn ?? ((...args: Parameters<typeof fetch>) => fetch(...args))
@@ -65,7 +92,11 @@ export function createRunApi({ baseUrl, fetchFn }: RunApiOptions) {
     }
 
     if (response.ok) {
-      return (await response.json()) as T
+      try {
+        return (await response.json()) as T
+      } catch {
+        throw new ResponseFormatError(path, `服务成功响应不是有效 JSON：${path}`)
+      }
     }
 
     let body: ErrorBody | null = null
@@ -106,6 +137,14 @@ export function createRunApi({ baseUrl, fetchFn }: RunApiOptions) {
     )
   }
 
+  function getEvents(runId: string, query: { after?: number; limit?: number } = {}): Promise<EventsPage> {
+    const params = new URLSearchParams()
+    if (query.after !== undefined) params.set('after', String(query.after))
+    if (query.limit !== undefined) params.set('limit', String(query.limit))
+    const suffix = params.size > 0 ? `?${params.toString()}` : ''
+    return requestJson<EventsPage>(`/runs/${encodeURIComponent(runId)}/events${suffix}`)
+  }
+
   return {
     /** POST /runs → 202 RunCreated；422 非法配置/重复策略、429 容量不足由 ApiError 呈现。 */
     createRun(request: RunRequest): Promise<RunCreated> {
@@ -122,12 +161,24 @@ export function createRunApi({ baseUrl, fetchFn }: RunApiOptions) {
     },
 
     /** GET /runs/{id}/events?after=&limit= → EventsPage；游标非法 422。 */
-    getEvents(runId: string, query: { after?: number; limit?: number } = {}): Promise<EventsPage> {
-      const params = new URLSearchParams()
-      if (query.after !== undefined) params.set('after', String(query.after))
-      if (query.limit !== undefined) params.set('limit', String(query.limit))
-      const suffix = params.size > 0 ? `?${params.toString()}` : ''
-      return requestJson<EventsPage>(`/runs/${encodeURIComponent(runId)}/events${suffix}`)
+    getEvents,
+
+    /** 顺序读取全部事件页；只拼接后端事件，不跨策略重排或推导。 */
+    async getAllEvents(runId: string, pageLimit = 200): Promise<Event[]> {
+      const events: Event[] = []
+      let after = 0
+      for (;;) {
+        const page = await getEvents(runId, { after, limit: pageLimit })
+        events.push(...page.events)
+        if (!page.has_more) return events
+        if (page.next_after <= after) {
+          throw new ResponseFormatError(
+            `/runs/${encodeURIComponent(runId)}/events`,
+            '事件分页游标没有向前推进',
+          )
+        }
+        after = page.next_after
+      }
     },
 
     /** GET /runs/{id}/results → RunResult；未完成 409（RUN_NOT_COMPLETE）。 */
@@ -166,7 +217,7 @@ export function createRunApi({ baseUrl, fetchFn }: RunApiOptions) {
         if (Date.now() - startedAt >= timeoutMs) {
           throw new TransportError(`等待 run 完成超时（${timeoutMs}ms）`)
         }
-        await new Promise((resolve) => setTimeout(resolve, intervalMs))
+        await waitForPoll(intervalMs, signal)
       }
     },
   }
