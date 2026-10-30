@@ -87,3 +87,16 @@ def test_existing_output_is_immutable(dataset):
     with pytest.raises(ValueError):
         build_split_manifest(folder / 'samples.jsonl', target, split_seed=43)
     assert target.read_bytes() == before
+
+
+def test_cli_passes_explicit_split_counts(monkeypatch):
+    import sys
+    import training.splits as splits
+
+    calls = []
+    monkeypatch.setattr(splits, 'build_split_manifest', lambda *args, **kwargs: calls.append((args, kwargs)))
+    monkeypatch.setattr(sys, 'argv', ['training.splits', '--samples', 'samples.jsonl', '--output', 'splits.json',
+                                     '--seed', '20261030', '--train-count', '12', '--validation-count', '4',
+                                     '--test-count', '4'])
+    splits.main()
+    assert calls == [((Path('samples.jsonl'), Path('splits.json')), {'split_seed': 20261030, 'split_counts': (12, 4, 4)})]

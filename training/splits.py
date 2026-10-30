@@ -75,8 +75,12 @@ def main():
     parser.add_argument('--samples', type=Path, default=Path('data/teacher/a_n3_20/samples.jsonl'))
     parser.add_argument('--output', type=Path, default=Path('data/teacher/a_n3_20/splits.json'))
     parser.add_argument('--seed', type=int, default=20261030)
+    parser.add_argument('--train-count', type=int, default=12)
+    parser.add_argument('--validation-count', type=int, default=4)
+    parser.add_argument('--test-count', type=int, default=4)
     args = parser.parse_args()
-    build_split_manifest(args.samples, args.output, split_seed=args.seed)
+    build_split_manifest(args.samples, args.output, split_seed=args.seed,
+                         split_counts=(args.train_count, args.validation_count, args.test_count))
 
 
 if __name__ == '__main__':
