@@ -1,0 +1,85 @@
+{
+  "intersections": {
+    "train_test": {
+      "sample_ids": [],
+      "scenario_ids": []
+    },
+    "train_validation": {
+      "sample_ids": [],
+      "scenario_ids": []
+    },
+    "validation_test": {
+      "sample_ids": [],
+      "scenario_ids": []
+    }
+  },
+  "source_jsonl_sha256": "32f09ebc03005a64327d86a58d6b15aa519f17c27060a96b522655437cc3aa58",
+  "split_algorithm_version": "scenario-sha256-v1",
+  "split_seed": 20261030,
+  "splits": {
+    "test": {
+      "sample_count": 4,
+      "sample_ids": [
+        "r4_02",
+        "r4_06",
+        "r4_07",
+        "r4_18"
+      ],
+      "scenario_count": 4,
+      "scenario_ids": [
+        "preflight_18",
+        "preflight_07",
+        "preflight_02",
+        "preflight_06"
+      ]
+    },
+    "train": {
+      "sample_count": 12,
+      "sample_ids": [
+        "r4_00",
+        "r4_01",
+        "r4_03",
+        "r4_04",
+        "r4_05",
+        "r4_08",
+        "r4_09",
+        "r4_10",
+        "r4_11",
+        "r4_12",
+        "r4_14",
+        "r4_16"
+      ],
+      "scenario_count": 12,
+      "scenario_ids": [
+        "preflight_08",
+        "preflight_03",
+        "preflight_00",
+        "preflight_14",
+        "preflight_10",
+        "preflight_04",
+        "preflight_16",
+        "preflight_09",
+        "preflight_01",
+        "preflight_11",
+        "preflight_05",
+        "preflight_12"
+      ]
+    },
+    "validation": {
+      "sample_count": 4,
+      "sample_ids": [
+        "r4_13",
+        "r4_15",
+        "r4_17",
+        "r4_19"
+      ],
+      "scenario_count": 4,
+      "scenario_ids": [
+        "preflight_17",
+        "preflight_15",
+        "preflight_19",
+        "preflight_13"
+      ]
+    }
+  }
+}
