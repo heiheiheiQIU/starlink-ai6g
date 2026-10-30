@@ -5,6 +5,7 @@ import math
 import hashlib
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 import pytest
@@ -18,6 +19,17 @@ from training.generate_teacher_data import (
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REVISION = "cccca9892086522624a5979216d7a2ab73209803"
 TEACHER_CONFIG = ROOT / "configs/teacher.json"
+
+
+@pytest.fixture(name="tmp_path")
+def repository_tmp_path():
+    """Keep this module's dataset paths local, independent of pytest basetemp."""
+    runs = ROOT / "runs"
+    runs.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="a_n3_teacher_test_", dir=runs) as directory:
+        path = Path(directory)
+        assert path.resolve().parent == runs.resolve()
+        yield path
 
 
 def first_source():
