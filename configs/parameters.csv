@@ -1,0 +1,27 @@
+parameter,value,unit,source,sensitivity_range,implementation
+capacity_Wh,20,Wh,synthetic,10..30,R2
+initial_energy_Wh,10,Wh,synthetic,2..18,R2
+reserve_Wh,0.5,Wh,synthetic,0..2,R2
+base_W,36,W,synthetic; 36W*100s=1Wh dimensional check,18..72,R2
+solar_W,0,W,synthetic,0..72,R2
+compute_W,0,W,synthetic; no inference yet,0..10,R2
+robust_tx_W,36,W,synthetic,18..72,R2
+fast_tx_W,72,W,synthetic,36..100,R2
+max_power_W,150,W,synthetic; no voltage model,100..200,R2
+robust_bps,8192,bit/s,synthetic; wire rate includes header time,4096..16384,R2
+fast_bps,16384,bit/s,synthetic; wire rate includes header time,8192..32768,R2
+loss_probability,0,probability,synthetic deterministic scope,0 only in R2,R2
+window_start_s,0,s,synthetic,0..60,R2
+window_end_s,120,s,synthetic,60..180,R2
+task_payload_bytes,1024,byte,synthetic task; protocol max per06 section6.4,1..1024 final block,R2
+data_header_bytes,32,byte,06 section6.4 fixed protocol hypothesis,fixed,R2
+ack_bytes,16,byte,06 section6.4 protocol hypothesis,fixed,R3 opt-in; absent in R2
+slot_s,1,s,synthetic,0.5..2,R2
+ack_delay_slots,1,slot,06 section6.4 hypothesis; receipt-to-ACK arrival incl control/propagation,fixed initial,R3 opt-in
+timeout_slots,2,slot,06 section6.4 hypothesis; from data send finish,fixed initial,R2 timestamp; R3 behavior
+data_propagation_s,0,s,synthetic deterministic validation; not measured RTT,0..3,R3 opt-in
+ack_propagation_s,0,s,synthetic deterministic validation,0..slot minus ACK airtime,R3 opt-in
+control_bps,1024,bit/s,synthetic reserved ACK channel,128/slot or greater,R3 opt-in
+ack_rx_W,8,W,synthetic incremental active reception beyond background,0..16,R3 opt-in
+health_soc_est,0.5,fraction,synthetic explicit observation; independent of true E,0..1,R2
+health_soc_lower,0.45,fraction,synthetic scenario bound; no probabilistic guarantee,0..soc_est,R2

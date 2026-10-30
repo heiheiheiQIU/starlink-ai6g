@@ -1,0 +1,2952 @@
+{
+  "kind": "actual_local_http_synthetic_validation",
+  "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+  "port": 53819,
+  "source_commit": "cccca9892086522624a5979216d7a2ab73209803",
+  "statuses": [
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "queued",
+      "progress": 0.0,
+      "active_policies": [],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.0,
+      "active_policies": [
+        "edf"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.0,
+      "active_policies": [
+        "edf"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.0,
+      "active_policies": [
+        "edf"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.0,
+      "active_policies": [
+        "edf"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "running",
+      "progress": 0.5,
+      "active_policies": [
+        "value"
+      ],
+      "error": null
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "status": "completed",
+      "progress": 1.0,
+      "active_policies": [],
+      "error": null
+    }
+  ],
+  "page_count": 22,
+  "event_count": 64,
+  "responses": {
+    "post": 202,
+    "status": 200,
+    "events": 200,
+    "results": 200,
+    "export": 200,
+    "missing": 404,
+    "invalid": 422
+  },
+  "pages": [
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 1,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 0.0,
+          "event_type": "arrived",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 2500,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 2,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 0.0,
+          "event_type": "window_changed",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "window_id": "W1",
+            "is_visible": true
+          }
+        },
+        {
+          "event_id": 3,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 0.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 1024,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 1.0
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 1.0
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 1.989199998206459,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "edf-r4-v1"
+          }
+        }
+      ],
+      "next_after": 3,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 4,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 0.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0103125,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 5,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 0.515625,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 6,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 0.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00515625,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49922656249999997,
+            "energy_est_Wh": 9.98453125,
+            "energy_lower_Wh": 8.98453125,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49922656249999997,
+              "energy_true_Wh": 9.98453125,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 6,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 7,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 1.390625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49878906250000005,
+            "energy_est_Wh": 9.97578125,
+            "energy_lower_Wh": 8.97578125,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49878906250000005,
+              "energy_true_Wh": 9.97578125,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 8,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 1.515625,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 9,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 1.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0015277777777777779,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49871267361111116,
+            "energy_est_Wh": 9.974253472222223,
+            "energy_lower_Wh": 8.974253472222223,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49871267361111116,
+              "energy_true_Wh": 9.974253472222223,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 9,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 10,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 2.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00484375,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4984704861111112,
+            "energy_est_Wh": 9.969409722222224,
+            "energy_lower_Wh": 8.969409722222224,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4984704861111112,
+              "energy_true_Wh": 9.969409722222224,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 11,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 2.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 1024,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 1.0
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 1.0
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 1.2951000026077963,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "edf-r4-v1"
+          }
+        },
+        {
+          "event_id": 12,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 2.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 1,
+          "payload_bytes": 1024,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0103125,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 12,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 13,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 2.515625,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 1,
+          "payload_bytes": 1024,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 14,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 2.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00515625,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4976970486111112,
+            "energy_est_Wh": 9.953940972222224,
+            "energy_lower_Wh": 8.953940972222224,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4976970486111112,
+              "energy_true_Wh": 9.953940972222224,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 15,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 3.390625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4972595486111112,
+            "energy_est_Wh": 9.945190972222225,
+            "energy_lower_Wh": 8.945190972222225,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4972595486111112,
+              "energy_true_Wh": 9.945190972222225,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 15,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 16,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 3.515625,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 1,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 17,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 3.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0015277777777777779,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4971831597222224,
+            "energy_est_Wh": 9.943663194444447,
+            "energy_lower_Wh": 8.943663194444447,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4971831597222224,
+              "energy_true_Wh": 9.943663194444447,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 18,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 4.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00484375,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4969409722222224,
+            "energy_est_Wh": 9.938819444444448,
+            "energy_lower_Wh": 8.938819444444448,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4969409722222224,
+              "energy_true_Wh": 9.938819444444448,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 18,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 19,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 4.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 452,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 1.0
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 1.0
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 1.214700001582969,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "edf-r4-v1"
+          }
+        },
+        {
+          "event_id": 20,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 4.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 2,
+          "payload_bytes": 452,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0047265625,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 21,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 4.236328125,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 2,
+          "payload_bytes": 452,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 21,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 22,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 4.236328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00236328125,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4965864800347224,
+            "energy_est_Wh": 9.931729600694448,
+            "energy_lower_Wh": 8.931729600694448,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4965864800347224,
+              "energy_true_Wh": 9.931729600694448,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 23,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 4.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00279296875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49644683159722236,
+            "energy_est_Wh": 9.928936631944447,
+            "energy_lower_Wh": 8.928936631944447,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49644683159722236,
+              "energy_true_Wh": 9.928936631944447,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 24,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 5.111328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00595703125,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49614898003472235,
+            "energy_est_Wh": 9.922979600694447,
+            "energy_lower_Wh": 8.922979600694447,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49614898003472235,
+              "energy_true_Wh": 9.922979600694447,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 24,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 25,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 5.236328125,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 2,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 26,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 5.236328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0015277777777777779,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49607259114583346,
+            "energy_est_Wh": 9.92145182291667,
+            "energy_lower_Wh": 8.92145182291667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49607259114583346,
+              "energy_true_Wh": 9.92145182291667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 27,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 6.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00763671875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4956907552083335,
+            "energy_est_Wh": 9.91381510416667,
+            "energy_lower_Wh": 8.91381510416667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4956907552083335,
+              "energy_true_Wh": 9.91381510416667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 27,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 28,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 6.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 0.751199997466756,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "edf-r4-v1"
+          }
+        },
+        {
+          "event_id": 29,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 6.236328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00236328125,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49557259114583346,
+            "energy_est_Wh": 9.91145182291667,
+            "energy_lower_Wh": 8.91145182291667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49557259114583346,
+              "energy_true_Wh": 9.91145182291667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 30,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 8.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.01763671875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4946907552083335,
+            "energy_est_Wh": 9.89381510416667,
+            "energy_lower_Wh": 8.89381510416667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4946907552083335,
+              "energy_true_Wh": 9.89381510416667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 30,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 31,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 8.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 0.8191999986593146,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "edf-r4-v1"
+          }
+        },
+        {
+          "event_id": 32,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "edf",
+          "sim_time_s": 10.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.02,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4936907552083335,
+            "energy_est_Wh": 9.87381510416667,
+            "energy_lower_Wh": 8.87381510416667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "edf-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4936907552083335,
+              "energy_true_Wh": 9.87381510416667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 33,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 0.0,
+          "event_type": "arrived",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 2500,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 33,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 34,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 0.0,
+          "event_type": "window_changed",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "window_id": "W1",
+            "is_visible": true
+          }
+        },
+        {
+          "event_id": 35,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 0.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 1024,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 0.1806633733239238
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 0.23432494279176203
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 3.579899999749614,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "value-r4-v1"
+          }
+        },
+        {
+          "event_id": 36,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 0.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0103125,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 36,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 37,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 0.515625,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 38,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 0.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00515625,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49922656249999997,
+            "energy_est_Wh": 9.98453125,
+            "energy_lower_Wh": 8.98453125,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49922656249999997,
+              "energy_true_Wh": 9.98453125,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 39,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 1.390625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49878906250000005,
+            "energy_est_Wh": 9.97578125,
+            "energy_lower_Wh": 8.97578125,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49878906250000005,
+              "energy_true_Wh": 9.97578125,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 39,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 40,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 1.515625,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 41,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 1.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0015277777777777779,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49871267361111116,
+            "energy_est_Wh": 9.974253472222223,
+            "energy_lower_Wh": 8.974253472222223,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49871267361111116,
+              "energy_true_Wh": 9.974253472222223,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 42,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 2.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00484375,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4984704861111112,
+            "energy_est_Wh": 9.969409722222224,
+            "energy_lower_Wh": 8.969409722222224,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4984704861111112,
+              "energy_true_Wh": 9.969409722222224,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 42,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 43,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 2.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 1024,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 0.2853957636566332
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 0.3633782824698368
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 1.8168000024161302,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "value-r4-v1"
+          }
+        },
+        {
+          "event_id": 44,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 2.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 1,
+          "payload_bytes": 1024,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0103125,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 45,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 2.515625,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 1,
+          "payload_bytes": 1024,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 45,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 46,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 2.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00515625,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4976970486111112,
+            "energy_est_Wh": 9.953940972222224,
+            "energy_lower_Wh": 8.953940972222224,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4976970486111112,
+              "energy_true_Wh": 9.953940972222224,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 47,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 3.390625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4972595486111112,
+            "energy_est_Wh": 9.945190972222225,
+            "energy_lower_Wh": 8.945190972222225,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4972595486111112,
+              "energy_true_Wh": 9.945190972222225,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 48,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 3.515625,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 1,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 48,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 49,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 3.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0015277777777777779,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4971831597222224,
+            "energy_est_Wh": 9.943663194444447,
+            "energy_lower_Wh": 8.943663194444447,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4971831597222224,
+              "energy_true_Wh": 9.943663194444447,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 50,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 4.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00484375,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4969409722222224,
+            "energy_est_Wh": 9.938819444444448,
+            "energy_lower_Wh": 8.938819444444448,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4969409722222224,
+              "energy_true_Wh": 9.938819444444448,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 51,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 4.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 452,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 0.6790450928381963
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 0.8088467614533965
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 3.5672999983944464,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "value-r4-v1"
+          }
+        }
+      ],
+      "next_after": 51,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 52,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 4.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 2,
+          "payload_bytes": 452,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0047265625,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 53,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 4.236328125,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 2,
+          "payload_bytes": 452,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 54,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 4.236328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00236328125,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4965864800347224,
+            "energy_est_Wh": 9.931729600694448,
+            "energy_lower_Wh": 8.931729600694448,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4965864800347224,
+              "energy_true_Wh": 9.931729600694448,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 54,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 55,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 4.515625,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00279296875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49644683159722236,
+            "energy_est_Wh": 9.928936631944447,
+            "energy_lower_Wh": 8.928936631944447,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49644683159722236,
+              "energy_true_Wh": 9.928936631944447,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 56,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 5.111328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00595703125,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49614898003472235,
+            "energy_est_Wh": 9.922979600694447,
+            "energy_lower_Wh": 8.922979600694447,
+            "queue_count": 1,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49614898003472235,
+              "energy_true_Wh": 9.922979600694447,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 57,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 5.236328125,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 2,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        }
+      ],
+      "next_after": 57,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 58,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 5.236328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0015277777777777779,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49607259114583346,
+            "energy_est_Wh": 9.92145182291667,
+            "energy_lower_Wh": 8.92145182291667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49607259114583346,
+              "energy_true_Wh": 9.92145182291667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 59,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 6.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00763671875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4956907552083335,
+            "energy_est_Wh": 9.91381510416667,
+            "energy_lower_Wh": 8.91381510416667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4956907552083335,
+              "energy_true_Wh": 9.91381510416667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 60,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 6.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 1.1831999981950503,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "value-r4-v1"
+          }
+        }
+      ],
+      "next_after": 60,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 61,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 6.236328125,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.00236328125,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.49557259114583346,
+            "energy_est_Wh": 9.91145182291667,
+            "energy_lower_Wh": 8.91145182291667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.49557259114583346,
+              "energy_true_Wh": 9.91145182291667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 62,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 8.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.01763671875,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4946907552083335,
+            "energy_est_Wh": 9.89381510416667,
+            "energy_lower_Wh": 8.89381510416667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4946907552083335,
+              "energy_true_Wh": 9.89381510416667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        },
+        {
+          "event_id": 63,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 8.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [],
+              "fallback": false
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 1.9124999998894054,
+            "fallback": false,
+            "model_version": null,
+            "policy_version": "value-r4-v1"
+          }
+        }
+      ],
+      "next_after": 63,
+      "has_more": true
+    },
+    {
+      "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+      "events": [
+        {
+          "event_id": 64,
+          "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+          "policy_id": "value",
+          "sim_time_s": 10.0,
+          "event_type": "snapshot",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.02,
+          "reason_code": null,
+          "data": {
+            "soc_est": 0.4936907552083335,
+            "energy_est_Wh": 9.87381510416667,
+            "energy_lower_Wh": 8.87381510416667,
+            "queue_count": 0,
+            "forecast_energy_band": null,
+            "policy_version": "value-r4-v1",
+            "evaluation_truth": {
+              "label": "posthoc_simulation",
+              "soc_true": 0.4936907552083335,
+              "energy_true_Wh": 9.87381510416667,
+              "capacity_true_Wh": 20.0
+            },
+            "reason_codes": [
+              "R3_FORECAST_BAND_UNAVAILABLE"
+            ]
+          }
+        }
+      ],
+      "next_after": 64,
+      "has_more": false
+    }
+  ],
+  "policy_ids": [
+    "edf",
+    "value"
+  ],
+  "result": {
+    "schema_version": "1.0",
+    "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+    "status": "completed",
+    "config_hash": "e8678314a72adc83235036a6d6bd4209a4a9cf6aaa5f930be856e187b33f8bf6",
+    "input_hash": "b928d504ce5c9b5f9a57457649736b3a503ce6b7dc9562c163c5bc82601b8602",
+    "model_hash": null,
+    "code_revision": "cccca9892086522624a5979216d7a2ab73209803",
+    "seed": 7,
+    "by_policy": [
+      {
+        "policy_id": "edf",
+        "model_hash": null,
+        "sample_count": 1,
+        "evaluation_end_s": 10.0,
+        "pending_task_count": 0,
+        "weighted_on_time_rate": 1.0,
+        "critical_task_success_rate": null,
+        "goodput_bps": 2000.0,
+        "minimum_soc_true": 0.4936907552083335,
+        "energy_violation_count": 0,
+        "energy_violation_duration_s": null,
+        "success_payload_bytes": 2500,
+        "joule_per_success_bit": 0.02271328125,
+        "wait_p50_s": 0.0,
+        "wait_p95_s": 0.0,
+        "decision_p50_ms": 1.214700001582969,
+        "decision_p95_ms": 1.8503799990867265,
+        "timeout_rate": 0.0,
+        "parameter_count": null,
+        "memory_bytes": null,
+        "metric_reasons": {
+          "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+          "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+          "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+          "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+        }
+      },
+      {
+        "policy_id": "value",
+        "model_hash": null,
+        "sample_count": 1,
+        "evaluation_end_s": 10.0,
+        "pending_task_count": 0,
+        "weighted_on_time_rate": 1.0,
+        "critical_task_success_rate": null,
+        "goodput_bps": 2000.0,
+        "minimum_soc_true": 0.4936907552083335,
+        "energy_violation_count": 0,
+        "energy_violation_duration_s": null,
+        "success_payload_bytes": 2500,
+        "joule_per_success_bit": 0.02271328125,
+        "wait_p50_s": 0.0,
+        "wait_p95_s": 0.0,
+        "decision_p50_ms": 1.9124999998894054,
+        "decision_p95_ms": 3.5773799994785804,
+        "timeout_rate": 0.0,
+        "parameter_count": null,
+        "memory_bytes": null,
+        "metric_reasons": {
+          "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+          "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+          "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+          "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+        }
+      }
+    ],
+    "metric_definitions": {
+      "details": "docs/metrics.md; synthetic manual validation; no comparative performance claim",
+      "energy_violation_count": "Count of negative unclipped energy ledger segments; not independent episodes",
+      "goodput_bps": "Unique payload bits / evaluation_end_s",
+      "joule_per_success_bit": "All satellite consumption J / unique received payload bits",
+      "pending_task_count": "Arrived tasks with deadline after evaluation end, regardless of early receipt",
+      "success_payload_bytes": "Unique received payload bytes including partial tasks and late data",
+      "weighted_on_time_rate": "Sum on-time complete task weights / all arrived due task weights"
+    },
+    "artifact_paths": {
+      "config.json": "config.json",
+      "events.jsonl": "events.jsonl",
+      "manifest.json": "manifest.json",
+      "results.json": "results.json",
+      "status.json": "status.json"
+    }
+  },
+  "export_sha256": "cd1e5cd777faf9abe20d08ba9feefacbcf9cbadb22e4962fea6a5783ce1a1e90"
+}

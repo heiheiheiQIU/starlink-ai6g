@@ -1,0 +1,39 @@
+{
+  "artifacts_sha256": {
+    "config.json": "e8678314a72adc83235036a6d6bd4209a4a9cf6aaa5f930be856e187b33f8bf6",
+    "edf/config.json": "db9928a82cf8d5fc5a7be4b4d12401a4871ce12f7438b244178c07a9d6e6efe0",
+    "edf/energy_ledger.json": "00ac22d6f2cbda75362abded9b31e3bcac96f261e210c9d400f34f1616647f61",
+    "edf/events.jsonl": "120025d04c3047f1dc9e3b935b9baa38b840826ddaf395756f5c95f5c5c60a4e",
+    "edf/execution.log": "5ea63f7236fdac4e78caf1ab10f7f39381f4d8b39ceefd8db70f8b634cb3098c",
+    "edf/manifest.json": "dd4184281b0b607c282574037698b5b471a85de7bab5f24c4d25869a1cfe75af",
+    "edf/results.json": "a4b684eed57720d46d9ae610e42d555c9a4e183a2145499edf1fd2c680b86043",
+    "edf/status.json": "5c70f1bb32ac2836a44e4a5440371bef1f2281cb77b9089e03e63ec9d617f05d",
+    "events.jsonl": "3489efb108cfef151cf04915a67f609bf4cb7cd978e0fdf035f28292f5ca2341",
+    "results.json": "2e744ab16ccfac0c0a3363e2ced97dd50ba2b36e63fe99013f4305429b71e367",
+    "value/config.json": "77b0fb61e67600ec36a4fd7640a51de3213c392788e2ea8a32d4721d52474361",
+    "value/energy_ledger.json": "00ac22d6f2cbda75362abded9b31e3bcac96f261e210c9d400f34f1616647f61",
+    "value/events.jsonl": "ed9fde1085663f88af950083a08dfa16e5048f094255f30a1fa5fb466846eae2",
+    "value/execution.log": "5ea63f7236fdac4e78caf1ab10f7f39381f4d8b39ceefd8db70f8b634cb3098c",
+    "value/manifest.json": "90e0eebb860b0f5002f4f5f32d85dcb8ca73b6b8369bf2a4848f3fd4d57d6e39",
+    "value/results.json": "bc4ce530964e9f1c57bf4fa7f7cb4d1cfb8d2177db4b1660adc706d87d260624",
+    "value/status.json": "5c70f1bb32ac2836a44e4a5440371bef1f2281cb77b9089e03e63ec9d617f05d"
+  },
+  "code_revision": "cccca9892086522624a5979216d7a2ab73209803",
+  "config_hash": "e8678314a72adc83235036a6d6bd4209a4a9cf6aaa5f930be856e187b33f8bf6",
+  "input_hash": "b928d504ce5c9b5f9a57457649736b3a503ce6b7dc9562c163c5bc82601b8602",
+  "kind": "synthetic_rule_comparison",
+  "note": "Status written last; manifest/status excluded from recursive hashes. No AI performance claim.",
+  "policy_ids": [
+    "edf",
+    "value"
+  ],
+  "run_id": "run_00e529f10c924216b03cec8ea3f4008b",
+  "seed": 7,
+  "seed_semantics": "Recorded only; deterministic zero-loss scenarios use no random draws",
+  "source_sha256": {
+    "backend/api/__init__.py": "7d2cea3fe6d7687b4e1dd9fee875d9fd21249ce7d5b3684c2ad27cbf04ef7397",
+    "backend/api/main.py": "ed39e18f205f6d7e2f5cf232370e2c306fa550a5384888df1b5a4b364ddfe13b",
+    "backend/api/service.py": "9fcbb6c5058f0ae823d05efb750eac0fb0f562d58f0367a2ce3a3ca39cff325d",
+    "backend/api/worker.py": "5e2b410cdf116fdb431f8552d0b3cf05bcc7b0a3dc33b61dfd9f7eead6bb2dce"
+  }
+}

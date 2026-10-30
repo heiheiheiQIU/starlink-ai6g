@@ -1,0 +1,25 @@
+{
+  "task": "R3_C_review_fix",
+  "status": "ready_for_review",
+  "source_commit": "e4953f4",
+  "review_source": "origin/feature/frontend@abeda03",
+  "targeted_passed": 70,
+  "full_passed": 248,
+  "dependencies": "pip check passed",
+  "accepted_by_C": false,
+  "fixes": [
+    "I-01",
+    "I-02",
+    "I-03 boundary clarified",
+    "M-01",
+    "M-02",
+    "M-03",
+    "M-04"
+  ],
+  "schema_sha256": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb",
+  "logs": {
+    "red.log": "e8817b72a2d6b34792f49deb30f65d90535ae4ebe317a93b932123c155fc0d89",
+    "green.log": "0cbf6f52b959c56d330c67b1c0f4c0ee799de0df6125002beb16ac7c3890f90c",
+    "full-stable.xml": "92307bbffc984f729c5bff8db5c77a18b46dcd2b8c20f70f7e876952e51f7e92"
+  }
+}
