@@ -16,7 +16,7 @@ export function answerFixtureQuestion(question: string): FixtureAnswer {
     return {
       isFixture: true,
       content:
-        '当前页面数字均为 H00 契约样例，用于验证字段、交互和证据链展示，非真实实验结果。真实指标必须由冻结 run 生成并在证据索引中完成签核后才能引用。',
+        '当前页面数字均为接口契约样例，用于说明字段、交互和证据链，非真实实验结果。真实指标必须由冻结 run 生成并在证据索引中完成签核后才能引用。',
       citations: [EVIDENCE_INDEX, 'contracts/schemas/'],
     }
   }

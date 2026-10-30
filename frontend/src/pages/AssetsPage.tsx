@@ -5,7 +5,7 @@ const ASSETS = [
     size: '87.8 KB · (585,15,11)',
     license: '公开 NASA 数据 · 许可待补台账',
     licenseKind: 'warn' as const,
-    note: 'R0 已核 SHA；谱系未闭合',
+    note: 'SHA 已核验；谱系未闭合',
   },
   {
     name: 'battery_target_windows.npz',
@@ -19,7 +19,7 @@ const ASSETS = [
     name: 'battery_lstm_source_only.pt',
     sha: '3145020C…D893',
     size: '216.7 KB',
-    license: '队内旧成果 · 授权边界待队长确认',
+    license: '历史模型资产 · 授权材料待补充',
     licenseKind: 'warn' as const,
     note: 'strict 加载 ✓',
   },
@@ -27,7 +27,7 @@ const ASSETS = [
     name: 'battery_lstm_finetune_best.pt',
     sha: '569B7D20…A4C',
     size: '216.7 KB',
-    license: '队内旧成果 · ↔冻结JSON映射未核验（F3）',
+    license: '历史模型资产 · 冻结配置映射待核验',
     licenseKind: 'warn' as const,
     note: '仅哈希核验',
   },
@@ -35,7 +35,7 @@ const ASSETS = [
     name: 'battery_bilstm_coral_best.pt',
     sha: '756B58B7…694',
     size: '580.2 KB',
-    license: '队内旧成果 · 输出级交叉核对未做（F1）',
+    license: '历史模型资产 · 输出一致性待核验',
     licenseKind: 'warn' as const,
     note: '两窗口前向 ✓',
   },
@@ -57,16 +57,16 @@ const MODEL_CARDS = [
     boundary: '允许=离线证据；禁止=SOC/容量/能量/在线RUL',
   },
   {
-    model: 'estimate_health（A-N1 内部核心）',
+    model: '电池健康估计服务',
     input: 'history + now_s（仅 synthetic）',
-    output: 'HealthCoreEstimate（内部类型）',
-    boundary: '内部核心已 C 复核 accepted_with_notes；正式 HealthEstimate 适配+三样例待交付',
+    output: 'HealthEstimate',
+    boundary: '演示适配已接入；真实任务接入前须通过输入完整性与版本校验',
   },
   {
-    model: 'score_actions（A-N3）',
+    model: 'AI 信息价值评分服务',
     input: 'Observation',
     output: 'CandidateScore[]',
-    boundary: '待交付（依赖 B-N2 教师接口）',
+    boundary: '演示评分已接入；正式模型版本未配置',
   },
 ] as const
 
@@ -92,7 +92,7 @@ export function AssetsPage() {
           ))}
         </div>
         <p className="panel-note">
-          数据来源：docs/evidence/B/R0_2026-10-29 与 v3 包 SOURCE_MANIFEST；大文件不入库，引用哈希与包内位置。
+          数据来源：资产清单与证据索引；大文件不入库，仅引用哈希与可定位位置。
         </p>
       </div>
 

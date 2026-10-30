@@ -167,16 +167,64 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
   }
 
   if (stepId === 'confirm') {
+    const uplinkPath = 'M 112 154 L 688 54'
+    const ackPath = 'M 688 54 L 112 154'
+
     return (
       <div className="experience experience--orbit">
         <div className="orbit-scene" data-playing={playing} data-lost={ackLost}>
           <span className="earth" />
           <span className="orbit-ring" />
-          <span className="satellite">SAT</span>
-          <span className="ground">GW</span>
-          <span className="signal-beam" />
-          <span className="packet">1024B</span>
-          {!ackLost ? <span className="ack-packet">ACK</span> : null}
+          <svg
+            className="orbit-link-map"
+            viewBox="0 0 800 200"
+            preserveAspectRatio="none"
+            role="img"
+            aria-label="GW 到 SAT 数据链路"
+          >
+            <defs>
+              <linearGradient id="uplink-gradient" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0" stopColor="#42d8eb" />
+                <stop offset="1" stopColor="#7d82ff" />
+              </linearGradient>
+              <filter id="link-glow" x="-20%" y="-100%" width="140%" height="300%">
+                <feGaussianBlur stdDeviation="4" result="blur" />
+                <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
+              </filter>
+            </defs>
+
+            <path
+              className="link-beam"
+              data-link-beam
+              d={uplinkPath}
+              pathLength="100"
+            />
+
+            {playing ? (
+              <g className="link-packet link-packet--uplink" data-packet="uplink">
+                <rect x="-28" y="-13" width="56" height="26" rx="6" />
+                <text textAnchor="middle" dominantBaseline="central">1024B</text>
+                <animateMotion dur="1.8s" repeatCount="indefinite" path={uplinkPath} />
+              </g>
+            ) : null}
+            {playing && !ackLost ? (
+              <g className="link-packet link-packet--ack" data-packet="ack" opacity="0">
+                <rect x="-22" y="-13" width="44" height="26" rx="6" />
+                <text textAnchor="middle" dominantBaseline="central">ACK</text>
+                <set attributeName="opacity" to="1" begin="0.9s" fill="freeze" />
+                <animateMotion begin="0.9s" dur="1.8s" repeatCount="indefinite" path={ackPath} />
+              </g>
+            ) : null}
+
+            <g className="orbit-node orbit-node--ground" data-node="gateway" transform="translate(112 154)">
+              <rect x="-30" y="-17" width="60" height="34" rx="8" />
+              <text textAnchor="middle" dominantBaseline="central">GW</text>
+            </g>
+            <g className="orbit-node orbit-node--satellite" data-node="satellite" transform="translate(688 54)">
+              <rect x="-32" y="-17" width="64" height="34" rx="8" />
+              <text textAnchor="middle" dominantBaseline="central">SAT</text>
+            </g>
+          </svg>
         </div>
         <div className="orbit-legend" aria-label="链路动画图例">
           <span>光束=数据发送</span>

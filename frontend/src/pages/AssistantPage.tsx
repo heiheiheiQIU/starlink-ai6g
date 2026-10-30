@@ -8,7 +8,7 @@ import {
 const INITIAL_ANSWER: FixtureAnswer = {
   isFixture: true,
   content:
-    '我只依据当前工作区的契约、证据索引和已签核 run 回答。现在接入的是契约样例，因此可以解释字段和流程，但不会把样例指标包装成实验结论。',
+    '我只依据系统契约、证据索引和已签核 run 回答。现在接入的是契约样例，因此可以解释字段和流程，但不会把样例指标包装成实验结论。',
   citations: ['docs/evidence_index.md'],
 }
 
@@ -44,7 +44,7 @@ export function AssistantPage() {
         <div>
           <p className="eyebrow">EVIDENCE-GROUNDED COPILOT</p>
           <h1>AI 助手</h1>
-          <p>解释每次调度的依据、边界与证据，不替团队编造尚未产生的实验结论。</p>
+          <p>解释每次调度的依据、边界与证据，不生成尚未产生的实验结论。</p>
         </div>
         <div className="assistant-boundary">
           <span>回答模式</span>
@@ -56,7 +56,7 @@ export function AssistantPage() {
       <div className="assistant-layout">
         <div className="assistant-thread">
           <div className="assistant-message assistant-message--user">
-            <span>团队提问</span>
+            <span>用户提问</span>
             <p>{lastQuestion}</p>
           </div>
           <article className="assistant-message assistant-message--answer">
@@ -100,7 +100,7 @@ export function AssistantPage() {
             <h2>本轮可用证据</h2>
             <ul>
               <li>
-                <span>H00 数据契约</span>
+                <span>接口数据契约</span>
                 <strong>已接入</strong>
               </li>
               <li>

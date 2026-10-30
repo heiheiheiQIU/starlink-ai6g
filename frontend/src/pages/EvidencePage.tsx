@@ -43,7 +43,7 @@ const EVIDENCE_ROWS = [
     claim: '冻结资产 SHA 与 v3 包一致',
     level: '已复核',
     levelKind: 'a' as const,
-    source: 'docs/evidence/B/R0_2026-10-29',
+    source: '资产证据索引 / 公开数据清单',
     boundary: '支持"资产未篡改"；不支持"谱系闭合"',
   },
   {
@@ -57,7 +57,7 @@ const EVIDENCE_ROWS = [
     claim: '学习调度优于基线',
     level: '待实验',
     levelKind: 'c' as const,
-    source: '11/04 G4 前禁止引用百分比',
+    source: '正式实验完成前禁止引用百分比',
     boundary: '任何收益数字当前均不可写',
   },
 ] as const

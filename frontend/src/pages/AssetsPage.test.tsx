@@ -16,13 +16,15 @@ describe('assets page', () => {
     render(<AssetsPage />)
 
     expect(screen.getAllByText(/谱系未闭合/).length).toBeGreaterThan(0)
-    expect(screen.getByText(/输出级交叉核对未做（F1）/)).toBeInTheDocument()
-    expect(screen.getByText(/冻结JSON映射未核验（F3）/)).toBeInTheDocument()
+    expect(screen.getByText(/输出一致性待核验/)).toBeInTheDocument()
+    expect(screen.getByText(/冻结配置映射待核验/)).toBeInTheDocument()
   })
 
   it('keeps model boundaries honest', () => {
-    render(<AssetsPage />)
+    const { container } = render(<AssetsPage />)
     expect(screen.getByText(/禁止=SOC\/容量\/能量\/在线RUL/)).toBeInTheDocument()
-    expect(screen.getByText(/accepted_with_notes；正式 HealthEstimate 适配/)).toBeInTheDocument()
+    expect(screen.getByText('电池健康估计服务')).toBeInTheDocument()
+    expect(screen.getByText(/演示适配已接入/)).toBeInTheDocument()
+    expect(container).not.toHaveTextContent(/A-N\d|B-N\d|accepted_with_notes|内部核心|待队长确认/)
   })
 })

@@ -113,7 +113,7 @@ export function ComparePage() {
             ))}
           </select>
         </label>
-        <span className="mono chip">seed=42 · 18工况×10轨迹（11/02 冻结）</span>
+        <span className="mono chip">seed=42 · 18工况×10轨迹</span>
         <div className="spacer" />
         <button className="primary-button" type="button" onClick={createRun}>
           新建 run 并重算

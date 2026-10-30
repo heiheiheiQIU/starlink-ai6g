@@ -7,13 +7,15 @@ import App from './App'
 describe('v4 application shell', () => {
   it('keeps the fixture warning visible while navigating all approved pages', async () => {
     const user = userEvent.setup()
-    render(<App />)
+    const { container } = render(<App />)
 
     expect(
       screen.getByRole('heading', { name: '流程主舞台', level: 1 }),
     ).toBeInTheDocument()
     expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
     expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
+    expect(screen.getByText('演示数据模式')).toBeInTheDocument()
+    expect(container).not.toHaveTextContent(/H00|fixture only/)
 
     const assistantEntry = screen.getByRole('button', { name: 'AI 助手' })
     expect(

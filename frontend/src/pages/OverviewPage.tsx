@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react'
-
 import type { PageId } from '../domain/navigation'
 
 const CHAIN_NODES = [
@@ -11,36 +9,11 @@ const CHAIN_NODES = [
   { id: 'evaluate', label: '评估与证据', sub: '指标与证据卡' },
 ] as const
 
-const INTERNAL_DEADLINE = new Date('2026-11-12T20:00:00+08:00')
-const OFFICIAL_DEADLINE = new Date('2026-11-13T20:00:00+08:00')
-
-interface Countdown {
-  days: number
-  hours: number
-  minutes: number
-}
-
-function remaining(deadline: Date): Countdown {
-  const diff = Math.max(0, deadline.getTime() - Date.now())
-  return {
-    days: Math.floor(diff / 86_400_000),
-    hours: Math.floor((diff % 86_400_000) / 3_600_000),
-    minutes: Math.floor((diff % 3_600_000) / 60_000),
-  }
-}
-
 interface OverviewPageProps {
   onNavigate: (pageId: PageId) => void
 }
 
 export function OverviewPage({ onNavigate }: OverviewPageProps) {
-  const [countdown, setCountdown] = useState<Countdown>(() => remaining(INTERNAL_DEADLINE))
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setCountdown(remaining(INTERNAL_DEADLINE)), 60_000)
-    return () => window.clearInterval(timer)
-  }, [])
-
   return (
     <section className="console-page">
       <header className="console-page__intro">
@@ -66,7 +39,7 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
             ))}
           </div>
           <p className="panel-note">
-            六步与"流程主舞台"一一对应；本页全部为契约样例展示，非实验结果。链路定义见 06 方案 §5。
+            六步与“流程主舞台”一一对应；当前展示为契约样例，非实验结果。
           </p>
         </div>
 
@@ -80,20 +53,19 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
             </button>
           </div>
           <div className="ov-card">
-            <h3>内部提交倒计时</h3>
-            <p className="countdown" data-testid="countdown">
-              {countdown.days} 天 {countdown.hours} 小时 {countdown.minutes} 分
-            </p>
-            <p className="table-note">
-              内部 11-12 20:00（北京时间）· 官方截止 {OFFICIAL_DEADLINE.toLocaleString('zh-CN')}
-            </p>
+            <h3>当前链路态势</h3>
+            <ul className="progress-list">
+              <li><span className="status-dot" aria-hidden="true" /><span>星上任务队列 · 可用</span></li>
+              <li><span className="status-dot" aria-hidden="true" /><span>联系窗口预测 · 已更新</span></li>
+              <li><span className="status-dot" aria-hidden="true" /><span>GW 确认通道 · 在线</span></li>
+            </ul>
           </div>
           <div className="ov-card">
-            <h3>当前进展（契约样例视角）</h3>
+            <h3>可用服务</h3>
             <ul className="progress-list">
-              <li><span className="status-dot" aria-hidden="true" /><span>H00 合同已三方签收并合入 main</span></li>
-              <li><span className="status-dot status-dot--pending" aria-hidden="true" /><span>A-N1 内部核心已复核，正式适配待交付</span></li>
-              <li><span className="status-dot status-dot--pending" aria-hidden="true" /><span>B-R3 待修复 I-01/I-02/M-04</span></li>
+              <li><span className="status-dot" aria-hidden="true" /><span>电池健康估计 · 演示模式</span></li>
+              <li><span className="status-dot" aria-hidden="true" /><span>AI 信息价值评分 · 演示模式</span></li>
+              <li><span className="status-dot" aria-hidden="true" /><span>发送确认与证据导出 · 可用</span></li>
             </ul>
           </div>
         </div>

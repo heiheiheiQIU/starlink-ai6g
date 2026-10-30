@@ -54,8 +54,8 @@ export function AppSidebar({ currentPage, onNavigate }: AppSidebarProps) {
       <div className="system-status" aria-label="系统状态">
         <span className="status-dot" aria-hidden="true" />
         <span>
-          <strong>契约服务已连接</strong>
-          <small>H00 · fixture only</small>
+          <strong>运行服务已连接</strong>
+          <small>演示数据模式</small>
         </span>
       </div>
     </aside>

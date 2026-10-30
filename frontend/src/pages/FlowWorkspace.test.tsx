@@ -77,4 +77,38 @@ describe('six-step operations stage', () => {
     expect(screen.getByText('光束=数据发送')).toBeInTheDocument()
     expect(screen.getByText('ACK=网关确认回传')).toBeInTheDocument()
   })
+
+  it('keeps GW, SAT, uplink data and the reverse ACK on one shared route', async () => {
+    const user = userEvent.setup()
+    render(<FlowWorkspace />)
+
+    await user.click(screen.getByRole('button', { name: '步骤 5：发送/确认' }))
+    await user.click(screen.getByRole('button', { name: '播放回放' }))
+
+    const linkMap = screen.getByRole('img', { name: 'GW 到 SAT 数据链路' })
+    const beamPath = linkMap.querySelector('[data-link-beam]')?.getAttribute('d')
+    const uplinkPath = linkMap
+      .querySelector('[data-packet="uplink"] animateMotion')
+      ?.getAttribute('path')
+    const ackPath = linkMap
+      .querySelector('[data-packet="ack"] animateMotion')
+      ?.getAttribute('path')
+
+    expect(beamPath).toBe('M 112 154 L 688 54')
+    expect(uplinkPath).toBe(beamPath)
+    expect(ackPath).toBe('M 688 54 L 112 154')
+
+    const uplinkPacket = linkMap.querySelector('[data-packet="uplink"]')
+    const ackPacket = linkMap.querySelector('[data-packet="ack"]')
+    const gatewayNode = linkMap.querySelector('[data-node="gateway"]')
+    expect(
+      uplinkPacket?.compareDocumentPosition(gatewayNode as Node) ?? 0,
+    ).toEqual(Node.DOCUMENT_POSITION_FOLLOWING)
+    expect(ackPacket).toHaveAttribute('opacity', '0')
+    expect(ackPacket?.querySelector('set')).toHaveAttribute('begin', '0.9s')
+
+    await user.click(screen.getByRole('button', { name: '注入 ACK 丢失' }))
+    expect(linkMap.querySelector('[data-packet="ack"]')).not.toBeInTheDocument()
+    expect(linkMap.querySelector('[data-packet="uplink"] animateMotion')?.getAttribute('path')).toBe(beamPath)
+  })
 })
