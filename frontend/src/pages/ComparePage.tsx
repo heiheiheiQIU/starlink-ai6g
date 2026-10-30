@@ -147,6 +147,9 @@ export function ComparePage() {
           </header>
           <Chart values={FIXTURE_SERIES.map((point) => point.learned)} color="#6d7cff" />
           <p className="panel-note">同一外部轨迹与观测；policy_id=learned。</p>
+          <p className="learned-slot-note">
+            数据接入点已预留：A 交付评分器后，本面板只替换数据源（policy_id=learned 的真实结果），页面结构不变。
+          </p>
         </div>
       </div>
 
