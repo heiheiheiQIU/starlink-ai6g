@@ -1,0 +1,39 @@
+{
+  "artifacts_sha256": {
+    "config.json": "bc5981d0ec596974102b26593d529c9f4df936b36c2daf4510ac4c7636e074a2",
+    "edf/config.json": "62e56c65798f9317e3c5450bcf3f5d607f2b6d571a062dfe6f6c1a9cd380ca18",
+    "edf/energy_ledger.json": "2c20dff7152a959a0e70c5648cbefed8970c83b51d1e717dce089409b2c756ed",
+    "edf/events.jsonl": "abd0ed31533c60791183d255279f25480031e63d8b9e2a5f0125b3437dbda1c3",
+    "edf/execution.log": "9bfd576bf9ec10106df7487a73fdaf94d3c83a8cb2cb5964b3a5b4f853a1c39a",
+    "edf/manifest.json": "20dd9b8a092cfdcbb5e4bb8430759aee8fa123663f3cef291e026b921977b787",
+    "edf/results.json": "51c9048f822ba69b1176cf7486a74a4aaef84640c471dfa815377b163aa47333",
+    "edf/status.json": "b1bde5ccb98745bd252ebd0f955790ed2629e041c7ac594f1e1f99c2aa091775",
+    "events.jsonl": "47ad60a566be0443b6801e4646aefb7c21895f2c1253555c47315ec52d7361b7",
+    "results.json": "1b1ee34717dcf0594ab5616d89eb6ddf57d7556cd7f06e96ab09cd223cd40f07",
+    "value/config.json": "93df97295b274872da3317f3026c04c7f10fe485c06053f497361cc11cdbdb33",
+    "value/energy_ledger.json": "2c20dff7152a959a0e70c5648cbefed8970c83b51d1e717dce089409b2c756ed",
+    "value/events.jsonl": "4cd89eb6b121b96043143b9fc0b0b24eff5339ec48f1740bed867f14c7a4c037",
+    "value/execution.log": "9bfd576bf9ec10106df7487a73fdaf94d3c83a8cb2cb5964b3a5b4f853a1c39a",
+    "value/manifest.json": "31d1763568c2376ded7e9f82abe13fb53c1227c9b8a830136fed737a4fc49afb",
+    "value/results.json": "0e9637f5c468f828c2dddf8a29d0fae4501e4c565754d2a111e3201a7b66c81a",
+    "value/status.json": "b1bde5ccb98745bd252ebd0f955790ed2629e041c7ac594f1e1f99c2aa091775"
+  },
+  "code_revision": "35b37eaf4a03b631aa2ead5e026143c7a14ab0ba",
+  "config_hash": "bc5981d0ec596974102b26593d529c9f4df936b36c2daf4510ac4c7636e074a2",
+  "input_hash": "79e9e2b06443b9525e325fceb3a8b5ca2e00e87108e3eacedc870754deb6707d",
+  "kind": "synthetic_rule_comparison",
+  "note": "Status written last; manifest/status excluded from recursive hashes. No AI performance claim.",
+  "policy_ids": [
+    "edf",
+    "value"
+  ],
+  "run_id": "run_dc41d9acbb0644a9a8d9e453ef571c52",
+  "seed": 7,
+  "seed_semantics": "Optional channel uses time-indexed draws; without channel seed is recorded only",
+  "source_sha256": {
+    "backend/api/__init__.py": "7d2cea3fe6d7687b4e1dd9fee875d9fd21249ce7d5b3684c2ad27cbf04ef7397",
+    "backend/api/main.py": "ed39e18f205f6d7e2f5cf232370e2c306fa550a5384888df1b5a4b364ddfe13b",
+    "backend/api/service.py": "456947d82dd3c8dfd7848e4411cb28e03a1e3216b1cb7f1e304eb66e650ee740",
+    "backend/api/worker.py": "62427c8dbf900129b1bf135ef224145bf9481be71144caa5b8a0f3cb2196d93b"
+  }
+}

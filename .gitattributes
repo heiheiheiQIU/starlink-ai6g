@@ -25,3 +25,5 @@ docs/evidence/B/B_N3_2026-10-29/server.log -text -diff
 
 docs/evidence/B/R5_2026-10-29/**/*.log -text -diff
 docs/evidence/B/R5_2026-10-29/*.xml -text -diff
+docs/evidence/B/H01_review_2026-10-30/** -text -diff
+docs/evidence/B/seed_P2_2026-10-30/** -text -diff

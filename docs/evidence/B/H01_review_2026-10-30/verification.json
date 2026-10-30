@@ -1,0 +1,25 @@
+{
+  "checks": {
+    "health_invalid.json": true,
+    "health_missing_rul.json": true,
+    "health_success.json": true,
+    "inputs/health_history_invalid.json": true,
+    "inputs/health_history_success.json": true,
+    "smoke.log": true,
+    "config": true,
+    "history": true,
+    "call": true,
+    "success_exit": true,
+    "independent_units": true,
+    "missing_rul": true,
+    "invalid_exit": true,
+    "rejection": true,
+    "future_excluded": true,
+    "stale_timestamp_preserved": true,
+    "legacy_rejected": true,
+    "frozen_contract_bytes": true
+  },
+  "all_passed": true,
+  "source_revision": "744b4062c320b875fb860a4c60556a8add709f4f",
+  "synthetic_only": true
+}

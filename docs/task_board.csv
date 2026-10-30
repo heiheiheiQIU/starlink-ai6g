@@ -1,16 +1,16 @@
 task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
-A-N1,A,not_started,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,等待B-N1类型,先评审合同并准备三样例测试
+A-N1,A,accepted_with_notes,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,B主验正式synthetic适配器158通过;见H01_B_2026-10-30,,正式接入另做集成回归;A推进样本与切分交付
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界
 A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,干净集成进入main后推进B-N2最小环境
 B-N2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,首轮41项R2/全库219通过;待A复算,,A复算R2四项;C读事件;R3实现独立交接见B-R3
-B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,五接口与三类fixture已交;定向26全库293通过,待C复验,按H03复跑真实run与分页导出
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,A指标accepted;C accepted_with_notes;seed修复定向31全库305通过,seed新修复待相邻复核;C实时HTTP复跑限制保留,按B_seed_P2_2026-10-30复验子seed和ZIP
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
 C-N1,C,in_progress,2026-10-28T22:00:00+08:00,frontend/,B,,,完成接管报告与两页信息架构
 C-N2,C,blocked,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,等待B-N1,先搭视觉状态外壳
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
-B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,C在68cc9ee回执对cac4b90修复accepted;待A新回执,,A复验cac4b90;三方对齐前不合main
+B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A81a3e56与C回执对cac4b90修复均accepted,R2先集成并复核增量,按B_R2_R5_integration_2026-10-30逐层集成
 B-R4,B,ready_for_review,,docs/handoffs/H02_teacher_2026-10-29.md,A,H02首版20状态和单标签可复跑;全库293通过,待A复验,独立生成一条标签并核验状态和限制
 B-R5,B,ready_for_review,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,共享信道与180轨迹360规则运行已交;全库303通过,待复验,核对公平输入和随机协议;成熟优化器另行实现
