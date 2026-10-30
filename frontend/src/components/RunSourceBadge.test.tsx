@@ -111,7 +111,12 @@ describe('RunSourceBadge', () => {
       })
 
       render(<RunSourceBadge api={api} storage={storage} />)
-      await act(async () => { await vi.runOnlyPendingTimersAsync() })
+      await act(async () => {})
+      expect(api.getRunStatus).toHaveBeenCalledTimes(1)
+
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(3000)
+      })
       expect(api.getRunStatus).toHaveBeenCalledTimes(1)
     } finally {
       vi.useRealTimers()
