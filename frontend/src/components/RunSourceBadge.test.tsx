@@ -66,10 +66,7 @@ describe('RunSourceBadge', () => {
     const storage = fakeStorage()
     storage.setItem(RUN_ID_STORAGE_KEY, 'run-9')
     const api = spyApi()
-    api.getRunStatus.mockResolvedValueOnce({
-      run_id: 'run-9', status: 'running', progress: 0.2, active_policies: ['edf'], error: null,
-    })
-    api.getRunStatus.mockRejectedValue(new TransportError('请求未到达服务'))
+    api.getRunStatus.mockRejectedValueOnce(new TransportError('请求未到达服务'))
 
     render(<RunSourceBadge api={api} storage={storage} />)
     await waitFor(() => {

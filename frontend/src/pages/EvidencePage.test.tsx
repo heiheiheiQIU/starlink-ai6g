@@ -20,7 +20,7 @@ describe('evidence page', () => {
     const entries = screen.getAllByRole('button', { name: /打开证据/ })
     expect(entries).toHaveLength(1)
     await user.click(entries[0])
-    expect(screen.getByRole('status')).toHaveTextContent(/仅 completed 可导出/)
+    expect(screen.getByRole('status', { name: /已导出 run 包/ })).toHaveTextContent(/仅 completed 可导出/)
   })
 
   it('keeps pending claims marked as pending', () => {

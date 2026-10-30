@@ -21,8 +21,8 @@ export function RunSourceBadge({ api, storage }: RunSourceBadgeProps) {
   const [polling, setPolling] = useState(false)
 
   useEffect(() => {
-    if (storage) return
-    const stored = window.localStorage.getItem(RUN_ID_STORAGE_KEY)
+    const source = storage ?? window.localStorage
+    const stored = source.getItem(RUN_ID_STORAGE_KEY)
     if (stored) {
       void resume(stored)
     }
