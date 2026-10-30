@@ -1589,6 +1589,62 @@ button {
   background: rgba(246, 196, 83, 0.1);
 }
 
+/* ═══ 数据源状态徽章 ═══ */
+.source-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  border: 1px solid;
+  border-radius: 11px;
+  font-size: 14px;
+}
+
+.source-badge strong {
+  font-size: 14px;
+}
+
+.source-badge--fixture {
+  color: #5b3b0f;
+  background: #fff8e7;
+  border-color: #eed6a5;
+}
+
+.source-badge--offline {
+  color: #b45309;
+  background: rgba(246, 196, 83, 0.1);
+  border-color: rgba(246, 196, 83, 0.45);
+}
+
+.source-badge--error {
+  color: #f49898;
+  background: rgba(244, 99, 99, 0.08);
+  border-color: rgba(244, 99, 99, 0.4);
+}
+
+.source-badge--online {
+  color: #a9c2d2;
+  background: rgba(73, 211, 164, 0.06);
+  border-color: rgba(73, 211, 164, 0.3);
+}
+
+.source-badge--online strong {
+  color: #6bd5ac;
+}
+
+.source-badge button {
+  margin-left: auto;
+  padding: 5px 14px;
+  color: #071c25;
+  background: #67ccdc;
+  border: 0;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 800;
+}
+
 /* ═══ 全局悬浮助手 ═══ */
 .floating-orb {
   position: fixed;

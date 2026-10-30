@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import { RunSourceBadge } from '../components/RunSourceBadge'
 import { FIXTURE_HASH, FIXTURE_RUN_RESULT } from '../fixtures/contracts'
 import type { RunResult } from '../types/contracts'
 
@@ -72,6 +73,11 @@ export function EvidencePage() {
         <h1>证据链</h1>
         <p>每个数字必须能定位到 run_id、结果、事件与源文件；缺证据就显示缺失，不伪造链接。</p>
       </header>
+
+      <div className="console-card">
+        <h2>数据源</h2>
+        <RunSourceBadge />
+      </div>
 
       <div className="console-card">
         <h2>实验列表</h2>
