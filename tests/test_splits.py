@@ -36,6 +36,13 @@ def test_determinism_disjoint_and_complete(dataset):
     b = build_split_manifest(folder / 'samples.jsonl', folder / 'c.json', split_seed=43)
     assert (folder / 'a.json').read_bytes() == (folder / 'b.json').read_bytes()
     assert a['splits'] != b['splits']
+    expected_order = sorted({r['scenario_id'] for r in rows}, key=lambda scenario:
+                            hashlib.sha256(f'42:{scenario}'.encode('utf-8')).hexdigest())
+    for name, start, count in (('train', 0, 12), ('validation', 12, 4), ('test', 16, 4)):
+        split = a['splits'][name]
+        assert split['scenario_ids'] == expected_order[start:start + count]
+        assert len(split['scenario_ids']) == split['scenario_count'] == count
+        assert len(split['sample_ids']) == split['sample_count'] == count * 2
     for split in a['splits'].values():
         assert set(split['sample_ids']) == {r['sample_id'] for r in rows if r['scenario_id'] in split['scenario_ids']}
     for field in ('scenario_ids', 'sample_ids'):
@@ -73,8 +80,48 @@ def test_invalid_input_rejected(dataset, change):
 
 def test_config_matches_features():
     config = json.loads((ROOT / 'configs/policy_train.json').read_text(encoding='utf-8'))
-    assert config['global_feature_names'] == list(GLOBAL_FEATURE_NAMES)
-    assert config['candidate_feature_names'] == list(CANDIDATE_FEATURE_NAMES)
+    assert config == {
+        'schema_version': 'policy-train-config-v1',
+        'dataset_path': 'data/teacher/a_n3_20/samples.jsonl',
+        'dataset_summary_path': 'data/teacher/a_n3_20/summary.json',
+        'dataset_manifest_path': 'data/teacher/a_n3_20/manifest.json',
+        'split_manifest_path': 'data/teacher/a_n3_20/splits.json',
+        'teacher_version': 'bounded-forecast-r4-v1',
+        'teacher_budget_ms': 1000,
+        'feature_schema_version': 'policy-features-v1',
+        'global_feature_names': list(GLOBAL_FEATURE_NAMES),
+        'candidate_feature_names': list(CANDIDATE_FEATURE_NAMES),
+        'split_algorithm_version': 'scenario-sha256-v1',
+        'split_seed': 20261030,
+        'split_counts': {'train': 12, 'validation': 4, 'test': 4},
+        'eligible_solver_status': 'OPTIMAL',
+        'required_gap': 0.0,
+        'normalization': 'deferred-until-training',
+        'training_enabled': False,
+    }
+    assert config['training_enabled'] is False
+
+
+def test_link_failure_does_not_publish_and_cleans_staging(dataset, monkeypatch):
+    import training.splits as splits
+
+    folder, _, _ = dataset
+    destination = folder / 'out.json'
+    staged = []
+
+    def fail_link(source, target):
+        staged.append(Path(source))
+        assert Path(source).is_file()
+        assert Path(target) == destination
+        raise OSError('injected link failure')
+
+    monkeypatch.setattr(splits.os, 'link', fail_link)
+    with pytest.raises(OSError, match='injected link failure'):
+        splits.build_split_manifest(folder / 'samples.jsonl', destination, split_seed=42)
+    assert len(staged) == 1
+    assert not destination.exists()
+    assert not staged[0].exists()
+    assert not list(folder.glob('.splits-*'))
 
 
 def test_existing_output_is_immutable(dataset):

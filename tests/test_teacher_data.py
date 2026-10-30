@@ -283,9 +283,71 @@ def test_batch_retains_nonoptimal_and_exception_evidence(tmp_path, monkeypatch):
     assert rows[0]["solver_status"] == "TIME_LIMIT_FEASIBLE"
     assert rows[0]["label_eligible"] is False and rows[0]["exclusion_reasons"]
     assert rows[1]["label_eligible"] is False
-    assert rows[1]["error"] == {"code": "SAMPLE_GENERATION_FAILED", "message": "solver exploded"}
+    assert rows[1]["error"] == {
+        "code": "SAMPLE_GENERATION_FAILED", "exception_type": "RuntimeError",
+        "message": "Unexpected sample generation failure",
+    }
     assert rows[1]["observation"] == sorted(read_rows(SOURCE), key=lambda r: (
         r["observation"]["run_id"], r["sample_id"]))[1]["observation"]
+
+
+def test_unexpected_solver_exception_does_not_publish_private_text(tmp_path, monkeypatch):
+    private_text = r"Cannot read C:\Users\private-user\secrets\teacher-token.json"
+
+    def fail(*args, **kwargs):
+        raise RuntimeError(private_text)
+
+    monkeypatch.setattr(module, "solve_teacher", fail)
+    output = tmp_path / "dataset"
+    summary = batch(output)
+    rows = read_rows(output / "samples.jsonl")
+    assert summary["status"] == "blocked"
+    assert summary["failures"] == summary["ineligible"] == 20
+    assert summary["eligible"] == 0
+    for row in rows:
+        assert row["error"] == {
+            "code": "SAMPLE_GENERATION_FAILED", "exception_type": "RuntimeError",
+            "message": "Unexpected sample generation failure",
+        }
+        assert row["label_eligible"] is False
+        assert row["exclusion_reasons"] == ["SAMPLE_GENERATION_FAILED"]
+    published = "\n".join(p.read_text(encoding="utf-8") for p in output.iterdir())
+    assert private_text not in published
+    assert "private-user" not in published
+    assert "teacher-token" not in published
+
+
+def test_generate_record_parses_and_hashes_one_config_snapshot(tmp_path, monkeypatch):
+    path = tmp_path / "teacher.json"
+    snapshot = TEACHER_CONFIG.read_bytes()
+    changed = json.loads(snapshot)
+    changed["version"] = "changed-after-read"
+    path.write_bytes(snapshot)
+    original_read_bytes = Path.read_bytes
+    original_read_text = Path.read_text
+    reads = []
+
+    def read_bytes(self):
+        value = original_read_bytes(self)
+        if self == path:
+            reads.append(value)
+            path.write_text(json.dumps(changed), encoding="utf-8")
+        return value
+
+    def read_text(self, *args, **kwargs):
+        value = original_read_text(self, *args, **kwargs)
+        if self == path:
+            reads.append(value.encode("utf-8"))
+            path.write_text(json.dumps(changed), encoding="utf-8")
+        return value
+
+    monkeypatch.setattr(Path, "read_bytes", read_bytes)
+    monkeypatch.setattr(Path, "read_text", read_text)
+    record = generate_record(first_source(), source_revision=SOURCE_REVISION,
+                             budget_ms=1000, teacher_config_path=path)
+    assert record["teacher_version"] == json.loads(snapshot)["version"]
+    assert record["teacher_config_sha256"] == hashlib.sha256(snapshot).hexdigest()
+    assert reads == [snapshot]
 
 
 def test_cli_ready_and_controlled_invalid_revision(tmp_path):

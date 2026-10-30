@@ -88,8 +88,9 @@ def generate_record(
     except (KeyError, ValueError, TypeError) as error:
         raise TeacherDataError("INVALID_OBSERVATION", str(error)) from error
 
-    config = load_json(teacher_config_path)
-    config_sha256 = hashlib.sha256(teacher_config_path.read_bytes()).hexdigest()
+    config_bytes = teacher_config_path.read_bytes()
+    config = json.loads(config_bytes)
+    config_sha256 = hashlib.sha256(config_bytes).hexdigest()
     diagnostics: dict[str, object] = {}
     result = solve_teacher(observation, budget_ms=budget_ms,
                            config=config, diagnostics=diagnostics)
@@ -213,6 +214,11 @@ def generate_teacher_dataset(
                     raise TeacherDataError("CONFIG_CHANGED", "Teacher config changed during generation")
             except Exception as error:
                 code = error.code if isinstance(error, TeacherDataError) else "SAMPLE_GENERATION_FAILED"
+                failure = ({"code": code, "message": str(error)}
+                           if isinstance(error, TeacherDataError) else {
+                               "code": code, "exception_type": type(error).__name__,
+                               "message": "Unexpected sample generation failure",
+                           })
                 record = {
                     "schema_version": "1.0", "dataset_version": "a-n3-teacher-20-v1",
                     "sample_id": source["sample_id"], "state_id": source["sample_id"],
@@ -222,7 +228,7 @@ def generate_teacher_dataset(
                     "source_revision": source_revision, "teacher_version": config.version,
                     "teacher_config_sha256": config_sha256, "solver_status": "ERROR",
                     "gap": None, "label_eligible": False, "exclusion_reasons": [code],
-                    "error": {"code": code, "message": str(error)},
+                    "error": failure,
                 }
             records.append(record)
         status_counts = dict(sorted(Counter(r["solver_status"] for r in records).items()))
