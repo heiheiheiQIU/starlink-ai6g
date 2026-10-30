@@ -3,6 +3,8 @@
 import json
 import math
 import hashlib
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -138,3 +140,189 @@ def test_non_optimal_real_result_is_retained_and_excluded():
     assert record["label_eligible"] is False
     assert record["exclusion_reasons"]
     assert record["candidate_scores"]
+
+
+SOURCE = ROOT / "docs/evidence/B/H02_2026-10-29/samples.jsonl"
+
+
+def batch(output, source=SOURCE, **kwargs):
+    options = dict(source_path=source, output_dir=output, source_revision=SOURCE_REVISION,
+                   teacher_config_path=TEACHER_CONFIG, budget_ms=1000, expected_count=20)
+    options.update(kwargs)
+    return module.generate_teacher_dataset(**options)
+
+
+def read_rows(path):
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+
+
+def cli_args(source, output, revision=SOURCE_REVISION):
+    return ["--source", str(source), "--output", str(output), "--source-revision", revision,
+            "--teacher-config", str(TEACHER_CONFIG), "--budget-ms", "1000",
+            "--expected-count", "20"]
+
+
+def test_batch_consumes_twenty_real_observations_and_manifest(tmp_path, monkeypatch):
+    calls = []
+    real_solver = module.solve_teacher
+
+    def spy(observation, **kwargs):
+        calls.append(observation.model_dump(mode="json"))
+        return real_solver(observation, **kwargs)
+
+    monkeypatch.setattr(module, "solve_teacher", spy)
+    output = tmp_path / "dataset"
+    source = tmp_path / "reversed.jsonl"
+    source.write_text("\n".join(canonical_json(row) for row in reversed(read_rows(SOURCE))) + "\n",
+                      encoding="utf-8")
+    summary = batch(output, source)
+    rows = read_rows(output / "samples.jsonl")
+    sources = read_rows(SOURCE)
+    assert len(sources) == len(rows) == len(calls) == 20
+    assert {r["sample_id"] for r in rows} == {r["sample_id"] for r in sources}
+    assert {r["scenario_id"] for r in rows} == {r["observation"]["run_id"] for r in sources}
+    assert calls == [r["observation"] for r in rows]
+    assert [r["observation"] for r in rows] == [r["observation"] for r in sorted(
+        sources, key=lambda r: (r["observation"]["run_id"], r["sample_id"]))]
+    assert [(r["scenario_id"], r["sample_id"]) for r in rows] == sorted(
+        (r["scenario_id"], r["sample_id"]) for r in rows)
+    assert all(r["solver_status"] == "OPTIMAL" and r["gap"] == 0 and r["label_eligible"] for r in rows)
+    assert summary == json.loads((output / "summary.json").read_text(encoding="utf-8"))
+    assert summary["status"] == "ready_for_split"
+    assert summary["total"] == summary["eligible"] == 20
+    assert summary["failures"] == summary["ineligible"] == 0
+    assert summary["solver_status_counts"] == {"OPTIMAL": 20}
+    manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
+    assert manifest["source_revision"] == SOURCE_REVISION
+    assert manifest["source_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+    assert manifest["teacher_config_sha256"] == hashlib.sha256(TEACHER_CONFIG.read_bytes()).hexdigest()
+    assert manifest["teacher_version"] == "bounded-forecast-r4-v1"
+    assert manifest["budget_ms"] == 1000
+    assert manifest["schema_versions"] == {"observation": "1.0", "teacher_record": "1.0", "manifest": "1.0"}
+    assert manifest["file_row_counts"] == {"source": 20, "samples.jsonl": 20, "summary.json": 1}
+    assert manifest["command"][:3] == ["python", "-m", "training.generate_teacher_data"]
+    assert all(not Path(arg).is_absolute() for arg in manifest["command"])
+    for filename in ("samples.jsonl", "summary.json"):
+        raw = (output / filename).read_bytes()
+        assert manifest["output_sha256"][filename] == hashlib.sha256(raw).hexdigest()
+        assert raw.endswith(b"\n")
+        assert all(line == canonical_json(json.loads(line)) for line in raw.decode("utf-8").splitlines())
+
+
+@pytest.mark.parametrize("defect, code", [
+    ("sample", "DUPLICATE_SAMPLE_ID"), ("scenario", "DUPLICATE_SCENARIO_ID"),
+    ("count", "UNEXPECTED_COUNT"), ("dirty", "OUTPUT_NOT_EMPTY"),
+    ("revision", "INVALID_SOURCE_REVISION"), ("leak", "LEAK_FIELD"),
+])
+def test_batch_rejects_bad_inputs_before_solving_or_publication(tmp_path, monkeypatch, defect, code):
+    rows = read_rows(SOURCE)
+    output = tmp_path / "dataset"
+    options = {}
+    if defect == "sample":
+        rows[-1]["sample_id"] = rows[0]["sample_id"]
+    elif defect == "scenario":
+        rows[-1]["observation"]["run_id"] = rows[0]["observation"]["run_id"]
+    elif defect == "count":
+        rows.pop()
+    elif defect == "dirty":
+        output.mkdir()
+        (output / "keep.txt").write_text("keep", encoding="utf-8")
+    elif defect == "revision":
+        options["source_revision"] = "HEAD"
+    elif defect == "leak":
+        rows[-1]["observation"]["tasks"][0]["metadata"] = {"soc_true": 1}
+    source = tmp_path / "source.jsonl"
+    source.write_text("\n".join(canonical_json(row) for row in rows) + "\n", encoding="utf-8")
+    calls = []
+    monkeypatch.setattr(module, "solve_teacher", lambda *a, **kw: calls.append(a))
+    with pytest.raises(TeacherDataError) as error:
+        batch(output, source, **options)
+    assert error.value.code == code
+    assert calls == []
+    assert not (output / "manifest.json").exists()
+    if defect == "dirty":
+        assert (output / "keep.txt").read_text() == "keep"
+    assert not list(tmp_path.glob(".dataset.*"))
+
+
+def test_batch_retains_nonoptimal_and_exception_evidence(tmp_path, monkeypatch):
+    real_solver = module.solve_teacher
+    calls = 0
+
+    def limited(observation, **kwargs):
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            raise RuntimeError("solver exploded")
+        result = real_solver(observation, **kwargs)
+        if calls == 1:
+            result.solver_status = "TIME_LIMIT_FEASIBLE"
+            result.gap = None
+        return result
+
+    monkeypatch.setattr(module, "solve_teacher", limited)
+    output = tmp_path / "dataset"
+    summary = batch(output)
+    rows = read_rows(output / "samples.jsonl")
+    assert calls == len(rows) == 20
+    assert summary["status"] == "blocked"
+    assert summary["eligible"] == 18 and summary["ineligible"] == 2 and summary["failures"] == 1
+    assert summary["solver_status_counts"] == {"OPTIMAL": 18, "TIME_LIMIT_FEASIBLE": 1, "ERROR": 1}
+    assert rows[0]["solver_status"] == "TIME_LIMIT_FEASIBLE"
+    assert rows[0]["label_eligible"] is False and rows[0]["exclusion_reasons"]
+    assert rows[1]["label_eligible"] is False
+    assert rows[1]["error"] == {"code": "SAMPLE_GENERATION_FAILED", "message": "solver exploded"}
+    assert rows[1]["observation"] == sorted(read_rows(SOURCE), key=lambda r: (
+        r["observation"]["run_id"], r["sample_id"]))[1]["observation"]
+
+
+def test_cli_ready_and_controlled_invalid_revision(tmp_path):
+    output = tmp_path / "dataset"
+    result = subprocess.run([sys.executable, "-m", "training.generate_teacher_data",
+                             *cli_args(SOURCE, output)], cwd=ROOT, capture_output=True, text=True)
+    assert result.returncode == 0, result.stderr
+    assert (output / "manifest.json").exists()
+    invalid = subprocess.run([sys.executable, "-m", "training.generate_teacher_data",
+                              *cli_args(SOURCE, tmp_path / "bad", "HEAD")], cwd=ROOT,
+                             capture_output=True, text=True)
+    assert invalid.returncode != 0
+    assert "INVALID_SOURCE_REVISION" in invalid.stderr and "Traceback" not in invalid.stderr
+    assert not (tmp_path / "bad").exists()
+
+
+def test_cli_blocked_writes_evidence_and_exits_nonzero(tmp_path, monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["generate_teacher_data", *cli_args(SOURCE, tmp_path / "blocked")])
+    real_solver = module.solve_teacher
+
+    def limited(observation, **kwargs):
+        result = real_solver(observation, **kwargs)
+        result.solver_status = "TIME_LIMIT_FEASIBLE"
+        result.gap = None
+        return result
+
+    monkeypatch.setattr(module, "solve_teacher", limited)
+    assert module.main() != 0
+    assert len(read_rows(tmp_path / "blocked" / "samples.jsonl")) == 20
+    assert json.loads((tmp_path / "blocked" / "summary.json").read_text())["status"] == "blocked"
+
+
+def test_batch_verifies_closed_staged_files_before_publication(tmp_path, monkeypatch):
+    original = Path.read_bytes
+    observed = []
+
+    def corrupted_read(path):
+        if path.name == "samples.jsonl" and path.parent.name.startswith(".dataset."):
+            observed.append(path)
+            assert {p.name for p in path.parent.iterdir()} == {
+                "samples.jsonl", "summary.json", "manifest.json"}
+            assert not (tmp_path / "dataset").exists()
+            return b"corrupt\n"
+        return original(path)
+
+    monkeypatch.setattr(Path, "read_bytes", corrupted_read)
+    with pytest.raises(TeacherDataError) as error:
+        batch(tmp_path / "dataset")
+    assert error.value.code == "OUTPUT_VERIFICATION_FAILED"
+    assert len(observed) == 1
+    assert not (tmp_path / "dataset").exists()
+    assert not list(tmp_path.glob(".dataset.*"))
