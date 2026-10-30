@@ -12,3 +12,11 @@
 回执从对应 origin/feature/ai 与 origin/feature/frontend 读取；A 固定头 bebe860、C a1375b1。接收人的原文保持不变。C 的新任务板与旧回执段落存在时间差，具体目标提交和后来回执优先。
 
 合并逐层执行，不因 Git 显示 MERGEABLE 就跳过验收。每层前后记录 head/base、合同/schema差异、实际回归与合并SHA；前一层入 main 后核查后一层 base 和 diff。未把A健康实现、训练代码或C前端混入B交付。
+
+## 本轮集成前独立复跑
+
+R3固定候选cac4b90的隔离发行副本：定向70 passed in 1.85s；全库248 passed in 11.41s。旧资产通过位于runs审查目录的junction读取既有交付包，原件未写入。ACK丢失与多块任务分别新建run，唯一载荷1024/2500 byte，J/bit分别0.04443359375/0.02271328125；全部源码与产物哈希逐项一致。
+
+无Git副本嵌套外层仓库会误认HEAD的问题已另提交921a24b修复，见B_release_provenance交接。此次旧候选复跑设置Git搜索上界，记录真实源码哈希9240f96a…；初次继承外层HEAD的尝试被排除。实际包与XML见 `docs/evidence/B/R3_integration_2026-10-30/`。
+
+R2独立交付尚无明确对应的接收回执；A对R3的回执覆盖R2测试，但没有明确签收d4716bf四项手算交接。本轮不代替A扩大其签收范围。R3复跑完成不等于R2独立交接已签收，PR链仍保持草稿，main未改动。

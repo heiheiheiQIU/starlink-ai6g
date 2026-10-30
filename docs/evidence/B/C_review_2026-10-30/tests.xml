@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="39" failures="0" errors="0" time="2.945">
+    <testsuite name="src/App.test.tsx" timestamp="2026-10-30T08:37:45.452Z" hostname="DESKTOP-AAVK2DR" tests="1" failures="0" errors="0" skipped="0" time="0.1807259">
+        <testcase classname="src/App.test.tsx" name="v4 application shell &gt; keeps the fixture warning visible while navigating all approved pages" time="0.1798202">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/api/runs.test.ts" timestamp="2026-10-30T08:37:45.455Z" hostname="DESKTOP-AAVK2DR" tests="7" failures="0" errors="0" skipped="0" time="0.0409416">
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; creates a run and parses 202" time="0.0098827">
+        </testcase>
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; maps contract error bodies to typed ApiError" time="0.0009781">
+        </testcase>
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; flags RUN_NOT_COMPLETE when results are read before completion" time="0.0004198">
+        </testcase>
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; builds event pagination query only for provided fields" time="0.0014797">
+        </testcase>
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; surfaces transport failures separately from backend failures" time="0.0004391">
+        </testcase>
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; polls until completed and returns formal results only then" time="0.0255294">
+        </testcase>
+        <testcase classname="src/api/runs.test.ts" name="run api client &gt; never returns partial results for failed runs" time="0.0008192">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/domain/assistant.test.ts" timestamp="2026-10-30T08:37:45.460Z" hostname="DESKTOP-AAVK2DR" tests="2" failures="0" errors="0" skipped="0" time="0.0046396">
+        <testcase classname="src/domain/assistant.test.ts" name="fixture-safe assistant boundary &gt; explains that displayed numbers are fixtures with an evidence path" time="0.0025094">
+        </testcase>
+        <testcase classname="src/domain/assistant.test.ts" name="fixture-safe assistant boundary &gt; refuses to invent unsupported answers or percentage gains" time="0.0007615">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/domain/contractView.test.ts" timestamp="2026-10-30T08:37:45.462Z" hostname="DESKTOP-AAVK2DR" tests="9" failures="0" errors="0" skipped="0" time="0.0051521">
+        <testcase classname="src/domain/contractView.test.ts" name="metric display semantics (null + reason / measured 0) &gt; treats a real measured zero as measured, not missing" time="0.0011498">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="metric display semantics (null + reason / measured 0) &gt; shows null metrics as N/A with their reason" time="0.0007755">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="metric display semantics (null + reason / measured 0) &gt; flags a non-null metric carrying a missing reason as a contract conflict" time="0.00033">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="forecast batch semantics &gt; accepts windows all matching the top-level batch" time="0.0001876">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="forecast batch semantics &gt; flags mixed forecast versions as a contract conflict without choosing one" time="0.0001775">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="teacher candidate set display guard &gt; accepts exactly one feasible idle with unique keys" time="0.000269">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="teacher candidate set display guard &gt; reports missing idle" time="0.0006381">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="teacher candidate set display guard &gt; reports multiple or infeasible idle candidates" time="0.0003384">
+        </testcase>
+        <testcase classname="src/domain/contractView.test.ts" name="teacher candidate set display guard &gt; reports an empty candidate set" time="0.0001507">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/domain/flow.test.ts" timestamp="2026-10-30T08:37:45.464Z" hostname="DESKTOP-AAVK2DR" tests="2" failures="0" errors="0" skipped="0" time="0.0033468">
+        <testcase classname="src/domain/flow.test.ts" name="six-step decision flow contract &gt; keeps the approved operational order and evidence artifact" time="0.0019824">
+        </testcase>
+        <testcase classname="src/domain/flow.test.ts" name="six-step decision flow contract &gt; clamps navigation to the six valid indices" time="0.0003788">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/domain/navigation.test.ts" timestamp="2026-10-30T08:37:45.465Z" hostname="DESKTOP-AAVK2DR" tests="2" failures="0" errors="0" skipped="0" time="0.0040309">
+        <testcase classname="src/domain/navigation.test.ts" name="v4 navigation contract &gt; keeps the six approved entries in their fixed group order" time="0.0020891">
+        </testcase>
+        <testcase classname="src/domain/navigation.test.ts" name="v4 navigation contract &gt; resolves the approved labels from page ids" time="0.0005895">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/AssetsPage.test.tsx" timestamp="2026-10-30T08:37:45.466Z" hostname="DESKTOP-AAVK2DR" tests="3" failures="0" errors="0" skipped="0" time="0.0590476">
+        <testcase classname="src/pages/AssetsPage.test.tsx" name="assets page &gt; shows frozen asset hashes and license state" time="0.0395208">
+        </testcase>
+        <testcase classname="src/pages/AssetsPage.test.tsx" name="assets page &gt; marks unresolved lineage items explicitly" time="0.0091977">
+        </testcase>
+        <testcase classname="src/pages/AssetsPage.test.tsx" name="assets page &gt; keeps model boundaries honest" time="0.0089054">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/AssistantPage.test.tsx" timestamp="2026-10-30T08:37:45.467Z" hostname="DESKTOP-AAVK2DR" tests="1" failures="0" errors="0" skipped="0" time="0.3074234">
+        <testcase classname="src/pages/AssistantPage.test.tsx" name="evidence-grounded assistant page &gt; refuses unsupported questions and keeps local citations visible" time="0.3065513">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/ComparePage.test.tsx" timestamp="2026-10-30T08:37:45.468Z" hostname="DESKTOP-AAVK2DR" tests="2" failures="0" errors="0" skipped="0" time="0.2184627">
+        <testcase classname="src/pages/ComparePage.test.tsx" name="compare page &gt; marks fixture data and invalidates old results on config change" time="0.2062464">
+        </testcase>
+        <testcase classname="src/pages/ComparePage.test.tsx" name="compare page &gt; keeps both policy series on the same axis contract" time="0.0110431">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/EvidencePage.test.tsx" timestamp="2026-10-30T08:37:45.469Z" hostname="DESKTOP-AAVK2DR" tests="3" failures="0" errors="0" skipped="0" time="0.1284609">
+        <testcase classname="src/pages/EvidencePage.test.tsx" name="evidence page &gt; never shows final metrics for unfinished runs" time="0.0343047">
+        </testcase>
+        <testcase classname="src/pages/EvidencePage.test.tsx" name="evidence page &gt; only completed runs expose an evidence entry" time="0.086598">
+        </testcase>
+        <testcase classname="src/pages/EvidencePage.test.tsx" name="evidence page &gt; keeps pending claims marked as pending" time="0.0063416">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/FlowWorkspace.test.tsx" timestamp="2026-10-30T08:37:45.470Z" hostname="DESKTOP-AAVK2DR" tests="4" failures="0" errors="0" skipped="0" time="0.9502865">
+        <testcase classname="src/pages/FlowWorkspace.test.tsx" name="six-step operations stage &gt; navigates the fixed steps and reveals traceable engineer details" time="0.2953831">
+        </testcase>
+        <testcase classname="src/pages/FlowWorkspace.test.tsx" name="six-step operations stage &gt; keeps the approved live interactions and automatic demo controls" time="0.2296923">
+        </testcase>
+        <testcase classname="src/pages/FlowWorkspace.test.tsx" name="six-step operations stage &gt; keeps tasks added at arrival visible in later steps" time="0.2983022">
+        </testcase>
+        <testcase classname="src/pages/FlowWorkspace.test.tsx" name="six-step operations stage &gt; shows quota computation and link legend at decode and confirm steps" time="0.1254431">
+        </testcase>
+    </testsuite>
+    <testsuite name="src/pages/OverviewPage.test.tsx" timestamp="2026-10-30T08:37:45.472Z" hostname="DESKTOP-AAVK2DR" tests="3" failures="0" errors="0" skipped="0" time="0.2812375">
+        <testcase classname="src/pages/OverviewPage.test.tsx" name="overview page &gt; renders the six-node chain and countdown" time="0.096644">
+        </testcase>
+        <testcase classname="src/pages/OverviewPage.test.tsx" name="overview page &gt; navigates from chain nodes and quick entries" time="0.1740581">
+        </testcase>
+        <testcase classname="src/pages/OverviewPage.test.tsx" name="overview page &gt; keeps fixture honesty visible" time="0.0091968">
+        </testcase>
+    </testsuite>
+</testsuites>
