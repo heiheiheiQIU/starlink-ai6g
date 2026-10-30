@@ -101,6 +101,8 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         if _executor is not None: files.extend(sorted((root/'backend/policies').glob('*.py')))
         source_hashes={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         try:
+            if not (root/'.git').exists():
+                raise OSError('Release root has no Git metadata')
             git = subprocess.run(['git','rev-parse','HEAD'],cwd=root,capture_output=True,text=True,check=False)
             revision = git.stdout.strip() if git.returncode == 0 else None
         except OSError:
