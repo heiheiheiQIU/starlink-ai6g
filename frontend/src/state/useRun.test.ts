@@ -55,7 +55,11 @@ describe('useRun', () => {
 
     const { result } = renderHook(() => useRun({ api }))
     await act(() => result.current.resume('run-9'))
+    await waitFor(() => {
+      expect(result.current.state).toMatchObject({ kind: 'online', status: { status: 'running' } })
+    })
 
+    await act(() => result.current.refresh())
     await waitFor(() => {
       expect(result.current.state).toMatchObject({ kind: 'online', offline: true })
     })
