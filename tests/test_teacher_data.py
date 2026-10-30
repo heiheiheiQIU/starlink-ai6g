@@ -326,3 +326,38 @@ def test_batch_verifies_closed_staged_files_before_publication(tmp_path, monkeyp
     assert len(observed) == 1
     assert not (tmp_path / "dataset").exists()
     assert not list(tmp_path.glob(".dataset.*"))
+
+
+@pytest.mark.parametrize("field, flag", [("source_path", "--source"),
+    ("teacher_config_path", "--teacher-config"), ("output_dir", "--output")])
+@pytest.mark.parametrize("location", ["cross_volume", "outside_project"])
+def test_batch_and_cli_reject_paths_outside_repository_before_io(
+        tmp_path, monkeypatch, capsys, field, flag, location):
+    other_drive = "C:" if ROOT.drive.upper() != "C:" else "D:"
+    outside = (Path(other_drive + "/teacher-inputs/samples.jsonl") if location == "cross_volume"
+               else ROOT.parent / "teacher-inputs" / "samples.jsonl")
+    output = tmp_path / "dataset"
+    options = dict(source_path=SOURCE, output_dir=output, source_revision=SOURCE_REVISION,
+                   teacher_config_path=TEACHER_CONFIG, budget_ms=1000, expected_count=20)
+    options[field] = outside
+    calls = []
+
+    def unexpected_io(*args, **kwargs):
+        calls.append(args)
+        raise AssertionError("Rejected paths must fail before input reads, solving, or staging")
+
+    monkeypatch.setattr(module, "solve_teacher", unexpected_io)
+    monkeypatch.setattr(module.tempfile, "mkdtemp", unexpected_io)
+    monkeypatch.setattr(Path, "read_bytes", unexpected_io)
+    with pytest.raises(TeacherDataError) as error:
+        module.generate_teacher_dataset(**options)
+    assert error.value.code == "PATH_OUTSIDE_PROJECT"
+    assert str(error.value) == "PATH_OUTSIDE_PROJECT: Dataset paths must resolve inside the repository"
+    args = cli_args(SOURCE, output)
+    args[args.index(flag) + 1] = str(outside)
+    monkeypatch.setattr(sys, "argv", ["generate_teacher_data", *args])
+    assert module.main() == 2
+    assert capsys.readouterr().err.strip() == str(error.value)
+    assert calls == []
+    assert not output.exists()
+    assert not list(tmp_path.glob(".dataset.*"))

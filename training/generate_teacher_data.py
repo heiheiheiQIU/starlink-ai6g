@@ -8,7 +8,6 @@ from collections import Counter
 import hashlib
 import json
 import math
-import os
 from pathlib import Path
 import re
 import shutil
@@ -146,10 +145,10 @@ def _command_path(path: Path) -> str:
     """Use portable relative paths in the recorded invocation."""
     root = Path(__file__).resolve().parents[1]
     try:
-        return Path(os.path.relpath(path.resolve(), root)).as_posix()
-    except ValueError:
-        # A Windows path on a different volume has no relative representation.
-        return path.name
+        return path.resolve().relative_to(root).as_posix()
+    except ValueError as error:
+        raise TeacherDataError("PATH_OUTSIDE_PROJECT",
+                               "Dataset paths must resolve inside the repository") from error
 
 
 def _check_destination(output_dir: Path) -> None:
@@ -169,6 +168,10 @@ def generate_teacher_dataset(
     """
     staging = None
     try:
+        # Validate all provenance paths before reading inputs or starting work.
+        source_command = _command_path(source_path)
+        output_command = _command_path(output_dir)
+        config_command = _command_path(teacher_config_path)
         _check_destination(output_dir)
         if not isinstance(source_revision, str) or not re.fullmatch(r"[0-9a-fA-F]{40}", source_revision):
             raise TeacherDataError("INVALID_SOURCE_REVISION", "Expected a 40-hex source revision")
@@ -233,9 +236,9 @@ def generate_teacher_dataset(
                    "solver_status_counts": status_counts}
         samples_text = "".join(canonical_json(row) + "\n" for row in records)
         summary_text = canonical_json(summary) + "\n"
-        command = ["python", "-m", "training.generate_teacher_data", "--source", _command_path(source_path),
-                   "--output", _command_path(output_dir), "--source-revision", source_revision,
-                   "--teacher-config", _command_path(teacher_config_path), "--budget-ms", str(budget_ms),
+        command = ["python", "-m", "training.generate_teacher_data", "--source", source_command,
+                   "--output", output_command, "--source-revision", source_revision,
+                   "--teacher-config", config_command, "--budget-ms", str(budget_ms),
                    "--expected-count", str(expected_count)]
         manifest = {
             "source_revision": source_revision,
