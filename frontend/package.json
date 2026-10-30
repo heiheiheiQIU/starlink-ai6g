@@ -7,12 +7,14 @@
     "node": ">=20 <25",
     "pnpm": ">=9 <12"
   },
+  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "test": "vitest",
     "test:run": "vitest run",
     "check": "pnpm test:run && pnpm build",
+    "install:frozen": "pnpm install --frozen-lockfile",
     "preview": "vite preview"
   },
   "dependencies": {
