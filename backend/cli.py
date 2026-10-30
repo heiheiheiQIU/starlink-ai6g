@@ -9,7 +9,7 @@ from typing import Literal
 from uuid import uuid4
 
 from pydantic import model_validator
-from backend.contracts import Action, ContractModel, JsonValue, NonNegativeFloat, PositiveFloat, RunResult, RunStatusResponse
+from backend.contracts import Action, ContractModel, JsonValue, NonNegativeFloat, NonNegativeInt, PositiveFloat, RunResult, RunStatusResponse
 from backend.evaluation import evaluate
 from backend.simulator.engine import ScenarioConfig, create_state, step
 
@@ -27,9 +27,12 @@ class RunConfig(ContractModel):
     actions: list[TimedAction]
     policy_runtime: dict[str,JsonValue] | None = None
     code_revision: str | None = None
+    seed: NonNegativeInt | None = None
 
     @model_validator(mode='after')
     def executable_script(self):
+        if self.seed is not None and self.scenario.channel is not None and self.seed != self.scenario.channel.seed:
+            raise ValueError('run seed must equal channel.seed')
         if self.scenario.protocol is None:
             raise ValueError('Formal R3 run requires explicit protocol config')
         times = [a.time_s for a in self.actions]
@@ -63,6 +66,8 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
     identity = run_id if run_id is not None else 'r3_'+uuid4().hex
     state = create_state(parsed.scenario,run_id=identity,policy_id=_policy_id)
     config_data = parsed.model_dump()
+    seed = parsed.seed if parsed.seed is not None else parsed.scenario.channel.seed if parsed.scenario.channel else 0
+    config_data['seed'] = seed
     if _runtime is not None: config_data['policy_runtime']=_runtime
     def status(value,error=None):
         model = RunStatusResponse(run_id=identity,status=value,progress=1.0 if value=='completed' else None,
@@ -113,12 +118,13 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         paths = {name:name for name in ('config.json','manifest.json','status.json','events.jsonl',
                                         'results.json','execution.log','energy_ledger.json')}
         result = RunResult(schema_version='1.0',run_id=identity,status='completed',config_hash=config_hash,
-            input_hash=input_hash,model_hash=None,code_revision=revision,seed=parsed.scenario.channel.seed if parsed.scenario.channel else 0,by_policy=[metrics],
+            input_hash=input_hash,model_hash=None,code_revision=revision,seed=seed,by_policy=[metrics],
             metric_definitions=definitions,artifact_paths=paths).model_dump()
         _write_json(output/'results.json',result)
         with log.open('a',encoding='utf-8',newline='\n') as stream:
             stream.write(f'validated {len(events)} events through {state.sim_time_s} seconds\n')
         manifest = dict(kind=parsed.kind,source='synthetic',run_id=identity,policy_id=_policy_id,
+            seed=seed,
             protocol_stage='receive_ack_retry_dedup',is_real_satellite_measurement=False,
             is_policy_benchmark=False,config_hash=config_hash,input_hash=input_hash,trace_hash=_hash(external),
             channel=parsed.scenario.channel.model_dump() if parsed.scenario.channel else None,

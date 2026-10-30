@@ -87,6 +87,8 @@ class RunService:
         if any(p not in ('edf','value') for p in request.policy_ids):
             raise ValueError('Only edf/value are supported in this release')
         config=RunConfig.model_validate(request.config)
+        if config.seed is not None and config.seed!=request.seed:
+            raise ValueError('config.seed must equal request.seed')
         if config.actions or config.policy_runtime is not None:
             raise ValueError('Automatic API runs require empty actions and no supplied runtime')
         scenario=config.scenario

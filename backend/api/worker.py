@@ -53,9 +53,10 @@ def execute_run(folder: Path, payload: dict):
     request=RunRequest.model_validate(payload)
     try:
         events=[];results=[]
+        config=dict(request.config,seed=request.seed)
         for index,policy in enumerate(request.policy_ids):
             write_status(folder,'running',progress=index/len(request.policy_ids),active=[policy])
-            result=run_policy(request.config,folder/policy,policy_id=policy,run_id=folder.name)
+            result=run_policy(config,folder/policy,policy_id=policy,run_id=folder.name)
             results.append(result)
             for line in (folder/policy/'events.jsonl').read_text(encoding='utf-8').splitlines():
                 event=Event.model_validate_json(line)
