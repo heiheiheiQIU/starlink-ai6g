@@ -1,16 +1,16 @@
-﻿task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
+task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
 B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
-A-N1,A,ready_for_review,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,C已复核内部核心+正式H01已交付,等B主验,estimate_health返回冻结HealthEstimate+三样例；F1遗留证据仍挂账
+A-N1,A,accepted,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,"A交付+B主验+C复核三方闭环",完成,F1遗留证据仍挂账（低优先）
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
-A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,范围已批（最小可验收5步）,今日签H02+20场景；10/31 B验收样本切分；11/02 22:00前完成训练
+A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,范围①-④已完成（20标签冻结+特征mask+12/4/4划分）,B于10/31上午训练门验收；训练11/02 22:00截止
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
 B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,共享信道+180轨迹规则矩阵已交付（PR#6）,R2-R5依序合main；成熟优化器与AI接入仍待后续
-B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,A+C,"A已accepted指标口径+C已accepted_with_notes",seed透传P2待修,随机信道进API前把request.seed传入子运行；完整HTTP复跑并入11/08换机验收
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,A+C,"A已accepted+C已accepted_with_notes+seed P2已修",等合入main,完整HTTP复跑并入11/08换机验收
 B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,R2 41项已交付（PR#3）,PR#3待R3修复后一并入main,复核R2手算与send-only轨迹
-B-R3,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,C对cac4b90修复已accepted,等A对cac4b90的新回执,A必须基于新提交cac4b90复核并推送回执；三方齐后R2先入main再合R3
+B-R3,B,accepted,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,"A+C均accepted（cac4b90）三方对齐",待R2先合main,按R2→R3→R4→R5顺序合入
 C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
 C-N2,C,ready_for_review,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,待B复核镜像语义,类型镜像+展示守卫+7项语义测试已提交（3c55815）
-C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
+C-N3,C,in_progress,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,API客户端+useRun+数据源徽章已交付,真实HTTP联调待本机起uvicorn；新建run等场景预设接口
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
