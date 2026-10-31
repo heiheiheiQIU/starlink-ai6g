@@ -6,6 +6,8 @@ import os
 from pathlib import Path
 import tempfile
 
+from training.generate_teacher_data import observation_content_sha256
+
 
 def build_split_manifest(samples_path: Path, output_path: Path, *, split_seed: int,
                          split_counts: tuple[int, int, int] = (12, 4, 4)) -> dict[str, object]:
@@ -25,32 +27,66 @@ def build_split_manifest(samples_path: Path, output_path: Path, *, split_seed: i
             or summary.get('ineligible') != 0 or summary.get('failures') != 0):
         raise ValueError('Summary counts do not match source')
     sample_ids = set()
-    scenarios = {}
+    content_hashes = set()
+    source_groups = {}
+    scenario_groups = {}
     for row in rows:
-        sample, scenario = row.get('sample_id'), row.get('scenario_id')
-        if not isinstance(sample, str) or not sample.strip() or not isinstance(scenario, str) or not scenario.strip():
+        sample = row.get('sample_id')
+        scenario = row.get('scenario_id')
+        source_group = row.get('source_group_id')
+        observation = row.get('observation')
+        stored_content_hash = row.get('observation_content_sha256')
+        identifiers = (sample, scenario, source_group, stored_content_hash)
+        if (any(not isinstance(value, str) or not value.strip() for value in identifiers)
+                or not isinstance(observation, dict)):
             raise ValueError('Invalid identifiers')
         if sample in sample_ids:
             raise ValueError('Duplicate sample ID')
         if row.get('label_eligible') is not True or row.get('solver_status') != 'OPTIMAL' or row.get('gap') != 0.0:
             raise ValueError('Ineligible record')
+        content_hash = observation_content_sha256(observation)
+        if stored_content_hash != content_hash:
+            raise ValueError('Observation content hash mismatch')
+        if content_hash in content_hashes:
+            raise ValueError('Duplicate observation content')
+        previous_group = scenario_groups.setdefault(scenario, source_group)
+        if previous_group != source_group:
+            raise ValueError('Scenario spans source groups')
         sample_ids.add(sample)
-        scenarios.setdefault(scenario, []).append(sample)
-    if len(split_counts) != 3 or any(type(n) is not int or n < 0 for n in split_counts) or len(scenarios) != sum(split_counts):
-        raise ValueError('Unexpected scenario count')
-    ordered = sorted(scenarios, key=lambda s: (hashlib.sha256(f'{split_seed}:{s}'.encode('utf-8')).hexdigest(), s))
+        content_hashes.add(content_hash)
+        source_groups.setdefault(source_group, []).append(row)
+    if (len(split_counts) != 3 or any(type(n) is not int or n < 0 for n in split_counts)
+            or len(source_groups) != sum(split_counts)):
+        raise ValueError('Unexpected source group count')
+    ordered = sorted(source_groups, key=lambda group: (
+        hashlib.sha256(f'{split_seed}:{group}'.encode('utf-8')).hexdigest(), group))
     splits = {}
     offset = 0
     for name, count in zip(('train', 'validation', 'test'), split_counts):
         ids = ordered[offset:offset + count]
-        samples = sorted(sample for scenario in ids for sample in scenarios[scenario])
-        splits[name] = {'scenario_ids': ids, 'sample_ids': samples,
-                        'scenario_count': len(ids), 'sample_count': len(samples)}
+        selected = [row for source_group in ids for row in source_groups[source_group]]
+        scenarios = sorted({row['scenario_id'] for row in selected})
+        samples = sorted(row['sample_id'] for row in selected)
+        hashes = sorted(row['observation_content_sha256'] for row in selected)
+        splits[name] = {
+            'source_group_ids': ids,
+            'scenario_ids': scenarios,
+            'sample_ids': samples,
+            'observation_content_sha256': hashes,
+            'source_group_count': len(ids),
+            'scenario_count': len(scenarios),
+            'sample_count': len(samples),
+            'observation_content_count': len(hashes),
+        }
         offset += count
     intersections = {}
     for left, right in (('train', 'validation'), ('train', 'test'), ('validation', 'test')):
-        intersections[f'{left}_{right}'] = {field: sorted(set(splits[left][field]) & set(splits[right][field])) for field in ('scenario_ids', 'sample_ids')}
-    result = {'split_algorithm_version': 'scenario-sha256-v1', 'split_seed': split_seed,
+        intersections[f'{left}_{right}'] = {
+            field: sorted(set(splits[left][field]) & set(splits[right][field]))
+            for field in ('source_group_ids', 'scenario_ids', 'sample_ids',
+                          'observation_content_sha256')
+        }
+    result = {'split_algorithm_version': 'source-group-sha256-v2', 'split_seed': split_seed,
               'source_jsonl_sha256': digest, 'splits': splits, 'intersections': intersections}
     content = (json.dumps(result, ensure_ascii=False, sort_keys=True, indent=2) + '\n').encode('utf-8')
     output_path.parent.mkdir(parents=True, exist_ok=True)

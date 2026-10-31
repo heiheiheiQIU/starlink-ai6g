@@ -19,11 +19,14 @@ from backend.policies.teacher import TeacherConfig, solve_teacher
 
 
 LABEL_CONTENT_FIELDS = (
-    "sample_id", "scenario_id", "state_id", "source_revision",
+    "dataset_version", "sample_id", "scenario_id", "source_group_id", "state_id", "source_revision",
     "source_observation_sha256", "observation", "teacher_version",
     "teacher_config_sha256", "candidate_scores", "solver_status",
     "gap", "diagnostics", "label_eligible", "exclusion_reasons",
+    "observation_content_sha256",
 )
+EXECUTION_ID_FIELDS = frozenset({"run_id", "policy_id"})
+DATASET_VERSION = "a-n3-teacher-20-v2"
 LEAK_FIELDS = {
     "true_capacity", "capacity_true_wh", "future_arrivals",
     "actual_future_loss", "evaluation_truth", "energy_true_wh", "soc_true",
@@ -45,6 +48,21 @@ def canonical_json(value: object) -> str:
 
 def sha256_text(value: str) -> str:
     return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+def observation_content_sha256(payload: dict[str, object]) -> str:
+    """Identify a public decision input independently of execution labels."""
+    content = copy.deepcopy(payload)
+    for field in EXECUTION_ID_FIELDS:
+        content.pop(field, None)
+    return sha256_text(canonical_json(content))
+
+
+def _source_group_id(source: dict[str, object]) -> str:
+    value = source.get("source_group_id", source.get("scenario_id"))
+    if not isinstance(value, str) or not value.strip():
+        raise TeacherDataError("INVALID_SOURCE_GROUP", "source_group_id must be nonempty")
+    return value
 
 
 def label_content_sha256(record: dict[str, object]) -> str:
@@ -83,6 +101,8 @@ def generate_record(
         before = canonical_json(payload)
         observation = Observation.model_validate(payload)
         parsed_before = canonical_json(observation.model_dump(mode="json"))
+        group_id = _source_group_id(source)
+        content_sha256 = observation_content_sha256(payload)
     except TeacherDataError:
         raise
     except (KeyError, ValueError, TypeError) as error:
@@ -121,12 +141,14 @@ def generate_record(
     eligible = result.solver_status == "OPTIMAL" and result.gap == 0.0
     record: dict[str, object] = {
         "schema_version": "1.0",
-        "dataset_version": "a-n3-teacher-20-v1",
+        "dataset_version": DATASET_VERSION,
         "sample_id": sample_id,
         "scenario_id": observation.run_id,
+        "source_group_id": group_id,
         "state_id": sample_id,
         "source_revision": source_revision,
         "source_observation_sha256": sha256_text(before),
+        "observation_content_sha256": content_sha256,
         "observation": copy.deepcopy(payload),
         "teacher_version": diagnostics["teacher_version"],
         "teacher_config_sha256": config_sha256,
@@ -184,7 +206,7 @@ def generate_teacher_dataset(
         sources = [json.loads(line) for line in source_bytes.decode("utf-8").splitlines()]
         if len(sources) != expected_count:
             raise TeacherDataError("UNEXPECTED_COUNT", f"Expected {expected_count} rows; got {len(sources)}")
-        sample_ids, scenario_ids = set(), set()
+        sample_ids, scenario_ids, content_hashes = set(), set(), set()
         for source in sources:
             if not isinstance(source, dict):
                 raise TeacherDataError("INVALID_OBSERVATION", "Source rows must be objects")
@@ -195,12 +217,17 @@ def generate_teacher_dataset(
             _reject_leaks(payload)
             canonical_json(payload)
             observation = Observation.model_validate(payload)
+            group_id = _source_group_id(source)
+            content_sha256 = observation_content_sha256(payload)
             if sample_id in sample_ids:
                 raise TeacherDataError("DUPLICATE_SAMPLE_ID", sample_id)
             if observation.run_id in scenario_ids:
                 raise TeacherDataError("DUPLICATE_SCENARIO_ID", observation.run_id)
+            if content_sha256 in content_hashes:
+                raise TeacherDataError("DUPLICATE_OBSERVATION_CONTENT", content_sha256)
             sample_ids.add(sample_id)
             scenario_ids.add(observation.run_id)
+            content_hashes.add(content_sha256)
         config_bytes = teacher_config_path.read_bytes()
         config = TeacherConfig.model_validate_json(config_bytes)
         config_sha256 = hashlib.sha256(config_bytes).hexdigest()
@@ -220,11 +247,13 @@ def generate_teacher_dataset(
                                "message": "Unexpected sample generation failure",
                            })
                 record = {
-                    "schema_version": "1.0", "dataset_version": "a-n3-teacher-20-v1",
+                    "schema_version": "1.0", "dataset_version": DATASET_VERSION,
                     "sample_id": source["sample_id"], "state_id": source["sample_id"],
                     "scenario_id": source["observation"]["run_id"],
+                    "source_group_id": _source_group_id(source),
                     "observation": copy.deepcopy(source["observation"]),
                     "source_observation_sha256": sha256_text(canonical_json(source["observation"])),
+                    "observation_content_sha256": observation_content_sha256(source["observation"]),
                     "source_revision": source_revision, "teacher_version": config.version,
                     "teacher_config_sha256": config_sha256, "solver_status": "ERROR",
                     "gap": None, "label_eligible": False, "exclusion_reasons": [code],
@@ -247,6 +276,7 @@ def generate_teacher_dataset(
                    "--teacher-config", config_command, "--budget-ms", str(budget_ms),
                    "--expected-count", str(expected_count)]
         manifest = {
+            "dataset_version": DATASET_VERSION,
             "source_revision": source_revision,
             "source_sha256": hashlib.sha256(source_bytes).hexdigest(),
             "teacher_config_sha256": config_sha256, "teacher_version": config.version,
