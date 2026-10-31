@@ -2,6 +2,28 @@
   box-sizing: border-box;
 }
 
+:root {
+  --transition-spring: 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* 环境光：极淡的青/靛氛围光，保持控制台暗色基调（借鉴苗圃杯 ambient orbs，强度压到 1/2） */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 50% at 25% 15%, rgba(64, 200, 224, 0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 75% 70%, rgba(109, 124, 255, 0.045) 0%, transparent 60%);
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
 html,
 body,
 #root {
@@ -1284,6 +1306,10 @@ button {
   margin: 0;
   font-size: 38px;
   letter-spacing: -0.045em;
+  background: linear-gradient(115deg, #a9e9f4 5%, #7fd8e8 40%, #8f9bff 90%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .console-page__intro p:not(.eyebrow) {
@@ -1300,6 +1326,7 @@ button {
   background: #102337;
   border: 1px solid #294158;
   border-radius: 15px;
+  box-shadow: var(--glass-highlight);
 }
 
 .console-card h2 {
