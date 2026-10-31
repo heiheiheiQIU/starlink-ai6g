@@ -45,6 +45,24 @@ describe('RunSourceBadge', () => {
     expect(screen.getByText(/契约样例，非真实运行结果/)).toBeInTheDocument()
   })
 
+  it('resumes a manually entered run id', async () => {
+    const user = userEvent.setup()
+    const storage = fakeStorage()
+    const api = spyApi()
+    api.getRunStatus.mockResolvedValue({
+      run_id: 'run-7', status: 'running', progress: 0.1, active_policies: ['edf', 'value'], error: null,
+    })
+
+    render(<RunSourceBadge api={api} storage={storage} />)
+    await user.type(screen.getByLabelText('手动输入 run_id'), 'run-7')
+    await user.click(screen.getByRole('button', { name: '恢复' }))
+
+    await waitFor(() => {
+      expect(screen.getByRole('status')).toHaveTextContent('已连接实验服务')
+    })
+    expect(api.getRunStatus).toHaveBeenCalledWith('run-7')
+  })
+
   it('resumes a stored run without creating a new one', async () => {
     const storage = fakeStorage()
     storage.setItem(RUN_ID_STORAGE_KEY, 'run-9')

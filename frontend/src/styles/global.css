@@ -1644,6 +1644,26 @@ button {
   color: #6bd5ac;
 }
 
+.source-manual {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  color: #8a6a2f;
+  font-size: 14px;
+}
+
+.source-manual input {
+  width: 220px;
+  padding: 5px 10px;
+  color: #3b2a08;
+  background: #ffffff;
+  border: 1px solid #d9c08a;
+  border-radius: 8px;
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 14px;
+}
+
 .source-badge button {
   margin-left: auto;
   padding: 5px 14px;
@@ -1654,6 +1674,12 @@ button {
   cursor: pointer;
   font-size: 14px;
   font-weight: 800;
+}
+
+.source-badge .source-manual button {
+  margin-left: 0;
+  color: #071c25;
+  background: #67ccdc;
 }
 
 /* ═══ 全局悬浮助手 ═══ */

@@ -19,6 +19,7 @@ interface RunSourceBadgeProps {
 export function RunSourceBadge({ api, storage }: RunSourceBadgeProps) {
   const { state, resume, refresh } = useRun({ api, storage, baseUrl: DEFAULT_BASE_URL })
   const [polling, setPolling] = useState(false)
+  const [manualRunId, setManualRunId] = useState('')
 
   useEffect(() => {
     const source = storage ?? window.localStorage
@@ -48,6 +49,18 @@ export function RunSourceBadge({ api, storage }: RunSourceBadgeProps) {
       <div className="source-badge source-badge--fixture" role="status">
         <strong>演示数据模式</strong>
         <span>未连接实验服务；页面内容为契约样例，非真实运行结果。</span>
+        <label className="source-manual">
+          已有 run_id？
+          <input
+            value={manualRunId}
+            onChange={(event) => setManualRunId(event.target.value)}
+            placeholder="run_xxxxxxxx"
+            aria-label="手动输入 run_id"
+          />
+          <button type="button" onClick={() => manualRunId.trim() && resume(manualRunId.trim())}>
+            恢复
+          </button>
+        </label>
       </div>
     )
   }
