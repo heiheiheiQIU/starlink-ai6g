@@ -41,6 +41,12 @@ def test_same_seed_repeats_exact_parameters_and_metrics():
     )
 
 
+def test_soft_teacher_scores_pass_frozen_overfit_gate_without_saturation():
+    result = train_seed(load_frozen_dataset(), seed=20261031, epochs=2000)
+    assert result.metrics["train"]["utility_mse"] <= 0.001
+    assert result.metrics["train"]["optimal_set_hits"] == 12
+
+
 def test_exported_array_names_shapes_and_dtypes_match_runtime_contract():
     result = train_seed(load_frozen_dataset(), seed=20261031, epochs=1)
     arrays = export_state_dict(result.state_dict)
@@ -71,6 +77,7 @@ def test_training_uses_three_fixed_seeds_and_frozen_hyperparameters():
         "learning_rate": 0.01,
         "weight_decay": 0.0,
         "epochs": 2000,
+        "utility_loss": "binary_cross_entropy_soft_target",
         "feasibility_loss_weight": 0.25,
     }
     assert config["training_enabled"] is False

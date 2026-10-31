@@ -25,6 +25,7 @@
     "learning_rate": 0.01,
     "weight_decay": 0.0,
     "epochs": 2000,
+    "utility_loss": "binary_cross_entropy_soft_target",
     "feasibility_loss_weight": 0.25
   },
   "overfit_gate": {

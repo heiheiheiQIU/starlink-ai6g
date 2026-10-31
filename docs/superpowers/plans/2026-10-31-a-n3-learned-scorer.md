@@ -235,14 +235,14 @@ Expected: import fails because `training.train_policy` does not exist.
 
 - [ ] **Step 3: Implement deterministic model, weighted loss and metrics**
 
-Use CPU float32, `torch.use_deterministic_algorithms(True)`, and set Python/NumPy/Torch seeds. Each observation contributes total weight 1/N regardless of candidate count. Optimize:
+Use CPU float32, `torch.use_deterministic_algorithms(True)`, and set Python/NumPy/Torch seeds. Each observation contributes total weight 1/N regardless of candidate count. The approved soft-label correction optimizes:
 
 ```python
-loss = weighted_mse(utility, teacher_scores, row_weights)
+loss = weighted_binary_cross_entropy(utility, teacher_scores, row_weights)
 loss += 0.25 * weighted_bce(feasibility_logits, feasible, row_weights)
 ```
 
-Evaluate utility MSE, feasibility accuracy, total loss and teacher-optimal-set hit count per split. Add idle-only and linear least-squares diagnostic baselines without using test data for selection.
+Evaluate both utility BCE and utility MSE, feasibility accuracy, total loss and teacher-optimal-set hit count per split. Utility MSE remains the overfit gate. Add idle-only and linear least-squares diagnostic baselines without using test data for selection.
 
 - [ ] **Step 4: Implement stable export and CLI preflight**
 

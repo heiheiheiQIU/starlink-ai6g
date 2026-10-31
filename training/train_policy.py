@@ -91,14 +91,16 @@ def _tensors(dataset: FrozenPolicyDataset, split: str):
 def _loss(model, batch, feasibility_loss_weight: float):
     inputs, target_scores, target_feasible, weights = batch
     utility, feasibility_logits = model(inputs)
-    utility_mse = torch.sum(weights * torch.square(utility - target_scores))
+    utility_bce = torch.sum(
+        weights * F.binary_cross_entropy(utility, target_scores, reduction="none")
+    )
     feasibility_bce = torch.sum(
         weights
         * F.binary_cross_entropy_with_logits(
             feasibility_logits, target_feasible, reduction="none"
         )
     )
-    return utility_mse + feasibility_loss_weight * feasibility_bce
+    return utility_bce + feasibility_loss_weight * feasibility_bce
 
 
 def evaluate_model(
@@ -114,6 +116,9 @@ def evaluate_model(
         utility, feasibility_logits = model(inputs)
         feasibility_probability = torch.sigmoid(feasibility_logits)
         utility_mse = torch.sum(weights * torch.square(utility - target_scores)).item()
+        utility_bce = torch.sum(
+            weights * F.binary_cross_entropy(utility, target_scores, reduction="none")
+        ).item()
         feasibility_bce = torch.sum(
             weights
             * F.binary_cross_entropy_with_logits(
@@ -144,9 +149,10 @@ def evaluate_model(
         offset += count
     return {
         "utility_mse": utility_mse,
+        "utility_bce": utility_bce,
         "feasibility_bce": feasibility_bce,
         "feasibility_accuracy": feasibility_accuracy,
-        "total_loss": utility_mse + feasibility_loss_weight * feasibility_bce,
+        "total_loss": utility_bce + feasibility_loss_weight * feasibility_bce,
         "optimal_set_hits": hits,
         "observation_count": len(dataset.splits[split]),
     }
@@ -298,6 +304,8 @@ def run_training(config_path: Path, output: Path) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=True)
     dataset = load_frozen_dataset(config_path)
     optimizer = config["optimizer"]
+    if optimizer.get("utility_loss") != "binary_cross_entropy_soft_target":
+        raise ValueError("Unexpected utility loss")
     results = [
         train_seed(
             dataset,

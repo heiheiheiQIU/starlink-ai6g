@@ -82,7 +82,7 @@ For each candidate:
 
 - utility target is the teacher score;
 - feasibility target is the teacher `feasible` flag;
-- training loss is `MSE(utility, teacher_score) + 0.25 * BCEWithLogits(feasibility, feasible)`;
+- training loss is `BCE(utility, soft_teacher_score) + 0.25 * BCEWithLogits(feasibility, feasible)`; utility MSE remains the reported overfit metric and gate;
 - inference score is `utility * sigmoid(feasibility)` for unmasked candidates;
 - ties remain valid because training regresses the full score vector rather than inventing a single chosen action.
 
@@ -122,6 +122,8 @@ The small-sample learning check is:
 - no non-finite loss, parameter, normalized feature or score.
 
 Failure of this check stops delivery and triggers a design review; it must not be hidden by changing the split or using validation/test examples for training. Validation and test metrics are descriptive only and carry no generalization claim.
+
+Approved correction on 2026-10-31: the initial sigmoid-plus-MSE objective saturated the only `2/3` soft utility label at `1.0`, producing a reproducible MSE floor of approximately `0.00185185` for all three seeds. A single-variable diagnostic using soft-target BCE reduced train utility MSE to approximately `1.06e-5` without changing data, architecture, seeds, epochs or evaluation gates. The utility training objective is therefore BCE; utility MSE remains the acceptance metric.
 
 Report an idle-only and a linear baseline on the same frozen splits. These baselines are diagnostics, not additional policy claims.
 
