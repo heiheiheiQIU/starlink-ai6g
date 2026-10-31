@@ -215,6 +215,8 @@ def preflight(output: Path):
     sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
     source_hashes={p.relative_to(root).as_posix():sha(p) for p in files}
     try:
+        if not (root/'.git').exists():
+            raise OSError('Release root has no Git metadata')
         revision=subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True,stderr=subprocess.DEVNULL).strip()
     except (OSError,subprocess.CalledProcessError):
         revision='unversioned-source-sha256:'+hashlib.sha256(json.dumps(source_hashes,sort_keys=True).encode()).hexdigest()

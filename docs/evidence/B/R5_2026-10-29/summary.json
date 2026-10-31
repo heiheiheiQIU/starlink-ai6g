@@ -1,0 +1,19 @@
+{
+  "by_policy": {
+    "edf": {
+      "energy_violation_segments": 0,
+      "mean_weighted_on_time_rate": 0.4869152046783626,
+      "sample_count": 180,
+      "successful_payload_bytes": 835584
+    },
+    "value": {
+      "energy_violation_segments": 0,
+      "mean_weighted_on_time_rate": 0.553192007797271,
+      "sample_count": 180,
+      "successful_payload_bytes": 823296
+    }
+  },
+  "kind": "synthetic_rule_validation_not_AI_benchmark",
+  "policy_run_count": 360,
+  "trajectory_count": 180
+}

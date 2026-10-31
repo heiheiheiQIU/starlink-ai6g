@@ -33,6 +33,8 @@ class Pending:
     valid_ack: bool = False
     rx_start_s: float = 0.0
     rx_visible_end_s: float = 0.0
+    valid_data: bool = True
+    ack_loss_reason: str = 'ACK_LOST_WINDOW_CLOSED'
 
 
 @dataclass

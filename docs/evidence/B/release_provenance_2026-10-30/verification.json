@@ -1,0 +1,15 @@
+{
+  "source_commit": "921a24b",
+  "targeted": 24,
+  "full": 307,
+  "checks": {
+    "cli": {
+      "revision": "unversioned-source-sha256:2a554ed5b74ec789f80fa68a6e47f97cbee58dd983573689cbe65cdca730512b",
+      "artifacts_and_sources_verified": true
+    },
+    "teacher": {
+      "revision": "unversioned-source-sha256:32a53264d65d531fd63258b1979dd81981cecb1eb6e9c5acffb88f541aa68535",
+      "artifacts_and_sources_verified": true
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "candidate_revision": "a1375b117ff340a3e7432b17c20bf07d34a9f517",
+  "tests": 39,
+  "failures": 0,
+  "build_passed": true,
+  "node": "24.15.0",
+  "npm": "11.12.1",
+  "npm_ci": "failed: missing remote lockfile",
+  "install": "npm install --ignore-scripts --no-audit --no-fund",
+  "lockfile_origin": "B isolated review generated; not C committed lock",
+  "browser_visual_review": false
+}

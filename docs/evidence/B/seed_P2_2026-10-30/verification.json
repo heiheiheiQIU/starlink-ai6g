@@ -1,0 +1,11 @@
+{
+  "run_id": "run_dc41d9acbb0644a9a8d9e453ef571c52",
+  "source_revision": "35b37eaf4a03b631aa2ead5e026143c7a14ab0ba",
+  "seed": 7,
+  "status": "completed",
+  "child_seed_checked": true,
+  "zip_seed_checked": true,
+  "artifact_hashes_verified": true,
+  "request_unmodified": true,
+  "synthetic_only": true
+}

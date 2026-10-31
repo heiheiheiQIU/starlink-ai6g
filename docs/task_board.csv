@@ -1,15 +1,19 @@
 task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
-A-N1,A,not_started,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,等待B-N1类型,先评审合同并准备三样例测试
-A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界
-A-N3,A,blocked,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,,等待B-N2教师接口,先定义特征与mask测试
+B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,恢复3329284历史状态;A原回执见origin/feature/ai的R0_A_2026-10-28,仅限环境与冻结旧资产;不是新系统效果,保留本地配置与哈希恢复说明
+A-N1,A,accepted_with_notes,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,B主验正式synthetic适配器158通过;见H01_B_2026-10-30,,正式接入另做集成回归;A推进样本与切分交付
+A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,待健康数据冻结交付核验;H01已有限签收,按电池和同源窗口冻结划分;补F4许可与哈希
+A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,v2数据8f206b4已B有限签收;允许冻结train小样本管线训练,learned模型与规模化数据仍需交付,11/01过拟合及三种子训练;11/02交评分器权重和model_card
+A-N3-DATA,A,accepted_with_notes,,data/teacher/a_n3_20_v2/splits.json,B,20标签一致;20内容唯一;四维身份12/4/4无交集;130定向471全库通过,仅20条合成管线数据;扩样与模型效果另验,按A_N3_v2_data_B_2026-10-31冻结数据和来源组
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,干净集成进入main后推进B-N2最小环境
 B-N2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,首轮41项R2/全库219通过;待A复算,,A复算R2四项;C读事件;R3实现独立交接见B-R3
-B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,五接口与三类fixture已交;定向26全库293通过,待C复验,按H03复跑真实run与分页导出
-B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
-C-N1,C,in_progress,2026-10-28T22:00:00+08:00,frontend/,B,,,完成接管报告与两页信息架构
-C-N2,C,blocked,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,等待B-N1,先搭视觉状态外壳
+B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,恢复3329284历史记录;固定交付d4716bf,R2四项手算独立签收范围待明确,先取得接收人覆盖确认再按R2到R3集成
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,A指标accepted;C accepted_with_notes;C晚间审计已关闭seed透传P2,新B1复验入口08f00d5待C实际复跑;C实时HTTP范围限制保留,按B_delivery_2026-10-31领取固定提交复跑seed和ZIP
+B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,接入和回退方案已起草;扩样代表计时16次已做,等待A接口确认与冻结评分器;三策略请求合同待三方确认,收到模型实施五接口和三策略验证;正式18乘10另验
+C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
+C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,B字段27结构一致;前端39测试和构建通过,缺远端package-lock;跨机复现待收口,C补锁文件并npm ci复验;运行时权威校验仍在后端
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
-B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,C在68cc9ee回执对cac4b90修复accepted;待A新回执,,A复验cac4b90;三方对齐前不合main
-B-R4,B,ready_for_review,,docs/handoffs/H02_teacher_2026-10-29.md,A,H02首版20状态和单标签可复跑;全库293通过,待A复验,独立生成一条标签并核验状态和限制
+B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A/C回执对齐;B新复跑定向70全库248通过,R2独立交接回执缺失;尚未合main,先收口R2四项手算签收;再逐层集成
+B-R4,B,accepted_with_notes,,docs/handoffs/H02_teacher_2026-10-29.md,A,A的H02_A_2026-10-30签收已取得;本轮原候选293全库通过,限首版零损失教师;扩展优化器另验,等待R2前置门禁后逐层集成
+B-R5,B,ready_for_review,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,C共享信道审计及seed溯源修复复核已到;本轮309全库通过,A公平性和场景拆分专门回执未找到;新B1入口待C复跑,收口覆盖范围后集成;成熟优化器另行实现

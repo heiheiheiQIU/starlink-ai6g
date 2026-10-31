@@ -5,6 +5,7 @@ from backend.contracts import Action, Event, InFlight, SnapshotData, StepResult,
 from .energy import advance_energy, finite_number
 from .link import transmission_time
 from .protocol import Pending
+from .channel import uniform_at,loss_at
 
 
 def protocol_step(state, action: Action, dt_s: float) -> StepResult:
@@ -31,6 +32,10 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
         for p in sorted(due, key=lambda p: (p.time_s, order[p.kind])):
             key = (p.task_id, p.block_id)
             if p.kind == 'received':
+                if not p.valid_data:
+                    emit(p.time_s,'dropped',task=p.task_id,block=p.block_id,
+                         payload=p.payload_bytes,reason='DATA_LOST_CHANNEL')
+                    continue
                 duplicate = key in protocol.gateway
                 protocol.gateway.add(key)
                 emit(p.time_s, 'received', task=p.task_id, block=p.block_id,
@@ -38,7 +43,7 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
             elif p.kind == 'acked':
                 if not p.valid_ack:
                     emit(p.time_s, 'dropped', task=p.task_id, block=p.block_id, overhead=16,
-                         reason='ACK_LOST_WINDOW_CLOSED')
+                         reason=p.ack_loss_reason)
                 elif key not in protocol.confirmed:
                     protocol.confirmed.add(key)
                     if protocol.retry_required_key == key:
@@ -114,6 +119,11 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
                     control_start = control_end-128/params.control_bps
                     w = next((w for w in cfg.true_windows if w.start_s <= control_start < w.end_s), None)
                     valid = w is not None and ack < w.end_s
+                    data_ok = cfg.channel is None or uniform_at(cfg.channel,start,'data')>=loss_at(cfg.true_windows,start,command.mode)
+                    ack_reason='ACK_LOST_WINDOW_CLOSED'
+                    if valid and cfg.channel is not None and uniform_at(cfg.channel,ack,'ack')<cfg.channel.ack_loss_prob:
+                        valid=False
+                        ack_reason='ACK_LOST_CHANNEL'
                     visible_end = min(control_end, w.end_s) if w is not None else control_start
                     rx_start = control_start+params.ack_propagation_s
                     rx_visible_end = min(ack,w.end_s) if w is not None else rx_start
@@ -125,11 +135,12 @@ def protocol_step(state, action: Action, dt_s: float) -> StepResult:
                         payload_bytes=command.scheduled_bytes, mode=command.mode,
                         sent_at_s=start, timeout_at_s=timeout, retries=attempt-1)
                     protocol.pending.extend([
-                        Pending(receive, 'received', selected.task_id, block, command.scheduled_bytes, attempt),
-                        Pending(ack, 'acked', selected.task_id, block, command.scheduled_bytes, attempt,
-                                control_start, control_end, visible_end, valid,
-                                rx_start, max(rx_start,rx_visible_end)),
+                        Pending(receive, 'received', selected.task_id, block, command.scheduled_bytes, attempt,valid_data=data_ok),
                         Pending(timeout, 'timeout', selected.task_id, block, command.scheduled_bytes, attempt)])
+                    if data_ok:
+                        protocol.pending.append(Pending(ack, 'acked', selected.task_id, block, command.scheduled_bytes, attempt,
+                                control_start, control_end, visible_end, valid,
+                                rx_start, max(rx_start,rx_visible_end),ack_loss_reason=ack_reason))
                     tx_power = power
                     emit(start, 'sent', task=selected.task_id, block=block, payload=command.scheduled_bytes,
                          overhead=32, energy=power*air/3600)

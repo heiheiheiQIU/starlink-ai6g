@@ -16,6 +16,37 @@ def request(policies=None):
     return dict(schema_version='1.0',config=run_config(actions=[]),policy_ids=policies or ['edf','value'],seed=7)
 
 
+def test_internal_seed_conflict_rejected(tmp_path):
+    payload=request(['edf']);payload['config']['seed']=8
+    with TestClient(create_app(tmp_path/'runs')) as client:
+        assert client.post('/runs',json=payload).status_code==422
+
+
+def test_direct_seed_metadata_preserves_deterministic_physics(tmp_path):
+    from backend.cli import RunConfig
+    from backend.policies.runner import run_policy
+    from pydantic import ValidationError
+    from backend.simulator.channel import ChannelConfig
+    config=run_config(actions=[])
+    for invalid in (-1,1.5,True):
+        with pytest.raises(ValidationError):RunConfig.model_validate(dict(config,seed=invalid))
+    config['scenario']['channel']=ChannelConfig(seed=7).model_dump()
+    with pytest.raises(ValidationError):RunConfig.model_validate(dict(config,seed=8))
+    config['scenario'].pop('channel')
+    outcomes=[]
+    for seed in (0,7):
+        folder=tmp_path/str(seed)
+        result=run_policy(dict(config,seed=seed),folder,policy_id='edf')
+        assert result['seed']==seed
+        assert json.loads((folder/'manifest.json').read_text())['seed']==seed
+        assert json.loads((folder/'config.json').read_text())['seed']==seed
+        outcomes.append(result)
+    assert outcomes[0]['config_hash']!=outcomes[1]['config_hash']
+    assert outcomes[0]['input_hash']==outcomes[1]['input_hash']
+    for key in ('weighted_on_time_rate','success_payload_bytes','goodput_bps','joule_per_success_bit'):
+        assert outcomes[0]['by_policy'][0][key]==outcomes[1]['by_policy'][0][key]
+
+
 def wait(client,identity):
     for _ in range(300):
         response=client.get('/runs/'+identity)
@@ -60,6 +91,9 @@ def test_real_comparison_paging_export_and_refresh(tmp_path):
             assert 'results.json' in package.namelist()
             assert not any('private' in n or '..' in n or n.startswith('/') for n in package.namelist())
             assert json.loads(package.read('results.json'))==result
+            for policy in ('edf','value'):
+                for artifact in ('config.json','results.json','manifest.json'):
+                    assert json.loads(package.read(f'{policy}/{artifact}'))['seed']==7
         again=client.post('/runs',json=request()).json()['run_id']
         assert again!=identity and wait(client,again)['status']=='completed'
         repeated=client.get('/runs/'+again+'/results').json()
@@ -188,3 +222,31 @@ def test_restart_recovers_directory_created_before_first_status(tmp_path):
         status=client.get('/runs/'+identity).json()
         assert status['status']=='failed'
         assert status['error']['details']['reason']=='INCOMPLETE_RUN_RECORD'
+
+
+def test_api_channel_seed_matches_request_seed(tmp_path):
+    from backend.simulator.channel import ChannelConfig
+    payload=request(['edf']);payload['config']['scenario']['channel']=ChannelConfig(seed=8).model_dump()
+    with TestClient(create_app(tmp_path/'runs')) as client:
+        assert client.post('/runs',json=payload).status_code==422
+        payload['config']['scenario']['channel']['seed']=7
+        created=client.post('/runs',json=payload)
+        assert created.status_code==202
+        identity=created.json()['run_id']
+        assert wait(client,identity)['status']=='completed'
+        assert client.get('/runs/'+identity+'/results').json()['seed']==7
+
+
+def test_status_read_retries_windows_atomic_replace_lock(tmp_path,monkeypatch):
+    from pathlib import Path
+    from backend.api.worker import write_status
+    folder=tmp_path/('run_'+'d'*32);folder.mkdir();write_status(folder,'completed',progress=1.0)
+    with TestClient(create_app(tmp_path)) as client:
+        original=Path.read_text;blocked=[]
+        def locked_once(path,*args,**kwargs):
+            if path.name=='status.json' and not blocked:
+                blocked.append(True);raise PermissionError('replace sharing violation')
+            return original(path,*args,**kwargs)
+        monkeypatch.setattr(Path,'read_text',locked_once)
+        assert client.get('/runs/'+folder.name).json()['status']=='completed'
+        assert blocked

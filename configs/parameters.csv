@@ -25,3 +25,9 @@ control_bps,1024,bit/s,synthetic reserved ACK channel,128/slot or greater,R3 opt
 ack_rx_W,8,W,synthetic incremental active reception beyond background,0..16,R3 opt-in
 health_soc_est,0.5,fraction,synthetic explicit observation; independent of true E,0..1,R2
 health_soc_lower,0.45,fraction,synthetic scenario bound; no probabilistic guarantee,0..soc_est,R2
+channel_step_s,0.25,s,synthetic block-start time-indexed process; not measured,0.1..1,R5 opt-in
+channel_data_loss_mild,0.05/0.12,probability,synthetic robust/fast; not measured,not calibrated,R5 matrix
+channel_data_loss_strong,0.2/0.4,probability,synthetic robust/fast; not measured,not calibrated,R5 matrix
+channel_ack_loss,0.02/0.12,probability,synthetic mild/strong; not measured,not calibrated,R5 matrix
+matrix_initial_energy,0.8/1.2/10,Wh,synthetic low/medium/ample; reserve0.5; not calibrated,not tuned,R5 matrix
+matrix_evaluation_end,24,s,synthetic validation horizon,not tuned,R5 matrix

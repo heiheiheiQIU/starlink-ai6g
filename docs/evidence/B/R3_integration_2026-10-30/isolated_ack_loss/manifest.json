@@ -1,0 +1,35 @@
+{
+  "artifacts_sha256": {
+    "config.json": "a1c631c3ee057b0aeb05615d4e2c559fc9505dfd010b9aaf089f078a29dc0bc4",
+    "energy_ledger.json": "3c68693f1ac65d488176c761fd56da26cfa1a0e0a6819d1080febd8f9b7487d8",
+    "events.jsonl": "aeb28a492376460ceb7c86654f3f2d58285fab51eea0bf822417d7041491ec80",
+    "execution.log": "7dbab966d76c310f52d010e1c686ef1964a4c9bed32dd09988a91cda8ef43e3e",
+    "results.json": "40993302146fa5a4a7f1887163944f503fa52298d96c68cf0f31d967f5c5995f"
+  },
+  "code_revision": "unversioned-source-sha256:9240f96a7c1169b887954c6f83d421420e90c8be9165dd04fa642002ca4247ee",
+  "config_hash": "a1c631c3ee057b0aeb05615d4e2c559fc9505dfd010b9aaf089f078a29dc0bc4",
+  "input_hash": "77b07a1014d3798a8b74f955b273d8dd7f7d6f100aa882133168c531a7577c2b",
+  "is_policy_benchmark": false,
+  "is_real_satellite_measurement": false,
+  "kind": "manual_validation",
+  "model_hash": null,
+  "policy_id": "manual",
+  "policy_version": "manual-r3-v1",
+  "protocol_stage": "receive_ack_retry_dedup",
+  "run_id": "r3_6bd538f70c5a4c0e883aa1d24e1974d7",
+  "source": "synthetic",
+  "source_sha256": {
+    "backend/cli.py": "a8570ee749a42abf92c27563a5998c7175e3e4bf85abb9635d009f775481fcb3",
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/evaluation.py": "2805b3cd7af8fff39cde8ad9183d7fd8efe1e6eac3337a2565697db5059ea459",
+    "backend/simulator/__init__.py": "b94dc8d98b60b9219d00698c6622023dc45e6853436edbb0ae2c344c9492d59f",
+    "backend/simulator/energy.py": "b1afe137f9284647face8f3cfc86d4594d7843191ae5f2c1ccc630537d64bef3",
+    "backend/simulator/engine.py": "61dbbcbad90dfdf192541befff1f9f0e74c6872096b3c1361066f36e1be02731",
+    "backend/simulator/link.py": "90556f6431f90423b888f9060c826f638dc2086445e331909ff9d95ff1e34b49",
+    "backend/simulator/protocol.py": "863501f5531ce72da0d07b0b8543845e09c2977f3f4e80fcf21a709044db579f",
+    "backend/simulator/queue.py": "059099298309f5c34a8051e198a6ec62729537118b32d7a8409d40a0044ee852",
+    "backend/simulator/r3_engine.py": "b2d56d490c4880ebc2e3cd44b99e66a1270e939cd4086c36eb279acb9947f90c"
+  },
+  "status_hash_note": "status written last; manifest and status excluded from self-referential hashes",
+  "trace_hash": "77b07a1014d3798a8b74f955b273d8dd7f7d6f100aa882133168c531a7577c2b"
+}
