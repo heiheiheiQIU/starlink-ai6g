@@ -12,6 +12,10 @@ __pycache__/
 *.npz
 *.zip
 models/
+!artifacts/
+!artifacts/models/
+!artifacts/models/a_n3_policy_v1/
+!artifacts/models/a_n3_policy_v1/weights.npz
 交付包/
 
 # 实验与运行产物

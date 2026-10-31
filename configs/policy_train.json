@@ -15,5 +15,22 @@
   "eligible_solver_status": "OPTIMAL",
   "required_gap": 0.0,
   "normalization": "deferred-until-training",
+  "training_seeds": [20261031, 20261032, 20261033],
+  "model": {
+    "input_width": 23,
+    "hidden_widths": [32, 16]
+  },
+  "optimizer": {
+    "name": "Adam",
+    "learning_rate": 0.01,
+    "weight_decay": 0.0,
+    "epochs": 2000,
+    "feasibility_loss_weight": 0.25
+  },
+  "overfit_gate": {
+    "max_train_utility_mse": 0.001,
+    "required_train_optimal_set_hits": 12
+  },
+  "artifact_output": "artifacts/models/a_n3_policy_v1",
   "training_enabled": false
 }
