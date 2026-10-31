@@ -1,0 +1,10 @@
+{
+  "schema_version": "learned-policy-config-v1",
+  "enabled": false,
+  "model_version": "a-n3-mlp-v1",
+  "feature_schema_version": "policy-features-v1",
+  "package_dir": "artifacts/models/a_n3_policy_v1",
+  "weights_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "normalization_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "masked_score": -1.0
+}
