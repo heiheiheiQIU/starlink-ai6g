@@ -1673,6 +1673,32 @@ button {
   box-shadow: 0 8px 28px rgba(99, 102, 241, 0.45);
   cursor: pointer;
   font-size: 22px;
+  animation: orbFloat 3.4s ease-in-out infinite;
+}
+
+@keyframes orbFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* 失效/新建横幅与页面切换过渡（reduced-motion 由全局媒体查询统一降级） */
+.stale-banner,
+.created-banner {
+  animation: bannerIn 320ms ease both;
+}
+
+@keyframes bannerIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.console-page {
+  animation: pageIn 300ms ease both;
+}
+
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .floating-panel {
