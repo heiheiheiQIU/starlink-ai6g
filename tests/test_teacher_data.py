@@ -1,5 +1,6 @@
 """Independent teacher labels over the frozen public H02 observations."""
 
+import copy
 import json
 import math
 import hashlib
@@ -67,6 +68,9 @@ def test_generate_record_recomputes_first_h02_label():
     assert record["teacher_version"] == "bounded-forecast-r4-v1"
     assert record["teacher_config_sha256"] == hashlib.sha256(TEACHER_CONFIG.read_bytes()).hexdigest()
     assert record["source_observation_sha256"] == sha256_text(before)
+    assert record["source_group_id"] == source["scenario_id"]
+    assert record["observation_content_sha256"] == module.observation_content_sha256(
+        source["observation"])
     assert record["source_revision"] == SOURCE_REVISION
     assert math.isfinite(record["elapsed_ms"])
 
@@ -76,10 +80,11 @@ def test_canonical_utf8_hash_and_stable_field_selection():
     assert sha256_text("中文") == hashlib.sha256("中文".encode("utf-8")).hexdigest()
     record = generate(first_source())
     expected_fields = (
-        "sample_id", "scenario_id", "state_id", "source_revision",
+        "sample_id", "scenario_id", "source_group_id", "state_id", "source_revision",
         "source_observation_sha256", "observation", "teacher_version",
         "teacher_config_sha256", "candidate_scores", "solver_status",
         "gap", "diagnostics", "label_eligible", "exclusion_reasons",
+        "observation_content_sha256",
     )
     expected = sha256_text(canonical_json({key: record[key] for key in expected_fields}))
     record.update(elapsed_ms=9999.0, generated_at="tomorrow", output_path="elsewhere",
@@ -157,7 +162,23 @@ def test_non_optimal_real_result_is_retained_and_excluded():
 SOURCE = ROOT / "docs/evidence/B/H02_2026-10-29/samples.jsonl"
 
 
-def batch(output, source=SOURCE, **kwargs):
+def unique_source_rows():
+    rows = read_rows(SOURCE)
+    for index, row in enumerate(rows):
+        row["source_group_id"] = f"test-source-{index:02d}"
+        row["observation"]["cache_bytes"] += index
+    return rows
+
+
+def write_unique_source(path):
+    path.write_text("\n".join(canonical_json(row) for row in unique_source_rows()) + "\n",
+                    encoding="utf-8")
+    return path
+
+
+def batch(output, source=None, **kwargs):
+    if source is None:
+        source = write_unique_source(output.parent / "unique-source.jsonl")
     options = dict(source_path=source, output_dir=output, source_revision=SOURCE_REVISION,
                    teacher_config_path=TEACHER_CONFIG, budget_ms=1000, expected_count=20)
     options.update(kwargs)
@@ -174,6 +195,32 @@ def cli_args(source, output, revision=SOURCE_REVISION):
             "--expected-count", "20"]
 
 
+def test_observation_content_identity_ignores_only_execution_ids():
+    left = first_source()["observation"]
+    right = copy.deepcopy(left)
+    right["run_id"] = "another-run"
+    right["policy_id"] = "another-policy"
+    assert module.observation_content_sha256(left) == module.observation_content_sha256(right)
+    right["cache_bytes"] += 1
+    assert module.observation_content_sha256(left) != module.observation_content_sha256(right)
+
+
+def test_batch_rejects_duplicate_observation_content_before_solving(tmp_path, monkeypatch):
+    rows = unique_source_rows()
+    rows[-1]["observation"] = copy.deepcopy(rows[0]["observation"])
+    rows[-1]["observation"]["run_id"] = "duplicate-content-run"
+    rows[-1]["observation"]["policy_id"] = "duplicate-content-policy"
+    source = tmp_path / "duplicate-content.jsonl"
+    source.write_text("\n".join(canonical_json(row) for row in rows) + "\n", encoding="utf-8")
+    calls = []
+    monkeypatch.setattr(module, "solve_teacher", lambda *args, **kwargs: calls.append(args))
+    with pytest.raises(TeacherDataError) as error:
+        batch(tmp_path / "dataset", source)
+    assert error.value.code == "DUPLICATE_OBSERVATION_CONTENT"
+    assert calls == []
+    assert not (tmp_path / "dataset").exists()
+
+
 def test_batch_consumes_twenty_real_observations_and_manifest(tmp_path, monkeypatch):
     calls = []
     real_solver = module.solve_teacher
@@ -185,11 +232,11 @@ def test_batch_consumes_twenty_real_observations_and_manifest(tmp_path, monkeypa
     monkeypatch.setattr(module, "solve_teacher", spy)
     output = tmp_path / "dataset"
     source = tmp_path / "reversed.jsonl"
-    source.write_text("\n".join(canonical_json(row) for row in reversed(read_rows(SOURCE))) + "\n",
+    source.write_text("\n".join(canonical_json(row) for row in reversed(unique_source_rows())) + "\n",
                       encoding="utf-8")
     summary = batch(output, source)
     rows = read_rows(output / "samples.jsonl")
-    sources = read_rows(SOURCE)
+    sources = unique_source_rows()
     assert len(sources) == len(rows) == len(calls) == 20
     assert {r["sample_id"] for r in rows} == {r["sample_id"] for r in sources}
     assert {r["scenario_id"] for r in rows} == {r["observation"]["run_id"] for r in sources}
@@ -227,7 +274,7 @@ def test_batch_consumes_twenty_real_observations_and_manifest(tmp_path, monkeypa
     ("revision", "INVALID_SOURCE_REVISION"), ("leak", "LEAK_FIELD"),
 ])
 def test_batch_rejects_bad_inputs_before_solving_or_publication(tmp_path, monkeypatch, defect, code):
-    rows = read_rows(SOURCE)
+    rows = unique_source_rows()
     output = tmp_path / "dataset"
     options = {}
     if defect == "sample":
@@ -287,7 +334,7 @@ def test_batch_retains_nonoptimal_and_exception_evidence(tmp_path, monkeypatch):
         "code": "SAMPLE_GENERATION_FAILED", "exception_type": "RuntimeError",
         "message": "Unexpected sample generation failure",
     }
-    assert rows[1]["observation"] == sorted(read_rows(SOURCE), key=lambda r: (
+    assert rows[1]["observation"] == sorted(unique_source_rows(), key=lambda r: (
         r["observation"]["run_id"], r["sample_id"]))[1]["observation"]
 
 
@@ -352,12 +399,13 @@ def test_generate_record_parses_and_hashes_one_config_snapshot(tmp_path, monkeyp
 
 def test_cli_ready_and_controlled_invalid_revision(tmp_path):
     output = tmp_path / "dataset"
+    source = write_unique_source(tmp_path / "cli-source.jsonl")
     result = subprocess.run([sys.executable, "-m", "training.generate_teacher_data",
-                             *cli_args(SOURCE, output)], cwd=ROOT, capture_output=True, text=True)
+                             *cli_args(source, output)], cwd=ROOT, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
     assert (output / "manifest.json").exists()
     invalid = subprocess.run([sys.executable, "-m", "training.generate_teacher_data",
-                              *cli_args(SOURCE, tmp_path / "bad", "HEAD")], cwd=ROOT,
+                              *cli_args(source, tmp_path / "bad", "HEAD")], cwd=ROOT,
                              capture_output=True, text=True)
     assert invalid.returncode != 0
     assert "INVALID_SOURCE_REVISION" in invalid.stderr and "Traceback" not in invalid.stderr
@@ -365,7 +413,8 @@ def test_cli_ready_and_controlled_invalid_revision(tmp_path):
 
 
 def test_cli_blocked_writes_evidence_and_exits_nonzero(tmp_path, monkeypatch):
-    monkeypatch.setattr(sys, "argv", ["generate_teacher_data", *cli_args(SOURCE, tmp_path / "blocked")])
+    source = write_unique_source(tmp_path / "blocked-source.jsonl")
+    monkeypatch.setattr(sys, "argv", ["generate_teacher_data", *cli_args(source, tmp_path / "blocked")])
     real_solver = module.solve_teacher
 
     def limited(observation, **kwargs):
