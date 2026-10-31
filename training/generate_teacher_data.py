@@ -19,13 +19,14 @@ from backend.policies.teacher import TeacherConfig, solve_teacher
 
 
 LABEL_CONTENT_FIELDS = (
-    "sample_id", "scenario_id", "source_group_id", "state_id", "source_revision",
+    "dataset_version", "sample_id", "scenario_id", "source_group_id", "state_id", "source_revision",
     "source_observation_sha256", "observation", "teacher_version",
     "teacher_config_sha256", "candidate_scores", "solver_status",
     "gap", "diagnostics", "label_eligible", "exclusion_reasons",
     "observation_content_sha256",
 )
 EXECUTION_ID_FIELDS = frozenset({"run_id", "policy_id"})
+DATASET_VERSION = "a-n3-teacher-20-v2"
 LEAK_FIELDS = {
     "true_capacity", "capacity_true_wh", "future_arrivals",
     "actual_future_loss", "evaluation_truth", "energy_true_wh", "soc_true",
@@ -140,7 +141,7 @@ def generate_record(
     eligible = result.solver_status == "OPTIMAL" and result.gap == 0.0
     record: dict[str, object] = {
         "schema_version": "1.0",
-        "dataset_version": "a-n3-teacher-20-v1",
+        "dataset_version": DATASET_VERSION,
         "sample_id": sample_id,
         "scenario_id": observation.run_id,
         "source_group_id": group_id,
@@ -246,7 +247,7 @@ def generate_teacher_dataset(
                                "message": "Unexpected sample generation failure",
                            })
                 record = {
-                    "schema_version": "1.0", "dataset_version": "a-n3-teacher-20-v1",
+                    "schema_version": "1.0", "dataset_version": DATASET_VERSION,
                     "sample_id": source["sample_id"], "state_id": source["sample_id"],
                     "scenario_id": source["observation"]["run_id"],
                     "source_group_id": _source_group_id(source),
@@ -275,6 +276,7 @@ def generate_teacher_dataset(
                    "--teacher-config", config_command, "--budget-ms", str(budget_ms),
                    "--expected-count", str(expected_count)]
         manifest = {
+            "dataset_version": DATASET_VERSION,
             "source_revision": source_revision,
             "source_sha256": hashlib.sha256(source_bytes).hexdigest(),
             "teacher_config_sha256": config_sha256, "teacher_version": config.version,

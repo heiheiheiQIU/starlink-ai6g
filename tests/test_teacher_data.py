@@ -48,6 +48,7 @@ def test_generate_record_recomputes_first_h02_label():
     before = canonical_json(source["observation"])
     record = generate(source)
     assert record["sample_id"] == source["sample_id"]
+    assert record["dataset_version"] == "a-n3-teacher-20-v2"
     assert record["scenario_id"] == source["observation"]["run_id"]
     assert record["state_id"] == source["sample_id"]
     assert record["solver_status"] == "OPTIMAL"
@@ -80,7 +81,7 @@ def test_canonical_utf8_hash_and_stable_field_selection():
     assert sha256_text("中文") == hashlib.sha256("中文".encode("utf-8")).hexdigest()
     record = generate(first_source())
     expected_fields = (
-        "sample_id", "scenario_id", "source_group_id", "state_id", "source_revision",
+        "dataset_version", "sample_id", "scenario_id", "source_group_id", "state_id", "source_revision",
         "source_observation_sha256", "observation", "teacher_version",
         "teacher_config_sha256", "candidate_scores", "solver_status",
         "gap", "diagnostics", "label_eligible", "exclusion_reasons",
@@ -253,6 +254,7 @@ def test_batch_consumes_twenty_real_observations_and_manifest(tmp_path, monkeypa
     assert summary["solver_status_counts"] == {"OPTIMAL": 20}
     manifest = json.loads((output / "manifest.json").read_text(encoding="utf-8"))
     assert manifest["source_revision"] == SOURCE_REVISION
+    assert manifest["dataset_version"] == "a-n3-teacher-20-v2"
     assert manifest["source_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
     assert manifest["teacher_config_sha256"] == hashlib.sha256(TEACHER_CONFIG.read_bytes()).hexdigest()
     assert manifest["teacher_version"] == "bounded-forecast-r4-v1"

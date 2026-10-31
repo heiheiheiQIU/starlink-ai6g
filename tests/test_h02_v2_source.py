@@ -1,12 +1,20 @@
+import hashlib
 import json
 from pathlib import Path
+import tempfile
 
 import pytest
 
 from backend.contracts import Observation, validate_teacher_result
 from backend.policies.teacher import solve_teacher
 from training.build_h02_v2_source import build_source_rows, write_source
-from training.generate_teacher_data import canonical_json, observation_content_sha256
+from training.generate_teacher_data import (
+    canonical_json,
+    generate_teacher_dataset,
+    label_content_sha256,
+    observation_content_sha256,
+)
+from training.splits import build_split_manifest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,3 +69,52 @@ def test_source_writer_is_canonical_idempotent_and_immutable(tmp_path):
     with pytest.raises(ValueError, match="Refusing to overwrite differing source"):
         write_source(target)
     assert target.read_text(encoding="utf-8") == "different\n"
+
+
+def test_frozen_v2_artifacts_regenerate_stable_labels_and_split_membership():
+    source = ROOT / "data/teacher/sources/a_n3_20_v2.jsonl"
+    frozen = ROOT / "data/teacher/a_n3_20_v2"
+    frozen_manifest = json.loads((frozen / "manifest.json").read_text(encoding="utf-8"))
+    frozen_summary = json.loads((frozen / "summary.json").read_text(encoding="utf-8"))
+    frozen_splits = json.loads((frozen / "splits.json").read_text(encoding="utf-8"))
+    frozen_rows = {
+        row["sample_id"]: row
+        for row in (json.loads(line) for line in (frozen / "samples.jsonl").read_text(
+            encoding="utf-8").splitlines())
+    }
+    assert frozen_manifest["source_sha256"] == hashlib.sha256(source.read_bytes()).hexdigest()
+    for name in ("samples.jsonl", "summary.json"):
+        assert frozen_manifest["output_sha256"][name] == hashlib.sha256(
+            (frozen / name).read_bytes()).hexdigest()
+
+    runs = ROOT / "runs"
+    runs.mkdir(exist_ok=True)
+    with tempfile.TemporaryDirectory(prefix="h02_v2_regeneration_", dir=runs) as directory:
+        regenerated = Path(directory) / "dataset"
+        summary = generate_teacher_dataset(
+            source_path=source,
+            output_dir=regenerated,
+            source_revision=frozen_manifest["source_revision"],
+            teacher_config_path=ROOT / "configs/teacher.json",
+            budget_ms=1000,
+            expected_count=20,
+        )
+        split = build_split_manifest(
+            regenerated / "samples.jsonl",
+            regenerated / "splits.json",
+            split_seed=20261031,
+            split_counts=(12, 4, 4),
+        )
+        regenerated_rows = {
+            row["sample_id"]: row
+            for row in (json.loads(line) for line in (regenerated / "samples.jsonl").read_text(
+                encoding="utf-8").splitlines())
+        }
+
+    assert summary == frozen_summary
+    assert regenerated_rows.keys() == frozen_rows.keys()
+    for sample_id, row in regenerated_rows.items():
+        assert row["label_content_sha256"] == label_content_sha256(row)
+        assert row["label_content_sha256"] == frozen_rows[sample_id]["label_content_sha256"]
+    assert split["splits"] == frozen_splits["splits"]
+    assert split["intersections"] == frozen_splits["intersections"]
