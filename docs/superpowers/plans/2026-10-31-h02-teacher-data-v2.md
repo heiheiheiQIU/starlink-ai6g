@@ -217,7 +217,7 @@ Expected: import failure because `training.build_h02_v2_source` does not exist.
 - [ ] **Step 3: Implement the deterministic 20-row matrix**
 
 Build Observations from the frozen public H02 shape while varying multiple
-public dimensions within support limits: one/two/three visible tasks, deadlines
+public dimensions within support limits: one/two visible tasks, deadlines
 2-12 seconds, payloads 1024-2048 bytes, priorities 1-5, immediate/delayed
 windows, robust rates 4096-12288 bps, fast rates 8192-24576 bps, and public
 `soc_lower` values 0.05-0.80 with matching `energy_lower_Wh`. Use stable IDs:

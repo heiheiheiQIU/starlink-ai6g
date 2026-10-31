@@ -27,6 +27,8 @@ def test_source_matrix_has_twenty_independent_supported_observations():
         content_hashes.add(observation_content_sha256(row["observation"]))
         assert observation.policy_id == "teacher"
         assert observation.inflight is None
+        assert 1 <= len(observation.tasks) <= 2
+        assert sum(task.payload_bytes for task in observation.tasks) <= 4096
         assert observation.health.rul_est is None
         assert "RUL_UNAVAILABLE" in observation.health.reason_codes
         assert all(window.source == "synthetic" for window in observation.forecast_windows)

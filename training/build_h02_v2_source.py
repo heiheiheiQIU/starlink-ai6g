@@ -16,7 +16,7 @@ FORECAST_VERSION = "h02-v2-synthetic-v1"
 
 
 def _build_observation(index: int) -> dict[str, object]:
-    task_count = 1 + index % 3
+    task_count = 1 + index % 2
     tasks = []
     for task_index in range(task_count):
         payload_bytes = 1024 * (1 + (index + task_index) % 2)
