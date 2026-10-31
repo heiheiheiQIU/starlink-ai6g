@@ -322,10 +322,10 @@ the old v1 candidate remains historical `changes_requested` evidence.
 
 - [ ] **Step 4: Update only the A-N3 task-board row**
 
-Keep A-N3 at `ready_for_review` for the teacher-data stage, point its artifact
-to the v2 handoff/data directory, and state that learned-policy implementation
-is still not complete. Do not alter B/C-owned interfaces or claim A-N3 overall
-acceptance.
+Keep overall A-N3 at `in_progress`, point its artifact to the v2 handoff/data
+directory, and record that only the teacher-data stage is ready for B review;
+learned-policy implementation is still not complete. Do not alter B/C-owned
+interfaces or claim A-N3 overall acceptance.
 
 - [ ] **Step 5: Run repository integrity checks**
 
