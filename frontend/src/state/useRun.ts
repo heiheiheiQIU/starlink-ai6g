@@ -23,7 +23,8 @@ export type RunSource =
       error: string | null
     }
 
-export const DEFAULT_BASE_URL = 'http://127.0.0.1:8000'
+/** 空串 = 同源（Vite 代理到实验服务）；需要直连时用 VITE_API_BASE_URL 覆盖。 */
+export const DEFAULT_BASE_URL = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? ''
 export const RUN_ID_STORAGE_KEY = 'xingdi.runId'
 
 export interface UseRunOptions {
