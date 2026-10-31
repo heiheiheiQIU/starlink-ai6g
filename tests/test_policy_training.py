@@ -9,6 +9,7 @@ import torch
 
 from training.policy_dataset import load_frozen_dataset
 from training.train_policy import (
+    linear_baseline,
     export_state_dict,
     train_seed,
     write_deterministic_npz,
@@ -81,3 +82,14 @@ def test_training_uses_three_fixed_seeds_and_frozen_hyperparameters():
         "feasibility_loss_weight": 0.25,
     }
     assert config["training_enabled"] is False
+
+
+def test_linear_baseline_is_fit_on_train_and_reports_all_splits():
+    metrics = linear_baseline(load_frozen_dataset())
+    assert set(metrics) == {"train", "validation", "test"}
+    assert all(value["observation_count"] in {12, 4} for value in metrics.values())
+    assert all(np.isfinite(value["utility_mse"]) for value in metrics.values())
+    assert all(
+        0 <= value["optimal_set_hits"] <= value["observation_count"]
+        for value in metrics.values()
+    )

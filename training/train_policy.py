@@ -266,6 +266,63 @@ def _idle_baseline(dataset: FrozenPolicyDataset, split: str):
     return {"utility_mse": squared / len(rows), "optimal_set_hits": hits}
 
 
+def linear_baseline(dataset: FrozenPolicyDataset) -> dict[str, dict[str, float | int]]:
+    train_inputs = np.asarray(
+        [
+            row
+            for example in dataset.splits["train"]
+            for row in normalise_example(example, dataset.normalization)
+        ],
+        dtype=np.float64,
+    )
+    train_targets = np.asarray(
+        [score for example in dataset.splits["train"] for score in example.target_scores],
+        dtype=np.float64,
+    )
+    design = np.concatenate(
+        (train_inputs, np.ones((len(train_inputs), 1), dtype=np.float64)), axis=1
+    )
+    coefficients = np.linalg.lstsq(design, train_targets, rcond=None)[0]
+    result = {}
+    for split, examples in dataset.splits.items():
+        squared = 0.0
+        hits = 0
+        for example in examples:
+            inputs = np.asarray(
+                normalise_example(example, dataset.normalization), dtype=np.float64
+            )
+            values = np.clip(
+                np.concatenate(
+                    (inputs, np.ones((len(inputs), 1), dtype=np.float64)), axis=1
+                )
+                @ coefficients,
+                0.0,
+                1.0,
+            )
+            squared += float(
+                np.mean(np.square(values - np.asarray(example.target_scores)))
+            )
+            values[~np.asarray(example.candidate_mask, dtype=bool)] = -1.0
+            chosen = int(np.argmax(values))
+            best = max(
+                score
+                for score, possible in zip(
+                    example.target_scores, example.target_feasible, strict=True
+                )
+                if possible
+            )
+            hits += int(
+                example.target_feasible[chosen]
+                and example.target_scores[chosen] == best
+            )
+        result[split] = {
+            "utility_mse": squared / len(examples),
+            "optimal_set_hits": hits,
+            "observation_count": len(examples),
+        }
+    return result
+
+
 def _model_card(summary: dict[str, object], weights_sha: str, normalization_sha: str) -> str:
     selected = summary["selected_seed"]
     train = summary["seeds"][str(selected)]["metrics"]["train"]
@@ -366,6 +423,7 @@ def run_training(config_path: Path, output: Path) -> dict[str, object]:
             split: _idle_baseline(dataset, split)
             for split in ("train", "validation", "test")
         },
+        "linear_baseline": linear_baseline(dataset),
         "limitations": (
             "synthetic small-sample validation; no generalization or policy-superiority claim"
         ),
