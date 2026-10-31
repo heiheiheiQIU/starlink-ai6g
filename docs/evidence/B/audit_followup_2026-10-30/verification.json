@@ -1,0 +1,40 @@
+{
+  "base_revision": "d68d3cbd2f95c24ac2f892b6fc54b3246157ddc4",
+  "working_tree_changes_tested": true,
+  "restored_r0_sha256": {
+    "docs/evidence/B/R0_2026-10-28/assets-audit.json": "4a0742682e8a0c7264e2a9218251927d06a4563b428b4848681feed0a5b689b4",
+    "docs/evidence/B/R0_2026-10-28/baseline-results.json": "c102311f7694df49ca993f64fedbe0b272b35c40a5cc0dcd23a54a2e23e6bd9f",
+    "docs/evidence/B/R0_2026-10-28/environment.json": "8b96194a117aadc85351c447cc0bbec56627cc18e3205249654599f4ad947136",
+    "docs/evidence/B/R0_2026-10-28/installed-wheels.json": "3025f65eae78574617aa5165a7710cb3885efd3a84b5edb3ef87cafe0663c933",
+    "docs/evidence/B/R0_2026-10-28/local-evidence-index.csv": "fda3ae3dc085b52a67e4d4bb3704ff1ca1329d2c3b66f3245b1631ab0859c069",
+    "docs/evidence/B/R0_2026-10-28/README.md": "b60fd75de53eed37f50ab512805c42e932e2369f37eeda0561bb3362da6f2c68",
+    "docs/evidence/B/R0_2026-10-28/requirements.freeze.txt": "a99875ff4b878dbeace4f0180a9bfc16eb9b39b8358b7cf20edebfec54b3c788"
+  },
+  "legacy_seed_script_unchanged": true,
+  "current_files_sha256": {
+    ".gitattributes": "6fe715a4f8e74b8dd33ac6593af53b42d3880cee0bd7c3e5fbe2aaf86352d1a5",
+    "scripts/verify_seed_p2.py": "80942c54f3d4a1a881b7a00c597819c270a64fb726a9b2ad8905aafe207d1e84",
+    "tests/test_seed_reproduction.py": "70e90d9bef7857afe706966d643039005365f479e356f6cdccbb778e75edcee0",
+    "docs/task_board.csv": "0af111b152169c256da24eacdca0a955642424bab779fc8b7108bfa79359d602",
+    "docs/handoffs/B_audit_followup_2026-10-30.md": "ed3a17d634aa524c78cc03eaaaa39f47865d7f415e5d36a7d059ecc1f5521e5f",
+    "docs/handoffs/B_training_scale_interface_2026-10-30.md": "30fd673d3c0549ea22e4c3bb04d3389e0b37298381bd32841ee80b3f0b033254"
+  },
+  "xml_sha256": {
+    "final.xml": "98f2eb59358648a14fcf839dcfbaccbbd2a28bb749974c092a5db550b0132a82",
+    "full.xml": "ddf8eb1254f78b41f2fc0610360746a823bd8b00722bacbf92ca6571316d9b0f",
+    "green.xml": "4c0a9946ad47ffb8d7631e0333d07d2c0f9ed11739bdd7755b06fdc8aedf0cbc",
+    "red.xml": "b9f0da481490d2f962e2159e4444bfc07bba661231427e9b154484c52cf7ea0a",
+    "red_mkdir.xml": "81e922a7983198946a5a3ad75caebf2d940dbea2e9065e370b69e9ac578b0aad"
+  },
+  "task_board_rows": 17,
+  "A_candidate": "866df43",
+  "A_candidate_available": false,
+  "fetch_status": "GitHub port 443 connection failed in both attempts",
+  "teacher_preflight": {
+    "count": 20,
+    "optimal": 20,
+    "timeouts": 0,
+    "cpu_seconds": 0.125
+  },
+  "note": "Teacher preflight is B initial-state check, not A data acceptance or scaled training data"
+}

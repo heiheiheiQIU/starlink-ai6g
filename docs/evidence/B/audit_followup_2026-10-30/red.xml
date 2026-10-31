@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.339" timestamp="2026-10-30T23:29:34.389881+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="tests.test_seed_reproduction" name="test_seed_verifier_clean_copy_and_repeat[False]" time="0.642"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;D:\人工智能挑战赛\starlink-ai6g\runs\b_next_20261030\red_tmp\test_seed_verifier_clean_copy_0\release\scripts\verify_seed_p2.py&quot;, line 7, in &lt;module&gt;&#10;      from backend.api.main import create_app&#10;  ModuleNotFoundError: No module named 'backend'&#10;  &#10;assert 1 == 0&#10; +  where 1 = CompletedProcess(args=['D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe', 'D:\\人工智能挑战赛\\starlink-ai6g\\runs\\b_... line 7, in &lt;module&gt;\n    from backend.api.main import create_app\nModuleNotFoundError: No module named \'backend\'\n').returncode">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_next_20261030/red_tmp/test_seed_verifier_clean_copy_0')
+outside_cwd = False
+
+    @pytest.mark.parametrize('outside_cwd', [False, True])
+    def test_seed_verifier_clean_copy_and_repeat(tmp_path, outside_cwd):
+        source = Path(__file__).resolve().parents[1]
+        release = tmp_path / 'release'
+        release.mkdir()
+        for name in ('backend', 'tests', 'configs', 'scripts'):
+            shutil.copytree(source / name, release / name,
+                            ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+        shutil.copy2(source / 'pyproject.toml', release / 'pyproject.toml')
+        assert not (release / 'runs').exists()
+        for _ in range(2):
+            result = subprocess.run(
+                [sys.executable, str(release / 'scripts/verify_seed_p2.py')],
+                cwd=tmp_path if outside_cwd else release,
+                capture_output=True, text=True, timeout=60,
+            )
+&gt;           assert result.returncode == 0, result.stdout + result.stderr
+E           AssertionError: Traceback (most recent call last):
+E               File "D:\人工智能挑战赛\starlink-ai6g\runs\b_next_20261030\red_tmp\test_seed_verifier_clean_copy_0\release\scripts\verify_seed_p2.py", line 7, in &lt;module&gt;
+E                 from backend.api.main import create_app
+E             ModuleNotFoundError: No module named 'backend'
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe', 'D:\\人工智能挑战赛\\starlink-ai6g\\runs\\b_... line 7, in &lt;module&gt;\n    from backend.api.main import create_app\nModuleNotFoundError: No module named \'backend\'\n').returncode
+
+tests\test_seed_reproduction.py:27: AssertionError</failure></testcase><testcase classname="tests.test_seed_reproduction" name="test_seed_verifier_clean_copy_and_repeat[True]" time="0.625"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;D:\人工智能挑战赛\starlink-ai6g\runs\b_next_20261030\red_tmp\test_seed_verifier_clean_copy_1\release\scripts\verify_seed_p2.py&quot;, line 7, in &lt;module&gt;&#10;      from backend.api.main import create_app&#10;  ModuleNotFoundError: No module named 'backend'&#10;  &#10;assert 1 == 0&#10; +  where 1 = CompletedProcess(args=['D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe', 'D:\\人工智能挑战赛\\starlink-ai6g\\runs\\b_... line 7, in &lt;module&gt;\n    from backend.api.main import create_app\nModuleNotFoundError: No module named \'backend\'\n').returncode">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_next_20261030/red_tmp/test_seed_verifier_clean_copy_1')
+outside_cwd = True
+
+    @pytest.mark.parametrize('outside_cwd', [False, True])
+    def test_seed_verifier_clean_copy_and_repeat(tmp_path, outside_cwd):
+        source = Path(__file__).resolve().parents[1]
+        release = tmp_path / 'release'
+        release.mkdir()
+        for name in ('backend', 'tests', 'configs', 'scripts'):
+            shutil.copytree(source / name, release / name,
+                            ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
+        shutil.copy2(source / 'pyproject.toml', release / 'pyproject.toml')
+        assert not (release / 'runs').exists()
+        for _ in range(2):
+            result = subprocess.run(
+                [sys.executable, str(release / 'scripts/verify_seed_p2.py')],
+                cwd=tmp_path if outside_cwd else release,
+                capture_output=True, text=True, timeout=60,
+            )
+&gt;           assert result.returncode == 0, result.stdout + result.stderr
+E           AssertionError: Traceback (most recent call last):
+E               File "D:\人工智能挑战赛\starlink-ai6g\runs\b_next_20261030\red_tmp\test_seed_verifier_clean_copy_1\release\scripts\verify_seed_p2.py", line 7, in &lt;module&gt;
+E                 from backend.api.main import create_app
+E             ModuleNotFoundError: No module named 'backend'
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe', 'D:\\人工智能挑战赛\\starlink-ai6g\\runs\\b_... line 7, in &lt;module&gt;\n    from backend.api.main import create_app\nModuleNotFoundError: No module named \'backend\'\n').returncode
+
+tests\test_seed_reproduction.py:27: AssertionError</failure></testcase></testsuite></testsuites>
