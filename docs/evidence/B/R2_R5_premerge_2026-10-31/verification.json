@@ -1,0 +1,63 @@
+{
+  "kind": "fixed_source_premerge_regression_not_merge_acceptance",
+  "layers": [
+    {
+      "layer": "R2",
+      "revision": "d4716bf24e9745fd85802e0fe01938812b3683a1",
+      "tests": 219,
+      "failures": 0,
+      "errors": 0,
+      "contract_sha256": {
+        "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+        "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb"
+      },
+      "xml_sha256": "abab0ece2c0847eba2f5a0239a29fefe4cd8acd25c377c1500e197d0c085ea4a",
+      "merged": false
+    },
+    {
+      "layer": "R3",
+      "revision": "cac4b909e2ba3ffdcb6e89e177213bd2055a81f0",
+      "tests": 248,
+      "failures": 0,
+      "errors": 0,
+      "contract_sha256": {
+        "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+        "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb"
+      },
+      "xml_sha256": "6448d9043d63981ddae5daa09597e4f397697f54fa8e607eab1a97d47c08c46d",
+      "merged": false
+    },
+    {
+      "layer": "R4",
+      "revision": "930476667933ca5d307a11e2003a7a263541baa9",
+      "tests": 293,
+      "failures": 0,
+      "errors": 0,
+      "contract_sha256": {
+        "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+        "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb"
+      },
+      "xml_sha256": "93db9565f924bcde2b85392dca2e05296e0b931441c837893a9155af9c8315d4",
+      "merged": false
+    },
+    {
+      "layer": "R5",
+      "revision": "5a2a50f2c5124bfbf8827b0103a9faf4cbc1b858",
+      "tests": 309,
+      "failures": 0,
+      "errors": 0,
+      "contract_sha256": {
+        "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+        "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb"
+      },
+      "xml_sha256": "d03d56a73c0c40970acb5a07a115974671fa15cd4ea335417cb52f55063b96fb",
+      "merged": false
+    }
+  ],
+  "main_unchanged": "75f1c52b558f5b1e9545d5659bb3a2c3588b109e",
+  "pending": [
+    "R2 recipient explicit four hand-check coverage",
+    "A R5 fairness/scenario review",
+    "C new B1 verifier rerun"
+  ]
+}
