@@ -2,13 +2,13 @@ task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_actio
 B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
 A-N1,A,accepted,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,"A交付+B主验+C复核三方闭环",完成,F1遗留证据仍挂账（低优先）
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
-A-N3,A,ready_for_review,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,"v2数据已交（PR#7）：20唯一观测0跨集重复，C独立确认",等B复验冻结后开训,B复算标签+SHA后冻结训练数据；训练11/02 22:00截止
+A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,"数据已冻结（B accepted_with_notes，130定向/471全库）",A用冻结train子集开训,A：小样本过拟合→三种子→11/02 22:00交score_actions+权重SHA+model_card+归一化来源+耗时+回退约定
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
 B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,共享信道+180轨迹规则矩阵已交付（PR#6）,R2-R5依序合main；成熟优化器与AI接入仍待后续
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,A+C,"A已accepted+C已accepted_with_notes+seed P2已修",等合入main,完整HTTP复跑并入11/08换机验收
-B-N4,B,blocked,2026-11-04T20:00:00+08:00,experiments/,A+C,,等待A-N1和A-N3,先固定统一指标定义
-B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,R2 41项已交付（PR#3）,PR#3待R3修复后一并入main,复核R2手算与send-only轨迹
+B-N4,B,in_progress,2026-11-04T20:00:00+08:00,experiments/,A+C,"learned API接入方案+扩样计时已交付；预合并回归219/248/293/309全过",等A评分器（11/02）后接入,B：接learned进五接口；A：R2四项手算范围确认+R5公平性专门回执（main合并前提）
+B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,"预合并回归219过；待A四项手算签收范围确认",main合并前提之一,A补R2四项手算范围确认回执；C可复核send-only轨迹
 B-R3,B,accepted,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,"A+C均accepted（cac4b90）三方对齐",待R2先合main,按R2→R3→R4→R5顺序合入
 C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
 C-N2,C,ready_for_review,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,待B复核镜像语义,类型镜像+展示守卫+7项语义测试已提交（3c55815）
