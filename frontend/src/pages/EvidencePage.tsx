@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { RunSourceBadge } from '../components/RunSourceBadge'
+import type { RunApi } from '../api/runs'
 import { FIXTURE_HASH, FIXTURE_RUN_RESULT } from '../fixtures/contracts'
+import { RUN_ID_STORAGE_KEY, useRun } from '../state/useRun'
 import type { RunResult } from '../types/contracts'
 
 function completedMetrics(result: RunResult): string {
@@ -63,8 +65,23 @@ const EVIDENCE_ROWS = [
   },
 ] as const
 
-export function EvidencePage() {
+export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage } = {}) {
   const [exported, setExported] = useState(false)
+  const run = useRun({ api, storage })
+  const { state, resume } = run
+
+  useEffect(() => {
+    const source = storage ?? window.localStorage
+    const stored = source.getItem(RUN_ID_STORAGE_KEY)
+    if (stored) {
+      void resume(stored)
+    }
+  }, [storage, resume])
+
+  const realResults =
+    state.kind === 'online' && state.status?.status === 'completed' && state.results !== null
+      ? state.results
+      : null
 
   return (
     <section className="console-page">
@@ -76,14 +93,48 @@ export function EvidencePage() {
 
       <div className="console-card">
         <h2>数据源</h2>
-        <RunSourceBadge />
+        <RunSourceBadge controller={run} />
       </div>
 
+      {realResults ? (
+        <div className="console-card">
+          <h2>真实 run 结果</h2>
+          <p className="panel-note" style={{ marginBottom: 10 }}>
+            来源：GET /runs/{'{id}'}/results（run_id={realResults.run_id}）；页面只读展示、不重算指标。
+          </p>
+          <table className="console-table" aria-label="真实运行指标">
+            <thead>
+              <tr>
+                <th>policy_id</th>
+                <th>加权按时交付率</th>
+                <th>成功载荷字节</th>
+                <th>J / 成功 bit</th>
+                <th>能量违规段</th>
+              </tr>
+            </thead>
+            <tbody>
+              {realResults.by_policy.map((policy) => (
+                <tr key={policy.policy_id}>
+                  <td className="mono">{policy.policy_id}</td>
+                  <td className="mono">
+                    {policy.weighted_on_time_rate === null ? '—（未测）' : `${(policy.weighted_on_time_rate * 100).toFixed(1)}%`}
+                  </td>
+                  <td className="mono">{policy.success_payload_bytes ?? '—'}</td>
+                  <td className="mono">
+                    {policy.joule_per_success_bit === null ? '—（无成功载荷）' : policy.joule_per_success_bit}
+                  </td>
+                  <td className="mono">{policy.energy_violation_count ?? '—'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : null}
+
       <div className="console-card">
-        <h2>实验列表</h2>
+        <h2>实验列表（契约样例 · 状态语义演示）</h2>
         <p className="panel-note" style={{ marginBottom: 10 }}>
-          已完成 run 的指标来自单一事实源 fixtures/contracts.ts（config_hash={FIXTURE_HASH}，占位）；
-          正式版由 GET /runs 提供，页面不重算。
+          下表为固定演示数据（config_hash={FIXTURE_HASH}，占位）；真实 run 的指标见上方"真实 run 结果"卡。
         </p>
         <table className="console-table">
           <thead>

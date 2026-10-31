@@ -4,30 +4,35 @@
  * - 未连接 → 明确展示"演示数据"而非假装在线；
  * - transport 失败 → offline 横幅＋重试；
  * - 只有 completed 显示正式结果标识。
+ *
+ * 页面已持有 useRun 时通过 `controller` 注入，避免重复客户端与重复轮询。
  */
 
 import { useEffect, useState } from 'react'
 
-import { ApiError, TransportError, type RunApi } from '../api/runs'
-import { DEFAULT_BASE_URL, RUN_ID_STORAGE_KEY, useRun } from '../state/useRun'
+import type { RunApi } from '../api/runs'
+import { DEFAULT_BASE_URL, RUN_ID_STORAGE_KEY, useRun, type RunController } from '../state/useRun'
 
 interface RunSourceBadgeProps {
   api?: RunApi
   storage?: Storage
+  controller?: RunController
 }
 
-export function RunSourceBadge({ api, storage }: RunSourceBadgeProps) {
-  const { state, resume, refresh } = useRun({ api, storage, baseUrl: DEFAULT_BASE_URL })
+export function RunSourceBadge({ api, storage, controller }: RunSourceBadgeProps) {
+  const own = useRun({ api, storage, baseUrl: DEFAULT_BASE_URL })
+  const { state, resume, refresh } = controller ?? own
   const [polling, setPolling] = useState(false)
   const [manualRunId, setManualRunId] = useState('')
 
   useEffect(() => {
+    if (controller) return
     const source = storage ?? window.localStorage
     const stored = source.getItem(RUN_ID_STORAGE_KEY)
     if (stored) {
       void resume(stored)
     }
-  }, [storage, resume])
+  }, [storage, resume, controller])
 
   const statusName = state.kind === 'online' ? state.status?.status : undefined
   const onlineRunId = state.kind === 'online' ? state.runId : null
