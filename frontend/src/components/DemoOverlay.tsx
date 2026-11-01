@@ -65,10 +65,23 @@ export function DemoOverlay({ visible, step, stepNumber, total, targetSelector =
       )
     }
 
+    // 滚动（含内层容器滚动）与缩放都要重算挖窗位置；rAF 节流避免抖动
+    let rafId = 0
+    const schedule = () => {
+      if (rafId !== 0) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0
+        recompute()
+      })
+    }
+
     recompute()
-    window.addEventListener('resize', recompute)
+    window.addEventListener('scroll', schedule, { capture: true, passive: true })
+    window.addEventListener('resize', schedule)
     return () => {
-      window.removeEventListener('resize', recompute)
+      window.removeEventListener('scroll', schedule, { capture: true })
+      window.removeEventListener('resize', schedule)
+      if (rafId !== 0) window.cancelAnimationFrame(rafId)
       if (timerRef.current !== null) window.clearTimeout(timerRef.current)
     }
   }, [visible, step.id, targetSelector])
