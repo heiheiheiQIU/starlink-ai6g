@@ -108,6 +108,15 @@
     },
     "model_training_dataset_feature_targeted_passed": 55,
     "model_package_commit": "7f18ff240201ce7954f71df2238bf28123ab54dc",
-    "training_config_and_gateway_test_commit": "e15048dcb97b155fb85e9ffa3967e3f429b99639"
+    "training_config_and_gateway_test_commit": "e15048dcb97b155fb85e9ffa3967e3f429b99639",
+    "api_read_retry_receipt": {
+      "A_application_commit": "3ea06f60b13cb036ca96ddd133345bf229d80aa0",
+      "B_source_commit": "576eb48f5d87abf8a0969b7c54df417523a39ee0",
+      "api_targeted_passed": 13,
+      "combined_full_suite_passed": 501,
+      "combined_full_suite_seconds": 26.05,
+      "combined_targeted_passed": 92,
+      "combined_targeted_seconds": 12.22
+    }
   }
 }
