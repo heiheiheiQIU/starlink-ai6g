@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { CountUp } from '../components/CountUp'
 import { RunSourceBadge } from '../components/RunSourceBadge'
 import type { RunApi } from '../api/runs'
 import { FIXTURE_HASH, FIXTURE_RUN_RESULT } from '../fixtures/contracts'
@@ -117,11 +118,11 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
                 <tr key={policy.policy_id}>
                   <td className="mono">{policy.policy_id}</td>
                   <td className="mono">
-                    {policy.weighted_on_time_rate === null ? '—（未测）' : `${(policy.weighted_on_time_rate * 100).toFixed(1)}%`}
+                    {policy.weighted_on_time_rate === null ? '—（未测）' : <><CountUp value={policy.weighted_on_time_rate * 100} />%</>}
                   </td>
                   <td className="mono">{policy.success_payload_bytes ?? '—'}</td>
                   <td className="mono">
-                    {policy.joule_per_success_bit === null ? '—（无成功载荷）' : policy.joule_per_success_bit}
+                    {policy.joule_per_success_bit === null ? '—（无成功载荷）' : <CountUp value={policy.joule_per_success_bit} decimals={8} />}
                   </td>
                   <td className="mono">{policy.energy_violation_count ?? '—'}</td>
                 </tr>
