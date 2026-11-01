@@ -88,12 +88,24 @@
     "venv_python": "D:/pro2/.venv/Scripts/python.exe"
   },
   "verification_results": {
-    "full_suite": {
+    "full_suite_green_run": {
       "passed": 498,
       "seconds": 27.83,
       "warnings": 1
     },
+    "full_suite_repeat_run": {
+      "failed": 1,
+      "failure_owner": "B API runtime",
+      "failure_test": "tests/test_api.py::test_real_comparison_paging_export_and_refresh",
+      "passed": 497,
+      "reason": "intermittent Windows PermissionError reading status.json",
+      "seconds": 27.68
+    },
     "gateway_and_runtime_targeted_passed": 20,
+    "final_A_owned_targeted": {
+      "passed": 79,
+      "seconds": 6.17
+    },
     "model_training_dataset_feature_targeted_passed": 55,
     "model_package_commit": "7f18ff240201ce7954f71df2238bf28123ab54dc",
     "training_config_and_gateway_test_commit": "e15048dcb97b155fb85e9ffa3967e3f429b99639"

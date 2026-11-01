@@ -59,10 +59,12 @@ test 指标只用于记录冻结小样本的行为，不证明模型泛化，也
 - 1000 次 warm inference：median `0.52445 ms`，p95 `0.68487 ms`，max `1.15960 ms`。
 - 模型/训练/数据/特征定向：`55 passed`。
 - learned 网关和运行时定向：`20 passed`。
-- 全库：`498 passed, 1 warning in 27.83s`。
+- 最终 A-owned 定向集合：`79 passed in 6.17s`。
+- 全库有一轮 `498 passed, 1 warning in 27.83s`；最终重复运行得到 `497 passed, 1 failed`，失败点是 B API 的 `RunService.status()` 在 Windows 下读取 `status.json` 时偶发 `PermissionError`。
+- 对该 B API 用例连续复跑时前 4 次通过、第 5 次复现同一文件锁错误；A 未修改 B 的 API 实现或接口。
 - `pip check`：`No broken requirements found.`
 
-全库测试在当前锁定依赖环境中运行；唯一 warning 是 Starlette 对 AnyIO 旧别名的上游弃用提示，与本交付无关。
+全库测试在当前锁定依赖环境中运行；warning 是 Starlette 对 AnyIO 旧别名的上游弃用提示，与本交付无关。A-N3 定向集合稳定通过，但全库当前不能表述为稳定全绿；B API 文件锁波动需由 B 单独处理。
 
 冻结身份复核：
 
