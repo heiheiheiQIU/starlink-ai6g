@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { DemoOverlay } from '../components/DemoOverlay'
 import { EngineerDetails } from '../components/EngineerDetails'
 import { FlowStepper } from '../components/FlowStepper'
 import { StagePanel } from '../components/StagePanel'
@@ -90,6 +91,13 @@ export function FlowWorkspace() {
         </div>
           <StepContextPanel step={activeStep} index={activeIndex} />
       </div>
+
+      <DemoOverlay
+        visible={autoMode}
+        step={activeStep}
+        stepNumber={activeIndex + 1}
+        total={FLOW_STEPS.length}
+      />
     </section>
   )
 }

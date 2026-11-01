@@ -52,6 +52,24 @@ describe('six-step operations stage', () => {
     expect(screen.getByText(/ACK 已丢失/)).toBeInTheDocument()
   })
 
+  it('shows narration and spotlight during the automatic demo', async () => {
+    const user = userEvent.setup()
+    render(<FlowWorkspace />)
+
+    expect(screen.queryByTestId('demo-spotlight')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '自动演示' }))
+
+    const narration = screen.getByRole('dialog', { name: '演示旁白' })
+    expect(narration).toHaveTextContent('任务进入星上队列')
+    expect(screen.getByTestId('demo-spotlight')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '下一步' }))
+    expect(screen.getByRole('dialog', { name: '演示旁白' })).toHaveTextContent('预测未来可见窗口')
+
+    await user.click(screen.getByRole('button', { name: '停止演示' }))
+    expect(screen.queryByTestId('demo-spotlight')).not.toBeInTheDocument()
+  })
+
   it('keeps tasks added at arrival visible in later steps', async () => {
     const user = userEvent.setup()
     render(<FlowWorkspace />)

@@ -1627,6 +1627,52 @@ button {
   line-height: 1.6;
 }
 
+/* ═══ 演示旁白与聚光灯（借鉴苗圃杯 demo-mode，零依赖） ═══ */
+.demo-spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  pointer-events: none;
+  background: rgba(5, 12, 20, 0.66);
+  clip-path: none;
+  transition: clip-path 0.32s var(--transition-spring, ease);
+}
+
+.demo-narration {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 81;
+  width: 380px;
+  padding: 16px 18px;
+  color: #dceaf4;
+  background: rgba(13, 29, 44, 0.92);
+  border: 1px solid rgba(103, 204, 220, 0.45);
+  border-radius: 15px;
+  box-shadow: 0 14px 44px rgba(6, 12, 20, 0.55), var(--glass-highlight);
+  animation: bannerIn 320ms ease both;
+}
+
+.demo-narration__kicker {
+  margin: 0 0 6px;
+  color: #67ccdc;
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+}
+
+.demo-narration h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.demo-narration__text {
+  margin: 0;
+  color: #a9c2d2;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
 /* ═══ 数据源状态徽章 ═══ */
 .source-badge {
   display: flex;
