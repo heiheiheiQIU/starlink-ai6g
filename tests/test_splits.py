@@ -145,10 +145,28 @@ def test_config_matches_features():
         'split_counts': {'train': 12, 'validation': 4, 'test': 4},
         'eligible_solver_status': 'OPTIMAL',
         'required_gap': 0.0,
-        'normalization': 'deferred-until-training',
-        'training_enabled': False,
+        'normalization': 'train-split-fitted',
+        'training_seeds': [20261031, 20261032, 20261033],
+        'model': {
+            'input_width': 23,
+            'hidden_widths': [32, 16],
+        },
+        'optimizer': {
+            'name': 'Adam',
+            'learning_rate': 0.01,
+            'weight_decay': 0.0,
+            'epochs': 2000,
+            'utility_loss': 'binary_cross_entropy_soft_target',
+            'feasibility_loss_weight': 0.25,
+        },
+        'overfit_gate': {
+            'max_train_utility_mse': 0.001,
+            'required_train_optimal_set_hits': 12,
+        },
+        'artifact_output': 'artifacts/models/a_n3_policy_v1',
+        'training_enabled': True,
     }
-    assert config['training_enabled'] is False
+    assert config['training_enabled'] is True
 
 
 def test_link_failure_does_not_publish_and_cleans_staging(dataset, monkeypatch):
