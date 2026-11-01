@@ -2,14 +2,14 @@ task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_actio
 B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,恢复3329284历史状态;A原回执见origin/feature/ai的R0_A_2026-10-28,仅限环境与冻结旧资产;不是新系统效果,保留本地配置与哈希恢复说明
 A-N1,A,accepted_with_notes,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,B主验正式synthetic适配器158通过;见H01_B_2026-10-30,,正式接入另做集成回归;A推进样本与切分交付
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,待健康数据冻结交付核验;H01已有限签收,按电池和同源窗口冻结划分;补F4许可与哈希
-A-N3,A,in_progress,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,PR8固定11c00374到件;B静态五SHA及权重格式通过,待B独立功能验收及learned接入;不等于模型accepted,按B_learned_next_2026-11-01复验候选及回退归一化
+A-N3,A,changes_requested,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,B对11c00374正常冻结包通过;46定向501全库通过,新坏ZIP回归1failed;BadZipFile未转MODEL_FORMAT,A最小修订加载器并补回归;权重不重训;新SHA交B复验
 A-N3-DATA,A,accepted_with_notes,,data/teacher/a_n3_20_v2/splits.json,B,20标签一致;20内容唯一;四维身份12/4/4无交集;130定向471全库通过,仅20条合成管线数据;扩样与模型效果另验,按A_N3_v2_data_B_2026-10-31冻结数据和来源组
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,干净集成进入main后推进B-N2最小环境
 B-N2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,首轮41项R2/全库219通过;待A复算,,A复算R2四项;C读事件;R3实现独立交接见B-R3
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,恢复3329284历史记录;固定交付d4716bf,R2四项手算独立签收范围待明确,先取得接收人覆盖确认再按R2到R3集成
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过,learned功能及真实HTTP另验,A API补丁回执已到;按PR8固定版本验包后接入
-B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,接入和回退方案已起草;扩样代表计时16次已做,等待A接口确认与冻结评分器;三策略请求合同待三方确认,收到模型实施五接口和三策略验证;正式18乘10另验
+B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,接入和回退方案已起草;扩样代表计时16次已做,等待A坏ZIP受控错误修订;三策略合同待三方确认,按A_N3_learned_B_2026-11-01复验修订后接入五接口
 C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
 C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,B字段27结构一致;前端39测试和构建通过,缺远端package-lock;跨机复现待收口,C补锁文件并npm ci复验;运行时权威校验仍在后端
 C-N3,C,blocked,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,等待B-N3,准备分页和错误状态测试
