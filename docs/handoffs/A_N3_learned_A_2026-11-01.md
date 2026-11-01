@@ -1,9 +1,9 @@
 # A-N3 learned 评分器交接
 
-日期：2026-11-01（Asia/Shanghai）  
-负责人：A  
-验收人：B  
-状态：**ready_for_B_review**  
+日期：2026-11-01（Asia/Shanghai）
+负责人：A
+验收人：B
+状态：**ready_for_B_review**
 分支：`codex/a-n3-learned`
 
 ## 本次交付边界
