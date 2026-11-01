@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from backend.cli import RunConfig, _write_json
 from backend.contracts import EventsPage, EventsQuery, Event, RunRequest, RunStatusResponse
-from .worker import execute_run, fail_run, write_status
+from .worker import execute_run, fail_run, write_status, read_text
 
 
 class ServiceError(Exception):
@@ -64,7 +64,7 @@ class RunService:
             if expired and process.is_alive(): process.terminate();process.join(3)
             if expired or not process.is_alive():
                 process.join(3)
-                state=json.loads((folder/'status.json').read_text(encoding='utf-8'))
+                state=json.loads(read_text(folder/'status.json'))
                 if state['status'] not in ('completed','failed','cancelled'):
                     fail_run(folder,'WORKER_TIMEOUT' if expired else 'WORKER_EXITED')
                 process.close();del self.jobs[identity]
@@ -119,7 +119,7 @@ class RunService:
 
     def status(self,identity):
         folder=self.folder(identity)
-        return RunStatusResponse.model_validate_json((folder/'status.json').read_text(encoding='utf-8')).model_dump()
+        return RunStatusResponse.model_validate_json(read_text(folder/'status.json')).model_dump()
 
     def completed(self,identity):
         status=self.status(identity)

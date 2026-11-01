@@ -27,6 +27,15 @@ def _write_json(path,value):
     publish(temporary,path)
 
 
+def read_text(path):
+    deadline=time.monotonic()+2.0
+    while True:
+        try:return path.read_text(encoding='utf-8')
+        except PermissionError:
+            if time.monotonic()>=deadline:raise
+            time.sleep(.01)
+
+
 def write_status(folder, status, *, progress=None, active=None, error=None):
     value=RunStatusResponse(run_id=folder.name,status=status,progress=progress,
                             active_policies=active or [],error=error)
