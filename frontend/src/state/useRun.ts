@@ -82,16 +82,13 @@ export function useRun(options: UseRunOptions = {}): RunController {
     controllerRef.current?.abort()
   }, [])
 
-  async function fetchCompleted(runId: string) {
-    const results = await api.getResults(runId)
-    let events: Event[] | null = null
+  async function fetchEvents(runId: string): Promise<Event[] | null> {
     try {
       const fetched = await api.getAllEvents(runId, 500)
-      events = Array.isArray(fetched) ? fetched : []
+      return Array.isArray(fetched) ? fetched : []
     } catch {
-      events = null
+      return null
     }
-    setOnline(runId, { results, events })
   }
 
   const create = useCallback(
@@ -114,8 +111,8 @@ export function useRun(options: UseRunOptions = {}): RunController {
         })
         const results = await api.pollUntilComplete(created.run_id, { signal: controller.signal })
         lastStatusRef.current = { run_id: created.run_id, status: 'completed', progress: 1, active_policies: request.policy_ids, error: null }
-        await fetchCompleted(created.run_id)
-        void results
+        const events = await fetchEvents(created.run_id)
+        setState({ kind: 'online', runId: created.run_id, status: lastStatusRef.current, results, events, offline: false, error: null })
       } catch (error) {
         if (controller.signal.aborted) return
         const offline = error instanceof TransportError
@@ -138,7 +135,9 @@ export function useRun(options: UseRunOptions = {}): RunController {
       lastStatusRef.current = status
       setOnline(runId, { status, offline: false, error: null })
       if (status.status === 'completed') {
-        await fetchCompleted(runId)
+        const results = await api.getResults(runId)
+        const events = await fetchEvents(runId)
+        setOnline(runId, { results, events })
       }
     } catch (error) {
       const offline = error instanceof TransportError
