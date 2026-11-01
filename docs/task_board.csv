@@ -8,7 +8,7 @@ A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,干净集成进入main后推进B-N2最小环境
 B-N2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,首轮41项R2/全库219通过;待A复算,,A复算R2四项;C读事件;R3实现独立交接见B-R3
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,恢复3329284历史记录;固定交付d4716bf,R2四项手算独立签收范围待明确,先取得接收人覆盖确认再按R2到R3集成
-B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,A指标accepted;C accepted_with_notes;C晚间审计已关闭seed透传P2,新B1复验入口08f00d5待C实际复跑;C实时HTTP范围限制保留,按B_delivery_2026-10-31领取固定提交复跑seed和ZIP
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过,A最终97124d4未取得;实际候选适配及HTTP范围另验,A领取B_API_lock_2026-11-01并复跑最终组合版本
 B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,接入和回退方案已起草;扩样代表计时16次已做,等待A接口确认与冻结评分器;三策略请求合同待三方确认,收到模型实施五接口和三策略验证;正式18乘10另验
 C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
 C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,B字段27结构一致;前端39测试和构建通过,缺远端package-lock;跨机复现待收口,C补锁文件并npm ci复验;运行时权威校验仍在后端
@@ -17,3 +17,4 @@ C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立
 B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A/C回执对齐;B新复跑定向70全库248通过,R2独立交接回执缺失;尚未合main,先收口R2四项手算签收;再逐层集成
 B-R4,B,accepted_with_notes,,docs/handoffs/H02_teacher_2026-10-29.md,A,A的H02_A_2026-10-30签收已取得;本轮原候选293全库通过,限首版零损失教师;扩展优化器另验,等待R2前置门禁后逐层集成
 B-R5,B,ready_for_review,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,C共享信道审计及seed溯源修复复核已到;本轮309全库通过,A公平性和场景拆分专门回执未找到;新B1入口待C复跑,收口覆盖范围后集成;成熟优化器另行实现
+B-API-LOCK,B,ready_for_review,,docs/handoffs/B_API_lock_2026-11-01.md,A+C,最小补丁适配2cfe89c;20轮通过;独立审查无重要项,待A最终候选应用和组合复跑,取得97124d4及五模型文件后继续验收
