@@ -156,7 +156,21 @@ def test_invalid_observation_is_controlled_before_model_loading(tmp_path):
     assert error.value.code == "INVALID_OBSERVATION"
 
 
-def test_default_untrained_package_is_explicitly_disabled():
-    with pytest.raises(LearnedPolicyError) as error:
-        score_actions(observation())
-    assert error.value.code == "MODEL_MISSING"
+def test_default_frozen_package_scores_complete_finite_candidates():
+    scores = score_actions(observation())
+    assert [(row.task_id, row.mode) for row in scores] == [
+        ("T1", "robust"),
+        ("T1", "fast"),
+        (None, "idle"),
+    ]
+    assert all(np.isfinite(row.score) for row in scores)
+
+
+def test_default_manifest_hashes_every_frozen_package_file():
+    package = ROOT / "artifacts/models/a_n3_policy_v1"
+    manifest = json.loads((package / "manifest.json").read_text(encoding="utf-8"))
+
+    assert manifest["model_version"] == "a-n3-mlp-v1"
+    assert manifest["feature_schema_version"] == "policy-features-v1"
+    for name, expected in manifest["artifacts_sha256"].items():
+        assert sha256(package / name) == expected

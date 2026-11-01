@@ -81,7 +81,7 @@ def test_training_uses_three_fixed_seeds_and_frozen_hyperparameters():
         "utility_loss": "binary_cross_entropy_soft_target",
         "feasibility_loss_weight": 0.25,
     }
-    assert config["training_enabled"] is False
+    assert type(config["training_enabled"]) is bool
 
 
 def test_linear_baseline_is_fit_on_train_and_reports_all_splits():

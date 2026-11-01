@@ -1,0 +1,38 @@
+{
+  "array_names": [
+    "feasibility_bias",
+    "feasibility_weight",
+    "layer1_bias",
+    "layer1_weight",
+    "layer2_bias",
+    "layer2_weight",
+    "utility_bias",
+    "utility_weight"
+  ],
+  "artifacts_sha256": {
+    "model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+    "normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+    "training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+    "weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "config_sha256": "788e361c5b204c85b232be51482323e66c03442849120c3eafcec57179a7503d",
+  "feature_schema_version": "policy-features-v1",
+  "inference_latency_ms": {
+    "cold_load_and_first_score": 2.6264999905833974,
+    "warm_calls": 1000,
+    "warm_max": 1.1595999967539683,
+    "warm_median": 0.5244499916443601,
+    "warm_p95": 0.6848650038591585
+  },
+  "limitations": "synthetic small-sample validation; no generalization or policy-superiority claim",
+  "model_version": "a-n3-mlp-v1",
+  "schema_version": "policy-model-manifest-v1",
+  "selected_seed": 20261033,
+  "source_revision": "ff0589bfa465585158f76818a422ce6def3efc15",
+  "training_environment": {
+    "numpy": "2.1.3",
+    "pydantic": "2.12.3",
+    "python": "3.12.9",
+    "torch": "2.5.1"
+  }
+}

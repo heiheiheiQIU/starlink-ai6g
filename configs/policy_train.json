@@ -14,7 +14,7 @@
   "split_counts": {"train": 12, "validation": 4, "test": 4},
   "eligible_solver_status": "OPTIMAL",
   "required_gap": 0.0,
-  "normalization": "deferred-until-training",
+  "normalization": "train-split-fitted",
   "training_seeds": [20261031, 20261032, 20261033],
   "model": {
     "input_width": 23,
@@ -33,5 +33,5 @@
     "required_train_optimal_set_hits": 12
   },
   "artifact_output": "artifacts/models/a_n3_policy_v1",
-  "training_enabled": false
+  "training_enabled": true
 }
