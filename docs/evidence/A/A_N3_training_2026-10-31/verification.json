@@ -86,5 +86,16 @@
     "python": "3.12.14",
     "torch": "2.5.1+cpu",
     "venv_python": "D:/pro2/.venv/Scripts/python.exe"
+  },
+  "verification_results": {
+    "full_suite": {
+      "passed": 498,
+      "seconds": 27.83,
+      "warnings": 1
+    },
+    "gateway_and_runtime_targeted_passed": 20,
+    "model_training_dataset_feature_targeted_passed": 55,
+    "model_package_commit": "7f18ff240201ce7954f71df2238bf28123ab54dc",
+    "training_config_and_gateway_test_commit": "e15048dcb97b155fb85e9ffa3967e3f429b99639"
   }
 }
