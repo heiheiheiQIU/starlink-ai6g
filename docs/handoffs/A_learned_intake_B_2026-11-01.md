@@ -2,6 +2,8 @@
 
 状态：awaiting_delivery。11/01重新fetch、查询全部远端learned分支及本地对象库后，仍未取得codex/a-n3-learned@97124d4。仅收到用户提供的A_N3_learned_A_2026-11-01.md，不能独立验收权重或代码。
 
+**后续接收更新：** 上述为上一轮现场。现已取得PR #8固定候选11c00374及模型五文件，五SHA、manifest、配置与权重格式预检通过，状态改为received_pending_functional_review。原待交付阻塞解除；后续按 `B_learned_next_2026-11-01.md` 执行正式验包，不重复索取已到件材料。
+
 ## A需给出的可读交付
 
 1. 最终完整40位SHA及源码：可推送评审分支，或先提供只读git bundle/源码归档。区分最终97124d4、训练源码ff0589b、模型包7f18ff2和回归e15048d的角色。
