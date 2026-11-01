@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 
 import { CountUp } from '../components/CountUp'
+import { EventStreamCard } from '../components/EventStreamCard'
 import { RunSourceBadge } from '../components/RunSourceBadge'
 import type { RunApi } from '../api/runs'
 import { FIXTURE_HASH, FIXTURE_RUN_RESULT } from '../fixtures/contracts'
@@ -84,6 +85,11 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
       ? state.results
       : null
 
+  const realEvents =
+    state.kind === 'online' && state.events !== null && state.events.length > 0
+      ? { runId: state.runId, events: state.events }
+      : null
+
   return (
     <section className="console-page">
       <header className="console-page__intro">
@@ -131,6 +137,8 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
           </table>
         </div>
       ) : null}
+
+      {realEvents ? <EventStreamCard runId={realEvents.runId} events={realEvents.events} /> : null}
 
       <div className="console-card">
         <h2>实验列表（契约样例 · 状态语义演示）</h2>

@@ -9,7 +9,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { ApiError, TransportError, createRunApi, type RunApi } from '../api/runs'
-import type { RunRequest, RunResult, RunStatusResponse } from '../types/contracts'
+import type { Event, RunRequest, RunResult, RunStatusResponse } from '../types/contracts'
 
 export type RunSource =
   | { kind: 'idle' }
@@ -19,6 +19,7 @@ export type RunSource =
       runId: string
       status: RunStatusResponse | null
       results: RunResult | null
+      events: Event[] | null
       offline: boolean
       error: string | null
     }
@@ -63,7 +64,7 @@ export function useRun(options: UseRunOptions = {}): RunController {
       const base =
         current.kind === 'online' && current.runId === runId
           ? current
-          : { kind: 'online', runId, status: lastStatusRef.current, results: null, offline: false, error: null }
+          : { kind: 'online', runId, status: lastStatusRef.current, results: null, events: null, offline: false, error: null }
       return { ...base, ...patch } as Extract<RunSource, { kind: 'online' }>
     })
   }
@@ -81,6 +82,18 @@ export function useRun(options: UseRunOptions = {}): RunController {
     controllerRef.current?.abort()
   }, [])
 
+  async function fetchCompleted(runId: string) {
+    const results = await api.getResults(runId)
+    let events: Event[] | null = null
+    try {
+      const fetched = await api.getAllEvents(runId, 500)
+      events = Array.isArray(fetched) ? fetched : []
+    } catch {
+      events = null
+    }
+    setOnline(runId, { results, events })
+  }
+
   const create = useCallback(
     async (request: RunRequest) => {
       clearSignal()
@@ -95,12 +108,14 @@ export function useRun(options: UseRunOptions = {}): RunController {
           runId: created.run_id,
           status: lastStatusRef.current,
           results: null,
+          events: null,
           offline: false,
           error: null,
         })
         const results = await api.pollUntilComplete(created.run_id, { signal: controller.signal })
         lastStatusRef.current = { run_id: created.run_id, status: 'completed', progress: 1, active_policies: request.policy_ids, error: null }
-        setState({ kind: 'online', runId: created.run_id, status: lastStatusRef.current, results, offline: false, error: null })
+        await fetchCompleted(created.run_id)
+        void results
       } catch (error) {
         if (controller.signal.aborted) return
         const offline = error instanceof TransportError
@@ -123,8 +138,7 @@ export function useRun(options: UseRunOptions = {}): RunController {
       lastStatusRef.current = status
       setOnline(runId, { status, offline: false, error: null })
       if (status.status === 'completed') {
-        const results = await api.getResults(runId)
-        setOnline(runId, { results })
+        await fetchCompleted(runId)
       }
     } catch (error) {
       const offline = error instanceof TransportError
@@ -136,7 +150,7 @@ export function useRun(options: UseRunOptions = {}): RunController {
     async (runId: string) => {
       rememberRunId(runId)
       lastStatusRef.current = { run_id: runId, status: 'running', progress: null, active_policies: [], error: null }
-      setState({ kind: 'online', runId, status: lastStatusRef.current, results: null, offline: false, error: null })
+      setState({ kind: 'online', runId, status: lastStatusRef.current, results: null, events: null, offline: false, error: null })
       await refresh()
     },
     [refresh, storage],
