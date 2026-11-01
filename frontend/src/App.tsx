@@ -10,6 +10,7 @@ import { AssetsPage } from './pages/AssetsPage'
 import { ComparePage } from './pages/ComparePage'
 import { EvidencePage } from './pages/EvidencePage'
 import { FlowWorkspace } from './pages/FlowWorkspace'
+import { MatrixPage } from './pages/MatrixPage'
 import { OverviewPage } from './pages/OverviewPage'
 
 export default function App() {
@@ -48,6 +49,8 @@ export default function App() {
             <AssistantPage />
           ) : currentPage === 'compare' ? (
             <ComparePage />
+          ) : currentPage === 'matrix' ? (
+            <MatrixPage />
           ) : currentPage === 'evidence' ? (
             <EvidencePage />
           ) : currentPage === 'assets' ? (

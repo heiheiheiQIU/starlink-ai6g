@@ -1627,6 +1627,145 @@ button {
   line-height: 1.6;
 }
 
+/* ═══ 实验矩阵页 ═══ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.kpi-card {
+  position: relative;
+  min-height: 108px;
+  padding: 16px 18px;
+  overflow: hidden;
+  background: #102337;
+  border: 1px solid #294158;
+  border-radius: 15px;
+  box-shadow: var(--glass-highlight);
+}
+
+.kpi-card span {
+  display: block;
+  color: #7e97aa;
+  font-size: 14px;
+}
+
+.kpi-card strong {
+  display: block;
+  margin-top: 10px;
+  color: #6fd2e5;
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 30px;
+}
+
+.kpi-card small {
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+  color: #4b6b84;
+  font-size: 14px;
+}
+
+.matrix-grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 8px;
+}
+
+.matrix-grid th {
+  padding: 8px 10px;
+  color: #7e97aa;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.matrix-grid .matrix-corner {
+  color: #4b6b84;
+  font-weight: 600;
+}
+
+.matrix-grid tbody th[scope='row'] {
+  min-width: 64px;
+  color: #a9c2d2;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.matrix-cell {
+  padding: 0;
+  background: #0a1c2e;
+  border: 1px solid #263f56;
+  border-radius: 12px;
+  vertical-align: top;
+}
+
+.matrix-cell__block {
+  padding: 8px 10px 10px;
+}
+
+.matrix-cell__block + .matrix-cell__block {
+  border-top: 1px dashed #263f56;
+}
+
+.matrix-cell__label {
+  margin: 0 0 6px;
+  color: #4b6b84;
+  font-size: 14px;
+}
+
+.matrix-cell__tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.matrix-tile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 6px;
+  align-items: center;
+  padding: 7px 8px;
+  color: #06121a;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.matrix-tile span {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.matrix-tile strong {
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 14px;
+  text-align: right;
+}
+
+.matrix-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  color: #7e97aa;
+  font-size: 14px;
+}
+
+.matrix-legend i {
+  width: 220px;
+  height: 10px;
+  background: linear-gradient(90deg, #9c3b3b, #b8860b, #2f9e6b);
+  border-radius: 5px;
+}
+
+.matrix-legend small {
+  margin-left: auto;
+  color: #4b6b84;
+  font-size: 14px;
+}
+
 /* ═══ 演示旁白与聚光灯（借鉴苗圃杯 demo-mode，零依赖） ═══ */
 .demo-spotlight {
   position: fixed;

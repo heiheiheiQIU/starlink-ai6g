@@ -6,6 +6,7 @@ const NAV_ICONS: Record<PageId, string> = {
   overview: '◫',
   assistant: '✦',
   compare: '⇄',
+  matrix: '▦',
   evidence: '✓',
   assets: '◇',
 }

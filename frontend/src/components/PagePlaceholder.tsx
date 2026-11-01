@@ -6,6 +6,7 @@ const PAGE_SUMMARIES: Record<PageId, string> = {
   overview: '汇总任务窗口、航天器健康风险与当前通信资源状态。',
   assistant: '围绕异常、策略依据和证据链进行可追溯问答。',
   compare: '在同一观测快照下对比多种遥测调度策略。',
+  matrix: '18 工况 × 10 轨迹的规则基线真实运行热力图。',
   evidence: '核验输入、预测版本、决策版本与执行回执。',
   assets: '管理契约样例、模型版本与前端可视化资源。',
 }

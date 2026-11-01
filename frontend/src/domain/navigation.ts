@@ -3,6 +3,7 @@ export type PageId =
   | 'overview'
   | 'assistant'
   | 'compare'
+  | 'matrix'
   | 'evidence'
   | 'assets'
 
@@ -29,6 +30,7 @@ export const NAV_GROUPS: readonly NavigationGroup[] = [
     label: '工作台',
     items: [
       { id: 'compare', label: '方案对比' },
+      { id: 'matrix', label: '实验矩阵' },
       { id: 'evidence', label: '证据链' },
       { id: 'assets', label: '资产管理' },
     ],
