@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.005" timestamp="2026-11-01T15:13:04.767080+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="tests.test_api_read_retry" name="test_status_recovers_after_multiple_read_locks" time="0.005"><failure message="PermissionError: Windows sharing violation">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_20261101/red_actual_tmp/test_status_recovers_after_mul0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002A846031A00&gt;
+
+    def test_status_recovers_after_multiple_read_locks(tmp_path, monkeypatch):
+        service, identity, folder = _completed_service(tmp_path)
+        attempts = _lock_three_reads(monkeypatch, folder / 'status.json')
+&gt;       assert service.status(identity)['status'] == 'completed'
+
+tests\test_api_read_retry.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+backend\api\service.py:122: in status
+    return RunStatusResponse.model_validate_json((folder/'status.json').read_text(encoding='utf-8')).model_dump()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_20261101/red_actual_tmp/test_status_recovers_after_mul0/run_eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/status.json')
+args = (), kwargs = {'encoding': 'utf-8'}
+
+    def locked(path, *args, **kwargs):
+        if path == target:
+            attempts.append(path)
+            if len(attempts) &lt;= 3:
+&gt;               raise PermissionError('Windows sharing violation')
+E               PermissionError: Windows sharing violation
+
+tests\test_api_read_retry.py:33: PermissionError</failure></testcase><testcase classname="tests.test_api_read_retry" name="test_reap_recovers_after_multiple_read_locks" time="0.440"><failure message="PermissionError: Windows sharing violation">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_20261101/red_actual_tmp/test_reap_recovers_after_multi0')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x000002A846032E40&gt;
+
+    def test_reap_recovers_after_multiple_read_locks(tmp_path, monkeypatch):
+        service, identity, folder = _completed_service(tmp_path)
+        process = multiprocessing.get_context('spawn').Process(target=_exit_worker)
+        process.start()
+        process.join(10)
+        assert process.exitcode == 0
+        service.jobs[identity] = (process, time.monotonic())
+        attempts = _lock_three_reads(monkeypatch, folder / 'status.json')
+        try:
+&gt;           service.reap()
+
+tests\test_api_read_retry.py:56: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+backend\api\service.py:67: in reap
+    state=json.loads((folder/'status.json').read_text(encoding='utf-8'))
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_20261101/red_actual_tmp/test_reap_recovers_after_multi0/run_eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee/status.json')
+args = (), kwargs = {'encoding': 'utf-8'}
+
+    def locked(path, *args, **kwargs):
+        if path == target:
+            attempts.append(path)
+            if len(attempts) &lt;= 3:
+&gt;               raise PermissionError('Windows sharing violation')
+E               PermissionError: Windows sharing violation
+
+tests\test_api_read_retry.py:33: PermissionError</failure></testcase></testsuite></testsuites>

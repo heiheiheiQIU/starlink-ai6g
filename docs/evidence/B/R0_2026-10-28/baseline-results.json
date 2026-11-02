@@ -1,0 +1,461 @@
+{
+  "date": "2026-10-28",
+  "role": "B",
+  "task": "R0",
+  "source_commit": "9acbd6b12e199f2de4eb9b32325009e80900e07a",
+  "status": "ready_for_review",
+  "main_checkout_all_tests_pass": false,
+  "snapshot_only_change": "configs/legacy_assets.json legacy_root points to local existing package",
+  "snapshot_source_unchanged_except_config": true,
+  "pip_check": "No broken requirements found.",
+  "asset_count": 7,
+  "package_files_verified_before_and_after": 148,
+  "historical_A1_evidence_unchanged": true,
+  "tests": [
+    {
+      "run": "pytest-default",
+      "tests": 61,
+      "passed": 4,
+      "failures": 5,
+      "errors": 52,
+      "skipped": 0,
+      "time_seconds": 6.598,
+      "exit_code": 1,
+      "failed_cases": [
+        {
+          "test": "tests.test_health::test_frozen_window_length_is_required_before_torch_import[1-1]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_frozen_window_length_is_required_before_torch_import[1-15]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_frozen_window_length_is_required_before_torch_import[15-1]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_frozen_window_length_is_required_before_torch_import[15.5-15]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_future_window_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_missing_feature_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_missing_checkpoint_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_corrupt_npz_is_stable_input_error[truncated]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_corrupt_npz_is_stable_input_error[empty]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_corrupt_npz_is_stable_input_error[invalid_format]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_empty_checkpoint_is_model_load_failure",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_pickled_module_is_model_load_failure",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_lstm_checkpoint_runs_two_distinct_windows",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_bilstm_checkpoint_requires_matching_architecture",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_wrong_architecture_fails_strictly",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_selected_window_nonfinite_input_is_rejected[nan]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_selected_window_nonfinite_input_is_rejected[inf]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_selected_window_nonfinite_input_is_rejected[-inf]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[nan]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[positive-infinity]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[negative-infinity]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[wrong-batch]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[missing-column]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[extra-column]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_package_root_is_rejected_without_any_asset_audit_or_write",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_package_descendant_outside_legacy_assets_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_output_destination_inside_package_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_output_sibling_with_package_name_prefix_is_allowed",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_inspect_cli_writes_only_inside_requested_output",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_inspect_cli_rejects_existing_child_link_before_any_write",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_asset_config_resolves_to_read_only_sibling_package",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_has_frozen_shape_and_units",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_target_npz_has_frozen_shape_and_units",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_matches_package_manifest",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_corrupt_npz_is_audit_error[truncated]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_corrupt_npz_is_audit_error[empty]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_corrupt_npz_is_audit_error[invalid_format]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_all_configured_assets_match_package_manifest",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_manifest_requires_one_matching_package_row[PackagePath,SourcePath,SHA256,Bytes,Purpose\\n]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_manifest_requires_one_matching_package_row[PackagePath,SourcePath,SHA256,Bytes,Purpose\\nasset.npz,,A,1,test\\nasset.npz,,A,1,test\\n]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_labels_match_fixed_csv_exactly",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_does_not_match_original_csv",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_label_lineage_rejects_npz_arrays_with_unequal_lengths",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change0]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change1]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change2]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change3]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change4]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change5]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change6]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change7]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change8]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_audit_rejects_inconsistent_schema[change9]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_adapter_rejects_bad_metadata_before_checkpoint[change0]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_adapter_rejects_bad_metadata_before_checkpoint[change1]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_adapter_rejects_bad_metadata_before_checkpoint[change2]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        },
+        {
+          "test": "tests.test_review_boundaries::test_adapter_rejects_bad_metadata_before_checkpoint[change3]",
+          "kind": "error",
+          "message": "failed on setup with \"PermissionError: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\yuzzz\\\\AppData\\\\Local\\\\Temp\\\\pytest-of-yuzzz'\""
+        }
+      ]
+    },
+    {
+      "run": "pytest-workspace-temp",
+      "tests": 61,
+      "passed": 36,
+      "failures": 5,
+      "errors": 20,
+      "skipped": 0,
+      "time_seconds": 2.42,
+      "exit_code": 1,
+      "failed_cases": [
+        {
+          "test": "tests.test_health::test_future_window_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_missing_feature_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_missing_checkpoint_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_empty_checkpoint_is_model_load_failure",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_pickled_module_is_model_load_failure",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_lstm_checkpoint_runs_two_distinct_windows",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_bilstm_checkpoint_requires_matching_architecture",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_wrong_architecture_fails_strictly",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[nan]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[positive-infinity]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[negative-infinity]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[wrong-batch]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[missing-column]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_health::test_invalid_model_output_is_rejected[extra-column]",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_package_root_is_rejected_without_any_asset_audit_or_write",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_package_descendant_outside_legacy_assets_is_rejected",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_inspect_cli_writes_only_inside_requested_output",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_inspect_cli_rejects_existing_child_link_before_any_write",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_asset_config_resolves_to_read_only_sibling_package",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_has_frozen_shape_and_units",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_target_npz_has_frozen_shape_and_units",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_matches_package_manifest",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_all_configured_assets_match_package_manifest",
+          "kind": "failure",
+          "message": "FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery"
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_labels_match_fixed_csv_exactly",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        },
+        {
+          "test": "tests.test_legacy_audit::test_source_npz_does_not_match_original_csv",
+          "kind": "error",
+          "message": "failed on setup with \"FileNotFoundError: D:\\人工智能挑战赛\\交付包\\星地智调_团队研发包_2026-10-26_v3\\assets\\legacy_battery\""
+        }
+      ]
+    },
+    {
+      "run": "pytest-snapshot",
+      "tests": 61,
+      "passed": 61,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "time_seconds": 8.989,
+      "exit_code": 0,
+      "failed_cases": []
+    }
+  ]
+}

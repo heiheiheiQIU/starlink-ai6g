@@ -1,0 +1,152 @@
+{
+  "duplicate_rejected_before_teacher": true,
+  "independent_split_order_verified": true,
+  "candidate": "8f206b4f6d029ddaf3cfd6163777e0c9a57b03ee",
+  "artifact_sha256": {
+    "data/teacher/a_n3_20_v2/samples.jsonl": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "data/teacher/a_n3_20_v2/summary.json": "1d435bd1ea0934cb5c5c85ee5f89525a90e1110f8554fcd730976b3404bb4df1",
+    "data/teacher/a_n3_20_v2/manifest.json": "1e0b3ec11528c90f0ce514e9972d85b398ebf0a0657c78b186dbcb6dd8b5ace9",
+    "data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+    "data/teacher/sources/a_n3_20_v2.jsonl": "6f099d8845dfa997c271399db5b43c348fa330c7a2b7316d8a5aaa20d89caf8d",
+    "configs/teacher.json": "1497a5f02754f76a3f355893d3f2cd9178525fc0d9d329eba03466faee62c795",
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/policies/teacher.py": "8e6178726bb763ddc28563bf382ec3b1cc5ddf9d7636e5ed6525cf144444d573",
+    "training/policy_features.py": "a2cfc11172f6fe7141d2d27f773c052cb642409eaf017e24ccd762d520e8b204"
+  },
+  "recomputed_count": 20,
+  "label_matches": 20,
+  "nominal_split_counts": {
+    "train": 12,
+    "validation": 4,
+    "test": 4
+  },
+  "nominal_split_disjoint": true,
+  "unique_semantic_observations": 20,
+  "duplicates_ignoring_run_and_policy_id": [],
+  "cross_split_duplicates": [],
+  "normalization": "deferred-until-training",
+  "training_enabled": false,
+  "details": [
+    {
+      "sample_id": "h02_v2_00",
+      "status": "OPTIMAL",
+      "elapsed_ms": 5.720299988752231,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_01",
+      "status": "OPTIMAL",
+      "elapsed_ms": 16.745600005378947,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_02",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.906699985032901,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_03",
+      "status": "OPTIMAL",
+      "elapsed_ms": 31.280099996365607,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_04",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.7288999990560114,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_05",
+      "status": "OPTIMAL",
+      "elapsed_ms": 20.73640000890009,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_06",
+      "status": "OPTIMAL",
+      "elapsed_ms": 5.274399998597801,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_07",
+      "status": "OPTIMAL",
+      "elapsed_ms": 17.090799985453486,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_08",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.354700001887977,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_09",
+      "status": "OPTIMAL",
+      "elapsed_ms": 28.47489999840036,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_10",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.710399974603206,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_11",
+      "status": "OPTIMAL",
+      "elapsed_ms": 17.488499986939132,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_12",
+      "status": "OPTIMAL",
+      "elapsed_ms": 5.120900023030117,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_13",
+      "status": "OPTIMAL",
+      "elapsed_ms": 6.784900004277006,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_14",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.239299996290356,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_15",
+      "status": "OPTIMAL",
+      "elapsed_ms": 44.500799995148554,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_16",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.6539999817032367,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_17",
+      "status": "OPTIMAL",
+      "elapsed_ms": 6.732300011208281,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_18",
+      "status": "OPTIMAL",
+      "elapsed_ms": 5.007399973692372,
+      "label_matches": true
+    },
+    {
+      "sample_id": "h02_v2_19",
+      "status": "OPTIMAL",
+      "elapsed_ms": 8.003800001461059,
+      "label_matches": true
+    }
+  ],
+  "scope": "synthetic teacher data only"
+}
