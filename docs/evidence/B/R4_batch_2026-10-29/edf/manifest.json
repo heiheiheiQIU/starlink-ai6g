@@ -1,0 +1,42 @@
+{
+  "artifacts_sha256": {
+    "config.json": "db9928a82cf8d5fc5a7be4b4d12401a4871ce12f7438b244178c07a9d6e6efe0",
+    "energy_ledger.json": "00ac22d6f2cbda75362abded9b31e3bcac96f261e210c9d400f34f1616647f61",
+    "events.jsonl": "6d4161cf196425f1b2a42f34a0c431d4b76720c2ebebf295e0b25466330aaacb",
+    "execution.log": "5ea63f7236fdac4e78caf1ab10f7f39381f4d8b39ceefd8db70f8b634cb3098c",
+    "results.json": "4aa75507f1a8948fbf61d22d21f9ad2eb4ae8e2d574525b1339fa0344a31f060"
+  },
+  "code_revision": "56e2cf82f4e0a523c67f7ed9f096040fea994fef",
+  "config_hash": "db9928a82cf8d5fc5a7be4b4d12401a4871ce12f7438b244178c07a9d6e6efe0",
+  "input_hash": "b928d504ce5c9b5f9a57457649736b3a503ce6b7dc9562c163c5bc82601b8602",
+  "is_policy_benchmark": false,
+  "is_real_satellite_measurement": false,
+  "kind": "rule_validation",
+  "model_hash": null,
+  "policy_id": "edf",
+  "policy_version": "edf-r4-v1",
+  "protocol_stage": "receive_ack_retry_dedup",
+  "run_id": "r3_eb04423eb881451e86f03dbb8a40fb08",
+  "source": "synthetic",
+  "source_sha256": {
+    "backend/cli.py": "892b7629fb229fbca6c4981feb6d5bde9fed5b5e0857f75236a76f6146e4e964",
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/evaluation.py": "1c86e349d0c3256e6f8ae82f53d30e4f5abd6cffd77596cd56fe4229359ecd53",
+    "backend/policies/__init__.py": "76940b2a453bc01e9b8844a1e61c4ecc11ab69f6beb2fc88f94a48d2e8e06d26",
+    "backend/policies/common.py": "ee035d8547a63437fcd09fa3f521e9cafacf97dc26f042f0b05e2d69cb97f6cb",
+    "backend/policies/edf.py": "9806c2a9e9da72104f7a1e102f4d4e84f4ef02133510a073086e49cfbc97827c",
+    "backend/policies/guard.py": "d241aaa4e04db42bf0fca53faaacf1b5cb12b95938629245b2007c74744d049e",
+    "backend/policies/runner.py": "1255e0cad5333d4f2261a7efe801134b240cc63f15f2ba4c0dcf4e79cd41d8a8",
+    "backend/policies/teacher.py": "7de53b9d8712e94e0953dcd6a3cdf0a2dc94049323600a80a52cc9fcf96dd8cf",
+    "backend/policies/value.py": "1d9be9699746cff53b80f75d5f8c77c679b9b947db52835099efb6ac3f52a817",
+    "backend/simulator/__init__.py": "b94dc8d98b60b9219d00698c6622023dc45e6853436edbb0ae2c344c9492d59f",
+    "backend/simulator/energy.py": "b1afe137f9284647face8f3cfc86d4594d7843191ae5f2c1ccc630537d64bef3",
+    "backend/simulator/engine.py": "61dbbcbad90dfdf192541befff1f9f0e74c6872096b3c1361066f36e1be02731",
+    "backend/simulator/link.py": "90556f6431f90423b888f9060c826f638dc2086445e331909ff9d95ff1e34b49",
+    "backend/simulator/protocol.py": "863501f5531ce72da0d07b0b8543845e09c2977f3f4e80fcf21a709044db579f",
+    "backend/simulator/queue.py": "059099298309f5c34a8051e198a6ec62729537118b32d7a8409d40a0044ee852",
+    "backend/simulator/r3_engine.py": "b2d56d490c4880ebc2e3cd44b99e66a1270e939cd4086c36eb279acb9947f90c"
+  },
+  "status_hash_note": "status written last; manifest and status excluded from self-referential hashes",
+  "trace_hash": "b928d504ce5c9b5f9a57457649736b3a503ce6b7dc9562c163c5bc82601b8602"
+}

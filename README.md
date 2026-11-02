@@ -1,5 +1,19 @@
 # 星地智调产品集成目录
 
+2026-10-29 B-N3：已提供本机CPU五接口，EDF/value同run比较、后台进程隔离、分页、失败恢复和ZIP导出，待接收方复验。[启动与接口交接](docs/handoffs/H03_api_2026-10-29.md)。H02教师首版可独立调用并支持无Git预跑，适用范围见[H02](docs/handoffs/H02_teacher_2026-10-29.md)。当前结果均为合成规则运行。
+
+```powershell
+.\.venv\Scripts\python.exe -m uvicorn backend.api.main:app --host 127.0.0.1 --port 8000 --workers 1
+```
+
+以下按日期保留历史阶段记录，当前能力以本段及相应交接为准。
+
+2026-10-29 R4：增加统一预测约束guard、EDF/价值规则、自主单策略运行与带预算教师首版。可在合成输入上独立运行；[H02调用与限制](docs/handoffs/H02_teacher_2026-10-29.md)说明A如何生成一条标签。教师是小规模有限树搜索，真实学习策略、成熟强优化基线、随机链路与API仍待后续。
+
+```powershell
+.\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy edf --output runs/my_r4_edf
+.\.venv\Scripts\python.exe -m backend.policies.teacher --preflight --output runs/my_r4_teacher
+```
 2026-10-29 R3回执修复：按C的changes_requested锁定超时重传块、传播公开能量下界，并支持无Git发行副本；新增6项回归，定向70/全库248通过，待C复验。当前提供H00兼容离线产物；五API和C前端导入仍待后续。见[修复记录](docs/evidence/B/R3_review_2026-10-29/README.md)。
 
 2026-10-29 R3：B已增加显式启用的确定性接收/ACK/超时重传/去重环境、事件评价器和单策略运行导出；使用synthetic健康输入与manual动作脚本。可独立复跑，不依赖A模型或C页面。实现与验收范围见[R3交接](docs/handoffs/B_R3_protocol_2026-10-29.md)；尚未签收时不视为B-N2整体完成。

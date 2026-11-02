@@ -9,7 +9,7 @@ from typing import Literal
 from uuid import uuid4
 
 from pydantic import model_validator
-from backend.contracts import Action, ContractModel, NonNegativeFloat, PositiveFloat, RunResult, RunStatusResponse
+from backend.contracts import Action, ContractModel, JsonValue, NonNegativeFloat, PositiveFloat, RunResult, RunStatusResponse
 from backend.evaluation import evaluate
 from backend.simulator.engine import ScenarioConfig, create_state, step
 
@@ -21,10 +21,11 @@ class TimedAction(ContractModel):
 
 class RunConfig(ContractModel):
     schema_version: Literal['1.0']
-    kind: Literal['manual_validation']
+    kind: Literal['manual_validation','rule_validation']
     scenario: ScenarioConfig
     evaluation_end_s: PositiveFloat
     actions: list[TimedAction]
+    policy_runtime: dict[str,JsonValue] | None = None
     code_revision: str | None = None
 
     @model_validator(mode='after')
@@ -51,26 +52,30 @@ def _write_json(path: Path, value):
     temporary.replace(path)
 
 
-def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None = None) -> dict:
+def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None = None,
+                   _policy_id='manual', _executor=None, _runtime=None) -> dict:
     parsed = RunConfig.model_validate(config)
+    if parsed.kind=='rule_validation' and _executor is None:
+        raise ValueError('Use policy-run for automatic rule configurations')
     if output.exists() and (not output.is_dir() or any(output.iterdir())):
         raise ValueError('Output directory must be new or empty')
     output.mkdir(parents=True,exist_ok=True)
     identity = run_id if run_id is not None else 'r3_'+uuid4().hex
-    state = create_state(parsed.scenario,run_id=identity,policy_id='manual')
+    state = create_state(parsed.scenario,run_id=identity,policy_id=_policy_id)
     config_data = parsed.model_dump()
+    if _runtime is not None: config_data['policy_runtime']=_runtime
     def status(value,error=None):
         model = RunStatusResponse(run_id=identity,status=value,progress=1.0 if value=='completed' else None,
-            active_policies=['manual'] if value=='running' else [],error=error)
+            active_policies=[_policy_id] if value=='running' else [],error=error)
         _write_json(output/'status.json',model.model_dump())
     events = []
     log = output/'execution.log'
     status('running')
     try:
         _write_json(output/'config.json',config_data)
-        log.write_text('R3 synthetic manual validation started\n',encoding='utf-8',newline='\n')
-        script = list(parsed.actions)
-        if not script or script[0].time_s > 0:
+        log.write_text('R4 synthetic validation started\n',encoding='utf-8',newline='\n')
+        script = list(parsed.actions) if _executor is None else []
+        if _executor is None and (not script or script[0].time_s > 0):
             script.insert(0,TimedAction(time_s=0.0,action=Action(task_id=None,mode='idle',scheduled_bytes=0,
                 reason_codes=[],fallback=False)))
         for index,item in enumerate(script):
@@ -78,14 +83,17 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
             result = step(state,item.action,end-item.time_s)
             state = result.next_state
             events.extend(result.events)
+        if _executor is not None:
+            state,events=_executor(state,parsed.evaluation_end_s)
         (output/'events.jsonl').write_text(''.join(e.model_dump_json()+'\n' for e in events),
             encoding='utf-8',newline='\n')
         _write_json(output/'energy_ledger.json',[asdict(row) for row in state.energy_ledger])
         metrics = evaluate(events,dict(scenario=parsed.scenario.model_dump(),
-            evaluation_end_s=parsed.evaluation_end_s,policy_id='manual'))
+            evaluation_end_s=parsed.evaluation_end_s,policy_id=_policy_id))
         root = Path(__file__).resolve().parents[1]
         files = [root/'backend/contracts.py',root/'backend/evaluation.py',root/'backend/cli.py',
                  *sorted((root/'backend/simulator').glob('*.py'))]
+        if _executor is not None: files.extend(sorted((root/'backend/policies').glob('*.py')))
         source_hashes={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         try:
             git = subprocess.run(['git','rev-parse','HEAD'],cwd=root,capture_output=True,text=True,check=False)
@@ -110,10 +118,10 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         _write_json(output/'results.json',result)
         with log.open('a',encoding='utf-8',newline='\n') as stream:
             stream.write(f'validated {len(events)} events through {state.sim_time_s} seconds\n')
-        manifest = dict(kind='manual_validation',source='synthetic',run_id=identity,policy_id='manual',
+        manifest = dict(kind=parsed.kind,source='synthetic',run_id=identity,policy_id=_policy_id,
             protocol_stage='receive_ack_retry_dedup',is_real_satellite_measurement=False,
             is_policy_benchmark=False,config_hash=config_hash,input_hash=input_hash,trace_hash=_hash(external),
-            model_hash=None,policy_version='manual-r3-v1',code_revision=revision,
+            model_hash=None,policy_version=_runtime['policy_version'] if _runtime else 'manual-r3-v1',code_revision=revision,
             source_sha256=source_hashes,
             artifacts_sha256={name:hashlib.sha256((output/name).read_bytes()).hexdigest() for name in
                 ('config.json','events.jsonl','results.json','energy_ledger.json','execution.log')},
@@ -138,8 +146,16 @@ def main():
     command = commands.add_parser('run')
     command.add_argument('--config',type=Path,required=True)
     command.add_argument('--output',type=Path,required=True)
+    rule=commands.add_parser('policy-run')
+    rule.add_argument('--config',type=Path,required=True)
+    rule.add_argument('--policy',choices=['edf','value'],required=True)
+    rule.add_argument('--output',type=Path,required=True)
     args = parser.parse_args()
-    result = run_experiment(json.loads(args.config.read_text(encoding='utf-8')),args.output)
+    config=json.loads(args.config.read_text(encoding='utf-8'))
+    if args.command=='policy-run':
+        from backend.policies.runner import run_policy
+        result=run_policy(config,args.output,policy_id=args.policy)
+    else: result=run_experiment(config,args.output)
     print(json.dumps(dict(run_id=result['run_id'],status=result['status']),ensure_ascii=False))
 
 
