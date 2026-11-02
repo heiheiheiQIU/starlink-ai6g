@@ -118,6 +118,30 @@ def test_wrong_weights_hash_is_controlled(tmp_path):
     assert error.value.code == "MODEL_HASH"
 
 
+def test_damaged_zip_is_controlled_model_format(tmp_path):
+    config = write_package(tmp_path)
+    weights = Path(config["package_dir"]) / "weights.npz"
+    raw = b"PK\x03\x04broken archive payload"
+    weights.write_bytes(raw)
+    config["weights_sha256"] = hashlib.sha256(raw).hexdigest()
+
+    with pytest.raises(LearnedPolicyError) as error:
+        score_actions(observation(), config=config)
+    assert error.value.code == "MODEL_FORMAT"
+
+
+def test_truncated_zip_is_controlled_model_format(tmp_path):
+    config = write_package(tmp_path)
+    weights = Path(config["package_dir"]) / "weights.npz"
+    raw = weights.read_bytes()[:-22]
+    weights.write_bytes(raw)
+    config["weights_sha256"] = hashlib.sha256(raw).hexdigest()
+
+    with pytest.raises(LearnedPolicyError) as error:
+        score_actions(observation(), config=config)
+    assert error.value.code == "MODEL_FORMAT"
+
+
 @pytest.mark.parametrize(
     "mutation, expected",
     [

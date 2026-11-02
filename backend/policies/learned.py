@@ -9,6 +9,7 @@ import json
 import math
 from pathlib import Path
 import re
+import zipfile
 
 import numpy as np
 
@@ -163,7 +164,7 @@ def _load_bundle(
             arrays = {name: np.array(archive[name], copy=True) for name in archive.files}
     except LearnedPolicyError:
         raise
-    except (OSError, ValueError, TypeError) as error:
+    except (OSError, ValueError, TypeError, zipfile.BadZipFile, EOFError) as error:
         raise LearnedPolicyError("MODEL_FORMAT", type(error).__name__) from error
     for name, shape in ARRAY_SHAPES.items():
         array = arrays[name]
