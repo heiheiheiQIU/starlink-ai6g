@@ -1,0 +1,61 @@
+{
+  "artifact_paths": {
+    "config.json": "config.json",
+    "energy_ledger.json": "energy_ledger.json",
+    "events.jsonl": "events.jsonl",
+    "execution.log": "execution.log",
+    "manifest.json": "manifest.json",
+    "results.json": "results.json",
+    "status.json": "status.json"
+  },
+  "by_policy": [
+    {
+      "critical_task_success_rate": null,
+      "decision_p50_ms": null,
+      "decision_p95_ms": null,
+      "energy_violation_count": 0,
+      "energy_violation_duration_s": null,
+      "evaluation_end_s": 10.0,
+      "goodput_bps": 2000.0,
+      "joule_per_success_bit": 0.02271328125,
+      "memory_bytes": null,
+      "metric_reasons": {
+        "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+        "decision_p50_ms": "NOT_MEASURED_MANUAL_VALIDATION",
+        "decision_p95_ms": "NOT_MEASURED_MANUAL_VALIDATION",
+        "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+        "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+        "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION",
+        "timeout_rate": "NOT_MEASURED_MANUAL_VALIDATION"
+      },
+      "minimum_soc_true": 0.4936907552083336,
+      "model_hash": null,
+      "parameter_count": null,
+      "pending_task_count": 0,
+      "policy_id": "manual",
+      "sample_count": 1,
+      "success_payload_bytes": 2500,
+      "timeout_rate": null,
+      "wait_p50_s": 0.0,
+      "wait_p95_s": 0.0,
+      "weighted_on_time_rate": 1.0
+    }
+  ],
+  "code_revision": "e4953f4ac9898b24fc36a1494cd2efb28d904d81",
+  "config_hash": "7902e2314ed6b0d852f32019a335907a4aded7a4cb85e30e5fc5715d5417c754",
+  "input_hash": "b928d504ce5c9b5f9a57457649736b3a503ce6b7dc9562c163c5bc82601b8602",
+  "metric_definitions": {
+    "details": "docs/metrics.md; synthetic manual validation; no comparative performance claim",
+    "energy_violation_count": "Count of negative unclipped energy ledger segments; not independent episodes",
+    "goodput_bps": "Unique payload bits / evaluation_end_s",
+    "joule_per_success_bit": "All satellite consumption J / unique received payload bits",
+    "pending_task_count": "Arrived tasks with deadline after evaluation end, regardless of early receipt",
+    "success_payload_bytes": "Unique received payload bytes including partial tasks and late data",
+    "weighted_on_time_rate": "Sum on-time complete task weights / all arrived due task weights"
+  },
+  "model_hash": null,
+  "run_id": "r3_8de1441dd2e74825916753f2eb0c050e",
+  "schema_version": "1.0",
+  "seed": 0,
+  "status": "completed"
+}
