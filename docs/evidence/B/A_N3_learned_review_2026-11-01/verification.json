@@ -1,0 +1,160 @@
+{
+  "candidate": "11c00374d88dbbc5138c7b2c65029317befa989c",
+  "observations": [
+    {
+      "sample_id": "h02_v2_00",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_01",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_02",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_03",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_04",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_05",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_06",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_07",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_08",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_09",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_10",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_11",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_12",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_13",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_14",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_15",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_16",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_17",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_18",
+      "candidates": 3,
+      "finite": true,
+      "input_unchanged": true
+    },
+    {
+      "sample_id": "h02_v2_19",
+      "candidates": 5,
+      "finite": true,
+      "input_unchanged": true
+    }
+  ],
+  "train_normalization_independently_recomputed": true,
+  "selection_by_validation_verified": true,
+  "test_once_evidence": "Source control-flow and frozen summary reviewed; historical execution count not independently provable from artifacts",
+  "structural_inflight_mask_verified": true,
+  "empty_candidates_idle_verified": true,
+  "failures": {
+    "missing": "MODEL_MISSING",
+    "hash": "MODEL_HASH",
+    "format": "MODEL_FORMAT",
+    "nan": "MODEL_NONFINITE"
+  },
+  "invalid_input_controlled": true,
+  "fallbacks": {
+    "exception": {
+      "fallback": true,
+      "reason": "MODEL_UNAVAILABLE"
+    },
+    "timeout": {
+      "fallback": true,
+      "reason": "MODEL_TIMEOUT"
+    }
+  },
+  "latency_ms": {
+    "cold_load_first_score": 2.217800007201731,
+    "warm_calls": 1000,
+    "median": 0.49870001384988427,
+    "p95": 0.6808599981013681,
+    "maximum": 1.1121000279672444
+  },
+  "environment": {
+    "python": "3.12.14",
+    "numpy": "2.1.3",
+    "pydantic": "2.12.3"
+  },
+  "scope": "Synthetic frozen small-sample inference and interface behavior; not policy runner/API integration or generalization"
+}

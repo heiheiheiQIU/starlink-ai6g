@@ -1,0 +1,6 @@
+{
+  "error_code": "OBSERVATION_INVALID",
+  "exit_code": 2,
+  "message": "OBSERVATION_INVALID: Observation source must be synthetic",
+  "status": "rejected"
+}

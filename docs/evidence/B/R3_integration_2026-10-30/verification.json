@@ -1,0 +1,23 @@
+{
+  "candidate_revision": "cac4b909e2ba3ffdcb6e89e177213bd2055a81f0",
+  "targeted_passed": 70,
+  "full_passed": 248,
+  "runs": {
+    "isolated_ack_loss": {
+      "run_id": "r3_6bd538f70c5a4c0e883aa1d24e1974d7",
+      "code_revision": "unversioned-source-sha256:9240f96a7c1169b887954c6f83d421420e90c8be9165dd04fa642002ca4247ee",
+      "success_payload_bytes": 1024,
+      "joule_per_success_bit": 0.04443359375,
+      "hashes_verified": true
+    },
+    "isolated_multiblock": {
+      "run_id": "r3_088a1be786684b18ae196e156dc37e6f",
+      "code_revision": "unversioned-source-sha256:9240f96a7c1169b887954c6f83d421420e90c8be9165dd04fa642002ca4247ee",
+      "success_payload_bytes": 2500,
+      "joule_per_success_bit": 0.02271328125,
+      "hashes_verified": true
+    }
+  },
+  "git_discovery_isolation": "GIT_CEILING_DIRECTORIES set to candidate parent",
+  "excluded_attempts": "integration_ack_loss/multiblock inherited outer HEAD; not used as revision evidence"
+}

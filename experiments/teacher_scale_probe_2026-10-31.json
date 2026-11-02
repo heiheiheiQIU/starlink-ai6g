@@ -1,0 +1,26 @@
+{
+  "kind": "synthetic_teacher_capacity_probe_not_training_data",
+  "budget_ms": 1000,
+  "repeats": 2,
+  "batch_generation_status": "awaiting_A_interface_confirmation",
+  "scenes": [
+    {"id":"sparse","tasks":1,"window_s":12,"robust_bps":8192,"energy_lower_Wh":9,"forecast_loss":0},
+    {"id":"deadline_conflict","tasks":2,"window_s":12,"robust_bps":8192,"energy_lower_Wh":9,"forecast_loss":0},
+    {"id":"medium","tasks":4,"window_s":12,"robust_bps":8192,"energy_lower_Wh":9,"forecast_loss":0},
+    {"id":"dense","tasks":8,"window_s":12,"robust_bps":8192,"energy_lower_Wh":9,"forecast_loss":0},
+    {"id":"short_window","tasks":2,"window_s":2,"robust_bps":8192,"energy_lower_Wh":9,"forecast_loss":0},
+    {"id":"low_rate","tasks":2,"window_s":12,"robust_bps":2048,"energy_lower_Wh":9,"forecast_loss":0},
+    {"id":"low_energy","tasks":2,"window_s":12,"robust_bps":8192,"energy_lower_Wh":0.51,"forecast_loss":0},
+    {"id":"loss_support_boundary","tasks":2,"window_s":12,"robust_bps":8192,"energy_lower_Wh":9,"forecast_loss":0.1}
+  ],
+  "later_trajectory_matrix": {
+    "task_density":[1,2,4,8], "priority":["uniform","critical_conflict"],
+    "window":["normal","short","delayed","none"],
+    "link_rate":["normal","low"], "data_loss":[0,0.1], "ack_loss":[0,0.1],
+    "health":["normal","low_soc","missing_rul"], "energy":["normal","reserve_boundary"],
+    "sampling":"real_state_evolution_max4_states_per_source_group",
+    "split":"group_before_derived_state_sampling",
+    "pairing":"freeze_task_channel_energy_inputs_and_hashes",
+    "note":"Use representative combinations, not the full Cartesian product; unsupported teacher rows retained and excluded from approved labels."
+  }
+}

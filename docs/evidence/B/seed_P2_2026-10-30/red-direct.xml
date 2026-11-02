@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.548" timestamp="2026-10-30T16:30:40.300718+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="tests.test_api" name="test_direct_seed_metadata_preserves_deterministic_physics" time="0.007"><failure message="pydantic_core._pydantic_core.ValidationError: 1 validation error for RunConfig&#10;seed&#10;  Extra inputs are not permitted [type=extra_forbidden, input_value=0, input_type=int]&#10;    For further information visit https://errors.pydantic.dev/2.12/v/extra_forbidden">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/seed_p2/red_direct/test_direct_seed_metadata_pres0')
+
+    def test_direct_seed_metadata_preserves_deterministic_physics(tmp_path):
+        from backend.cli import RunConfig
+        from backend.policies.runner import run_policy
+        from pydantic import ValidationError
+        from backend.simulator.channel import ChannelConfig
+        config=run_config(actions=[])
+        for invalid in (-1,1.5,True):
+            with pytest.raises(ValidationError):RunConfig.model_validate(dict(config,seed=invalid))
+        config['scenario']['channel']=ChannelConfig(seed=7).model_dump()
+        with pytest.raises(ValidationError):RunConfig.model_validate(dict(config,seed=8))
+        config['scenario'].pop('channel')
+        outcomes=[]
+        for seed in (0,7):
+            folder=tmp_path/str(seed)
+&gt;           result=run_policy(dict(config,seed=seed),folder,policy_id='edf')
+
+tests\test_api.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+config = {'actions': [], 'evaluation_end_s': 7.0, 'kind': 'manual_validation', 'scenario': {'capacity_Wh': 20.0, 'forecast_vers... [{'available_at_s': 0.0, 'capacity_Wh_est': 20.0, 'capacity_lower_Wh': 20.0, 'energy_lower_Wh': 9.0, ...}], ...}, ...}
+output = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/seed_p2/red_direct/test_direct_seed_metadata_pres0/0')
+
+    def run_policy(config, output, *, policy_id='edf', run_id=None):
+        from backend.cli import RunConfig, run_experiment
+        from backend.simulator.engine import observe, step
+        from . import edf, value
+        modules={'edf':edf,'value':value}
+        if policy_id not in modules: raise ValueError('Supported rule policies: edf, value')
+&gt;       parsed=RunConfig.model_validate(config)
+E       pydantic_core._pydantic_core.ValidationError: 1 validation error for RunConfig
+E       seed
+E         Extra inputs are not permitted [type=extra_forbidden, input_value=0, input_type=int]
+E           For further information visit https://errors.pydantic.dev/2.12/v/extra_forbidden
+
+backend\policies\runner.py:55: ValidationError</failure></testcase></testsuite></testsuites>

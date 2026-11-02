@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "method": "synthetic_absolute_margin",
+  "soc_abs_error": 0.05,
+  "capacity_abs_error_Wh": 1.0,
+  "model_version": "synthetic-health-v1"
+}

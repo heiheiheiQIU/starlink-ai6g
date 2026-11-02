@@ -1,0 +1,34 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "Manual UI state example; completed events/results must be fetched from a real run.",
+  "status": {
+    "run_id": "fixture_api_failed",
+    "status": "failed",
+    "progress": null,
+    "active_policies": [],
+    "error": {
+      "code": "INTERNAL_RUN_ERROR",
+      "message": "Contract fixture failure",
+      "details": {
+        "reason": "FIXTURE_ONLY"
+      }
+    }
+  },
+  "events": {
+    "run_id": "fixture_api_failed",
+    "events": [],
+    "next_after": 0,
+    "has_more": false
+  },
+  "results_error": {
+    "http_status": 409,
+    "body": {
+      "code": "RUN_NOT_COMPLETE",
+      "message": "Run is not complete",
+      "details": {
+        "status": "failed"
+      }
+    }
+  }
+}

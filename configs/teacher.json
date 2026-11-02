@@ -1,0 +1,20 @@
+{
+  "version": "bounded-forecast-r4-v1",
+  "policy": {
+    "decision_dt_s": 2.0,
+    "slot_s": 1.0,
+    "base_W": 36.0,
+    "compute_W": 0.0,
+    "solar_W": 0.0,
+    "max_power_W": 150.0,
+    "reserve_Wh": 0.5,
+    "tx_power_W": {"robust": 36.0, "fast": 72.0},
+    "protocol": {"data_propagation_s": 0.0, "ack_propagation_s": 0.0, "control_bps": 1024.0, "ack_rx_W": 8.0}
+  },
+  "max_tasks": 12,
+  "max_steps": 120,
+  "max_windows": 3,
+  "max_nodes": 20000,
+  "candidate_budget_ms": 200.0,
+  "horizon_s": 240.0
+}

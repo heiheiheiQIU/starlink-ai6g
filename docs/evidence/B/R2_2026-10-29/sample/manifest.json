@@ -1,0 +1,23 @@
+{
+  "kind": "r2_synthetic_validation",
+  "source": "synthetic",
+  "protocol_stage": "send_only_ack_pending",
+  "is_real_satellite_measurement": false,
+  "is_policy_benchmark": false,
+  "run_id": "r2_minimal_validation",
+  "policy_id": "manual",
+  "code_revision": "39d7d11f86b25813293ab50207a47acaf19190ec",
+  "source_sha256": {
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/simulator/__init__.py": "b94dc8d98b60b9219d00698c6622023dc45e6853436edbb0ae2c344c9492d59f",
+    "backend/simulator/energy.py": "f9bccccc8da759fe0797c9fdcf4dcfa01ebe2bc57b7857b4e1a790406e15ee21",
+    "backend/simulator/engine.py": "5bc606dd79c24fc952ea826cce6716660e8e3b6342b554cfd2bfa8bab839ffb7",
+    "backend/simulator/link.py": "90556f6431f90423b888f9060c826f638dc2086445e331909ff9d95ff1e34b49",
+    "backend/simulator/queue.py": "059099298309f5c34a8051e198a6ec62729537118b32d7a8409d40a0044ee852"
+  },
+  "artifacts_sha256": {
+    "config.json": "81dfc21750440a55172d41ab559dab01170e5aa933cfad0af60132484438a534",
+    "events.jsonl": "d53bb082f739982d532c039e34541c9b45cf591c9321ab96dc9666ea6f816e69",
+    "energy_ledger.json": "9901fe117fcad5a23fd43998124cd4dcfa94f7fe2bae71774e80f726e23753a6"
+  }
+}

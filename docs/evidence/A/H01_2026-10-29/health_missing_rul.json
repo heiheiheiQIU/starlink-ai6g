@@ -1,0 +1,14 @@
+{
+  "kind": "H01_missing_rul_audit",
+  "note": "Audit view of the same successful estimate; not a second experiment",
+  "reason_codes": [
+    "SYNTHETIC_HEALTH_OBSERVATION",
+    "SCENARIO_CONSERVATIVE_BOUND",
+    "RUL_UNAVAILABLE"
+  ],
+  "rul_est": null,
+  "rul_unit": null,
+  "source_artifact": "health_success.json",
+  "source_artifact_sha256": "a2fa1b3fa777f321ee0b4d77d4b3a93ff2d1bf7c83cd16ff5a66eb50f01025a0",
+  "status": "accepted_with_missing_rul"
+}

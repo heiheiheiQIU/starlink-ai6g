@@ -1,5 +1,7 @@
 # 公共接口合同 v1.0 候选基线
 
+当前状态（2026-10-29）：H00修订c54c79d已获A/C签收并随干净集成进入main，见FREEZE_2026-10-29.md。下文候选状态文字保留为历史修订记录。当前五接口实现见docs/handoffs/H03_api_2026-10-29.md。
+
 状态：H00候选实现已准备，**ready_for_review；A/C尚未签收，不能称为已冻结**。Python类型位于`backend/contracts.py`，JSON Schema位于`configs/schema.json`；TypeScript镜像仍由C实现。以09手册补充为准。变更清单见[CHANGELOG](CHANGELOG.md)，发送单见[H00交接](../handoffs/H00_contract.md)。
 
 2026-10-29修订：针对A/C的changes_requested修复教师候选集合、单一预测批次和缺测原因冲突，补显式`validate_teacher_result(obs,result)`任务引用校验。此次是修复后待复测状态，旧回执尚未被accepted回执替代。新证据见[H00修订验证](../evidence/B/H00_revision_2026-10-29/README.md)。

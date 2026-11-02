@@ -1,0 +1,180 @@
+{
+  "assets": [
+    {
+      "asset_path": "assets/legacy_battery/data/processed/battery_source_windows.npz",
+      "purpose": "source_npz",
+      "sha256": "DE8EA216CC7F604B277EEFCAC7054CD6E439C22F413BDB18B870F59B11F55499",
+      "size_bytes": 87798,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\data\\processed\\battery_source_windows.npz",
+      "status": "manifest_verified"
+    },
+    {
+      "asset_path": "assets/legacy_battery/data/processed/battery_target_windows.npz",
+      "purpose": "target_npz",
+      "sha256": "E6D98DCF8F23302FB91D4651DBD237AF31BD89507E36566D1500C4E5F354BADC",
+      "size_bytes": 6850800,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\data\\processed\\battery_target_windows.npz",
+      "status": "manifest_verified"
+    },
+    {
+      "asset_path": "assets/legacy_battery/data/processed/public_battery.csv",
+      "purpose": "source_csv",
+      "sha256": "E3109551D0BA6873FC48D0CF983599B56539C22741D4D9FEAE1791D56951B740",
+      "size_bytes": 1215218,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\data\\processed\\public_battery.csv",
+      "status": "manifest_verified"
+    },
+    {
+      "asset_path": "assets/legacy_battery/results/models/battery_bilstm_coral_best.pt",
+      "purpose": "bilstm_coral",
+      "sha256": "756B58B7D528A49F3CFD03FB706B175139CEB3A1E3F4A834BAD6F2499F425694",
+      "size_bytes": 580185,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\results\\models\\battery_bilstm_coral_best.pt",
+      "status": "manifest_verified"
+    },
+    {
+      "asset_path": "assets/legacy_battery/results/models/battery_lstm_finetune_best.pt",
+      "purpose": "lstm_finetune",
+      "sha256": "569B7D2051607D68A7494304E6417CCD28964D45020615972ADA9CA4BA4F2A4C",
+      "size_bytes": 216693,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\results\\models\\battery_lstm_finetune_best.pt",
+      "status": "manifest_verified"
+    },
+    {
+      "asset_path": "assets/legacy_battery/results/models/battery_lstm_source_only.pt",
+      "purpose": "lstm_source",
+      "sha256": "3145020C539630E53DF15742033167B1F7FB667C946D01A7DD0A7D4106B9D893",
+      "size_bytes": 216661,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\results\\models\\battery_lstm_source_only.pt",
+      "status": "manifest_verified"
+    },
+    {
+      "asset_path": "assets/legacy_battery/results/p3-1/public_battery_fixed.csv",
+      "purpose": "fixed_source_csv",
+      "sha256": "86CF8C06C7CAA95762902786D04F6EABBF247047492668AC0BC04D3DB3915984",
+      "size_bytes": 1255005,
+      "source_path": "D:\\AI Agent\\Codex\\Codex-WorkSpace\\Challenge_Cup_xTrans-Lifespan\\challenge_phm\\results\\p3-1\\public_battery_fixed.csv",
+      "status": "manifest_verified"
+    }
+  ],
+  "environment": {
+    "cpu": "",
+    "device": "cpu",
+    "numpy": "2.1.3",
+    "python": "3.12.14",
+    "pytorch": "2.5.1+cpu"
+  },
+  "inference": {
+    "bilstm_coral": {
+      "checkpoint_sha256": "756B58B7D528A49F3CFD03FB706B175139CEB3A1E3F4A834BAD6F2499F425694",
+      "model_id": "battery_bilstm_coral_best",
+      "step_unit": "orbit",
+      "windows": [
+        {
+          "available_index": 14,
+          "raw_fraction": 1.1702452898025513,
+          "run_id": "battery_0001",
+          "start_index": 0
+        },
+        {
+          "available_index": 17,
+          "raw_fraction": 1.1421915292739868,
+          "run_id": "battery_0001",
+          "start_index": 3
+        }
+      ]
+    },
+    "lstm_source": {
+      "checkpoint_sha256": "3145020C539630E53DF15742033167B1F7FB667C946D01A7DD0A7D4106B9D893",
+      "model_id": "battery_lstm_source_only",
+      "step_unit": "cycle",
+      "windows": [
+        {
+          "available_index": 14,
+          "raw_fraction": 0.8055816292762756,
+          "run_id": "B0005",
+          "start_index": 0
+        },
+        {
+          "available_index": 17,
+          "raw_fraction": 0.7995225787162781,
+          "run_id": "B0005",
+          "start_index": 3
+        }
+      ]
+    }
+  },
+  "label_lineage": {
+    "fixed_csv": {
+      "comparable": 585,
+      "exact_matches": 585,
+      "max_abs_difference": 0.0,
+      "missing": 0
+    },
+    "original_csv": {
+      "comparable": 384,
+      "exact_matches": 262,
+      "max_abs_difference": 65.0,
+      "missing": 201
+    }
+  },
+  "npz": {
+    "source": {
+      "feature_names": [
+        "voltage_mean_V",
+        "voltage_min_V",
+        "voltage_end_V",
+        "current_mean_A",
+        "temperature_mean_C",
+        "temperature_max_C",
+        "capacity_Ah",
+        "resistance_Re_Ohm",
+        "resistance_Rct_Ohm",
+        "resistance",
+        "soc"
+      ],
+      "finite_x": true,
+      "finite_y": true,
+      "finite_y_fraction": true,
+      "rul_unit": "cycles",
+      "run_count": 20,
+      "shape": [
+        585,
+        15,
+        11
+      ],
+      "step_unit": "cycle",
+      "stride": 3,
+      "window_size": 15
+    },
+    "target": {
+      "feature_names": [
+        "voltage_mean_V",
+        "voltage_min_V",
+        "voltage_end_V",
+        "current_mean_A",
+        "temperature_mean_C",
+        "temperature_max_C",
+        "capacity_Ah",
+        "resistance_Re_Ohm",
+        "resistance_Rct_Ohm",
+        "resistance",
+        "soc"
+      ],
+      "finite_x": true,
+      "finite_y": true,
+      "finite_y_fraction": true,
+      "rul_unit": "orbits",
+      "run_count": 100,
+      "shape": [
+        79710,
+        15,
+        11
+      ],
+      "step_unit": "orbit",
+      "stride": 3,
+      "window_size": 15
+    }
+  },
+  "schema_version": "1.0"
+}

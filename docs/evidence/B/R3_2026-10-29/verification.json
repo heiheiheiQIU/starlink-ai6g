@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-29",
+  "task": "B_R3_independent_protocol_validation",
+  "status": "ready_for_review",
+  "base_commit": "d4716bf",
+  "source_commit": "0c18f6d8bf70cb709ff3aea3d461aad463d3bb35",
+  "full_tests_passed": 242,
+  "r3_tests_passed": 23,
+  "r2_tests_passed": 41,
+  "dependencies": "pip check passed",
+  "schema_sha256": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb",
+  "public_contract_unchanged": true,
+  "A_C_accepted": false,
+  "independent_review": {
+    "critical": 0,
+    "important": 2,
+    "minor": 0,
+    "fixed": 2,
+    "pending": 0
+  },
+  "actual_runs": [
+    {
+      "scenario": "normal",
+      "run_id": "r3_cdd1de0ec9734847a685ce46cfe89b87",
+      "success_payload_bytes": 1024,
+      "weighted_on_time_rate": 1.0,
+      "consumed_J": 290.125,
+      "joule_per_success_bit": 0.0354156494140625,
+      "artifact_hashes_verified": true,
+      "source_hashes_verified": true,
+      "event_energy_matches_ledger": true
+    },
+    {
+      "scenario": "multiblock",
+      "run_id": "r3_428ba615edfd4b2091fadfa54e74865d",
+      "success_payload_bytes": 2500,
+      "weighted_on_time_rate": 1.0,
+      "consumed_J": 454.265625,
+      "joule_per_success_bit": 0.02271328125,
+      "artifact_hashes_verified": true,
+      "source_hashes_verified": true,
+      "event_energy_matches_ledger": true
+    },
+    {
+      "scenario": "ack_loss",
+      "run_id": "r3_6f5ba97e1293439f982c11ff742175a7",
+      "success_payload_bytes": 1024,
+      "weighted_on_time_rate": 1.0,
+      "consumed_J": 364.0,
+      "joule_per_success_bit": 0.04443359375,
+      "artifact_hashes_verified": true,
+      "source_hashes_verified": true,
+      "event_energy_matches_ledger": true
+    },
+    {
+      "scenario": "no_delivery",
+      "run_id": "r3_46e8e87476354f038de24cfdfcb72768",
+      "success_payload_bytes": 0,
+      "weighted_on_time_rate": 0.0,
+      "consumed_J": 252.00000000000003,
+      "joule_per_success_bit": null,
+      "artifact_hashes_verified": true,
+      "source_hashes_verified": true,
+      "event_energy_matches_ledger": true
+    }
+  ]
+}
