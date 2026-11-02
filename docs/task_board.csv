@@ -2,12 +2,12 @@ task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_actio
 B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
 A-N1,A,accepted,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,"A交付+B主验+C复核三方闭环",完成,F1遗留证据仍挂账（低优先）
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
-A-N3,A,changes_requested,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,"PR#8已交；B验包46定向/501全库过；唯一必修=坏ZIP泄漏BadZipFile（C复核属实）",A补BadZipFile+EOFError转换与回归+新SHA,A无需重训；C补充EOFError同类缺口；R2/R5回执仍未推送必须一起交
+A-N3,A,ready_for_review,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,"PR#8修复已推（1c90246）：BadZipFile+EOFError转MODEL_FORMAT，2红2绿、组合94、全库503，C复核通过",等B复验升级签收,B复验失败用例+正常包+回退→升级签收→接learned进五接口；G4只剩1.5天务必今晚开动
 A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
 B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,共享信道+180轨迹规则矩阵已交付（PR#6）,R2-R5依序合main；成熟优化器与AI接入仍待后续
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,A+C,"A已accepted+C已accepted_with_notes+seed P2已修",等合入main,完整HTTP复跑并入11/08换机验收
-B-N4,B,in_progress,2026-11-04T20:00:00+08:00,experiments/,A+C,"learned API接入方案+扩样计时已交付；B1复跑C已accepted；预合并回归全过",main合并只欠A两份回执,A：R2四项手算范围确认+R5公平性专门回执；B：接learned进五接口（等A评分器11/02）
+B-N4,B,in_progress,2026-11-04T20:00:00+08:00,experiments/,A+C,"main合并前提全齐（C B1 accepted+A R2 accepted+A R5 accepted_with_notes）",R2→R5合main只欠B执行,B：合main→验包签收→learned接入→正式实验；G4前窗口仅1.5天
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,"预合并回归219过；待A四项手算签收范围确认",main合并前提之一,A补R2四项手算范围确认回执；C可复核send-only轨迹
 B-R3,B,accepted,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,"A+C均accepted（cac4b90）三方对齐",待R2先合main,按R2→R3→R4→R5顺序合入
 C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
