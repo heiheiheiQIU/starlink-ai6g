@@ -1,0 +1,21 @@
+{
+  "artifact_sha256": {
+    "health_invalid.json": "54ac42735ff5c6d503500a4a13d7ba4793f0e572a9ac659dda7d5482d9adc2cc",
+    "health_missing_rul.json": "056c33ece9587ce8ec15208de6fcb1db06427bf8f89ba10a6fd174751c07fd5b",
+    "health_success.json": "a2fa1b3fa777f321ee0b4d77d4b3a93ff2d1bf7c83cd16ff5a66eb50f01025a0",
+    "inputs/health_history_invalid.json": "7f99334235bc53f9464a313a3d02aac6150fd422a7bcd35618571219355cbbec",
+    "inputs/health_history_success.json": "5db111f31eab8a1ca1fbd5e6397a6e6c0b44ebfa1c27d9326cb6232e82febe47",
+    "smoke.log": "6ea02dfa4dd6e8bbab49c3632fdf1f2d845b728580897aaae1312f41936ec40d"
+  },
+  "call_input_sha256": "d4f3b0874d6aaaf6788c499e73ba7ef99e5144c620fb43b61eaf25155cedf0d9",
+  "config_path": "configs/health_observation.json",
+  "config_sha256": "5a738aef496475d8cfcdcc2bbd96a37d5d9bb9b8891526f1e197c10b1af1dc6f",
+  "history_input_sha256": "cfca64517628df0f2c3af4477520d401cd59393c10c39bd30709123fd6055edc",
+  "is_new_model_training_result": false,
+  "is_real_satellite_measurement": false,
+  "kind": "H01_formal_health_estimate_evidence",
+  "now_s": 10.0,
+  "schema_version": "1.0",
+  "source": "synthetic",
+  "source_revision": "744b4062c320b875fb860a4c60556a8add709f4f"
+}

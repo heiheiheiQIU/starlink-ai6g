@@ -1,0 +1,149 @@
+{
+  "intersections": {
+    "train_test": {
+      "observation_content_sha256": [],
+      "sample_ids": [],
+      "scenario_ids": [],
+      "source_group_ids": []
+    },
+    "train_validation": {
+      "observation_content_sha256": [],
+      "sample_ids": [],
+      "scenario_ids": [],
+      "source_group_ids": []
+    },
+    "validation_test": {
+      "observation_content_sha256": [],
+      "sample_ids": [],
+      "scenario_ids": [],
+      "source_group_ids": []
+    }
+  },
+  "source_jsonl_sha256": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+  "split_algorithm_version": "source-group-sha256-v2",
+  "split_seed": 20261031,
+  "splits": {
+    "test": {
+      "observation_content_count": 4,
+      "observation_content_sha256": [
+        "2769d511c8e39bb3f11ad11214cb7882637fb5d6767cb6baa785bb396a0f7dcd",
+        "c41820b4d320b4e10ee1ea8a61e79d25bf933ed8ade906bcfa816e4393224ae1",
+        "eac74a4e7739b9d3b6d93667e567951048e980c317b539018e1535051a2c8097",
+        "fd8e9754b119017f4233273ade3637368d6e1ef22d1c79056baf6f13efe1f9af"
+      ],
+      "sample_count": 4,
+      "sample_ids": [
+        "h02_v2_02",
+        "h02_v2_07",
+        "h02_v2_12",
+        "h02_v2_18"
+      ],
+      "scenario_count": 4,
+      "scenario_ids": [
+        "h02_v2_run_02",
+        "h02_v2_run_07",
+        "h02_v2_run_12",
+        "h02_v2_run_18"
+      ],
+      "source_group_count": 4,
+      "source_group_ids": [
+        "h02-v2-source-02",
+        "h02-v2-source-12",
+        "h02-v2-source-07",
+        "h02-v2-source-18"
+      ]
+    },
+    "train": {
+      "observation_content_count": 12,
+      "observation_content_sha256": [
+        "0565e049d24ff50b7a556e849b331f3c773a01d38deaf23912e66bd876279c89",
+        "0fbc4a7074025e80b0322a3c13adeb2dbbe7ed366e80df65ca4f1612dba79d37",
+        "64dc403e2f8669397c8bfc6b64fae415b5c050f75f675c03b1c795fef251843f",
+        "a795fed6f20e3ed19d84f205a4050dd9357537dc34ec7c01068225cbd043dba3",
+        "adbdd00e0540f54f6b1430a67f8dd47be458cd20dc10f2c491f340950c05c431",
+        "b85a18b75610d7b3e75db38c54a47d49d5e2af009a50f6cf21fc9e33d681f43d",
+        "b8ec4eb4d077b13ce58f621eb4b916396ab4dff15c76c5d19ff88d474644eee4",
+        "cbf9e59b9da4842219a249057529565c941664fe727f43e0783cbf47fe322a01",
+        "d2397f7e8d3e621fe1a92e77d4f7375d880c5e87e6319e1875a29a323f19e09a",
+        "db888c97db1e669d20058e7329f88d56f424d9ca31dee04df9be0ffdb516ad9c",
+        "e4d34cf7c8865c57edc9626354329657289f2bc02db9f448c3c5a68a59172270",
+        "ef0f22bf9203b0f9bc7af11b46017e268669cb32a7dcdbffd3a4a3ba70259cfb"
+      ],
+      "sample_count": 12,
+      "sample_ids": [
+        "h02_v2_00",
+        "h02_v2_01",
+        "h02_v2_03",
+        "h02_v2_04",
+        "h02_v2_05",
+        "h02_v2_06",
+        "h02_v2_08",
+        "h02_v2_10",
+        "h02_v2_13",
+        "h02_v2_16",
+        "h02_v2_17",
+        "h02_v2_19"
+      ],
+      "scenario_count": 12,
+      "scenario_ids": [
+        "h02_v2_run_00",
+        "h02_v2_run_01",
+        "h02_v2_run_03",
+        "h02_v2_run_04",
+        "h02_v2_run_05",
+        "h02_v2_run_06",
+        "h02_v2_run_08",
+        "h02_v2_run_10",
+        "h02_v2_run_13",
+        "h02_v2_run_16",
+        "h02_v2_run_17",
+        "h02_v2_run_19"
+      ],
+      "source_group_count": 12,
+      "source_group_ids": [
+        "h02-v2-source-17",
+        "h02-v2-source-16",
+        "h02-v2-source-19",
+        "h02-v2-source-10",
+        "h02-v2-source-03",
+        "h02-v2-source-05",
+        "h02-v2-source-00",
+        "h02-v2-source-13",
+        "h02-v2-source-06",
+        "h02-v2-source-04",
+        "h02-v2-source-08",
+        "h02-v2-source-01"
+      ]
+    },
+    "validation": {
+      "observation_content_count": 4,
+      "observation_content_sha256": [
+        "0779e4b50307fa6164b7bc5720c58c3a8e7dd34b065271c5ab1b3ad55e34ee60",
+        "548508977d2f62a2c3c9163d23128aa5969ce95e9e7e80fda5d78bd4b7830307",
+        "59b2cba6e921cc840e24510645f8d91a83f3c103ef346ce9a3e40cf941397f06",
+        "c2dd73848034eac1c8694b6cf727ce8654b3e08c837148f83963604a37d9de64"
+      ],
+      "sample_count": 4,
+      "sample_ids": [
+        "h02_v2_09",
+        "h02_v2_11",
+        "h02_v2_14",
+        "h02_v2_15"
+      ],
+      "scenario_count": 4,
+      "scenario_ids": [
+        "h02_v2_run_09",
+        "h02_v2_run_11",
+        "h02_v2_run_14",
+        "h02_v2_run_15"
+      ],
+      "source_group_count": 4,
+      "source_group_ids": [
+        "h02-v2-source-11",
+        "h02-v2-source-09",
+        "h02-v2-source-14",
+        "h02-v2-source-15"
+      ]
+    }
+  }
+}
