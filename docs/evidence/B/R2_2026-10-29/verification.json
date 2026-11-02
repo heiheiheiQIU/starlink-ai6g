@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-29",
+  "task": "B-N2_R2_first_slice",
+  "status": "ready_for_review",
+  "base_commit": "75f1c52",
+  "source_commit": "39d7d11f86b25813293ab50207a47acaf19190ec",
+  "r2_tests_passed": 41,
+  "full_suite": {
+    "tests": 219,
+    "passed": 219,
+    "failed": 0,
+    "errors": 0,
+    "seconds": 9.024
+  },
+  "frozen_schema_sha256": "D1A19C098B8C69BA7EBEFC19DB60C1E3F0F321C38B5F669518E7F05676B89FCB",
+  "H00_frozen": true,
+  "protocol_stage": "send_only_ack_pending",
+  "A_C_accepted": false,
+  "independent_review": {
+    "original_tests_passed": 40,
+    "critical": 0,
+    "important": 0,
+    "minor": 1,
+    "regraded_and_fixed_important": 1,
+    "pending_findings": 0
+  },
+  "formal_policy_results_generated": false
+}
