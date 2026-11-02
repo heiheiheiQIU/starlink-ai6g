@@ -1,5 +1,7 @@
 # 成员B：learned交付验收、API版本对齐与后续集成计划
 
+> 最新进度（2026-11-02）：任务1已闭环；任务2修复版独立复验完成并签收 accepted_with_notes（48定向、503全库、原坏ZIP用例1通过）。任务4所缺A回执已到，尚未实际合main；任务3接入尚未完成、任务5正式实验未开始。以下11/01状态保留为历史，当前入口见 `docs/handoffs/B_progress_and_next_2026-11-02.md`。
+
 > 执行时使用 superpowers:executing-plans 逐项推进；本文是计划，不是新增验收或修复完成回执。
 
 **Goal:** 先解除A的API复跑和候选交付阻塞，独立验收冻结learned小样本包，再接入现有Runner/五接口，按签收范围推进R2→R5集成。
