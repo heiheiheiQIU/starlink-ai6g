@@ -1,0 +1,130 @@
+{
+  "feature_schema_version": "policy-features-v1",
+  "idle_baseline": {
+    "test": {
+      "optimal_set_hits": 4,
+      "utility_mse": 0.3680555555555556
+    },
+    "train": {
+      "optimal_set_hits": 12,
+      "utility_mse": 0.15185185185185182
+    },
+    "validation": {
+      "optimal_set_hits": 3,
+      "utility_mse": 0.3222222222222222
+    }
+  },
+  "limitations": "synthetic small-sample validation; no generalization or policy-superiority claim",
+  "linear_baseline": {
+    "test": {
+      "observation_count": 4,
+      "optimal_set_hits": 4,
+      "utility_mse": 0.1612503829276402
+    },
+    "train": {
+      "observation_count": 12,
+      "optimal_set_hits": 12,
+      "utility_mse": 0.05759029932368944
+    },
+    "validation": {
+      "observation_count": 4,
+      "optimal_set_hits": 3,
+      "utility_mse": 0.0919429617519561
+    }
+  },
+  "model_version": "a-n3-mlp-v1",
+  "overfit_gate": {
+    "max_train_utility_mse": 0.001,
+    "passed": true,
+    "required_train_optimal_set_hits": 12
+  },
+  "samples_sha256": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+  "schema_version": "policy-training-summary-v1",
+  "seeds": {
+    "20261031": {
+      "metrics": {
+        "train": {
+          "feasibility_accuracy": 1.0,
+          "feasibility_bce": 2.4156211111403536e-06,
+          "observation_count": 12,
+          "optimal_set_hits": 12,
+          "total_loss": 0.010634994542556342,
+          "utility_bce": 0.010634390637278557,
+          "utility_mse": 1.0617785846989136e-05
+        },
+        "validation": {
+          "feasibility_accuracy": 0.6000000834465027,
+          "feasibility_bce": 4.748497009277344,
+          "observation_count": 4,
+          "optimal_set_hits": 3,
+          "total_loss": 7.004932403564453,
+          "utility_bce": 5.817808151245117,
+          "utility_mse": 0.32209673523902893
+        }
+      }
+    },
+    "20261032": {
+      "metrics": {
+        "train": {
+          "feasibility_accuracy": 1.0,
+          "feasibility_bce": 1.929023028424126e-06,
+          "observation_count": 12,
+          "optimal_set_hits": 12,
+          "total_loss": 0.010610713454127563,
+          "utility_bce": 0.010610231198370457,
+          "utility_mse": 4.000937775527902e-11
+        },
+        "validation": {
+          "feasibility_accuracy": 0.6000000834465027,
+          "feasibility_bce": 4.410635471343994,
+          "observation_count": 4,
+          "optimal_set_hits": 3,
+          "total_loss": 6.559873700141907,
+          "utility_bce": 5.457214832305908,
+          "utility_mse": 0.32183149456977844
+        }
+      }
+    },
+    "20261033": {
+      "metrics": {
+        "train": {
+          "feasibility_accuracy": 1.0,
+          "feasibility_bce": 1.298801521443238e-06,
+          "observation_count": 12,
+          "optimal_set_hits": 12,
+          "total_loss": 0.010609759617949521,
+          "utility_bce": 0.01060943491756916,
+          "utility_mse": 5.849076778474682e-11
+        },
+        "validation": {
+          "feasibility_accuracy": 0.6000000834465027,
+          "feasibility_bce": 3.9439444541931152,
+          "observation_count": 4,
+          "optimal_set_hits": 3,
+          "total_loss": 5.407445311546326,
+          "utility_bce": 4.421459197998047,
+          "utility_mse": 0.3181956708431244
+        }
+      }
+    }
+  },
+  "selected_seed": 20261033,
+  "selected_test_metrics": {
+    "feasibility_accuracy": 0.6666667461395264,
+    "feasibility_bce": 2.773623466491699,
+    "observation_count": 4,
+    "optimal_set_hits": 4,
+    "total_loss": 7.6455371379852295,
+    "utility_bce": 6.952131271362305,
+    "utility_mse": 0.356253057718277
+  },
+  "selection_rule": "minimum validation total_loss; lower seed tie-break",
+  "source_revision": "ff0589bfa465585158f76818a422ce6def3efc15",
+  "split_sha256": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+  "test_evaluated_after_selection": true,
+  "training_seeds": [
+    20261031,
+    20261032,
+    20261033
+  ]
+}

@@ -2,7 +2,7 @@ import json,threading,time
 import pytest
 from backend.policies.runner import ScorerGateway, run_policy
 from backend.policies.common import PolicyConfig
-from backend.policies import edf
+from backend.policies import edf, learned
 from tests.test_policies import obs
 from tests.test_run_export import run_config
 from tests.test_protocol import config
@@ -19,6 +19,39 @@ def test_missing_nan_and_bounded_timeout_use_explicit_fallback():
     assert 'MODEL_TIMEOUT' in decision.action.reason_codes and time.perf_counter()-before<0.5
     assert 'MODEL_BUSY' in gateway.decide(observed).action.reason_codes
     release.set(); gateway.worker.join(1)
+    assert not gateway.worker.is_alive()
+
+
+def test_learned_scorer_error_and_timeout_use_gateway_fallback(tmp_path):
+    observed = obs()
+    missing_package = {
+        "schema_version": "learned-policy-config-v1",
+        "model_version": "a-n3-mlp-v1",
+        "feature_schema_version": "policy-features-v1",
+        "package_dir": str(tmp_path / "missing"),
+        "weights_sha256": "0" * 64,
+        "normalization_sha256": "0" * 64,
+        "masked_score": -1.0,
+    }
+    unavailable = ScorerGateway(
+        lambda value: learned.score_actions(value, config=missing_package)
+    ).decide(observed)
+    assert "MODEL_UNAVAILABLE" in unavailable.action.reason_codes
+
+    release = threading.Event()
+    started = threading.Event()
+
+    def delayed_learned(value):
+        started.set()
+        release.wait(2)
+        return learned.score_actions(value)
+
+    gateway = ScorerGateway(delayed_learned, budget_ms=10.0)
+    timed_out = gateway.decide(observed)
+    assert started.is_set()
+    assert "MODEL_TIMEOUT" in timed_out.action.reason_codes
+    release.set()
+    gateway.worker.join(1)
     assert not gateway.worker.is_alive()
 
 
