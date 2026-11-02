@@ -44,4 +44,8 @@
 - C：在统一候选开展真实页面消费、预设请求、ZIP下载与双分辨率验收。现有比较页仍有fixture内容，不能写成已完成现场重算。
 - 正式18×10、强优化器、扩样/消融、换机和参赛材料按优化方案继续；本轮未产出learned收益结论。
 
+独立代码审查：Critical/Important均为0，可交A/C复核。延后小项为HTTP验证脚本在异常退出时的worker清理；本次成功运行先等待completed，不影响当前证据。`smoke_servers_stopped`只检查直接启动的两个服务进程。详见[审查记录](../evidence/B/WP1_integration_2026-11-03/review.md)。
+
+候选已推送为 [Draft PR #9](https://github.com/heiheiheiQIU/starlink-ai6g/pull/9)。根据[协作规则](../../CONTRIBUTING.md)，“合并到main必须经至少一名相邻角色复核”；待A/C接收本组合候选，未提前修改共享main。
+
 证据与复跑：[WP1验证目录](../evidence/B/WP1_integration_2026-11-03/README.md)。

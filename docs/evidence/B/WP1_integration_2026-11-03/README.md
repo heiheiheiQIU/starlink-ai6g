@@ -37,3 +37,5 @@ pnpm --dir frontend check
 HTTP脚本需要8000和4179端口空闲，使用已构建前端，创建一个新synthetic规则run，最终回收自己启动的服务。运行目录必须新建；原始run保存在本机runs/api，ZIP与验证记录写入指定输出。脚本不是浏览器操作，也不调用learned运行。
 
 本轮仅提供规则运行和独立评分证据，不支持AI收益、成熟优化器比较、真实卫星表现、完整页面闭环或换机结论。当前A模型仅20条合成观测的管线验证，限制仍生效。
+
+独立审查见[review.md](review.md)，未发现Critical/Important。HTTP脚本的smoke_servers_stopped仅检查直接服务进程；异常中断时整个worker树的清理尚待增强，本次成功运行证据不受影响。

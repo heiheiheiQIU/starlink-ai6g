@@ -18,4 +18,4 @@ B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A/C既有
 B-R4,B,accepted_with_notes,,docs/handoffs/H02_teacher_2026-10-29.md,A,A的H02_A_2026-10-30签收已取得;本轮原候选293全库通过,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R5,B,accepted_with_notes,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,A ddcca9c签收50f441a公平性与矩阵;C B1 accepted及49d9385补充认可,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-API-LOCK,B,accepted_with_notes,,docs/handoffs/B_API_lock_2026-11-01.md,A+C,A已应用3ea06f6并在11c00374交接accepted;B核三路径SHA一致,限短锁读取缓解;持续锁有界失败保留,在固定learned候选做B组合复验
-B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过,待A/C复核统一候选;main未变,审查WP1交接和证据;完成组合复核后进入main
+B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过,独立代码审查无阻断;Draft PR9待A/C接收;main未变,审查WP1交接和证据;完成组合复核后进入main
