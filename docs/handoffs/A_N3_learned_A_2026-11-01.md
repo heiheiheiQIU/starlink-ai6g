@@ -60,8 +60,9 @@ test 指标只用于记录冻结小样本的行为，不证明模型泛化，也
 - 模型/训练/数据/特征定向：`55 passed`。
 - learned 网关和运行时定向：`20 passed`。
 - B API 最小补丁来源 `576eb48`，A 组合应用提交 `3ea06f6`；接收回执见 `docs/acceptance/B_API_lock_A_2026-11-01.md`。
-- 最终 A-N3 + API 组合定向：`92 passed, 1 warning in 12.22s`。
-- 最终组合全库：`501 passed, 1 warning in 26.05s`。
+- B 坏 ZIP 审查修复提交 `d97ff5b`；回执见 `docs/acceptance/A_N3_learned_B_fix_A_2026-11-02.md`。
+- 最终 A-N3 + API 组合定向：`94 passed, 1 warning in 12.32s`。
+- 最终组合全库：`503 passed, 1 warning in 23.52s`。
 - `pip check`：`No broken requirements found.`
 
 全库测试在当前锁定依赖环境中运行；warning 是 Starlette 对 AnyIO 旧别名的上游弃用提示，与本交付无关。此前复现的短暂 `status.json` 文件锁已由 B 的有界读重试补丁覆盖；持续超过 2 秒的锁仍按合同抛出原 `PermissionError`。

@@ -117,6 +117,17 @@
       "combined_full_suite_seconds": 26.05,
       "combined_targeted_passed": 92,
       "combined_targeted_seconds": 12.22
+    },
+    "corrupt_npz_review_fix": {
+      "B_review_commit": "69847d8fa07fe566bcf39bc1fb909bd27d7a7367",
+      "A_fix_commit": "d97ff5b0a9707bdbad01cac5b5d21b70d03ef7c2",
+      "combined_full_suite_passed": 503,
+      "combined_full_suite_seconds": 23.52,
+      "combined_targeted_passed": 94,
+      "combined_targeted_seconds": 12.32,
+      "expected_error_code": "MODEL_FORMAT",
+      "red_regressions_failed": 2,
+      "green_regressions_passed": 2
     }
   }
 }
