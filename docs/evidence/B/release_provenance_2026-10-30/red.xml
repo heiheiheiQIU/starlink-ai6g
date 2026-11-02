@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="2" time="1.702" timestamp="2026-10-30T16:37:36.053338+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="tests.test_release_provenance" name="test_nested_release_does_not_claim_parent_revision[cli]" time="0.797"><failure message="AssertionError: assert False&#10; +  where False = &lt;built-in method startswith of str object at 0x000001C9AE93F3F0&gt;('unversioned-source-sha256:')&#10; +    where &lt;built-in method startswith of str object at 0x000001C9AE93F3F0&gt; = '1343cbfc36acae74703667362e4d694b4a35d4af'.startswith">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/provenance_red/test_nested_release_does_not_c0')
+entry = 'cli'
+
+    @pytest.mark.parametrize('entry',['cli','teacher'])
+    def test_nested_release_does_not_claim_parent_revision(tmp_path,entry):
+        root=Path(__file__).resolve().parents[1]
+        release=tmp_path/'release';release.mkdir()
+        shutil.copytree(root/'backend',release/'backend',ignore=shutil.ignore_patterns('__pycache__'))
+        shutil.copytree(root/'configs',release/'configs')
+        env=os.environ.copy();env.pop('GIT_CEILING_DIRECTORIES',None)
+        if entry=='cli':
+            command=['backend.cli','run','--config','configs/scenarios/r3_normal.json','--output','output']
+        else:command=['backend.policies.teacher','--preflight','--output','output']
+        process=subprocess.run([sys.executable,'-m',*command],cwd=release,env=env,capture_output=True,text=True)
+        assert process.returncode==0,process.stderr
+        manifest=json.loads((release/'output/manifest.json').read_text())
+&gt;       assert manifest['code_revision'].startswith('unversioned-source-sha256:')
+E       AssertionError: assert False
+E        +  where False = &lt;built-in method startswith of str object at 0x000001C9AE93F3F0&gt;('unversioned-source-sha256:')
+E        +    where &lt;built-in method startswith of str object at 0x000001C9AE93F3F0&gt; = '1343cbfc36acae74703667362e4d694b4a35d4af'.startswith
+
+tests\test_release_provenance.py:25: AssertionError</failure></testcase><testcase classname="tests.test_release_provenance" name="test_nested_release_does_not_claim_parent_revision[teacher]" time="0.828"><failure message="AssertionError: assert False&#10; +  where False = &lt;built-in method startswith of str object at 0x000001C9AE93F8D0&gt;('unversioned-source-sha256:')&#10; +    where &lt;built-in method startswith of str object at 0x000001C9AE93F8D0&gt; = '1343cbfc36acae74703667362e4d694b4a35d4af'.startswith">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/provenance_red/test_nested_release_does_not_c1')
+entry = 'teacher'
+
+    @pytest.mark.parametrize('entry',['cli','teacher'])
+    def test_nested_release_does_not_claim_parent_revision(tmp_path,entry):
+        root=Path(__file__).resolve().parents[1]
+        release=tmp_path/'release';release.mkdir()
+        shutil.copytree(root/'backend',release/'backend',ignore=shutil.ignore_patterns('__pycache__'))
+        shutil.copytree(root/'configs',release/'configs')
+        env=os.environ.copy();env.pop('GIT_CEILING_DIRECTORIES',None)
+        if entry=='cli':
+            command=['backend.cli','run','--config','configs/scenarios/r3_normal.json','--output','output']
+        else:command=['backend.policies.teacher','--preflight','--output','output']
+        process=subprocess.run([sys.executable,'-m',*command],cwd=release,env=env,capture_output=True,text=True)
+        assert process.returncode==0,process.stderr
+        manifest=json.loads((release/'output/manifest.json').read_text())
+&gt;       assert manifest['code_revision'].startswith('unversioned-source-sha256:')
+E       AssertionError: assert False
+E        +  where False = &lt;built-in method startswith of str object at 0x000001C9AE93F8D0&gt;('unversioned-source-sha256:')
+E        +    where &lt;built-in method startswith of str object at 0x000001C9AE93F8D0&gt; = '1343cbfc36acae74703667362e4d694b4a35d4af'.startswith
+
+tests\test_release_provenance.py:25: AssertionError</failure></testcase></testsuite></testsuites>

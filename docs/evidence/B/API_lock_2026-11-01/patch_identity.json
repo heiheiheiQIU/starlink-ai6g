@@ -1,0 +1,18 @@
+{
+  "base": "2cfe89cfa2e990c4d488861c0fd4a57ae2e3ac67",
+  "existing_fix": "5375e99",
+  "paths": {
+    "backend/api/service.py": {
+      "before_sha256": "9fcbb6c5058f0ae823d05efb750eac0fb0f562d58f0367a2ce3a3ca39cff325d",
+      "after_sha256": "97dcf58d296cc8d28be87aa3aeeb6d27ca90c8cc3cff43e20213717ce36f11e9"
+    },
+    "backend/api/worker.py": {
+      "before_sha256": "5e2b410cdf116fdb431f8552d0b3cf05bcc7b0a3dc33b61dfd9f7eead6bb2dce",
+      "after_sha256": "0d6255f20d46d320d254623deadaf52db691061a47c4972e6eb347d99cc99941"
+    },
+    "tests/test_api_read_retry.py": {
+      "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "after_sha256": "99ca96f421b28a311dbabd20ad33b53a5296d26e264bc3cbcd1081c5d963104c"
+    }
+  }
+}

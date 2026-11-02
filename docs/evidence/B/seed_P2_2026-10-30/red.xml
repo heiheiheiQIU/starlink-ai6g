@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="1.658" timestamp="2026-10-30T16:30:28.320589+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="tests.test_api" name="test_real_comparison_paging_export_and_refresh" time="1.024"><failure message="KeyError: 'seed'">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/seed_p2/red_tmp/test_real_comparison_paging_ex0')
+
+    def test_real_comparison_paging_export_and_refresh(tmp_path):
+        with TestClient(create_app(tmp_path/'runs')) as client:
+            created=client.post('/runs',json=request())
+            assert created.status_code==202 and created.json()['status']=='queued'
+            identity=created.json()['run_id'];url='/runs/'+identity
+            assert wait(client,identity)['status']=='completed'
+            result=client.get(url+'/results').json();RunResult.model_validate(result)
+            assert result['seed']==7
+            assert [p['policy_id'] for p in result['by_policy']]==['edf','value']
+            cursor=0;events=[]
+            while True:
+                response=client.get(url+'/events',params={'after':cursor,'limit':3})
+                assert response.status_code==200
+                page=EventsPage.model_validate(response.json());events+=page.events
+                cursor=page.next_after
+                if not page.has_more: break
+            assert [e.event_id for e in events]==list(range(1,len(events)+1))
+            assert {e.policy_id for e in events}=={'edf','value'}
+            assert all(e.run_id==identity for e in events)
+            assert client.get(url+'/events',params={'after':cursor}).json()['events']==[]
+            assert client.get(url).json()['run_id']==identity
+            (tmp_path/'runs'/identity/'private.txt').write_text('not exported')
+            download=client.get(url+'/export');assert download.status_code==200
+            with zipfile.ZipFile(io.BytesIO(download.content)) as package:
+                assert 'results.json' in package.namelist()
+                assert not any('private' in n or '..' in n or n.startswith('/') for n in package.namelist())
+                assert json.loads(package.read('results.json'))==result
+                for policy in ('edf','value'):
+                    for artifact in ('config.json','results.json','manifest.json'):
+&gt;                       assert json.loads(package.read(f'{policy}/{artifact}'))['seed']==7
+E                       KeyError: 'seed'
+
+tests\test_api.py:65: KeyError</failure></testcase></testsuite></testsuites>

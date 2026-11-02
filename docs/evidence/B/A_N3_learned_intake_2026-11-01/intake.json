@@ -1,0 +1,102 @@
+{
+  "candidate": "11c00374d88dbbc5138c7b2c65029317befa989c",
+  "pr": 8,
+  "status": "static_intake_passed_pending_functional_review",
+  "package": {
+    "manifest.json": {
+      "sha256": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+      "bytes": 1353
+    },
+    "model_card.md": {
+      "sha256": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+      "bytes": 1672
+    },
+    "normalization.json": {
+      "sha256": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+      "bytes": 1522
+    },
+    "training_summary.json": {
+      "sha256": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+      "bytes": 3976
+    },
+    "weights.npz": {
+      "sha256": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+      "bytes": 7254
+    }
+  },
+  "configs": {
+    "learned_policy.json": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+    "policy_train.json": "788e361c5b204c85b232be51482323e66c03442849120c3eafcec57179a7503d"
+  },
+  "arrays": {
+    "layer1_weight": {
+      "shape": [
+        32,
+        23
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "layer1_bias": {
+      "shape": [
+        32
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "layer2_weight": {
+      "shape": [
+        16,
+        32
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "layer2_bias": {
+      "shape": [
+        16
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "utility_weight": {
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "utility_bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "feasibility_weight": {
+      "shape": [
+        1,
+        16
+      ],
+      "dtype": "float32",
+      "finite": true
+    },
+    "feasibility_bias": {
+      "shape": [
+        1
+      ],
+      "dtype": "float32",
+      "finite": true
+    }
+  },
+  "frozen": {
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb",
+    "data/teacher/a_n3_20_v2/samples.jsonl": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8"
+  },
+  "API_patch_identity_matches": true,
+  "functional_tests_run": false,
+  "model_accepted": false
+}

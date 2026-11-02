@@ -1,0 +1,102 @@
+[
+  {
+    "iteration": 1,
+    "exit_code": 0,
+    "junit": "repeat_00.xml"
+  },
+  {
+    "iteration": 2,
+    "exit_code": 0,
+    "junit": "repeat_01.xml"
+  },
+  {
+    "iteration": 3,
+    "exit_code": 0,
+    "junit": "repeat_02.xml"
+  },
+  {
+    "iteration": 4,
+    "exit_code": 0,
+    "junit": "repeat_03.xml"
+  },
+  {
+    "iteration": 5,
+    "exit_code": 0,
+    "junit": "repeat_04.xml"
+  },
+  {
+    "iteration": 6,
+    "exit_code": 0,
+    "junit": "repeat_05.xml"
+  },
+  {
+    "iteration": 7,
+    "exit_code": 0,
+    "junit": "repeat_06.xml"
+  },
+  {
+    "iteration": 8,
+    "exit_code": 0,
+    "junit": "repeat_07.xml"
+  },
+  {
+    "iteration": 9,
+    "exit_code": 0,
+    "junit": "repeat_08.xml"
+  },
+  {
+    "iteration": 10,
+    "exit_code": 0,
+    "junit": "repeat_09.xml"
+  },
+  {
+    "iteration": 11,
+    "exit_code": 0,
+    "junit": "repeat_10.xml"
+  },
+  {
+    "iteration": 12,
+    "exit_code": 0,
+    "junit": "repeat_11.xml"
+  },
+  {
+    "iteration": 13,
+    "exit_code": 0,
+    "junit": "repeat_12.xml"
+  },
+  {
+    "iteration": 14,
+    "exit_code": 0,
+    "junit": "repeat_13.xml"
+  },
+  {
+    "iteration": 15,
+    "exit_code": 0,
+    "junit": "repeat_14.xml"
+  },
+  {
+    "iteration": 16,
+    "exit_code": 0,
+    "junit": "repeat_15.xml"
+  },
+  {
+    "iteration": 17,
+    "exit_code": 0,
+    "junit": "repeat_16.xml"
+  },
+  {
+    "iteration": 18,
+    "exit_code": 0,
+    "junit": "repeat_17.xml"
+  },
+  {
+    "iteration": 19,
+    "exit_code": 0,
+    "junit": "repeat_18.xml"
+  },
+  {
+    "iteration": 20,
+    "exit_code": 0,
+    "junit": "repeat_19.xml"
+  }
+]

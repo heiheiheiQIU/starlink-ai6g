@@ -1,0 +1,229 @@
+{
+  "actions": [],
+  "code_revision": null,
+  "evaluation_end_s": 24.0,
+  "kind": "rule_validation",
+  "policy_runtime": {
+    "policy_id": "edf",
+    "policy_version": "edf-r4-v1",
+    "public_policy_config": {
+      "base_W": 36.0,
+      "compute_W": 0.0,
+      "decision_dt_s": 2.0,
+      "max_power_W": 150.0,
+      "protocol": {
+        "ack_propagation_s": 0.0,
+        "ack_rx_W": 8.0,
+        "control_bps": 1024.0,
+        "data_propagation_s": 0.0
+      },
+      "reserve_Wh": 0.5,
+      "slot_s": 1.0,
+      "solar_W": 0.0,
+      "tx_power_W": {
+        "fast": 72.0,
+        "robust": 36.0
+      }
+    },
+    "scoring_budget_ms": 100.0
+  },
+  "scenario": {
+    "capacity_Wh": 20.0,
+    "channel": {
+      "ack_loss_prob": 0.12,
+      "seed": 10179,
+      "step_s": 0.25,
+      "version": "time-indexed-sha256-v1"
+    },
+    "forecast_version": "r2-synthetic-v1",
+    "forecast_windows": [
+      {
+        "end_s": 26.0,
+        "forecast_version": "r2-synthetic-v1",
+        "loss_profile": [
+          {
+            "fast_loss_prob": 0.4,
+            "robust_loss_prob": 0.2,
+            "time_s": 0.0
+          }
+        ],
+        "rate_profile": [
+          {
+            "fast_bps": 16384.0,
+            "robust_bps": 8192.0,
+            "time_s": 0.0
+          }
+        ],
+        "source": "synthetic",
+        "start_s": 0.0,
+        "window_id": "W1"
+      }
+    ],
+    "health_observations": [
+      {
+        "available_at_s": 0.0,
+        "capacity_Wh_est": 20.0,
+        "capacity_lower_Wh": 20.0,
+        "energy_lower_Wh": 10.0,
+        "model_version": "synthetic-r5-accurate-health",
+        "observed_at_s": 0.0,
+        "reason_codes": [
+          "RUL_UNAVAILABLE"
+        ],
+        "rul_est": null,
+        "rul_unit": null,
+        "soc_est": 0.5,
+        "soc_lower": 0.5,
+        "uncertainty_method": "synthetic_exact_counterexample"
+      }
+    ],
+    "initial_energy_Wh": 10.0,
+    "max_power_W": 150.0,
+    "powers": {
+      "base_W": 36.0,
+      "compute_W": 0.0,
+      "solar_W": 0.0
+    },
+    "protocol": {
+      "ack_propagation_s": 0.0,
+      "ack_rx_W": 8.0,
+      "control_bps": 1024.0,
+      "data_propagation_s": 0.0
+    },
+    "reserve_Wh": 0.5,
+    "scenario_id": "r5_cell_17_10179",
+    "schema_version": "1.0",
+    "slot_s": 1.0,
+    "source": "synthetic",
+    "tasks": [
+      {
+        "arrival_s": 0.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 10.0,
+        "payload_bytes": 1024,
+        "priority_weight": 1.0,
+        "remaining_bytes": 1024,
+        "task_id": "T00"
+      },
+      {
+        "arrival_s": 2.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 12.0,
+        "payload_bytes": 2048,
+        "priority_weight": 2.0,
+        "remaining_bytes": 2048,
+        "task_id": "T01"
+      },
+      {
+        "arrival_s": 4.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 14.0,
+        "payload_bytes": 2048,
+        "priority_weight": 3.0,
+        "remaining_bytes": 2048,
+        "task_id": "T02"
+      },
+      {
+        "arrival_s": 6.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 16.0,
+        "payload_bytes": 2048,
+        "priority_weight": 1.0,
+        "remaining_bytes": 2048,
+        "task_id": "T03"
+      },
+      {
+        "arrival_s": 8.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 14.0,
+        "payload_bytes": 2048,
+        "priority_weight": 2.0,
+        "remaining_bytes": 2048,
+        "task_id": "T04"
+      },
+      {
+        "arrival_s": 10.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 16.0,
+        "payload_bytes": 1024,
+        "priority_weight": 3.0,
+        "remaining_bytes": 1024,
+        "task_id": "T05"
+      },
+      {
+        "arrival_s": 12.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 22.0,
+        "payload_bytes": 1024,
+        "priority_weight": 1.0,
+        "remaining_bytes": 1024,
+        "task_id": "T06"
+      },
+      {
+        "arrival_s": 14.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 20.0,
+        "payload_bytes": 2048,
+        "priority_weight": 2.0,
+        "remaining_bytes": 2048,
+        "task_id": "T07"
+      },
+      {
+        "arrival_s": 16.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 24.0,
+        "payload_bytes": 1024,
+        "priority_weight": 3.0,
+        "remaining_bytes": 1024,
+        "task_id": "T08"
+      },
+      {
+        "arrival_s": 18.0,
+        "business_class": "synthetic",
+        "data_location": "satellite_1",
+        "deadline_s": 24.0,
+        "payload_bytes": 1024,
+        "priority_weight": 1.0,
+        "remaining_bytes": 1024,
+        "task_id": "T09"
+      }
+    ],
+    "true_windows": [
+      {
+        "end_s": 26.0,
+        "forecast_version": "r2-synthetic-v1",
+        "loss_profile": [
+          {
+            "fast_loss_prob": 0.4,
+            "robust_loss_prob": 0.2,
+            "time_s": 0.0
+          }
+        ],
+        "rate_profile": [
+          {
+            "fast_bps": 16384.0,
+            "robust_bps": 8192.0,
+            "time_s": 0.0
+          }
+        ],
+        "source": "synthetic",
+        "start_s": 0.0,
+        "window_id": "W1"
+      }
+    ],
+    "tx_power_W": {
+      "fast": 72.0,
+      "robust": 36.0
+    }
+  },
+  "schema_version": "1.0"
+}

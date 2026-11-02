@@ -11,7 +11,7 @@ from uuid import uuid4
 
 from backend.cli import RunConfig, _write_json
 from backend.contracts import EventsPage, EventsQuery, Event, RunRequest, RunStatusResponse
-from .worker import execute_run, fail_run, write_status
+from .worker import execute_run, fail_run, write_status, read_text
 
 
 class ServiceError(Exception):
@@ -64,7 +64,7 @@ class RunService:
             if expired and process.is_alive(): process.terminate();process.join(3)
             if expired or not process.is_alive():
                 process.join(3)
-                state=json.loads((folder/'status.json').read_text(encoding='utf-8'))
+                state=json.loads(read_text(folder/'status.json'))
                 if state['status'] not in ('completed','failed','cancelled'):
                     fail_run(folder,'WORKER_TIMEOUT' if expired else 'WORKER_EXITED')
                 process.close();del self.jobs[identity]
@@ -87,9 +87,13 @@ class RunService:
         if any(p not in ('edf','value') for p in request.policy_ids):
             raise ValueError('Only edf/value are supported in this release')
         config=RunConfig.model_validate(request.config)
+        if config.seed is not None and config.seed!=request.seed:
+            raise ValueError('config.seed must equal request.seed')
         if config.actions or config.policy_runtime is not None:
             raise ValueError('Automatic API runs require empty actions and no supplied runtime')
         scenario=config.scenario
+        if scenario.channel is not None and scenario.channel.seed!=request.seed:
+            raise ValueError('channel.seed must equal request.seed')
         if (config.evaluation_end_s>240 or len(scenario.tasks)>128 or
             max(len(scenario.true_windows),len(scenario.forecast_windows))>128):
             raise ValueError('API limits: 240 seconds, 128 tasks, 128 windows per profile')
@@ -119,7 +123,7 @@ class RunService:
 
     def status(self,identity):
         folder=self.folder(identity)
-        return RunStatusResponse.model_validate_json((folder/'status.json').read_text(encoding='utf-8')).model_dump()
+        return RunStatusResponse.model_validate_json(read_text(folder/'status.json')).model_dump()
 
     def completed(self,identity):
         status=self.status(identity)
@@ -131,11 +135,11 @@ class RunService:
         query=EventsQuery(after=after,limit=limit);folder=self.folder(identity)
         path=checked_file(folder,'events.jsonl');rows=[]
         if path.exists():
-            with path.open(encoding='utf-8') as stream:
-                for line in stream:
-                    row=Event.model_validate_json(line)
-                    if row.event_id>query.after: rows.append(row)
-                    if len(rows)>query.limit: break
+            # Release the file before JSON validation so Windows publication is not blocked by parsing.
+            for line in read_text(path).splitlines():
+                row=Event.model_validate_json(line)
+                if row.event_id>query.after: rows.append(row)
+                if len(rows)>query.limit: break
         batch=rows[:query.limit]
         return EventsPage(run_id=identity,events=batch,next_after=batch[-1].event_id if batch else after,
                           has_more=len(rows)>query.limit).model_dump()
