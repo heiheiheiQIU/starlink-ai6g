@@ -12,8 +12,8 @@ pnpm install --frozen-lockfile
 pnpm check
 ```
 
-仓库内 `.npmrc` 关闭pnpm自动替换自身版本的行为；在无网络但已有本机pnpm缓存时可使用
-`pnpm install --offline`，它仍然受冻结锁文件约束。
+在无网络但已有本机pnpm缓存时可使用
+`pnpm install --offline --frozen-lockfile`，它仍然受冻结锁文件约束。
 
 `pnpm check` 会顺序执行全部 Vitest 测试、TypeScript 检查和 Vite 生产构建。
 
@@ -28,11 +28,15 @@ pnpm dev
 ## 连接真实运行服务
 
 ```powershell
-$env:VITE_RUN_API_BASE_URL = "http://127.0.0.1:8000"
 pnpm dev
 ```
 
-真实服务当前只用于按 `run_id` 检查状态、事件、结果和导出包。新建运行继续等待
+开发和预览服务器默认将 `/runs` 代理到 `http://127.0.0.1:8000`；后端按仓库根目录
+README启动，无需额外设置环境变量。如果使用 `VITE_API_BASE_URL` 直连其他地址，
+目标服务必须配置相应CORS；当前后端默认未启用跨域，优先使用同源代理。
+
+真实服务当前只用于按 `run_id` 检查状态、事件和结果；API客户端已具备导出能力，
+页面ZIP下载联调尚待完成。新建运行继续等待
 B端冻结场景预设合同；前端不会自行拼装或推测通用仿真配置。
 
 页面规则：只有后端返回 `completed` 后才读取并展示正式结果；`queued`、`running`、
