@@ -44,3 +44,5 @@ docs/evidence/B/A_N3_learned_recheck_2026-11-02/** -text -diff
 # Keep WP1 command reports byte-identical across Windows checkouts
 docs/evidence/B/WP1_integration_2026-11-03/*.xml -text -diff
 docs/evidence/B/WP1_integration_2026-11-03/*.log -text -diff
+
+docs/evidence/B/A_N4_readiness_2026-11-04/*.xml -text -diff

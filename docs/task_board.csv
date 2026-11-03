@@ -4,12 +4,12 @@ A-N1,A,accepted_with_notes,2026-10-29T22:00:00+08:00,backend/health/estimator.py
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,待健康数据冻结交付核验;H01已有限签收,按电池和同源窗口冻结划分;补F4许可与哈希
 A-N3,A,accepted_with_notes,2026-11-02T22:00:00+08:00,docs/acceptance/A_N3_learned_B_2026-11-02.md,B,B复验1c90246;48定向503全库及原坏ZIP1项通过;冻结五文件和配置不变,仅小样本包与评分接口;不代表API接入或效果,冻结五文件已完整集成并独立评分;B推进WP2;A配合适用域与扩样
 A-N3-DATA,A,accepted_with_notes,,data/teacher/a_n3_20_v2/splits.json,B,20标签一致;20内容唯一;四维身份12/4/4无交集;130定向471全库通过,仅20条合成管线数据;扩样与模型效果另验,按A_N3_v2_data_B_2026-10-31冻结数据和来源组
-A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
+A-N4,A,in_progress,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,冻结审计经B独立计数与输出字节复验;组合524通过;审计有限签收,扩样范围与0.5Wh语义B已确认;新数据需另验,按B_teacher_support_2026-11-04建新版本小批并审计;不覆盖旧包或直接重训
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,H00冻结版本保持;组合合同与Schema逐字节核对通过
 B-N2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,A ddcca9c明确签收d4716bf四项手算和发送能量;41定向219全库为A实测,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,A专门回执已到ddcca9c;覆盖d4716bf四项手算,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过;WP1组合519项及真实HTTP/代理/18页事件/ZIP通过,页面完整联调与learned仍待后续;统一候选待复核,复核WP1候选;继续WP2 learned进程监督和五接口
-B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,A模型已签收并纳入统一候选;WP1仅验证独立评分;learned运行接入尚未实施,待WP2 scorer/Guard/API与推理进程监督,按优化方案先做WP2失败回归与接入;正式实验另冻结
+B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,A模型已签收并纳入统一候选;WP1仅验证独立评分;learned运行接入尚未实施;B已确认教师扩样支持域和reserve,待WP2 scorer/Guard/API与推理进程监督,先写完整候选/idle/重传失败回归;再做同级推理进程最小验证
 C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
 C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,原27结构镜像复核保留;WP1冻结pnpm安装成功;61项前端测试及类型/构建通过,换机及浏览器视觉验收另做,保持pnpm唯一锁文件;复核本轮README代理说明
 C-N3,C,in_progress,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,真实HTTP和Vite代理已实测;页面创建run/ZIP/learned联调仍待后续,基于统一候选完成浏览器及真实请求闭环;按WP3接冻结预设
@@ -18,4 +18,5 @@ B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A/C既有
 B-R4,B,accepted_with_notes,,docs/handoffs/H02_teacher_2026-10-29.md,A,A的H02_A_2026-10-30签收已取得;本轮原候选293全库通过,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R5,B,accepted_with_notes,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,A ddcca9c签收50f441a公平性与矩阵;C B1 accepted及49d9385补充认可,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-API-LOCK,B,accepted_with_notes,,docs/handoffs/B_API_lock_2026-11-01.md,A+C,A已应用3ea06f6并在11c00374交接accepted;B核三路径SHA一致,限短锁读取缓解;持续锁有界失败保留,在固定learned候选做B组合复验
-B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过,独立代码审查无阻断;Draft PR9待A/C接收;main未变,审查WP1交接和证据;完成组合复核后进入main
+B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过;C63c7740给无阻断推进意见,C回执已纳入;新main合并授权与执行仍未完成,按C回执及协作规则安排main；当前B准备WP2
+B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11-04.md,A+C,A审计及C回执已整合;524通过;6能量和10支持域探针通过,WP2实现尚未执行,A开始小批生成审计;B接WP2;C准备无数字材料骨架
