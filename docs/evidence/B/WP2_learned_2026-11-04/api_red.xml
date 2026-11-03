@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="3" skipped="0" tests="3" time="0.545" timestamp="2026-11-04T00:18:19.878654+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="tests.test_learned_api" name="test_learned_five_interfaces_pairing_and_model_identity" time="0.012"><failure message="AssertionError: {&quot;code&quot;:&quot;INVALID_CONFIG&quot;,&quot;message&quot;:&quot;Unsupported or invalid run configuration&quot;,&quot;details&quot;:{}}&#10;assert 422 == 202&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">tests\test_learned_api.py:18: in test_learned_five_interfaces_pairing_and_model_identity
+    assert created.status_code == 202, created.text
+E   AssertionError: {"code":"INVALID_CONFIG","message":"Unsupported or invalid run configuration","details":{}}
+E   assert 422 == 202
+E    +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code</failure></testcase><testcase classname="tests.test_learned_api" name="test_learned_only_common_model_hash" time="0.010"><failure message="assert 422 == 202&#10; +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code">tests\test_learned_api.py:51: in test_learned_only_common_model_hash
+    response=client.post('/runs',json=request(['learned']));assert response.status_code==202
+E   assert 422 == 202
+E    +  where 422 = &lt;Response [422 Unprocessable Entity]&gt;.status_code</failure></testcase><testcase classname="tests.test_learned_api" name="test_missing_server_model_rejected_before_run_created" time="0.001"><failure message="TypeError: RunService.__init__() got an unexpected keyword argument 'model_config'">tests\test_learned_api.py:58: in test_missing_server_model_rejected_before_run_created
+    service=RunService(tmp_path/'runs', model_config={'enabled': False})
+E   TypeError: RunService.__init__() got an unexpected keyword argument 'model_config'</failure></testcase></testsuite></testsuites>

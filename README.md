@@ -1,18 +1,18 @@
 # 星地智调
 
-2026-11-04 接续：B已同步并纳入A的冻结数据审计657f39c、C的WP1复核63c7740；新组合524项测试通过。A可按[B确认的教师支持域](docs/handoffs/B_teacher_support_2026-11-04.md)开始新版本小批生成与审计。B下一项为learned接入准备，详见[最新接续交接](docs/handoffs/B_next_readiness_2026-11-04.md)。共享main合并与WP2实现尚未执行。
+更新：2026-11-04，当前为 **B 的 WP2 learned集成候选**。learned已接入Runner/Guard及五接口，暖评分100ms预算、超时/异常EDF回退与Windows进程回收已验证。后端552通过、1项Linux专用跳过；前端61及构建通过。真实HTTP三策略配对运行完成，属于开发验证，尚无正式AI收益结论。接收与复跑见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。
 
-更新：2026-11-03。当前为 **B 的 WP1 集成候选**，包含 R2→R5 仿真、EDF/value、五接口、A 的冻结健康适配与 learned 评分包，以及 C 前端。各层原始分支和验收回执保留；进入 main 的状态以实际 PR 为准。
+当前候选以WP1统一版本为基础，已纳入A审计657f39c和C复核63c7740。A可按[B确认的教师支持域](docs/handoffs/B_teacher_support_2026-11-04.md)开展新版本小批生成与审计；此前进度见[B接续记录](docs/handoffs/B_next_readiness_2026-11-04.md)。原始分支与回执保留，共享main尚未更新。
 
 ## 当前能力与边界
 
 - 规则链路：任务/窗口/能量 → EDF 或 value → Guard → 发送/接收/ACK/重传/去重 → 事件、指标和 ZIP。
-- learned：可独立加载冻结权重并调用 `score_actions`；Runner/API 当前仅支持 `edf`、`value`，完整接入属于下一项 WP2。
+- learned：可独立加载冻结权重并调用 `score_actions`；Runner/API 已支持 `edf`、`value`、`learned`，异常与结构全mask回退保持可追溯。
 - 健康：正式适配器使用显式 synthetic 观测误差界；旧权重支持冻结 NPZ 离线推理。raw_fraction 不能作为 SOC、容量或在线原生 RUL。
 - 前端：离线流程演示、历史规则矩阵、按已有 run_id 读取状态、事件和结果。对比页的新建运行和 learned 对比仍为明确标识的契约样例，尚未完成现场重算闭环。
 - 旧矩阵为 180 轨迹×两规则共 360 次合成运行；正式 AI 实验、成熟优化器与真实卫星验证尚未完成。
 
-集成顺序、冲突决策、验证证据和下一步见 [WP1 交接](docs/handoffs/B_WP1_integration_2026-11-03.md)。
+WP1集成顺序与历史验证见 [WP1 交接](docs/handoffs/B_WP1_integration_2026-11-03.md)。
 
 ## 环境与安装
 
@@ -44,7 +44,7 @@ pnpm --dir frontend dev --host 127.0.0.1
 
 API 文档：<http://127.0.0.1:8000/docs>。目前可通过 API 提交新规则运行；页面创建真实运行属于后续联调。接口详见 [H03](docs/handoffs/H03_api_2026-10-29.md)：
 
-- `POST /runs`：提交规则配置，返回 run_id；每请求一至两策略。
+- `POST /runs`：提交规则或learned配置，返回 run_id；每请求一至两策略。
 - `GET /runs/{id}`：状态和进度。
 - `GET /runs/{id}/events?after=0&limit=500`：分页事件。
 - `GET /runs/{id}/results`：仅完成后提供正式结果。
@@ -59,9 +59,10 @@ API 文档：<http://127.0.0.1:8000/docs>。目前可通过 API 提交新规则�
 ```powershell
 .\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy edf --output runs/example_edf
 .\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy value --output runs/example_value
+.\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy learned --output runs/example_learned
 ```
 
-模型校验包含在下文使用工作区临时目录的全库验证中。模型五文件在 `artifacts/models/a_n3_policy_v1/`，运行配置为 `configs/learned_policy.json`。权重和归一化 SHA 必须与配置及 manifest 一致；不要以重新训练替代恢复冻结模型。模型包、训练数据与模型卡均随候选版本保存。加载和评分成功不代表调度效果成立。
+learned也可将下列policy-run命令的`--policy edf`改为`--policy learned`独立运行；模型权重由服务端冻结配置提供。模型校验包含在下文使用工作区临时目录的全库验证中。模型五文件在 `artifacts/models/a_n3_policy_v1/`，运行配置为 `configs/learned_policy.json`。权重和归一化 SHA 必须与配置及 manifest 一致；不要以重新训练替代恢复冻结模型。模型包、训练数据与模型卡均随候选版本保存。加载和评分成功不代表调度效果成立。
 
 ## 旧资产恢复
 
@@ -92,6 +93,6 @@ pnpm --dir frontend check
 
 ## 协作与后续工作
 
-[协作规则](CONTRIBUTING.md)、[公共合同](docs/contracts/README.md)、[任务板](docs/task_board.csv)、[优化方案](docs/superpowers/plans/2026-11-02-project-optimization.md)。B 下一项为 learned 的 Runner/Guard/API 接入及推理进程监督；A 推进数据与标签有效性；C 推进真实请求和页面联调。合同变更按三方确认规则执行。
+[协作规则](CONTRIBUTING.md)、[公共合同](docs/contracts/README.md)、[任务板](docs/task_board.csv)、[优化方案](docs/superpowers/plans/2026-11-02-project-optimization.md)。B 下一项为接收人复验及正式实验冻结；A 推进数据与标签有效性；C 推进真实请求和页面联调。合同变更按三方确认规则执行。
 
 旧日期记录保留在 [本轮集成前 README](docs/history/README_before_WP1_2026-11-03.md)，当前能力以本文件与最新交接为准。

@@ -1,0 +1,214 @@
+{
+  "base": "06384281034febcf12aaaecc6a4a66b89c94e325",
+  "runtime_commit": "5411fefa5f91b10ecc40b1203347a6fa7159334b",
+  "tests": {
+    "tests": "553",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "1",
+    "time": "53.362"
+  },
+  "frontend": {
+    "tests": 61,
+    "test_files": 16,
+    "typescript": true,
+    "production_build": true,
+    "source_unchanged": true,
+    "browser_verified": false
+  },
+  "frozen_sha256": {
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb",
+    "backend/policies/learned.py": "74278d6a5a7a1e106ea179e526b206ae9d77526dda24c3c93a036630e6e15785",
+    "configs/learned_policy.json": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+    "configs/policy_train.json": "788e361c5b204c85b232be51482323e66c03442849120c3eafcec57179a7503d",
+    "data/teacher/a_n3_20_v2/samples.jsonl": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+    "artifacts/models/a_n3_policy_v1/manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+    "artifacts/models/a_n3_policy_v1/model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+    "artifacts/models/a_n3_policy_v1/normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+    "artifacts/models/a_n3_policy_v1/training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+    "artifacts/models/a_n3_policy_v1/weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "http": {
+    "kind": "synthetic_WP2_integration_not_formal_AI_benchmark",
+    "runs": [
+      {
+        "run_id": "run_979943661a2e46b7ae29d031caafee23",
+        "policies": [
+          "edf",
+          "value"
+        ],
+        "input_hash": "79e9e2b06443b9525e325fceb3a8b5ca2e00e87108e3eacedc870754deb6707d",
+        "seed": 7,
+        "code_revision": "5411fefa5f91b10ecc40b1203347a6fa7159334b",
+        "by_policy": [
+          {
+            "policy_id": "edf",
+            "model_hash": null,
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 1.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 1170.2857142857142,
+            "minimum_soc_true": 0.49597048611111116,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": 0.0354156494140625,
+            "wait_p50_s": 0.0,
+            "wait_p95_s": 0.0,
+            "decision_p50_ms": 0.6839499983470887,
+            "decision_p95_ms": 1.581494983111042,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          },
+          {
+            "policy_id": "value",
+            "model_hash": null,
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 1.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 1170.2857142857142,
+            "minimum_soc_true": 0.49597048611111116,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": 0.0354156494140625,
+            "wait_p50_s": 0.0,
+            "wait_p95_s": 0.0,
+            "decision_p50_ms": 0.7202000124379992,
+            "decision_p95_ms": 1.1960099946008993,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          }
+        ],
+        "model": null,
+        "inference": null,
+        "event_count": 36,
+        "event_pages": 18,
+        "zip_sha256": "6601e7412d8cbcc1f50ee53fb558cfadd1e630b72334876888f0048ffd5060a0"
+      },
+      {
+        "run_id": "run_cc24e1361eb44c55b9790fedaa92d087",
+        "policies": [
+          "edf",
+          "learned"
+        ],
+        "input_hash": "79e9e2b06443b9525e325fceb3a8b5ca2e00e87108e3eacedc870754deb6707d",
+        "seed": 7,
+        "code_revision": "5411fefa5f91b10ecc40b1203347a6fa7159334b",
+        "by_policy": [
+          {
+            "policy_id": "edf",
+            "model_hash": null,
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 1.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 1170.2857142857142,
+            "minimum_soc_true": 0.49597048611111116,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": 0.0354156494140625,
+            "wait_p50_s": 0.0,
+            "wait_p95_s": 0.0,
+            "decision_p50_ms": 0.6422500009648502,
+            "decision_p95_ms": 1.642939996963832,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          },
+          {
+            "policy_id": "learned",
+            "model_hash": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 0.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 0.0,
+            "minimum_soc_true": 0.49650000000000005,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 0,
+            "joule_per_success_bit": null,
+            "wait_p50_s": null,
+            "wait_p95_s": null,
+            "decision_p50_ms": 1.822100006393157,
+            "decision_p95_ms": 4.181500007689464,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "joule_per_success_bit": "NO_DELIVERY",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION",
+              "wait_p50_s": "NOT_MEASURED_MANUAL_VALIDATION",
+              "wait_p95_s": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          }
+        ],
+        "model": {
+          "artifacts_sha256": {
+            "manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+            "model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+            "normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+            "training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+            "weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+          },
+          "feature_schema_version": "policy-features-v1",
+          "model_hash": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+          "model_version": "a-n3-mlp-v1",
+          "normalization_sha256": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449"
+        },
+        "inference": {
+          "cold_load_ms": 92.38540002843365,
+          "fallback_count": 0,
+          "fallback_reasons": {},
+          "requests": 4,
+          "retry_override_count": 0,
+          "successful_model_decisions": 4,
+          "warm_budget_ms": 100.0
+        },
+        "event_count": 30,
+        "event_pages": 15,
+        "zip_sha256": "280d93f98e1c882baad83c0b5eb57a4953b0fa97872348639949693a96f88cd4"
+      }
+    ],
+    "paired_inputs": true,
+    "max_two_policies_preserved": true,
+    "all_artifact_hashes_verified": true,
+    "real_http_and_vite_proxy": true,
+    "owned_servers_stopped": true
+  },
+  "scope": "WP2 synthetic integration, not formal algorithm benchmark",
+  "platform_limit": "Windows verified; Linux zombie test skipped; no Linux execution claim"
+}
