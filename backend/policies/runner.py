@@ -45,6 +45,9 @@ class ScorerGateway:
                 expected={(t.task_id,m) for t in observed.tasks for m in ('robust','fast')} | {(None,'idle')}
                 if {(s.task_id,s.mode) for s in scores} != expected: reason='INVALID_SCORE'
             except (ContractViolation,ValueError,TypeError): reason='INVALID_SCORE'
+            if reason is None and observed.tasks:
+                from training.policy_features import encode_observation
+                if not any(encode_observation(observed).candidate_mask[:-1]): reason='NO_VALID_CANDIDATE'
         result=fallback_decision(observed,reason,config=self.config) if reason else decode_safe(observed,scores,config=self.config)
         if self.model_version and not result.fallback: result=result.model_copy(update={'model_version':self.model_version})
         return result.model_copy(update={'decision_latency_ms':(perf_counter()-start)*1000})

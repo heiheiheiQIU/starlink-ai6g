@@ -49,7 +49,8 @@ def test_bounded_failed_inference_is_killed_and_not_reused(scorer, reason):
         with pytest.raises(InferenceFailure): supervisor.client(obs())
 
 
-def test_service_death_kills_running_and_inference_processes(tmp_path):
+@pytest.mark.parametrize('stage', [None, 'inference', 'run'])
+def test_service_death_kills_running_and_inference_processes(tmp_path, stage):
     import json
     import os
     from pathlib import Path
@@ -60,7 +61,7 @@ def test_service_death_kills_running_and_inference_processes(tmp_path):
     root=Path(__file__).resolve().parents[1]
     children=[]
     with (tmp_path/'parent.log').open('wb') as log:
-        parent=subprocess.Popen([sys.executable,'-m','tests.inference_parent_probe',str(tmp_path)],
+        parent=subprocess.Popen([sys.executable,'-m','tests.inference_parent_probe',str(tmp_path),*([stage] if stage else [])],
                                 cwd=root, stdout=log, stderr=subprocess.STDOUT,
                                 creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
         try:
@@ -69,7 +70,7 @@ def test_service_death_kills_running_and_inference_processes(tmp_path):
                     children=json.loads((tmp_path/'pids.json').read_text());break
                 assert parent.poll() is None, (tmp_path/'parent.log').read_text(errors='replace')
                 time.sleep(.05)
-            assert len(children)==2 and all(pid_alive(p) for p in children)
+            assert len(children)==(1 if stage=='inference' else 2) and all(pid_alive(p) for p in children)
             parent.kill();parent.wait(5)
             for _ in range(100):
                 if all(not pid_alive(p) for p in children): break
@@ -79,4 +80,30 @@ def test_service_death_kills_running_and_inference_processes(tmp_path):
             if parent.poll() is None: parent.kill();parent.wait(5)
             for pid in children:
                 if pid_alive(pid): os.kill(pid, signal.SIGTERM)
+
+
+def test_frozen_manifest_tamper_is_rejected(tmp_path):
+    import json
+    import shutil
+    from backend.policies.learned import _config
+    config=_config(None); source=config['package_dir']
+    shutil.copytree(source,tmp_path/'model');config['package_dir']=str(tmp_path/'model')
+    path=tmp_path/'model/manifest.json';manifest=json.loads(path.read_text())
+    manifest['schema_version']='invalid';manifest['source_revision']='Bogus'
+    path.write_text(json.dumps(manifest))
+    with pytest.raises(InferenceFailure): inspect_model(config)
+
+
+@pytest.mark.skipif(__import__('sys').platform!='linux',reason='Linux zombie state')
+def test_linux_zombie_is_not_reported_alive():
+    import os
+    from backend.api.processes import pid_alive
+    child=os.fork()
+    if child==0: os._exit(0)
+    try:
+        for _ in range(100):
+            if not pid_alive(child):break
+            time.sleep(.01)
+        assert not pid_alive(child)
+    finally:os.waitpid(child,0)
 

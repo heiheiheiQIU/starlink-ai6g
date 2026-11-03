@@ -9,7 +9,12 @@ from queue import Empty, Full
 import time
 
 from backend.contracts import Observation
-from .processes import ProcessGroup, bind_parent, pid_alive, stop_process
+from .processes import ProcessGroup, wait_for_start, pid_alive, stop_process
+
+
+FROZEN_MANIFESTS = {
+    'a-n3-mlp-v1': '949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8',
+}
 
 
 class InferenceFailure(RuntimeError):
@@ -22,7 +27,12 @@ def inspect_model(config=None):
     cfg = learned._config(config)
     package = Path(cfg['package_dir'])
     try:
-        manifest = json.loads((package/'manifest.json').read_text(encoding='utf-8'))
+        manifest_bytes=(package/'manifest.json').read_bytes()
+        manifest_hash=hashlib.sha256(manifest_bytes).hexdigest()
+        if manifest_hash != FROZEN_MANIFESTS.get(cfg['model_version']):
+            raise ValueError('Unrecognized frozen manifest')
+        manifest = json.loads(manifest_bytes)
+        if manifest['schema_version'] != 'policy-model-manifest-v1': raise ValueError('Invalid model schema')
         if (manifest['model_version'] != cfg['model_version'] or
                 manifest['feature_schema_version'] != cfg['feature_schema_version']):
             raise ValueError('Model metadata mismatch')
@@ -34,7 +44,7 @@ def inspect_model(config=None):
             raw = (package/name).read_bytes()
             hashes[name] = hashlib.sha256(raw).hexdigest()
             if hashes[name] != digest: raise ValueError('Model package hash mismatch')
-        hashes['manifest.json'] = hashlib.sha256((package/'manifest.json').read_bytes()).hexdigest()
+        hashes['manifest.json'] = manifest_hash
         if hashes['weights.npz'] != cfg['weights_sha256'] or hashes['normalization.json'] != cfg['normalization_sha256']:
             raise ValueError('Runtime model hash mismatch')
         learned._bundle(cfg)  # Validate shapes, dtype, finite arrays and train normalization.
@@ -46,7 +56,7 @@ def inspect_model(config=None):
 
 
 def _score_loop(requests, responses, config, scorer, gate, parent_pid):
-    bind_parent(parent_pid); gate.wait()
+    wait_for_start(gate, parent_pid)
     responses.cancel_join_thread()
     started = time.perf_counter()
     try:

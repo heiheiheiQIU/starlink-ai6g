@@ -55,11 +55,12 @@ def test_learned_only_common_model_hash(tmp_path):
 
 
 def test_missing_server_model_rejected_before_run_created(tmp_path):
+    import pytest
+    from backend.api.service import ServiceError
     service=RunService(tmp_path/'runs', model_config={'enabled': False})
     try:
-        try: service.submit(request(['learned']))
-        except ValueError: pass
-        else: raise AssertionError('Invalid model must reject submit')
+        with pytest.raises(ServiceError) as error: service.submit(request(['learned']))
+        assert error.value.status==422 and error.value.body['details']['reason']=='MODEL_UNAVAILABLE'
         assert not list((tmp_path/'runs').iterdir())
     finally: service.close()
 
@@ -138,4 +139,54 @@ def test_worker_crash_reaps_inference_and_never_publishes_results(tmp_path):
         assert not (service.root/identity/'results.json').exists()
         assert not pid_alive(pid)
     finally: service.close()
+
+
+@__import__('pytest').mark.parametrize('corruption',['artifact','root_manifest','child_manifest'])
+def test_export_rejects_corrupt_completed_artifact(tmp_path,corruption):
+    app=create_app(tmp_path/'runs')
+    with TestClient(app) as client:
+        response=client.post('/runs',json=request(['learned']));assert response.status_code==202
+        identity=response.json()['run_id'];assert wait(client,identity)['status']=='completed'
+        if corruption=='artifact':
+            path=tmp_path/'runs'/identity/'learned/events.jsonl'
+            with path.open('ab') as stream:stream.write(b'\n')
+        else:
+            path=tmp_path/'runs'/identity/('manifest.json' if corruption=='root_manifest' else 'learned/manifest.json')
+            path.write_text('{}')
+        response=client.get('/runs/'+identity+'/export')
+        assert response.status_code==500 and response.json()['code']=='INTERNAL_RUN_ERROR'
+
+
+def test_status_io_error_does_not_disable_future_supervision(tmp_path,monkeypatch):
+    from backend.api import service as module
+    from backend.api.processes import pid_alive
+    from tests.test_api import held_worker
+    service=RunService(tmp_path/'runs',worker=held_worker,timeout_s=.2)
+    service.start();identity=service.submit(request())['run_id']
+    original=module.read_text
+    def denied(path):
+        if path==service.root/identity/'status.json':raise PermissionError('persistent read lock')
+        return original(path)
+    monkeypatch.setattr(module,'read_text',denied)
+    try:
+        for _ in range(200):
+            if identity not in service.jobs:break
+            time.sleep(.01)
+        assert service.monitor.is_alive()
+        second=service.submit(request(['learned']))['run_id']
+        pids=[service.jobs[second][0].pid,service.inference_jobs[second].process.pid]
+        for _ in range(300):
+            if service.status(second)['status']=='failed':break
+            time.sleep(.01)
+        assert service.status(second)['status']=='failed'
+        assert all(not pid_alive(pid) for pid in pids)
+    finally:service.close()
+
+
+def test_missing_model_http_explains_server_failure(tmp_path):
+    app=create_app(tmp_path/'runs');app.state.service.model_config={'enabled':False}
+    with TestClient(app) as client:
+        response=client.post('/runs',json=request(['learned']))
+        assert response.status_code==422
+        assert response.json()['details']['reason']=='MODEL_UNAVAILABLE'
 

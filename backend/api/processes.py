@@ -7,7 +7,16 @@ import signal
 
 def pid_alive(pid):
     if os.name != 'nt':
-        try: os.kill(pid, 0); return True
+        try:
+            os.kill(pid, 0)
+            import sys
+            if sys.platform.startswith('linux'):
+                from pathlib import Path
+                try:
+                    state=Path(f'/proc/{pid}/stat').read_text().rsplit(')',1)[1].split()[0]
+                    if state in ('Z','X'): return False
+                except FileNotFoundError: return False
+            return True
         except ProcessLookupError: return False
     from ctypes import wintypes as w
     kernel = ctypes.WinDLL('kernel32', use_last_error=True)
@@ -39,6 +48,17 @@ def bind_parent(parent_pid):
         if sys.platform.startswith('linux'):
             if ctypes.CDLL(None).prctl(1, signal.SIGTERM) != 0: raise OSError('prctl failed')
     if os.getppid() != parent_pid: raise RuntimeError('Supervisor exited before child startup')
+
+
+def wait_for_start(gate, parent_pid):
+    """Cover the spawn-to-Job-assignment window without leaving an orphan waiter."""
+    bind_parent(parent_pid)
+    parent=multiprocessing.parent_process()
+    while not gate.wait(.05):
+        if (parent is not None and not parent.is_alive()) or not pid_alive(parent_pid):
+            raise RuntimeError('Supervisor died before containment assignment')
+    if parent is not None and not parent.is_alive():
+        raise RuntimeError('Supervisor died during child startup')
 
 
 class ProcessGroup:
@@ -87,6 +107,5 @@ class ProcessGroup:
 
 
 def run_owned(target, args, gate, parent_pid):
-    bind_parent(parent_pid)
-    gate.wait()
+    wait_for_start(gate, parent_pid)
     target(*args)

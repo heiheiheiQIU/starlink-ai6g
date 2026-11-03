@@ -31,6 +31,20 @@ def test_learned_gateway_keeps_normal_idle_and_model_identity():
     assert result.model_version == 'frozen-test'
 
 
+def test_all_structurally_masked_tasks_fall_back_but_empty_queue_does_not():
+    from backend.policies.learned import score_actions
+    from backend.simulator.engine import create_state, observe, step
+    from tests.test_protocol import send
+    observed=observe(step(create_state(config()),send(),1.5).next_state)
+    result=ScorerGateway(score_actions,require_complete=True,model_version='frozen').decide(observed)
+    assert result.fallback and 'NO_VALID_CANDIDATE' in result.action.reason_codes
+    assert result.model_version is None
+    data=config();data['tasks']=[]
+    empty=obs(data)
+    result=ScorerGateway(score_actions,require_complete=True,model_version='frozen').decide(empty)
+    assert result.action.mode=='idle' and not result.fallback
+
+
 def test_frozen_learned_runner_records_model_and_decisions(tmp_path):
     result = run_policy(run_config(config(deadline=4), actions=[], end=4), tmp_path/'run', policy_id='learned')
     metadata = json.loads((tmp_path/'run/manifest.json').read_text(encoding='utf-8'))

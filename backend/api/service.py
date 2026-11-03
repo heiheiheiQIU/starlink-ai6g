@@ -1,5 +1,6 @@
 """Single-server process supervisor and bounded read/export operations."""
 import io
+import hashlib
 import json
 import multiprocessing
 import os
@@ -44,6 +45,7 @@ class RunService:
         self.stopping=threading.Event();self.monitor=None
         self.model_config=model_config;self.inference_factory=inference_factory
         self.inference_jobs={};self.process_groups={}
+        self.terminal_overrides={};self.last_supervision_error=None
 
     def start(self):
         # Single service owns this root; unfinished records from an earlier stop fail honestly.
@@ -60,7 +62,10 @@ class RunService:
 
     def _watch(self):
         while not self.stopping.wait(.05):
-            with self.lock: self.reap()
+            with self.lock:
+                try: self.reap()
+                except (OSError,ValueError,RuntimeError,ServiceError) as error:
+                    self.last_supervision_error=type(error).__name__
 
     def _release_inference(self, identity):
         supervisor=self.inference_jobs.pop(identity,None)
@@ -80,6 +85,13 @@ class RunService:
                     state=json.loads(read_text(folder/'status.json'))
                     if state['status'] not in ('completed','failed','cancelled'):
                         fail_run(folder,'WORKER_TIMEOUT' if expired else 'WORKER_EXITED')
+                except (OSError,ValueError) as error:
+                    self.last_supervision_error=type(error).__name__
+                    terminal=RunStatusResponse(run_id=identity,status='failed',progress=None,active_policies=[],
+                        error=dict(code='INTERNAL_RUN_ERROR',message='Run status is unavailable',details={'reason':'STATUS_UNAVAILABLE'}))
+                    self.terminal_overrides[identity]=terminal.model_dump()
+                    try: fail_run(folder,'STATUS_UNAVAILABLE')
+                    except OSError: pass
                 finally:
                     self._release_inference(identity)
                     process.close();del self.jobs[identity]
@@ -118,7 +130,8 @@ class RunService:
         if 'learned' in request.policy_ids:
             from .inference import inspect_model
             try: inspect_model(self.model_config)
-            except (ValueError,RuntimeError,OSError) as error: raise ValueError('Frozen learned package is unavailable') from error
+            except (ValueError,RuntimeError,OSError) as error:
+                raise ServiceError(422,'INVALID_CONFIG','Frozen learned model package is unavailable',reason='MODEL_UNAVAILABLE') from error
         with self.lock:
             self.reap()
             if self.jobs: raise ServiceError(429,'CAPACITY_BUSY','One run is already active')
@@ -158,6 +171,7 @@ class RunService:
         return path
 
     def status(self,identity):
+        if identity in self.terminal_overrides: return self.terminal_overrides[identity].copy()
         folder=self.folder(identity)
         return RunStatusResponse.model_validate_json(read_text(folder/'status.json')).model_dump()
 
@@ -187,7 +201,23 @@ class RunService:
         for policy in request.policy_ids:
             names += [f'{policy}/{n}' for n in ('config.json','manifest.json','status.json','results.json',
                 'events.jsonl','execution.log','energy_ledger.json')]
+        contents={name:checked_file(folder,name).read_bytes() for name in names}
+        root_manifest=json.loads(contents['manifest.json'])
+        if not isinstance(root_manifest,dict) or not isinstance(root_manifest.get('artifacts_sha256'),dict):
+            raise ValueError('Invalid root manifest')
+        expected=set(names)-{'manifest.json','status.json'}
+        if set(root_manifest['artifacts_sha256'])!=expected: raise ValueError('Incomplete export manifest')
+        for name,digest in root_manifest['artifacts_sha256'].items():
+            if hashlib.sha256(contents[name]).hexdigest()!=digest: raise ValueError('Corrupt export artifact')
+        for policy in request.policy_ids:
+            manifest=json.loads(contents[policy+'/manifest.json'])
+            if not isinstance(manifest,dict) or not isinstance(manifest.get('artifacts_sha256'),dict):
+                raise ValueError('Invalid child manifest')
+            expected={'config.json','events.jsonl','results.json','execution.log','energy_ledger.json'}
+            if set(manifest['artifacts_sha256'])!=expected: raise ValueError('Incomplete child manifest')
+            for name,digest in manifest['artifacts_sha256'].items():
+                if hashlib.sha256(contents[policy+'/'+name]).hexdigest()!=digest: raise ValueError('Corrupt child artifact')
         output=io.BytesIO()
         with zipfile.ZipFile(output,'w',zipfile.ZIP_DEFLATED) as package:
-            for name in names: package.writestr(name,checked_file(folder,name).read_bytes())
+            for name in names: package.writestr(name,contents[name])
         return output.getvalue()
