@@ -4,7 +4,7 @@ A-N1,A,accepted_with_notes,2026-10-29T22:00:00+08:00,backend/health/estimator.py
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,待健康数据冻结交付核验;H01已有限签收,按电池和同源窗口冻结划分;补F4许可与哈希
 A-N3,A,accepted_with_notes,2026-11-02T22:00:00+08:00,docs/acceptance/A_N3_learned_B_2026-11-02.md,B,B复验1c90246;48定向503全库及原坏ZIP1项通过;冻结五文件和配置不变,仅小样本包与评分接口;不代表API接入或效果,冻结五文件已完整集成并独立评分;B推进WP2;A配合适用域与扩样
 A-N3-DATA,A,accepted_with_notes,,data/teacher/a_n3_20_v2/splits.json,B,20标签一致;20内容唯一;四维身份12/4/4无交集;130定向471全库通过,仅20条合成管线数据;扩样与模型效果另验,按A_N3_v2_data_B_2026-10-31冻结数据和来源组
-A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
+A-N4,A,in_progress,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,冻结20条标签审计已完成;未启动扩样或训练,,先请B复核支持域边界;再建版本化扩样集与方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,H00冻结版本保持;组合合同与Schema逐字节核对通过
 B-N2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,A ddcca9c明确签收d4716bf四项手算和发送能量;41定向219全库为A实测,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,A专门回执已到ddcca9c;覆盖d4716bf四项手算,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
