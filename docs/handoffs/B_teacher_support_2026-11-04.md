@@ -30,7 +30,7 @@ cost_Wh = ((base_W+compute_W)*horizon + tx_W*air + ack_rx_W*ack_air)/3600
 | 预测窗口数 | 最多3 | 0—3，含当前无窗口、后续有窗口与完全无窗口 |
 | 期限跨度 | <=min(240 s,120×decision_dt_s) | 所有可见任务deadline-now在0—30 s内；未来到达任务不放入Observation |
 | payload | 每任务<=122880 B | 1—4096 B；采样时remaining>0，payload-remaining须为1024整数倍 |
-| inflight | 不支持 | 只采无在途块状态；发送后待ACK完成再采下一状态；带inflight的样本计入不支持清单 |
+| inflight与协议历史 | inflight不支持；教师不能从Observation恢复未公开的重传义务和待处理控制事件 | 只采无在途块、无待重传义务且控制事件已处理的状态；带inflight的样本计入不支持清单 |
 | 预测数据损失 | 任意非零robust/fast概率返回UNSUPPORTED_LOSS | 标注输入所有预测loss为0；非零损失压力测试另存、不混入标签 |
 | 预测协议 | 使用固定TeacherConfig.policy重建环境 | 保持现有参数：decision_dt=2 s、slot=1 s、传播0、control=1024 bit/s、ACK=8 W、base=36 W、compute/solar=0、robust/fast功率36/72 W、max_power=150 W |
 | 速率 | 正值且能构成合法Window | 首批固定8192/16384 bit/s；优先变化期限、窗口和队列，不同时改物理参数 |
@@ -41,17 +41,19 @@ cost_Wh = ((base_W+compute_W)*horizon + tx_W*air + ack_rx_W*ack_air)/3600
 
 首批来源轨迹采用显式确定性合成环境：不启用随机channel、数据/ACK随机丢失为0，实际窗口与已知预测窗口一致；这仅用于受控小批生成。教师仍只接收公开Observation，不读取环境真值。实际/预测失配、随机ACK丢失和重传留作独立域外压力测试，不混称已支持训练域。
 
+特别注意：即使没有随机丢失，断窗仍可能导致ACK失败；超时后inflight可能已清空但retry_required义务仍存在。采样器须依据来源事件/协议记录确认 `inflight is None`、`retry_required_key is None`，且pending控制事件已清空，再导出公开Observation。该准入检查属于来源审计，禁止把私有协议对象或隐藏未来传给score_actions/solve_teacher。单凭教师返回OPTIMAL不能证明来源状态没有这些未建模历史。
+
 UNSUPPORTED_TASK_COUNT/WINDOW_COUNT/HORIZON/PAYLOAD_RANGE/BLOCK_STATE/INFLIGHT/LOSS/FORECAST_CONFIG均保留状态与原因，不作为可学习的最优标签。TIME_LIMIT_FEASIBLE、NODE_LIMIT_FEASIBLE是受限可行解，不能改称OPTIMAL或gap=0。正式训练默认仅接收通过完整标签合同的OPTIMAL/gap=0样本；其他状态留作诊断。
 
 任务仍可能在公共合同合法后被预测场景构造拒绝；上表是生成范围而非保证每条均可标注。完整valid/unsupported/timeout数量均须返回。
 
 ## 3. 给 A 的具体下一交付
 
-1. 新目录建议data/teacher/a_n4_pilot_v1，使用新dataset_version与单独训练配置，不覆盖旧samples/splits/model/policy_train.json。现有生成器含固定版本常量，A应先让新版本路径和元数据一致，不靠目录改名伪装新版本。
+1. 新目录建议data/teacher/a_n4_pilot_v1，使用新dataset_version与单独训练配置，不覆盖旧samples/splits/model/policy_train.json。现有生成器含固定版本常量，旧数据加载器与冻结审计CLI也强制20条、12/4/4及全部OPTIMAL，不能直接用它们验证新试点。A负责为新版本增加独立生成/校验/审计入口（建议training/audit_policy_pilot.py），按新manifest核对来源、实际分组数量与内容身份，保留旧冻结入口和测试；可以复用audit_rows统计函数，不能放宽旧入口约束来兼容新数据。
 2. 先设计30条独立来源轨迹。建议24条来自有决策差异机会的期限/权重/任务冲突、短窗口等组合；其余6条覆盖低能量、无窗口、窗口前到期各2条。此比例是生成设计，不保证最优动作分布；实际标签如实报告。
 3. 先按来源分组冻结train/validation/test，再由真实环境演进采每轨迹2—4个公开状态；不更换run_id复制旧初态，不读取隐藏未来。确保决策时的energy_lower已合法传播且available_at<=now。
 4. 最多先生成60—120条有效状态；累计达到2 CPU小时或多次出现TIME/NODE限制时先交预算与覆盖报告，扩到原8 CPU小时总预算前由B根据实测评估。数量不足不放宽支持域凑数。
-5. 交付来源清单/轨迹与时间/完整Observation/教师配置SHA/标签/支持状态/划分、内容去重与标签审计。额外区分“所有任务动作不可行”和“任务动作可行但效用为0”，给出每模式拒绝原因。
+5. 交付来源清单/轨迹与时间/完整Observation/教师配置SHA/标签/支持状态/划分、内容去重与标签审计。先统计全部尝试的求解状态和排除理由，再对通过完整标签合同的可训练样本做审计，数量动态来自新manifest；unsupported/受限可行解另存诊断，不伪造成训练样本。额外区分“所有任务动作不可行”和“任务动作可行但效用为0”，给出每模式拒绝原因。
 6. 保留所有idle和并列最优记录，不以提高非idle比例为目标删除困难样本或改教师；若辨识度仍弱，先解释任务期限与续行动作价值，再决定新的场景设计。B复验前不将小批数据称为正式训练集或启动新候选训练。
 
 这份支持域确认使A可以开始小批生成与审计；不要求等待B完成WP2。旧冻结模型仍可用于B的接入与故障回归。非零损失和重传运行的learned泛化仍未验证，后续作为域外压力测试或显式回退单列。
