@@ -46,3 +46,6 @@ docs/evidence/B/WP1_integration_2026-11-03/*.xml -text -diff
 docs/evidence/B/WP1_integration_2026-11-03/*.log -text -diff
 
 docs/evidence/B/A_N4_readiness_2026-11-04/*.xml -text -diff
+
+docs/evidence/B/WP2_learned_2026-11-04/*.xml -text -diff
+docs/evidence/B/WP2_learned_2026-11-04/*.log -text -diff

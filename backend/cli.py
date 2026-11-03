@@ -56,7 +56,7 @@ def _write_json(path: Path, value):
 
 
 def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None = None,
-                   _policy_id='manual', _executor=None, _runtime=None) -> dict:
+                   _policy_id='manual', _executor=None, _runtime=None, _diagnostics=None) -> dict:
     parsed = RunConfig.model_validate(config)
     if parsed.kind=='rule_validation' and _executor is None:
         raise ValueError('Use policy-run for automatic rule configurations')
@@ -95,10 +95,16 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         _write_json(output/'energy_ledger.json',[asdict(row) for row in state.energy_ledger])
         metrics = evaluate(events,dict(scenario=parsed.scenario.model_dump(),
             evaluation_end_s=parsed.evaluation_end_s,policy_id=_policy_id))
+        model = (_runtime or {}).get('model')
+        model_hash = model['model_hash'] if model else None
+        metrics['model_hash'] = model_hash
         root = Path(__file__).resolve().parents[1]
         files = [root/'backend/contracts.py',root/'backend/evaluation.py',root/'backend/cli.py',
                  *sorted((root/'backend/simulator').glob('*.py'))]
         if _executor is not None: files.extend(sorted((root/'backend/policies').glob('*.py')))
+        if model is not None:
+            files.extend([root/'backend/api/inference.py',root/'backend/api/processes.py',
+                          root/'training/policy_features.py'])
         source_hashes={p.relative_to(root).as_posix():hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
         try:
             if not (root/'.git').exists():
@@ -120,7 +126,7 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
         paths = {name:name for name in ('config.json','manifest.json','status.json','events.jsonl',
                                         'results.json','execution.log','energy_ledger.json')}
         result = RunResult(schema_version='1.0',run_id=identity,status='completed',config_hash=config_hash,
-            input_hash=input_hash,model_hash=None,code_revision=revision,seed=seed,by_policy=[metrics],
+            input_hash=input_hash,model_hash=model_hash,code_revision=revision,seed=seed,by_policy=[metrics],
             metric_definitions=definitions,artifact_paths=paths).model_dump()
         _write_json(output/'results.json',result)
         with log.open('a',encoding='utf-8',newline='\n') as stream:
@@ -130,11 +136,14 @@ def run_experiment(config: RunConfig | dict, output: Path, *, run_id: str | None
             protocol_stage='receive_ack_retry_dedup',is_real_satellite_measurement=False,
             is_policy_benchmark=False,config_hash=config_hash,input_hash=input_hash,trace_hash=_hash(external),
             channel=parsed.scenario.channel.model_dump() if parsed.scenario.channel else None,
-            model_hash=None,policy_version=_runtime['policy_version'] if _runtime else 'manual-r3-v1',code_revision=revision,
+            model_hash=model_hash,policy_version=_runtime['policy_version'] if _runtime else 'manual-r3-v1',code_revision=revision,
             source_sha256=source_hashes,
             artifacts_sha256={name:hashlib.sha256((output/name).read_bytes()).hexdigest() for name in
                 ('config.json','events.jsonl','results.json','energy_ledger.json','execution.log')},
             status_hash_note='status written last; manifest and status excluded from self-referential hashes')
+        if model is not None:
+            manifest['model']=model
+            manifest['inference']=_diagnostics or {}
         _write_json(output/'manifest.json',manifest)
         # Successful status is the final write, after all required artifacts validate.
         status('completed')
@@ -157,7 +166,7 @@ def main():
     command.add_argument('--output',type=Path,required=True)
     rule=commands.add_parser('policy-run')
     rule.add_argument('--config',type=Path,required=True)
-    rule.add_argument('--policy',choices=['edf','value'],required=True)
+    rule.add_argument('--policy',choices=['edf','value','learned'],required=True)
     rule.add_argument('--output',type=Path,required=True)
     args = parser.parse_args()
     config=json.loads(args.config.read_text(encoding='utf-8'))

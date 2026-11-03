@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.291" timestamp="2026-11-04T00:15:50.063859+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="" name="tests.test_inference_lifecycle" time="0.000"><error message="collection failure">ImportError while importing test module 'D:\人工智能挑战赛\starlink-ai6g\tests\test_inference_lifecycle.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yuzzz\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_inference_lifecycle.py:5: in &lt;module&gt;
+    from backend.api.inference import InferenceFailure, InferenceSupervisor, inspect_model
+E   ModuleNotFoundError: No module named 'backend.api.inference'</error></testcase></testsuite></testsuites>

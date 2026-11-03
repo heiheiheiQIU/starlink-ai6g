@@ -8,11 +8,11 @@ A-N4,A,in_progress,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,冻结审�
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,H00冻结版本保持;组合合同与Schema逐字节核对通过
 B-N2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,A ddcca9c明确签收d4716bf四项手算和发送能量;41定向219全库为A实测,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,A专门回执已到ddcca9c;覆盖d4716bf四项手算,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
-B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过;WP1组合519项及真实HTTP/代理/18页事件/ZIP通过,页面完整联调与learned仍待后续;统一候选待复核,复核WP1候选;继续WP2 learned进程监督和五接口
-B-N4,B,in_progress,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,A模型已签收并纳入统一候选;WP1仅验证独立评分;learned运行接入尚未实施;B已确认教师扩样支持域和reserve,待WP2 scorer/Guard/API与推理进程监督,先写完整候选/idle/重传失败回归;再做同级推理进程最小验证
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过;WP1组合519项及真实HTTP/代理/18页事件/ZIP通过,页面完整联调与learned仍待后续;统一候选待复核,已支持edf/value/learned各至多两策略;接收人复验分页/ZIP/故障恢复
+B-N4,B,ready_for_review,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,WP2 learned Runner/Guard/五接口已实现;552通过1平台跳过;前端61及构建;真实HTTP配对通过,待A/C接入复验;正式实验/模型泛化/强优化器另验,按B_WP2_learned_2026-11-04交接;C页面消费;A扩样审计;B正式实验冻结
 C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
 C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,原27结构镜像复核保留;WP1冻结pnpm安装成功;61项前端测试及类型/构建通过,换机及浏览器视觉验收另做,保持pnpm唯一锁文件;复核本轮README代理说明
-C-N3,C,in_progress,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,真实HTTP和Vite代理已实测;页面创建run/ZIP/learned联调仍待后续,基于统一候选完成浏览器及真实请求闭环;按WP3接冻结预设
+C-N3,C,in_progress,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,WP2五接口已可运行learned;页面创建预设/ZIP和视觉交互待C联调,使用WP2固定候选真实请求;消费模型身份、NO_VALID_CANDIDATE/超时回退和ZIP
 C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
 B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A/C既有回执齐;此前B复跑70定向248全库,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R4,B,accepted_with_notes,,docs/handoffs/H02_teacher_2026-10-29.md,A,A的H02_A_2026-10-30签收已取得;本轮原候选293全库通过,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
@@ -20,3 +20,4 @@ B-R5,B,accepted_with_notes,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,A ddcca
 B-API-LOCK,B,accepted_with_notes,,docs/handoffs/B_API_lock_2026-11-01.md,A+C,A已应用3ea06f6并在11c00374交接accepted;B核三路径SHA一致,限短锁读取缓解;持续锁有界失败保留,在固定learned候选做B组合复验
 B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过;C63c7740给无阻断推进意见,C回执已纳入;新main合并授权与执行仍未完成,按C回执及协作规则安排main；当前B准备WP2
 B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11-04.md,A+C,A审计及C回执已整合;524通过;6能量和10支持域探针通过,WP2实现尚未执行,A开始小批生成审计;B接WP2;C准备无数字材料骨架
+B-WP2,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP2_learned_2026-11-04.md,A+C,模型固定身份;有界推理和Windows进程树回收;552通过1跳过;HTTP/ZIP配对通过,待组合接收人签收;非正式AI结果,C实际页面;A新数据准入;B冻结正式实验与统计
