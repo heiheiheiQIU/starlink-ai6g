@@ -1,0 +1,341 @@
+{
+  "kind": "B_independent_support_check_not_new_training_data",
+  "observation_count": 20,
+  "independent_counts": {
+    "task_action_all_zero": 13,
+    "idle_in_optimal_set": 19,
+    "unique_non_idle_best": 1,
+    "tied_optimal_set": 6,
+    "low_energy_at_or_below_reserve": 0,
+    "no_forecast_window": 0,
+    "deadline_before_or_at_first_window": 0,
+    "all_task_actions_infeasible": 13
+  },
+  "reserve_Wh": 0.5,
+  "robust_start_threshold_Wh": 0.5309027777777777,
+  "reserve_probes": [
+    {
+      "energy_lower_Wh": 0.49,
+      "robust_feasible": false,
+      "robust_cost_Wh": 0.03090277777777778,
+      "projected_lower_Wh": 0.4590972222222222,
+      "teacher_status": "OPTIMAL",
+      "feasible_modes": [
+        "idle"
+      ]
+    },
+    {
+      "energy_lower_Wh": 0.5,
+      "robust_feasible": false,
+      "robust_cost_Wh": 0.03090277777777778,
+      "projected_lower_Wh": 0.4690972222222222,
+      "teacher_status": "OPTIMAL",
+      "feasible_modes": [
+        "idle"
+      ]
+    },
+    {
+      "energy_lower_Wh": 0.51,
+      "robust_feasible": false,
+      "robust_cost_Wh": 0.03090277777777778,
+      "projected_lower_Wh": 0.47909722222222223,
+      "teacher_status": "OPTIMAL",
+      "feasible_modes": [
+        "idle"
+      ]
+    },
+    {
+      "energy_lower_Wh": 0.5309017777777777,
+      "robust_feasible": false,
+      "robust_cost_Wh": 0.03090277777777778,
+      "projected_lower_Wh": 0.4999989999999999,
+      "teacher_status": "OPTIMAL",
+      "feasible_modes": [
+        "fast",
+        "idle"
+      ]
+    },
+    {
+      "energy_lower_Wh": 0.5309027777777777,
+      "robust_feasible": false,
+      "robust_cost_Wh": 0.03090277777777778,
+      "projected_lower_Wh": 0.49999999999999994,
+      "teacher_status": "OPTIMAL",
+      "feasible_modes": [
+        "fast",
+        "idle"
+      ]
+    },
+    {
+      "energy_lower_Wh": 0.5309037777777778,
+      "robust_feasible": true,
+      "robust_cost_Wh": 0.03090277777777778,
+      "projected_lower_Wh": 0.5000009999999999,
+      "teacher_status": "OPTIMAL",
+      "feasible_modes": [
+        "robust",
+        "fast",
+        "idle"
+      ]
+    }
+  ],
+  "support_cases": [
+    {
+      "name": "normal",
+      "expected": "OPTIMAL",
+      "actual": "OPTIMAL",
+      "gap": 0.0,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 1.0,
+          "feasible": true
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 1.0,
+          "feasible": true
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 1.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "no_window",
+      "expected": "OPTIMAL",
+      "actual": "OPTIMAL",
+      "gap": 0.0,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "deadline_before_window",
+      "expected": "OPTIMAL",
+      "actual": "OPTIMAL",
+      "gap": 0.0,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "nonzero_loss",
+      "expected": "UNSUPPORTED_LOSS",
+      "actual": "UNSUPPORTED_LOSS",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "inflight",
+      "expected": "UNSUPPORTED_INFLIGHT",
+      "actual": "UNSUPPORTED_INFLIGHT",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "misaligned_partial",
+      "expected": "UNSUPPORTED_BLOCK_STATE",
+      "actual": "UNSUPPORTED_BLOCK_STATE",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "too_many_tasks",
+      "expected": "UNSUPPORTED_TASK_COUNT",
+      "actual": "UNSUPPORTED_TASK_COUNT",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "too_long_horizon",
+      "expected": "UNSUPPORTED_HORIZON",
+      "actual": "UNSUPPORTED_HORIZON",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "too_many_windows",
+      "expected": "UNSUPPORTED_WINDOW_COUNT",
+      "actual": "UNSUPPORTED_WINDOW_COUNT",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    },
+    {
+      "name": "oversized_history_payload",
+      "expected": "UNSUPPORTED_PAYLOAD_RANGE",
+      "actual": "UNSUPPORTED_PAYLOAD_RANGE",
+      "gap": null,
+      "candidates": [
+        {
+          "task_id": "T1",
+          "mode": "robust",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": "T1",
+          "mode": "fast",
+          "score": 0.0,
+          "feasible": false
+        },
+        {
+          "task_id": null,
+          "mode": "idle",
+          "score": 0.0,
+          "feasible": true
+        }
+      ]
+    }
+  ],
+  "input_hashes": {
+    "configs/teacher.json": "1497a5f02754f76a3f355893d3f2cd9178525fc0d9d329eba03466faee62c795",
+    "configs/policy.json": "c4f8f69ea11f3d3091c94bd50ce7441c415ac5e5668c8119b245ae143808b25e",
+    "backend/policies/teacher.py": "88c124b1c710dc0c607f03cd903a0de046b4e2c18e9fc7c8e770db05b72e75f8",
+    "backend/policies/common.py": "ee035d8547a63437fcd09fa3f521e9cafacf97dc26f042f0b05e2d69cb97f6cb",
+    "data/teacher/a_n3_20_v2/samples.jsonl": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+    "artifacts/models/a_n3_policy_v1/weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  }
+}
