@@ -114,7 +114,7 @@ def test_capacity_running_incomplete_validation_and_missing(tmp_path):
         assert client.get(url+'/events?after=-1').status_code==422
         assert client.get(url+'/events?limit=2001').status_code==422
         assert client.get('/runs/no_such_run').status_code==404
-        for bad in (dict(request(),policy_ids=['edf','edf']),dict(request(),policy_ids=['learned']),dict(request(),config={} )):
+        for bad in (dict(request(),policy_ids=['edf','edf']),dict(request(),policy_ids=['unknown']),dict(request(),config={} )):
             response=client.post('/runs',json=bad)
             assert response.status_code==422 and response.json()['code']=='INVALID_CONFIG'
         (tmp_path/'runs/release').touch()
