@@ -2,7 +2,7 @@ task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_actio
 A-N1,A,in_progress,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,,等待H00修复冻结,内部核心与测试完成后接正式HealthEstimate适配及三样例
 A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界
 A-N3,A,ready_for_review,2026-11-02T22:00:00+08:00,docs/handoffs/A_N3_learned_A_2026-11-01.md,B,B坏ZIP changes_requested已在d97ff5b修复;组合定向94/全库503通过;待B复验,,B复跑坏ZIP和截断NPZ/正常包/回退并核对冻结SHA
-A-N4,A,not_started,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,,,建立方法数据局限模板
+A-N4,A,in_progress,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,冻结20条标签审计已完成;未启动扩样或训练,,先请B复核支持域边界;再建版本化扩样集与方法数据局限模板
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,干净集成进入main后推进B-N2最小环境
 B-N2,B,ready_for_review,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,首轮41项R2/全库219通过;待A复算,,A复算R2四项;C读事件;R3实现独立交接见B-R3
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,五接口与三类fixture已交;定向26全库293通过,待C复验,按H03复跑真实run与分页导出
