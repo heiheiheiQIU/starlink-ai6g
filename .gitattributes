@@ -49,3 +49,7 @@ docs/evidence/B/A_N4_readiness_2026-11-04/*.xml -text -diff
 
 docs/evidence/B/WP2_learned_2026-11-04/*.xml -text -diff
 docs/evidence/B/WP2_learned_2026-11-04/*.log -text -diff
+
+docs/evidence/B/WP5_readiness_2026-11-04/*.xml -text -diff
+
+docs/evidence/B/WP5_readiness_2026-11-04/*.log -text -diff
