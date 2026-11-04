@@ -58,6 +58,8 @@ def _validate_protocol(protocol):
 
 def _assert_loaded_code():
     """Reject edits on disk after importing any of the generator's source modules."""
+    if _source_hashes() != _IMPORT_HASHES:
+        raise ValueError('Loaded code source snapshot changed after import')
     for name in _source_hashes():
         if not name.endswith('.py'):
             continue
@@ -236,6 +238,9 @@ def main():
         parser.error('Choose --output or --verify')
     result = verify_inputs(args.verify) if args.verify else materialize_inputs(args.protocol, args.output)
     print(json.dumps(dict(status=result['status'], trajectory_count=len(result['trajectories']))))
+
+
+_IMPORT_HASHES = _source_hashes()
 
 
 if __name__ == '__main__':

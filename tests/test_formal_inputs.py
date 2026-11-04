@@ -118,7 +118,8 @@ def test_review_integrity_regressions(tmp_path, mutation):
         verify_inputs(root/'manifest.json')
 
 
-def test_loaded_source_must_match_recorded_source(tmp_path, monkeypatch):
+@pytest.mark.parametrize('edit', ['function', 'constant'])
+def test_loaded_source_must_match_recorded_source(tmp_path, monkeypatch, edit):
     import backend.formal_inputs as module
 
     for name in module._source_hashes():
@@ -126,7 +127,8 @@ def test_loaded_source_must_match_recorded_source(tmp_path, monkeypatch):
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes((module.ROOT/name).read_bytes())
     source = tmp_path/'source/backend/formal_inputs.py'
-    source.write_text(source.read_text().replace('arrival_s=0.0', 'arrival_s=1.0'))
+    before, after = ('arrival_s=0.0', 'arrival_s=1.0') if edit == 'function' else ('formal-tasks-v1|seed', 'modified-tasks|seed')
+    source.write_text(source.read_text().replace(before, after))
     monkeypatch.setattr(module, 'ROOT', tmp_path/'source')
     with pytest.raises(ValueError, match='Loaded code'):
         materialize_inputs(PROTOCOL, tmp_path/'output')
