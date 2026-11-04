@@ -7,7 +7,9 @@ import json
 from pathlib import Path
 import random
 import shutil
+import sys
 import tempfile
+import types
 
 from backend.cli import RunConfig, _hash, _json_bytes
 
@@ -16,6 +18,15 @@ ROOT = Path(__file__).resolve().parents[1]
 LOADS = ('low', 'near_capacity', 'overload')
 ENERGIES = ('low', 'medium', 'ample')
 LINKS = ('mild', 'strong')
+DESCRIPTIONS = dict(
+    load_definition='All tasks arrive at 0. Offered 4/12/20 payload blocks versus optimistic 12 blocks in 24s at 2s decision spacing. Deadline/ACK/loss constraints can reduce usable capacity.',
+    health_assumption='Initial exact synthetic health; conservative energy propagation thereafter; RUL unavailable.',
+    training_domain='All cells have nonzero forecast data loss, outside current deterministic teacher labeling domain.',
+    leakage_review='Old development seeds excluded; A-N4b provenance and content audit pending delivery.')
+RULES = dict(task_rng='random.Random(int.from_bytes(sha256(UTF8(formal-tasks-v1|seed))[:8],big))',
+             deadline='Independent uniform choice from deadline_grid_s, then uniform(*priority_weight_range), task index order',
+             energy='Initial exact health and energy from initial_energy_Wh[energy_margin], capacity20Wh; no solar or compute power',
+             channel='time-indexed-sha256-v1; index=floor(Fraction(str(time_s))/Fraction(str(step_s))); key=version|seed|stream|index; streams=data,ack; SHA256 first8 bytes big endian shifted right11 divided by2**53')
 
 
 def _read(path):
@@ -38,13 +49,45 @@ def _validate_protocol(protocol):
                             strong=dict(data_robust=.2, data_fast=.4, ack=.12)),
                  channel_step_s=.25, seed_start=200000, trajectories_per_cell=10,
                  model=None, cells=expected_cells, trajectories=expected_traces)
-    descriptions = {'load_definition', 'health_assumption', 'training_domain', 'leakage_review'}
-    if set(protocol) != set(fixed) | descriptions:
+    fixed.update(DESCRIPTIONS, generation_rules=RULES)
+    if set(protocol) != set(fixed):
         raise ValueError('Protocol fields differ from supported version')
     if any(protocol[key] != value for key, value in fixed.items()):
         raise ValueError('Protocol values differ from supported version')
-    if any(not isinstance(protocol[key], str) or not protocol[key] for key in descriptions):
-        raise ValueError('Protocol descriptions required')
+
+
+def _assert_loaded_code():
+    """Reject edits on disk after importing any of the generator's source modules."""
+    for name in _source_hashes():
+        if not name.endswith('.py'):
+            continue
+        module = sys.modules[__name__] if name == 'backend/formal_inputs.py' else sys.modules.get(name[:-3].replace('/', '.'))
+        if module is None:
+            continue
+        functions = []
+        for value in vars(module).values():
+            if isinstance(value, types.FunctionType) and value.__module__ == module.__name__:
+                functions.append(value)
+            elif isinstance(value, type) and value.__module__ == module.__name__:
+                for member in vars(value).values():
+                    member = member.__func__ if isinstance(member, (classmethod, staticmethod)) else member
+                    if isinstance(member, types.FunctionType) and member.__module__ == module.__name__:
+                        functions.append(member)
+        functions = [function for function in functions
+                     if Path(function.__code__.co_filename).as_posix().endswith(name)]
+        if not functions:
+            continue
+        compiled = compile((ROOT/name).read_text(encoding='utf-8-sig'), functions[0].__code__.co_filename, 'exec', dont_inherit=True)
+        expected = {}
+        def collect(code):
+            expected[code.co_qualname] = code
+            for child in code.co_consts:
+                if isinstance(child, types.CodeType):
+                    collect(child)
+        collect(compiled)
+        for function in functions:
+            if expected.get(function.__code__.co_qualname) != function.__code__:
+                raise ValueError(f'Loaded code differs from source: {name}:{function.__qualname__}')
 
 
 def _source_hashes():
@@ -96,6 +139,7 @@ def _content_hash(config):
 
 def materialize_inputs(protocol_path: Path, output: Path, *, excluded_seeds=(), excluded_content_hashes=()) -> dict:
     protocol = _read(protocol_path)
+    _assert_loaded_code()
     _validate_protocol(protocol)
     if {row['seed'] for row in protocol['trajectories']} & set(excluded_seeds):
         raise ValueError('Training seed collision')
@@ -139,19 +183,29 @@ def materialize_inputs(protocol_path: Path, output: Path, *, excluded_seeds=(), 
 
 
 def verify_inputs(manifest_path: Path, *, require_frozen=False) -> dict:
+    _assert_loaded_code()
     manifest = _read(manifest_path)
     root = manifest_path.parent
     protocol = _read(root/'protocol.json')
     _validate_protocol(protocol)
-    if manifest.get('status') != 'candidate_pending_review' or manifest.get('model') is not None:
+    required = {'schema_version', 'status', 'model', 'leakage_review', 'protocol_sha256', 'source_sha256', 'trajectories'}
+    if (set(manifest) != required or manifest['schema_version'] != 'formal-input-manifest-v1'
+            or manifest['leakage_review'] != 'pending_A_N4b_delivery'
+            or manifest['status'] != 'candidate_pending_review' or manifest['model'] is not None):
         raise ValueError('Unsupported manifest status or model')
     if require_frozen:
         raise ValueError('Model and receiver review pending')
-    if manifest.get('protocol_sha256') != _hash(protocol) or manifest.get('source_sha256') != _source_hashes():
+    if (manifest.get('protocol_sha256') != hashlib.sha256((root/'protocol.json').read_bytes()).hexdigest()
+            or manifest.get('protocol_sha256') != _hash(protocol)
+            or manifest.get('source_sha256') != _source_hashes()):
         raise ValueError('Protocol or generator hash mismatch')
     rows = manifest.get('trajectories', [])
     if len(rows) != 180:
         raise ValueError('Expected 180 trajectories')
+    configs_root = root/'configs'
+    if (configs_root.resolve() != root.resolve()/'configs'
+            or {p.name for p in configs_root.iterdir()} != {t['trajectory_id']+'.json' for t in protocol['trajectories']}):
+        raise ValueError('Config directory must contain exactly the advertised local files')
     template = _read(ROOT/'configs/scenarios/r3_normal.json')
     cells = {cell['cell_id']: cell for cell in protocol['cells']}
     seen = set()

@@ -81,3 +81,52 @@ def test_content_collision_rejected_and_runner_identity_matches(tmp_path):
         result = run_policy(config, tmp_path/policy, policy_id=policy)
         assert result['input_hash'] == row['input_hash']
         assert result['seed'] == row['seed']
+
+
+@pytest.mark.parametrize('mutation', ['missing_model', 'schema', 'leakage', 'domain', 'protocol_bytes', 'extra', 'junction'])
+def test_review_integrity_regressions(tmp_path, mutation):
+    import os
+    import subprocess
+
+    root = tmp_path/'inputs'
+    manifest = materialize_inputs(PROTOCOL, root)
+    if mutation == 'missing_model':
+        manifest.pop('model')
+    elif mutation == 'schema':
+        manifest['schema_version'] = 'unknown'
+    elif mutation == 'leakage':
+        manifest['leakage_review'] = 'passed'
+    elif mutation == 'domain':
+        from backend.cli import _hash, _json_bytes
+        protocol = json.loads((root/'protocol.json').read_text())
+        protocol['training_domain'] = 'within teacher domain'
+        (root/'protocol.json').write_bytes(_json_bytes(protocol))
+        manifest['protocol_sha256'] = _hash(protocol)
+    elif mutation == 'protocol_bytes':
+        with (root/'protocol.json').open('ab') as stream:
+            stream.write(b' ')
+    elif mutation == 'extra':
+        (root/'configs/EXTRA.json').write_text('{}')
+    else:
+        (root/'configs').rename(tmp_path/'external')
+        if os.name == 'nt':
+            subprocess.run(['cmd', '/c', 'mklink', '/J', str(root/'configs'), str(tmp_path/'external')], check=True, capture_output=True)
+        else:
+            (root/'configs').symlink_to(tmp_path/'external', target_is_directory=True)
+    (root/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ValueError):
+        verify_inputs(root/'manifest.json')
+
+
+def test_loaded_source_must_match_recorded_source(tmp_path, monkeypatch):
+    import backend.formal_inputs as module
+
+    for name in module._source_hashes():
+        target = tmp_path/'source'/name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((module.ROOT/name).read_bytes())
+    source = tmp_path/'source/backend/formal_inputs.py'
+    source.write_text(source.read_text().replace('arrival_s=0.0', 'arrival_s=1.0'))
+    monkeypatch.setattr(module, 'ROOT', tmp_path/'source')
+    with pytest.raises(ValueError, match='Loaded code'):
+        materialize_inputs(PROTOCOL, tmp_path/'output')

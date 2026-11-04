@@ -1056,5 +1056,11 @@
   "priority_weight_range": [
     1.0,
     3.0
-  ]
+  ],
+  "generation_rules": {
+    "task_rng": "random.Random(int.from_bytes(sha256(UTF8(formal-tasks-v1|seed))[:8],big))",
+    "deadline": "Independent uniform choice from deadline_grid_s, then uniform(*priority_weight_range), task index order",
+    "energy": "Initial exact health and energy from initial_energy_Wh[energy_margin], capacity20Wh; no solar or compute power",
+    "channel": "time-indexed-sha256-v1; index=floor(Fraction(str(time_s))/Fraction(str(step_s))); key=version|seed|stream|index; streams=data,ack; SHA256 first8 bytes big endian shifted right11 divided by2**53"
+  }
 }
