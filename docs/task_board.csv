@@ -21,3 +21,4 @@ B-API-LOCK,B,accepted_with_notes,,docs/handoffs/B_API_lock_2026-11-01.md,A+C,A�
 B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过;C63c7740给无阻断推进意见,C回执已纳入;新main合并授权与执行仍未完成,保留原始验收范围;main合并另按协作规则处理
 B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11-04.md,A+C,A审计及C回执已整合;524通过;6能量和10支持域探针通过,历史准备回执已由WP2实现推进;A新数据仍待交付,按B_WP5_readiness_2026-11-04准备正式实验
 B-WP2,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP2_learned_2026-11-04.md,A+C,C代码级复核通过;B原552通过1跳过及HTTP配对证据保留,A独立复测尚缺;C页面组合复验本轮进行,保留ready_for_review;准备WP5;不将代码复核写成A/C全量复测
+B-WP5-PREP,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP5_readiness_2026-11-04.md,A+C,整合C b1d5e8b;552通过1跳过;前端70构建;实际HTTP及ZIP通过,A新模型未交付;formal输入与统计待实施;未三方冻结,先按WP5计划物化180独立轨迹;三策略540运行;收到A包独立验收
