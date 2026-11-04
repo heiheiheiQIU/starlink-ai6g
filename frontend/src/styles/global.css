@@ -1835,6 +1835,67 @@ button {
   border-radius: 12px;
 }
 
+/* ═══ 教师标签质量审计卡 ═══ */
+.audit-kpis {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.audit-kpi {
+  padding: 12px 14px;
+  background: #0a1c2e;
+  border: 1px solid #263f56;
+  border-radius: 11px;
+}
+
+.audit-kpi span {
+  display: block;
+  color: #7e97aa;
+  font-size: 14px;
+}
+
+.audit-kpi strong {
+  display: block;
+  margin-top: 6px;
+  color: #edf8ff;
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 22px;
+}
+
+.audit-strip {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.audit-strip__cell {
+  width: 22px;
+  height: 34px;
+  border-radius: 4px;
+}
+
+.audit-legend {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+  color: #7e97aa;
+  font-size: 14px;
+}
+
+.audit-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.audit-legend i {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
 /* ═══ 演示旁白与聚光灯（借鉴苗圃杯 demo-mode，零依赖） ═══ */
 .demo-spotlight {
   position: fixed;
