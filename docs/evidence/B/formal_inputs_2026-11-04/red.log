@@ -1,0 +1,15 @@
+
+=================================== ERRORS ====================================
+________________ ERROR collecting tests/test_formal_inputs.py _________________
+ImportError while importing test module 'D:\�˹�������ս��\starlink-ai6g\tests\test_formal_inputs.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yuzzz\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+tests\test_formal_inputs.py:7: in <module>
+    from backend.formal_inputs import materialize_inputs, verify_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_inputs'
+=========================== short test summary info ===========================
+ERROR tests/test_formal_inputs.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.30s

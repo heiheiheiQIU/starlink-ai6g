@@ -1,0 +1,1066 @@
+{
+  "schema_version": "formal-input-protocol-v1",
+  "status": "candidate_pending_review",
+  "generator_version": "formal-inputs-v1",
+  "evaluation_end_s": 24.0,
+  "decision_dt_s": 2.0,
+  "task_counts": {
+    "low": 2,
+    "near_capacity": 6,
+    "overload": 10
+  },
+  "payload_bytes": 2048,
+  "deadline_grid_s": [
+    8.0,
+    12.0,
+    18.0,
+    24.0
+  ],
+  "initial_energy_Wh": {
+    "low": 0.8,
+    "medium": 1.2,
+    "ample": 10.0
+  },
+  "links": {
+    "mild": {
+      "data_robust": 0.05,
+      "data_fast": 0.12,
+      "ack": 0.02
+    },
+    "strong": {
+      "data_robust": 0.2,
+      "data_fast": 0.4,
+      "ack": 0.12
+    }
+  },
+  "channel_step_s": 0.25,
+  "seed_start": 200000,
+  "trajectories_per_cell": 10,
+  "load_definition": "All tasks arrive at 0. Offered 4/12/20 payload blocks versus optimistic 12 blocks in 24s at 2s decision spacing. Deadline/ACK/loss constraints can reduce usable capacity.",
+  "health_assumption": "Initial exact synthetic health; conservative energy propagation thereafter; RUL unavailable.",
+  "training_domain": "All cells have nonzero forecast data loss, outside current deterministic teacher labeling domain.",
+  "leakage_review": "Old development seeds excluded; A-N4b provenance and content audit pending delivery.",
+  "model": null,
+  "cells": [
+    {
+      "cell_id": "cell_00",
+      "load_level": "low",
+      "energy_margin": "low",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_01",
+      "load_level": "low",
+      "energy_margin": "low",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_02",
+      "load_level": "low",
+      "energy_margin": "medium",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_03",
+      "load_level": "low",
+      "energy_margin": "medium",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_04",
+      "load_level": "low",
+      "energy_margin": "ample",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_05",
+      "load_level": "low",
+      "energy_margin": "ample",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_06",
+      "load_level": "near_capacity",
+      "energy_margin": "low",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_07",
+      "load_level": "near_capacity",
+      "energy_margin": "low",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_08",
+      "load_level": "near_capacity",
+      "energy_margin": "medium",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_09",
+      "load_level": "near_capacity",
+      "energy_margin": "medium",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_10",
+      "load_level": "near_capacity",
+      "energy_margin": "ample",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_11",
+      "load_level": "near_capacity",
+      "energy_margin": "ample",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_12",
+      "load_level": "overload",
+      "energy_margin": "low",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_13",
+      "load_level": "overload",
+      "energy_margin": "low",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_14",
+      "load_level": "overload",
+      "energy_margin": "medium",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_15",
+      "load_level": "overload",
+      "energy_margin": "medium",
+      "link_disturbance": "strong"
+    },
+    {
+      "cell_id": "cell_16",
+      "load_level": "overload",
+      "energy_margin": "ample",
+      "link_disturbance": "mild"
+    },
+    {
+      "cell_id": "cell_17",
+      "load_level": "overload",
+      "energy_margin": "ample",
+      "link_disturbance": "strong"
+    }
+  ],
+  "trajectories": [
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_00",
+      "cell_id": "cell_00",
+      "seed": 200000
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_01",
+      "cell_id": "cell_00",
+      "seed": 200001
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_02",
+      "cell_id": "cell_00",
+      "seed": 200002
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_03",
+      "cell_id": "cell_00",
+      "seed": 200003
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_04",
+      "cell_id": "cell_00",
+      "seed": 200004
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_05",
+      "cell_id": "cell_00",
+      "seed": 200005
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_06",
+      "cell_id": "cell_00",
+      "seed": 200006
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_07",
+      "cell_id": "cell_00",
+      "seed": 200007
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_08",
+      "cell_id": "cell_00",
+      "seed": 200008
+    },
+    {
+      "trajectory_id": "formal_v1_cell_00_trace_09",
+      "cell_id": "cell_00",
+      "seed": 200009
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_00",
+      "cell_id": "cell_01",
+      "seed": 200010
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_01",
+      "cell_id": "cell_01",
+      "seed": 200011
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_02",
+      "cell_id": "cell_01",
+      "seed": 200012
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_03",
+      "cell_id": "cell_01",
+      "seed": 200013
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_04",
+      "cell_id": "cell_01",
+      "seed": 200014
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_05",
+      "cell_id": "cell_01",
+      "seed": 200015
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_06",
+      "cell_id": "cell_01",
+      "seed": 200016
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_07",
+      "cell_id": "cell_01",
+      "seed": 200017
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_08",
+      "cell_id": "cell_01",
+      "seed": 200018
+    },
+    {
+      "trajectory_id": "formal_v1_cell_01_trace_09",
+      "cell_id": "cell_01",
+      "seed": 200019
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_00",
+      "cell_id": "cell_02",
+      "seed": 200020
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_01",
+      "cell_id": "cell_02",
+      "seed": 200021
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_02",
+      "cell_id": "cell_02",
+      "seed": 200022
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_03",
+      "cell_id": "cell_02",
+      "seed": 200023
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_04",
+      "cell_id": "cell_02",
+      "seed": 200024
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_05",
+      "cell_id": "cell_02",
+      "seed": 200025
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_06",
+      "cell_id": "cell_02",
+      "seed": 200026
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_07",
+      "cell_id": "cell_02",
+      "seed": 200027
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_08",
+      "cell_id": "cell_02",
+      "seed": 200028
+    },
+    {
+      "trajectory_id": "formal_v1_cell_02_trace_09",
+      "cell_id": "cell_02",
+      "seed": 200029
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_00",
+      "cell_id": "cell_03",
+      "seed": 200030
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_01",
+      "cell_id": "cell_03",
+      "seed": 200031
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_02",
+      "cell_id": "cell_03",
+      "seed": 200032
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_03",
+      "cell_id": "cell_03",
+      "seed": 200033
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_04",
+      "cell_id": "cell_03",
+      "seed": 200034
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_05",
+      "cell_id": "cell_03",
+      "seed": 200035
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_06",
+      "cell_id": "cell_03",
+      "seed": 200036
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_07",
+      "cell_id": "cell_03",
+      "seed": 200037
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_08",
+      "cell_id": "cell_03",
+      "seed": 200038
+    },
+    {
+      "trajectory_id": "formal_v1_cell_03_trace_09",
+      "cell_id": "cell_03",
+      "seed": 200039
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_00",
+      "cell_id": "cell_04",
+      "seed": 200040
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_01",
+      "cell_id": "cell_04",
+      "seed": 200041
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_02",
+      "cell_id": "cell_04",
+      "seed": 200042
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_03",
+      "cell_id": "cell_04",
+      "seed": 200043
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_04",
+      "cell_id": "cell_04",
+      "seed": 200044
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_05",
+      "cell_id": "cell_04",
+      "seed": 200045
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_06",
+      "cell_id": "cell_04",
+      "seed": 200046
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_07",
+      "cell_id": "cell_04",
+      "seed": 200047
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_08",
+      "cell_id": "cell_04",
+      "seed": 200048
+    },
+    {
+      "trajectory_id": "formal_v1_cell_04_trace_09",
+      "cell_id": "cell_04",
+      "seed": 200049
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_00",
+      "cell_id": "cell_05",
+      "seed": 200050
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_01",
+      "cell_id": "cell_05",
+      "seed": 200051
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_02",
+      "cell_id": "cell_05",
+      "seed": 200052
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_03",
+      "cell_id": "cell_05",
+      "seed": 200053
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_04",
+      "cell_id": "cell_05",
+      "seed": 200054
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_05",
+      "cell_id": "cell_05",
+      "seed": 200055
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_06",
+      "cell_id": "cell_05",
+      "seed": 200056
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_07",
+      "cell_id": "cell_05",
+      "seed": 200057
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_08",
+      "cell_id": "cell_05",
+      "seed": 200058
+    },
+    {
+      "trajectory_id": "formal_v1_cell_05_trace_09",
+      "cell_id": "cell_05",
+      "seed": 200059
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_00",
+      "cell_id": "cell_06",
+      "seed": 200060
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_01",
+      "cell_id": "cell_06",
+      "seed": 200061
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_02",
+      "cell_id": "cell_06",
+      "seed": 200062
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_03",
+      "cell_id": "cell_06",
+      "seed": 200063
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_04",
+      "cell_id": "cell_06",
+      "seed": 200064
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_05",
+      "cell_id": "cell_06",
+      "seed": 200065
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_06",
+      "cell_id": "cell_06",
+      "seed": 200066
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_07",
+      "cell_id": "cell_06",
+      "seed": 200067
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_08",
+      "cell_id": "cell_06",
+      "seed": 200068
+    },
+    {
+      "trajectory_id": "formal_v1_cell_06_trace_09",
+      "cell_id": "cell_06",
+      "seed": 200069
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_00",
+      "cell_id": "cell_07",
+      "seed": 200070
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_01",
+      "cell_id": "cell_07",
+      "seed": 200071
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_02",
+      "cell_id": "cell_07",
+      "seed": 200072
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_03",
+      "cell_id": "cell_07",
+      "seed": 200073
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_04",
+      "cell_id": "cell_07",
+      "seed": 200074
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_05",
+      "cell_id": "cell_07",
+      "seed": 200075
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_06",
+      "cell_id": "cell_07",
+      "seed": 200076
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_07",
+      "cell_id": "cell_07",
+      "seed": 200077
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_08",
+      "cell_id": "cell_07",
+      "seed": 200078
+    },
+    {
+      "trajectory_id": "formal_v1_cell_07_trace_09",
+      "cell_id": "cell_07",
+      "seed": 200079
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_00",
+      "cell_id": "cell_08",
+      "seed": 200080
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_01",
+      "cell_id": "cell_08",
+      "seed": 200081
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_02",
+      "cell_id": "cell_08",
+      "seed": 200082
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_03",
+      "cell_id": "cell_08",
+      "seed": 200083
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_04",
+      "cell_id": "cell_08",
+      "seed": 200084
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_05",
+      "cell_id": "cell_08",
+      "seed": 200085
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_06",
+      "cell_id": "cell_08",
+      "seed": 200086
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_07",
+      "cell_id": "cell_08",
+      "seed": 200087
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_08",
+      "cell_id": "cell_08",
+      "seed": 200088
+    },
+    {
+      "trajectory_id": "formal_v1_cell_08_trace_09",
+      "cell_id": "cell_08",
+      "seed": 200089
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_00",
+      "cell_id": "cell_09",
+      "seed": 200090
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_01",
+      "cell_id": "cell_09",
+      "seed": 200091
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_02",
+      "cell_id": "cell_09",
+      "seed": 200092
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_03",
+      "cell_id": "cell_09",
+      "seed": 200093
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_04",
+      "cell_id": "cell_09",
+      "seed": 200094
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_05",
+      "cell_id": "cell_09",
+      "seed": 200095
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_06",
+      "cell_id": "cell_09",
+      "seed": 200096
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_07",
+      "cell_id": "cell_09",
+      "seed": 200097
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_08",
+      "cell_id": "cell_09",
+      "seed": 200098
+    },
+    {
+      "trajectory_id": "formal_v1_cell_09_trace_09",
+      "cell_id": "cell_09",
+      "seed": 200099
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_00",
+      "cell_id": "cell_10",
+      "seed": 200100
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_01",
+      "cell_id": "cell_10",
+      "seed": 200101
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_02",
+      "cell_id": "cell_10",
+      "seed": 200102
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_03",
+      "cell_id": "cell_10",
+      "seed": 200103
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_04",
+      "cell_id": "cell_10",
+      "seed": 200104
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_05",
+      "cell_id": "cell_10",
+      "seed": 200105
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_06",
+      "cell_id": "cell_10",
+      "seed": 200106
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_07",
+      "cell_id": "cell_10",
+      "seed": 200107
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_08",
+      "cell_id": "cell_10",
+      "seed": 200108
+    },
+    {
+      "trajectory_id": "formal_v1_cell_10_trace_09",
+      "cell_id": "cell_10",
+      "seed": 200109
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_00",
+      "cell_id": "cell_11",
+      "seed": 200110
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_01",
+      "cell_id": "cell_11",
+      "seed": 200111
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_02",
+      "cell_id": "cell_11",
+      "seed": 200112
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_03",
+      "cell_id": "cell_11",
+      "seed": 200113
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_04",
+      "cell_id": "cell_11",
+      "seed": 200114
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_05",
+      "cell_id": "cell_11",
+      "seed": 200115
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_06",
+      "cell_id": "cell_11",
+      "seed": 200116
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_07",
+      "cell_id": "cell_11",
+      "seed": 200117
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_08",
+      "cell_id": "cell_11",
+      "seed": 200118
+    },
+    {
+      "trajectory_id": "formal_v1_cell_11_trace_09",
+      "cell_id": "cell_11",
+      "seed": 200119
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_00",
+      "cell_id": "cell_12",
+      "seed": 200120
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_01",
+      "cell_id": "cell_12",
+      "seed": 200121
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_02",
+      "cell_id": "cell_12",
+      "seed": 200122
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_03",
+      "cell_id": "cell_12",
+      "seed": 200123
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_04",
+      "cell_id": "cell_12",
+      "seed": 200124
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_05",
+      "cell_id": "cell_12",
+      "seed": 200125
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_06",
+      "cell_id": "cell_12",
+      "seed": 200126
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_07",
+      "cell_id": "cell_12",
+      "seed": 200127
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_08",
+      "cell_id": "cell_12",
+      "seed": 200128
+    },
+    {
+      "trajectory_id": "formal_v1_cell_12_trace_09",
+      "cell_id": "cell_12",
+      "seed": 200129
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_00",
+      "cell_id": "cell_13",
+      "seed": 200130
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_01",
+      "cell_id": "cell_13",
+      "seed": 200131
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_02",
+      "cell_id": "cell_13",
+      "seed": 200132
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_03",
+      "cell_id": "cell_13",
+      "seed": 200133
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_04",
+      "cell_id": "cell_13",
+      "seed": 200134
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_05",
+      "cell_id": "cell_13",
+      "seed": 200135
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_06",
+      "cell_id": "cell_13",
+      "seed": 200136
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_07",
+      "cell_id": "cell_13",
+      "seed": 200137
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_08",
+      "cell_id": "cell_13",
+      "seed": 200138
+    },
+    {
+      "trajectory_id": "formal_v1_cell_13_trace_09",
+      "cell_id": "cell_13",
+      "seed": 200139
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_00",
+      "cell_id": "cell_14",
+      "seed": 200140
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_01",
+      "cell_id": "cell_14",
+      "seed": 200141
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_02",
+      "cell_id": "cell_14",
+      "seed": 200142
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_03",
+      "cell_id": "cell_14",
+      "seed": 200143
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_04",
+      "cell_id": "cell_14",
+      "seed": 200144
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_05",
+      "cell_id": "cell_14",
+      "seed": 200145
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_06",
+      "cell_id": "cell_14",
+      "seed": 200146
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_07",
+      "cell_id": "cell_14",
+      "seed": 200147
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_08",
+      "cell_id": "cell_14",
+      "seed": 200148
+    },
+    {
+      "trajectory_id": "formal_v1_cell_14_trace_09",
+      "cell_id": "cell_14",
+      "seed": 200149
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_00",
+      "cell_id": "cell_15",
+      "seed": 200150
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_01",
+      "cell_id": "cell_15",
+      "seed": 200151
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_02",
+      "cell_id": "cell_15",
+      "seed": 200152
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_03",
+      "cell_id": "cell_15",
+      "seed": 200153
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_04",
+      "cell_id": "cell_15",
+      "seed": 200154
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_05",
+      "cell_id": "cell_15",
+      "seed": 200155
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_06",
+      "cell_id": "cell_15",
+      "seed": 200156
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_07",
+      "cell_id": "cell_15",
+      "seed": 200157
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_08",
+      "cell_id": "cell_15",
+      "seed": 200158
+    },
+    {
+      "trajectory_id": "formal_v1_cell_15_trace_09",
+      "cell_id": "cell_15",
+      "seed": 200159
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_00",
+      "cell_id": "cell_16",
+      "seed": 200160
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_01",
+      "cell_id": "cell_16",
+      "seed": 200161
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_02",
+      "cell_id": "cell_16",
+      "seed": 200162
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_03",
+      "cell_id": "cell_16",
+      "seed": 200163
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_04",
+      "cell_id": "cell_16",
+      "seed": 200164
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_05",
+      "cell_id": "cell_16",
+      "seed": 200165
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_06",
+      "cell_id": "cell_16",
+      "seed": 200166
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_07",
+      "cell_id": "cell_16",
+      "seed": 200167
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_08",
+      "cell_id": "cell_16",
+      "seed": 200168
+    },
+    {
+      "trajectory_id": "formal_v1_cell_16_trace_09",
+      "cell_id": "cell_16",
+      "seed": 200169
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_00",
+      "cell_id": "cell_17",
+      "seed": 200170
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_01",
+      "cell_id": "cell_17",
+      "seed": 200171
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_02",
+      "cell_id": "cell_17",
+      "seed": 200172
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_03",
+      "cell_id": "cell_17",
+      "seed": 200173
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_04",
+      "cell_id": "cell_17",
+      "seed": 200174
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_05",
+      "cell_id": "cell_17",
+      "seed": 200175
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_06",
+      "cell_id": "cell_17",
+      "seed": 200176
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_07",
+      "cell_id": "cell_17",
+      "seed": 200177
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_08",
+      "cell_id": "cell_17",
+      "seed": 200178
+    },
+    {
+      "trajectory_id": "formal_v1_cell_17_trace_09",
+      "cell_id": "cell_17",
+      "seed": 200179
+    }
+  ],
+  "priority_weight_range": [
+    1.0,
+    3.0
+  ],
+  "generation_rules": {
+    "task_rng": "random.Random(int.from_bytes(sha256(UTF8(formal-tasks-v1|seed))[:8],big))",
+    "deadline": "Independent uniform choice from deadline_grid_s, then uniform(*priority_weight_range), task index order",
+    "energy": "Initial exact health and energy from initial_energy_Wh[energy_margin], capacity20Wh; no solar or compute power",
+    "channel": "time-indexed-sha256-v1; index=floor(Fraction(str(time_s))/Fraction(str(step_s))); key=version|seed|stream|index; streams=data,ack; SHA256 first8 bytes big endian shifted right11 divided by2**53"
+  }
+}
