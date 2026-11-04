@@ -83,12 +83,12 @@ describe('RealRunPanel', () => {
             results: null,
             events: null,
             offline: false,
-            error: new ApiError(422, 'INVALID_CONFIG', 'bad config', {}).message,
+            error: 'INVALID_CONFIG：bad config',
           },
         })}
       />,
     )
 
-    expect(screen.getByText(/INVALID_CONFIG：bad config/)).toBeInTheDocument()
+    expect(screen.getByText('INVALID_CONFIG：bad config')).toBeInTheDocument()
   })
 })
