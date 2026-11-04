@@ -71,7 +71,7 @@ def pilot_run(tmp_path, monkeypatch):
 
 
 def test_package_freezes_splits_and_verifies_all_advertised_hashes(pilot_run, tmp_path):
-    pilot, path, _, calls = pilot_run
+    pilot, path, teacher, calls = pilot_run
     output = tmp_path / "out"
     summary = pilot.generate_pilot(path, output)
     assert summary["status"] == "ready_for_audit"
@@ -81,11 +81,109 @@ def test_package_freezes_splits_and_verifies_all_advertised_hashes(pilot_run, tm
     splits = json.loads((output / "source_splits.json").read_bytes())["splits"]
     assert all(row["source_id"] in splits[row["split"]] for row in calls)
     manifest = json.loads((output / "manifest.json").read_bytes())
+    assert manifest["config_sha256"] == hashlib.sha256(path.read_bytes()).hexdigest()
+    assert manifest["teacher_config_sha256"] == hashlib.sha256(teacher.read_bytes()).hexdigest()
     assert set(manifest["output_sha256"]) == {"sources.jsonl", "source_splits.json", "attempts.jsonl", "samples.jsonl", "diagnostics.jsonl", "summary.json"}
     for name, expected in manifest["output_sha256"].items():
         raw = (output / name).read_bytes()
         assert b"\r" not in raw
         assert hashlib.sha256(raw).hexdigest() == expected
+
+
+@pytest.mark.parametrize("target", ["pilot", "teacher"])
+def test_config_parsed_bytes_are_the_frozen_snapshot(pilot_run, monkeypatch, tmp_path, target):
+    pilot, path, teacher, _ = pilot_run
+    target_path = path if target == "pilot" else teacher
+    validated_bytes = target_path.read_bytes()
+    original_loads = json.loads
+    changed = False
+
+    def parse_then_change(raw, *args, **kwargs):
+        nonlocal changed
+        parsed = original_loads(raw, *args, **kwargs)
+        if not changed and raw == validated_bytes:
+            changed = True
+            tampered = dict(parsed)
+            tampered["training_enabled" if target == "pilot" else "version"] = (
+                True if target == "pilot" else "unvalidated-version"
+            )
+            target_path.write_text(json.dumps(tampered), encoding="utf-8")
+        return parsed
+
+    monkeypatch.setattr(json, "loads", parse_then_change)
+    output = tmp_path / "out"
+    with pytest.raises(PilotDataError, match="CONFIG_CHANGED"):
+        pilot.generate_pilot(path, output)
+    assert changed
+    assert not output.exists()  # Never bind an advertised digest to unvalidated bytes.
+    assert not list(tmp_path.glob(".out.pilot-*"))
+
+
+EXECUTION_DEPENDENCIES = [
+    "backend/policies/common.py", "backend/simulator/engine.py",
+    "backend/simulator/r3_engine.py", "backend/simulator/energy.py",
+    "backend/simulator/link.py", "backend/simulator/queue.py",
+    "backend/simulator/protocol.py", "backend/simulator/channel.py",
+]
+
+
+def test_manifest_binds_teacher_and_simulator_execution_dependencies(pilot_run, tmp_path):
+    pilot, path, _, _ = pilot_run
+    output = tmp_path / "out"
+    pilot.generate_pilot(path, output)
+    manifest = json.loads((output / "manifest.json").read_bytes())
+    root = Path(__file__).resolve().parents[1]
+    for name in EXECUTION_DEPENDENCIES:
+        assert manifest["code_sha256"].get(name) == hashlib.sha256((root / name).read_bytes()).hexdigest()
+
+
+@pytest.mark.parametrize("dependency", EXECUTION_DEPENDENCIES)
+def test_execution_dependency_drift_blocks_publication(pilot_run, monkeypatch, tmp_path, dependency):
+    pilot, path, _, _ = pilot_run
+    dependency_path = Path(__file__).resolve().parents[1] / dependency
+    original_read = Path.read_bytes
+    original_label = pilot.label_state
+    changed = False
+
+    def read_with_drift(self):
+        raw = original_read(self)
+        return raw + b"\n# simulated dependency change\n" if changed and self == dependency_path else raw
+
+    def label_then_change(record, **kwargs):
+        nonlocal changed
+        result = original_label(record, **kwargs)
+        changed = True
+        return result
+
+    monkeypatch.setattr(Path, "read_bytes", read_with_drift)
+    monkeypatch.setattr(pilot, "label_state", label_then_change)
+    output = tmp_path / "out"
+    with pytest.raises(PilotDataError, match="CODE_CHANGED"):
+        pilot.generate_pilot(path, output)
+    assert not output.exists()
+    assert not list(tmp_path.glob(".out.pilot-*"))
+
+
+@pytest.mark.parametrize("location", ["top-level", "observation"])
+def test_hidden_content_never_survives_in_error_records(pilot_run, monkeypatch, tmp_path, location):
+    pilot, path, _, _ = pilot_run
+    original_sample = pilot.sample_source
+
+    def sample_with_private_content(source):
+        rows = original_sample(source)
+        envelope = rows[0] if location == "top-level" else rows[0]["observation"]
+        envelope["evaluation_truth"] = {"private": "PRIVATE-MARKER"}
+        rows[0]["unexpected_metadata"] = "PRIVATE-MARKER"
+        return rows
+
+    monkeypatch.setattr(pilot, "sample_source", sample_with_private_content)
+    output = tmp_path / "out"
+    summary = pilot.generate_pilot(path, output)
+    assert summary["status"] == "blocked"
+    for artifact in output.iterdir():
+        assert b"PRIVATE-MARKER" not in artifact.read_bytes()
+    errors = [json.loads(line) for line in (output / "diagnostics.jsonl").read_text().splitlines()]
+    assert errors and all("evaluation_truth" not in row and "unexpected_metadata" not in row for row in errors)
 
 
 def test_cpu_budget_publishes_completed_evidence(pilot_run, monkeypatch, tmp_path):

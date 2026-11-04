@@ -136,8 +136,8 @@ def _sha256(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
-def _load_config(path):
-    config = json.loads(path.read_bytes())
+def _load_config(raw):
+    config = json.loads(raw)
     fixed = {
         "schema_version": "policy-pilot-config-v1", "dataset_version": "a-n4-pilot-v1",
         "source_count": 30, "split_seed": 20261104,
@@ -193,19 +193,26 @@ def generate_pilot(config_path: Path, output_dir: Path) -> dict[str, object]:
     try:
         _check_destination(output)
         config_path = Path(config_path).resolve()
-        config = _load_config(config_path)
+        config_bytes = config_path.read_bytes()
+        config = _load_config(config_bytes)
         teacher_path = Path(config["teacher_config_path"])
         if not teacher_path.is_absolute():
             teacher_path = ROOT / teacher_path
+        teacher_path = teacher_path.resolve()
         teacher_bytes = teacher_path.read_bytes()
         teacher_config = json.loads(teacher_bytes)
         teacher = TeacherConfig.model_validate(teacher_config)
         if teacher.version != config["teacher_version"]:
             raise PilotDataError("INVALID_CONFIG", "Teacher version differs")
         teacher_sha = _sha256(teacher_bytes)
+        # engine.step also dispatches to r3_engine; bind its transitive simulator
+        # helpers as well as the common policy planning used by the teacher.
         code_paths = [Path(__file__).resolve(), ROOT / "training/pilot_scenarios.py",
-                      ROOT / "backend/policies/teacher.py", ROOT / "backend/contracts.py"]
-        frozen = {path: path.read_bytes() for path in [config_path, teacher_path, *code_paths]}
+                      ROOT / "backend/policies/teacher.py", ROOT / "backend/policies/common.py",
+                      ROOT / "backend/contracts.py",
+                      *sorted((ROOT / "backend/simulator").glob("*.py"))]
+        frozen = {config_path: config_bytes, teacher_path: teacher_bytes,
+                  **{path: path.read_bytes() for path in code_paths}}
         output.parent.mkdir(parents=True, exist_ok=True)
         staging = Path(tempfile.mkdtemp(prefix=prefix, dir=output.parent))
         paths = write_source_protocol(staging, split_seed=config["split_seed"])
@@ -248,17 +255,28 @@ def generate_pilot(config_path: Path, output_dir: Path) -> dict[str, object]:
                     stop_reason = "CPU_BUDGET"
                     break
                 record = {**record, "split": split_by_source[source["source_id"]]}
+                capture = record.get("capture_index")
+                capture = capture if type(capture) is int else None
+                # Error evidence is built from trusted identity and validated
+                # public fields only, never by expanding an untrusted record.
+                safe_record = {
+                    "source_id": source["source_id"], "family": source["family"],
+                    "seed": source["seed"], "capture_index": capture,
+                    "state_id": f"{source['source_id']}:{capture}",
+                    "split": split_by_source[source["source_id"]],
+                }
                 try:
                     _check_record(record, source, state_ids, content_hashes)
+                    public_payload = Observation.model_validate(record["observation"]).model_dump(mode="json")
+                    safe_record["observation"] = public_payload
+                    safe_record["observation_sha256"] = sha256_json(public_payload)
                     labelled = label_state(record, teacher_config=teacher_config,
                                            teacher_config_sha256=teacher_sha, budget_ms=1000)
                 except Exception as error:
                     code = getattr(error, "code", "LABEL_FAILED")
                     if isinstance(error, PilotDataError):
                         integrity_failure_count += 1
-                    if code == "LEAK_FIELD":
-                        record = {key: value for key, value in record.items() if key != "observation"}
-                    labelled = {**record, "solver_status": "ERROR", "gap": None,
+                    labelled = {**safe_record, "solver_status": "ERROR", "gap": None,
                                 "label_eligible": False, "exclusion_reasons": [code],
                                 "teacher_version": teacher.version, "teacher_config_sha256": teacher_sha,
                                 "diagnostics": {"error_type": type(error).__name__, "code": code}}
