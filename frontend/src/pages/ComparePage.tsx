@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import { RealRunPanel } from '../components/RealRunPanel'
 import {
   COMPARE_AXIS,
   COMPARE_SCENARIO_LABELS,
@@ -7,6 +8,7 @@ import {
   FIXTURE_SERIES,
   type PolicyMetricRow,
 } from '../domain/compare'
+import { RUN_ID_STORAGE_KEY, useRun } from '../state/useRun'
 
 function seriesPath(values: readonly number[], width: number, height: number): string {
   const max = Math.max(...values, 1)
@@ -69,6 +71,15 @@ export function ComparePage() {
   const [link, setLink] = useState(1)
   const [stale, setStale] = useState(false)
   const [created, setCreated] = useState(false)
+  const run = useRun()
+  const { resume } = run
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem(RUN_ID_STORAGE_KEY)
+    if (stored) {
+      void resume(stored)
+    }
+  }, [resume])
 
   function touchConfig() {
     setStale(true)
@@ -87,6 +98,8 @@ export function ComparePage() {
         <h1>方案对比</h1>
         <p>同配置、同 seed、同外部轨迹与评价口径下，并排对照两种策略；参数变更立即让旧结果失效。</p>
       </header>
+
+      <RealRunPanel controller={run} />
 
       <div className="compare-config" aria-label="实验配置（契约样例）">
         <label>
