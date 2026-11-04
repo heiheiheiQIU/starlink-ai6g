@@ -22,3 +22,4 @@ B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.m
 B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11-04.md,A+C,A审计及C回执已整合;524通过;6能量和10支持域探针通过,历史准备回执已由WP2实现推进;A新数据仍待交付,按B_WP5_readiness_2026-11-04准备正式实验
 B-WP2,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP2_learned_2026-11-04.md,A+C,C代码级复核通过;B原552通过1跳过及HTTP配对证据保留,A独立复测尚缺;C页面组合复验本轮进行,保留ready_for_review;准备WP5;不将代码复核写成A/C全量复测
 B-WP5-PREP,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP5_readiness_2026-11-04.md,A+C,整合C b1d5e8b;552通过1跳过;前端70构建;实际HTTP及ZIP通过,A新模型未交付;formal输入与统计待实施;未三方冻结,先按WP5计划物化180独立轨迹;三策略540运行;收到A包独立验收
+B-WP5-INPUTS,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_formal_inputs_2026-11-04.md,A+C,180独立输入/内容哈希;17定向;全库证据见交接,A-N4b来源及接收人复核待交付;model pending,A核对来源/种子与内容交集;B继续模型验包与运行统计入口

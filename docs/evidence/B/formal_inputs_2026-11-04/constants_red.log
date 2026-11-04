@@ -1,0 +1,27 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+___________ test_loaded_source_must_match_recorded_source[constant] ___________
+
+tmp_path = WindowsPath('D:/�˹�������ս��/starlink-ai6g/runs/formal_inputs_20261104/constants_red_tmp/test_loaded_source_must_match_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001C346C99E50>
+edit = 'constant'
+
+    @pytest.mark.parametrize('edit', ['function', 'constant'])
+    def test_loaded_source_must_match_recorded_source(tmp_path, monkeypatch, edit):
+        import backend.formal_inputs as module
+    
+        for name in module._source_hashes():
+            target = tmp_path/'source'/name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes((module.ROOT/name).read_bytes())
+        source = tmp_path/'source/backend/formal_inputs.py'
+        before, after = ('arrival_s=0.0', 'arrival_s=1.0') if edit == 'function' else ('formal-tasks-v1|seed', 'modified-tasks|seed')
+        source.write_text(source.read_text().replace(before, after))
+        monkeypatch.setattr(module, 'ROOT', tmp_path/'source')
+>       with pytest.raises(ValueError, match='Loaded code'):
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests\test_formal_inputs.py:133: Failed
+=========================== short test summary info ===========================
+FAILED tests/test_formal_inputs.py::test_loaded_source_must_match_recorded_source[constant]
+1 failed, 1 passed, 16 deselected in 1.23s
