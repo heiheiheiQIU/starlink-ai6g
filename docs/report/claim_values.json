@@ -1,0 +1,83 @@
+{
+  "schema_version": "claim-values-v1",
+  "generated_from": "docs\\materials\\claims_spec.json",
+  "claims": {
+    "claim-P1": {
+      "value": null,
+      "unit": "citation",
+      "source": "官方文件URL（待队长核实后填写）",
+      "scope": "政策与白皮书引用；白皮书愿景非工程指标",
+      "status": "pending"
+    },
+    "claim-E1": {
+      "value": 0.0303125,
+      "unit": "Wh",
+      "source": "R2/R3 手算与CLI运行（发送能耗 36W×2s背景+36W×1.03125s发送）",
+      "scope": "仅发送段能耗口径；三方独立复算一致",
+      "status": "signed_off"
+    },
+    "claim-E2": {
+      "value": "冷载2.2ms/暖中位0.499ms/p95 0.681ms；教师7-24ms/状态",
+      "unit": "ms",
+      "source": "B WP2 证据 verification.json 与 B H02 scale_timing.json",
+      "scope": "本机CPU实测，非目标星上时延",
+      "status": "signed_off"
+    },
+    "claim-D1": {
+      "value": "全零13/20；idle并列最优19/20；唯一非idle最优1/20；困难工况覆盖0/20",
+      "unit": "count/20",
+      "source": "data/teacher/a_n3_20_v2（SHA 2df964e7…）；A-N4审计+C独立复算",
+      "scope": "仅旧20样本冻结包；结论=仅管线回归用途",
+      "status": "signed_off"
+    },
+    "claim-D2": {
+      "value": "EDF 0.486915 / value 0.553192",
+      "unit": "weighted-on-time-rate",
+      "source": "docs/evidence/B/R5_2026-10-29/per_run.csv（SHA b1203575…）",
+      "scope": "开发期规则验证矩阵，非正式实验",
+      "status": "signed_off"
+    },
+    "claim-D3": {
+      "value": "线性0.161 / MLP 0.356（test utility MSE，4样本）",
+      "unit": "MSE",
+      "source": "artifacts/models/a_n3_policy_v1/training_summary.json（SHA fc011b87…）",
+      "scope": "小规模测试集对照，样本规模限制必须注明",
+      "status": "signed_off"
+    },
+    "claim-A1": {
+      "value": null,
+      "unit": null,
+      "source": "A-N4b 审计JSON（待生成）",
+      "scope": "数据重建标签质量与覆盖；B验包后签核",
+      "status": "pending"
+    },
+    "claim-X1": {
+      "value": null,
+      "unit": null,
+      "source": "formal_v1 运行集（待冻结）",
+      "scope": "正式实验总体结果；四档口径之一",
+      "status": "pending"
+    },
+    "claim-X2": {
+      "value": null,
+      "unit": null,
+      "source": "formal_v1 运行集（待冻结）",
+      "scope": "分工况胜负平热力矩阵",
+      "status": "pending"
+    },
+    "claim-X3": {
+      "value": null,
+      "unit": null,
+      "source": "指定run事件流（待冻结）",
+      "scope": "失败/边界案例行为",
+      "status": "pending"
+    },
+    "claim-R1": {
+      "value": null,
+      "unit": null,
+      "source": "11/08 换机验收记录（待执行）",
+      "scope": "更换机器复现",
+      "status": "pending"
+    }
+  }
+}

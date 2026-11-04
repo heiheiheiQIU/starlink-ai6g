@@ -1,4 +1,5 @@
 import { CountUp } from '../components/CountUp'
+import { TeacherAuditCard } from '../components/TeacherAuditCard'
 import {
   DISTURBANCE_LABELS,
   ENERGY_LABELS,
@@ -117,6 +118,8 @@ export function MatrixPage() {
           <small>EDF=vale 规则；learned 接入后本网格自动扩展第三行对比</small>
         </div>
       </div>
+
+      <TeacherAuditCard />
 
       <div className="console-card source-card">
         <h2>数据来源与边界</h2>

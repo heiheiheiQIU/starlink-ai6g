@@ -40,6 +40,8 @@ export interface RunController {
   resume: (runId: string) => Promise<void>
   refresh: () => Promise<void>
   abort: () => void
+  /** 下载当前 run 的 ZIP 导出（仅 completed；触发浏览器下载）。 */
+  exportZip: () => Promise<void>
 }
 
 function errorMessage(error: unknown): string {
@@ -155,9 +157,23 @@ export function useRun(options: UseRunOptions = {}): RunController {
     [refresh, storage],
   )
 
+  const exportZip = useCallback(async () => {
+    const current = lastStatusRef.current
+    if (!current) throw new TransportError('尚无已确认的 run')
+    const blob = await api.exportRun(current.run_id)
+    const url = URL.createObjectURL(blob)
+    const anchor = document.createElement('a')
+    anchor.href = url
+    anchor.download = `${current.run_id}.zip`
+    document.body.appendChild(anchor)
+    anchor.click()
+    anchor.remove()
+    URL.revokeObjectURL(url)
+  }, [api])
+
   useEffect(() => {
     return () => controllerRef.current?.abort()
   }, [])
 
-  return { state, create, resume, refresh, abort }
+  return { state, create, resume, refresh, abort, exportZip }
 }
