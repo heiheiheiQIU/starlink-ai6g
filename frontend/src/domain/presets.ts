@@ -17,7 +17,7 @@ export interface ScenarioPreset {
 }
 
 function buildConfig(raw: string): Record<string, unknown> {
-  const parsed = JSON.parse(raw) as Record<string, unknown>
+  const parsed = JSON.parse(raw.replace(/^\uFEFF/, '')) as Record<string, unknown>
   return {
     ...parsed,
     actions: [],
