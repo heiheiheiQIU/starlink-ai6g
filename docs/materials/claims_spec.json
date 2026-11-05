@@ -44,11 +44,11 @@
       "status": "signed_off"
     },
     "claim-P2": {
-      "value": "SIA 2026 State of the Satellite Industry Report（第29届，FY2025）：2025全球航天经济4290亿美元(+3%)、296次发射、4434颗卫星入轨(+65%)；备用中文口径：2024年中国卫星互联网行业市场规模353.3亿元（北京博研智尚，权威性一般）",
+      "value": "SIA 2026 State of the Satellite Industry Report（第29届，FY2025）：2025全球航天经济4290亿美元(+3%)、商业卫星产业3030亿美元占71%、296次发射、4434颗卫星入轨(+65%)、年末在轨14266颗、卫星宽带用户+62%超1000万",
       "unit": "citation",
-      "source": "https://sia.org/news-resources/state-of-the-satellite-industry-report/（执行摘要PDF：/wp-content/uploads/2026/05/SSIR26-One-Pager-Exec-Summary-FINAL.pdf.pdf；新闻稿PDF：/wp-content/uploads/2026/05/Presidents-Rep26-SIA-News-Page-May.pdf）；豆丁 docin.com/p-5020144397.html",
-      "scope": "行业市场数据引用；SIA为国际行业协会权威来源，中文口径须标注咨询机构性质",
-      "status": "pending"
+      "source": "https://sia.org/affordability-productivity-drive-historic-satellite-industry-growth-satellite-industry-association-releases-29th-annual-state-of-the-satellite-industry-report/（队长2026-11-05已核实页面与数字）",
+      "scope": "行业市场数据引用；SIA为国际行业协会权威来源；引用于第5章产业背景",
+      "status": "signed_off"
     },
     "claim-A1": {
       "value": null,
