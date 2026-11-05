@@ -1,4 +1,4 @@
-﻿{
+{
   "schema_version": "claims-spec-v1",
   "claims": {
     "claim-P1": {
@@ -42,6 +42,13 @@
       "source": "artifacts/models/a_n3_policy_v1/training_summary.json（SHA fc011b87…）",
       "scope": "小规模测试集对照，样本规模限制必须注明",
       "status": "signed_off"
+    },
+    "claim-P2": {
+      "value": "SIA 2026 State of the Satellite Industry Report（第29届，FY2025）：2025全球航天经济4290亿美元(+3%)、296次发射、4434颗卫星入轨(+65%)；备用中文口径：2024年中国卫星互联网行业市场规模353.3亿元（北京博研智尚，权威性一般）",
+      "unit": "citation",
+      "source": "https://sia.org/news-resources/state-of-the-satellite-industry-report/（执行摘要PDF：/wp-content/uploads/2026/05/SSIR26-One-Pager-Exec-Summary-FINAL.pdf.pdf；新闻稿PDF：/wp-content/uploads/2026/05/Presidents-Rep26-SIA-News-Page-May.pdf）；豆丁 docin.com/p-5020144397.html",
+      "scope": "行业市场数据引用；SIA为国际行业协会权威来源，中文口径须标注咨询机构性质",
+      "status": "pending"
     },
     "claim-A1": {
       "value": null,
