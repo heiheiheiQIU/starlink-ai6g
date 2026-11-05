@@ -1835,6 +1835,46 @@ button {
   border-radius: 12px;
 }
 
+/* ═══ AI评分：特征组与候选分数 ═══ */
+.score-features {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.score-features .chip {
+  padding: 4px 10px;
+  color: #a9c2d2;
+  background: rgba(103, 204, 220, 0.08);
+  border: 1px solid rgba(103, 204, 220, 0.3);
+  border-radius: 999px;
+  font-size: 14px;
+}
+
+.score-features small {
+  margin-left: auto;
+  color: #4b6b84;
+  font-size: 14px;
+}
+
+.score-candidates {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  color: #a9c2d2;
+  font-size: 14px;
+}
+
+.score-candidates small {
+  margin-left: auto;
+  color: #4b6b84;
+  font-size: 14px;
+}
+
 /* ═══ 教师标签质量审计卡 ═══ */
 .audit-kpis {
   display: grid;

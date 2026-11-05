@@ -8,10 +8,10 @@ interface StageExperienceProps {
   onTasksChange: (tasks: StageTask[]) => void
 }
 
-const SCORE_TABLE: Record<string, { factors: [number, number, number]; total: string }> = {
-  '3.0': { factors: [92, 95, 55], total: '0.861' },
-  '1.5': { factors: [55, 68, 40], total: '0.562' },
-  '1.0': { factors: [30, 22, 60], total: '0.318' },
+const SCORE_TABLE: Record<string, { scores: Record<string, number>; total: string }> = {
+  '3.0': { scores: { robust: 0.861, fast: 0.743, idle: 0.5 }, total: '0.861' },
+  '1.5': { scores: { robust: 0.562, fast: 0.501, idle: 0.5 }, total: '0.562' },
+  '1.0': { scores: { robust: 0.318, fast: 0.302, idle: 0.5 }, total: '0.318' },
 }
 
 export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienceProps) {
@@ -121,20 +121,29 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
             </button>
           ))}
         </div>
-        {['风险权重', '期限紧迫度', '能耗影响'].map((label, index) => (
-          <div className="score-factor" key={label}>
-            <span>{label}</span>
-            <i><b style={{ width: scored ? `${table.factors[index]}%` : 0 }} /></i>
-            <strong>{scored ? `${table.factors[index]}%` : '—'}</strong>
-          </div>
-        ))}
+        <div className="score-features" aria-label="模型输入特征组">
+          <span className="chip">健康下界 / SOC / 容量</span>
+          <span className="chip">下一窗口速率与丢失</span>
+          <span className="chip">期限 · 剩余字节 · 优先级</span>
+          <small>23 维公开特征已编码（契约样例输入）</small>
+        </div>
         <button className="experience-primary" type="button" onClick={() => setScored(true)}>运行 AI 评分</button>
         {scored ? (
-          <div className="score-verdict">
-            <span>决策候选</span>
-            <strong>{top.id} × robust</strong>
-            <small>综合评分 {SCORE_TABLE[top.weight].total}（队列最高）→ 交给下一步约束解码</small>
-          </div>
+          <>
+            <div className="score-candidates" aria-label="候选评分（契约样例）">
+              {['robust', 'fast', 'idle'].map((mode) => (
+                <span key={mode} className="mono">
+                  {mode}：{table.scores[mode].toFixed(3)}
+                </span>
+              ))}
+              <small>候选分数为契约样例，非模型解释归因</small>
+            </div>
+            <div className="score-verdict">
+              <span>决策候选</span>
+              <strong>{top.id} × robust</strong>
+              <small>综合评分 {SCORE_TABLE[top.weight].total}（队列最高）→ 交给下一步约束解码</small>
+            </div>
+          </>
         ) : null}
       </div>
     )
