@@ -9,7 +9,7 @@ B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+
 B-N2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,A ddcca9c明确签收d4716bf四项手算和发送能量;41定向219全库为A实测,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-R2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,A专门回执已到ddcca9c;覆盖d4716bf四项手算,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过;WP1组合519项及真实HTTP/代理/18页事件/ZIP通过,页面完整联调与learned仍待后续;统一候选待复核,已支持edf/value/learned各至多两策略;接收人复验分页/ZIP/故障恢复
-B-N4,B,ready_for_review,2026-11-04T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,WP2 B实测552通过1跳过;C对6051d34代码级复核通过;见C_audit_WP2_code_A_N4_2026-11-04,A独立复测尚未交付;正式实验配置待冻结,B先冻结模型无关输入与统计口径;新模型收到后独立验包
+B-N4,B,in_progress,2026-11-07T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,WP2 C代码级复核通过;WP5输入710f141经C代码级复核通过;见C_audit_WP5_inputs_2026-11-05,A独立复测与模型落位/最终冻结/运行统计待完成,11/06 20:00冻结硬线;正式随机丢失环境属learned域外评估;540与900运行口径待三方统一
 C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
 C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,原27结构镜像复核保留;WP1冻结pnpm安装成功;61项前端测试及类型/构建通过,换机及浏览器视觉验收另做,保持pnpm唯一锁文件;复核本轮README代理说明
 C-N3,C,ready_for_review,2026-11-02T20:00:00+08:00,frontend/src/components/RealRunPanel.tsx,B,C b1d5e8b已提交三预设/配对请求/ZIP及测试;B本轮纳入组合候选,真实浏览器视觉及操作闭环尚未验收,B组合测试与HTTP复验;C完成真实浏览器截图/刷新/下载闭环
@@ -22,4 +22,4 @@ B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.m
 B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11-04.md,A+C,A审计及C回执已整合;524通过;6能量和10支持域探针通过,历史准备回执已由WP2实现推进;A新数据仍待交付,按B_WP5_readiness_2026-11-04准备正式实验
 B-WP2,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP2_learned_2026-11-04.md,A+C,C代码级复核通过;B原552通过1跳过及HTTP配对证据保留,A独立复测尚缺;C页面组合复验本轮进行,保留ready_for_review;准备WP5;不将代码复核写成A/C全量复测
 B-WP5-PREP,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP5_readiness_2026-11-04.md,A+C,整合C b1d5e8b;552通过1跳过;前端70构建;实际HTTP及ZIP通过,A新模型未交付;formal输入与统计待实施;未三方冻结,先按WP5计划物化180独立轨迹;三策略540运行;收到A包独立验收
-B-WP5-INPUTS,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_formal_inputs_2026-11-04.md,A+C,180独立输入/内容哈希;17定向;全库证据见交接,A-N4b来源及接收人复核待交付;model pending,A核对来源/种子与内容交集;B继续模型验包与运行统计入口
+B-WP5-INPUTS,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_formal_inputs_2026-11-04.md,A+C,180独立输入/内容哈希;18定向;C对710f141代码级复核通过;见C_audit_WP5_inputs_2026-11-05,A来源交集复核与模型落位待完成;model pending,A核对来源/种子与内容交集;B继续模型验包与运行统计入口;保留域外评估边界
