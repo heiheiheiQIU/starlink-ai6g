@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { AppSidebar } from './components/AppSidebar'
 import { FixtureBanner } from './components/FixtureBanner'
 import { FloatingAssistant } from './components/FloatingAssistant'
+import { PAGE_SOURCES } from './domain/dataSource'
 import type { PageId } from './domain/navigation'
 import { getPageLabel } from './domain/navigation'
 import { AssistantPage } from './pages/AssistantPage'
@@ -27,7 +28,7 @@ export default function App() {
             <strong>{getPageLabel(currentPage)}</strong>
           </div>
           <div className="topbar__actions">
-            <span className="snapshot-chip">OBS · 2026-10-29T15:00Z</span>
+            <span className="snapshot-chip">DEMO OBS · 2026-10-29T15:00Z</span>
             <button
               className="assistant-trigger"
               type="button"
@@ -38,7 +39,7 @@ export default function App() {
           </div>
         </header>
 
-        <FixtureBanner />
+        <FixtureBanner source={PAGE_SOURCES[currentPage]} />
 
         <div className="page-stage">
           {currentPage === 'flow' ? (

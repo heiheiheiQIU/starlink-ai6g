@@ -29,6 +29,6 @@ describe('v4 application shell', () => {
     ).toBeInTheDocument()
     expect(assistantEntry).toHaveAttribute('aria-current', 'page')
     expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
-    expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
+    expect(screen.getByText(/仅来自已索引证据文档/)).toBeInTheDocument()
   })
 })

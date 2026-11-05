@@ -24,4 +24,12 @@ describe('six-step decision flow contract', () => {
     expect(clampStep(5)).toBe(5)
     expect(clampStep(6)).toBe(5)
   })
+
+  it('keeps step copy free of over-claiming language', () => {
+    const forbidden = /VoI|信息新鲜度|不确定性|走哪条链路|显著优于|模型解释归因/
+    for (const step of FLOW_STEPS) {
+      const text = [step.description, step.narration, step.method].join(' ')
+      expect(text).not.toMatch(forbidden)
+    }
+  })
 })
