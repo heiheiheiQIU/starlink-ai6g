@@ -38,7 +38,7 @@ export function FlowWorkspace() {
           <p className="eyebrow">MISSION DECISION WORKSPACE</p>
           <h1>流程主舞台</h1>
           <p>
-            以电池健康风险为输入，让 AI 在 6G 空天地链路约束下决定“传什么、何时传、走哪条链路”。
+            以保守健康状态为输入，让 AI 在 6G 星地链路约束下决定“传什么、何时传、采用何种传输模式”。
           </p>
         </div>
         <div className="flow-intro-actions">
