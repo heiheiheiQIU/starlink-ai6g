@@ -2,11 +2,11 @@
   "schema_version": "claims-spec-v1",
   "claims": {
     "claim-P1": {
-      "value": null,
+      "value": "1)《中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要》2021-03，https://www.gov.cn/xinwen/2021-03/13/content_5592681.htm；2)IMT-2030(6G)推进组《6G总体愿景与潜在关键技术》白皮书（官网白皮书列表https://www.imt2030.org.cn/html/default/zhongwen/chengguofabu/baipishu/index.html?index=2）；3)IMT-2030(6G)推进组《6G典型场景和关键能力》白皮书；均2026-11-05访问",
       "unit": "citation",
-      "source": "官方文件URL（待队长核实后填写）",
-      "scope": "政策与白皮书引用；白皮书愿景非工程指标",
-      "status": "pending"
+      "source": "gov.cn + imt2030.org.cn 官方列表页（队长已下载PDF至报告政策材料/）",
+      "scope": "政策与白皮书引用；白皮书愿景非工程指标；白皮书发布年份以PDF内页为准",
+      "status": "signed_off"
     },
     "claim-E1": {
       "value": 0.0303125,
