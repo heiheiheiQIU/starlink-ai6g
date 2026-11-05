@@ -139,7 +139,7 @@
 ## 参考文献
 
 1. 《中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要》[EB/OL]. (2021-03). https://www.gov.cn/xinwen/2021-03/13/content_5592681.htm（2026-11-05访问）；
-2. IMT-2030(6G)推进组. 6G总体愿景与潜在关键技术白皮书[R/OL]. https://www.imt2030.org.cn/html/default/zhongwen/chengguofabu/baipishu/index.html?index=2（2026-11-05访问；发布年份以PDF内页为准）；
-3. IMT-2030(6G)推进组. 6G典型场景和关键能力白皮书[R/OL]. 同上列表页（2026-11-05访问；发布年份以PDF内页为准）；
+2. IMT-2030(6G)推进组. 6G总体愿景与潜在关键技术白皮书[R/OL]. (2021-06). https://www.imt2030.org.cn/html/default/zhongwen/chengguofabu/baipishu/index.html?index=2（2026-11-05访问）；
+3. IMT-2030(6G)推进组. 6G典型场景和关键能力白皮书[R/OL]. (2022). 同上列表页（2026-11-05访问）；
 4. 教师求解与调度方法文献（训练标签方法、EOS调度研究等，引用编号待补）；
 5. 数据集与工具引用（版本、许可、URL、访问日期，待补）。
