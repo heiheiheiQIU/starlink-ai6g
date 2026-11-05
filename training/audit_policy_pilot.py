@@ -185,7 +185,8 @@ def audit_pilot(package_dir) -> dict[str, object]:
                 key: value for key, value in row.items() if key not in {"elapsed_ms", "label_content_sha256"}}), "LABEL_HASH")
             labels = {(label.task_id, label.mode): label for label in result.candidate_scores}
             planned_status = row["solver_status"] in {"OPTIMAL", "TIME_LIMIT_FEASIBLE", "NODE_LIMIT_FEASIBLE"}
-            crosschecks["verified" if planned_status else "not_applicable_teacher_preflight"] += 1
+            crosschecks["not_available_error" if row["solver_status"] == "ERROR" else
+                        "verified" if planned_status else "not_applicable_teacher_preflight"] += 1
             for task in observation.tasks:
                 for mode in ("robust", "fast"):
                     if (task.task_id, mode) not in labels:

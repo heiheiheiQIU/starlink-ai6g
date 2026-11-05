@@ -142,13 +142,16 @@ def stable_label_hash(row):
     return hashlib.sha256(raw.encode()).hexdigest()
 
 
-@pytest.mark.parametrize("status,reason", [("UNSUPPORTED_LOSS", "not_applicable_teacher_preflight"),
-                                           ("ERROR", "not_available_error")])
-def test_preflight_and_error_diagnostics_are_honest(pilot_package, status, reason):
+@pytest.mark.parametrize("status,reason,keep_scores", [
+    ("UNSUPPORTED_LOSS", "not_applicable_teacher_preflight", True),
+    ("ERROR", "not_available_error", False),
+    ("ERROR", "not_available_error", True),
+])
+def test_preflight_and_error_diagnostics_are_honest(pilot_package, status, reason, keep_scores):
     rows = read_rows(pilot_package / "attempts.jsonl")
     for row in rows:
         row.update(solver_status=status, gap=None, label_eligible=False, exclusion_reasons=[status])
-        if status == "ERROR":
+        if status == "ERROR" and not keep_scores:
             del row["candidate_scores"]
             del row["label_content_sha256"]
         else:
