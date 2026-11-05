@@ -1,0 +1,1 @@
+{"cpu_elapsed_s":2.453125,"eligible":8,"exclusion_reason_counts":{"TIME_LIMIT_FEASIBLE":3},"failures":[],"ineligible":3,"integrity_failure_count":0,"limited_result_count":3,"solver_status_counts":{"OPTIMAL":8,"TIME_LIMIT_FEASIBLE":3},"sources_attempted":5,"status":"blocked","stop_reason":"REPEATED_SOLVER_LIMIT","total":11,"training_enabled":false}
