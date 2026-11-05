@@ -7,7 +7,7 @@ A-N4,A,completed,2026-11-05T20:00:00+08:00,docs/contributions/A/,B,"标签审计
 B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
 B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,共享信道+180轨迹规则矩阵已交付（PR#6）,R2-R5依序合main；成熟优化器与AI接入仍待后续
 B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,A+C,"A已accepted+C已accepted_with_notes+seed P2已修",等合入main,完整HTTP复跑并入11/08换机验收
-B-N4,B,ready_for_review,2026-11-07T20:00:00+08:00,experiments/,A+C,"WP2代码级C复核通过（白名单/回退/RETRY覆盖/进程生命周期与交接单一致）；C已接通真实页面（三预设+ZIP）",A复测后三方齐；B冻结正式实验配置,B：11/06 20:00冻结；11/07实验签核；本轮不支持AI收益结论
+B-N4,B,in_progress,2026-11-07T20:00:00+08:00,experiments/,A+C,"WP5正式输入候选PR#13（710f141）：180输入确定性/防篡改/pending门禁，C复核通过；正式环境全含随机丢失=learned域外评估",A-N4b交包或旧包落位→B冻结→运行+统计,A：今晚交包（含与200000-200179种子无交集证明）；11/06 20:00冻结硬线；域外评估必须写入材料口径
 B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,"预合并回归219过；待A四项手算签收范围确认",main合并前提之一,A补R2四项手算范围确认回执；C可复核send-only轨迹
 B-R3,B,accepted,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,"A+C均accepted（cac4b90）三方对齐",待R2先合main,按R2→R3→R4→R5顺序合入
 C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
