@@ -4,6 +4,7 @@
  */
 
 import type { PageId } from './navigation'
+import { sourceLabel } from './productLanguage'
 
 export type DataSourceKind = 'fixture' | 'mixed' | 'development_run' | 'verified_asset'
 
@@ -16,37 +17,37 @@ export interface PageSourceInfo {
 export const PAGE_SOURCES: Record<PageId, PageSourceInfo> = {
   flow: {
     kind: 'fixture',
-    badge: 'FIXTURE',
-    note: '本页交互、动效与数字均为契约样例，仅演示流程与数据结构，非实验结果。',
+    badge: sourceLabel('fixture'),
+    note: '标准场景演示：交互、动效与数值用于说明流程和数据结构，不作为实验结论。',
   },
   overview: {
     kind: 'fixture',
-    badge: 'FIXTURE',
-    note: '汇总卡、倒计时与进展列表为演示数据。',
+    badge: sourceLabel('fixture'),
+    note: '标准场景演示：汇总卡、倒计时与进展列表为演示数据。',
   },
   assistant: {
     kind: 'fixture',
-    badge: 'FIXTURE',
-    note: '回答仅来自已索引证据文档，不生成任何实验数字。',
+    badge: sourceLabel('fixture'),
+    note: '回答仅引用已建立索引的项目资料，不生成或推测实验数值。',
   },
   compare: {
     kind: 'mixed',
-    badge: 'MIXED',
-    note: '真实运行区展示真实 run 结果；下方契约样例对比区为演示数据，两者标注相互独立。',
+    badge: sourceLabel('mixed'),
+    note: '上方可接入在线任务结果；下方为标准场景对比，二者独立标识。',
   },
   matrix: {
     kind: 'development_run',
-    badge: 'DEV-RUN',
-    note: 'B R5 规则矩阵的 360 次真实开发期运行；属规则基线验证，非正式 AI 实验。',
+    badge: sourceLabel('development_run'),
+    note: '360 次开发期规则基线运行，用于验证流程与统计口径，不代表正式 AI 实验结果。',
   },
   evidence: {
     kind: 'mixed',
-    badge: 'MIXED',
-    note: '数据源卡片与真实事件流为真实 run；实验列表与证据索引样例为契约演示。',
+    badge: sourceLabel('mixed'),
+    note: '在线事件和结果按任务实例显示；示例列表用于说明追溯结构。',
   },
   assets: {
     kind: 'verified_asset',
-    badge: 'VERIFIED',
-    note: '资产 SHA 来自实际审计与冻结包核对；黄色项为待补来源说明。',
+    badge: sourceLabel('verified_asset'),
+    note: '资产完整性标识来自 SHA 核验与版本清单；待补说明项单独标记。',
   },
 }

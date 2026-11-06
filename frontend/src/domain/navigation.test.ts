@@ -8,26 +8,26 @@ describe('navigation contract', () => {
       {
         label: '主流程',
         items: [
-          { id: 'flow', label: '流程主舞台' },
-          { id: 'overview', label: '任务总览' },
-          { id: 'assistant', label: 'AI 助手' },
+          { id: 'flow', label: '任务决策' },
+          { id: 'overview', label: '运行总览' },
+          { id: 'assistant', label: '智能研判' },
         ],
       },
       {
         label: '工作台',
         items: [
-          { id: 'compare', label: '方案对比' },
-          { id: 'matrix', label: '实验矩阵' },
-          { id: 'evidence', label: '证据链' },
-          { id: 'assets', label: '资产管理' },
+          { id: 'compare', label: '策略评估' },
+          { id: 'matrix', label: '场景验证' },
+          { id: 'evidence', label: '结果追溯' },
+          { id: 'assets', label: '模型与资产' },
         ],
       },
     ])
   })
 
   it('resolves the approved labels from page ids', () => {
-    expect(getPageLabel('flow')).toBe('流程主舞台')
-    expect(getPageLabel('assistant')).toBe('AI 助手')
-    expect(getPageLabel('matrix')).toBe('实验矩阵')
+    expect(getPageLabel('flow')).toBe('任务决策')
+    expect(getPageLabel('assistant')).toBe('智能研判')
+    expect(getPageLabel('matrix')).toBe('场景验证')
   })
 })
