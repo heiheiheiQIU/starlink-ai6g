@@ -80,7 +80,7 @@ export function RealRunPanel({ controller }: RealRunPanelProps) {
             className="mono"
             value={seedText}
             onChange={(event) => setSeedText(event.target.value)}
-            aria-label="实验 seed"
+            aria-label="随机种子 seed"
           />
         </label>
         <button
@@ -136,7 +136,7 @@ export function RealRunPanel({ controller }: RealRunPanelProps) {
                 </tbody>
               </table>
               <button className="link-button" type="button" onClick={() => void exportZip()}>
-                下载 ZIP 证据包（{state.runId}.zip）
+                下载 ZIP 结果归档（{state.runId}.zip）
               </button>
             </>
           ) : null}

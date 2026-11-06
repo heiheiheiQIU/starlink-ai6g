@@ -92,7 +92,7 @@ export function AssetsPage() {
           ))}
         </div>
         <p className="panel-note">
-          数据来源：资产清单与证据索引；大文件不入库，仅引用哈希与可定位位置。
+          数据来源：资产清单与结果依据索引；大文件不入库，仅引用哈希与可定位位置。
         </p>
       </div>
 

@@ -2,7 +2,7 @@ import { FormEvent, useState } from 'react'
 
 import { answerFixtureQuestion } from '../domain/assistant'
 
-const QUICK_QUESTIONS = ['这些数字是真的吗？', 'AI 控制了通信的什么？', '当前证据能支持哪些结论？']
+const QUICK_QUESTIONS = ['这些数字来自哪里？', 'AI 控制了通信的什么？', '当前依据能支持哪些结论？']
 
 interface FloatingAssistantProps {
   onOpenAssistant: () => void

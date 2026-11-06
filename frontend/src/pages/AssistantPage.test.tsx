@@ -13,7 +13,7 @@ describe('evidence-grounded assistant page', () => {
     expect(screen.getByText('docs/evidence_index.md')).toBeInTheDocument()
 
     await user.type(
-      screen.getByRole('textbox', { name: '向证据助手提问' }),
+      screen.getByRole('textbox', { name: '向智能研判助手提问' }),
       '相比基线提升了多少？',
     )
     await user.click(screen.getByRole('button', { name: '发送问题' }))

@@ -194,7 +194,7 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
             <defs>
               <linearGradient id="uplink-gradient" x1="0" y1="1" x2="1" y2="0">
                 <stop offset="0" stopColor="#42d8eb" />
-                <stop offset="1" stopColor="#7d82ff" />
+                <stop offset="1" stopColor="#8295ad" />
               </linearGradient>
               <filter id="link-glow" x="-20%" y="-100%" width="140%" height="300%">
                 <feGaussianBlur stdDeviation="4" result="blur" />

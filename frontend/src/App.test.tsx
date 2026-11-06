@@ -9,6 +9,8 @@ describe('v4 application shell', () => {
     const user = userEvent.setup()
     const { container } = render(<App />)
 
+    expect(container.querySelector('.app-shell')).toHaveClass('app-shell--mission')
+
     expect(
       screen.getByRole('heading', { name: '任务决策', level: 1 }),
     ).toBeInTheDocument()

@@ -28,7 +28,7 @@ const STAGE_METRICS: Record<FlowStep['id'], readonly [string, string][]> = {
     ['等待确认', '01'],
   ],
   evaluate: [
-    ['证据对象', '27'],
+    ['追溯对象', '27'],
     ['完整性校验', '100%'],
     ['待归档', '01'],
   ],
@@ -61,7 +61,7 @@ export function StagePanel({ step, stepNumber, tasks, onTasksChange }: StagePane
             ? '估计层'
             : step.status === 'decision'
               ? 'AI+6G 决策层'
-              : '执行证据层'}
+              : '结果追溯层'}
         </span>
       </div>
 

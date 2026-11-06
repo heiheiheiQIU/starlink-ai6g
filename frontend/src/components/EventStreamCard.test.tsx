@@ -79,6 +79,6 @@ describe('EventStreamCard', () => {
   it('shows an honest empty note without events', () => {
     render(<EventStreamCard runId="run-1" events={[]} />)
 
-    expect(screen.getByText('该 run 暂无事件。')).toBeInTheDocument()
+    expect(screen.getByText('该任务实例暂无事件。')).toBeInTheDocument()
   })
 })

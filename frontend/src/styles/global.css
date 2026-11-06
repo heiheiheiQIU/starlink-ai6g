@@ -885,6 +885,226 @@ button {
   .operations-bar__actions { grid-column: 1 / -1; justify-content: flex-start; }
 }
 
+/* ═══ 2026-11-06 航天任务视觉语言：克制、可读、可发布 ═══ */
+body {
+  color: #dbe8ed;
+  background: #06121c;
+}
+
+body::before {
+  background: none;
+}
+
+.app-shell--mission {
+  background: #06121c;
+}
+
+.app-shell--mission .app-sidebar {
+  z-index: 4;
+  background:
+    linear-gradient(180deg, rgba(5, 18, 28, .98), rgba(7, 23, 34, .96)),
+    #06121c;
+  border-right-color: rgba(128, 174, 191, .14);
+  box-shadow: 18px 0 48px rgba(0, 7, 13, .22);
+}
+
+.app-shell--mission .brand-lockup__mark {
+  color: #dff5f8;
+  background: linear-gradient(145deg, #286b7c, #183e4e);
+  border-color: rgba(133, 203, 216, .26);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .09);
+}
+
+.app-shell--mission .nav-entry[data-active='true'] {
+  background: linear-gradient(90deg, rgba(91, 169, 184, .18), rgba(91, 169, 184, .06));
+  border-color: rgba(112, 195, 208, .26);
+}
+
+.app-shell--mission .nav-entry__icon,
+.app-shell--mission .quick-entry__icon {
+  color: #83c8d2;
+}
+
+.app-shell--mission .app-main {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #081824;
+}
+
+.app-shell--mission .app-main::before,
+.app-shell--mission .app-main::after {
+  position: fixed;
+  inset: 0 0 0 244px;
+  z-index: -2;
+  content: '';
+  pointer-events: none;
+}
+
+.app-shell--mission .app-main::before {
+  background: url('/visuals/orbital-command-backdrop-v1.png') center / cover no-repeat;
+  opacity: .42;
+  filter: saturate(.72) contrast(.94);
+}
+
+.app-shell--mission .app-main::after {
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(6, 18, 28, .68) 0%, rgba(6, 18, 28, .78) 44%, rgba(6, 18, 28, .92) 100%),
+    radial-gradient(circle at 72% 16%, rgba(92, 164, 178, .08), transparent 36%);
+}
+
+.app-shell--mission .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  color: #dbe8ed;
+  background: rgba(7, 22, 33, .82);
+  border-bottom-color: rgba(132, 176, 192, .14);
+  box-shadow: 0 10px 30px rgba(0, 8, 14, .12);
+  backdrop-filter: blur(22px) saturate(120%);
+}
+
+.app-shell--mission .topbar__context,
+.app-shell--mission .snapshot-chip {
+  color: #8299a8;
+}
+
+.app-shell--mission .snapshot-chip {
+  background: rgba(7, 24, 36, .62);
+  border-color: rgba(133, 177, 191, .18);
+}
+
+.app-shell--mission .assistant-trigger,
+.app-shell--mission .primary-button,
+.app-shell--mission .experience-primary {
+  color: #06151e;
+  background: linear-gradient(135deg, #79c4cf, #5b9faf);
+  border-color: rgba(162, 224, 231, .38);
+  box-shadow: 0 8px 24px rgba(40, 113, 129, .18);
+}
+
+.app-shell--mission .fixture-banner,
+.app-shell--mission .source-badge--fixture {
+  color: #d8c69e;
+  background: rgba(62, 48, 27, .58);
+  border-color: rgba(207, 169, 95, .27);
+  backdrop-filter: blur(18px);
+}
+
+.app-shell--mission .fixture-banner__source,
+.app-shell--mission .source-manual {
+  color: #b9a77e;
+}
+
+.app-shell--mission .source-manual input {
+  color: #dbe8ed;
+  background: rgba(6, 19, 29, .78);
+  border-color: rgba(207, 169, 95, .3);
+}
+
+.app-shell--mission .page-stage {
+  position: relative;
+}
+
+.app-shell--mission .flow-workspace,
+.app-shell--mission .assistant-page,
+.app-shell--mission .console-page {
+  color: #dbe8ed;
+  background: rgba(7, 22, 33, .66);
+  border: 1px solid rgba(139, 181, 196, .16);
+  box-shadow: 0 26px 70px rgba(0, 7, 13, .24);
+  backdrop-filter: blur(18px) saturate(112%);
+}
+
+.app-shell--mission .console-card,
+.app-shell--mission .stage-panel,
+.app-shell--mission .operations-bar,
+.app-shell--mission .flow-stepper,
+.app-shell--mission .step-context,
+.app-shell--mission .assistant-thread,
+.app-shell--mission .assistant-context > div,
+.app-shell--mission .chain-panel,
+.app-shell--mission .ov-card,
+.app-shell--mission .quick-entry,
+.app-shell--mission .policy-panel,
+.app-shell--mission .asset-card,
+.app-shell--mission .compare-config,
+.app-shell--mission .engineer-details {
+  color: #d7e5ea;
+  background: rgba(10, 29, 42, .83);
+  border-color: rgba(132, 177, 193, .18);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025), 0 14px 40px rgba(0, 7, 13, .13);
+  backdrop-filter: blur(16px);
+}
+
+.app-shell--mission .experience,
+.app-shell--mission .runtime-pulse,
+.app-shell--mission .chain-node {
+  background: linear-gradient(145deg, rgba(5, 20, 31, .92), rgba(13, 39, 54, .86));
+  border-color: rgba(119, 170, 189, .2);
+}
+
+.app-shell--mission .score-verdict,
+.app-shell--mission .assistant-message--answer,
+.app-shell--mission .learned-slot-note {
+  background: rgba(111, 132, 158, .09);
+  border-color: rgba(130, 149, 173, .3);
+}
+
+.app-shell--mission .auto-demo {
+  color: #0c1820;
+  background: #cda55f;
+  border-color: #dec07f;
+  box-shadow: 0 7px 18px rgba(126, 91, 35, .16);
+  animation: none;
+}
+
+.app-shell--mission .auto-badge {
+  color: #e2c98f;
+  background: rgba(201, 154, 83, .1);
+  border-color: rgba(201, 154, 83, .3);
+  animation: goldPulse 1.8s ease-in-out infinite;
+}
+
+.app-shell--mission .floating-orb {
+  background: radial-gradient(circle at 32% 28%, #9bd0d7, #4f93a3 52%, #304f63);
+  box-shadow: 0 10px 30px rgba(20, 75, 91, .36);
+  animation: orbFloat 4.6s ease-in-out infinite;
+}
+
+.app-shell--mission .floating-panel {
+  background: rgba(8, 26, 38, .94);
+  border-color: rgba(130, 178, 195, .22);
+  backdrop-filter: blur(20px);
+}
+
+.app-shell--mission .status-dot {
+  background: #72ad97;
+  box-shadow: 0 0 0 5px rgba(114, 173, 151, .1);
+}
+
+.app-shell--mission .stage-state--decision {
+  color: #aebbd0;
+  background: rgba(130, 149, 173, .11);
+  border-color: rgba(130, 149, 173, .32);
+}
+
+@media (max-width: 1240px) {
+  .app-shell--mission .app-main::before,
+  .app-shell--mission .app-main::after {
+    left: 220px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-shell--mission .auto-badge,
+  .app-shell--mission .floating-orb {
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     scroll-behavior: auto !important;

@@ -45,7 +45,7 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
 
         <div className="overview-cards">
           <div className="ov-card">
-            <h3>当前实验</h3>
+            <h3>当前任务实例</h3>
             <p className="mono">demo_fixture_001 · completed（占位）</p>
             <p className="table-note">EDF（规则）+ Learned（AI）· 同配置同随机种子 · 演示数据</p>
             <button className="link-button" type="button" onClick={() => onNavigate('flow')}>
@@ -65,7 +65,7 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
             <ul className="progress-list">
               <li><span className="status-dot" aria-hidden="true" /><span>电池健康估计 · 演示模式</span></li>
               <li><span className="status-dot" aria-hidden="true" /><span>AI 信息价值评分 · 演示模式</span></li>
-              <li><span className="status-dot" aria-hidden="true" /><span>发送确认与证据导出 · 可用</span></li>
+              <li><span className="status-dot" aria-hidden="true" /><span>发送确认与结果导出 · 可用</span></li>
             </ul>
           </div>
         </div>

@@ -115,7 +115,7 @@ export function MatrixPage() {
           <span>0% 未交付</span>
           <i className="matrix-legend__scale" />
           <span>100% 全按时</span>
-          <small>EDF/value 规则基线；正式 learned 结果签核后再扩展第三行对比</small>
+          <small>EDF/value 规则基线；learned 结果完成核验后再扩展第三行对比</small>
         </div>
       </div>
 

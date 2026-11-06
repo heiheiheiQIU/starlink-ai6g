@@ -48,7 +48,7 @@ const EVIDENCE_ROWS = [
     claim: '版本锁定资产 SHA 与 v3 包一致',
     level: '已复核',
     levelKind: 'a' as const,
-    source: '资产证据索引 / 公开数据清单',
+    source: '资产结果依据索引 / 公开数据清单',
     boundary: '支持"资产未篡改"；不支持"谱系闭合"',
   },
   {
@@ -60,9 +60,9 @@ const EVIDENCE_ROWS = [
   },
   {
     claim: '学习调度优于基线',
-    level: '待实验',
+    level: '待正式验证',
     levelKind: 'c' as const,
-    source: '正式实验完成前禁止引用百分比',
+    source: '正式验证完成前禁止引用百分比',
     boundary: '任何收益数字当前均不可写',
   },
 ] as const
@@ -153,7 +153,7 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
               <th>策略</th>
               <th>状态</th>
               <th>加权交付率</th>
-              <th>证据</th>
+              <th>依据</th>
             </tr>
           </thead>
           <tbody>

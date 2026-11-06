@@ -68,7 +68,7 @@ describe('RealRunPanel', () => {
     )
 
     expect(screen.getByLabelText('在线任务指标')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: /下载 ZIP 证据包/ }))
+    await user.click(screen.getByRole('button', { name: /下载 ZIP 结果归档/ }))
     expect(exportZip).toHaveBeenCalled()
   })
 

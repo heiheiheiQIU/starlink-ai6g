@@ -57,7 +57,7 @@ describe('evidence page', () => {
   it('keeps pending claims marked as pending', () => {
     render(<EvidencePage />)
     expect(screen.getByText('学习调度优于基线')).toBeInTheDocument()
-    expect(screen.getByText('待实验')).toBeInTheDocument()
+    expect(screen.getByText('待正式验证')).toBeInTheDocument()
     expect(screen.getByText(/任何收益数字当前均不可写/)).toBeInTheDocument()
   })
 
