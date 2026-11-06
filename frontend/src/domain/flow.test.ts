@@ -8,9 +8,9 @@ describe('six-step decision flow contract', () => {
       '任务到达',
       '窗口预测',
       'AI评分',
-      '约束解码',
+      '安全约束决策',
       '发送/确认',
-      '评估与证据',
+      '结果与追溯',
     ])
     expect(FLOW_STEPS[4]).toMatchObject({
       title: '发送/确认',

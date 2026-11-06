@@ -9,7 +9,7 @@ describe('evidence-grounded assistant page', () => {
     const user = userEvent.setup()
     render(<AssistantPage />)
 
-    expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/标准场景演示|演示数据/).length).toBeGreaterThan(0)
     expect(screen.getByText('docs/evidence_index.md')).toBeInTheDocument()
 
     await user.type(
@@ -19,6 +19,6 @@ describe('evidence-grounded assistant page', () => {
     await user.click(screen.getByRole('button', { name: '发送问题' }))
 
     expect(screen.getByText(/无法给出这个结论/)).toBeInTheDocument()
-    expect(screen.getByText(/待真实 run/)).toBeInTheDocument()
+    expect(screen.getByText(/等待在线任务结果/)).toBeInTheDocument()
   })
 })

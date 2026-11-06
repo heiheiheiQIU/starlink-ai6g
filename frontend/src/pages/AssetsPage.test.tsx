@@ -17,7 +17,7 @@ describe('assets page', () => {
 
     expect(screen.getAllByText(/谱系未闭合/).length).toBeGreaterThan(0)
     expect(screen.getByText(/输出一致性待核验/)).toBeInTheDocument()
-    expect(screen.getByText(/冻结配置映射待核验/)).toBeInTheDocument()
+    expect(screen.getByText(/版本配置映射待核验/)).toBeInTheDocument()
   })
 
   it('keeps model boundaries honest', () => {

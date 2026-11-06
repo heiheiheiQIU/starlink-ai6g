@@ -17,10 +17,10 @@ describe('operations status bar', () => {
         onPlaybackToggle={vi.fn()}
       />,
     )
-    expect(screen.getByRole('region', { name: '工程运行状态' })).toHaveTextContent('契约演示')
-    expect(screen.getByText('API 未连接')).toBeInTheDocument()
-    expect(screen.getByText('证据未冻结')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: '切换到真实运行' }))
+    expect(screen.getByRole('region', { name: '工程运行状态' })).toHaveTextContent('标准场景演示')
+    expect(screen.getByText('任务服务未接入')).toBeInTheDocument()
+    expect(screen.getByText('结果待归档')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '切换到在线任务' }))
     expect(onModeChange).toHaveBeenCalledWith('live')
   })
 })

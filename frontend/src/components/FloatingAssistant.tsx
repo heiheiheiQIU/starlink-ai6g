@@ -26,17 +26,17 @@ export function FloatingAssistant({ onOpenAssistant }: FloatingAssistantProps) {
       <button
         className="floating-orb"
         type="button"
-        aria-label="打开全局 AI 助手"
+        aria-label="打开智能研判"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
         ✦
       </button>
       {open ? (
-        <aside className="floating-panel" aria-label="全局 AI 助手面板">
+        <aside className="floating-panel" aria-label="智能研判面板">
           <header>
-            <strong>星地智调 · AI 助手</strong>
-            <small>只依据证据索引回答 · 契约样例</small>
+            <strong>星地智调 · 智能研判</strong>
+            <small>仅依据项目数据与结果依据回答</small>
           </header>
           <div className="floating-panel__body">
             {answer ? <p className="floating-answer">{answer}</p> : null}
@@ -58,7 +58,7 @@ export function FloatingAssistant({ onOpenAssistant }: FloatingAssistantProps) {
           </div>
           <form className="floating-panel__input" onSubmit={submit}>
             <input
-              aria-label="向全局助手提问"
+              aria-label="向智能研判提问"
               placeholder="快速提问…"
               value={question}
               onChange={(event) => setQuestion(event.target.value)}

@@ -11,9 +11,9 @@ const PHASE_LABELS: Record<RunSessionState['phase'], string> = {
   queued: '任务已入队',
   forecasting: '窗口预测中',
   scoring: 'AI 评分中',
-  guarding: '约束解码中',
+  guarding: '安全约束校验中',
   transmitting: '链路执行中',
-  evidencing: '证据归档中',
+  evidencing: '结果归档中',
   complete: '流程完成',
   failed: '运行失败',
 }
@@ -24,19 +24,19 @@ export function OperationsBar({
   onStep,
   onPlaybackToggle,
 }: OperationsBarProps) {
-  const modeLabel = session.mode === 'fixture' ? '契约演示' : '真实运行'
+  const modeLabel = session.mode === 'fixture' ? '标准场景演示' : '在线任务执行'
   const connectionLabel =
     session.connection === 'online'
-      ? 'API 在线'
+      ? '任务服务在线'
       : session.connection === 'offline'
-        ? 'API 离线'
-        : 'API 未连接'
+        ? '任务服务离线'
+        : '任务服务未接入'
   return (
     <section className="operations-bar" aria-label="工程运行状态">
       <div className="operations-bar__identity">
         <span className={`operations-mode operations-mode--${session.mode}`}>{modeLabel}</span>
         <div>
-          <strong>{session.runId ?? '尚未创建 run'}</strong>
+          <strong>{session.runId ?? '尚未创建任务实例'}</strong>
           <small>
             <span>{connectionLabel}</span>
             <span aria-hidden="true"> · </span>
@@ -57,13 +57,13 @@ export function OperationsBar({
       </div>
 
       <div className="operations-bar__truth">
-        <span data-state={session.evidence}>{session.evidence === 'frozen' ? '证据已冻结' : '证据未冻结'}</span>
-        <span>{session.mode === 'fixture' ? '指标仅供演示' : '仅 completed 展示指标'}</span>
+        <span data-state={session.evidence}>{session.evidence === 'frozen' ? '结果已归档' : '结果待归档'}</span>
+        <span>{session.mode === 'fixture' ? '演示数值不作实验结论' : '仅完成任务展示最终指标'}</span>
       </div>
 
       <div className="operations-bar__actions">
         <button type="button" onClick={() => onModeChange(session.mode === 'fixture' ? 'live' : 'fixture')}>
-          {session.mode === 'fixture' ? '切换到真实运行' : '返回契约演示'}
+          {session.mode === 'fixture' ? '切换到在线任务' : '返回场景演示'}
         </button>
         <button type="button" onClick={onStep} disabled={session.phase === 'complete' || session.phase === 'failed'}>
           单步推进

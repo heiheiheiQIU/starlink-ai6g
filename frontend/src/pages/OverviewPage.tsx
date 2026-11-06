@@ -4,9 +4,9 @@ const CHAIN_NODES = [
   { id: 'arrival', label: '任务到达', sub: '数据入星上队列' },
   { id: 'window', label: '窗口预测', sub: '未来3个联系窗口' },
   { id: 'score', label: 'AI 评分', sub: '任务×模式打分' },
-  { id: 'guard', label: '约束解码', sub: '窗口/能量/在途' },
+  { id: 'guard', label: '安全约束决策', sub: '窗口/能量/在途' },
   { id: 'send', label: '发送/确认', sub: '分块→ACK→去重' },
-  { id: 'evaluate', label: '评估与证据', sub: '指标与证据卡' },
+  { id: 'evaluate', label: '结果与追溯', sub: '指标与追溯记录' },
 ] as const
 
 interface OverviewPageProps {
@@ -18,12 +18,12 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
     <section className="console-page">
       <header className="console-page__intro">
         <p className="eyebrow">MISSION OVERVIEW</p>
-        <h1>任务总览</h1>
-        <p>一条链路贯穿全部页面：从任务到达星上队列，到窗口预测、AI评分、约束解码、发送确认与证据评估。</p>
+        <h1>运行总览</h1>
+        <p>从星上任务入队、窗口预测和 AI 价值评分，到安全约束决策、链路执行与结果追溯，一屏掌握完整运行链路。</p>
       </header>
 
       <div className="overview-hero">
-        <div className="chain-panel" aria-label="系统链路（契约样例）">
+        <div className="chain-panel" aria-label="系统链路（标准场景演示）">
           <h2>系统链路 · 星上队列 → 网关确认</h2>
           <div className="chain-flow">
             {CHAIN_NODES.map((node, index) => (
@@ -39,7 +39,7 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
             ))}
           </div>
           <p className="panel-note">
-            六步与“流程主舞台”一一对应；当前展示为契约样例，非实验结果。
+            六步与“任务决策”页面一一对应；当前展示为标准场景演示，不作为实验结果。
           </p>
         </div>
 
@@ -47,7 +47,7 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
           <div className="ov-card">
             <h3>当前实验</h3>
             <p className="mono">demo_fixture_001 · completed（占位）</p>
-            <p className="table-note">edf（规则）+ learned（AI）· 同配置同 seed · 契约样例</p>
+            <p className="table-note">EDF（规则）+ Learned（AI）· 同配置同随机种子 · 演示数据</p>
             <button className="link-button" type="button" onClick={() => onNavigate('flow')}>
               进入驾驶舱 ▸
             </button>
@@ -74,19 +74,19 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
       <div className="quick-row">
         <button className="quick-entry" type="button" onClick={() => onNavigate('flow')}>
           <span className="quick-entry__icon" aria-hidden="true">⌁</span>
-          <span><strong>流程主舞台</strong><small>六步层层递进</small></span>
+          <span><strong>任务决策</strong><small>六步闭环推演</small></span>
         </button>
         <button className="quick-entry" type="button" onClick={() => onNavigate('compare')}>
           <span className="quick-entry__icon" aria-hidden="true">⇄</span>
-          <span><strong>方案对比</strong><small>同配置双策略</small></span>
+          <span><strong>策略评估</strong><small>同配置双策略</small></span>
         </button>
         <button className="quick-entry" type="button" onClick={() => onNavigate('evidence')}>
           <span className="quick-entry__icon" aria-hidden="true">✓</span>
-          <span><strong>证据链</strong><small>数字可定位</small></span>
+          <span><strong>结果追溯</strong><small>数字可定位</small></span>
         </button>
         <button className="quick-entry" type="button" onClick={() => onNavigate('assistant')}>
           <span className="quick-entry__icon" aria-hidden="true">✦</span>
-          <span><strong>AI 助手</strong><small>只答证据索引</small></span>
+          <span><strong>智能研判</strong><small>基于项目资料回答</small></span>
         </button>
       </div>
     </section>

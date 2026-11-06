@@ -27,7 +27,7 @@ const ASSETS = [
     name: 'battery_lstm_finetune_best.pt',
     sha: '569B7D20…A4C',
     size: '216.7 KB',
-    license: '历史模型资产 · 冻结配置映射待核验',
+    license: '历史模型资产 · 版本配置映射待核验',
     licenseKind: 'warn' as const,
     note: '仅哈希核验',
   },
@@ -52,7 +52,7 @@ const ASSETS = [
 const MODEL_CARDS = [
   {
     model: 'LSTMRegressor / BiLSTMAttention',
-    input: '冻结NPZ窗口(15,11)',
+    input: '版本锁定 NPZ 窗口 (15,11)',
     output: 'raw_fraction（可>1，不裁剪）',
     boundary: '允许=离线证据；禁止=SOC/容量/能量/在线RUL',
   },
@@ -75,12 +75,12 @@ export function AssetsPage() {
     <section className="console-page">
       <header className="console-page__intro">
         <p className="eyebrow">FROZEN ASSET LEDGER</p>
-        <h1>资产管理</h1>
-        <p>冻结资产台账：来源、SHA256、许可状态与已知边界；未闭合项显式标注，不把旧指标当新成绩。</p>
+        <h1>模型与资产</h1>
+        <p>统一管理模型、数据、SHA256、许可状态与已知边界；未闭合项显式标注，不把历史指标当作新结果。</p>
       </header>
 
       <div className="console-card">
-        <h2>冻结资产台账</h2>
+        <h2>版本锁定资产台账</h2>
         <div className="asset-grid">
           {ASSETS.map((asset) => (
             <article className="asset-card" key={asset.name}>

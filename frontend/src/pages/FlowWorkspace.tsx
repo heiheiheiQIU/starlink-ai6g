@@ -47,9 +47,9 @@ export function FlowWorkspace() {
       <header className="flow-workspace__intro">
         <div>
           <p className="eyebrow">MISSION DECISION WORKSPACE</p>
-          <h1>流程主舞台</h1>
+          <h1>任务决策</h1>
           <p>
-            以保守健康状态为输入，让 AI 在 6G 星地链路约束下决定“传什么、何时传、采用何种传输模式”。
+            以保守健康状态为输入，由 AI 评估遥测价值，再经 6G 链路安全约束形成可执行发送计划。
           </p>
         </div>
         <div className="flow-intro-actions">

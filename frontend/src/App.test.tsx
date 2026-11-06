@@ -10,15 +10,15 @@ describe('v4 application shell', () => {
     const { container } = render(<App />)
 
     expect(
-      screen.getByRole('heading', { name: '流程主舞台', level: 1 }),
+      screen.getByRole('heading', { name: '任务决策', level: 1 }),
     ).toBeInTheDocument()
     expect(screen.getByText('演示数据')).toBeInTheDocument()
     expect(screen.getByText(/不作为实验结论/)).toBeInTheDocument()
     expect(screen.getByText('工程控制台')).toBeInTheDocument()
-    expect(screen.getByText('数据源、连接与证据状态逐页可审计')).toBeInTheDocument()
+    expect(screen.getByText('数据源、连接与结果来源逐页可追溯')).toBeInTheDocument()
     expect(container).not.toHaveTextContent(/H00|fixture only|运行服务已连接/)
 
-    const assistantEntry = screen.getByRole('button', { name: '智能研判' })
+    const assistantEntry = screen.getAllByRole('button', { name: '智能研判' })[0]
     expect(
       screen.getByRole('button', { name: '任务决策' }),
     ).toHaveAttribute('aria-current', 'page')
@@ -26,7 +26,7 @@ describe('v4 application shell', () => {
     await user.click(assistantEntry)
 
     expect(
-      screen.getByRole('heading', { name: 'AI 助手', level: 1 }),
+      screen.getByRole('heading', { name: '智能研判', level: 1 }),
     ).toBeInTheDocument()
     expect(assistantEntry).toHaveAttribute('aria-current', 'page')
     expect(screen.getByText('演示数据')).toBeInTheDocument()

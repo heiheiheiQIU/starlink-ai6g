@@ -10,7 +10,7 @@ describe('overview page', () => {
 
     expect(screen.getByText(/系统链路/)).toBeInTheDocument()
     expect(screen.getByText('任务到达')).toBeInTheDocument()
-    expect(screen.getByText('评估与证据')).toBeInTheDocument()
+    expect(screen.getByText('结果与追溯')).toBeInTheDocument()
     expect(screen.getByText('当前链路态势')).toBeInTheDocument()
     expect(screen.getByText('可用服务')).toBeInTheDocument()
     expect(container).not.toHaveTextContent(/内部提交|A-N\d|B-R\d|I-\d|M-\d|合入 main/)
@@ -24,12 +24,12 @@ describe('overview page', () => {
     await user.click(screen.getAllByRole('button', { name: /任务到达/ })[0])
     expect(onNavigate).toHaveBeenCalledWith('flow')
 
-    await user.click(screen.getByRole('button', { name: /方案对比/ }))
+    await user.click(screen.getByRole('button', { name: /策略评估/ }))
     expect(onNavigate).toHaveBeenCalledWith('compare')
   })
 
-  it('keeps fixture honesty visible', () => {
+  it('keeps demonstration-data honesty visible', () => {
     render(<OverviewPage onNavigate={() => undefined} />)
-    expect(screen.getByText(/当前展示为契约样例，非实验结果/)).toBeInTheDocument()
+    expect(screen.getByText(/当前展示为标准场景演示，不作为实验结果/)).toBeInTheDocument()
   })
 })

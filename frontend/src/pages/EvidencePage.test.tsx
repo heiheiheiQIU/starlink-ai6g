@@ -45,7 +45,7 @@ describe('evidence page', () => {
     const user = userEvent.setup()
     render(<EvidencePage />)
 
-    const entries = screen.getAllByRole('button', { name: /打开证据/ })
+    const entries = screen.getAllByRole('button', { name: /查看依据/ })
     expect(entries).toHaveLength(1)
     await user.click(entries[0])
     const statuses = screen.getAllByRole('status')
@@ -73,9 +73,9 @@ describe('evidence page', () => {
     render(<EvidencePage api={api} storage={storage} />)
 
     await waitFor(() => {
-      expect(screen.getByText('真实 run 结果')).toBeInTheDocument()
+      expect(screen.getByText('在线任务结果')).toBeInTheDocument()
     })
-    expect(screen.getByLabelText('真实运行指标')).toBeInTheDocument()
-    expect(screen.getByText(/来源：GET \/runs/)).toBeInTheDocument()
+    expect(screen.getByLabelText('在线任务指标')).toBeInTheDocument()
+    expect(screen.getByText(/任务结果接口 GET \/runs/)).toBeInTheDocument()
   })
 })

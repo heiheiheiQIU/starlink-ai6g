@@ -20,7 +20,7 @@ export function EngineerDetails({ step }: EngineerDetailsProps) {
       >
         <span>
           <small>ENGINEER VIEW</small>
-          <strong>工程师详情与契约证据</strong>
+          <strong>工程接口与追溯信息</strong>
         </span>
         <span>{expanded ? '收起工程师详情' : '展开工程师详情'}</span>
       </button>
@@ -29,23 +29,23 @@ export function EngineerDetails({ step }: EngineerDetailsProps) {
         <div className="engineer-details__body">
           <dl>
             <div>
-              <dt>输入契约</dt>
+              <dt>工程输入</dt>
               <dd>{step.input}</dd>
             </div>
             <div>
-              <dt>输出契约</dt>
+              <dt>工程输出</dt>
               <dd>{step.output}</dd>
             </div>
             <div>
-              <dt>证据产物</dt>
+              <dt>追溯产物</dt>
               <dd>{step.artifact}</dd>
             </div>
             <div>
               <dt>数据级别</dt>
-              <dd>契约样例 · 非实验结果</dd>
+              <dd>标准场景演示 · 非实验结果</dd>
             </div>
           </dl>
-          <div className="contract-preview" aria-label="契约样例预览">
+          <div className="contract-preview" aria-label="工程数据预览">
             <span>{'{'}</span>
             <code>"schema_version": "h00.v1"</code>
             <code>"source_kind": "synthetic_fixture"</code>

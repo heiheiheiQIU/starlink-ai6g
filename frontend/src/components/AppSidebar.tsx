@@ -56,7 +56,7 @@ export function AppSidebar({ currentPage, onNavigate }: AppSidebarProps) {
         <span className="status-dot" aria-hidden="true" />
         <span>
           <strong>工程控制台</strong>
-          <small>数据源、连接与证据状态逐页可审计</small>
+          <small>数据源、连接与结果来源逐页可追溯</small>
         </span>
       </div>
     </aside>

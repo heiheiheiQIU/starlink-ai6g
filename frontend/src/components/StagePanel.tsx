@@ -29,8 +29,8 @@ const STAGE_METRICS: Record<FlowStep['id'], readonly [string, string][]> = {
   ],
   evaluate: [
     ['证据对象', '27'],
-    ['哈希覆盖', '100%'],
-    ['待冻结', '01'],
+    ['完整性校验', '100%'],
+    ['待归档', '01'],
   ],
 }
 
@@ -69,12 +69,12 @@ export function StagePanel({ step, stepNumber, tasks, onTasksChange }: StagePane
 
       <StageExperience key={step.id} stepId={step.id} tasks={tasks} onTasksChange={onTasksChange} />
 
-      <div className="stage-metrics" aria-label="当前步骤样例指标">
+      <div className="stage-metrics" aria-label="当前步骤演示指标">
         {metrics.map(([label, value]) => (
           <div className="stage-metric" key={label}>
             <span>{label}</span>
             <strong>{value}</strong>
-            <small>FIXTURE</small>
+            <small>演示</small>
           </div>
         ))}
       </div>

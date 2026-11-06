@@ -42,7 +42,7 @@ describe('RunSourceBadge', () => {
     render(<RunSourceBadge api={spyApi()} storage={storage} />)
 
     expect(screen.getByRole('status')).toHaveTextContent('演示数据模式')
-    expect(screen.getByText(/契约样例，非真实运行结果/)).toBeInTheDocument()
+    expect(screen.getByText(/标准场景演示，不作为在线任务结果/)).toBeInTheDocument()
   })
 
   it('resumes a manually entered run id', async () => {
@@ -58,7 +58,7 @@ describe('RunSourceBadge', () => {
     await user.click(screen.getByRole('button', { name: '恢复' }))
 
     await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('已连接实验服务')
+      expect(screen.getByRole('status')).toHaveTextContent('任务服务已连接')
     })
     expect(api.getRunStatus).toHaveBeenCalledWith('run-7')
   })
@@ -74,7 +74,7 @@ describe('RunSourceBadge', () => {
     render(<RunSourceBadge api={api} storage={storage} />)
 
     await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('已连接实验服务')
+      expect(screen.getByRole('status')).toHaveTextContent('任务服务已连接')
     })
     expect(api.createRun).not.toHaveBeenCalled()
   })
@@ -96,7 +96,7 @@ describe('RunSourceBadge', () => {
     })
     await user.click(screen.getByRole('button', { name: '重试' }))
     await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('已连接实验服务')
+      expect(screen.getByRole('status')).toHaveTextContent('任务服务已连接')
     })
   })
 
@@ -112,7 +112,7 @@ describe('RunSourceBadge', () => {
     render(<RunSourceBadge api={api} storage={storage} />)
 
     await waitFor(() => {
-      expect(screen.getByRole('status')).toHaveTextContent('正式结果可用')
+      expect(screen.getByRole('status')).toHaveTextContent('最终结果可用')
     })
   })
 
