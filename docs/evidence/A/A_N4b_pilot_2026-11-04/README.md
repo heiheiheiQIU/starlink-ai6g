@@ -28,5 +28,6 @@ Public plan checks: first failed ConstraintCheck per task/mode; idle has no reje
 {"fast":{"checked_count":16,"first_failed_check_counts":{"NO_VISIBLE_WINDOW":4},"rejected_count":4},"robust":{"checked_count":16,"first_failed_check_counts":{"NO_VISIBLE_WINDOW":4},"rejected_count":4}}
 Teacher diagnostics by mode: {"fast":{"TIME_LIMIT_FEASIBLE":1,"searched_count":12},"idle":{"TIME_LIMIT_FEASIBLE":3,"searched_count":11},"robust":{"TIME_LIMIT_FEASIBLE":4,"searched_count":12}}
 Feasibility crosscheck: {"verified":11}
+Verifier code SHA256: {"training/audit_policy_dataset.py":"3bd203ebc8becb56556d5ff4cba2f6c48a25740c50cb1f0f6b9f34066fc5bf5a","training/audit_policy_pilot.py":"999461efeff3dfd1e1adc22cc2339c23da854b11914a16f8caa2efe23245f38f"}
 
 Model training remains disabled pending B acceptance.

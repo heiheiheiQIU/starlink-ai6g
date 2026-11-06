@@ -5,6 +5,8 @@ from pathlib import Path
 import pytest
 
 import training.generate_policy_pilot as generator
+import training.audit_policy_pilot as pilot_auditor
+import training.audit_policy_dataset as dataset_auditor
 from backend.contracts import TeacherCandidateScore, TeacherResult
 from backend.policies.common import plan_candidate
 from backend.policies.teacher import TeacherConfig
@@ -53,9 +55,48 @@ def test_audit_verifies_sources_splits_hashes_and_label_semantics(pilot_package)
     assert audit["family_counts"]["low_energy"]["sources"] == 2
     assert audit["plan_rejections"]["robust"]["first_failed_check_counts"]["NO_VISIBLE_WINDOW"] > 0
     assert audit["label_quality"]["idle_in_optimal_set"] != audit["label_quality"]["tied_optimal_set"]
+    assert audit["inputs"]["verifier_code_sha256"] == {
+        "training/audit_policy_dataset.py": hashlib.sha256(
+            Path(dataset_auditor.__file__).read_bytes()
+        ).hexdigest(),
+        "training/audit_policy_pilot.py": hashlib.sha256(
+            Path(pilot_auditor.__file__).read_bytes()
+        ).hexdigest(),
+    }
     text = render_pilot_audit(audit)
-    for phrase in ("synthetic pilot", "not a formal experiment", "idle_in_optimal_set", "tied_optimal_set", "B acceptance", "UNSUPPORTED", "ERROR"):
+    for phrase in ("synthetic pilot", "not a formal experiment", "idle_in_optimal_set", "tied_optimal_set", "B acceptance", "UNSUPPORTED", "ERROR", "Verifier code SHA256"):
         assert phrase in text
+
+
+def test_rehashed_source_protocol_drift_is_rejected(pilot_package):
+    rows = read_rows(pilot_package / "sources.jsonl")
+    rows[0]["scenario"]["initial_energy_Wh"] += 0.01
+    identity = json.loads(json.dumps(rows[0]["scenario"]))
+    identity.pop("scenario_id", None)
+    if isinstance(identity.get("channel"), dict):
+        identity["channel"].pop("seed", None)
+    rows[0]["content_sha256"] = hashlib.sha256(
+        json.dumps(identity, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+    rewrite(pilot_package, "sources.jsonl", rows)
+    with pytest.raises(ValueError, match="SOURCE_PROTOCOL_MISMATCH"):
+        audit_pilot(pilot_package)
+
+
+def test_rehashed_split_protocol_drift_is_rejected(pilot_package):
+    splits = json.loads((pilot_package / "source_splits.json").read_bytes())
+    splits["split_seed"] += 1
+    rewrite(pilot_package, "source_splits.json", splits)
+    with pytest.raises(ValueError, match="SOURCE_SPLIT_PROTOCOL_MISMATCH"):
+        audit_pilot(pilot_package)
+
+
+def test_unknown_attempt_source_has_deliberate_error(pilot_package):
+    rows = read_rows(pilot_package / "attempts.jsonl")
+    rows[0]["source_id"] = "invented"
+    rewrite(pilot_package, "attempts.jsonl", rows)
+    with pytest.raises(ValueError, match="UNKNOWN_ATTEMPT_SOURCE"):
+        audit_pilot(pilot_package)
 
 
 def test_split_verification_rejects_state_moved_to_another_split():

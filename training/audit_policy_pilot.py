@@ -14,10 +14,12 @@ from backend.contracts import Observation, TeacherResult, validate_teacher_resul
 from backend.policies.common import plan_candidate
 from backend.policies.teacher import TeacherConfig
 from training.audit_policy_dataset import audit_rows
+from training.pilot_scenarios import build_source_splits, build_sources
 
 ROOT = Path(__file__).resolve().parents[1]
 FILES = {"sources.jsonl", "source_splits.json", "attempts.jsonl", "samples.jsonl",
          "diagnostics.jsonl", "summary.json"}
+VERIFIER_FILES = {"training/audit_policy_dataset.py", "training/audit_policy_pilot.py"}
 
 
 def _require(condition, code):
@@ -134,14 +136,26 @@ def audit_pilot(package_dir) -> dict[str, object]:
         _require(source.get("content_sha256") == content_hash, "SOURCE_HASH")
         _require(content_hash not in source_hashes, "DUPLICATE_SOURCE_CONTENT")
         source_hashes.add(content_hash)
+    expected_sources = build_sources()
+    _require(sources == expected_sources, "SOURCE_PROTOCOL_MISMATCH")
     splits = parsed["source_splits.json"]
     expected_counts = {"train": 18, "validation": 6, "test": 6}
+    configured_counts = config.get("split_counts", {})
+    expected_splits = build_source_splits(
+        expected_sources,
+        split_seed=config.get("split_seed"),
+        counts=tuple(configured_counts.get(name) for name in ("train", "validation", "test")),
+    )
     _require(set(splits["splits"]) == set(expected_counts), "SOURCE_SPLIT_NAMES")
     members = [sid for ids in splits["splits"].values() for sid in ids]
     _require(len(members) == len(set(members)) == 30 and set(members) == set(source_ids), "SOURCE_SPLIT_COMPLETENESS")
     split_counts = {key: len(ids) for key, ids in splits["splits"].items()}
     _require(split_counts == expected_counts and splits.get("counts") == split_counts, "SOURCE_SPLIT_COUNTS")
+    _require(splits == expected_splits, "SOURCE_SPLIT_PROTOCOL_MISMATCH")
     attempts, samples, diagnostics = (parsed[name] for name in ("attempts.jsonl", "samples.jsonl", "diagnostics.jsonl"))
+    for row in attempts:
+        _require(row.get("source_id") in source_by_id,
+                 f"UNKNOWN_ATTEMPT_SOURCE: {row.get('source_id')}")
     for rows in (attempts, samples, diagnostics):
         verify_split_inheritance(rows, splits)
 
@@ -241,6 +255,9 @@ def audit_pilot(package_dir) -> dict[str, object]:
     _require(summary.get("status") == ("ready_for_audit" if ready else "blocked"), "SUMMARY_STATUS")
     row_audit = (audit_rows(samples, reserve_wh=0.5) if samples else
                  {key: {"not_computed_reason": "NO_ELIGIBLE_LABELS"} for key in ("label_quality", "coverage", "teacher")})
+    verifier_hashes = {
+        name: _digest((ROOT / name).read_bytes()) for name in sorted(VERIFIER_FILES)
+    }
     return {
         "schema_version": "policy-pilot-audit-v1",
         "status": "accepted_for_receiver_review" if ready and samples else "blocked_diagnostics_verified",
@@ -255,7 +272,8 @@ def audit_pilot(package_dir) -> dict[str, object]:
         "candidate_diagnostics_by_mode": candidate_diagnostics,
         "inputs": {"output_sha256": verified, "manifest_sha256": _digest((package / "manifest.json").read_bytes()),
                    "config_sha256": _digest(config_raw), "teacher_config_sha256": _digest(teacher_raw),
-                   "code_sha256": manifest["code_sha256"]},
+                   "code_sha256": manifest["code_sha256"],
+                   "verifier_code_sha256": verifier_hashes},
     }
 
 
@@ -272,6 +290,7 @@ def render_pilot_audit(audit) -> str:
                   "Stop reason: " + str(audit["stop_reason"]), "", "Public plan checks: first failed ConstraintCheck per task/mode; idle has no rejection reason.",
                   _canonical(audit["plan_rejections"]), "Teacher diagnostics by mode: " + _canonical(audit["candidate_diagnostics_by_mode"]),
                   "Feasibility crosscheck: " + _canonical(audit["feasibility_crosscheck_counts"]),
+                  "Verifier code SHA256: " + _canonical(audit["inputs"]["verifier_code_sha256"]),
                   "", "Model training remains disabled pending B acceptance.", ""])
     return "\n".join(lines)
 
