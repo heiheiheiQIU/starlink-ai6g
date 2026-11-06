@@ -13,6 +13,13 @@
   --indigo-600: #4054c7;
   --amber-500: #c77916;
   --green-500: #1b8c66;
+  --signal-link: #35c9e2;
+  --signal-ai: #8792ff;
+  --signal-ok: #49d49d;
+  --signal-watch: #f2c45e;
+  --signal-block: #ff6f7d;
+  --console-panel: #0a1929;
+  --console-raised: #10243a;
   --font-body: 14px;
   --font-metric: 24px;
   --radius-sm: 10px;

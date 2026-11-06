@@ -27,7 +27,7 @@ body::before {
 html,
 body,
 #root {
-  min-width: 1180px;
+  min-width: 1024px;
   min-height: 100%;
   margin: 0;
 }
@@ -343,6 +343,153 @@ button {
   grid-template-columns: 210px minmax(520px, 1fr) 220px;
   gap: 26px;
   padding-top: 28px;
+}
+
+.operations-bar {
+  display: grid;
+  grid-template-columns: minmax(220px, 1.15fr) minmax(190px, .9fr) minmax(150px, .72fr) auto;
+  align-items: center;
+  gap: 18px;
+  margin-top: 18px;
+  padding: 13px 15px;
+  background:
+    linear-gradient(110deg, rgba(53, 201, 226, .07), transparent 34%),
+    var(--console-panel);
+  border: 1px solid #29445d;
+  border-radius: 14px;
+  box-shadow: var(--glass-highlight), 0 14px 34px rgba(0, 0, 0, .12);
+}
+
+.operations-bar__identity,
+.runtime-pulse,
+.operations-bar__actions {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.operations-bar__identity strong,
+.operations-bar__identity small,
+.runtime-pulse strong,
+.runtime-pulse small,
+.operations-bar__truth span {
+  display: block;
+}
+
+.operations-bar__identity strong,
+.runtime-pulse strong {
+  color: #edf8ff;
+  font-size: 13px;
+}
+
+.operations-bar__identity small,
+.runtime-pulse small {
+  margin-top: 3px;
+  color: #7692aa;
+  font-family: "IBM Plex Mono", Consolas, monospace;
+  font-size: 11px;
+}
+
+.operations-mode {
+  flex: 0 0 auto;
+  padding: 7px 9px;
+  color: #05131f;
+  background: var(--signal-link);
+  border-radius: 7px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .04em;
+}
+
+.operations-mode--live {
+  color: #feecee;
+  background: rgba(255, 111, 125, .16);
+  border: 1px solid rgba(255, 111, 125, .48);
+}
+
+.runtime-pulse {
+  position: relative;
+  min-height: 42px;
+  padding: 0 14px 0 18px;
+  overflow: hidden;
+  background: #0d2033;
+  border: 1px solid rgba(53, 201, 226, .23);
+  border-radius: 10px;
+}
+
+.runtime-pulse__beam {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+  background: var(--signal-link);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(53, 201, 226, .1), 0 0 16px rgba(53, 201, 226, .7);
+}
+
+.runtime-pulse[data-playback="playing"]::after {
+  position: absolute;
+  inset: 0 auto 0 -25%;
+  width: 22%;
+  content: '';
+  background: linear-gradient(90deg, transparent, rgba(53, 201, 226, .16), transparent);
+  animation: runtimeSweep 1.6s linear infinite;
+}
+
+.runtime-pulse small {
+  margin: 0 0 0 auto;
+  color: #9fb4c6;
+}
+
+.operations-bar__truth {
+  display: grid;
+  gap: 5px;
+  padding-left: 14px;
+  border-left: 1px solid rgba(142, 170, 194, .16);
+  color: #8fa9be;
+  font-size: 11px;
+}
+
+.operations-bar__truth span:first-child {
+  color: var(--signal-watch);
+  font-weight: 800;
+}
+
+.operations-bar__truth span[data-state="frozen"] {
+  color: var(--signal-ok);
+}
+
+.operations-bar__actions {
+  justify-content: flex-end;
+  gap: 7px;
+}
+
+.operations-bar__actions button {
+  min-height: 34px;
+  padding: 0 10px;
+  color: #a9bfd1;
+  background: #11263a;
+  border: 1px solid #2a465e;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 750;
+}
+
+.operations-bar__actions button:hover:not(:disabled) {
+  color: white;
+  border-color: #4b718d;
+  transform: translateY(-1px);
+}
+
+.operations-bar__actions button:disabled {
+  cursor: not-allowed;
+  opacity: .42;
+}
+
+.operations-bar__actions .operations-bar__primary {
+  color: #05131f;
+  background: var(--signal-link);
+  border-color: #7de6f4;
 }
 
 .flow-intro-actions {
@@ -721,11 +868,21 @@ button {
 @keyframes linkAlarm { 50% { opacity: .36; } }
 @keyframes drawChart { to { stroke-dashoffset: 0; } }
 @keyframes cardPop { from { opacity: 0; transform: translateY(10px) scale(.97); } }
+@keyframes runtimeSweep { to { transform: translateX(600%); } }
 
 @media (max-width: 1500px) {
+  .operations-bar { grid-template-columns: 1fr 1fr auto; }
+  .operations-bar__truth { display: none; }
   .flow-workspace__grid { grid-template-columns: 190px minmax(500px, 1fr); }
   .step-context { grid-column: 1 / -1; display: grid; grid-template-columns: 140px 1fr; align-items: center; gap: 12px 24px; }
   .step-context dl { grid-column: 1 / -1; grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 1240px) {
+  .page-stage { padding: 20px; }
+  .flow-workspace { padding: 24px; }
+  .operations-bar { grid-template-columns: 1fr 1fr; }
+  .operations-bar__actions { grid-column: 1 / -1; justify-content: flex-start; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -55,8 +55,8 @@ export function AppSidebar({ currentPage, onNavigate }: AppSidebarProps) {
       <div className="system-status" aria-label="系统状态">
         <span className="status-dot" aria-hidden="true" />
         <span>
-          <strong>演示工作台</strong>
-          <small>数据状态见各页数据源卡片</small>
+          <strong>工程控制台</strong>
+          <small>数据源、连接与证据状态逐页可审计</small>
         </span>
       </div>
     </aside>

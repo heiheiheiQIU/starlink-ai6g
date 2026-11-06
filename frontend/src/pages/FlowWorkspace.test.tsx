@@ -5,6 +5,24 @@ import { describe, expect, it } from 'vitest'
 import { FlowWorkspace } from './FlowWorkspace'
 
 describe('six-step operations stage', () => {
+  it('exposes a single engineering session for mode, playback and step progress', async () => {
+    const user = userEvent.setup()
+    render(<FlowWorkspace />)
+
+    const status = screen.getByRole('region', { name: '工程运行状态' })
+    expect(status).toHaveTextContent('契约演示')
+    expect(status).toHaveTextContent('01 / 06')
+    expect(screen.getByTestId('runtime-pulse')).toHaveAttribute('data-phase', 'queued')
+
+    await user.click(screen.getByRole('button', { name: '单步推进' }))
+    expect(screen.getByRole('heading', { name: '窗口预测', level: 2 })).toBeInTheDocument()
+    expect(screen.getByTestId('runtime-pulse')).toHaveAttribute('data-phase', 'forecasting')
+
+    await user.click(screen.getByRole('button', { name: '切换到真实运行' }))
+    expect(status).toHaveTextContent('真实运行')
+    expect(status).toHaveTextContent('API 离线')
+  })
+
   it('navigates the fixed steps and reveals traceable engineer details', async () => {
     const user = userEvent.setup()
     render(<FlowWorkspace />)

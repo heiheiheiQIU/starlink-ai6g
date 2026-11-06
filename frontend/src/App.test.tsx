@@ -14,7 +14,8 @@ describe('v4 application shell', () => {
     ).toBeInTheDocument()
     expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
     expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
-    expect(screen.getByText('演示工作台')).toBeInTheDocument()
+    expect(screen.getByText('工程控制台')).toBeInTheDocument()
+    expect(screen.getByText('数据源、连接与证据状态逐页可审计')).toBeInTheDocument()
     expect(container).not.toHaveTextContent(/H00|fixture only|运行服务已连接/)
 
     const assistantEntry = screen.getByRole('button', { name: 'AI 助手' })
