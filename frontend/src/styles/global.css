@@ -944,15 +944,15 @@ body::before {
 
 .app-shell--mission .app-main::before {
   background: url('/visuals/orbital-command-backdrop-v1.png') center / cover no-repeat;
-  opacity: .42;
-  filter: saturate(.72) contrast(.94);
+  opacity: .72;
+  filter: saturate(.8) contrast(.96) brightness(.88);
 }
 
 .app-shell--mission .app-main::after {
   z-index: -1;
   background:
-    linear-gradient(180deg, rgba(6, 18, 28, .68) 0%, rgba(6, 18, 28, .78) 44%, rgba(6, 18, 28, .92) 100%),
-    radial-gradient(circle at 72% 16%, rgba(92, 164, 178, .08), transparent 36%);
+    linear-gradient(180deg, rgba(6, 18, 28, .34) 0%, rgba(6, 18, 28, .48) 48%, rgba(6, 18, 28, .7) 100%),
+    radial-gradient(circle at 72% 16%, rgba(92, 164, 178, .05), transparent 38%);
 }
 
 .app-shell--mission .topbar {
@@ -1012,10 +1012,14 @@ body::before {
 .app-shell--mission .assistant-page,
 .app-shell--mission .console-page {
   color: #dbe8ed;
-  background: rgba(7, 22, 33, .66);
-  border: 1px solid rgba(139, 181, 196, .16);
-  box-shadow: 0 26px 70px rgba(0, 7, 13, .24);
-  backdrop-filter: blur(18px) saturate(112%);
+  background:
+    linear-gradient(145deg, rgba(9, 27, 39, .52), rgba(6, 20, 31, .38));
+  border: 1px solid rgba(151, 195, 210, .19);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .045),
+    0 26px 70px rgba(0, 7, 13, .22);
+  backdrop-filter: blur(24px) saturate(122%);
+  -webkit-backdrop-filter: blur(24px) saturate(122%);
 }
 
 .app-shell--mission .console-card,
@@ -1033,17 +1037,23 @@ body::before {
 .app-shell--mission .compare-config,
 .app-shell--mission .engineer-details {
   color: #d7e5ea;
-  background: rgba(10, 29, 42, .83);
-  border-color: rgba(132, 177, 193, .18);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025), 0 14px 40px rgba(0, 7, 13, .13);
-  backdrop-filter: blur(16px);
+  background:
+    linear-gradient(145deg, rgba(12, 34, 48, .78), rgba(8, 25, 37, .7));
+  border-color: rgba(146, 190, 205, .21);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .04),
+    0 14px 40px rgba(0, 7, 13, .13);
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
 }
 
 .app-shell--mission .experience,
 .app-shell--mission .runtime-pulse,
 .app-shell--mission .chain-node {
-  background: linear-gradient(145deg, rgba(5, 20, 31, .92), rgba(13, 39, 54, .86));
+  background: linear-gradient(145deg, rgba(5, 20, 31, .82), rgba(13, 39, 54, .74));
   border-color: rgba(119, 170, 189, .2);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .app-shell--mission .score-verdict,

@@ -10,6 +10,7 @@ describe('v4 application shell', () => {
     const { container } = render(<App />)
 
     expect(container.querySelector('.app-shell')).toHaveClass('app-shell--mission')
+    expect(container.querySelector('.app-shell')).toHaveClass('app-shell--glass')
 
     expect(
       screen.getByRole('heading', { name: '任务决策', level: 1 }),

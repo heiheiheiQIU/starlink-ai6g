@@ -18,7 +18,7 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('flow')
 
   return (
-    <div className="app-shell app-shell--mission">
+    <div className="app-shell app-shell--mission app-shell--glass">
       <AppSidebar currentPage={currentPage} onNavigate={setCurrentPage} />
 
       <main className="app-main">
