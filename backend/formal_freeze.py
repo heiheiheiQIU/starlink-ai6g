@@ -144,6 +144,10 @@ def _review(review_path, binding, candidate):
             or evidence.get('model_artifacts_sha256') != binding['model_artifacts_sha256']
             or not evidence.get('source_files') or not evidence.get('method')):
         raise ValueError('Leakage review missing or wrong subject')
+    if scope == 'formal':
+        for name, digest in subject['audit_files_sha256'].items():
+            if evidence['source_files'].get('sources/'+name) != digest:
+                raise ValueError('Source review differs from approved audit file: '+name)
     for name, digest in evidence['source_files'].items():
         source = local_file(path.parent, name)
         if file_hash(source) != digest: raise ValueError('Leakage source hash mismatch')

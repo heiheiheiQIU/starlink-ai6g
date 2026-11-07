@@ -18,6 +18,11 @@ PILOT = ROOT/'data/teacher/a_n4_pilot_v1/sources.jsonl'
 DEV = ROOT/'experiments/test_matrix.json'
 TEMPLATE = ROOT/'configs/scenarios/r3_normal.json'
 SCHEMA = 'formal-input-manifest-v2'
+AUDIT_FILES = (
+    'scripts/prepare_formal_v2_review.py',
+    'data/teacher/a_n3_20_v2/splits.json',
+    'data/teacher/a_n4_pilot_v1/source_splits.json',
+)
 
 
 def isolation():
@@ -45,6 +50,7 @@ def subject():
                 archive_sha256=file_hash(ARCHIVE), model_config_sha256=file_hash(MODEL),
                 model=inspect_model(MODEL), analysis_protocol_sha256=file_hash(ANALYSIS),
                 code_sha256=_hash(source_hashes()), template_sha256=file_hash(TEMPLATE),
+                audit_files_sha256={name: file_hash(ROOT/name) for name in AUDIT_FILES},
                 source_inputs={p.relative_to(ROOT).as_posix():file_hash(p) for p in
                     (PILOT, DEV, ROOT/'data/teacher/sources/a_n3_20_v2.jsonl')})
 

@@ -55,9 +55,51 @@ def test_surrogate_generation_verified_and_tamper_rejected(tmp_path, monkeypatch
     leakage = json.loads((review/'leakage.json').read_text())
     assert set(range(200000,200180)).issubset(leakage['excluded_seeds'])
     assert leakage['status'] == 'pending'
+    for name, digest in subject['audit_files_sha256'].items():
+        assert leakage['source_files']['sources/'+name] == digest
     with pytest.raises(ValueError, match='pending'):
         index(review)
     path = output/manifest['trajectories'][0]['config_path']
     path.write_bytes(path.read_bytes()+b' ')
     with pytest.raises(ValueError):
         verify_candidate(output/'manifest.json')
+
+@pytest.mark.parametrize("changed", [
+    "scripts/prepare_formal_v2_review.py",
+    "data/teacher/a_n3_20_v2/splits.json",
+    "data/teacher/a_n4_pilot_v1/source_splits.json",
+])
+def test_pre_generation_receipts_reject_changed_audit_file(tmp_path, monkeypatch, changed):
+    import shutil
+    from backend import formal_v2 as v2
+
+    # Isolate real input bytes and use a substitute seed range even on a failing implementation.
+    source = v2.ROOT
+    sandbox = tmp_path / "snapshot"
+    def copy_input(relative):
+        target = sandbox / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source / relative, target)
+        return target
+
+    for name in ("REGISTRATION", "MODEL", "DEV", "ARCHIVE", "PILOT", "TEMPLATE", "ANALYSIS", "DESIGN"):
+        monkeypatch.setattr(v2, name, copy_input(getattr(v2, name).relative_to(source)))
+    for relative in ("data/teacher/sources/a_n3_20_v2.jsonl", "scripts/prepare_formal_v2_review.py",
+                     "data/teacher/a_n3_20_v2/splits.json", "data/teacher/a_n4_pilot_v1/source_splits.json"):
+        copy_input(relative)
+    monkeypatch.setattr(v2, "ROOT", sandbox)
+    reg = json.loads(v2.REGISTRATION.read_bytes())
+    reg.update(seed_start=890000, seed_end=890179)
+    v2.REGISTRATION.write_text(json.dumps(reg), encoding="utf-8")
+    signed = v2.subject()
+    receipts = {role: dict(role=role, reviewer="ci-"+role, status="accepted",
+                           subject=signed, notes="Surrogate regression") for role in "ABC"}
+    v2.check_receipts(receipts)
+    for role, receipt in receipts.items():
+        (tmp_path / (role+".json")).write_text(json.dumps(receipt), encoding="utf-8")
+    with (sandbox / changed).open("ab") as stream:
+        stream.write(b"\n")
+    monkeypatch.setattr(v2, "expected_inputs", lambda: pytest.fail("stale receipt reached generation"))
+    with pytest.raises(ValueError, match="receipt"):
+        v2.materialize(tmp_path, tmp_path / "output")
+    assert not (tmp_path / "output").exists()

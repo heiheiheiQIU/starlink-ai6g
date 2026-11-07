@@ -8,7 +8,7 @@ from tempfile import TemporaryDirectory
 from backend.cli import _hash
 from backend.experiments import build_config
 from backend.formal_freeze import file_hash, freeze_binding, read_json, write_json
-from backend.formal_v2 import ANALYSIS, ARCHIVE, DEV, MODEL, PILOT, ROOT, verify
+from backend.formal_v2 import ANALYSIS, ARCHIVE, AUDIT_FILES, DEV, MODEL, PILOT, ROOT, verify
 from backend.simulator.engine import create_state, observe
 
 
@@ -55,12 +55,15 @@ def prepare(candidate_path, destination):
     with TemporaryDirectory(dir=destination.parent) as scratch:
         stage = Path(scratch)/'review'
         sources = {}
-        for path in (ARCHIVE, DEV, PILOT, old, ROOT/'data/teacher/a_n4_pilot_v1/source_splits.json'):
+        for path in (ARCHIVE, DEV, PILOT, old, *(ROOT/name for name in AUDIT_FILES)):
             name = 'sources/'+path.relative_to(ROOT).as_posix()
             target = stage/name
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(path,target)
             sources[name] = file_hash(target)
+        approved = candidate['generation_receipts']['A']['subject']['audit_files_sha256']
+        if any(sources['sources/'+name] != digest for name, digest in approved.items()):
+            raise ValueError('Copied audit files differ from the pre-generation receipts')
         write_json(stage/'leakage.json',dict(schema_version='formal-leakage-review-v1',
             data_scope='formal',status='pending',candidate_manifest_sha256=file_hash(candidate_path),
             model_artifacts_sha256=binding['model_artifacts_sha256'],source_files=sources,
