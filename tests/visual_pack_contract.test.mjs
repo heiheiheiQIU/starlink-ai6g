@@ -55,6 +55,7 @@ test('each A line figure has a truthful review-pending manifest', () => {
     assert.equal(manifest.status, 'review_pending');
     assert.ok(allowedStatuses.has(manifest.status));
     assert.deepEqual(manifest.reviewers, ['B', 'C']);
+    assert.match(manifest.git_sha, /^[0-9a-f]{40}$/);
     assert.ok(manifest.source_files.length > 0);
     assert.ok(manifest.limitations.length > 0);
     assert.ok(manifest.outputs.length > 0);

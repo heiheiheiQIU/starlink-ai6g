@@ -24,7 +24,7 @@
 以下问题与图中数字是否正确相互独立；未补齐前，C 不应把图标为正式 `accepted`：
 
 1. `docs/figures/generated/v1/manifest.json` 使用了任务书不允许的 `ready_for_review`、`template_only`；允许值仅为 `draft`、`review_pending`、`accepted_with_notes`、`accepted`、`superseded`。
-2. A-F01/A-F02/A-F03/A-F05 已有同名逐图 manifest；C-F03 与其余图仍缺。A 线 manifest 的 `git_sha` 在最终提交前保持 `null` 并明确列为限制，避免把未提交工作树冒充冻结版本。
+2. A-F01/A-F02/A-F03/A-F05 已有同名逐图 manifest，并以 `691ab28b…` 锚定生成这些图源和预览的本地冻结提交；C-F03 与其余图仍缺逐图 manifest。
 3. 当前只有 SVG 和 1600×900 预览 PNG；缺少嵌字 PDF 与600 DPI 白底 PNG。
 4. A-F01/A-F05/C-F03 为机制图，仍需逐节点来源与“能支持/不能支持”的图注；A-F02/A-F03 为定量图，必须明确输入文件与 claim 绑定。
 5. 当前生成器未固定 Node/渲染器版本到逐图 manifest；Windows 复跑会产生工作区行尾噪声，虽然内容一致，但应在生成脚本或 `.gitattributes` 中统一 LF，保证干净复现。

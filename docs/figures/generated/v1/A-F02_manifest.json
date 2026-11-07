@@ -19,14 +19,13 @@
     "docs/figures/generated/v1/A-F02_教师标签质量审计.svg",
     "docs/figures/generated/v1/previews/A-F02_教师标签质量审计.png"
   ],
-  "source_git_sha": "cfcf0f26c6d19da63e2df27e42873a80605e32e5",
-  "git_sha": null,
+  "source_git_sha": "691ab283a23ae4397c8a927067ecbcf2a2ed4f11",
+  "git_sha": "691ab283a23ae4397c8a927067ecbcf2a2ed4f11",
   "generated_at": "2026-11-07",
   "status": "review_pending",
   "limitations": [
     "仅旧20样本冻结包",
     "不得据此声称AI优于规则或A-N4b扩样成功",
-    "嵌字PDF与600 DPI PNG尚待C统一导出",
-    "最终提交后回填git_sha"
+    "嵌字PDF与600 DPI PNG尚待C统一导出"
   ]
 }

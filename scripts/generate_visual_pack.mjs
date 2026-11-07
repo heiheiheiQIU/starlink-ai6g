@@ -233,10 +233,10 @@ for(const spec of aFigureManifests){
     script:'scripts/generate_visual_pack.mjs',
     outputs,
     source_git_sha:sourceGitSha,
-    git_sha:null,
+    git_sha:sourceGitSha,
     generated_at:'2026-11-07',
     status:'review_pending',
-    limitations:[...spec.limitations,'嵌字PDF与600 DPI PNG尚待C统一导出','最终提交后回填git_sha'],
+    limitations:[...spec.limitations,'嵌字PDF与600 DPI PNG尚待C统一导出'],
   };
   fs.writeFileSync(path.join(OUT,`${spec.figure_id}_manifest.json`),JSON.stringify(figureManifest,null,2)+'\n','utf8');
 }
