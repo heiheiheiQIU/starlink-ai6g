@@ -24,6 +24,7 @@ node_modules/
 dist/
 frontend/dist/
 *.tsbuildinfo
+.presentation-build/
 
 # 操作系统
 Thumbs.db
