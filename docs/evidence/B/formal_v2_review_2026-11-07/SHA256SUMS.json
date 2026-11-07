@@ -1,12 +1,16 @@
 {
+  "audit_hash_full.log": "b3be6e93acfe014835a26d1edc85ec6c794163988a40ced2bd4c04a66d0fdd6a",
+  "audit_hash_pending_gate.log": "f6ffe5d7bfcd79409bf49e1805805d731898d800328f8e59ca8ed1d3e3a3c99b",
+  "audit_tamper_green.log": "33277edf5812e504238fc789ad8340d3a702a803a0b7d689ffcec43bd9ac6d6f",
+  "audit_tamper_red.log": "8b06e3f51899ee4572a279be86eafce076ac359c22c6449a9b6a5fbe59c66f06",
   "figures.log": "1697832a15d7f12d93d52846a40a840e1e511cbf3b6be446c4189b53e5f53b9b",
   "final.log": "554964b766f082c1421ebdd0d77b4c0f3d3ffe7326b88204687b1a8d91268ee5",
   "frontend.log": "87d2eadc418d603afb34588c57ceb792642ce7b662d9c0aa50c8f84e5a777fde",
-  "generation/A.json": "189b164d766211bede358ad8e8171f7c9933d2ea4cd146ddda37d26661d31358",
-  "generation/B.json": "bc813e349fd6f11b165ab69a01b891a60f3cf9ee904dbf6e37eae54333d5a236",
-  "generation/C.json": "72a3648152caa54673f4d26e54e60e50aa88cac0098cad399723fc7ab87f03da",
-  "generation/subject.json": "1101350b895b17d7972a79b1f58a035ae80e39f209506c199596236f5688a9b9",
+  "generation/A.json": "2bdb6c144d752643c76732043d9cb8c439c97baa0ef7f67def492470b58592f6",
+  "generation/B.json": "ac53d858a848018009436b2024be582ae6fde66649744999837c58f17463d587",
+  "generation/C.json": "405bbc4d983b88ccc47514168127530271c60270db7c92bdfe5761716ffc93e1",
+  "generation/subject.json": "936e5b2186bf6f0c65e10a3001b887d492ac85ffb54e65ced73ad72aad9346fe",
   "packet_test.log": "5010b1399254fbac1e78a1b9e5ab7027326ce74e9523a7fafd0cb13b005ce04d",
   "pending_gate.log": "3e5da74670b59fa0514de9d92f920e1440cd9b43cf45d886c758e78a546946a5",
-  "review_index.json": "6e4ab864d0b142f47920467e59d25e7e4c44b0f640f5e6856e1d0e2ec1c36957"
+  "review_index.json": "b9cd3e7aad5c086d39a18732058c5cd3e5a27ba5488a20c8ca50f2624030cb28"
 }

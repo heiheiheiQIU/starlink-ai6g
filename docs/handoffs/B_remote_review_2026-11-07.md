@@ -2,6 +2,22 @@
 
 **当前状态为 B 已推送，等待接收人代码级验收。** 正式实验为“未完成”。正式输入、统计结果和换机复现分别签收。独立分支为 `codex/b-final-sprint-review-20261107`。
 
+## 本次重新签核
+
+审核代码提交为 `d039b98cb45a84a4fdaeaf4e4caa4595603cd1dc`。生成前 subject 新增三项逐字节 SHA256，生成与冻结复核均重新计算。生成后的来源审查包保存三份文件的副本，并与生成前回执逐项比对。
+
+| 生成前覆盖文件 | SHA256 |
+|---|---|
+| `scripts/prepare_formal_v2_review.py` | `50e4090fec611906eae58f7255fe5e1649d240e3211e7117ae150c9a9c611628` |
+| `data/teacher/a_n3_20_v2/splits.json` | `8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8` |
+| `data/teacher/a_n4_pilot_v1/source_splits.json` | `aaa5c558c83e9d2dcec0c9637f74dc5dc431de9109874a85f17cba2eb87c2e95` |
+
+新版 [subject.json](../evidence/B/formal_v2_review_2026-11-07/generation/subject.json) 文件 SHA256 为 `936e5b2186bf6f0c65e10a3001b887d492ac85ffb54e65ced73ad72aad9346fe`。A/B/C 使用同目录对应角色的新版 pending 模板，在各自审核副本中填写回执。上一版 `58c68b6` 的回执需重新审核。
+
+接收人可执行 `python -m pytest tests/test_formal_v2.py -k reject_changed_audit -q --basetemp runs/receiver_hash_test`。三种测试各自只改一份文件，保留原回执，检查生成器拒绝且输出目录不存在。有效用例使用独立的替代种子段。
+
+本次全库 704 项通过，1 项 Linux 专用测试跳过，1 条既有 AnyIO 弃用提示。正式输入等待三方新版回执。[本次全库日志](../evidence/B/formal_v2_review_2026-11-07/audit_hash_full.log) · [篡改复现](../evidence/B/formal_v2_review_2026-11-07/audit_tamper_red.log) · [修复验证](../evidence/B/formal_v2_review_2026-11-07/audit_tamper_green.log)
+
 | 复验对象 | 完整提交 |
 |---|---|
 | 原 B 三项问题修复及 697 项日志 | `03cbb225d46472d9bbbfdc463a6bad291fc2c04e` |

@@ -1,0 +1,31 @@
+FFF                                                                      [100%]
+================================== FAILURES ===================================
+_ test_pre_generation_receipts_reject_changed_audit_file[scripts/prepare_formal_v2_review.py] _
+tests\test_formal_v2.py:102: in test_pre_generation_receipts_reject_changed_audit_file
+    v2.materialize(tmp_path, tmp_path / "output")
+backend\formal_v2.py:119: in materialize
+    for row, config in expected_inputs():
+tests\test_formal_v2.py:100: in <lambda>
+    monkeypatch.setattr(v2, "expected_inputs", lambda: pytest.fail("stale receipt reached generation"))
+E   Failed: stale receipt reached generation
+_ test_pre_generation_receipts_reject_changed_audit_file[data/teacher/a_n3_20_v2/splits.json] _
+tests\test_formal_v2.py:102: in test_pre_generation_receipts_reject_changed_audit_file
+    v2.materialize(tmp_path, tmp_path / "output")
+backend\formal_v2.py:119: in materialize
+    for row, config in expected_inputs():
+tests\test_formal_v2.py:100: in <lambda>
+    monkeypatch.setattr(v2, "expected_inputs", lambda: pytest.fail("stale receipt reached generation"))
+E   Failed: stale receipt reached generation
+_ test_pre_generation_receipts_reject_changed_audit_file[data/teacher/a_n4_pilot_v1/source_splits.json] _
+tests\test_formal_v2.py:102: in test_pre_generation_receipts_reject_changed_audit_file
+    v2.materialize(tmp_path, tmp_path / "output")
+backend\formal_v2.py:119: in materialize
+    for row, config in expected_inputs():
+tests\test_formal_v2.py:100: in <lambda>
+    monkeypatch.setattr(v2, "expected_inputs", lambda: pytest.fail("stale receipt reached generation"))
+E   Failed: stale receipt reached generation
+=========================== short test summary info ===========================
+FAILED tests/test_formal_v2.py::test_pre_generation_receipts_reject_changed_audit_file[scripts/prepare_formal_v2_review.py]
+FAILED tests/test_formal_v2.py::test_pre_generation_receipts_reject_changed_audit_file[data/teacher/a_n3_20_v2/splits.json]
+FAILED tests/test_formal_v2.py::test_pre_generation_receipts_reject_changed_audit_file[data/teacher/a_n4_pilot_v1/source_splits.json]
+3 failed, 4 deselected in 3.47s
