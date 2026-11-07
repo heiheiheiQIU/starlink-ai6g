@@ -26,19 +26,20 @@ def make_review(tmp_path):
     model = Path('configs/learned_policy.json')
     protocol = Path('experiments/formal_v1/analysis_protocol.json')
     binding = freeze_binding(candidate, model, protocol)
-    receipts = []
-    for role in 'ABC':
-        path = write_json(tmp_path/f'receipt_{role}.json', dict(
-            schema_version='formal-freeze-receipt-v1', role=role, reviewer=f'test-fixture-{role}',
-            reviewed_at='2026-11-07T12:00:00+08:00', status='accepted', data_scope='test_fixture',
-            binding=binding, notes='Synthetic test receipt; not a real team signoff.'))
-        receipts.append(dict(role=role, path=path.name, sha256=digest(path)))
+    source = write_json(tmp_path/'sources/fixture.json', {'data_scope': 'test_fixture', 'seed': 10000})
     evidence = write_json(tmp_path/'leakage.json', dict(
         schema_version='formal-leakage-review-v1', status='accepted', data_scope='test_fixture',
         candidate_manifest_sha256=binding['candidate_manifest_sha256'],
         model_artifacts_sha256=binding['model_artifacts_sha256'],
         excluded_seeds=list(range(10000, 10180)), excluded_content_hashes=[],
-        source_files={'fixture': '0'*64}, method='Synthetic isolated fixture sources; not production audit.'))
+        source_files={'sources/fixture.json': digest(source)}, method='Synthetic isolated fixture sources; not production audit.'))
+    receipts = []
+    for role in 'ABC':
+        path = write_json(tmp_path/f'receipt_{role}.json', dict(
+            schema_version='formal-freeze-receipt-v1', role=role, reviewer=f'test-fixture-{role}',
+            reviewed_at='2026-11-07T12:00:00+08:00', status='accepted', data_scope='test_fixture',
+            binding=binding, leakage_sha256=digest(evidence), notes='Synthetic test receipt; not a real team signoff.'))
+        receipts.append(dict(role=role, path=path.name, sha256=digest(path)))
     review = dict(schema_version='formal-freeze-review-v1', data_scope='test_fixture', binding=binding,
                   receipts=receipts, leakage=dict(path=evidence.name, sha256=digest(evidence)))
     return candidate, write_json(tmp_path/'review.json', review), model, protocol
@@ -104,3 +105,26 @@ def test_analysis_protocol_rejects_changed_method(tmp_path):
     for field, value in [('bootstrap_replicates', 10), ('aggregation', 'pooled'), ('max_retries', 3)]:
         altered = copy.deepcopy(protocol); altered[field] = value
         with pytest.raises(ValueError): validate_analysis_protocol(altered)
+
+
+@pytest.mark.parametrize('bad', ['missing_source', 'source_tampered', 'leakage_replaced'])
+def test_source_evidence_and_receipt_binding_enforced(tmp_path, bad):
+    from backend.formal_freeze import freeze_inputs
+    args = make_review(tmp_path)
+    if bad == 'missing_source': (tmp_path/'sources/fixture.json').unlink()
+    elif bad == 'source_tampered': (tmp_path/'sources/fixture.json').write_text('{}')
+    else:
+        path = tmp_path/'leakage.json'; value = json.loads(path.read_text())
+        value['method'] = 'Changed after reviewers signed'
+        write_json(path, value)
+        review = json.loads(args[1].read_text()); review['leakage']['sha256'] = digest(path)
+        write_json(args[1], review)
+    with pytest.raises(ValueError): freeze_inputs(*args, tmp_path/'frozen')
+
+
+def test_freeze_without_git_executable(tmp_path, monkeypatch):
+    import backend.formal_freeze as module
+    args = make_review(tmp_path)
+    def missing(*args, **kwargs): raise FileNotFoundError('git')
+    monkeypatch.setattr(module.subprocess, 'run', missing)
+    assert module.freeze_binding(args[0], args[2], args[3])['code_revision'] is None

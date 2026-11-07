@@ -1,0 +1,29 @@
+FFFFF                                                                    [100%]
+================================== FAILURES ===================================
+________ test_real_three_policy_run_and_resume_preserve_unique_samples ________
+tests\test_formal_experiments.py:15: in test_real_three_policy_run_and_resume_preserve_unique_samples
+    from backend.formal_experiments import run_formal, read_run_index
+E   ModuleNotFoundError: No module named 'backend.formal_experiments'
+_____________ test_failure_is_retained_and_only_one_retry_allowed _____________
+tests\test_formal_experiments.py:36: in test_failure_is_retained_and_only_one_retry_allowed
+    import backend.formal_experiments as module
+E   ModuleNotFoundError: No module named 'backend.formal_experiments'
+__________ test_interruption_is_recorded_on_resume_without_overwrite __________
+tests\test_formal_experiments.py:55: in test_interruption_is_recorded_on_resume_without_overwrite
+    import backend.formal_experiments as module
+E   ModuleNotFoundError: No module named 'backend.formal_experiments'
+____________________ test_resume_rejects_result_tampering _____________________
+tests\test_formal_experiments.py:70: in test_resume_rejects_result_tampering
+    from backend.formal_experiments import run_formal, read_run_index
+E   ModuleNotFoundError: No module named 'backend.formal_experiments'
+________ test_bad_selection_or_pending_rejected_before_batch_creation _________
+tests\test_formal_experiments.py:80: in test_bad_selection_or_pending_rejected_before_batch_creation
+    from backend.formal_experiments import run_formal
+E   ModuleNotFoundError: No module named 'backend.formal_experiments'
+=========================== short test summary info ===========================
+FAILED tests/test_formal_experiments.py::test_real_three_policy_run_and_resume_preserve_unique_samples
+FAILED tests/test_formal_experiments.py::test_failure_is_retained_and_only_one_retry_allowed
+FAILED tests/test_formal_experiments.py::test_interruption_is_recorded_on_resume_without_overwrite
+FAILED tests/test_formal_experiments.py::test_resume_rejects_result_tampering
+FAILED tests/test_formal_experiments.py::test_bad_selection_or_pending_rejected_before_batch_creation
+5 failed in 0.23s

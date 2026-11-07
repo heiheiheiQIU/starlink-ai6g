@@ -1,0 +1,46 @@
+$ pnpm test:run && pnpm build
+$ vitest run
+
+ RUN  v2.1.9 D:/人工智能挑战赛/starlink-ai6g/frontend
+
+ ✓ src/domain/runSession.test.ts (2 tests) 3ms
+ ✓ src/domain/navigation.test.ts (2 tests) 2ms
+ ✓ src/domain/flow.test.ts (3 tests) 5ms
+ ✓ src/domain/productLanguage.test.ts (2 tests) 3ms
+ ✓ src/domain/contractView.test.ts (9 tests) 6ms
+ ✓ src/domain/presets.test.ts (3 tests) 3ms
+ ✓ src/api/runs.test.ts (11 tests) 58ms
+ ✓ src/pages/AssetsPage.test.tsx (3 tests) 71ms
+ ✓ src/state/useRun.test.ts (4 tests) 87ms
+ ✓ src/components/EventStreamCard.test.tsx (3 tests) 106ms
+ ✓ src/pages/MatrixPage.test.tsx (2 tests) 192ms
+ ✓ src/components/OperationsBar.test.tsx (1 test) 134ms
+ ✓ src/pages/EvidencePage.test.tsx (4 tests) 236ms
+ ✓ src/pages/OverviewPage.test.tsx (3 tests) 292ms
+ ✓ src/pages/ComparePage.test.tsx (2 tests) 317ms
+ ✓ src/components/RealRunPanel.test.tsx (4 tests) 359ms
+ ✓ src/App.test.tsx (1 test) 244ms
+ ✓ src/components/RunSourceBadge.test.tsx (6 tests) 427ms
+ ✓ src/domain/assistant.test.ts (2 tests) 3ms
+ ✓ src/components/TeacherAuditCard.test.tsx (2 tests) 49ms
+ ✓ src/pages/AssistantPage.test.tsx (1 test) 325ms
+   ✓ evidence-grounded assistant page > refuses unsupported questions and keeps local citations visible 324ms
+ ✓ src/pages/FlowWorkspace.test.tsx (7 tests) 1747ms
+   ✓ six-step operations stage > exposes a single engineering session for mode, playback and step progress 303ms
+   ✓ six-step operations stage > keeps tasks added at arrival visible in later steps 329ms
+
+ Test Files  22 passed (22)
+      Tests  77 passed (77)
+   Start at  11:27:51
+   Duration  8.35s (transform 2.53s, setup 17.92s, collect 19.21s, tests 4.67s, environment 64.71s, prepare 9.46s)
+
+$ tsc --noEmit && vite build
+vite v6.4.3 building for production...
+transforming...
+✓ 68 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.50 kB │ gzip:   0.36 kB
+dist/assets/index-CJ123bfx.css   46.49 kB │ gzip:  10.45 kB
+dist/assets/index-DLlvBLTJ.js   332.46 kB │ gzip: 100.31 kB
+✓ built in 746ms

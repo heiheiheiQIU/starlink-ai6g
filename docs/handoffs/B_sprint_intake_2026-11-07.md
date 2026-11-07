@@ -1,6 +1,6 @@
 # B 冲刺集成接收记录
 
-日期：2026-11-07。状态：集成与复验进行中，不是三方正式冻结。
+日期：2026-11-07。状态：集成与复验完成，正式冻结待独立签核。
 
 用户已要求执行 `docs/superpowers/plans/2026-11-07-b-final-sprint.md`。本地 B 基线为 `d4f7012d630858459fcb23a100f1c98380d5a829`。
 
@@ -16,3 +16,5 @@
 命令、实际输出、运行路径和 SHA 将在 `docs/evidence/B/sprint_2026-11-07/` 登记。A 诊断复核写 `docs/acceptance/A_N4b_diagnostics_B_2026-11-07.md`。
 
 最终交接必须包含完整集成提交、改动范围、测试输出、输入输出路径、文件 SHA、已知限制、接收步骤与验收状态；未完成项不写 accepted。
+
+实际集成为 `1a51ae91fc380e5e71dbf4d8f4fbaf93526f9ee7`，A/C 均无冲突。A pilot --verify 退出 0；集成后 659 passed、1 Linux 跳过；前端 77 passed、TypeScript 与 Vite 构建通过。详情和后续工程交付见 `B_sprint_delivery_2026-11-07.md`。原输入/冻结模型未替换。

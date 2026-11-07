@@ -23,3 +23,6 @@ B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11
 B-WP2,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP2_learned_2026-11-04.md,A+C,C代码级复核通过;B原552通过1跳过及HTTP配对证据保留,A独立复测尚缺;C页面组合复验本轮进行,保留ready_for_review;准备WP5;不将代码复核写成A/C全量复测
 B-WP5-PREP,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP5_readiness_2026-11-04.md,A+C,整合C b1d5e8b;552通过1跳过;前端70构建;实际HTTP及ZIP通过,A新模型未交付;formal输入与统计待实施;未三方冻结,先按WP5计划物化180独立轨迹;三策略540运行;收到A包独立验收
 B-WP5-INPUTS,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_formal_inputs_2026-11-04.md,A+C,180独立输入/内容哈希;18定向;C对710f141代码级复核通过;见C_audit_WP5_inputs_2026-11-05,A来源交集复核与模型落位待完成;model pending,A核对来源/种子与内容交集;B继续模型验包与运行统计入口;保留域外评估边界
+B-SPRINT-INTAKE,B,ready_for_review,2026-11-07T23:30:00+08:00,docs/handoffs/B_sprint_intake_2026-11-07.md,A+C,A/C无冲突集成;A诊断verify退出0;集成659通过1跳过;前端77及构建,正式来源与模型冻结仍待三方,见首轮工程交接
+B-SPRINT-ENGINEERING,B,ready_for_review,2026-11-08T23:00:00+08:00,docs/handoffs/B_sprint_delivery_2026-11-07.md,A+C,冻结/三策略追加台账/等权配对统计工程完成;独立审查三项修复,来源审查及回执待签;trace00工程测试暴露已披露;未跑正式全矩阵,先审holdout和统计协议再冻结
+B-SPRINT-FIGURES,B,changes_requested,2026-11-10T18:00:00+08:00,docs/acceptance/B_figures_review_2026-11-07.md,C,54格开发矩阵复算通过;三个开发失败案例可追溯,B-F01方向/B-F02硬编码阶梯/C-F02回灌/C-F03域外与决策措辞需改,C按图逐项修订后复核

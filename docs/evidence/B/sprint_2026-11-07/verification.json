@@ -1,0 +1,51 @@
+{
+  "scope": "B_local_engineering_and_development_evidence_not_formal_signoff",
+  "backend": {
+    "passed": 697,
+    "skipped": 1,
+    "warning_count": 1,
+    "seconds": 139.98,
+    "command": ".venv\\Scripts\\python.exe -m pytest tests scripts/tests -q --tb=short --noconftest -p no:cacheprovider --basetemp runs/b_sprint_20261107/final_suite",
+    "skip": "tests/test_inference_lifecycle.py:97 Linux zombie state",
+    "warning": "Existing AnyIO BlockingPortal deprecation"
+  },
+  "frontend": {
+    "passed": 77,
+    "typescript": "passed",
+    "build": "passed",
+    "log": "frontend_check.log"
+  },
+  "targeted": {
+    "passed": 38,
+    "log": "review_green.log"
+  },
+  "review": {
+    "critical": 0,
+    "important": 3,
+    "fixed": 3,
+    "minor": 0
+  },
+  "figure_recalculation": {
+    "rows": 360,
+    "labels_checked": 54,
+    "max_rounding_error": 0.0050000000000000044,
+    "edf_mean": 0.4869152046783626,
+    "value_mean": 0.553192007797271
+  },
+  "code_sha256": {
+    "backend/formal_freeze.py": "3e29d4de3ed1c26485a9d36834e773d56f2e83219fb9d7d5d0498f6aaaab7f98",
+    "backend/formal_experiments.py": "1ccef4b3d076befdf417b4d7011102e4e5d12d29bc6812da5485ee04af6230a7",
+    "experiments/analyze_formal.py": "c00bb8436c43b56f9a3f657399de2b391c5738ccba535c2525bbf8d003634ff8",
+    "experiments/formal_v1/analysis_protocol.json": "649ecfc8c94c37f8118ae4996947df215ce6c7ed13a8e2ee55db267a5e0c1e1f",
+    "tests/test_formal_freeze.py": "2395fbacaae171b05b01bf905370697c3d847c98ab2272bbb628aa837206d4a5",
+    "tests/test_formal_experiments.py": "1e48cab5b3d755d8066f0b23af2c411d4f50a3a15a93fd49ab2204c5303ffa33",
+    "tests/test_formal_analysis.py": "332b71b925827faefd19695cc921736ee716c28f102700ac518b55236ee10321"
+  },
+  "remaining": [
+    "A/C holdout exposure decision and independent source review",
+    "ABC freeze receipts",
+    "540 formal strategy runs and statistical/result signoff",
+    "C figure corrections and real browser acceptance",
+    "second physical machine and final release artifacts"
+  ]
+}

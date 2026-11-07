@@ -1,0 +1,41 @@
+[
+  {
+    "case": "manual_ack_loss",
+    "run_id": "development_B_manual_ack_loss",
+    "policy_id": "manual",
+    "input_hash": "a58fad9d8cda6100d35f2e0b80f391ce07893c08899facc6fcf6c5dcf3a6bb32",
+    "event_ids": [
+      9,
+      11,
+      16,
+      17
+    ],
+    "description": "ACK丢失后同块重传与地面去重。开发期手动动作脚本，非正式实验。",
+    "data_scope": "development_only"
+  },
+  {
+    "case": "corrupt_npz",
+    "run_id": "development_B_20261107_corrupt_npz",
+    "policy_id": "learned",
+    "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+    "event_ids": [
+      3,
+      11,
+      14,
+      17
+    ],
+    "description": "隔离的损坏NPZ触发评分异常并回退EDF。开发故障注入，非正式模型注册。",
+    "data_scope": "development_only"
+  },
+  {
+    "case": "constraint_reject",
+    "run_id": "development_B_20261107_constraint_reject",
+    "policy_id": "learned",
+    "input_hash": "4208da24935dd54705297cfe0a78f60dbfba56f48dcf568e44f182689a970825",
+    "event_ids": [
+      3
+    ],
+    "description": "注入高分探针候选被能量保留约束拒绝。非训练模型决策证据。",
+    "data_scope": "development_only"
+  }
+]

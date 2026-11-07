@@ -75,8 +75,13 @@ def source_hashes():
 def _binding(candidate, model_config, analysis_protocol, metadata):
     sources = source_hashes()
     # Source hashes are authoritative for uncommitted builds and no-Git releases.
-    result = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True)
-    revision = result.stdout.strip() if result.returncode == 0 else None
+    revision = None
+    if (ROOT/'.git').exists():
+        try:
+            result = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=ROOT, capture_output=True, text=True)
+            revision = result.stdout.strip() if result.returncode == 0 else None
+        except OSError:
+            pass
     return dict(candidate_manifest_sha256=file_hash(candidate), model_config_sha256=file_hash(model_config),
                 analysis_protocol_sha256=file_hash(analysis_protocol), model_artifacts_sha256=metadata['artifacts_sha256'],
                 source_sha256=sources, code_revision=revision)
@@ -97,6 +102,7 @@ def _review(review_path, binding, candidate):
     rows = review.get('receipts', [])
     if len(rows) != 3 or {r.get('role') for r in rows} != set('ABC'):
         raise ValueError('A/B/C receipts required')
+    leak = review['leakage']
     copies = {}; reviewers = set()
     for row in rows:
         path = local_file(review_path.parent, row['path'])
@@ -105,12 +111,13 @@ def _review(review_path, binding, candidate):
         if (receipt.get('schema_version') != 'formal-freeze-receipt-v1'
                 or receipt.get('role') != row['role'] or receipt.get('status') not in ('accepted', 'accepted_with_notes')
                 or receipt.get('binding') != binding or receipt.get('data_scope') != scope
+                or receipt.get('leakage_sha256') != leak['sha256']
                 or not receipt.get('reviewer') or not receipt.get('reviewed_at') or not receipt.get('notes')):
             raise ValueError('Receipt pending, incomplete, or wrong subject')
         reviewers.add(receipt['reviewer'])
         copies[f'receipts/{row["role"]}.json'] = path
     if len(reviewers) != 3: raise ValueError('Independent reviewers required')
-    leak = review['leakage']; path = local_file(review_path.parent, leak['path'])
+    path = local_file(review_path.parent, leak['path'])
     evidence = read_json(path)
     if (file_hash(path) != leak['sha256'] or evidence.get('schema_version') != 'formal-leakage-review-v1'
             or evidence.get('status') != 'accepted' or evidence.get('data_scope') != scope
@@ -118,6 +125,10 @@ def _review(review_path, binding, candidate):
             or evidence.get('model_artifacts_sha256') != binding['model_artifacts_sha256']
             or not evidence.get('source_files') or not evidence.get('method')):
         raise ValueError('Leakage review missing or wrong subject')
+    for name, digest in evidence['source_files'].items():
+        source = local_file(path.parent, name)
+        if file_hash(source) != digest: raise ValueError('Leakage source hash mismatch')
+        copies['receipts/'+name] = source
     rows = candidate['trajectories']
     if {r['seed'] for r in rows} & set(evidence['excluded_seeds']): raise ValueError('Training seed collision')
     if {r['content_hash'] for r in rows} & set(evidence['excluded_content_hashes']): raise ValueError('Training content collision')
@@ -179,6 +190,8 @@ def verify_frozen(manifest_path: Path) -> dict:
                 'review.json', 'receipts/A.json', 'receipts/B.json', 'receipts/C.json', 'receipts/leakage.json'}
     required |= {'model/'+name for name in ('weights.npz', 'normalization.json', 'training_summary.json', 'model_card.md', 'manifest.json')}
     required |= {'candidate/'+r['config_path'] for r in manifest['trajectories']}
+    leakage = read_json(local_file(root, 'receipts/leakage.json'))
+    required |= {'receipts/'+name for name in leakage.get('source_files', {})}
     if set(files) != actual or actual != required: raise ValueError('Frozen artifact set mismatch')
     for name, digest in files.items():
         if file_hash(local_file(root, name)) != digest: raise ValueError(f'Frozen artifact hash mismatch: {name}')

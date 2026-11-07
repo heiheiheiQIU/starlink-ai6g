@@ -83,3 +83,15 @@ def test_bad_selection_or_pending_rejected_before_batch_creation(tmp_path):
         with pytest.raises(ValueError): run_formal(manifest, tmp_path/'bad', trajectory_ids=selection)
         assert not (tmp_path/'bad').exists()
     with pytest.raises(ValueError): run_formal(tmp_path/'candidate/manifest.json', tmp_path/'bad')
+
+
+def test_runner_rejects_actual_horizon_different_from_frozen(tmp_path, monkeypatch):
+    import copy
+    import backend.formal_experiments as module
+    manifest = frozen(tmp_path); original = module.run_policy
+    def wrong_horizon(config, *args, **kwargs):
+        config = copy.deepcopy(config); config['evaluation_end_s'] = 2.0
+        return original(config, *args, **kwargs)
+    monkeypatch.setattr(module, 'run_policy', wrong_horizon)
+    with pytest.raises(ValueError, match='config'):
+        module.run_formal(manifest, tmp_path/'batch', trajectory_ids=['formal_v1_cell_00_trace_00'])

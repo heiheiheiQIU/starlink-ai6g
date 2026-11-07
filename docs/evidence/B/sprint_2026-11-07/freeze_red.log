@@ -1,0 +1,74 @@
+FFFFFFFFFFFFFF                                                           [100%]
+================================== FAILURES ===================================
+_____________ test_freeze_roundtrip_preserves_candidate_and_model _____________
+tests\test_formal_freeze.py:48: in test_freeze_roundtrip_preserves_candidate_and_model
+    from backend.formal_freeze import freeze_inputs, verify_frozen
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+________ test_freeze_rejects_unreviewed_or_wrong_subject[missing_role] ________
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+__________ test_freeze_rejects_unreviewed_or_wrong_subject[pending] ___________
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+_______ test_freeze_rejects_unreviewed_or_wrong_subject[wrong_subject] ________
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+______ test_freeze_rejects_unreviewed_or_wrong_subject[receipt_tampered] ______
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+_______ test_freeze_rejects_unreviewed_or_wrong_subject[seed_collision] _______
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+_____ test_freeze_rejects_unreviewed_or_wrong_subject[content_collision] ______
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+________ test_freeze_rejects_unreviewed_or_wrong_subject[path_escape] _________
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+______ test_freeze_rejects_unreviewed_or_wrong_subject[fake_production] _______
+tests\test_formal_freeze.py:65: in test_freeze_rejects_unreviewed_or_wrong_subject
+    from backend.formal_freeze import freeze_inputs
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+_ test_frozen_tampering_rejected[candidate/configs/formal_v1_cell_00_trace_00.json] _
+tests\test_formal_freeze.py:93: in test_frozen_tampering_rejected
+    from backend.formal_freeze import freeze_inputs, verify_frozen
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+______________ test_frozen_tampering_rejected[model/weights.npz] ______________
+tests\test_formal_freeze.py:93: in test_frozen_tampering_rejected
+    from backend.formal_freeze import freeze_inputs, verify_frozen
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+_______________ test_frozen_tampering_rejected[receipts/A.json] _______________
+tests\test_formal_freeze.py:93: in test_frozen_tampering_rejected
+    from backend.formal_freeze import freeze_inputs, verify_frozen
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+___________ test_frozen_tampering_rejected[analysis_protocol.json] ____________
+tests\test_formal_freeze.py:93: in test_frozen_tampering_rejected
+    from backend.formal_freeze import freeze_inputs, verify_frozen
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+________________ test_analysis_protocol_rejects_changed_method ________________
+tests\test_formal_freeze.py:101: in test_analysis_protocol_rejects_changed_method
+    from backend.formal_freeze import validate_analysis_protocol
+E   ModuleNotFoundError: No module named 'backend.formal_freeze'
+=========================== short test summary info ===========================
+FAILED tests/test_formal_freeze.py::test_freeze_roundtrip_preserves_candidate_and_model
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[missing_role]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[pending]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[wrong_subject]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[receipt_tampered]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[seed_collision]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[content_collision]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[path_escape]
+FAILED tests/test_formal_freeze.py::test_freeze_rejects_unreviewed_or_wrong_subject[fake_production]
+FAILED tests/test_formal_freeze.py::test_frozen_tampering_rejected[candidate/configs/formal_v1_cell_00_trace_00.json]
+FAILED tests/test_formal_freeze.py::test_frozen_tampering_rejected[model/weights.npz]
+FAILED tests/test_formal_freeze.py::test_frozen_tampering_rejected[receipts/A.json]
+FAILED tests/test_formal_freeze.py::test_frozen_tampering_rejected[analysis_protocol.json]
+FAILED tests/test_formal_freeze.py::test_analysis_protocol_rejects_changed_method
+14 failed in 0.26s

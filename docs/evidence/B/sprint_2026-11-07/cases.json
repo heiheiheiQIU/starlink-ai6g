@@ -1,0 +1,449 @@
+{
+  "data_scope": "development_only",
+  "cases": [
+    {
+      "case": "ack_loss",
+      "data_scope": "development_fault_or_protocol_validation_not_formal",
+      "run_id": "development_B_20261107_ack_loss",
+      "policy_id": "edf",
+      "input_hash": "a58fad9d8cda6100d35f2e0b80f391ce07893c08899facc6fcf6c5dcf3a6bb32",
+      "elapsed_s": 0.12208520000058343,
+      "model_hash": null,
+      "files": {
+        "config.json": "d8d8ae8f198cdeceb91792beb70dbafd82f82f939afc0158507062f0f720ec46",
+        "energy_ledger.json": "cdbd5be69765aa86da58b59bf9ad5e41f723fd508342eef684f26dd7c326f5f6",
+        "events.jsonl": "05b3d488524659951324117f2dcf285ca241c4d3595f301100db9edb3ef6f202",
+        "execution.log": "b55cea0708c2bd4e2a6e3b3ee72c01003e20b36e80cfe716359aad52106cbbb9",
+        "manifest.json": "ee4a5ce3c94371e5396e881dad872bc5cdf1c308e939729e8860c682799ce1c7",
+        "results.json": "591063fa02464cecaed4c43a959bc35e4057e8735a1f390bb34c271cf0961048",
+        "status.json": "716d96e72d993c56e2c4d89b411cc1f7302e5961b5be29b277346bdf525cc5d0"
+      },
+      "notable_events": [
+        {
+          "event_id": 4,
+          "run_id": "development_B_20261107_ack_loss",
+          "policy_id": "edf",
+          "sim_time_s": 0.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0103125,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 5,
+          "run_id": "development_B_20261107_ack_loss",
+          "policy_id": "edf",
+          "sim_time_s": 0.515625,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 8,
+          "run_id": "development_B_20261107_ack_loss",
+          "policy_id": "edf",
+          "sim_time_s": 1.515625,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        }
+      ]
+    },
+    {
+      "case": "corrupt_npz",
+      "data_scope": "development_fault_or_protocol_validation_not_formal",
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+      "elapsed_s": 0.09742019999976037,
+      "model_hash": "8ae968122a3798d5ca80b65723f241e25bb7eeb9fe56076d557c158cd36e1b8c",
+      "files": {
+        "config.json": "728a393f19ad138facc8127c5500e731b211c96ea7493f9af6e4803145cfd828",
+        "energy_ledger.json": "2c20dff7152a959a0e70c5648cbefed8970c83b51d1e717dce089409b2c756ed",
+        "events.jsonl": "f358804d3b61121c3310b91f5d3c1a6ac0d78c456e260188ad94f1119e7959a4",
+        "execution.log": "9bfd576bf9ec10106df7487a73fdaf94d3c83a8cb2cb5964b3a5b4f853a1c39a",
+        "manifest.json": "23b5879331a344cc77a62b2486f85b67d34996113732172b4796b38da41d8ac3",
+        "results.json": "505f47669031adbec24dfe06a338495ef989fbf7637e4c6b5d516a80ad467373",
+        "status.json": "d96951588c0782dad74be9ec6a998b7589ae1ed8ba0ae09bb4bb70d5803a0a22"
+      },
+      "notable_events": [
+        {
+          "event_id": 3,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 0.0,
+          "event_type": "decision",
+          "task_id": "T1",
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": "MODEL_UNAVAILABLE",
+          "data": {
+            "action": {
+              "task_id": "T1",
+              "mode": "fast",
+              "scheduled_bytes": 1024,
+              "reason_codes": [
+                "MODEL_UNAVAILABLE"
+              ],
+              "fallback": true
+            },
+            "candidate_scores": [
+              {
+                "task_id": "T1",
+                "mode": "robust",
+                "score": 1.0
+              },
+              {
+                "task_id": "T1",
+                "mode": "fast",
+                "score": 1.0
+              },
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "robust"
+                }
+              },
+              {
+                "code": "TASK_NOT_AVAILABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INFLIGHT_BLOCK",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "NO_VISIBLE_WINDOW",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "INSUFFICIENT_LINK_TIME",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "DEADLINE_UNREACHABLE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "POWER_LIMIT",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "CONTROL_BUDGET",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              },
+              {
+                "code": "ENERGY_RESERVE",
+                "passed": true,
+                "details": {
+                  "task_id": "T1",
+                  "mode": "fast"
+                }
+              }
+            ],
+            "latency_ms": 1.6034999989642529,
+            "fallback": true,
+            "model_version": null,
+            "policy_version": "learned-r4-v1"
+          }
+        },
+        {
+          "event_id": 4,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 0.0,
+          "event_type": "sent",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 32,
+          "energy_Wh": 0.0103125,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 5,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 0.515625,
+          "event_type": "received",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 1024,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 8,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 1.515625,
+          "event_type": "acked",
+          "task_id": "T1",
+          "block_id": 0,
+          "payload_bytes": 0,
+          "overhead_bytes": 16,
+          "energy_Wh": 0.0,
+          "reason_code": null,
+          "data": null
+        },
+        {
+          "event_id": 11,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 2.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": "MODEL_UNAVAILABLE",
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [
+                "MODEL_UNAVAILABLE"
+              ],
+              "fallback": true
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 1.352900000711088,
+            "fallback": true,
+            "model_version": null,
+            "policy_version": "learned-r4-v1"
+          }
+        },
+        {
+          "event_id": 14,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 4.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": "MODEL_UNAVAILABLE",
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [
+                "MODEL_UNAVAILABLE"
+              ],
+              "fallback": true
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 1.1658000003080815,
+            "fallback": true,
+            "model_version": null,
+            "policy_version": "learned-r4-v1"
+          }
+        },
+        {
+          "event_id": 17,
+          "run_id": "development_B_20261107_corrupt_npz",
+          "policy_id": "learned",
+          "sim_time_s": 6.0,
+          "event_type": "decision",
+          "task_id": null,
+          "block_id": null,
+          "payload_bytes": 0,
+          "overhead_bytes": 0,
+          "energy_Wh": 0.0,
+          "reason_code": "MODEL_UNAVAILABLE",
+          "data": {
+            "action": {
+              "task_id": null,
+              "mode": "idle",
+              "scheduled_bytes": 0,
+              "reason_codes": [
+                "MODEL_UNAVAILABLE"
+              ],
+              "fallback": true
+            },
+            "candidate_scores": [
+              {
+                "task_id": null,
+                "mode": "idle",
+                "score": 0.0
+              }
+            ],
+            "constraint_checks": [],
+            "latency_ms": 0.8879000015440397,
+            "fallback": true,
+            "model_version": null,
+            "policy_version": "learned-r4-v1"
+          }
+        }
+      ]
+    },
+    {
+      "case": "constraint_reject",
+      "data_scope": "development_fault_or_protocol_validation_not_formal",
+      "run_id": "development_B_20261107_constraint_reject",
+      "policy_id": "learned",
+      "input_hash": "4208da24935dd54705297cfe0a78f60dbfba56f48dcf568e44f182689a970825",
+      "elapsed_s": 0.10740389999955369,
+      "model_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+      "files": {
+        "config.json": "52473768fe22cd00f9485ec7aba9884228a35b951a3afcf038b5d8917c74a887",
+        "energy_ledger.json": "aaced833853b876b36b8ff7a7cab11d29b126c1a30a39d42b16d93c61fc94523",
+        "events.jsonl": "f71e895fb4752f1a32d5436fe31031d8499c675739c11cbd496f074ebb930cfc",
+        "execution.log": "f2ca33eb4b4aea66270df434f6dd7ffb8315fcff81b02d60ea062bc0c2d90c5b",
+        "manifest.json": "57ca983bf48939029ea3a30241b05fa4d0d799be730d2f9983c7493d378c856e",
+        "results.json": "e5f46cf4e510b4cd4f7b410f50fce14b15039f55b9c6eb6e4295ad18ce7c387c",
+        "status.json": "cedd7f93f736312e989084175f49250fd8d85020d86d2ccfdb5ad5959292bddc"
+      },
+      "notable_events": []
+    }
+  ],
+  "timing": [
+    {
+      "policy_id": "edf",
+      "elapsed_s": 0.10710999999901105,
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706"
+    },
+    {
+      "policy_id": "value",
+      "elapsed_s": 0.09456909999971685,
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706"
+    },
+    {
+      "policy_id": "learned",
+      "elapsed_s": 0.534233000000313,
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706"
+    }
+  ],
+  "caution": "High-score case is an injected scoring probe, not a real trained-model decision; corrupt package bypass is only this local development callback."
+}

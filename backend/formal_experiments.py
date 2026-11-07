@@ -96,6 +96,26 @@ def _load_index(frozen, manifest_path, path):
                         or meta['input_hash'] != expected['input_hash'] or meta['policy_id'] != policy
                         or meta['config_hash'] != result['config_hash']):
                     raise ValueError('Successful result identity mismatch')
+                from backend.cli import RunConfig, _hash
+                from backend.policies.runner import policy_config
+                actual_config = read_json(folder/'config.json')
+                expected_config = read_json(local_file(manifest_path.parent/'candidate', trace['config_path']))
+                runtime = dict(policy_id=policy, policy_version=policy+'-r4-v1',
+                               public_policy_config=policy_config(RunConfig.model_validate(expected_config).scenario).model_dump(),
+                               scoring_budget_ms=100.0)
+                if policy == 'learned':
+                    from backend.api.inference import inspect_model
+                    runtime['model'] = inspect_model(frozen_model_config(manifest_path.parent))
+                expected_config.update(kind='rule_validation', actions=[], policy_runtime=runtime)
+                if actual_config != expected_config or _hash(actual_config) != result['config_hash']:
+                    raise ValueError('Run config differs from frozen config/runtime')
+                for name in meta['source_sha256']:
+                    from backend.formal_freeze import ROOT
+                    normalized = __import__('hashlib').sha256((ROOT/name).read_text(encoding='utf-8-sig').encode()).hexdigest()
+                    if normalized != frozen['binding']['source_sha256'].get(name):
+                        raise ValueError('Run source differs from frozen source')
+                    if file_hash(ROOT/name) != meta['source_sha256'][name]:
+                        raise ValueError('Run source hash mismatch')
                 for name, digest in meta['artifacts_sha256'].items():
                     if file_hash(local_file(folder, name)) != digest: raise ValueError('Run manifest mismatch')
             ended[key] = row
