@@ -25,7 +25,7 @@ describe('RealRunPanel', () => {
     const create = vi.fn()
     render(<RealRunPanel controller={fakeController({ create })} />)
 
-    await user.click(screen.getByRole('button', { name: '发起真实运行' }))
+    await user.click(screen.getByRole('button', { name: '启动在线任务' }))
 
     expect(create).toHaveBeenCalledTimes(1)
     const request = create.mock.calls[0][0] as { config: { actions: unknown[]; scenario: { scenario_id: string } }; policy_ids: string[]; seed: number }
@@ -41,7 +41,7 @@ describe('RealRunPanel', () => {
     render(<RealRunPanel controller={fakeController({ create })} />)
 
     await user.selectOptions(screen.getByLabelText(/策略对/), 'edf/learned')
-    await user.click(screen.getByRole('button', { name: '发起真实运行' }))
+    await user.click(screen.getByRole('button', { name: '启动在线任务' }))
 
     const request = create.mock.calls[0][0] as { policy_ids: string[] }
     expect(request.policy_ids).toEqual(['edf', 'learned'])
@@ -67,8 +67,8 @@ describe('RealRunPanel', () => {
       />,
     )
 
-    expect(screen.getByLabelText('真实运行指标')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: /下载 ZIP 证据包/ }))
+    expect(screen.getByLabelText('在线任务指标')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /下载 ZIP 结果归档/ }))
     expect(exportZip).toHaveBeenCalled()
   })
 

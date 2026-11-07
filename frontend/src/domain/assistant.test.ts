@@ -7,7 +7,7 @@ describe('fixture-safe assistant boundary', () => {
     const answer = answerFixtureQuestion('这些数字是真的吗？')
 
     expect(answer.isFixture).toBe(true)
-    expect(answer.content).toMatch(/契约样例/)
+    expect(answer.content).toMatch(/演示数据|标准场景/)
     expect(answer.content).toMatch(/非真实实验结果/)
     expect(answer.citations).toContain('docs/evidence_index.md')
   })
@@ -17,7 +17,7 @@ describe('fixture-safe assistant boundary', () => {
 
     expect(answer.isFixture).toBe(true)
     expect(answer.content).toMatch(/无法给出/)
-    expect(answer.content).toMatch(/待真实 run/)
+    expect(answer.content).toMatch(/等待在线任务结果/)
     expect(answer.content).not.toMatch(/提升\s*\d+(?:\.\d+)?%/)
   })
 })

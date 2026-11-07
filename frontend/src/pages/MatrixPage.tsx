@@ -22,13 +22,13 @@ export function MatrixPage() {
     <section className="console-page">
       <header className="console-page__intro">
         <p className="eyebrow">EXPERIMENT MATRIX · 18 CELLS</p>
-        <h1>实验矩阵</h1>
-        <p>预登记的 18 个工况（3档负载 × 3档能量余量 × 2档链路扰动）下规则基线的真实运行结果热力图。</p>
+        <h1>场景验证</h1>
+        <p>在 18 个预登记工况中复核规则基线的开发期运行结果，覆盖负载、能量余量与链路扰动三类变化。</p>
       </header>
 
       <div className="kpi-row">
         <div className="kpi-card">
-          <span>真实运行</span>
+          <span>开发期运行</span>
           <strong><CountUp value={summary.runCount} decimals={0} /></strong>
           <small>180 轨迹 × 2 规则</small>
         </div>
@@ -115,7 +115,7 @@ export function MatrixPage() {
           <span>0% 未交付</span>
           <i className="matrix-legend__scale" />
           <span>100% 全按时</span>
-          <small>EDF/value 规则基线；正式 learned 结果签核后再扩展第三行对比</small>
+          <small>EDF/value 规则基线；learned 结果完成核验后再扩展第三行对比</small>
         </div>
       </div>
 

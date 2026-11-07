@@ -29,7 +29,7 @@ export function EventStreamCard({ runId, events }: EventStreamCardProps) {
 
   return (
     <div className="console-card">
-      <h2>真实事件流</h2>
+      <h2>在线事件记录</h2>
       <p className="panel-note" style={{ marginBottom: 12 }}>
         来源：GET /runs/{'{id}'}/events（分页全量，run_id={runId}）；只读展示，页面不重算指标。
       </p>
@@ -67,7 +67,7 @@ export function EventStreamCard({ runId, events }: EventStreamCardProps) {
           </div>
         </div>
       ) : (
-        <p className="panel-note">该 run 暂无事件。</p>
+        <p className="panel-note">该任务实例暂无事件。</p>
       )}
 
       {energy.length >= 2 ? (

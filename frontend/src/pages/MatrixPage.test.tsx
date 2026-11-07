@@ -12,7 +12,7 @@ describe('matrix page', () => {
     vi.stubGlobal('matchMedia', vi.fn(() => ({ matches: true })))
     render(<MatrixPage />)
 
-    expect(screen.getByText('真实运行')).toBeInTheDocument()
+    expect(screen.getByText('开发期运行')).toBeInTheDocument()
     expect(screen.getByText('360')).toBeInTheDocument()
     expect(screen.getByText('18')).toBeInTheDocument()
   })

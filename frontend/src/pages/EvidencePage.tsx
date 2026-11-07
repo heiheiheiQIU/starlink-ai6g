@@ -11,7 +11,7 @@ import type { RunResult } from '../types/contracts'
 function completedMetrics(result: RunResult): string {
   const learned = result.by_policy.find((policy) => policy.policy_id === 'learned')
   if (learned?.weighted_on_time_rate === null || learned?.weighted_on_time_rate === undefined) {
-    return '—（契约样例）'
+    return '—（演示数据）'
   }
   return `${(learned.weighted_on_time_rate * 100).toFixed(1)}%（占位）`
 }
@@ -45,10 +45,10 @@ const RUNS = [
 
 const EVIDENCE_ROWS = [
   {
-    claim: '冻结资产 SHA 与 v3 包一致',
+    claim: '版本锁定资产 SHA 与 v3 包一致',
     level: '已复核',
     levelKind: 'a' as const,
-    source: '资产证据索引 / 公开数据清单',
+    source: '资产结果依据索引 / 公开数据清单',
     boundary: '支持"资产未篡改"；不支持"谱系闭合"',
   },
   {
@@ -60,9 +60,9 @@ const EVIDENCE_ROWS = [
   },
   {
     claim: '学习调度优于基线',
-    level: '待实验',
+    level: '待正式验证',
     levelKind: 'c' as const,
-    source: '正式实验完成前禁止引用百分比',
+    source: '正式验证完成前禁止引用百分比',
     boundary: '任何收益数字当前均不可写',
   },
 ] as const
@@ -93,9 +93,9 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
   return (
     <section className="console-page">
       <header className="console-page__intro">
-        <p className="eyebrow">TRACEABLE EVIDENCE CHAIN</p>
-        <h1>证据链</h1>
-        <p>每个数字必须能定位到 run_id、结果、事件与源文件；缺证据就显示缺失，不伪造链接。</p>
+        <p className="eyebrow">TRACEABLE RESULTS</p>
+        <h1>结果追溯</h1>
+        <p>每项结果均可定位到任务实例、运行事件与源文件；缺少依据时明确显示缺失。</p>
       </header>
 
       <div className="console-card">
@@ -105,11 +105,11 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
 
       {realResults ? (
         <div className="console-card">
-          <h2>真实 run 结果</h2>
+          <h2>在线任务结果</h2>
           <p className="panel-note" style={{ marginBottom: 10 }}>
-            来源：GET /runs/{'{id}'}/results（run_id={realResults.run_id}）；页面只读展示、不重算指标。
+            来源：任务结果接口 GET /runs/{'{id}'}/results（run_id={realResults.run_id}）；页面只读展示、不重算指标。
           </p>
-          <table className="console-table" aria-label="真实运行指标">
+          <table className="console-table" aria-label="在线任务指标">
             <thead>
               <tr>
                 <th>policy_id</th>
@@ -141,9 +141,9 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
       {realEvents ? <EventStreamCard runId={realEvents.runId} events={realEvents.events} /> : null}
 
       <div className="console-card">
-        <h2>实验列表（契约样例 · 状态语义演示）</h2>
+        <h2>任务实例列表（演示数据 · 状态说明）</h2>
         <p className="panel-note" style={{ marginBottom: 10 }}>
-          下表为固定演示数据（config_hash={FIXTURE_HASH}，占位）；真实 run 的指标见上方"真实 run 结果"卡。
+          下表用于说明任务状态与交互（config_hash={FIXTURE_HASH}，占位）；在线任务指标见上方“在线任务结果”。
         </p>
         <table className="console-table">
           <thead>
@@ -153,7 +153,7 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
               <th>策略</th>
               <th>状态</th>
               <th>加权交付率</th>
-              <th>证据</th>
+              <th>依据</th>
             </tr>
           </thead>
           <tbody>
@@ -169,7 +169,7 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
                 <td>
                   {run.status === 'completed' ? (
                     <button className="link-button" type="button" onClick={() => setExported(true)}>
-                      打开证据 ▸
+                      查看依据 ▸
                     </button>
                   ) : (
                     <span className="table-note">{run.status === 'running' ? '409 语义演示' : '错误码演示'}</span>
@@ -181,13 +181,13 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
         </table>
         {exported ? (
           <p className="panel-note" role="status">
-            已导出 run 包（契约样例：正式版调用 GET /runs/{'{id}'}/export，仅 completed 可导出）。
+            已导出任务结果包（演示流程：正式版调用 GET /runs/{'{id}'}/export，仅 completed 可导出）。
           </p>
         ) : null}
       </div>
 
       <div className="console-card">
-        <h2>证据索引</h2>
+        <h2>结果依据索引</h2>
         <table className="console-table">
           <thead>
             <tr>
@@ -213,7 +213,7 @@ export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage
       </div>
 
       <div className="console-card">
-        <h2>事件日志样例</h2>
+        <h2>事件记录示例</h2>
         <pre className="event-sample">
           {`e=1001 policy=learned t=301.0 decision mode=idle reason=WINDOW_CLOSED
 e=1002 policy=edf     t=301.0 decision mode=idle reason=WINDOW_CLOSED
@@ -221,7 +221,7 @@ e=1003 policy=learned t=302.0 snapshot energy_est=6.2Wh lower=5.1Wh
 e=1004 policy=edf     t=302.0 snapshot energy_est=6.2Wh lower=5.1Wh`}
         </pre>
         <p className="panel-note">
-          契约样例：event_id 跨策略递增、policy_id 隔离；页面不重算科学指标，只消费后端结果。
+          演示说明：event_id 跨策略递增、policy_id 隔离；页面不重算科学指标，只展示后端结果。
         </p>
       </div>
     </section>

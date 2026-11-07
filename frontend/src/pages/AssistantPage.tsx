@@ -8,7 +8,7 @@ import {
 const INITIAL_ANSWER: FixtureAnswer = {
   isFixture: true,
   content:
-    '我只依据系统契约、证据索引和已签核 run 回答。现在接入的是契约样例，因此可以解释字段和流程，但不会把样例指标包装成实验结论。',
+    '我只依据系统接口、追溯索引和已归档任务实例回答。当前接入的是标准场景演示，可以解释字段和流程，但不会把演示数值包装成实验结论。',
   citations: ['docs/evidence_index.md'],
 }
 
@@ -43,13 +43,13 @@ export function AssistantPage() {
       <header className="assistant-page__intro">
         <div>
           <p className="eyebrow">EVIDENCE-GROUNDED COPILOT</p>
-          <h1>AI 助手</h1>
-          <p>解释每次调度的依据、边界与证据，不生成尚未产生的实验结论。</p>
+          <h1>智能研判</h1>
+          <p>解释每次调度的依据、边界与来源，不生成尚未产生的验证结论。</p>
         </div>
         <div className="assistant-boundary">
           <span>回答模式</span>
-          <strong>契约样例 · 防编造</strong>
-          <small>仅允许本地证据引用</small>
+          <strong>标准场景演示 · 可追溯回答</strong>
+          <small>仅引用已建立索引的项目资料</small>
         </div>
       </header>
 
@@ -65,8 +65,8 @@ export function AssistantPage() {
                 ✦
               </span>
               <span>
-                <strong>星地证据助手</strong>
-                <small>{answer.isFixture ? 'FIXTURE BOUNDARY ACTIVE' : ''}</small>
+                <strong>星地智能研判助手</strong>
+                <small>{answer.isFixture ? '演示数据边界已启用' : ''}</small>
               </span>
             </div>
             <p>{answer.content}</p>
@@ -79,12 +79,12 @@ export function AssistantPage() {
           </article>
 
           <form className="assistant-composer" onSubmit={submitQuestion}>
-            <label htmlFor="assistant-question">向证据助手提问</label>
+            <label htmlFor="assistant-question">向智能研判助手提问</label>
             <div>
               <input
                 id="assistant-question"
                 value={question}
-                placeholder="例如：这个结论由哪个 run 支持？"
+                placeholder="例如：这个结论由哪个任务实例支持？"
                 onChange={(event) => setQuestion(event.target.value)}
               />
               <button type="submit" aria-label="发送问题">
@@ -97,18 +97,18 @@ export function AssistantPage() {
         <aside className="assistant-context" aria-label="助手上下文">
           <div>
             <span className="assistant-context__label">KNOWN CONTEXT</span>
-            <h2>本轮可用证据</h2>
+            <h2>本轮可用依据</h2>
             <ul>
               <li>
-                <span>接口数据契约</span>
+                <span>接口数据规范</span>
                 <strong>已接入</strong>
               </li>
               <li>
-                <span>前端 fixture</span>
+                <span>前端演示数据</span>
                 <strong>已接入</strong>
               </li>
               <li>
-                <span>真实实验 run</span>
+                <span>在线任务实例</span>
                 <strong className="pending">待接入</strong>
               </li>
             </ul>

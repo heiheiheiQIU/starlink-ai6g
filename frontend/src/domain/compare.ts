@@ -33,7 +33,7 @@ export const FIXTURE_METRICS: readonly PolicyMetricRow[] = [
     learned: '66.7%',
     diff: '+8.4 pp（占位）',
     diffKind: 'pos',
-    note: '分母含到期失败任务；未到期单列。契约样例占位，非实测。',
+    note: '分母含到期失败任务；未到期单列。当前为演示数据，非正式实测。',
   },
   {
     metric: '关键任务成功率',
@@ -42,7 +42,7 @@ export const FIXTURE_METRICS: readonly PolicyMetricRow[] = [
     learned: '1/1',
     diff: '持平',
     diffKind: 'zero',
-    note: '异常摘要类任务完整按时交付。契约样例占位。',
+    note: '异常摘要类任务完整按时交付。当前为演示数据。',
   },
   {
     metric: '能量违例次数',

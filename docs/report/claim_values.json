@@ -3,11 +3,11 @@
   "generated_from": "docs\\materials\\claims_spec.json",
   "claims": {
     "claim-P1": {
-      "value": null,
+      "value": "1)《中华人民共和国国民经济和社会发展第十四个五年规划和2035年远景目标纲要》2021-03，https://www.gov.cn/xinwen/2021-03/13/content_5592681.htm；2)IMT-2030(6G)推进组《6G总体愿景与潜在关键技术》白皮书（2021-06，官网白皮书列表https://www.imt2030.org.cn/html/default/zhongwen/chengguofabu/baipishu/index.html?index=2）——引用原文：『实现空天地一体化的全球无缝覆盖』（第2-3页）、星地一体融合组网『不是卫星、飞行器与地面网络的简单互联，而是空基、天基、地基网络的深度融合』及『卫星在能源、计算等资源方面的限制也对架构和技术选择提出了更高的要求』（第22-23页）；3)IMT-2030(6G)推进组《6G典型场景和关键能力》白皮书（2022）——引用原文：『实现地面蜂窝网络与非地面网络的融合，构建起全球广域覆盖的空天地一体化的三维立体网络』（第17页）；均2026-11-05访问",
       "unit": "citation",
-      "source": "官方文件URL（待队长核实后填写）",
-      "scope": "政策与白皮书引用；白皮书愿景非工程指标",
-      "status": "pending"
+      "source": "gov.cn + imt2030.org.cn 官方列表页（队长已下载PDF至报告政策材料/并抄录原文）",
+      "scope": "政策与白皮书引用；白皮书愿景非工程指标；白皮书发布年份以PDF内页为准",
+      "status": "signed_off"
     },
     "claim-E1": {
       "value": 0.0303125,
@@ -42,6 +42,13 @@
       "unit": "MSE",
       "source": "artifacts/models/a_n3_policy_v1/training_summary.json（SHA fc011b87…）",
       "scope": "小规模测试集对照，样本规模限制必须注明",
+      "status": "signed_off"
+    },
+    "claim-P2": {
+      "value": "SIA 2026 State of the Satellite Industry Report（第29届，FY2025）：2025全球航天经济4290亿美元(+3%)、商业卫星产业3030亿美元占71%、296次发射、4434颗卫星入轨(+65%)、年末在轨14266颗、卫星宽带用户+62%超1000万",
+      "unit": "citation",
+      "source": "https://sia.org/affordability-productivity-drive-historic-satellite-industry-growth-satellite-industry-association-releases-29th-annual-state-of-the-satellite-industry-report/（队长2026-11-05已核实页面与数字）",
+      "scope": "行业市场数据引用；SIA为国际行业协会权威来源；引用于第5章产业背景",
       "status": "signed_off"
     },
     "claim-A1": {

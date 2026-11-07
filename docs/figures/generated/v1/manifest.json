@@ -1,0 +1,112 @@
+{
+  "schema_version": "visual-pack-v1",
+  "generated_at": "2026-11-07",
+  "generator": "scripts/generate_visual_pack.mjs",
+  "canvas": "1600x900 SVG",
+  "palette": {
+    "bg": "#F7F9FB",
+    "ink": "#17232E",
+    "muted": "#617181",
+    "grid": "#DDE3E8",
+    "navy": "#17324D",
+    "cyan": "#2B9BB0",
+    "teal": "#29977D",
+    "amber": "#D49A3A",
+    "coral": "#D95C5C",
+    "steel": "#6C86A0",
+    "pale": "#E8EFF4",
+    "white": "#FFFFFF"
+  },
+  "fonts": [
+    "Noto Sans SC",
+    "Source Han Sans SC",
+    "Microsoft YaHei",
+    "Arial"
+  ],
+  "source_revision": "64db43c for R5 evidence lookup",
+  "external_assets": [
+    {
+      "file": "C-F00_星地智调主题背景_v1.png",
+      "sha256": "ab4849cfdabd76f24b1809fe8c30010ec065e0fd8239249be1e1fe81e31c9548",
+      "method": "OpenAI built-in image generation",
+      "scope": "non-data thematic background only"
+    }
+  ],
+  "figures": [
+    {
+      "file": "C-F01_6G星地业务冲突.svg",
+      "sha256": "241072e9f53fdf7e606810892e2b8f37bb798e14f6f05b3473a0e975749a9957",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F02_四层架构六步闭环.svg",
+      "sha256": "8535a52604efe2eedfeb0cbe2ee5110ba51526fb219fa033449c521d1af10ad8",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F03_AI与6G双向耦合.svg",
+      "sha256": "57944d0abccbf9efe8ebc03dac7d27e267e0145f01cbfa4af5de0efb321abe65",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F01_公开特征教师标注学习评分器.svg",
+      "sha256": "af1efd1b7e24f3bf1d997fc55e80698cea746480ddae47e9325182d821f50aeb",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F02_教师标签质量审计.svg",
+      "sha256": "3aec5e3b85939122c71e9e4210d8c23f5bca4dd086b13b1cfd00fc0e0178a235",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F03_小样本模型对照.svg",
+      "sha256": "31adbecf5af1cba2309774ee5d14f371a48e77fc1767e2864767091af909d514",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F05_公开信息与真值隔离.svg",
+      "sha256": "141a52a0353d7f656a364adf79b41ece9c5eb5b074ec6121f7332b3e0bb746bb",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F01_发送确认重传去重时序.svg",
+      "sha256": "fafc03e2656719fefc45dc37b2c8ec337f740c4987098671f827c09b2355b1d2",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F02_能量账本校核.svg",
+      "sha256": "b0a47eead44c57aafc06f797ba17a6b8b69afcb9e10f2717fe0cff5260287f9f",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F03_开发期18工况规则矩阵.svg",
+      "sha256": "ea7557ec2afe5dc104e4b7df80c12d2de4460063b1680b39c5cb89b3bcf2881d",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F04_正式实验公平比较协议.svg",
+      "sha256": "d46e6963379165d3c343cb3dadd0a62e8b8b4e40f2aa07baee6d2f13d0933018",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F04_证据链.svg",
+      "sha256": "1a92dfeaffb7102cf6fac0d5adee58299dbad2e2c2e815e84b8f1176f820ce91",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F05_三阶段落地路线.svg",
+      "sha256": "aa5934a90d3da61ef5b80dc664d770615d8209d7af6e4b32697a56d2290e693b",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F08_产业规模与应用价值.svg",
+      "sha256": "235cbfa0af3b914b39dc2d8d5e4b19888b81347725bd0bd537608af6e8b9a673",
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F05_正式结果未完成模板.svg",
+      "sha256": "633219ccc580921c1c660b624f30af8fa9b4e930711f20824b992fda4d817657",
+      "status": "template_only"
+    }
+  ]
+}

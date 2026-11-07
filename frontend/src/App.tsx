@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { AppSidebar } from './components/AppSidebar'
 import { FixtureBanner } from './components/FixtureBanner'
 import { FloatingAssistant } from './components/FloatingAssistant'
+import { PAGE_SOURCES } from './domain/dataSource'
 import type { PageId } from './domain/navigation'
 import { getPageLabel } from './domain/navigation'
 import { AssistantPage } from './pages/AssistantPage'
@@ -17,28 +18,28 @@ export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('flow')
 
   return (
-    <div className="app-shell">
+    <div className="app-shell app-shell--mission app-shell--glass">
       <AppSidebar currentPage={currentPage} onNavigate={setCurrentPage} />
 
       <main className="app-main">
         <header className="topbar">
           <div>
-            <span className="topbar__context">星地任务 / 决策工作台</span>
+            <span className="topbar__context">星地任务 / 智能通信调度</span>
             <strong>{getPageLabel(currentPage)}</strong>
           </div>
           <div className="topbar__actions">
-            <span className="snapshot-chip">OBS · 2026-10-29T15:00Z</span>
+            <span className="snapshot-chip">演示观测 · 2026-10-29T15:00Z</span>
             <button
               className="assistant-trigger"
               type="button"
               onClick={() => setCurrentPage('assistant')}
             >
-              <span aria-hidden="true">✦</span> 全局助手
+              <span aria-hidden="true">✦</span> 智能研判
             </button>
           </div>
         </header>
 
-        <FixtureBanner />
+        <FixtureBanner source={PAGE_SOURCES[currentPage]} />
 
         <div className="page-stage">
           {currentPage === 'flow' ? (

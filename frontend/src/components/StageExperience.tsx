@@ -8,10 +8,10 @@ interface StageExperienceProps {
   onTasksChange: (tasks: StageTask[]) => void
 }
 
-const SCORE_TABLE: Record<string, { factors: [number, number, number]; total: string }> = {
-  '3.0': { factors: [92, 95, 55], total: '0.861' },
-  '1.5': { factors: [55, 68, 40], total: '0.562' },
-  '1.0': { factors: [30, 22, 60], total: '0.318' },
+const SCORE_TABLE: Record<string, { scores: Record<string, number>; total: string }> = {
+  '3.0': { scores: { robust: 0.861, fast: 0.743, idle: 0.5 }, total: '0.861' },
+  '1.5': { scores: { robust: 0.562, fast: 0.501, idle: 0.5 }, total: '0.562' },
+  '1.0': { scores: { robust: 0.318, fast: 0.302, idle: 0.5 }, total: '0.318' },
 }
 
 export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienceProps) {
@@ -29,7 +29,7 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
     return (
       <div className="experience experience--queue">
         <div className="experience-toolbar">
-          <span className="live-pill">LIVE FIXTURE</span>
+          <span className="live-pill">标准场景</span>
           <strong>队列任务 {String(tasks.length).padStart(2, '0')}</strong>
         </div>
         <div className="task-stack">
@@ -121,20 +121,29 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
             </button>
           ))}
         </div>
-        {['风险权重', '期限紧迫度', '能耗影响'].map((label, index) => (
-          <div className="score-factor" key={label}>
-            <span>{label}</span>
-            <i><b style={{ width: scored ? `${table.factors[index]}%` : 0 }} /></i>
-            <strong>{scored ? `${table.factors[index]}%` : '—'}</strong>
-          </div>
-        ))}
+        <div className="score-features" aria-label="模型输入特征组">
+          <span className="chip">健康下界 / SOC / 容量</span>
+          <span className="chip">下一窗口速率与丢失</span>
+          <span className="chip">期限 · 剩余字节 · 优先级</span>
+          <small>23 维公开特征已编码（演示数据输入）</small>
+        </div>
         <button className="experience-primary" type="button" onClick={() => setScored(true)}>运行 AI 评分</button>
         {scored ? (
-          <div className="score-verdict">
-            <span>决策候选</span>
-            <strong>{top.id} × robust</strong>
-            <small>综合评分 {SCORE_TABLE[top.weight].total}（队列最高）→ 交给下一步约束解码</small>
-          </div>
+          <>
+            <div className="score-candidates" aria-label="候选评分（演示数据）">
+              {['robust', 'fast', 'idle'].map((mode) => (
+                <span key={mode} className="mono">
+                  {mode}：{table.scores[mode].toFixed(3)}
+                </span>
+              ))}
+              <small>候选分数用于流程演示，不作为模型归因结论</small>
+            </div>
+            <div className="score-verdict">
+              <span>决策候选</span>
+              <strong>{top.id} × robust</strong>
+              <small>综合评分 {SCORE_TABLE[top.weight].total}（队列最高）→ 交给下一步安全约束决策</small>
+            </div>
+          </>
         ) : null}
       </div>
     )
@@ -185,7 +194,7 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
             <defs>
               <linearGradient id="uplink-gradient" x1="0" y1="1" x2="1" y2="0">
                 <stop offset="0" stopColor="#42d8eb" />
-                <stop offset="1" stopColor="#7d82ff" />
+                <stop offset="1" stopColor="#8295ad" />
               </linearGradient>
               <filter id="link-glow" x="-20%" y="-100%" width="140%" height="300%">
                 <feGaussianBlur stdDeviation="4" result="blur" />
@@ -245,15 +254,15 @@ export function StageExperience({ stepId, tasks, onTasksChange }: StageExperienc
     <div className="experience experience--evidence" data-generated={generated}>
       <div className="evidence-metrics">
         {['加权按时交付率', '关键任务成功率', 'J / 成功 bit'].map((label, index) => (
-          <button type="button" key={label}><span>{label}</span><strong>{generated ? ['待真实 run', '待真实 run', '待真实 run'][index] : '—'}</strong></button>
+          <button type="button" key={label}><span>{label}</span><strong>{generated ? ['等待在线任务结果', '等待在线任务结果', '等待在线任务结果'][index] : '—'}</strong></button>
         ))}
       </div>
-      <svg className="evidence-chart" viewBox="0 0 620 130" role="img" aria-label="指标曲线契约样例">
+      <svg className="evidence-chart" viewBox="0 0 620 130" role="img" aria-label="指标曲线演示数据">
         <path d="M20 108 L120 90 L220 96 L320 62 L420 70 L520 34 L600 42" />
         <path d="M20 112 L120 104 L220 82 L320 88 L420 54 L520 60 L600 28" />
       </svg>
-      <button className="experience-primary" type="button" onClick={() => setGenerated(true)}>生成实验报告</button>
-      {generated ? <p className="report-ready">证据卡已生成 · 指标仍待真实 run</p> : null}
+      <button className="experience-primary" type="button" onClick={() => setGenerated(true)}>生成结果追溯卡</button>
+      {generated ? <p className="report-ready">追溯卡已生成 · 指标等待在线任务结果</p> : null}
     </div>
   )
 }

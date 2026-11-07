@@ -5,30 +5,34 @@ import { describe, expect, it } from 'vitest'
 import App from './App'
 
 describe('v4 application shell', () => {
-  it('keeps the fixture warning visible while navigating all approved pages', async () => {
+  it('keeps a readable data-source boundary visible while navigating approved pages', async () => {
     const user = userEvent.setup()
     const { container } = render(<App />)
 
-    expect(
-      screen.getByRole('heading', { name: '流程主舞台', level: 1 }),
-    ).toBeInTheDocument()
-    expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
-    expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
-    expect(screen.getByText('演示数据模式')).toBeInTheDocument()
-    expect(container).not.toHaveTextContent(/H00|fixture only/)
+    expect(container.querySelector('.app-shell')).toHaveClass('app-shell--mission')
+    expect(container.querySelector('.app-shell')).toHaveClass('app-shell--glass')
 
-    const assistantEntry = screen.getByRole('button', { name: 'AI 助手' })
     expect(
-      screen.getByRole('button', { name: '流程主舞台' }),
+      screen.getByRole('heading', { name: '任务决策', level: 1 }),
+    ).toBeInTheDocument()
+    expect(screen.getByText('演示数据')).toBeInTheDocument()
+    expect(screen.getByText(/不作为实验结论/)).toBeInTheDocument()
+    expect(screen.getByText('工程控制台')).toBeInTheDocument()
+    expect(screen.getByText('数据源、连接与结果来源逐页可追溯')).toBeInTheDocument()
+    expect(container).not.toHaveTextContent(/H00|fixture only|运行服务已连接/)
+
+    const assistantEntry = screen.getAllByRole('button', { name: '智能研判' })[0]
+    expect(
+      screen.getByRole('button', { name: '任务决策' }),
     ).toHaveAttribute('aria-current', 'page')
 
     await user.click(assistantEntry)
 
     expect(
-      screen.getByRole('heading', { name: 'AI 助手', level: 1 }),
+      screen.getByRole('heading', { name: '智能研判', level: 1 }),
     ).toBeInTheDocument()
     expect(assistantEntry).toHaveAttribute('aria-current', 'page')
-    expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
-    expect(screen.getByText(/非实验结果/)).toBeInTheDocument()
+    expect(screen.getByText('演示数据')).toBeInTheDocument()
+    expect(screen.getByText(/回答仅引用已建立索引的项目资料/)).toBeInTheDocument()
   })
 })

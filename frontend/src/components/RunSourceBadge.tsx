@@ -53,9 +53,9 @@ export function RunSourceBadge({ api, storage, controller }: RunSourceBadgeProps
     return (
       <div className="source-badge source-badge--fixture" role="status">
         <strong>演示数据模式</strong>
-        <span>未连接实验服务；页面内容为契约样例，非真实运行结果。</span>
+        <span>未连接任务服务；当前为标准场景演示，不作为在线任务结果。</span>
         <label className="source-manual">
-          已有 run_id？
+          已有任务实例编号？
           <input
             value={manualRunId}
             onChange={(event) => setManualRunId(event.target.value)}
@@ -103,15 +103,15 @@ export function RunSourceBadge({ api, storage, controller }: RunSourceBadgeProps
   const statusLabel = status?.status ?? 'unknown'
   return (
     <div className="source-badge source-badge--online" role="status">
-      <strong>已连接实验服务</strong>
+        <strong>任务服务已连接</strong>
       <span className="mono">{runId}</span>
       <span>
         {statusLabel === 'completed'
-          ? `已完成${results ? ' · 正式结果可用' : ' · 读取结果中'}`
+          ? `已完成${results ? ' · 最终结果可用' : ' · 读取结果中'}`
           : statusLabel === 'running'
             ? `运行中${polling ? ' · 自动轮询' : ''}${status?.progress !== null && status?.progress !== undefined ? ` ${Math.round(status.progress * 100)}%` : ''}`
             : statusLabel === 'failed'
-              ? '失败 · 保留现场，不显示正式指标'
+              ? '失败 · 保留运行记录，不显示最终指标'
               : statusLabel === 'queued'
                 ? '排队中'
                 : '未知状态'}

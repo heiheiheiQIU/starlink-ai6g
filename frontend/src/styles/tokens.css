@@ -1,18 +1,25 @@
 :root {
-  --ink-950: #08111f;
-  --ink-900: #0e1b2d;
-  --ink-800: #17283d;
-  --ink-700: #33465f;
-  --ink-500: #667890;
-  --surface: #f4f7fb;
-  --surface-raised: rgba(255, 255, 255, 0.84);
-  --line: rgba(33, 58, 88, 0.13);
-  --line-strong: rgba(33, 58, 88, 0.22);
-  --cyan-600: #087f9f;
-  --cyan-500: #0b9bc1;
-  --indigo-600: #4054c7;
-  --amber-500: #c77916;
-  --green-500: #1b8c66;
+  --ink-950: #06121c;
+  --ink-900: #0a1a27;
+  --ink-800: #132838;
+  --ink-700: #31495b;
+  --ink-500: #6f8799;
+  --surface: #081824;
+  --surface-raised: rgba(11, 28, 41, 0.88);
+  --line: rgba(143, 181, 197, 0.15);
+  --line-strong: rgba(143, 181, 197, 0.26);
+  --cyan-600: #2d8298;
+  --cyan-500: #65b5c5;
+  --indigo-600: #63758f;
+  --amber-500: #c99a53;
+  --green-500: #579b83;
+  --signal-link: #70c3d0;
+  --signal-ai: #8295ad;
+  --signal-ok: #72ad97;
+  --signal-watch: #d2a65f;
+  --signal-block: #c96e70;
+  --console-panel: rgba(7, 22, 33, 0.9);
+  --console-raised: rgba(14, 36, 51, 0.9);
   --font-body: 14px;
   --font-metric: 24px;
   --radius-sm: 10px;
@@ -21,7 +28,7 @@
   font-family:
     Inter, "SF Pro Display", "PingFang SC", "Microsoft YaHei", system-ui,
     sans-serif;
-  color: var(--ink-900);
+  color: #dbe8ed;
   background: var(--surface);
   font-synthesis: none;
   text-rendering: optimizeLegibility;

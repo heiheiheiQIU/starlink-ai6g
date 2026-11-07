@@ -5,6 +5,24 @@ import { describe, expect, it } from 'vitest'
 import { FlowWorkspace } from './FlowWorkspace'
 
 describe('six-step operations stage', () => {
+  it('exposes a single engineering session for mode, playback and step progress', async () => {
+    const user = userEvent.setup()
+    render(<FlowWorkspace />)
+
+    const status = screen.getByRole('region', { name: '工程运行状态' })
+    expect(status).toHaveTextContent('标准场景演示')
+    expect(status).toHaveTextContent('01 / 06')
+    expect(screen.getByTestId('runtime-pulse')).toHaveAttribute('data-phase', 'queued')
+
+    await user.click(screen.getByRole('button', { name: '单步推进' }))
+    expect(screen.getByRole('heading', { name: '窗口预测', level: 2 })).toBeInTheDocument()
+    expect(screen.getByTestId('runtime-pulse')).toHaveAttribute('data-phase', 'forecasting')
+
+    await user.click(screen.getByRole('button', { name: '切换到在线任务' }))
+    expect(status).toHaveTextContent('在线任务执行')
+    expect(status).toHaveTextContent('任务服务离线')
+  })
+
   it('navigates the fixed steps and reveals traceable engineer details', async () => {
     const user = userEvent.setup()
     render(<FlowWorkspace />)
@@ -25,12 +43,12 @@ describe('six-step operations stage', () => {
       screen.getByRole('heading', { name: '发送/确认', level: 2 }),
     ).toBeInTheDocument()
 
-    expect(screen.queryByLabelText('契约样例预览')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('工程数据预览')).not.toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: '展开工程师详情' }))
 
     expect(screen.getAllByText('events.jsonl').length).toBeGreaterThan(0)
-    expect(screen.getByLabelText('契约样例预览')).toBeInTheDocument()
-    expect(screen.getByText(/契约样例/)).toBeInTheDocument()
+    expect(screen.getByLabelText('工程数据预览')).toBeInTheDocument()
+    expect(screen.getAllByText(/标准场景演示/).length).toBeGreaterThan(0)
   })
 
   it('keeps the approved live interactions and automatic demo controls', async () => {
@@ -88,7 +106,7 @@ describe('six-step operations stage', () => {
     const user = userEvent.setup()
     render(<FlowWorkspace />)
 
-    await user.click(screen.getByRole('button', { name: '步骤 4：约束解码' }))
+    await user.click(screen.getByRole('button', { name: '步骤 4：安全约束决策' }))
     expect(screen.getByText(/本时隙字节配额 = 1024 B/)).toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: '步骤 5：发送/确认' }))

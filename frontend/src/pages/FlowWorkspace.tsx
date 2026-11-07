@@ -3,30 +3,41 @@ import { useEffect, useState } from 'react'
 import { DemoOverlay } from '../components/DemoOverlay'
 import { EngineerDetails } from '../components/EngineerDetails'
 import { FlowStepper } from '../components/FlowStepper'
+import { OperationsBar } from '../components/OperationsBar'
 import { StagePanel } from '../components/StagePanel'
 import { StepContextPanel } from '../components/StepContextPanel'
-import { clampStep, FLOW_STEPS, INITIAL_TASKS, type StageTask } from '../domain/flow'
+import { FLOW_STEPS, INITIAL_TASKS, type StageTask } from '../domain/flow'
+import {
+  advanceSession,
+  createRunSession,
+  selectSessionStep,
+  switchRunMode,
+} from '../domain/runSession'
 
 export function FlowWorkspace() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [autoMode, setAutoMode] = useState(false)
+  const [session, setSession] = useState(createRunSession)
   const [tasks, setTasks] = useState<StageTask[]>(() => [...INITIAL_TASKS])
+  const activeIndex = session.stepIndex
+  const autoMode = session.playback === 'playing'
   const activeStep = FLOW_STEPS[activeIndex]
 
   function selectStep(index: number) {
-    setActiveIndex(clampStep(index))
+    setSession((current) => selectSessionStep(current, index, FLOW_STEPS.length))
+  }
+
+  function togglePlayback() {
+    setSession((current) => ({
+      ...current,
+      playback: current.playback === 'playing' ? 'paused' : 'playing',
+      phase: current.phase === 'complete' ? 'queued' : current.phase,
+      stepIndex: current.phase === 'complete' ? 0 : current.stepIndex,
+    }))
   }
 
   useEffect(() => {
     if (!autoMode) return
     const timer = window.setInterval(() => {
-      setActiveIndex((current) => {
-        if (current >= FLOW_STEPS.length - 1) {
-          setAutoMode(false)
-          return current
-        }
-        return current + 1
-      })
+      setSession((current) => advanceSession(current, FLOW_STEPS.length))
     }, 3200)
     return () => window.clearInterval(timer)
   }, [autoMode])
@@ -36,14 +47,14 @@ export function FlowWorkspace() {
       <header className="flow-workspace__intro">
         <div>
           <p className="eyebrow">MISSION DECISION WORKSPACE</p>
-          <h1>流程主舞台</h1>
+          <h1>任务决策</h1>
           <p>
-            以保守健康状态为输入，让 AI 在 6G 星地链路约束下决定“传什么、何时传、采用何种传输模式”。
+            以保守健康状态为输入，由 AI 评估遥测价值，再经 6G 链路安全约束形成可执行发送计划。
           </p>
         </div>
         <div className="flow-intro-actions">
           {autoMode ? <span className="auto-badge">AUTO · 3S</span> : null}
-          <button className="auto-demo" type="button" onClick={() => setAutoMode((value) => !value)}>
+          <button className="auto-demo" type="button" onClick={togglePlayback}>
             {autoMode ? '停止演示' : '自动演示'}
           </button>
         <div className="mission-id">
@@ -53,6 +64,13 @@ export function FlowWorkspace() {
         </div>
         </div>
       </header>
+
+      <OperationsBar
+        session={session}
+        onModeChange={(mode) => setSession((current) => switchRunMode(current, mode))}
+        onStep={() => setSession((current) => advanceSession(current, FLOW_STEPS.length))}
+        onPlaybackToggle={togglePlayback}
+      />
 
       <div className="flow-workspace__grid">
         <FlowStepper

@@ -9,16 +9,16 @@ describe('compare page', () => {
     const user = userEvent.setup()
     render(<ComparePage />)
 
-    expect(screen.getAllByText(/契约样例/).length).toBeGreaterThan(0)
+    expect(screen.getAllByText(/标准场景|演示数据/).length).toBeGreaterThan(0)
     expect(screen.getByText('EDF 能源约束基线')).toBeInTheDocument()
     expect(screen.getByText(/58\.3%/)).toBeInTheDocument()
 
     await user.selectOptions(screen.getByLabelText('负载'), '2')
     expect(screen.getByRole('alert')).toHaveTextContent(/已标记为历史\/失效/)
-    expect(screen.queryByText(/新 run 已创建/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/新任务实例已创建/)).not.toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: '新建 run 并重算' }))
-    expect(screen.getByRole('status')).toHaveTextContent(/新 run 已创建/)
+    await user.click(screen.getByRole('button', { name: '新建任务实例并重算' }))
+    expect(screen.getByRole('status')).toHaveTextContent(/新任务实例已创建/)
   })
 
   it('keeps both policy series on the same axis contract', () => {

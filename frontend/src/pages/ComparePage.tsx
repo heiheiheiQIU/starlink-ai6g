@@ -27,7 +27,7 @@ function Chart({ values, color }: { values: readonly number[]; color: string }) 
       className="compare-chart"
       viewBox="0 0 560 170"
       role="img"
-      aria-label="同时间轴累计完整交付任务数（契约样例）"
+      aria-label="同时间轴累计完整交付任务数（演示数据）"
     >
       <line x1="8" y1="8" x2="8" y2="160" stroke="rgba(255,255,255,0.08)" />
       <line x1="8" y1="160" x2="552" y2="160" stroke="rgba(255,255,255,0.08)" />
@@ -95,13 +95,13 @@ export function ComparePage() {
     <section className="console-page">
       <header className="console-page__intro">
         <p className="eyebrow">FAIR COMPARISON BENCH</p>
-        <h1>方案对比</h1>
-        <p>同配置、同 seed、同外部轨迹与评价口径下，并排对照两种策略；参数变更立即让旧结果失效。</p>
+        <h1>策略评估</h1>
+        <p>在相同配置、随机种子、外部轨迹与评价口径下并排评估两种策略；参数变更后，历史结果立即失效。</p>
       </header>
 
       <RealRunPanel controller={run} />
 
-      <div className="compare-config" aria-label="实验配置（契约样例）">
+      <div className="compare-config" aria-label="评估配置（标准场景演示）">
         <label>
           负载
           <select value={load} onChange={(event) => { setLoad(Number(event.target.value)); touchConfig() }}>
@@ -129,18 +129,18 @@ export function ComparePage() {
         <span className="mono chip">seed=42 · 18工况×10轨迹</span>
         <div className="spacer" />
         <button className="primary-button" type="button" onClick={createRun}>
-          新建 run 并重算
+          新建任务实例并重算
         </button>
       </div>
 
       {stale ? (
         <div className="stale-banner" role="alert">
-          ⚠ 配置已变更：旧结果（demo_fixture_001）已标记为历史/失效；请新建 run 后再比较。
+          ⚠ 配置已变更：旧结果（demo_fixture_001）已标记为历史/失效；请新建任务实例后再比较。
         </div>
       ) : null}
       {created ? (
         <div className="created-banner" role="status">
-          ✅ 新 run 已创建（契约样例 fixture_002）：仅 completed 后展示结果，数字仍为占位。
+          ✅ 新任务实例已创建（演示编号 fixture_002）：仅执行完成后展示结果，数值仍为演示数据。
         </div>
       ) : null}
 
@@ -156,9 +156,9 @@ export function ComparePage() {
         <div className="policy-panel">
           <header className="policy-panel__head">
             <strong>learned 学习调度（本方案）</strong>
-            <span className="chip">policy_v001 · 契约样例</span>
+            <span className="chip">policy_v001 · 演示数据</span>
           </header>
-          <Chart values={FIXTURE_SERIES.map((point) => point.learned)} color="#6d7cff" />
+          <Chart values={FIXTURE_SERIES.map((point) => point.learned)} color="#8295ad" />
           <p className="panel-note">同一外部轨迹与观测；policy_id=learned。</p>
           <p className="learned-slot-note">
             数据接入点已预留：A 交付评分器后，本面板只替换数据源（policy_id=learned 的真实结果），页面结构不变。
@@ -170,11 +170,11 @@ export function ComparePage() {
         <h2>指标对比</h2>
         <MetricTable rows={FIXTURE_METRICS} />
         <p className="panel-note">
-          轴刻度（秒）：{COMPARE_AXIS.join(' / ')} · 两策略事件按 policy_id 严格隔离 · 全部为契约样例占位，非实验结果。
+          轴刻度（秒）：{COMPARE_AXIS.join(' / ')} · 两策略事件按 policy_id 严格隔离 · 全部为演示数据，不作为实验结果。
         </p>
         <div className="negative-note">
           工程化原则：低负载/能量充足工况若两策略无显著差异，必须如实展示并注明"该工况下额外预测无益"，
-          不删负结果；相对优化器的配对统计只在预冻结 54 条子集上声称。
+          不删除负结果；相对优化器的配对统计仅在预先锁定的 54 条子集上报告。
         </div>
       </div>
     </section>

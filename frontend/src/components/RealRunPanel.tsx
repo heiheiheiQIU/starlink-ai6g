@@ -56,7 +56,7 @@ export function RealRunPanel({ controller }: RealRunPanelProps) {
 
   return (
     <div className="console-card">
-      <h2>真实运行（POST /runs）</h2>
+      <h2>在线任务执行（POST /runs）</h2>
       <div className="real-run-config">
         <label>
           场景预设
@@ -80,7 +80,7 @@ export function RealRunPanel({ controller }: RealRunPanelProps) {
             className="mono"
             value={seedText}
             onChange={(event) => setSeedText(event.target.value)}
-            aria-label="实验 seed"
+            aria-label="随机种子 seed"
           />
         </label>
         <button
@@ -89,27 +89,27 @@ export function RealRunPanel({ controller }: RealRunPanelProps) {
           disabled={busy || !Number.isFinite(seed) || seed < 0}
           onClick={() => void handleCreate()}
         >
-          发起真实运行
+          启动在线任务
         </button>
       </div>
       <p className="panel-note">{preset.description}</p>
 
       {stale ? (
         <div className="stale-banner" role="alert">
-          ⚠ 配置已变更：下方结果为旧配置（{lastKey?.split('|')[0]}）的历史展示；请重新发起真实运行。
+          ⚠ 配置已变更：下方保留旧配置（{lastKey?.split('|')[0]}）的历史结果；请重新启动在线任务。
         </div>
       ) : null}
 
       {state.kind === 'online' ? (
         <div className="real-run-status">
           <p>
-            run_id：<span className="mono">{state.runId}</span> · {statusLabel(state.status?.status, state.status?.progress)}
+            任务实例（run_id）：<span className="mono">{state.runId}</span> · {statusLabel(state.status?.status, state.status?.progress)}
             {state.offline ? ' · 服务连接失败（保留最后状态）' : ''}
           </p>
           {state.error ? <p className="real-run-error">{state.error}</p> : null}
           {state.status?.status === 'completed' && state.results ? (
             <>
-              <table className="console-table" aria-label="真实运行指标">
+              <table className="console-table" aria-label="在线任务指标">
                 <thead>
                   <tr>
                     <th>policy_id</th>
@@ -136,13 +136,13 @@ export function RealRunPanel({ controller }: RealRunPanelProps) {
                 </tbody>
               </table>
               <button className="link-button" type="button" onClick={() => void exportZip()}>
-                下载 ZIP 证据包（{state.runId}.zip）
+                下载 ZIP 结果归档（{state.runId}.zip）
               </button>
             </>
           ) : null}
         </div>
       ) : (
-        <p className="panel-note">未连接实验服务时，下方为契约样例演示；发起真实运行需要本机后端（uvicorn 127.0.0.1:8000）。</p>
+        <p className="panel-note">任务服务未连接时，页面展示标准场景；启动在线任务需连接本机服务（uvicorn 127.0.0.1:8000）。</p>
       )}
     </div>
   )

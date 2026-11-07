@@ -48,10 +48,10 @@ export function TeacherAuditCard() {
   const { summary, samples } = fixture
   return (
     <div className="console-card">
-      <h2>教师标签质量审计（契约样例数据）</h2>
+      <h2>最优决策标注质量（演示数据）</h2>
       <p className="panel-note" style={{ marginBottom: 10 }}>
-        数据来源：{fixture.source}（SHA 前缀 {fixture.source_sha256_prefix}）；审计结论经 A 执行、C 独立复算一致。
-        结论：冻结包仅用于管线回归，不构成学习评分器效果证据；数据重建（A-N4b）进行中。
+        数据来源：{fixture.source}（SHA 前缀 {fixture.source_sha256_prefix}）；质量结论经双人独立复算一致。
+        结论：版本锁定包仅用于管线回归，不构成学习评分器效果依据；训练数据升级仍在进行。
       </p>
 
       <div className="audit-kpis">
