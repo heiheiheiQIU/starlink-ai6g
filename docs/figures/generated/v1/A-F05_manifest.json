@@ -1,0 +1,30 @@
+{
+  "schema_version": "figure-manifest-v1",
+  "figure_id": "A-F05",
+  "title_cn": "公开信息与真值隔离",
+  "owner": "A",
+  "reviewers": [
+    "B",
+    "C"
+  ],
+  "source_files": [
+    "docs/report/report_v2.md",
+    "docs/contracts/README.md"
+  ],
+  "claim_ids": [],
+  "data_scope": "mechanism_public_observation_boundary",
+  "script": "scripts/generate_visual_pack.mjs",
+  "outputs": [
+    "docs/figures/generated/v1/A-F05_公开信息与真值隔离.svg",
+    "docs/figures/generated/v1/previews/A-F05_公开信息与真值隔离.png"
+  ],
+  "source_git_sha": "691ab283a23ae4397c8a927067ecbcf2a2ed4f11",
+  "git_sha": "691ab283a23ae4397c8a927067ecbcf2a2ed4f11",
+  "generated_at": "2026-11-07",
+  "status": "review_pending",
+  "limitations": [
+    "机制图不包含实验结果",
+    "完整事件链和未来真值仅供事后评估，评分器不得回读",
+    "嵌字PDF与600 DPI PNG尚待C统一导出"
+  ]
+}
