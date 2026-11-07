@@ -24,9 +24,11 @@ REFERENCE = REPORT_DIR / "reference_official.docx"
 
 M_NS = "http://schemas.openxmlformats.org/officeDocument/2006/math"
 W_NS = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+V_NS = "urn:schemas-microsoft-com:vml"
 EQ_LABEL = re.compile(r"<!--\s*(eq:[\w-]+)\s*-->")
 EQ_REF = re.compile(r"式\(?(eq:[\w-]+)\)?")
 TAB_LABEL = re.compile(r"<!--\s*(tab:[\w-]+)\s*\|\s*(.*?)\s*-->")
+FIG_LABEL = re.compile(r"<!--\s*(fig:[\w-]+)\s*\|\s*(.*?)\s*-->")
 CLAIM_TOKEN = re.compile(r"\{\{(claim-[\w-]+)\}\}")
 
 
@@ -138,15 +140,16 @@ def configure_reference_document(document: docx.Document) -> None:
 
 
 def ensure_reference_doc() -> Path:
-    if not REFERENCE.exists():
-        raw = subprocess.run(
-            [str(resolve_pandoc()), "--print-default-data-file", "reference.docx"],
-            capture_output=True,
-            check=False,
-        )
-        if raw.returncode != 0:
-            raise RuntimeError(f"无法生成参考文档: {raw.stderr.decode(errors='ignore')}")
-        REFERENCE.write_bytes(raw.stdout)
+    if REFERENCE.exists():
+        return REFERENCE
+    raw = subprocess.run(
+        [str(resolve_pandoc()), "--print-default-data-file", "reference.docx"],
+        capture_output=True,
+        check=False,
+    )
+    if raw.returncode != 0:
+        raise RuntimeError(f"无法生成参考文档: {raw.stderr.decode(errors='ignore')}")
+    REFERENCE.write_bytes(raw.stdout)
     document = docx.Document(str(REFERENCE))
     configure_reference_document(document)
     document.save(str(REFERENCE))
@@ -234,12 +237,33 @@ def style_table(table) -> None:
                     rfonts.set(qn("w:eastAsia"), "宋体" if row_index else "黑体")
 
 
+def compact_appendix_table(table) -> None:
+    """Tighten evidence-index tables so short trailing rows do not create an orphan page."""
+    for row in table.rows:
+        for cell in row.cells:
+            tc_pr = cell._tc.get_or_add_tcPr()
+            tc_mar = tc_pr.find(qn("w:tcMar"))
+            if tc_mar is not None:
+                for side in ("top", "bottom"):
+                    node = tc_mar.find(qn(f"w:{side}"))
+                    if node is not None:
+                        node.set(qn("w:w"), "35")
+            for paragraph in cell.paragraphs:
+                paragraph.paragraph_format.line_spacing = 0.9
+                for run in paragraph.runs:
+                    run.font.size = Pt(8.5)
+
+
 def extract_equation_labels(source: Path) -> list[str]:
     return EQ_LABEL.findall(source.read_text(encoding="utf-8"))
 
 
 def extract_table_labels(source: Path) -> list[tuple[str, str]]:
     return TAB_LABEL.findall(source.read_text(encoding="utf-8"))
+
+
+def extract_figure_labels(source: Path) -> list[tuple[str, str]]:
+    return FIG_LABEL.findall(source.read_text(encoding="utf-8"))
 
 
 def render_claim_tokens(text: str, claims: dict) -> str:
@@ -322,6 +346,28 @@ def add_table_caption(table, number: int, label: str, title: str) -> str:
     return bookmark
 
 
+def add_figure_caption(image_paragraph, number: int, label: str, title: str) -> str:
+    """Insert a live figure caption immediately after an image paragraph."""
+    bookmark = _bookmark_name(label)
+    xml_paragraph = OxmlElement("w:p")
+    image_paragraph._p.addnext(xml_paragraph)
+    paragraph = Paragraph(xml_paragraph, image_paragraph._parent)
+    paragraph.style = "Caption"
+    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    paragraph.paragraph_format.keep_with_next = False
+    paragraph.add_run("图 ")
+    bookmark_start = OxmlElement("w:bookmarkStart")
+    bookmark_start.set(qn("w:id"), str(3000 + number))
+    bookmark_start.set(qn("w:name"), bookmark)
+    paragraph._p.append(bookmark_start)
+    _append_field(paragraph, "SEQ Figure \\* ARABIC", str(number))
+    bookmark_end = OxmlElement("w:bookmarkEnd")
+    bookmark_end.set(qn("w:id"), str(3000 + number))
+    paragraph._p.append(bookmark_end)
+    paragraph.add_run(f"  {title}")
+    return bookmark
+
+
 def _all_paragraphs(document):
     for paragraph in document.paragraphs:
         yield paragraph
@@ -335,10 +381,14 @@ def replace_semantic_references(
     document,
     bookmark_map: dict[str, str],
     table_bookmark_map: dict[str, str] | None = None,
+    figure_bookmark_map: dict[str, str] | None = None,
 ) -> None:
-    """Replace equation/table source tokens with Word REF fields."""
+    """Replace equation/table/figure source tokens with Word REF fields."""
     table_bookmark_map = table_bookmark_map or {}
-    combined = re.compile(r"式\(?(eq:[\w-]+)\)?|表\(?(tab:[\w-]+)\)?")
+    figure_bookmark_map = figure_bookmark_map or {}
+    combined = re.compile(
+        r"式\(?(eq:[\w-]+)\)?|表\(?(tab:[\w-]+)\)?|图\(?(fig:[\w-]+)\)?"
+    )
     for paragraph in list(_all_paragraphs(document)):
         original = paragraph.text
         matches = list(combined.finditer(original))
@@ -351,7 +401,7 @@ def replace_semantic_references(
         cursor = 0
         for match in matches:
             paragraph.add_run(original[cursor:match.start()])
-            equation_label, table_label = match.groups()
+            equation_label, table_label, figure_label = match.groups()
             if equation_label:
                 paragraph.add_run("式（")
                 _append_field(
@@ -360,11 +410,18 @@ def replace_semantic_references(
                     "?",
                 )
                 paragraph.add_run("）")
-            else:
+            elif table_label:
                 paragraph.add_run("表")
                 _append_field(
                     paragraph,
                     f"REF {table_bookmark_map.get(table_label, _bookmark_name(table_label))} \\h",
+                    "?",
+                )
+            else:
+                paragraph.add_run("图")
+                _append_field(
+                    paragraph,
+                    f"REF {figure_bookmark_map.get(figure_label, _bookmark_name(figure_label))} \\h",
                     "?",
                 )
             cursor = match.end()
@@ -399,6 +456,8 @@ def postprocess(out: Path, source: Path) -> None:
             label, title = table_labels[index - 1]
         else:
             label, title = f"tab:auto-{index}", "数据表"
+        if label in {"tab:claims", "tab:reproduction"}:
+            compact_appendix_table(table)
         table_bookmark_map[label] = add_table_caption(table, index, label, title)
 
     labels = extract_equation_labels(source)
@@ -416,7 +475,31 @@ def postprocess(out: Path, source: Path) -> None:
     for index, paragraph in enumerate(equations, start=1):
         label = labels[index - 1] if index <= len(labels) else f"eq:auto-{index}"
         bookmark_map[label] = add_equation_number(paragraph, index, label)
-    replace_semantic_references(document, bookmark_map, table_bookmark_map)
+    figure_labels = extract_figure_labels(source)
+    image_paragraphs = [
+        paragraph
+        for paragraph in document.paragraphs
+        if paragraph._p.findall(".//w:drawing", {"w": W_NS})
+        or paragraph._p.findall(".//v:imagedata", {"v": V_NS})
+    ]
+    figure_bookmark_map: dict[str, str] = {}
+    for index, paragraph in enumerate(image_paragraphs, start=1):
+        paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        paragraph.paragraph_format.first_line_indent = None
+        paragraph.paragraph_format.keep_with_next = True
+        if index <= len(figure_labels):
+            label, title = figure_labels[index - 1]
+        else:
+            label, title = f"fig:auto-{index}", "系统图"
+        figure_bookmark_map[label] = add_figure_caption(
+            paragraph, index, label, title
+        )
+    replace_semantic_references(
+        document,
+        bookmark_map,
+        table_bookmark_map,
+        figure_bookmark_map,
+    )
 
     in_references = False
     for paragraph in document.paragraphs:
@@ -435,7 +518,8 @@ def postprocess(out: Path, source: Path) -> None:
     document.save(str(out))
     print(
         f"[build] {out}：段落 {len(document.paragraphs)}、表格 {len(document.tables)}、"
-        f"公式 {len(equations)}、标签 {len(labels)}"
+        f"公式 {len(equations)}、图 {len(image_paragraphs)}、"
+        f"公式标签 {len(labels)}、图标签 {len(figure_labels)}"
     )
 
 

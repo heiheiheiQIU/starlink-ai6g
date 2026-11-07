@@ -36,77 +36,77 @@
     {
       "file": "C-F01_6G星地业务冲突.svg",
       "sha256": "f32bfc62da2b236b6a458b4e66efb092f9abebf58bb11cf2c887084ba038d4be",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "C-F02_三层执行架构六步闭环.svg",
-      "sha256": "516b840011ebea9f709f8f8a072725540e57ac83fc0f31bd8a13cc930bfdca77",
-      "status": "ready_for_review"
+      "sha256": "4c31f89e2d9afe681fc75df727f007a73793b41778030ef491ea486b9e2111d0",
+      "status": "review_pending"
     },
     {
       "file": "C-F03_AI与6G双向耦合.svg",
-      "sha256": "288ccdb7687eb6d09aea43859aff0a8fbf65bdf6e7963b0ac78abb3f86f25abe",
-      "status": "ready_for_review"
+      "sha256": "84d3a5761b34bf1364d89feffe7a949e2fe0a5821fcba99b0ef73dce03fdcf1d",
+      "status": "review_pending"
     },
     {
       "file": "A-F01_公开特征教师标注学习评分器.svg",
-      "sha256": "02f1040b7de6659ff607e71a3e69287de5f63a98295c5c3a896a6c9911be5e73",
-      "status": "ready_for_review"
+      "sha256": "47da9db3973ccd7ed2db1aedac3b1a25c641c8731ebfad784d2f3daeae81364d",
+      "status": "review_pending"
     },
     {
       "file": "A-F02_教师标签质量审计.svg",
-      "sha256": "1b544d06234aa02df243c6263a18d420cd237e1e0c5911b5e12474e28fe8970d",
-      "status": "ready_for_review"
+      "sha256": "a541bb3ee5e093082812590214f9aec97615c8271786d505a13cb6138cea071e",
+      "status": "review_pending"
     },
     {
       "file": "A-F03_小样本模型对照.svg",
-      "sha256": "d1faabfc493eee20f0951addc9510b6bf7571facbcdad67d5692e948abf1f07f",
-      "status": "ready_for_review"
+      "sha256": "66c0c8f244aadddb8bddd92b589d7d2333ec7a9be21feeb883335774c6736d3f",
+      "status": "review_pending"
     },
     {
       "file": "A-F05_公开信息与真值隔离.svg",
       "sha256": "289815397457c20d99e0cfb39ec37c321120a6ae4fdea4edb5c98499b03f96cb",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "B-F01_发送确认重传去重时序.svg",
       "sha256": "1ab9eb2db1bb7a4acc62cf850646eeb0089465f4af7bb6f3ff4a1edbef437736",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "B-F02_能量账本校核.svg",
       "sha256": "675d09a23bc441a7bc2e078a5282a5105a09d9ebabd14a816349da07fb06a262",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "B-F03_开发期18工况规则矩阵.svg",
       "sha256": "bcbf034ee87ba8fa0f4eee95bbeddb77f2ce5e8b1fa064f4f5dd3924f110d6f3",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "B-F04_正式实验公平比较协议.svg",
       "sha256": "43a549c343edc840a887205fb686650586d0751eee7b9f0f5623387ec522319b",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "C-F04_证据链.svg",
       "sha256": "8acccc88270a0045fe2007470379cc6292383a8995271d45e6a04e7a06f635c7",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "C-F05_三阶段落地路线.svg",
       "sha256": "80c2e31860619e9be151c4651416bff775cfb5b90285c662d1edc0ee95d9ac8d",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "C-F08_产业规模与应用价值.svg",
       "sha256": "eda54fe7d01d76eb31ac73e85b4b278d8d920e1a1b9a9955b521a1b601c9f226",
-      "status": "ready_for_review"
+      "status": "review_pending"
     },
     {
       "file": "B-F05_正式结果未完成模板.svg",
       "sha256": "407a472ef3f935e5ebb31700f10e402df6280bb8505b76b7ae8caa7e485cb5c3",
-      "status": "template_only"
+      "status": "draft"
     }
   ]
 }

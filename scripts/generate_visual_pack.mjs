@@ -64,19 +64,20 @@ ${L(220,225,1480,225,C.grid,1)}${L(220,375,1480,375,C.grid,1)}${L(220,525,1480,5
 ${box(250,250,300,100,'① 状态融合',['健康下界 · 任务 · 窗口'],C.teal)}${box(650,250,300,100,'② 候选构造',['任务 × robust/fast + idle'],C.cyan)}${box(1050,250,300,100,'③ AI价值评分',['输出候选分数，不直接执行'],C.cyan)}
 ${arrow(550,300,650,300)}${arrow(950,300,1050,300)}
 ${box(350,400,360,100,'④ 约束解码',['窗口 · 能量 · 协议义务'],C.amber)}${box(890,400,360,100,'⑤ 链路执行',['发送 · ACK · 重传 · 去重'],C.amber)}${arrow(710,450,890,450,C.amber)}
-${box(410,550,340,100,'⑥ 证据记录',['run_id · 哈希 · 事件 · 指标'],C.steel)}${box(850,550,340,100,'结果回灌',['适用域 · 失败边界 · 版本冻结'],C.teal)}${arrow(750,600,850,600,C.steel)}
+${box(410,550,340,100,'⑥ 证据记录',['run_id · 哈希 · 事件 · 指标'],C.steel)}${box(850,550,340,100,'离线证据归档',['适用域 · 失败边界 · 版本冻结'],C.teal)}${arrow(750,600,850,600,C.steel)}
 <path d="M1190 600 C1430 600 1440 300 1350 300" fill="none" stroke="${C.teal}" stroke-width="3" stroke-dasharray="9 8"/><polygon points="1350,300 1363,292 1363,308" fill="${C.teal}"/>
 ${R(1240,680,230,52,'#FFF5E3',C.amber,10)}${T(1355,701,'虚线：证据反馈',13,800,C.amber,'middle')}${T(1355,720,'不是在线反向控制',12,700,C.muted,'middle')}
 `);
 
-figs['C-F03_AI与6G双向耦合.svg'] = svg('AI决定“传什么、何时传、用何种模式”，6G状态反过来约束AI','评分—解码解耦：学习处理排序，规则保证可执行',`
+figs['C-F03_AI与6G双向耦合.svg'] = svg('AI参与候选价值排序，6G状态与安全边界共同形成可执行通信动作','评分—解码解耦：学习处理排序，规则与协议保证可执行',`
 ${CIRC(800,455,128,'#E6F3F6',C.cyan,4)}${T(800,430,'条件化',29,800,C.navy,'middle')}${T(800,470,'通信决策',29,800,C.navy,'middle')}${T(800,505,'AI × 6G',21,700,C.cyan,'middle')}
-${box(150,190,380,150,'AI侧：价值估计',['任务紧迫度 · 健康风险','能量余量 · 候选收益'],C.cyan)}${box(1070,190,380,150,'6G侧：状态与约束',['可见窗口 · 速率 · 丢失','ACK义务 · 单在途协议'],C.amber)}
+${box(150,190,380,150,'AI侧：价值估计',['任务紧迫度 · 健康风险','能量余量 · 候选收益'],C.cyan)}${box(1070,190,380,150,'6G侧：状态与约束',['可见窗口 · 速率 · 预测丢失','ACK义务 · 单在途协议'],C.amber)}
 ${box(150,590,380,140,'输出：候选排序',['发送哪条遥测','robust / fast / idle'],C.teal)}${box(1070,590,380,140,'执行：安全解码',['不可行动作被屏蔽','域外/异常受控回退'],C.steel)}
 <path d="M530 270 C690 190 910 190 1070 270" fill="none" stroke="${C.cyan}" stroke-width="6"/><polygon points="1068,270 1045,258 1048,284" fill="${C.cyan}"/>
 ${T(800,210,'AI给出价值排序',20,700,C.cyan,'middle')}
 <path d="M1070 660 C910 760 690 760 530 660" fill="none" stroke="${C.amber}" stroke-width="6"/><polygon points="532,660 555,648 552,674" fill="${C.amber}"/>
-${T(800,752,'链路结果与边界形成新证据',20,700,C.amber,'middle')}
+${T(800,746,'链路结果仅进入离线评估与后续版本证据',19,700,C.amber,'middle')}
+${T(800,777,'当前运行不在线更新模型',16,800,C.coral,'middle')}
 ${arrow(530,650,700,515,C.teal)}${arrow(900,515,1070,650,C.steel)}
 `);
 
@@ -85,28 +86,28 @@ ${T(100,165,'离线训练链',22,800,C.cyan)}${T(100,520,'在线推理链',22,80
 ${R(1240,135,280,44,'#E8F3F6',C.cyan,10)}${T(1380,164,'教师仅离线调用 · 在线不依赖求解器',14,800,C.cyan,'middle')}
 ${box(90,210,250,125,'版本锁定观测',['14维全局 + 9维候选'],C.steel)}${box(400,210,250,125,'候选集合',['task × mode + idle'],C.cyan)}${box(710,210,250,125,'教师预算树',['仅 OPTIMAL / gap=0 准入'],C.amber)}${box(1020,210,250,125,'监督标签',['候选效用 + 可行性'],C.teal)}${box(1330,210,190,125,'评分器',['23-32-16'],C.cyan)}
 ${arrow(340,272,400,272)}${arrow(650,272,710,272)}${arrow(960,272,1020,272)}${arrow(1270,272,1330,272)}
-${box(90,565,300,125,'实时公开观测',['健康下界 · 任务 · 预测窗口'],C.teal)}${box(470,565,300,125,'冻结学习评分器',['候选分数 + 置信边界'],C.cyan)}${box(850,565,300,125,'约束解码器',['能量 · 窗口 · 协议'],C.amber)}${box(1230,565,290,125,'可执行动作',['发送 / 等待 / 回退'],C.steel)}
+${box(90,565,300,125,'实时公开观测',['健康下界 · 任务 · 预测窗口'],C.teal)}${box(470,565,300,125,'冻结学习评分器',['候选分数'],C.cyan)}${box(850,565,300,125,'约束解码器（B线模块）',['能量 · 窗口 · 协议'],C.amber)}${box(1230,565,290,125,'可执行动作',['发送 / 等待 / 回退'],C.steel)}
 ${arrow(390,628,470,628,C.teal)}${arrow(770,628,850,628,C.teal)}${arrow(1150,628,1230,628,C.teal)}
 ${R(470,390,680,80,'#FFF5E3',C.amber,14)}${T(810,425,'训练域：零损失　→　正式域：含随机丢失（域外压力测试）',20,800,C.amber,'middle')}${T(810,457,'模型输出是评分，不是执行命令',17,600,C.muted,'middle')}
 ${T(90,748,'版本指纹：数据manifest → 训练配置SHA → 模型五文件SHA → 运行配置SHA',15,700,C.steel)}
 `,'项目事实：claim-D1/D3/E2；正式域外关系见正式输入协议。');
 
 figs['A-F02_教师标签质量审计.svg'] = svg('旧20样本缺少可学习的决策差异，只能用于管线回归','条形分布＋标签类别点图＋困难工况覆盖矩阵',`
-${R(70,150,460,620,C.white,C.grid,20,1.5,'filter="url(#shadow)"')}${T(105,200,'(a) 任务标签信息量',22,800)}
+${R(70,150,460,620,C.white,C.grid,20)}${T(105,200,'(a) 任务标签信息量',22,800)}
 ${T(115,270,'任务动作全零',19,600)}<rect x="300" y="242" width="180" height="36" rx="8" fill="#E8EFF4"/><rect x="300" y="242" width="117" height="36" rx="8" fill="${C.coral}"/>${T(430,268,'13/20',18,800,C.coral)}
 ${T(115,340,'至少一个非零',19,600)}<rect x="300" y="312" width="180" height="36" rx="8" fill="#E8EFF4"/><rect x="300" y="312" width="63" height="36" rx="8" fill="${C.teal}"/>${T(375,338,'7/20',18,800,C.teal)}
-${CIRC(300,470,80,'none',C.grid,24)}<circle cx="300" cy="470" r="80" fill="none" stroke="${C.coral}" stroke-width="24" stroke-dasharray="327 503" transform="rotate(-90 300 470)"/>${T(300,465,'65%',30,800,C.coral,'middle')}${T(300,500,'全零标签',16,600,C.muted,'middle')}
-${R(570,150,440,620,C.white,C.grid,20,1.5,'filter="url(#shadow)"')}${T(605,200,'(b) 最优集合辨识度',22,800)}
+${R(125,420,350,155,'#FCEAEA',C.coral,16)}${T(300,472,'13/20',36,900,C.coral,'middle')}${T(300,512,'任务动作全零',18,700,C.ink,'middle')}${T(300,548,'仅支持管线回归',17,700,C.muted,'middle')}
+${R(570,150,440,620,C.white,C.grid,20)}${T(605,200,'(b) 最优集合辨识度',22,800)}
 ${T(625,275,'idle 位于最优集合',19,600)}${L(625,315,930,315,C.grid,5)}${CIRC(915,315,12,C.amber)}${T(915,355,'19/20',18,800,C.amber,'middle')}
 ${T(625,435,'唯一非 idle 最优',19,600)}${L(625,475,930,475,C.grid,5)}${CIRC(640,475,12,C.teal)}${T(640,515,'1/20',18,800,C.teal,'middle')}
 ${R(620,590,340,105,'#FFF5E3',C.amber,14)}${multiline(790,625,['高命中不等于学到有效策略','并列最优会掩盖模型能力'],18,700,C.amber,1.45,'middle')}
-${R(1050,150,480,620,C.white,C.grid,20,1.5,'filter="url(#shadow)"')}${T(1085,200,'(c) 困难工况覆盖',22,800)}
+${R(1050,150,480,620,C.white,C.grid,20)}${T(1085,200,'(c) 困难工况覆盖',22,800)}
 ${['低能量','无窗口','窗口前到期','多任务冲突'].map((s,i)=>`${T(1090,285+i*92,s,18,600)}${R(1280,250+i*92,180,55,'url(#hatch)',C.grid,10)}${T(1370,286+i*92,'0 / 20',18,800,C.muted,'middle')}`).join('')}
 ${R(1090,650,370,70,'#FCEAEA',C.coral,12)}${T(1275,692,'仅旧20样本冻结包',20,800,C.coral,'middle')}
 `,'数据源：claim-D1；不得据此声称AI优于规则。');
 
 figs['A-F03_小样本模型对照.svg'] = svg('小样本域内对照不支持学习评分器优于简单基线','棒棒糖图＋样本量警示；test utility MSE，越低越好',`
-${R(100,170,930,560,C.white,C.grid,22,1.5,'filter="url(#shadow)"')}${T(150,225,'测试集 utility MSE',24,800)}
+${R(100,170,930,560,C.white,C.grid,22)}${T(150,225,'测试集 utility MSE',24,800)}
 ${[0,0.1,0.2,0.3,0.4].map((v,i)=>`${L(220+i*165,275,220+i*165,650,C.grid,1)}${T(220+i*165,685,v.toFixed(1),16,500,C.muted,'middle')}`).join('')}
 ${T(160,370,'线性模型',20,700)}${L(220,360,486,360,C.steel,6)}${CIRC(486,360,14,C.teal)}${T(505,367,'0.161',20,800,C.teal)}
 ${T(160,520,'MLP',20,700)}${L(220,510,807,510,C.steel,6)}${CIRC(807,510,14,C.coral)}${T(830,517,'0.356',20,800,C.coral)}
@@ -222,6 +223,6 @@ ${R(520,735,560,55,'#FCEAEA',C.coral,12)}${T(800,770,'禁止以演示数据、0�
 
 const heroPath=path.join(OUT,'C-F00_星地智调主题背景_v1.png');
 const manifest={schema_version:'visual-pack-v2',generated_at:'2026-11-07',generator:'scripts/generate_visual_pack.mjs',canvas:'1600x900 SVG',palette:C,fonts:['Noto Sans SC','Source Han Sans SC','Microsoft YaHei','Arial'],source_revision:'64db43c for R5 evidence lookup',external_assets:fs.existsSync(heroPath)?[{file:path.basename(heroPath),sha256:crypto.createHash('sha256').update(fs.readFileSync(heroPath)).digest('hex'),method:'OpenAI built-in image generation',scope:'non-data thematic background only'}]:[],figures:[]};
-for(const [name,raw] of Object.entries(figs)){const content=decorate(raw,name);const p=path.join(OUT,name);fs.writeFileSync(p,content,'utf8');manifest.figures.push({file:name,sha256:crypto.createHash('sha256').update(content).digest('hex'),status:name.includes('未完成模板')?'template_only':'ready_for_review'});}
+for(const [name,raw] of Object.entries(figs)){const content=decorate(raw,name);const p=path.join(OUT,name);fs.writeFileSync(p,content,'utf8');manifest.figures.push({file:name,sha256:crypto.createHash('sha256').update(content).digest('hex'),status:name.includes('未完成模板')?'draft':'review_pending'});}
 fs.writeFileSync(path.join(OUT,'manifest.json'),JSON.stringify(manifest,null,2)+'\n','utf8');
 console.log(`generated ${manifest.figures.length} SVG figures in ${OUT}`);

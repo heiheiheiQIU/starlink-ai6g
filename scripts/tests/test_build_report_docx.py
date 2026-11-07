@@ -5,6 +5,7 @@ from pathlib import Path
 
 from docx import Document
 from docx.oxml.ns import qn
+from lxml import etree
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "build_report_docx.py"
@@ -87,6 +88,58 @@ class ReportBuilderTests(unittest.TestCase):
         self.assertIn('w:name="tab_kpi"', previous)
         self.assertNotIn("表(tab:kpi)", reference.text)
         self.assertIn("REF tab_kpi", reference._p.xml)
+
+    def test_extract_figure_labels_preserves_title_and_source_order(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "report.md"
+            source.write_text(
+                "<!-- fig:flow | 端到端闭环 -->\n![](flow.svg){width=15cm}\n\n"
+                "<!-- fig:evidence | 证据链 -->\n![](evidence.svg){width=15cm}\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                MODULE.extract_figure_labels(source),
+                [("fig:flow", "端到端闭环"), ("fig:evidence", "证据链")],
+            )
+
+    def test_figure_caption_uses_seq_bookmark_and_reference(self):
+        document = Document()
+        image_paragraph = document.add_paragraph("图像占位")
+        reference = document.add_paragraph("系统闭环如图(fig:flow)所示。")
+        bookmark = MODULE.add_figure_caption(
+            image_paragraph, 1, "fig:flow", "端到端闭环"
+        )
+        MODULE.replace_semantic_references(
+            document,
+            {},
+            {},
+            {"fig:flow": bookmark},
+        )
+        following = image_paragraph._p.getnext().xml
+        self.assertIn("SEQ Figure", following)
+        self.assertIn('w:name="fig_flow"', following)
+        self.assertNotIn("图(fig:flow)", reference.text)
+        self.assertIn("REF fig_flow", reference._p.xml)
+
+    def test_v3_report_has_twelve_bound_figures_and_honest_status(self):
+        source = MODULE.REPORT_DIR / "report_v3.md"
+        text = source.read_text(encoding="utf-8")
+        figures = MODULE.extract_figure_labels(source)
+        self.assertEqual(len(figures), 12)
+        self.assertEqual(len({label for label, _ in figures}), 12)
+        self.assertIn("正式策略运行仍为0次", text)
+        self.assertIn("训练门禁未通过", text)
+        self.assertNotIn("后端570项", text)
+        self.assertNotIn("前端71项", text)
+        self.assertNotIn("可在干净环境按清单完整复现", text)
+
+    def test_horizontal_rule_is_not_counted_as_a_figure(self):
+        document = Document()
+        paragraph = document.add_paragraph()
+        pict = MODULE.OxmlElement("w:pict")
+        etree.SubElement(pict, f"{{{MODULE.V_NS}}}rect")
+        paragraph.add_run()._r.append(pict)
+        self.assertFalse(paragraph._p.findall(".//v:imagedata", {"v": MODULE.V_NS}))
 
 
 if __name__ == "__main__":
