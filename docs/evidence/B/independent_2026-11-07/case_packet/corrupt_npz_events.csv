@@ -1,0 +1,8 @@
+﻿event_id,sim_time_s,event_type,task_id,block_id,reason_code,energy_Wh,payload_bytes
+3,0.0,decision,T1,,MODEL_UNAVAILABLE,0.0,0
+4,0.0,sent,T1,0,,0.0103125,1024
+5,0.515625,received,T1,0,,0.0,1024
+8,1.515625,acked,T1,0,,0.0,0
+11,2.0,decision,,,MODEL_UNAVAILABLE,0.0,0
+14,4.0,decision,,,MODEL_UNAVAILABLE,0.0,0
+17,6.0,decision,,,MODEL_UNAVAILABLE,0.0,0

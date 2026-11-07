@@ -1,0 +1,484 @@
+{
+  "case": "corrupt_npz",
+  "run_id": "development_B_20261107_corrupt_npz",
+  "policy_id": "learned",
+  "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+  "event_ids": [
+    3,
+    11,
+    14,
+    17
+  ],
+  "description": "隔离的损坏NPZ触发评分异常并回退EDF。开发故障注入，非正式模型注册。",
+  "data_scope": "development_only",
+  "explanation": "隔离的损坏NPZ触发评分异常并回退EDF。开发故障注入，非正式模型注册。",
+  "event_range": [
+    3,
+    17
+  ],
+  "events": [
+    {
+      "event_id": 3,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 0.0,
+      "event_type": "decision",
+      "task_id": "T1",
+      "block_id": null,
+      "payload_bytes": 0,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "MODEL_UNAVAILABLE",
+      "data": {
+        "action": {
+          "task_id": "T1",
+          "mode": "fast",
+          "scheduled_bytes": 1024,
+          "reason_codes": [
+            "MODEL_UNAVAILABLE"
+          ],
+          "fallback": true
+        },
+        "candidate_scores": [
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0
+          },
+          {
+            "task_id": "T1",
+            "mode": "fast",
+            "score": 1.0
+          },
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [
+          {
+            "code": "TASK_NOT_AVAILABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "INFLIGHT_BLOCK",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "NO_VISIBLE_WINDOW",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "INSUFFICIENT_LINK_TIME",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "DEADLINE_UNREACHABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "POWER_LIMIT",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "CONTROL_BUDGET",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "ENERGY_RESERVE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "TASK_NOT_AVAILABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "INFLIGHT_BLOCK",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "NO_VISIBLE_WINDOW",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "INSUFFICIENT_LINK_TIME",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "DEADLINE_UNREACHABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "POWER_LIMIT",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "CONTROL_BUDGET",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "ENERGY_RESERVE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          }
+        ],
+        "latency_ms": 1.6034999989642529,
+        "fallback": true,
+        "model_version": null,
+        "policy_version": "learned-r4-v1"
+      }
+    },
+    {
+      "event_id": 4,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 0.0,
+      "event_type": "sent",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 1024,
+      "overhead_bytes": 32,
+      "energy_Wh": 0.0103125,
+      "reason_code": null,
+      "data": null
+    },
+    {
+      "event_id": 5,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 0.515625,
+      "event_type": "received",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 1024,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": null,
+      "data": null
+    },
+    {
+      "event_id": 8,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 1.515625,
+      "event_type": "acked",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 0,
+      "overhead_bytes": 16,
+      "energy_Wh": 0.0,
+      "reason_code": null,
+      "data": null
+    },
+    {
+      "event_id": 11,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 2.0,
+      "event_type": "decision",
+      "task_id": null,
+      "block_id": null,
+      "payload_bytes": 0,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "MODEL_UNAVAILABLE",
+      "data": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "MODEL_UNAVAILABLE"
+          ],
+          "fallback": true
+        },
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [],
+        "latency_ms": 1.352900000711088,
+        "fallback": true,
+        "model_version": null,
+        "policy_version": "learned-r4-v1"
+      }
+    },
+    {
+      "event_id": 14,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 4.0,
+      "event_type": "decision",
+      "task_id": null,
+      "block_id": null,
+      "payload_bytes": 0,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "MODEL_UNAVAILABLE",
+      "data": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "MODEL_UNAVAILABLE"
+          ],
+          "fallback": true
+        },
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [],
+        "latency_ms": 1.1658000003080815,
+        "fallback": true,
+        "model_version": null,
+        "policy_version": "learned-r4-v1"
+      }
+    },
+    {
+      "event_id": 17,
+      "run_id": "development_B_20261107_corrupt_npz",
+      "policy_id": "learned",
+      "sim_time_s": 6.0,
+      "event_type": "decision",
+      "task_id": null,
+      "block_id": null,
+      "payload_bytes": 0,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "MODEL_UNAVAILABLE",
+      "data": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "MODEL_UNAVAILABLE"
+          ],
+          "fallback": true
+        },
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [],
+        "latency_ms": 0.8879000015440397,
+        "fallback": true,
+        "model_version": null,
+        "policy_version": "learned-r4-v1"
+      }
+    }
+  ],
+  "public_snapshots": [
+    {
+      "event_id": 6,
+      "sim_time_s": 0.515625,
+      "soc_est": 0.49922656249999997,
+      "energy_est_Wh": 9.98453125,
+      "energy_lower_Wh": 8.98453125,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 7,
+      "sim_time_s": 1.390625,
+      "soc_est": 0.49878906250000005,
+      "energy_est_Wh": 9.97578125,
+      "energy_lower_Wh": 8.97578125,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 9,
+      "sim_time_s": 1.515625,
+      "soc_est": 0.49871267361111116,
+      "energy_est_Wh": 9.974253472222223,
+      "energy_lower_Wh": 8.974253472222223,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 10,
+      "sim_time_s": 2.0,
+      "soc_est": 0.4984704861111112,
+      "energy_est_Wh": 9.969409722222224,
+      "energy_lower_Wh": 8.969409722222224,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 12,
+      "sim_time_s": 2.515625,
+      "soc_est": 0.49821267361111116,
+      "energy_est_Wh": 9.964253472222223,
+      "energy_lower_Wh": 8.964253472222223,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 13,
+      "sim_time_s": 4.0,
+      "soc_est": 0.4974704861111111,
+      "energy_est_Wh": 9.949409722222223,
+      "energy_lower_Wh": 8.949409722222223,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 15,
+      "sim_time_s": 5.0,
+      "soc_est": 0.49697048611111116,
+      "energy_est_Wh": 9.939409722222223,
+      "energy_lower_Wh": 8.939409722222223,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 16,
+      "sim_time_s": 6.0,
+      "soc_est": 0.49647048611111116,
+      "energy_est_Wh": 9.929409722222223,
+      "energy_lower_Wh": 8.929409722222223,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 18,
+      "sim_time_s": 7.0,
+      "soc_est": 0.49597048611111116,
+      "energy_est_Wh": 9.919409722222223,
+      "energy_lower_Wh": 8.919409722222223,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    }
+  ],
+  "initial_tasks": [
+    {
+      "task_id": "T1",
+      "payload_bytes": 1024,
+      "remaining_bytes": 1024
+    }
+  ],
+  "source_files": {
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/config.json": "728a393f19ad138facc8127c5500e731b211c96ea7493f9af6e4803145cfd828",
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/energy_ledger.json": "2c20dff7152a959a0e70c5648cbefed8970c83b51d1e717dce089409b2c756ed",
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/events.jsonl": "f358804d3b61121c3310b91f5d3c1a6ac0d78c456e260188ad94f1119e7959a4",
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/execution.log": "9bfd576bf9ec10106df7487a73fdaf94d3c83a8cb2cb5964b3a5b4f853a1c39a",
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/manifest.json": "23b5879331a344cc77a62b2486f85b67d34996113732172b4796b38da41d8ac3",
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/results.json": "505f47669031adbec24dfe06a338495ef989fbf7637e4c6b5d516a80ad467373",
+    "docs/evidence/B/sprint_2026-11-07/cases/corrupt_npz/status.json": "d96951588c0782dad74be9ec6a998b7589ae1ed8ba0ae09bb4bb70d5803a0a22"
+  },
+  "notes": [
+    "Development validation only; no formal performance claim"
+  ]
+}

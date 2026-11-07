@@ -1,0 +1,20 @@
+{
+  "status": "passed_local_independent_checks",
+  "source_revision": "03cbb225d46472d9bbbfdc463a6bad291fc2c04e",
+  "real_http_runs": 4,
+  "pagination_compared_to_export": true,
+  "api_runtime_packages": 16,
+  "offline_install": "--no-index --find-links",
+  "pip_check": "No broken requirements found.",
+  "no_git_version": "unversioned-source-sha256",
+  "model_faults": "missing/corrupt rejected with 422 MODEL_UNAVAILABLE before run creation",
+  "second_machine": false,
+  "browser_acceptance": false,
+  "formal_inputs_used": false,
+  "kit": {
+    "path": "runs/b_independent_20261107/B_backend_offline_20261107.zip",
+    "bytes": 23021493,
+    "sha256": "975aba2955cb96f362beb75f0e68e5341cd10462fa2de5019759a6827252ce4a"
+  },
+  "scope": "backend API runtime only; training and full release not covered"
+}

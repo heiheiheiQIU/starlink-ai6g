@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "scope": "local_development_HTTP_not_formal",
+  "without_git": false,
+  "via_vite_proxy": true,
+  "runs": [
+    {
+      "policies": [
+        "edf",
+        "value"
+      ],
+      "run_id": "run_5fc5f04c8ee44b8a9ce0cf080f71cef4",
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+      "code_revision": "03cbb225d46472d9bbbfdc463a6bad291fc2c04e",
+      "events": 36,
+      "pages": 12,
+      "export": {
+        "files": 19,
+        "root_hashed_files": 17,
+        "zip_sha256": "39183d724050e6e8fd810fdb925d7eee5860baa70a9104e26ff78f041f5bc764"
+      }
+    },
+    {
+      "policies": [
+        "edf",
+        "learned"
+      ],
+      "run_id": "run_9261b5f87a5c4196a63be7217cef0349",
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+      "code_revision": "03cbb225d46472d9bbbfdc463a6bad291fc2c04e",
+      "events": 30,
+      "pages": 10,
+      "export": {
+        "files": 19,
+        "root_hashed_files": 17,
+        "zip_sha256": "876e90676f090a80009034495221da9ad6d2ae74680b0782ba855eb8ea605844"
+      }
+    }
+  ],
+  "checks": [
+    "real HTTP creation/status/results",
+    "small-page event completeness",
+    "reconnect read-only by run_id",
+    "ZIP root and child SHA verification",
+    "invalid input and unknown run rejection"
+  ],
+  "limitations": [
+    "No browser visual or click acceptance",
+    "No other physical machine",
+    "No formal holdout inputs used"
+  ]
+}
