@@ -1,5 +1,7 @@
 # formal_v1 输入候选
 
+> 2026-11-07 最新裁决：原 formal_v1 的 180 条输入统一归档为 engineering_regression_v1。正式实验使用预登记的 formal_v2，生成前等待三方冻结。分支、复验记录和当前命令见[远端复验交接](../../docs/handoffs/B_remote_review_2026-11-07.md)。
+
 状态为 `candidate_pending_review`。本目录保存协议和180条输入身份清单，生成配置在独立输出目录。A-N4b来源、内容排重与接收人复核待交付后执行，模型字段为null。
 
 ## 参数依据

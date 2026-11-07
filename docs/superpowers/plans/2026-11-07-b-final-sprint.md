@@ -1,5 +1,7 @@
 # B 最终冲刺工作计划 Implementation Plan
 
+> 2026-11-07 最新裁决：原 formal_v1 的 180 条输入统一归档为 engineering_regression_v1。正式实验使用预登记的 formal_v2，生成前等待三方冻结。分支、复验记录和当前命令见[远端复验交接](../../handoffs/B_remote_review_2026-11-07.md)。
+
 > **For agentic workers:** 后续执行使用 superpowers:executing-plans，逐项记录实际证据。本文为规划，不是已执行回执；复选框未勾选的项目均未在本轮完成。
 
 **Goal:** B 在 11 月 10 日 12:00 前交付可复核的正式实验四档裁决，在 11 月 11 日完成换机与证据交接，支撑 11 月 12 日 20:00 完整作品内部提交。

@@ -27,3 +27,4 @@ B-SPRINT-INTAKE,B,ready_for_review,2026-11-07T23:30:00+08:00,docs/handoffs/B_spr
 B-SPRINT-ENGINEERING,B,ready_for_review,2026-11-08T23:00:00+08:00,docs/handoffs/B_sprint_delivery_2026-11-07.md,A+C,冻结/三策略追加台账/等权配对统计工程完成;独立审查三项修复,来源审查及回执待签;trace00工程测试暴露已披露;未跑正式全矩阵,先审holdout和统计协议再冻结
 B-SPRINT-FIGURES,B,changes_requested,2026-11-10T18:00:00+08:00,docs/acceptance/B_figures_review_2026-11-07.md,C,54格开发矩阵复算通过;三个开发失败案例可追溯,B-F01方向/B-F02硬编码阶梯/C-F02回灌/C-F03域外与决策措辞需改,C按图逐项修订后复核
 B-INDEPENDENT-1107,B,ready_for_review,2026-11-07,docs/handoffs/B_independent_checks_2026-11-07.md,A+C,真实HTTP与Vite代理两组通过;新venv本地16依赖安装;无Git运行/故障门禁通过;案例包和离线后端包完成,同机非换机;浏览器按钮/刷新视觉未验收;非正式输入,接收人核SHA后按包README复跑
+B-REMOTE-REVIEW,B,ready_for_review,2026-11-07,docs/handoffs/B_remote_review_2026-11-07.md,A+C,独立分支已推送;701通过1平台跳过;前端77及构建;图件合同4通过,旧180条归档;新600000–600179仅预登记;代码待独立验收;换机待完成,复验提交及签核生成前对象

@@ -60,3 +60,4 @@ docs/evidence/B/formal_inputs_2026-11-04/*.xml -text -diff
 # Preserve B sprint validation and raw event evidence bytes across checkouts.
 docs/evidence/B/sprint_2026-11-07/** -text -diff
 docs/evidence/B/independent_2026-11-07/** -text -diff
+docs/evidence/B/formal_v2_review_2026-11-07/*.log -text -diff

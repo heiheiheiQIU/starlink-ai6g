@@ -1,0 +1,12 @@
+✔ A-F01 only claims the frozen scorer output that exists in the contract (1.8001ms)
+✔ A-F02 uses bars and points without a percentage ring (0.7055ms)
+✔ A line figures do not use decorative drop shadows (7.9249ms)
+✔ each A line figure has a truthful review-pending manifest (5.603ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 101.2904

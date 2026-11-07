@@ -1,5 +1,7 @@
 # 星地智调
 
+> 2026-11-07 最新裁决：原 formal_v1 的 180 条输入统一归档为 engineering_regression_v1。正式实验使用预登记的 formal_v2，生成前等待三方冻结。分支、复验记录和当前命令见[远端复验交接](docs/handoffs/B_remote_review_2026-11-07.md)。
+
 更新：2026-11-04，当前为 **B 的 WP2 learned集成候选**。learned已接入Runner/Guard及五接口，暖评分100ms预算、超时/异常EDF回退与Windows进程回收已验证。后端552通过、1项Linux专用跳过；前端61及构建通过。真实HTTP三策略配对运行完成，属于开发验证，尚无正式AI收益结论。接收与复跑见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。
 
 当前候选以WP1统一版本为基础，已纳入A审计657f39c和C复核63c7740。A可按[B确认的教师支持域](docs/handoffs/B_teacher_support_2026-11-04.md)开展新版本小批生成与审计；此前进度见[B接续记录](docs/handoffs/B_next_readiness_2026-11-04.md)。原始分支与回执保留，共享main尚未更新。
