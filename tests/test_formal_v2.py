@@ -49,6 +49,14 @@ def test_surrogate_generation_verified_and_tamper_rejected(tmp_path, monkeypatch
     freeze_inputs(*args, tmp_path/'envelope')
     verified = verify_frozen(tmp_path/'envelope/manifest.json')
     assert verified['trajectories'] == manifest['trajectories']
+    from scripts.prepare_formal_v2_review import prepare, index
+    review = tmp_path/'post_generation'
+    prepare(output/'manifest.json', review)
+    leakage = json.loads((review/'leakage.json').read_text())
+    assert set(range(200000,200180)).issubset(leakage['excluded_seeds'])
+    assert leakage['status'] == 'pending'
+    with pytest.raises(ValueError, match='pending'):
+        index(review)
     path = output/manifest['trajectories'][0]['config_path']
     path.write_bytes(path.read_bytes()+b' ')
     with pytest.raises(ValueError):
