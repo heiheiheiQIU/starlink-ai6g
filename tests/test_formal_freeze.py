@@ -19,10 +19,11 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def make_review(tmp_path):
+def make_review(tmp_path, candidate=None):
     from backend.formal_freeze import freeze_binding
-    candidate = tmp_path/'candidate/manifest.json'
-    materialize_inputs(Path('experiments/formal_v1/protocol.json'), candidate.parent)
+    if candidate is None:
+        candidate = tmp_path/'candidate/manifest.json'
+        materialize_inputs(Path('experiments/formal_v1/protocol.json'), candidate.parent)
     model = Path('configs/learned_policy.json')
     protocol = Path('experiments/formal_v1/analysis_protocol.json')
     binding = freeze_binding(candidate, model, protocol)

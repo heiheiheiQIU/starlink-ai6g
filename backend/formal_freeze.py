@@ -87,8 +87,21 @@ def _binding(candidate, model_config, analysis_protocol, metadata):
                 source_sha256=sources, code_revision=revision)
 
 
+def verify_candidate(path):
+    from backend.formal_v2 import SCHEMA, verify
+    if read_json(path).get('schema_version') == SCHEMA:
+        return verify(path)
+    return verify_inputs(path)
+
+
+def check_population(scope, candidate):
+    from backend.formal_v2 import SCHEMA
+    if scope == 'formal' and candidate.get('schema_version') != SCHEMA:
+        raise ValueError('engineering_regression_v1 is reserved for engineering tests')
+
+
 def freeze_binding(candidate_manifest: Path, model_config: Path, analysis_protocol: Path) -> dict:
-    verify_inputs(candidate_manifest)
+    verify_candidate(candidate_manifest)
     validate_analysis_protocol(read_json(analysis_protocol))
     return _binding(candidate_manifest, model_config, analysis_protocol, inspect_model(model_config))
 
@@ -99,6 +112,12 @@ def _review(review_path, binding, candidate):
     if (review.get('schema_version') != 'formal-freeze-review-v1' or scope not in ('formal', 'test_fixture')
             or review.get('binding') != binding):
         raise ValueError('Review subject does not match freeze binding')
+    check_population(scope, candidate)
+    if scope == 'formal':
+        subject = candidate['generation_receipts']['A']['subject']
+        for key in ('model_config_sha256', 'analysis_protocol_sha256'):
+            if binding[key] != subject[key]:
+                raise ValueError('Post-generation change to frozen '+key)
     rows = review.get('receipts', [])
     if len(rows) != 3 or {r.get('role') for r in rows} != set('ABC'):
         raise ValueError('A/B/C receipts required')
@@ -147,7 +166,7 @@ def freeze_inputs(candidate_manifest: Path, review_path: Path, model_config: Pat
     output = Path(output)
     if output.exists(): raise ValueError('Output must be new')
     binding = freeze_binding(candidate_manifest, model_config, analysis_protocol)
-    candidate = verify_inputs(candidate_manifest)
+    candidate = verify_candidate(candidate_manifest)
     scope, copies = _review(review_path, binding, candidate)
     model_dir = Path(_config(model_config)['package_dir'])
     copies.update({f'model/{name}': model_dir/name for name in binding['model_artifacts_sha256']})
@@ -195,7 +214,7 @@ def verify_frozen(manifest_path: Path) -> dict:
     if set(files) != actual or actual != required: raise ValueError('Frozen artifact set mismatch')
     for name, digest in files.items():
         if file_hash(local_file(root, name)) != digest: raise ValueError(f'Frozen artifact hash mismatch: {name}')
-    candidate = verify_inputs(root/'candidate/manifest.json')
+    candidate = verify_candidate(root/'candidate/manifest.json')
     if candidate['trajectories'] != manifest['trajectories']: raise ValueError('Frozen trajectory mismatch')
     validate_analysis_protocol(read_json(root/'analysis_protocol.json'))
     metadata = inspect_model(frozen_model_config(root))
