@@ -1,0 +1,32 @@
+{
+  "schema_version": "figure-manifest-v1",
+  "figure_id": "A-F02",
+  "title_cn": "教师标签质量与困难工况覆盖审计",
+  "owner": "A",
+  "reviewers": [
+    "B",
+    "C"
+  ],
+  "source_files": [
+    "docs/report/claim_values.json"
+  ],
+  "claim_ids": [
+    "claim-D1"
+  ],
+  "data_scope": "frozen_old_20_samples_pipeline_regression_only",
+  "script": "scripts/generate_visual_pack.mjs",
+  "outputs": [
+    "docs/figures/generated/v1/A-F02_教师标签质量审计.svg",
+    "docs/figures/generated/v1/previews/A-F02_教师标签质量审计.png"
+  ],
+  "source_git_sha": "cfcf0f26c6d19da63e2df27e42873a80605e32e5",
+  "git_sha": null,
+  "generated_at": "2026-11-07",
+  "status": "review_pending",
+  "limitations": [
+    "仅旧20样本冻结包",
+    "不得据此声称AI优于规则或A-N4b扩样成功",
+    "嵌字PDF与600 DPI PNG尚待C统一导出",
+    "最终提交后回填git_sha"
+  ]
+}

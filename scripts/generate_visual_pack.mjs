@@ -66,27 +66,27 @@ figs['A-F01_公开特征教师标注学习评分器.svg'] = svg('训练链与推
 ${T(100,165,'离线训练链',22,800,C.cyan)}${T(100,520,'在线推理链',22,800,C.teal)}
 ${box(90,210,250,125,'版本锁定观测',['14维全局 + 9维候选'],C.steel)}${box(400,210,250,125,'候选集合',['task × mode + idle'],C.cyan)}${box(710,210,250,125,'教师预算树',['仅 OPTIMAL / gap=0 准入'],C.amber)}${box(1020,210,250,125,'监督标签',['候选效用 + 可行性'],C.teal)}${box(1330,210,190,125,'评分器',['23-32-16'],C.cyan)}
 ${arrow(340,272,400,272)}${arrow(650,272,710,272)}${arrow(960,272,1020,272)}${arrow(1270,272,1330,272)}
-${box(90,565,300,125,'实时公开观测',['健康下界 · 任务 · 预测窗口'],C.teal)}${box(470,565,300,125,'冻结学习评分器',['候选分数 + 置信边界'],C.cyan)}${box(850,565,300,125,'约束解码器',['能量 · 窗口 · 协议'],C.amber)}${box(1230,565,290,125,'可执行动作',['发送 / 等待 / 回退'],C.steel)}
+${box(90,565,300,125,'实时公开观测',['健康下界 · 任务 · 预测窗口'],C.teal)}${box(470,565,300,125,'冻结学习评分器',['候选分数'],C.cyan)}${box(850,565,300,125,'约束解码器（B线模块）',['能量 · 窗口 · 协议'],C.amber)}${box(1230,565,290,125,'可执行动作',['发送 / 等待 / 回退'],C.steel)}
 ${arrow(390,628,470,628,C.teal)}${arrow(770,628,850,628,C.teal)}${arrow(1150,628,1230,628,C.teal)}
 ${R(470,390,680,80,'#FFF5E3',C.amber,14)}${T(810,425,'训练域：零损失　→　正式域：含随机丢失（域外压力测试）',20,800,C.amber,'middle')}${T(810,457,'模型输出是评分，不是执行命令',17,600,C.muted,'middle')}
 `,'项目事实：claim-D1/D3/E2；正式域外关系见正式输入协议。');
 
 figs['A-F02_教师标签质量审计.svg'] = svg('旧20样本缺少可学习的决策差异，只能用于管线回归','条形分布＋标签类别点图＋困难工况覆盖矩阵',`
-${R(70,150,460,620,C.white,C.grid,20,1.5,'filter="url(#shadow)"')}${T(105,200,'(a) 任务标签信息量',22,800)}
+${R(70,150,460,620,C.white,C.grid,20)}${T(105,200,'(a) 任务标签信息量',22,800)}
 ${T(115,270,'任务动作全零',19,600)}<rect x="300" y="242" width="180" height="36" rx="8" fill="#E8EFF4"/><rect x="300" y="242" width="117" height="36" rx="8" fill="${C.coral}"/>${T(430,268,'13/20',18,800,C.coral)}
 ${T(115,340,'至少一个非零',19,600)}<rect x="300" y="312" width="180" height="36" rx="8" fill="#E8EFF4"/><rect x="300" y="312" width="63" height="36" rx="8" fill="${C.teal}"/>${T(375,338,'7/20',18,800,C.teal)}
-${CIRC(300,470,80,'none',C.grid,24)}<circle cx="300" cy="470" r="80" fill="none" stroke="${C.coral}" stroke-width="24" stroke-dasharray="327 503" transform="rotate(-90 300 470)"/>${T(300,465,'65%',30,800,C.coral,'middle')}${T(300,500,'全零标签',16,600,C.muted,'middle')}
-${R(570,150,440,620,C.white,C.grid,20,1.5,'filter="url(#shadow)"')}${T(605,200,'(b) 最优集合辨识度',22,800)}
+${R(125,420,350,155,'#FCEAEA',C.coral,16)}${T(300,472,'13/20',36,900,C.coral,'middle')}${T(300,512,'任务动作全零',18,700,C.ink,'middle')}${T(300,548,'仅支持管线回归',17,700,C.muted,'middle')}
+${R(570,150,440,620,C.white,C.grid,20)}${T(605,200,'(b) 最优集合辨识度',22,800)}
 ${T(625,275,'idle 位于最优集合',19,600)}${L(625,315,930,315,C.grid,5)}${CIRC(915,315,12,C.amber)}${T(915,355,'19/20',18,800,C.amber,'middle')}
 ${T(625,435,'唯一非 idle 最优',19,600)}${L(625,475,930,475,C.grid,5)}${CIRC(640,475,12,C.teal)}${T(640,515,'1/20',18,800,C.teal,'middle')}
 ${R(620,590,340,105,'#FFF5E3',C.amber,14)}${multiline(790,625,['高命中不等于学到有效策略','并列最优会掩盖模型能力'],18,700,C.amber,1.45,'middle')}
-${R(1050,150,480,620,C.white,C.grid,20,1.5,'filter="url(#shadow)"')}${T(1085,200,'(c) 困难工况覆盖',22,800)}
+${R(1050,150,480,620,C.white,C.grid,20)}${T(1085,200,'(c) 困难工况覆盖',22,800)}
 ${['低能量','无窗口','窗口前到期','多任务冲突'].map((s,i)=>`${T(1090,285+i*92,s,18,600)}${R(1280,250+i*92,180,55,'url(#hatch)',C.grid,10)}${T(1370,286+i*92,'0 / 20',18,800,C.muted,'middle')}`).join('')}
 ${R(1090,650,370,70,'#FCEAEA',C.coral,12)}${T(1275,692,'仅旧20样本冻结包',20,800,C.coral,'middle')}
 `,'数据源：claim-D1；不得据此声称AI优于规则。');
 
 figs['A-F03_小样本模型对照.svg'] = svg('小样本域内对照不支持学习评分器优于简单基线','棒棒糖图＋样本量警示；test utility MSE，越低越好',`
-${R(100,170,930,560,C.white,C.grid,22,1.5,'filter="url(#shadow)"')}${T(150,225,'测试集 utility MSE',24,800)}
+${R(100,170,930,560,C.white,C.grid,22)}${T(150,225,'测试集 utility MSE',24,800)}
 ${[0,0.1,0.2,0.3,0.4].map((v,i)=>`${L(220+i*165,275,220+i*165,650,C.grid,1)}${T(220+i*165,685,v.toFixed(1),16,500,C.muted,'middle')}`).join('')}
 ${T(160,370,'线性模型',20,700)}${L(220,360,486,360,C.steel,6)}${CIRC(486,360,14,C.teal)}${T(505,367,'0.161',20,800,C.teal)}
 ${T(160,520,'MLP',20,700)}${L(220,510,807,510,C.steel,6)}${CIRC(807,510,14,C.coral)}${T(830,517,'0.356',20,800,C.coral)}
@@ -177,4 +177,67 @@ const heroPath=path.join(OUT,'C-F00_星地智调主题背景_v1.png');
 const manifest={schema_version:'visual-pack-v1',generated_at:'2026-11-07',generator:'scripts/generate_visual_pack.mjs',canvas:'1600x900 SVG',palette:C,fonts:['Noto Sans SC','Source Han Sans SC','Microsoft YaHei','Arial'],source_revision:'64db43c for R5 evidence lookup',external_assets:fs.existsSync(heroPath)?[{file:path.basename(heroPath),sha256:crypto.createHash('sha256').update(fs.readFileSync(heroPath)).digest('hex'),method:'OpenAI built-in image generation',scope:'non-data thematic background only'}]:[],figures:[]};
 for(const [name,content] of Object.entries(figs)){const p=path.join(OUT,name);fs.writeFileSync(p,content,'utf8');manifest.figures.push({file:name,sha256:crypto.createHash('sha256').update(content).digest('hex'),status:name.includes('未完成模板')?'template_only':'ready_for_review'});}
 fs.writeFileSync(path.join(OUT,'manifest.json'),JSON.stringify(manifest,null,2)+'\n','utf8');
+
+const sourceGitSha=execFileSync('git',['rev-parse','HEAD'],{cwd:ROOT,encoding:'utf8'}).trim();
+const aFigureManifests = [
+  {
+    figure_id:'A-F01',
+    title_cn:'公开特征、教师标注与学习评分器数据链',
+    file:'A-F01_公开特征教师标注学习评分器.svg',
+    source_files:['docs/report/report_v2.md','docs/contracts/README.md','docs/report/claim_values.json'],
+    claim_ids:['claim-D1','claim-D3','claim-E2'],
+    data_scope:'mechanism_from_signed_contracts',
+    limitations:['模型只输出候选评分，不直接执行动作','正式域含随机丢失，属于零损失训练域外评估'],
+  },
+  {
+    figure_id:'A-F02',
+    title_cn:'教师标签质量与困难工况覆盖审计',
+    file:'A-F02_教师标签质量审计.svg',
+    source_files:['docs/report/claim_values.json'],
+    claim_ids:['claim-D1'],
+    data_scope:'frozen_old_20_samples_pipeline_regression_only',
+    limitations:['仅旧20样本冻结包','不得据此声称AI优于规则或A-N4b扩样成功'],
+  },
+  {
+    figure_id:'A-F03',
+    title_cn:'小样本模型对照',
+    file:'A-F03_小样本模型对照.svg',
+    source_files:['docs/report/claim_values.json'],
+    claim_ids:['claim-D3'],
+    data_scope:'small_test_set_n4_not_scheduling_gain',
+    limitations:['测试观测仅4条','MSE不构成调度收益、提升率或泛化证据'],
+  },
+  {
+    figure_id:'A-F05',
+    title_cn:'公开信息与真值隔离',
+    file:'A-F05_公开信息与真值隔离.svg',
+    source_files:['docs/report/report_v2.md','docs/contracts/README.md'],
+    claim_ids:[],
+    data_scope:'mechanism_public_observation_boundary',
+    limitations:['机制图不包含实验结果','完整事件链和未来真值仅供事后评估，评分器不得回读'],
+  },
+];
+for(const spec of aFigureManifests){
+  const preview=`docs/figures/generated/v1/previews/${spec.file.replace(/\.svg$/,'.png')}`;
+  const outputs=[`docs/figures/generated/v1/${spec.file}`];
+  if(fs.existsSync(path.join(ROOT,preview))) outputs.push(preview);
+  const figureManifest={
+    schema_version:'figure-manifest-v1',
+    figure_id:spec.figure_id,
+    title_cn:spec.title_cn,
+    owner:'A',
+    reviewers:['B','C'],
+    source_files:spec.source_files,
+    claim_ids:spec.claim_ids,
+    data_scope:spec.data_scope,
+    script:'scripts/generate_visual_pack.mjs',
+    outputs,
+    source_git_sha:sourceGitSha,
+    git_sha:null,
+    generated_at:'2026-11-07',
+    status:'review_pending',
+    limitations:[...spec.limitations,'嵌字PDF与600 DPI PNG尚待C统一导出','最终提交后回填git_sha'],
+  };
+  fs.writeFileSync(path.join(OUT,`${spec.figure_id}_manifest.json`),JSON.stringify(figureManifest,null,2)+'\n','utf8');
+}
 console.log(`generated ${manifest.figures.length} SVG figures in ${OUT}`);

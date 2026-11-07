@@ -1,0 +1,36 @@
+{
+  "schema_version": "figure-manifest-v1",
+  "figure_id": "A-F01",
+  "title_cn": "公开特征、教师标注与学习评分器数据链",
+  "owner": "A",
+  "reviewers": [
+    "B",
+    "C"
+  ],
+  "source_files": [
+    "docs/report/report_v2.md",
+    "docs/contracts/README.md",
+    "docs/report/claim_values.json"
+  ],
+  "claim_ids": [
+    "claim-D1",
+    "claim-D3",
+    "claim-E2"
+  ],
+  "data_scope": "mechanism_from_signed_contracts",
+  "script": "scripts/generate_visual_pack.mjs",
+  "outputs": [
+    "docs/figures/generated/v1/A-F01_公开特征教师标注学习评分器.svg",
+    "docs/figures/generated/v1/previews/A-F01_公开特征教师标注学习评分器.png"
+  ],
+  "source_git_sha": "cfcf0f26c6d19da63e2df27e42873a80605e32e5",
+  "git_sha": null,
+  "generated_at": "2026-11-07",
+  "status": "review_pending",
+  "limitations": [
+    "模型只输出候选评分，不直接执行动作",
+    "正式域含随机丢失，属于零损失训练域外评估",
+    "嵌字PDF与600 DPI PNG尚待C统一导出",
+    "最终提交后回填git_sha"
+  ]
+}

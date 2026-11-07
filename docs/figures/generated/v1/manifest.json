@@ -50,17 +50,17 @@
     },
     {
       "file": "A-F01_公开特征教师标注学习评分器.svg",
-      "sha256": "af1efd1b7e24f3bf1d997fc55e80698cea746480ddae47e9325182d821f50aeb",
+      "sha256": "0036b449b49e3bd23add2e26f786c5eb33350bb8595baf350382aca629195698",
       "status": "ready_for_review"
     },
     {
       "file": "A-F02_教师标签质量审计.svg",
-      "sha256": "3aec5e3b85939122c71e9e4210d8c23f5bca4dd086b13b1cfd00fc0e0178a235",
+      "sha256": "3aa2ee7b9214b1de5b7b7bad30b779f47ef3d6da3ac35a4a5fd2225b677b461d",
       "status": "ready_for_review"
     },
     {
       "file": "A-F03_小样本模型对照.svg",
-      "sha256": "31adbecf5af1cba2309774ee5d14f371a48e77fc1767e2864767091af909d514",
+      "sha256": "fbc091b8417d2332f7bd96782f493147b03cbd431d4ce425368ef014254003d1",
       "status": "ready_for_review"
     },
     {
