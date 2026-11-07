@@ -1,0 +1,22 @@
+{
+  "schema_version": "policy-pilot-config-v1",
+  "dataset_version": "a-n4-pilot-v1",
+  "output_path": "data/teacher/a_n4_pilot_v1",
+  "source_count": 30,
+  "split_seed": 20261104,
+  "split_counts": {
+    "train": 18,
+    "validation": 6,
+    "test": 6
+  },
+  "states_per_source_min": 2,
+  "states_per_source_max": 4,
+  "valid_state_min": 60,
+  "valid_state_max": 120,
+  "teacher_config_path": "configs/teacher.json",
+  "teacher_version": "bounded-forecast-r4-v1",
+  "teacher_budget_ms": 1000,
+  "cpu_budget_s": 7200,
+  "limited_result_stop_count": 3,
+  "training_enabled": false
+}
