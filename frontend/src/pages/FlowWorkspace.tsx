@@ -90,6 +90,7 @@ export function FlowWorkspace() {
             stepNumber={activeIndex + 1}
             tasks={tasks}
             onTasksChange={setTasks}
+            liveEvents={controlledSession ? sharedRun?.state.kind === 'online' ? sharedRun.state.events ?? [] : [] : undefined}
           />
           <div className="stage-controls">
             <button

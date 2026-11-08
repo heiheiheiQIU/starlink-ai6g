@@ -1,4 +1,6 @@
 import type { FlowStep, StageTask } from '../domain/flow'
+import type { Event } from '../types/contracts'
+import { LiveStageExperience } from './LiveStageExperience'
 import { StageExperience } from './StageExperience'
 
 const STAGE_METRICS: Record<FlowStep['id'], readonly [string, string][]> = {
@@ -39,11 +41,28 @@ interface StagePanelProps {
   stepNumber: number
   tasks: readonly StageTask[]
   onTasksChange: (tasks: StageTask[]) => void
+  liveEvents?: readonly Event[]
 }
 
-export function StagePanel({ step, stepNumber, tasks, onTasksChange }: StagePanelProps) {
+function liveMetrics(stepId: FlowStep['id'], events: readonly Event[]): readonly [string, string][] {
+  const count = (type: Event['event_type']) => events.filter((event) => event.event_type === type).length
+  const latest = events.at(-1)
+  const decisions = events.filter((event) => event.event_type === 'decision' && event.data !== null && 'candidate_scores' in event.data)
+  const decision = decisions.at(-1)
+  const decisionData = decision?.data && 'candidate_scores' in decision.data ? decision.data : null
+  if (stepId === 'arrival') return [['到达任务', String(count('arrived'))], ['载荷字节', String(events.filter((event) => event.event_type === 'arrived').reduce((sum, event) => sum + event.payload_bytes, 0))], ['最新事件', latest ? `e=${latest.event_id}` : '—']]
+  if (stepId === 'forecast') return [['窗口变化', String(count('window_changed'))], ['状态快照', String(count('snapshot'))], ['最新时刻', latest ? `${latest.sim_time_s}s` : '—']]
+  if (stepId === 'score') return [['决策事件', String(decisions.length)], ['候选动作', String(decisionData?.candidate_scores.length ?? 0)], ['策略数量', String(new Set(events.map((event) => event.policy_id)).size)]]
+  if (stepId === 'decode') return [['约束检查', String(decisionData?.constraint_checks.length ?? 0)], ['拒绝项', String(decisionData?.constraint_checks.filter((check) => !check.passed).length ?? 0)], ['安全回退', decisionData?.fallback ? 'YES' : 'NO']]
+  if (stepId === 'confirm') return [['发送', String(count('sent'))], ['确认', String(count('acked'))], ['丢失', String(count('dropped'))]]
+  return [['事件总数', String(events.length)], ['策略数量', String(new Set(events.map((event) => event.policy_id)).size)], ['最新事件', latest ? `e=${latest.event_id}` : '—']]
+}
+
+export function StagePanel({ step, stepNumber, tasks, onTasksChange, liveEvents }: StagePanelProps) {
   const metrics =
-    step.id === 'arrival'
+    liveEvents !== undefined
+      ? liveMetrics(step.id, liveEvents)
+      : step.id === 'arrival'
       ? [['队列任务', String(tasks.length).padStart(2, '0')], ['缓存占用', '4.8 KB'], ['最高权重', '3.0']]
       : STAGE_METRICS[step.id]
   return (
@@ -67,14 +86,16 @@ export function StagePanel({ step, stepNumber, tasks, onTasksChange }: StagePane
 
       <p className="stage-description">{step.description}</p>
 
-      <StageExperience key={step.id} stepId={step.id} tasks={tasks} onTasksChange={onTasksChange} />
+      {liveEvents === undefined
+        ? <StageExperience key={step.id} stepId={step.id} tasks={tasks} onTasksChange={onTasksChange} />
+        : <LiveStageExperience stepId={step.id} events={liveEvents} />}
 
-      <div className="stage-metrics" aria-label="当前步骤演示指标">
+      <div className="stage-metrics" aria-label={liveEvents === undefined ? '当前步骤演示指标' : '当前步骤在线摘要'}>
         {metrics.map(([label, value]) => (
           <div className="stage-metric" key={label}>
             <span>{label}</span>
             <strong>{value}</strong>
-            <small>演示</small>
+            <small>{liveEvents === undefined ? '演示' : '在线事件'}</small>
           </div>
         ))}
       </div>

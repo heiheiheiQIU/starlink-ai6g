@@ -2229,6 +2229,89 @@ body::before {
   color: #7e97aa;
 }
 
+.live-stage {
+  display: grid;
+  gap: 12px;
+  min-height: 180px;
+  padding: 16px;
+  border: 1px solid rgba(101, 181, 197, 0.22);
+  border-radius: 16px;
+  background: linear-gradient(145deg, rgba(7, 23, 35, 0.92), rgba(16, 39, 55, 0.74));
+}
+
+.live-stage > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #7e97aa;
+}
+
+.live-stage p { margin: 0; color: #7e97aa; font-size: 12px; }
+.live-stage--error { color: #f1a7a9; border-color: rgba(201, 110, 112, 0.48); }
+.live-stage--waiting { place-content: center; text-align: center; }
+
+.live-decision-action,
+.live-event-cards > div {
+  display: grid;
+  gap: 3px;
+  padding: 11px 12px;
+  border: 1px solid rgba(143, 181, 197, 0.14);
+  border-radius: 11px;
+  background: rgba(10, 28, 43, 0.64);
+}
+
+.live-decision-action span,
+.live-decision-action small,
+.live-event-cards span,
+.live-event-cards small { color: #7e97aa; }
+
+.live-candidate-grid,
+.live-event-cards,
+.live-transport-counts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: 8px;
+}
+
+.live-candidate-grid > span,
+.live-transport-counts > strong {
+  display: grid;
+  gap: 2px;
+  padding: 9px 10px;
+  border: 1px solid rgba(101, 181, 197, 0.16);
+  border-radius: 10px;
+  background: rgba(45, 130, 152, 0.08);
+}
+
+.live-candidate-grid small { color: #7e97aa; }
+.live-transport-counts > strong[data-alert='true'] { color: #f1a7a9; border-color: rgba(201, 110, 112, 0.38); }
+
+.live-guard-list { display: grid; gap: 6px; }
+.live-guard-list > div {
+  display: grid;
+  grid-template-columns: 22px 1fr auto;
+  gap: 8px;
+  align-items: center;
+  padding: 7px 10px;
+  border-left: 3px solid var(--signal-ok);
+  background: rgba(87, 155, 131, 0.08);
+}
+.live-guard-list > div[data-passed='false'] { border-left-color: var(--signal-block); background: rgba(201, 110, 112, 0.09); }
+.live-guard-list small { color: #9eb3c1; }
+
+.live-stage--transport ol { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.live-stage--transport li {
+  display: grid;
+  grid-template-columns: 150px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(143, 181, 197, 0.12);
+}
+.live-stage--transport li[data-kind='dropped'] { color: #f1a7a9; }
+.live-stage--transport li small { color: #7e97aa; }
+
 .run-history-strip strong {
   color: #dbe8ed;
 }
