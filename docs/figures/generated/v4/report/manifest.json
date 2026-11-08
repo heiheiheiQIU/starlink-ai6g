@@ -1,14 +1,32 @@
 {
   "schema_version": "report-figure-pack-v4",
   "generated_at": "2026-11-08",
-  "status": "calibration-sample",
-  "source_contract": "docs/figures/source_data/v4_master_figure.json",
+  "status": "review_pending",
+  "master_format": "SVG",
   "figures": [
     {
+      "file": "A-F00_AI数据模型与局限证据总图.svg",
+      "sha256": "c77822495767c2d4eb8c3c52fefa5de376258d0be94bb4ea3424d43ba93f2cbb"
+    },
+    {
+      "file": "B-F00_6G协议调度与能量证据总图.svg",
+      "sha256": "6576748690f9f7d248457a688b9762db17ae29e93d6d65c9c7dc9b9fa5eb536c"
+    },
+    {
+      "file": "B-F04_正式实验设计与裁决协议总图.svg",
+      "sha256": "0226035f1f40198ee5dc408c5e900c664ab6308a8c80c18fc6482c8d64078109"
+    },
+    {
+      "file": "B-F06_可靠性失效边界与安全回退总图.svg",
+      "sha256": "d759d268f1a2523491e468783902136c7f1637a086c8a58adf6d1a99fe988f4b"
+    },
+    {
       "file": "C-F00_AI6G闭环证据主图.svg",
-      "sha256": "daa6fde48a750bac75f6725e292d9313ef958a0c850d2b43c18bc40ac612e18e",
-      "width": "170mm",
-      "height": "126mm"
+      "sha256": "daa6fde48a750bac75f6725e292d9313ef958a0c850d2b43c18bc40ac612e18e"
+    },
+    {
+      "file": "C-F04_工程架构与证据追溯闭环总图.svg",
+      "sha256": "b1aef50d0b819cb6bfcdcf6226cc5a1fd33e05271af84b0a5495a000ef71cb33"
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "schema_version": "v4-master-pack-source-1.0",
+  "claims": {
+    "teacher_audit": {"all_zero": 13, "idle_tied": 19, "unique_nonidle": 1, "difficult": 0, "n": 20, "status": "signed_off"},
+    "small_sample_mse": {"linear": 0.161, "mlp": 0.356, "test_n": 4, "status": "signed_off"},
+    "timing_ms": {"cold": 2.2, "warm_median": 0.499, "warm_p95": 0.681, "teacher_min": 7, "teacher_max": 24, "scope": "本机CPU实测，非星上时延"},
+    "development_wotr": {"edf": 0.486915, "value": 0.553192, "scope": "开发期规则验证，非正式实验"},
+    "send_segment_Wh": 0.0303125,
+    "formal_v2": {"cells": 18, "trajectories": 180, "policies": 3, "runs": 540, "bootstrap": 10000, "confidence": 0.95, "status": "未完成"},
+    "constraint_reject": {"candidate_score": 10.0, "energy_lower_Wh": 0.49, "reserve_Wh": 0.5, "action": "idle", "reason": "ENERGY_RESERVE"}
+  },
+  "provenance": [
+    "docs/materials/claims_spec.json",
+    "origin/codex/b-final-sprint-review-20261107:experiments/formal_v2/registration.json",
+    "origin/codex/b-final-sprint-review-20261107:experiments/formal_v1/analysis_protocol.json",
+    "origin/codex/b-final-sprint-review-20261107:docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/events.jsonl",
+    "docs/evidence/A1/health_success.json"
+  ]
+}

@@ -46,3 +46,47 @@ test('all text stays inside the canvas and the score panel carries scientific me
   assert.match(svg, /OPTIMAL/);
   assert.match(svg, /gap = 0\.0/);
 });
+
+test('the v4 report pack contains six evidence-dense master figures', async () => {
+  const expected = [
+    'C-F00_AI6G闭环证据主图.svg',
+    'A-F00_AI数据模型与局限证据总图.svg',
+    'B-F00_6G协议调度与能量证据总图.svg',
+    'B-F04_正式实验设计与裁决协议总图.svg',
+    'B-F06_可靠性失效边界与安全回退总图.svg',
+    'C-F04_工程架构与证据追溯闭环总图.svg',
+  ];
+  for (const file of expected) {
+    const content = await fs.readFile(new URL(`../docs/figures/generated/v4/report/${file}`, import.meta.url), 'utf8');
+    assert.match(content, /width="170mm"/);
+    assert.match(content, /\(a\)/);
+    assert.match(content, /\(b\)/);
+    assert.match(content, /\(c\)/);
+    assert.match(content, /\(d\)/);
+  }
+});
+
+test('formal and AI-limitation figures preserve pending and negative-result boundaries', async () => {
+  const formal = await fs.readFile(new URL('../docs/figures/generated/v4/report/B-F04_正式实验设计与裁决协议总图.svg', import.meta.url), 'utf8');
+  assert.match(formal, /18 个工况/);
+  assert.match(formal, /180 条轨迹/);
+  assert.match(formal, /540 次策略运行/);
+  assert.match(formal, /10,000/);
+  assert.match(formal, /未完成/);
+  assert.doesNotMatch(formal, /提升率|显著优于/);
+  const ai = await fs.readFile(new URL('../docs/figures/generated/v4/report/A-F00_AI数据模型与局限证据总图.svg', import.meta.url), 'utf8');
+  assert.match(ai, /线性模型/);
+  assert.match(ai, /0\.161/);
+  assert.match(ai, /MLP/);
+  assert.match(ai, /0\.356/);
+  assert.match(ai, /不支持AI增益主张/);
+});
+
+test('paired-policy routing is a fan-out and the engineering feedback avoids step nodes', async () => {
+  const formal = await fs.readFile(new URL('../docs/figures/generated/v4/report/B-F04_正式实验设计与裁决协议总图.svg', import.meta.url), 'utf8');
+  assert.match(formal, /data-role="paired-fanout"/);
+  assert.doesNotMatch(formal, /M1070 280 L1270 280/);
+  const engineering = await fs.readFile(new URL('../docs/figures/generated/v4/report/C-F04_工程架构与证据追溯闭环总图.svg', import.meta.url), 'utf8');
+  assert.match(engineering, /data-role="feedback-loop"/);
+  assert.doesNotMatch(engineering, /M965 365 L920 365/);
+});
