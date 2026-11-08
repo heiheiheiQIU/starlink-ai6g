@@ -1,0 +1,14 @@
+{
+  "schema_version": "report-figure-pack-v4",
+  "generated_at": "2026-11-08",
+  "status": "calibration-sample",
+  "source_contract": "docs/figures/source_data/v4_master_figure.json",
+  "figures": [
+    {
+      "file": "C-F00_AI6G闭环证据主图.svg",
+      "sha256": "daa6fde48a750bac75f6725e292d9313ef958a0c850d2b43c18bc40ac612e18e",
+      "width": "170mm",
+      "height": "126mm"
+    }
+  ]
+}

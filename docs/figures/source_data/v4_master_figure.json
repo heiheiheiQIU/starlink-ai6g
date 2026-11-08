@@ -1,0 +1,76 @@
+{
+  "schema_version": "v4-master-figure-source-1.0",
+  "scope_note": "工程签核样例；非正式策略对比结果",
+  "provenance": {
+    "ref": "origin/codex/b-final-sprint-review-20261107",
+    "teacher": {
+      "path": "data/teacher/a_n3_20/samples.jsonl",
+      "blob": "13647fb7a71d104022d7c029e883ffa3c538716a",
+      "row": 1
+    },
+    "events": {
+      "path": "docs/evidence/B/R3_2026-10-29/samples/ack_loss/events.jsonl",
+      "blob": "d73b9a5f81fdb8049b8e1c40bc359e3df25f906f"
+    },
+    "energy": {
+      "path": "docs/evidence/B/R3_2026-10-29/samples/ack_loss/energy_ledger.json",
+      "blob": "6c455f10be938aa474c263ca7b82f64ea219c002"
+    }
+  },
+  "teacher": {
+    "sample_id": "r4_00",
+    "dataset_version": "a-n3-teacher-20-v1",
+    "solver_status": "OPTIMAL",
+    "gap": 0.0,
+    "health": { "energy_lower_Wh": 9.0, "soc_lower": 0.45, "rul": null },
+    "tasks": [
+      { "task_id": "T1", "deadline_s": 1.0, "payload_bytes": 1024, "priority_weight": 1.0 },
+      { "task_id": "T2", "deadline_s": 4.0, "payload_bytes": 1024, "priority_weight": 1.0 }
+    ],
+    "candidates": [
+      { "key": "T1/robust", "score": 0.0, "feasible": false },
+      { "key": "T1/fast", "score": 1.0, "feasible": true },
+      { "key": "T2/robust", "score": 0.5, "feasible": true },
+      { "key": "T2/fast", "score": 0.5, "feasible": true },
+      { "key": "idle", "score": 0.5, "feasible": true }
+    ]
+  },
+  "ack_loss": {
+    "scenario_id": "r3_ack_loss_synthetic",
+    "windows": [
+      { "id": "W1", "start_s": 0.0, "end_s": 2.0 },
+      { "id": "W2", "start_s": 4.0, "end_s": 8.0 }
+    ],
+    "deadline_s": 4.0,
+    "events": [
+      { "time_s": 0.0, "label": "发送", "lane": "SAT→GW", "kind": "sent" },
+      { "time_s": 1.03125, "label": "首次接收", "lane": "GW", "kind": "received" },
+      { "time_s": 2.03125, "label": "ACK丢失", "lane": "GW→SAT", "kind": "lost" },
+      { "time_s": 3.03125, "label": "ACK超时", "lane": "SAT", "kind": "timeout" },
+      { "time_s": 4.0, "label": "重传", "lane": "SAT→GW", "kind": "sent" },
+      { "time_s": 5.03125, "label": "去重接收", "lane": "GW", "kind": "duplicate" },
+      { "time_s": 6.03125, "label": "ACK确认", "lane": "GW→SAT", "kind": "acked" }
+    ],
+    "energy": [
+      { "time_s": 0.0, "energy_after_Wh": 10.0, "background_Wh": 0.0, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 1.03125, "energy_after_Wh": 9.979375000000001, "background_Wh": 0.0103125, "transmit_Wh": 0.0103125, "receive_Wh": 0.0 },
+      { "time_s": 1.90625, "energy_after_Wh": 9.970625000000002, "background_Wh": 0.00875, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 2.0, "energy_after_Wh": 9.96947916666667, "background_Wh": 0.0009375, "transmit_Wh": 0.0, "receive_Wh": 0.00020833333333333335 },
+      { "time_s": 2.03125, "energy_after_Wh": 9.96916666666667, "background_Wh": 0.0003125, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 3.03125, "energy_after_Wh": 9.95916666666667, "background_Wh": 0.01, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 4.0, "energy_after_Wh": 9.94947916666667, "background_Wh": 0.0096875, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 5.03125, "energy_after_Wh": 9.928854166666671, "background_Wh": 0.0103125, "transmit_Wh": 0.0103125, "receive_Wh": 0.0 },
+      { "time_s": 5.90625, "energy_after_Wh": 9.920104166666672, "background_Wh": 0.00875, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 6.03125, "energy_after_Wh": 9.918576388888894, "background_Wh": 0.00125, "transmit_Wh": 0.0, "receive_Wh": 0.0002777777777777778 },
+      { "time_s": 7.03125, "energy_after_Wh": 9.908576388888894, "background_Wh": 0.01, "transmit_Wh": 0.0, "receive_Wh": 0.0 },
+      { "time_s": 8.0, "energy_after_Wh": 9.898888888888894, "background_Wh": 0.0096875, "transmit_Wh": 0.0, "receive_Wh": 0.0 }
+    ],
+    "results": {
+      "success_payload_bytes": 1024,
+      "joule_per_success_bit": 0.04443359375,
+      "weighted_on_time_rate": 1.0,
+      "energy_violation_count": 0,
+      "sample_count": 1
+    }
+  }
+}
