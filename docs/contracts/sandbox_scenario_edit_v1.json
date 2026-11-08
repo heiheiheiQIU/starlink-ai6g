@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "SandboxAxes": {
+      "additionalProperties": false,
+      "properties": {
+        "task_count": {
+          "enum": [
+            2,
+            6,
+            10
+          ],
+          "title": "Task Count",
+          "type": "integer"
+        },
+        "deadline_s": {
+          "enum": [
+            8,
+            12,
+            18,
+            24
+          ],
+          "title": "Deadline S",
+          "type": "integer"
+        },
+        "weights": {
+          "enum": [
+            "equal",
+            "tiered",
+            "urgent"
+          ],
+          "title": "Weights",
+          "type": "string"
+        },
+        "initial_energy_Wh": {
+          "enum": [
+            0.8,
+            1.2,
+            10.0
+          ],
+          "title": "Initial Energy Wh",
+          "type": "number"
+        },
+        "health": {
+          "enum": [
+            "healthy",
+            "degraded",
+            "critical"
+          ],
+          "title": "Health",
+          "type": "string"
+        },
+        "reserve_Wh": {
+          "minimum": 0,
+          "title": "Reserve Wh",
+          "type": "number"
+        },
+        "disturbance": {
+          "enum": [
+            "none",
+            "mild",
+            "strong"
+          ],
+          "title": "Disturbance",
+          "type": "string"
+        },
+        "rate": {
+          "enum": [
+            "robust",
+            "fast"
+          ],
+          "title": "Rate",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_count",
+        "deadline_s",
+        "weights",
+        "initial_energy_Wh",
+        "health",
+        "reserve_Wh",
+        "disturbance",
+        "rate"
+      ],
+      "title": "SandboxAxes",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "kind": {
+      "const": "sandbox_axes",
+      "title": "Kind",
+      "type": "string"
+    },
+    "compiler_version": {
+      "const": "sandbox-axis-v1",
+      "title": "Compiler Version",
+      "type": "string"
+    },
+    "axes": {
+      "$ref": "#/$defs/SandboxAxes"
+    }
+  },
+  "required": [
+    "kind",
+    "compiler_version",
+    "axes"
+  ],
+  "title": "SandboxRequest",
+  "type": "object"
+}

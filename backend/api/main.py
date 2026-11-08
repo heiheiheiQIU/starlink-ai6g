@@ -21,7 +21,7 @@ def create_app(root=None,*,worker=execute_run,timeout_s=120.0):
         service.start()
         try: yield
         finally: service.close()
-    app=FastAPI(title='星地智调 deterministic rule API',lifespan=lifespan)
+    app=FastAPI(title='閺勭喎婀撮弲楦跨殶 deterministic rule API',lifespan=lifespan)
     app.state.service=service
 
     @app.exception_handler(ServiceError)
@@ -29,7 +29,7 @@ def create_app(root=None,*,worker=execute_run,timeout_s=120.0):
 
     @app.exception_handler(RequestValidationError)
     async def validation_error(request,error):
-        return JSONResponse(status_code=422,content=dict(code='INVALID_CONFIG',message='Invalid request',details={}))
+        return JSONResponse(status_code=422,content=dict(code='INVALID_CONFIG',message='Invalid request',details=dict(errors=[dict(loc=list(item['loc']),msg=item['msg'],type=item['type']) for item in error.errors()])))
 
     @app.exception_handler(HTTPException)
     async def http_error(request,error):
@@ -38,7 +38,11 @@ def create_app(root=None,*,worker=execute_run,timeout_s=120.0):
     @app.post('/runs',status_code=202)
     def submit(payload:RunRequest):
         try: return service.submit(payload)
-        except (ValueError,ValidationError) as error:
+        except ValidationError as error:
+            errors = [dict(loc=['config', *item['loc']], msg=item['msg'], type=item['type'])
+                      for item in error.errors()]
+            raise ServiceError(422,'INVALID_CONFIG','Invalid run configuration',errors=errors) from error
+        except ValueError as error:
             raise ServiceError(422,'INVALID_CONFIG','Unsupported or invalid run configuration') from error
 
     @app.get('/runs/{identity}')

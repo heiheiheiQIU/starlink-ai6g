@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "seed": 7,
+  "policy_ids": [
+    "edf",
+    "learned"
+  ],
+  "config": {
+    "kind": "sandbox_axes",
+    "compiler_version": "sandbox-axis-v1",
+    "axes": {
+      "task_count": 2,
+      "deadline_s": 24,
+      "weights": "tiered",
+      "initial_energy_Wh": 10.0,
+      "health": "healthy",
+      "reserve_Wh": 0.5,
+      "disturbance": "strong",
+      "rate": "robust"
+    }
+  }
+}

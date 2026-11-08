@@ -49,9 +49,9 @@ class RunService:
 
     def start(self):
         # Single service owns this root; unfinished records from an earlier stop fail honestly.
-        for folder in self.root.iterdir():
-            if folder.is_dir() and re.fullmatch(r'run_[0-9a-f]{32}',folder.name):
-                try: checked_file(folder,'status.json')
+        for folder in [*self.root.iterdir(), *self.root.glob('sandbox/*')]:
+            if folder.is_dir() and re.fullmatch(r'(?:sandbox_)?run_[0-9a-f]{32}',folder.name):
+                try: checked_file(self.root,folder.relative_to(self.root))
                 except ValueError: continue  # Never recover through an external link.
                 try: state=self.status(folder.name)
                 except (ServiceError,ValueError,OSError):
@@ -76,7 +76,7 @@ class RunService:
     def reap(self):
         for supervisor in self.inference_jobs.values(): supervisor.reap()
         for identity,(process,started) in list(self.jobs.items()):
-            folder=self.root/identity
+            folder=checked_file(self.root,Path('sandbox' if identity.startswith('sandbox_') else '')/identity)
             expired=time.monotonic()-started>self.timeout_s
             if expired and process.is_alive(): stop_process(process)
             if expired or not process.is_alive():
@@ -102,7 +102,7 @@ class RunService:
         with self.lock:
             for identity,(process,_) in list(self.jobs.items()):
                 stop_process(process)
-                folder=self.root/identity
+                folder=checked_file(self.root,Path('sandbox' if identity.startswith('sandbox_') else '')/identity)
                 try:
                     if self.status(identity)['status'] not in ('completed','failed','cancelled'):
                         fail_run(folder,'SERVICE_STOPPED')
@@ -116,7 +116,14 @@ class RunService:
         request=RunRequest.model_validate(payload)
         if any(p not in ('edf','value','learned') for p in request.policy_ids):
             raise ValueError('Supported policies: edf, value, learned')
-        config=RunConfig.model_validate(request.config)
+        sandbox = request.config.get('kind') == 'sandbox_axes'
+        if sandbox:
+            from backend.sandbox import SandboxRequest, compile_sandbox_axes
+            axes = SandboxRequest.model_validate(request.config)
+            compiled = compile_sandbox_axes(axes.axes, request.seed)
+        else:
+            compiled = request.config
+        config=RunConfig.model_validate(compiled)
         if config.seed is not None and config.seed!=request.seed:
             raise ValueError('config.seed must equal request.seed')
         if config.actions or config.policy_runtime is not None:
@@ -135,9 +142,19 @@ class RunService:
         with self.lock:
             self.reap()
             if self.jobs: raise ServiceError(429,'CAPACITY_BUSY','One run is already active')
-            identity='run_'+uuid4().hex;folder=self.root/identity;folder.mkdir()
+            identity=('sandbox_run_' if sandbox else 'run_')+uuid4().hex
+            folder=checked_file(self.root,Path('sandbox' if sandbox else '')/identity)
+            folder.mkdir(parents=True)
             data=request.model_dump()
             _write_json(folder/'config.json',data)
+            if sandbox:
+                from backend.cli import _hash
+                from backend import sandbox as compiler
+                _write_json(folder/'compiled_config.json',compiled)
+                _write_json(folder/'sandbox.json',dict(source='synthetic/sandbox',
+                    compiler_version=axes.compiler_version, axes=axes.axes.model_dump(),
+                    config_hash=_hash(compiled),
+                    compiler_sha256=hashlib.sha256(Path(compiler.__file__).read_bytes()).hexdigest()))
             write_status(folder,'queued',progress=0.0)
             context=multiprocessing.get_context('spawn');gate=context.Event()
             process=None
@@ -162,9 +179,9 @@ class RunService:
             return dict(run_id=identity,status='queued',schema_version='1.0')
 
     def folder(self,identity):
-        if not re.fullmatch(r'run_[0-9a-f]{32}',identity):
+        if not re.fullmatch(r'(?:sandbox_)?run_[0-9a-f]{32}',identity):
             raise ServiceError(404,'RUN_NOT_FOUND','Run not found')
-        path=self.root/identity
+        path=checked_file(self.root,Path('sandbox' if identity.startswith('sandbox_') else '')/identity)
         try: checked_file(path,'status.json')
         except ValueError: raise ServiceError(404,'RUN_NOT_FOUND','Run not found')
         if not (path/'status.json').is_file(): raise ServiceError(404,'RUN_NOT_FOUND','Run not found')
@@ -198,6 +215,8 @@ class RunService:
         folder=self.completed(identity)
         request=RunRequest.model_validate_json(checked_file(folder,'config.json').read_text(encoding='utf-8'))
         names=['config.json','manifest.json','status.json','events.jsonl','results.json']
+        if request.config.get('kind') == 'sandbox_axes':
+            names += ['compiled_config.json','sandbox.json']
         for policy in request.policy_ids:
             names += [f'{policy}/{n}' for n in ('config.json','manifest.json','status.json','results.json',
                 'events.jsonl','execution.log','energy_ledger.json')]

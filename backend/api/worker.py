@@ -53,7 +53,9 @@ def execute_run(folder: Path, payload: dict, inference_client=None, model_metada
     request=RunRequest.model_validate(payload)
     try:
         events=[];results=[]
-        config=dict(request.config,seed=request.seed)
+        sandbox = request.config.get('kind') == 'sandbox_axes'
+        compiled = json.loads(read_text(folder/'compiled_config.json')) if sandbox else request.config
+        config=dict(compiled,seed=request.seed)
         for index,policy in enumerate(request.policy_ids):
             write_status(folder,'running',progress=index/len(request.policy_ids),active=[policy])
             result=run_policy(config,folder/policy,policy_id=policy,run_id=folder.name,
@@ -80,6 +82,8 @@ def execute_run(folder: Path, payload: dict, inference_client=None, model_metada
             artifact_paths={n:n for n in ('config.json','status.json','events.jsonl','results.json','manifest.json')})
         _write_json(folder/'results.json',result.model_dump())
         names=['config.json','events.jsonl','results.json']
+        if sandbox:
+            names += ['compiled_config.json','sandbox.json']
         for policy in request.policy_ids:
             names += [f'{policy}/{n}' for n in ('config.json','manifest.json','status.json','results.json',
                       'events.jsonl','execution.log','energy_ledger.json')]
