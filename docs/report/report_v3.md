@@ -502,7 +502,7 @@ $$ \max_{\mathbf{a}} \sum_{i} u_i(\mathbf{a}) $$
 | evaluation_end_s | 24 | trajectories_per_cell | 10 |
 | decision_dt_s | 2 | payload_bytes | 2048 |
 | task_counts | 2/6/10 | deadline_grid_s | 8/12/18/24 |
-| initial_energy_Wh | 0.8/1.2/10 | seed_start | 200000 |
+| initial_energy_Wh | 0.8/1.2/10 | formal_v2 seed | 600000—600179 |
 | 链路mild丢失 | 0.05/0.12/0.02 | 链路strong丢失 | 0.2/0.4/0.12 |
 | channel_step_s | 0.25 | 训练域声明 | 全部含随机丢失（域外） |
 

@@ -29,7 +29,7 @@ class ReportBuilderTests(unittest.TestCase):
         self.assertEqual(normal.paragraph_format.line_spacing, 1.0)
         self.assertEqual(normal.element.rPr.rFonts.get(qn("w:eastAsia")), "宋体")
 
-    def test_style_table_applies_header_repeat_margins_and_row_integrity(self):
+    def test_style_table_applies_three_line_rules_header_repeat_and_row_integrity(self):
         document = Document()
         table = document.add_table(rows=2, cols=3)
         table.rows[0].cells[0].text = "字段"
@@ -37,7 +37,10 @@ class ReportBuilderTests(unittest.TestCase):
         table.rows[0].cells[2].text = "说明"
         MODULE.style_table(table)
         self.assertIn("tblHeader", table.rows[0]._tr.xml)
-        self.assertIn("DCE6F1", table.rows[0]._tr.xml)
+        self.assertNotIn("w:shd", table.rows[0]._tr.xml)
+        self.assertIn('w:top w:val="single" w:sz="12" w:color="000000"', table._tbl.xml)
+        self.assertIn('w:bottom w:val="single" w:sz="12" w:color="000000"', table._tbl.xml)
+        self.assertIn('w:bottom w:val="single" w:sz="6" w:color="000000"', table.rows[0]._tr.xml)
         self.assertTrue(all("cantSplit" in row._tr.xml for row in table.rows))
         self.assertTrue(all("tcMar" in cell._tc.xml for row in table.rows for cell in row.cells))
 
