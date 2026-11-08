@@ -111,7 +111,19 @@ export function useRun(options: UseRunOptions = {}): RunController {
           offline: false,
           error: null,
         })
-        const results = await api.pollUntilComplete(created.run_id, { signal: controller.signal })
+        const results = await api.pollUntilComplete(created.run_id, {
+          signal: controller.signal,
+          onStatus: async (status) => {
+            lastStatusRef.current = status
+            const events = await fetchEvents(created.run_id)
+            setOnline(created.run_id, {
+              status,
+              ...(events === null ? {} : { events }),
+              offline: false,
+              error: null,
+            })
+          },
+        })
         lastStatusRef.current = { run_id: created.run_id, status: 'completed', progress: 1, active_policies: request.policy_ids, error: null }
         const events = await fetchEvents(created.run_id)
         setState({ kind: 'online', runId: created.run_id, status: lastStatusRef.current, results, events, offline: false, error: null })

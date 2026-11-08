@@ -5,6 +5,7 @@ interface OperationsBarProps {
   onModeChange: (mode: RunMode) => void
   onStep: () => void
   onPlaybackToggle: () => void
+  liveControlled?: boolean
 }
 
 const PHASE_LABELS: Record<RunSessionState['phase'], string> = {
@@ -23,6 +24,7 @@ export function OperationsBar({
   onModeChange,
   onStep,
   onPlaybackToggle,
+  liveControlled = false,
 }: OperationsBarProps) {
   const modeLabel = session.mode === 'fixture' ? '标准场景演示' : '在线任务执行'
   const connectionLabel =
@@ -62,14 +64,14 @@ export function OperationsBar({
       </div>
 
       <div className="operations-bar__actions">
-        <button type="button" onClick={() => onModeChange(session.mode === 'fixture' ? 'live' : 'fixture')}>
-          {session.mode === 'fixture' ? '切换到在线任务' : '返回场景演示'}
+        <button type="button" disabled={liveControlled} onClick={() => onModeChange(session.mode === 'fixture' ? 'live' : 'fixture')}>
+          {liveControlled ? '在线任务已接管' : session.mode === 'fixture' ? '切换到在线任务' : '返回场景演示'}
         </button>
-        <button type="button" onClick={onStep} disabled={session.phase === 'complete' || session.phase === 'failed'}>
-          单步推进
+        <button type="button" onClick={onStep} disabled={liveControlled || session.phase === 'complete' || session.phase === 'failed'}>
+          {liveControlled ? '由事件推进' : '单步推进'}
         </button>
-        <button className="operations-bar__primary" type="button" onClick={onPlaybackToggle}>
-          {session.playback === 'playing' ? '暂停自动运行' : '自动运行'}
+        <button className="operations-bar__primary" type="button" disabled={liveControlled} onClick={onPlaybackToggle}>
+          {liveControlled ? '实时事件模式' : session.playback === 'playing' ? '暂停自动运行' : '自动运行'}
         </button>
       </div>
     </section>

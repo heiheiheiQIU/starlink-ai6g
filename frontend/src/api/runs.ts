@@ -59,6 +59,8 @@ export interface PollOptions {
   intervalMs?: number
   timeoutMs?: number
   signal?: AbortSignal
+  /** 每次取得后端权威状态后触发；用于界面增量展示，不改变完成/失败语义。 */
+  onStatus?: (status: RunStatusResponse) => void | Promise<void>
 }
 
 const JSON_HEADERS = { 'Content-Type': 'application/json' }
@@ -196,13 +198,14 @@ export function createRunApi({ baseUrl, fetchFn }: RunApiOptions) {
      * 超时抛出 TransportError；中断由 AbortSignal 控制。
      */
     async pollUntilComplete(runId: string, options: PollOptions = {}): Promise<RunResult> {
-      const { intervalMs = 1000, timeoutMs = 60_000, signal } = options
+      const { intervalMs = 1000, timeoutMs = 60_000, signal, onStatus } = options
       const startedAt = Date.now()
 
       for (;;) {
         if (signal?.aborted) throw new TransportError('轮询已中止')
 
         const status = await this.getRunStatus(runId)
+        await onStatus?.(status)
         if (status.status === 'completed') {
           return this.getResults(runId)
         }

@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest'
 
 import { TransportError, type RunApi } from '../api/runs'
 import { FIXTURE_RUN_RESULT } from '../fixtures/contracts'
-import type { RunRequest, RunStatusResponse } from '../types/contracts'
+import type { Event, RunRequest, RunStatusResponse } from '../types/contracts'
 import { useRun } from './useRun'
 
 const REQUEST: RunRequest = {
@@ -100,5 +100,49 @@ describe('useRun', () => {
     await waitFor(() => {
       expect(result.current.state).toMatchObject({ kind: 'online', results: FIXTURE_RUN_RESULT })
     })
+  })
+
+  it('publishes running status and events before final results complete', async () => {
+    const api = spyApi()
+    const liveEvent: Event = {
+      event_id: 5,
+      run_id: 'run-live',
+      policy_id: 'learned',
+      sim_time_s: 120,
+      event_type: 'sent',
+      task_id: 'T-101',
+      block_id: 1,
+      payload_bytes: 1024,
+      overhead_bytes: 32,
+      energy_Wh: 0.01,
+      reason_code: null,
+      data: null,
+    }
+    let releaseCompletion!: () => void
+    const completionGate = new Promise<void>((resolve) => { releaseCompletion = resolve })
+    api.createRun.mockResolvedValue({ run_id: 'run-live', status: 'queued', schema_version: '1.0' })
+    api.getAllEvents.mockResolvedValue([liveEvent])
+    api.pollUntilComplete.mockImplementation(async (_id: string, options: { onStatus?: (status: RunStatusResponse) => void | Promise<void> }) => {
+      await options.onStatus?.(runningStatus('run-live'))
+      await completionGate
+      return FIXTURE_RUN_RESULT
+    })
+
+    const { result } = renderHook(() => useRun({ api }))
+    let createPromise!: Promise<void>
+    act(() => { createPromise = result.current.create(REQUEST) })
+
+    await waitFor(() => {
+      expect(result.current.state).toMatchObject({
+        kind: 'online',
+        runId: 'run-live',
+        status: { status: 'running', progress: 0.4 },
+        events: [liveEvent],
+        results: null,
+      })
+    })
+
+    releaseCompletion()
+    await act(() => createPromise)
   })
 })

@@ -7,18 +7,23 @@ import { OperationsBar } from '../components/OperationsBar'
 import { StagePanel } from '../components/StagePanel'
 import { StepContextPanel } from '../components/StepContextPanel'
 import { FLOW_STEPS, INITIAL_TASKS, type StageTask } from '../domain/flow'
+import { liveRunSession } from '../domain/liveRunSession'
 import {
   advanceSession,
   createRunSession,
   selectSessionStep,
   switchRunMode,
 } from '../domain/runSession'
+import { useOptionalSharedRun } from '../state/RunContext'
 
 export function FlowWorkspace() {
   const [session, setSession] = useState(createRunSession)
   const [tasks, setTasks] = useState<StageTask[]>(() => [...INITIAL_TASKS])
-  const activeIndex = session.stepIndex
-  const autoMode = session.playback === 'playing'
+  const sharedRun = useOptionalSharedRun()
+  const controlledSession = sharedRun?.state.kind === 'online' ? liveRunSession(sharedRun.state) : null
+  const visibleSession = controlledSession ?? session
+  const activeIndex = visibleSession.stepIndex
+  const autoMode = visibleSession.playback === 'playing'
   const activeStep = FLOW_STEPS[activeIndex]
 
   function selectStep(index: number) {
@@ -54,8 +59,8 @@ export function FlowWorkspace() {
         </div>
         <div className="flow-intro-actions">
           {autoMode ? <span className="auto-badge">AUTO · 3S</span> : null}
-          <button className="auto-demo" type="button" onClick={togglePlayback}>
-            {autoMode ? '停止演示' : '自动演示'}
+          <button className="auto-demo" type="button" disabled={controlledSession !== null} onClick={togglePlayback}>
+            {controlledSession ? '实时事件驱动' : autoMode ? '停止演示' : '自动演示'}
           </button>
         <div className="mission-id">
           <span>MISSION</span>
@@ -66,7 +71,8 @@ export function FlowWorkspace() {
       </header>
 
       <OperationsBar
-        session={session}
+        session={visibleSession}
+        liveControlled={controlledSession !== null}
         onModeChange={(mode) => setSession((current) => switchRunMode(current, mode))}
         onStep={() => setSession((current) => advanceSession(current, FLOW_STEPS.length))}
         onPlaybackToggle={togglePlayback}
