@@ -164,24 +164,50 @@ def _append_child(parent, name: str, **attrs):
     return child
 
 
-def style_table(table) -> None:
-    """Style one table for dense but readable A4 output."""
-    table.alignment = WD_TABLE_ALIGNMENT.CENTER
-    table.autofit = False
+def _set_table_border(table, edge: str, value: str, size: int, color: str) -> None:
     tbl_pr = table._tbl.tblPr
-
     borders = tbl_pr.find(qn("w:tblBorders"))
     if borders is None:
         borders = OxmlElement("w:tblBorders")
         tbl_pr.append(borders)
-    for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
-        element = borders.find(qn(f"w:{edge}"))
-        if element is None:
-            element = OxmlElement(f"w:{edge}")
-            borders.append(element)
-        element.set(qn("w:val"), "single")
-        element.set(qn("w:sz"), "4")
-        element.set(qn("w:color"), "B8C4D1")
+    element = borders.find(qn(f"w:{edge}"))
+    if element is None:
+        element = OxmlElement(f"w:{edge}")
+        borders.append(element)
+    element.set(qn("w:val"), value)
+    element.set(qn("w:sz"), str(size))
+    element.set(qn("w:color"), color)
+
+
+def _set_cell_border(cell, edge: str, value: str, size: int, color: str) -> None:
+    tc_pr = cell._tc.get_or_add_tcPr()
+    borders = tc_pr.find(qn("w:tcBorders"))
+    if borders is None:
+        borders = OxmlElement("w:tcBorders")
+        tc_pr.append(borders)
+    element = borders.find(qn(f"w:{edge}"))
+    if element is None:
+        element = OxmlElement(f"w:{edge}")
+        borders.append(element)
+    element.set(qn("w:val"), value)
+    element.set(qn("w:sz"), str(size))
+    element.set(qn("w:color"), color)
+
+
+def _clear_cell_decoration(cell) -> None:
+    tc_pr = cell._tc.get_or_add_tcPr()
+    shading = tc_pr.find(qn("w:shd"))
+    if shading is not None:
+        tc_pr.remove(shading)
+    borders = tc_pr.find(qn("w:tcBorders"))
+    if borders is not None:
+        tc_pr.remove(borders)
+
+
+def _style_table_layout(table) -> None:
+    """Apply shared typography, widths and spacing without choosing border semantics."""
+    table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    table.autofit = False
 
     column_count = len(table.columns)
     presets = {
@@ -200,6 +226,7 @@ def style_table(table) -> None:
         if row_index == 0 and tr_pr.find(qn("w:tblHeader")) is None:
             _append_child(tr_pr, "w:tblHeader", **{"w:val": "true"})
         for column_index, cell in enumerate(row.cells):
+            _clear_cell_decoration(cell)
             cell.width = Cm(widths[min(column_index, len(widths) - 1)])
             cell.vertical_alignment = WD_CELL_VERTICAL_ALIGNMENT.CENTER
             tc_pr = cell._tc.get_or_add_tcPr()
@@ -214,17 +241,13 @@ def style_table(table) -> None:
                     tc_mar.append(node)
                 node.set(qn("w:w"), str(value))
                 node.set(qn("w:type"), "dxa")
-            if row_index == 0:
-                shading = tc_pr.find(qn("w:shd"))
-                if shading is None:
-                    shading = OxmlElement("w:shd")
-                    tc_pr.append(shading)
-                shading.set(qn("w:fill"), "DCE6F1")
             for paragraph in cell.paragraphs:
                 paragraph.paragraph_format.first_line_indent = None
                 paragraph.paragraph_format.space_before = Pt(0)
                 paragraph.paragraph_format.space_after = Pt(0)
                 paragraph.paragraph_format.line_spacing = 1.0
+                if row_index == 0:
+                    paragraph.alignment = WD_ALIGN_PARAGRAPH.CENTER
                 for run in paragraph.runs:
                     run.font.name = "Times New Roman"
                     run.font.size = Pt(9.5)
@@ -235,6 +258,32 @@ def style_table(table) -> None:
                         rfonts = OxmlElement("w:rFonts")
                         rpr.append(rfonts)
                     rfonts.set(qn("w:eastAsia"), "宋体" if row_index else "黑体")
+
+
+def style_body_table(table) -> None:
+    """Use a publication-style black three-line table for report body content."""
+    _style_table_layout(table)
+    _set_table_border(table, "top", "single", 12, "000000")
+    _set_table_border(table, "bottom", "single", 12, "000000")
+    for edge in ("left", "right", "insideH", "insideV"):
+        _set_table_border(table, edge, "nil", 0, "000000")
+    for cell in table.rows[0].cells:
+        _set_cell_border(cell, "bottom", "single", 6, "000000")
+
+
+def style_appendix_table(table) -> None:
+    """Use an unshaded black-and-white full grid for appendix dictionaries and indexes."""
+    _style_table_layout(table)
+    for edge in ("top", "left", "bottom", "right", "insideH", "insideV"):
+        _set_table_border(table, edge, "single", 4, "000000")
+
+
+def style_table(table, *, appendix: bool = False) -> None:
+    """Backward-compatible table dispatcher."""
+    if appendix:
+        style_appendix_table(table)
+    else:
+        style_body_table(table)
 
 
 def compact_appendix_table(table) -> None:
@@ -260,6 +309,14 @@ def extract_equation_labels(source: Path) -> list[str]:
 
 def extract_table_labels(source: Path) -> list[tuple[str, str]]:
     return TAB_LABEL.findall(source.read_text(encoding="utf-8"))
+
+
+def extract_appendix_table_labels(source_text: str) -> set[str]:
+    """Return table labels located under a real appendix heading such as 附录A/附录B."""
+    appendix = re.search(r"^#{2,4}\s+附录[A-Z0-9]", source_text, re.MULTILINE)
+    if appendix is None:
+        return set()
+    return {label for label, _title in TAB_LABEL.findall(source_text[appendix.start():])}
 
 
 def extract_figure_labels(source: Path) -> list[tuple[str, str]]:
@@ -449,13 +506,14 @@ def postprocess(out: Path, source: Path) -> None:
     document = docx.Document(str(out))
     configure_reference_document(document)
     table_labels = extract_table_labels(source)
+    appendix_table_labels = extract_appendix_table_labels(source.read_text(encoding="utf-8"))
     table_bookmark_map: dict[str, str] = {}
     for index, table in enumerate(document.tables, start=1):
-        style_table(table)
         if index <= len(table_labels):
             label, title = table_labels[index - 1]
         else:
             label, title = f"tab:auto-{index}", "数据表"
+        style_table(table, appendix=label in appendix_table_labels)
         if label in {"tab:claims", "tab:reproduction"}:
             compact_appendix_table(table)
         table_bookmark_map[label] = add_table_caption(table, index, label, title)
