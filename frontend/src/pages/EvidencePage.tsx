@@ -5,7 +5,8 @@ import { EventStreamCard } from '../components/EventStreamCard'
 import { RunSourceBadge } from '../components/RunSourceBadge'
 import type { RunApi } from '../api/runs'
 import { FIXTURE_HASH, FIXTURE_RUN_RESULT } from '../fixtures/contracts'
-import { RUN_ID_STORAGE_KEY, useRun } from '../state/useRun'
+import { useOptionalSharedRun } from '../state/RunContext'
+import { RUN_ID_STORAGE_KEY, useRun, type RunController } from '../state/useRun'
 import type { RunResult } from '../types/contracts'
 
 function completedMetrics(result: RunResult): string {
@@ -67,18 +68,9 @@ const EVIDENCE_ROWS = [
   },
 ] as const
 
-export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage } = {}) {
+function EvidenceContent({ run }: { run: RunController }) {
   const [exported, setExported] = useState(false)
-  const run = useRun({ api, storage })
-  const { state, resume } = run
-
-  useEffect(() => {
-    const source = storage ?? window.localStorage
-    const stored = source.getItem(RUN_ID_STORAGE_KEY)
-    if (stored) {
-      void resume(stored)
-    }
-  }, [storage, resume])
+  const { state } = run
 
   const realResults =
     state.kind === 'online' && state.status?.status === 'completed' && state.results !== null
@@ -226,4 +218,31 @@ e=1004 policy=edf     t=302.0 snapshot energy_est=6.2Wh lower=5.1Wh`}
       </div>
     </section>
   )
+}
+
+function EvidenceWithSharedRun() {
+  const sharedRun = useOptionalSharedRun()
+  const ownedRun = useRun()
+  return <EvidenceContent run={sharedRun ?? ownedRun} />
+}
+
+function EvidenceWithOwnedRun({ api, storage }: { api?: RunApi; storage?: Storage }) {
+  const run = useRun({ api, storage })
+  const { resume } = run
+
+  useEffect(() => {
+    const source = storage ?? window.localStorage
+    const stored = source.getItem(RUN_ID_STORAGE_KEY)
+    if (stored) {
+      void resume(stored)
+    }
+  }, [storage, resume])
+
+  return <EvidenceContent run={run} />
+}
+
+export function EvidencePage({ api, storage }: { api?: RunApi; storage?: Storage } = {}) {
+  return api || storage
+    ? <EvidenceWithOwnedRun api={api} storage={storage} />
+    : <EvidenceWithSharedRun />
 }

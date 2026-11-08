@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { RealRunPanel } from '../components/RealRunPanel'
 import {
@@ -8,7 +8,8 @@ import {
   FIXTURE_SERIES,
   type PolicyMetricRow,
 } from '../domain/compare'
-import { RUN_ID_STORAGE_KEY, useRun } from '../state/useRun'
+import { useOptionalSharedRun } from '../state/RunContext'
+import { useRun } from '../state/useRun'
 
 function seriesPath(values: readonly number[], width: number, height: number): string {
   const max = Math.max(...values, 1)
@@ -71,15 +72,9 @@ export function ComparePage() {
   const [link, setLink] = useState(1)
   const [stale, setStale] = useState(false)
   const [created, setCreated] = useState(false)
-  const run = useRun()
-  const { resume } = run
-
-  useEffect(() => {
-    const stored = window.localStorage.getItem(RUN_ID_STORAGE_KEY)
-    if (stored) {
-      void resume(stored)
-    }
-  }, [resume])
+  const sharedRun = useOptionalSharedRun()
+  const ownedRun = useRun()
+  const run = sharedRun ?? ownedRun
 
   function touchConfig() {
     setStale(true)

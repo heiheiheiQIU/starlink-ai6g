@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { AppSidebar } from './components/AppSidebar'
 import { FixtureBanner } from './components/FixtureBanner'
@@ -13,12 +13,31 @@ import { EvidencePage } from './pages/EvidencePage'
 import { FlowWorkspace } from './pages/FlowWorkspace'
 import { MatrixPage } from './pages/MatrixPage'
 import { OverviewPage } from './pages/OverviewPage'
+import { RunProvider } from './state/RunContext'
+import { RUN_ID_STORAGE_KEY, useRun, type RunController } from './state/useRun'
 
-export default function App() {
+interface AppProps {
+  runController?: RunController
+  storage?: Storage
+}
+
+export default function App({ runController, storage }: AppProps = {}) {
   const [currentPage, setCurrentPage] = useState<PageId>('flow')
+  const ownedController = useRun({ storage })
+  const controller = runController ?? ownedController
+  const restoredRun = useRef(false)
+
+  useEffect(() => {
+    if (restoredRun.current) return
+    restoredRun.current = true
+    const source = storage ?? window.localStorage
+    const storedRunId = source.getItem(RUN_ID_STORAGE_KEY)
+    if (storedRunId) void controller.resume(storedRunId)
+  }, [controller, storage])
 
   return (
-    <div className="app-shell app-shell--mission app-shell--glass">
+    <RunProvider controller={controller}>
+      <div className="app-shell app-shell--mission app-shell--glass">
       <AppSidebar currentPage={currentPage} onNavigate={setCurrentPage} />
 
       <main className="app-main">
@@ -61,6 +80,7 @@ export default function App() {
       </main>
 
       <FloatingAssistant onOpenAssistant={() => setCurrentPage('assistant')} />
-    </div>
+      </div>
+    </RunProvider>
   )
 }
