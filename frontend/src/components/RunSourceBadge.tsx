@@ -44,10 +44,10 @@ export function RunSourceBadge({ api, storage, controller }: RunSourceBadgeProps
     }
     const active = statusName === 'queued' || statusName === 'running'
     setPolling(active)
-    if (!active) return
+    if (!active || controller) return
     const timer = window.setInterval(() => void refresh(), 2000)
     return () => window.clearInterval(timer)
-  }, [state.kind, statusName, onlineRunId, refresh])
+  }, [state.kind, statusName, onlineRunId, refresh, controller])
 
   if (state.kind === 'idle') {
     return (

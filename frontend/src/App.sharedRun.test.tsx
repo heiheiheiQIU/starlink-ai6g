@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
 
 import App from './App'
@@ -51,5 +51,21 @@ describe('App shared run root', () => {
 
     fireEvent.click(screen.getByRole('button', { name: '结果追溯' }))
     expect(screen.getByText('run_shared_42')).toBeInTheDocument()
+  })
+
+  it('refreshes an active shared run globally without requiring a specific page', async () => {
+    vi.useFakeTimers()
+    try {
+      const controller = onlineController()
+      const storage = {
+        getItem: vi.fn(() => null), setItem: vi.fn(), removeItem: vi.fn(), clear: vi.fn(), key: vi.fn(), length: 0,
+      } satisfies Storage
+      render(<App runController={controller} storage={storage} />)
+
+      await act(async () => { await vi.advanceTimersByTimeAsync(2100) })
+      expect(controller.refresh).toHaveBeenCalledTimes(1)
+    } finally {
+      vi.useRealTimers()
+    }
   })
 })

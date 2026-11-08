@@ -35,6 +35,14 @@ export default function App({ runController, storage }: AppProps = {}) {
     if (storedRunId) void controller.resume(storedRunId)
   }, [controller, storage])
 
+  const sharedStatus = controller.state.kind === 'online' ? controller.state.status?.status : null
+  useEffect(() => {
+    const active = sharedStatus === 'queued' || sharedStatus === 'running'
+    if (!active || controller.polling) return
+    const timer = window.setInterval(() => void controller.refresh(), 2000)
+    return () => window.clearInterval(timer)
+  }, [controller, controller.polling, sharedStatus])
+
   return (
     <RunProvider controller={controller}>
       <div className="app-shell app-shell--mission app-shell--glass">

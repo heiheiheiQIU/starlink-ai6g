@@ -36,6 +36,8 @@ export interface UseRunOptions {
 
 export interface RunController {
   state: RunSource
+  /** create() 内部是否正在执行权威状态轮询；用于避免根组件重复请求。 */
+  polling?: boolean
   create: (request: RunRequest) => Promise<void>
   resume: (runId: string) => Promise<void>
   refresh: () => Promise<void>
@@ -58,6 +60,7 @@ export function useRun(options: UseRunOptions = {}): RunController {
   const api = apiRef.current
   const storage = options.storage
   const [state, setState] = useState<RunSource>({ kind: 'idle' })
+  const [polling, setPolling] = useState(false)
   const controllerRef = useRef<AbortController | null>(null)
   const lastStatusRef = useRef<RunStatusResponse | null>(null)
 
@@ -98,6 +101,7 @@ export function useRun(options: UseRunOptions = {}): RunController {
       clearSignal()
       const controller = new AbortController()
       controllerRef.current = controller
+      setPolling(true)
       try {
         const created = await api.createRun(request)
         rememberRunId(created.run_id)
@@ -136,6 +140,7 @@ export function useRun(options: UseRunOptions = {}): RunController {
         })
       } finally {
         if (controllerRef.current === controller) controllerRef.current = null
+        setPolling(false)
       }
     },
     [api, storage],
@@ -187,5 +192,5 @@ export function useRun(options: UseRunOptions = {}): RunController {
     return () => controllerRef.current?.abort()
   }, [])
 
-  return { state, create, resume, refresh, abort, exportZip }
+  return { state, polling, create, resume, refresh, abort, exportZip }
 }
