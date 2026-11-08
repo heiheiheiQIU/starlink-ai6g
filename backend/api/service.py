@@ -74,27 +74,28 @@ class RunService:
         if group is not None: group.close()
 
     def reap(self):
-        for supervisor in self.inference_jobs.values(): supervisor.reap()
-        for identity,(process,started) in list(self.jobs.items()):
-            folder=checked_file(self.root,Path('sandbox' if identity.startswith('sandbox_') else '')/identity)
-            expired=time.monotonic()-started>self.timeout_s
-            if expired and process.is_alive(): stop_process(process)
-            if expired or not process.is_alive():
-                process.join(3)
-                try:
-                    state=json.loads(read_text(folder/'status.json'))
-                    if state['status'] not in ('completed','failed','cancelled'):
-                        fail_run(folder,'WORKER_TIMEOUT' if expired else 'WORKER_EXITED')
-                except (OSError,ValueError) as error:
-                    self.last_supervision_error=type(error).__name__
-                    terminal=RunStatusResponse(run_id=identity,status='failed',progress=None,active_policies=[],
-                        error=dict(code='INTERNAL_RUN_ERROR',message='Run status is unavailable',details={'reason':'STATUS_UNAVAILABLE'}))
-                    self.terminal_overrides[identity]=terminal.model_dump()
-                    try: fail_run(folder,'STATUS_UNAVAILABLE')
-                    except OSError: pass
-                finally:
-                    self._release_inference(identity)
-                    process.close();del self.jobs[identity]
+        with self.lock:
+            for supervisor in self.inference_jobs.values(): supervisor.reap()
+            for identity,(process,started) in list(self.jobs.items()):
+                folder=checked_file(self.root,Path('sandbox' if identity.startswith('sandbox_') else '')/identity)
+                expired=time.monotonic()-started>self.timeout_s
+                if expired and process.is_alive(): stop_process(process)
+                if expired or not process.is_alive():
+                    process.join(3)
+                    try:
+                        state=json.loads(read_text(folder/'status.json'))
+                        if state['status'] not in ('completed','failed','cancelled'):
+                            fail_run(folder,'WORKER_TIMEOUT' if expired else 'WORKER_EXITED')
+                    except (OSError,ValueError) as error:
+                        self.last_supervision_error=type(error).__name__
+                        terminal=RunStatusResponse(run_id=identity,status='failed',progress=None,active_policies=[],
+                            error=dict(code='INTERNAL_RUN_ERROR',message='Run status is unavailable',details={'reason':'STATUS_UNAVAILABLE'}))
+                        self.terminal_overrides[identity]=terminal.model_dump()
+                        try: fail_run(folder,'STATUS_UNAVAILABLE')
+                        except OSError: pass
+                    finally:
+                        self._release_inference(identity)
+                        process.close();del self.jobs[identity]
 
     def close(self):
         self.stopping.set()
