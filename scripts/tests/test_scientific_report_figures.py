@@ -1,5 +1,4 @@
 import json
-import subprocess
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -12,25 +11,20 @@ GENERATOR = ROOT / "scripts" / "generate_report_figures_v3.mjs"
 FIGURES = {
     "C-F03_AI与6G双向耦合_报告版.svg": {
         "required": ["AI价值排序", "6G可行域", "安全解码", "下一决策周期"],
-        "forbidden": ["AI决定", "C-F03", "机制与设计图"],
+        "forbidden": ["AI决定", "C-F03", "机制与设计图", "AI输出不越过可行域"],
     },
     "A-F02_教师标签质量审计_报告版.svg": {
         "required": ["13/20", "7/20", "19/20", "1/20", "旧20样本冻结包"],
-        "forbidden": ["65%", "A-F02", "已签核数据"],
+        "forbidden": ["65%", "A-F02", "已签核数据", "审计边界"],
     },
     "B-F02_能量账本校核_报告版.svg": {
         "required": ["0.0200000", "0.0103125", "0.0303125", "Wh", "指定发送段"],
-        "forbidden": ["B-F02", "已签核数据", "而不是界面装饰"],
+        "forbidden": ["B-F02", "已签核数据", "而不是界面装饰", "工程校核边界"],
     },
 }
 
 
 class ScientificReportFigureContractTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls):
-        if GENERATOR.is_file():
-            subprocess.run(["node", str(GENERATOR)], cwd=ROOT, check=True)
-
     def _read_svg(self, name):
         path = OUT / name
         self.assertTrue(path.is_file(), name)
@@ -83,6 +77,39 @@ class ScientificReportFigureContractTests(unittest.TestCase):
         self.assertEqual(len(manifest["figures"]), 3)
         self.assertEqual(
             {item["file"] for item in manifest["figures"]}, set(FIGURES)
+        )
+
+    def test_png_previews_are_rendered_from_each_svg(self):
+        preview_dir = OUT / "previews"
+        for name in FIGURES:
+            preview = preview_dir / name.replace(".svg", ".png")
+            self.assertTrue(preview.is_file(), preview)
+            self.assertEqual(preview.read_bytes()[:8], b"\x89PNG\r\n\x1a\n", preview)
+            self.assertGreater(preview.stat().st_size, 20_000, preview)
+
+    def test_coverage_grid_does_not_overlap_row_labels_or_counts(self):
+        root = ET.fromstring(self._read_svg("A-F02_教师标签质量审计_报告版.svg"))
+        rects = [node for node in root.iter() if node.tag.endswith("rect")]
+        first_row = [node for node in rects if node.attrib.get("y") == "228"]
+        self.assertEqual(len(first_row), 20)
+        self.assertGreaterEqual(min(float(node.attrib["x"]) for node in first_row), 1310)
+        zero_counts = [
+            node for node in root.iter()
+            if node.tag.endswith("text") and "".join(node.itertext()) == "0/20"
+        ]
+        self.assertEqual(len(zero_counts), 4)
+        self.assertTrue(all(float(node.attrib["x"]) >= 1650 for node in zero_counts))
+
+    def test_feedback_path_routes_below_the_explanation_band(self):
+        text = self._read_svg("C-F03_AI与6G双向耦合_报告版.svg")
+        self.assertIn('data-role="feedback-path"', text)
+        self.assertIn('L 360 637 L 360 390 L 572 390 L 572 355', text)
+
+    def test_energy_boundary_note_is_not_drawn_as_a_ui_card(self):
+        root = ET.fromstring(self._read_svg("B-F02_能量账本校核_报告版.svg"))
+        rects = [node for node in root.iter() if node.tag.endswith("rect")]
+        self.assertFalse(
+            any(node.attrib.get("x") == "1195" and node.attrib.get("y") == "640" for node in rects)
         )
 
 

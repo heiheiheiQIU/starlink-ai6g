@@ -1,0 +1,26 @@
+{
+  "schema_version": "report-figure-pack-v3",
+  "generated_at": "2026-11-08",
+  "scope": "report-only",
+  "master_format": "SVG",
+  "background": "#FFFFFF",
+  "width": "170mm",
+  "font_stack": "Arial, Source Han Sans SC, Microsoft YaHei, sans-serif",
+  "figures": [
+    {
+      "file": "C-F03_AI与6G双向耦合_报告版.svg",
+      "kind": "mechanism",
+      "sha256": "6a10b978f31482b7c06ba0f99ec93745c86f72d193404e74bbe8c9517a3b52a4"
+    },
+    {
+      "file": "A-F02_教师标签质量审计_报告版.svg",
+      "kind": "quantitative-audit",
+      "sha256": "e7d0daaf593254218791934d615e9790107fb506d597ca50729545c0ec1eac6d"
+    },
+    {
+      "file": "B-F02_能量账本校核_报告版.svg",
+      "kind": "engineering-validation",
+      "sha256": "ace364db7e8ab101716c1c61739f44580ed77f3e4866393322b251be125b1660"
+    }
+  ]
+}

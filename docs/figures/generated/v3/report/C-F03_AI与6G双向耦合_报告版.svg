@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="170mm" height="74mm" viewBox="0 0 1700 740" role="img" aria-label="AI价值排序与6G可行域约束的协同决策机制">
+<rect x="0" y="0" width="1700" height="740" fill="#FFFFFF"/>
+<defs><marker id="arrow-24415A" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,4.5 L0,9 z" fill="#24415A"/></marker><marker id="arrow-2A8C82" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,4.5 L0,9 z" fill="#2A8C82"/></marker><marker id="arrow-D9912B" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,4.5 L0,9 z" fill="#D9912B"/></marker><marker id="arrow-C95757" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L9,4.5 L0,9 z" fill="#C95757"/></marker></defs>
+
+<text x="70" y="70" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="700" fill="#5E6B75" text-anchor="start" >输入状态</text>
+<rect x="70" y="110" width="250" height="112" fill="#FFFFFF" stroke="#D9E1E7" stroke-width="2" rx="6"/>
+<line x1="70" y1="110" x2="70" y2="222" stroke="#24415A" stroke-width="8"/>
+<text x="100" y="151" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#263442" text-anchor="start" >公开观测</text>
+<text x="100" y="188" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="400" fill="#5E6B75" text-anchor="start" >健康风险 · 能量余量</text>
+<rect x="70" y="258" width="250" height="112" fill="#FFFFFF" stroke="#D9E1E7" stroke-width="2" rx="6"/>
+<line x1="70" y1="258" x2="70" y2="370" stroke="#24415A" stroke-width="8"/>
+<text x="100" y="299" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#263442" text-anchor="start" >任务与窗口</text>
+<text x="100" y="336" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="400" fill="#5E6B75" text-anchor="start" >紧迫度 · 可见期 · 收益</text>
+
+<path d="M 320 166 L 425 225" fill="none" stroke="#24415A" stroke-width="3" marker-end="url(#arrow-24415A)"/>
+<path d="M 320 314 L 425 255" fill="none" stroke="#24415A" stroke-width="3" marker-end="url(#arrow-24415A)"/>
+<text x="372" y="198" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="17" font-weight="600" fill="#5E6B75" text-anchor="middle" >特征</text>
+
+<rect x="425" y="125" width="295" height="230" fill="#EDF6F4" stroke="#2A8C82" stroke-width="2" rx="6"/>
+<text x="572" y="181" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#2A8C82" text-anchor="middle" >AI价值排序</text>
+<line x1="465" y1="205" x2="680" y2="205" stroke="#D9E1E7" stroke-width="2"/>
+<text x="465" y="248" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >候选任务效用评分</text>
+<text x="465" y="286" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >健康风险与时效权衡</text>
+<text x="465" y="324" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >输出：候选价值次序</text>
+
+<path d="M 720 240 L 825 240" fill="none" stroke="#2A8C82" stroke-width="3" marker-end="url(#arrow-2A8C82)"/>
+<text x="772" y="212" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="17" font-weight="600" fill="#2A8C82" text-anchor="middle" >价值分数</text>
+
+<rect x="825" y="125" width="295" height="230" fill="#FBF4E8" stroke="#D9912B" stroke-width="2" rx="6"/>
+<text x="972" y="181" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#D9912B" text-anchor="middle" >6G可行域</text>
+<line x1="865" y1="205" x2="1080" y2="205" stroke="#D9E1E7" stroke-width="2"/>
+<text x="865" y="248" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >可见窗口 · 速率 · 丢失</text>
+<text x="865" y="286" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >ACK义务 · 能量储备</text>
+<text x="865" y="324" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >输出：可执行候选集合</text>
+
+<path d="M 1120 240 L 1225 240" fill="none" stroke="#D9912B" stroke-width="3" marker-end="url(#arrow-D9912B)"/>
+<text x="1172" y="212" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="17" font-weight="600" fill="#D9912B" text-anchor="middle" >约束掩码</text>
+
+<rect x="1225" y="125" width="405" height="230" fill="#FFFFFF" stroke="#24415A" stroke-width="2.4" rx="6"/>
+<text x="1427" y="181" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#24415A" text-anchor="middle" >安全解码与执行</text>
+<line x1="1265" y1="205" x2="1590" y2="205" stroke="#D9E1E7" stroke-width="2"/>
+<text x="1265" y="248" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >在可行集合内选择最高价值候选</text>
+<text x="1265" y="286" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >异常、域外输入或空集合触发回退</text>
+<text x="1265" y="324" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="20" font-weight="600" fill="#263442" text-anchor="start" >动作：robust / fast / idle</text>
+
+<line x1="425" y1="448" x2="1620" y2="448" stroke="#D9E1E7" stroke-width="1.5"/>
+<line x1="425" y1="466" x2="425" y2="512" stroke="#2A8C82" stroke-width="7"/>
+<text x="457" y="499" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="700" fill="#263442" text-anchor="start" >评分—解码解耦：AI负责价值排序；规则负责通信与安全边界。</text>
+
+<rect x="1225" y="585" width="405" height="104" fill="#FFFFFF" stroke="#D9E1E7" stroke-width="1.5" rx="6"/>
+<text x="1260" y="628" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="23" font-weight="700" fill="#263442" text-anchor="start" >链路结果</text>
+<text x="1260" y="663" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="400" fill="#5E6B75" text-anchor="start" >送达 · 重传 · 超时 · 能耗</text>
+<path data-role="feedback-path" d="M 1225 637 L 360 637 L 360 390 L 572 390 L 572 355" fill="none" stroke="#2A8C82" stroke-width="2.8" stroke-dasharray="10 8" marker-end="url(#arrow-2A8C82)"/>
+<text x="790" y="620" font-family="Arial, Source Han Sans SC, Microsoft YaHei, sans-serif" font-size="18" font-weight="700" fill="#2A8C82" text-anchor="middle" >链路结果进入下一决策周期</text>
+
+</svg>
