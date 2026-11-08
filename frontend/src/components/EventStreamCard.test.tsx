@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { describe, expect, it } from 'vitest'
 
 import { EventStreamCard } from './EventStreamCard'
@@ -80,5 +81,23 @@ describe('EventStreamCard', () => {
     render(<EventStreamCard runId="run-1" events={[]} />)
 
     expect(screen.getByText('该任务实例暂无事件。')).toBeInTheDocument()
+  })
+
+  it('supports deterministic restart, step and independent replay speed', async () => {
+    const user = userEvent.setup()
+    render(<EventStreamCard runId="run-1" events={EVENTS} />)
+
+    expect(screen.getByText('4 / 4 帧')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '从头回放' }))
+    expect(screen.getByText('0 / 4 帧')).toBeInTheDocument()
+    expect(screen.getByText('等待回放事件。')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '单步推进回放' }))
+    expect(screen.getByText('1 / 4 帧')).toBeInTheDocument()
+    expect(screen.getByLabelText('事件瀑布图')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '2×' }))
+    expect(screen.getByRole('button', { name: '2×' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByText(/仅改变前端回放速度/)).toBeInTheDocument()
   })
 })

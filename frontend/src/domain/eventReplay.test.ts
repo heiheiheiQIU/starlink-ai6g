@@ -33,9 +33,10 @@ describe('event replay normalization', () => {
   })
 
   it('groups simultaneous events into deterministic simulation-time frames', () => {
-    const frames = buildReplayFrames([event(3, 2), event(1, 0), event(2, 0)])
+    const frames = buildReplayFrames([event(3, 2), event(1, 0), event(2, 0), event(4, 1)])
     expect(frames.map((frame) => [frame.simTimeS, frame.events.map((item) => item.event_id)])).toEqual([
       [0, [1, 2]],
+      [1, [4]],
       [2, [3]],
     ])
   })

@@ -2159,6 +2159,53 @@ body::before {
   gap: 8px;
 }
 
+.event-replay-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(99, 217, 235, 0.16);
+  border-radius: 12px;
+  background: rgba(7, 18, 31, 0.42);
+}
+
+.event-replay-controls > button,
+.event-replay-controls__speed button {
+  min-height: 30px;
+  padding: 5px 10px;
+  border: 1px solid rgba(140, 190, 215, 0.22);
+  border-radius: 8px;
+  color: #dbe8ed;
+  background: rgba(18, 42, 61, 0.68);
+  cursor: pointer;
+}
+
+.event-replay-controls button:hover:not(:disabled),
+.event-replay-controls button[aria-pressed='true'] {
+  border-color: rgba(59, 212, 237, 0.62);
+  background: rgba(28, 93, 113, 0.58);
+}
+
+.event-replay-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.event-replay-controls__speed {
+  display: inline-flex;
+  gap: 4px;
+  padding-left: 4px;
+  border-left: 1px solid rgba(140, 190, 215, 0.16);
+}
+
+.event-replay-controls small {
+  flex: 1 1 260px;
+  color: #7e97aa;
+  text-align: right;
+}
+
 .waterfall__lane {
   display: grid;
   grid-template-columns: 110px 1fr;

@@ -18,14 +18,13 @@ export function normalizeReplayEvents(events: readonly Event[]): Event[] {
 }
 
 export function buildReplayFrames(events: readonly Event[]): ReplayFrame[] {
-  const frames: ReplayFrame[] = []
+  const bySimulationTime = new Map<number, Event[]>()
   for (const event of normalizeReplayEvents(events)) {
-    const previous = frames.at(-1)
-    if (previous?.simTimeS === event.sim_time_s) {
-      previous.events.push(event)
-    } else {
-      frames.push({ simTimeS: event.sim_time_s, events: [event] })
-    }
+    const frameEvents = bySimulationTime.get(event.sim_time_s) ?? []
+    frameEvents.push(event)
+    bySimulationTime.set(event.sim_time_s, frameEvents)
   }
-  return frames
+  return [...bySimulationTime.entries()]
+    .sort(([left], [right]) => left - right)
+    .map(([simTimeS, frameEvents]) => ({ simTimeS, events: frameEvents }))
 }
