@@ -42,8 +42,8 @@ S3 重复运行的事件去除 run_id 和实测 latency_ms 后完全相同。运
 
 - 后端相关回归 283 项通过，完整日志见 evidence/B/sprint_2026-11-09/regression.log。覆盖 API、Learned、协议、能量、合同、formal 候选/冻结/运行/统计等 18 个测试文件。全库测试曾在收集阶段长时间无输出，已停止，故只报告上述范围。
 - frontend 的 pnpm test:run 共 77 项通过，pnpm build 通过。页面按钮及新版参数控件的浏览器验收归 C 联调。
-- 源码包版本 3f09926，离线包路径为 runs/B_sandbox_offline_20261109.zip。包内包含源码、16 个 wheel、锁文件、前端构建产物、单端口启动器、5 个运行及 SHA256SUMS.json。
-- 离线包 24,770,339 bytes，SHA256 为 36de40f1dac37b3d78bea0362314fc8e82b28aaa63c3f0e4b82ed02fc25b7a81。机器清单见 offline_package.json。解压后按 README.txt 操作，start.py 同时提供网页和 /runs 接口。
+- 源码包版本 71c40b0842ac9547895874288a1633d1f4fdb5ac，离线包路径为 runs/B_sandbox_offline_20261109.zip。包内包含源码、16 个 wheel、锁文件、前端构建产物、单端口启动器、5 个运行及 SHA256SUMS.json。
+- 离线包 24,845,651 bytes，SHA256 为 d637e638fcf1cf7baa4c178e3843afbd4847d85102df68ea2f6ef8d7ac08dc34。机器清单见 offline_package.json。解压后按 README.txt 操作，start.py 同时提供网页和 /runs 接口。
 - 后续证据提交只增加文档和验证日志，离线源码包固定在上述已核验版本。包中现有前端仍需 C 加入新版轴控件，API 可直接使用三份请求 JSON。
 - 审查发现的 seed 类型强转、sandbox 父目录链接越界已补回归测试；广泛回归发现直接清理与后台监督并发重入，已用同一重入锁串行化，复测通过。
 
