@@ -4,6 +4,15 @@ import path from 'node:path';
 
 export const CANVAS = Object.freeze({ width: 1600, height: 900 });
 export const TYPOGRAPHY = Object.freeze({ title: 34, claim: 19, body: 18, metric: 20, source: 10.5 });
+
+export const HERO_GEOMETRY = Object.freeze({
+  title: Object.freeze({ left: 84, top: 180, width: 760, height: 150 }),
+  claim: Object.freeze({ left: 88, top: 344, width: 780, height: 90 }),
+  rule: Object.freeze({ left: 88, top: 458, width: 86, height: 5 }),
+  metrics: Object.freeze({ left: 88, top: 500, width: 700, height: 160 }),
+  meaning: Object.freeze({ left: 88, top: 698, width: 1030, height: 82 }),
+  source: Object.freeze({ left: 88, top: 822, width: 1120, height: 24 }),
+});
 export const THEME_ASSET = 'frontend/public/visuals/orbital-command-backdrop-v1.png';
 export const ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -253,17 +262,18 @@ export async function renderProductEvidence({ slide, spec, pageLabel }) {
 }
 
 export async function renderHero({ slide, spec, pageLabel }) {
+  const g = HERO_GEOMETRY;
   await addThemeBackground(slide, { hero: true });
   addText(slide, spec.section, { left: 88, top: 108, width: 460, height: 34 },
     { fontSize: 17, bold: true, color: COLORS.cyan });
-  addText(slide, spec.title, { left: 84, top: 190, width: 690, height: 82 },
-    { fontSize: 58, bold: true, color: COLORS.white });
-  addText(slide, spec.claim, { left: 88, top: 308, width: 690, height: 118 },
-    { fontSize: 31, bold: true, color: COLORS.white });
-  addShape(slide, 'rect', { left: 88, top: 458, width: 86, height: 5 }, COLORS.cyan);
-  addMetricStrip(slide, spec.supportingFacts, { left: 88, top: 500, width: 700, height: 160 }, { compact: true });
-  addInterpretation(slide, spec.businessMeaning, { left: 88, top: 698, width: 1030, height: 82 });
-  addText(slide, spec.sourceNote, { left: 88, top: 822, width: 1120, height: 24 },
+  addText(slide, spec.title, g.title,
+    { fontSize: spec.title.length > 18 ? 48 : 56, bold: true, color: COLORS.white });
+  addText(slide, spec.claim, g.claim,
+    { fontSize: spec.claim.length > 42 ? 27 : 30, bold: true, color: COLORS.white });
+  addShape(slide, 'rect', g.rule, COLORS.cyan);
+  addMetricStrip(slide, spec.supportingFacts, g.metrics, { compact: true });
+  addInterpretation(slide, spec.businessMeaning, g.meaning);
+  addText(slide, spec.sourceNote, g.source,
     { fontSize: TYPOGRAPHY.source, color: COLORS.muted });
   addText(slide, pageLabel, { left: 1436, top: 48, width: 92, height: 26 },
     { fontSize: 13, bold: true, color: COLORS.muted, alignment: 'right' });
