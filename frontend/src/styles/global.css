@@ -2312,6 +2312,18 @@ body::before {
 .live-stage--transport li[data-kind='dropped'] { color: #f1a7a9; }
 .live-stage--transport li small { color: #7e97aa; }
 
+.run-result-comparison { display: grid; gap: 14px; }
+.run-result-comparison__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
+.run-result-comparison__head h2 { margin: 0 0 5px; }
+.run-result-comparison__head p { margin: 0; color: #7e97aa; }
+.run-result-comparison__meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; }
+.run-result-comparison__meta > div { display: grid; gap: 3px; padding: 11px 12px; border: 1px solid rgba(101, 181, 197, 0.16); border-radius: 11px; background: rgba(10, 28, 43, 0.56); }
+.run-result-comparison__meta span,
+.run-result-comparison__meta small { color: #7e97aa; }
+.run-result-comparison__meta code { overflow-wrap: anywhere; color: #9fc8d4; font-size: 11px; }
+.run-result-comparison__table-wrap { overflow-x: auto; }
+.run-result-comparison__table-wrap .console-table { min-width: 980px; }
+
 .run-history-strip strong {
   color: #dbe8ed;
 }

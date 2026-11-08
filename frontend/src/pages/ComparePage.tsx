@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { RealRunPanel } from '../components/RealRunPanel'
+import { RunResultComparison } from '../components/RunResultComparison'
 import {
   COMPARE_AXIS,
   COMPARE_SCENARIO_LABELS,
@@ -118,6 +119,13 @@ export function ComparePage() {
           </div>
           <p>仅对比后端已返回的状态与结果；配置差异等待权威请求摘要，不从页面控件反推。</p>
         </section>
+      ) : null}
+
+      {history?.current.kind === 'online' && history.current.results ? (
+        <RunResultComparison
+          current={history.current.results}
+          previous={history.previous?.kind === 'online' ? history.previous.results : null}
+        />
       ) : null}
 
       <div className="compare-config" aria-label="评估配置（标准场景演示）">
