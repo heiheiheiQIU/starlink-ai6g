@@ -31,7 +31,7 @@ export const FIXTURE_METRICS: readonly PolicyMetricRow[] = [
     unit: '0—1',
     edf: '58.3%',
     learned: '66.7%',
-    diff: '+8.4 pp（占位）',
+    diff: '+8.4 pp（示例差值）',
     diffKind: 'pos',
     note: '分母含到期失败任务；未到期单列。当前为演示数据，非正式实测。',
   },

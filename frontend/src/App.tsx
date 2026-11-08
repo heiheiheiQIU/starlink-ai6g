@@ -4,6 +4,7 @@ import { AppSidebar } from './components/AppSidebar'
 import { FixtureBanner } from './components/FixtureBanner'
 import { FloatingAssistant } from './components/FloatingAssistant'
 import { PAGE_SOURCES } from './domain/dataSource'
+import type { PageSourceInfo } from './domain/dataSource'
 import type { PageId } from './domain/navigation'
 import { getPageLabel } from './domain/navigation'
 import { AssistantPage } from './pages/AssistantPage'
@@ -36,6 +37,22 @@ export default function App({ runController, storage }: AppProps = {}) {
   }, [controller, storage])
 
   const sharedStatus = controller.state.kind === 'online' ? controller.state.status?.status : null
+  const onlineSource: PageSourceInfo | null = controller.state.kind === 'online'
+    ? {
+        kind: 'development_run',
+        badge: '在线任务',
+        note: `任务 ${controller.state.runId}：状态与事件来自任务服务，完成后才展示最终指标。`,
+      }
+    : null
+  const statusLabel = sharedStatus === 'queued'
+    ? '排队中'
+    : sharedStatus === 'running'
+      ? '运行中'
+      : sharedStatus === 'completed'
+        ? '已完成'
+        : sharedStatus === 'failed'
+          ? '运行失败'
+          : '状态同步中'
   useEffect(() => {
     const active = sharedStatus === 'queued' || sharedStatus === 'running'
     if (!active || controller.polling) return
@@ -55,7 +72,11 @@ export default function App({ runController, storage }: AppProps = {}) {
             <strong>{getPageLabel(currentPage)}</strong>
           </div>
           <div className="topbar__actions">
-            <span className="snapshot-chip">演示观测 · 2026-10-29T15:00Z</span>
+            <span className="snapshot-chip">
+              {controller.state.kind === 'online'
+                ? `${statusLabel} · ${controller.state.runId}`
+                : '标准场景 · 固定观测快照'}
+            </span>
             <button
               className="assistant-trigger"
               type="button"
@@ -66,7 +87,7 @@ export default function App({ runController, storage }: AppProps = {}) {
           </div>
         </header>
 
-        <FixtureBanner source={PAGE_SOURCES[currentPage]} />
+        <FixtureBanner source={onlineSource ?? PAGE_SOURCES[currentPage]} />
 
         <div className="page-stage">
           {currentPage === 'flow' ? (

@@ -14,11 +14,11 @@ describe('compare page', () => {
     expect(screen.getByText(/58\.3%/)).toBeInTheDocument()
 
     await user.selectOptions(screen.getByLabelText('负载'), '2')
-    expect(screen.getByRole('alert')).toHaveTextContent(/已标记为历史\/失效/)
+    expect(screen.getByRole('alert')).toHaveTextContent(/已转入历史记录/)
     expect(screen.queryByText(/新任务实例已创建/)).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: '新建任务实例并重算' }))
-    expect(screen.getByRole('status')).toHaveTextContent(/新任务实例已创建/)
+    expect(screen.getByRole('status')).toHaveTextContent(/新的标准场景实例已创建/)
   })
 
   it('keeps both policy series on the same axis contract', () => {

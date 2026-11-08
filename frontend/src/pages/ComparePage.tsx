@@ -162,12 +162,12 @@ export function ComparePage() {
 
       {stale ? (
         <div className="stale-banner" role="alert">
-          ⚠ 配置已变更：旧结果（demo_fixture_001）已标记为历史/失效；请新建任务实例后再比较。
+          ⚠ 配置已变更：上一组标准场景结果已转入历史记录；请新建任务实例后再比较。
         </div>
       ) : null}
       {created ? (
         <div className="created-banner" role="status">
-          ✅ 新任务实例已创建（演示编号 fixture_002）：仅执行完成后展示结果，数值仍为演示数据。
+          ✅ 新的标准场景实例已创建：仅在执行完成后展示结果，当前数值仍为演示数据。
         </div>
       ) : null}
 

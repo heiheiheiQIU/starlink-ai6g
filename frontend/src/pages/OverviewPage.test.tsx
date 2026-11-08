@@ -3,6 +3,27 @@ import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
 import { OverviewPage } from './OverviewPage'
+import { RunProvider } from '../state/RunContext'
+import type { RunController } from '../state/useRun'
+
+function onlineController(): RunController {
+  return {
+    state: {
+      kind: 'online',
+      runId: 'run-overview-7',
+      status: { run_id: 'run-overview-7', status: 'running', progress: 0.6, active_policies: ['learned'], error: null },
+      results: null,
+      events: [],
+      offline: false,
+      error: null,
+    },
+    create: async () => undefined,
+    resume: async () => undefined,
+    refresh: async () => undefined,
+    abort: () => undefined,
+    exportZip: async () => undefined,
+  }
+}
 
 describe('overview page', () => {
   it('renders the six-node chain and product runtime status without internal project management', () => {
@@ -31,5 +52,15 @@ describe('overview page', () => {
   it('keeps demonstration-data honesty visible', () => {
     render(<OverviewPage onNavigate={() => undefined} />)
     expect(screen.getByText(/当前展示为标准场景演示，不作为实验结果/)).toBeInTheDocument()
+  })
+
+  it('shows the authoritative run identity when an online task is active', () => {
+    render(
+      <RunProvider controller={onlineController()}>
+        <OverviewPage onNavigate={() => undefined} />
+      </RunProvider>,
+    )
+    expect(screen.getByText(/run-overview-7 · 运行中/)).toBeInTheDocument()
+    expect(screen.queryByText(/demo_fixture_001 · completed/)).not.toBeInTheDocument()
   })
 })

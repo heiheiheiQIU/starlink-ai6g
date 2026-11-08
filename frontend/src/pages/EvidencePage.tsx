@@ -14,7 +14,7 @@ function completedMetrics(result: RunResult): string {
   if (learned?.weighted_on_time_rate === null || learned?.weighted_on_time_rate === undefined) {
     return '—（演示数据）'
   }
-  return `${(learned.weighted_on_time_rate * 100).toFixed(1)}%（占位）`
+  return `${(learned.weighted_on_time_rate * 100).toFixed(1)}%（示例值）`
 }
 
 const RUNS = [
@@ -135,7 +135,7 @@ function EvidenceContent({ run }: { run: RunController }) {
       <div className="console-card">
         <h2>任务实例列表（演示数据 · 状态说明）</h2>
         <p className="panel-note" style={{ marginBottom: 10 }}>
-          下表用于说明任务状态与交互（config_hash={FIXTURE_HASH}，占位）；在线任务指标见上方“在线任务结果”。
+          下表仅说明任务状态与交互（示例配置指纹：{FIXTURE_HASH}）；在线任务指标见上方“在线任务结果”。
         </p>
         <table className="console-table">
           <thead>

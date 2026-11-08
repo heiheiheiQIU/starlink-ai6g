@@ -44,6 +44,10 @@ describe('App shared run root', () => {
     render(<App runController={controller} storage={storage} />)
     await waitFor(() => expect(controller.resume).toHaveBeenCalledTimes(1))
     expect(controller.resume).toHaveBeenCalledWith('run_saved_99')
+    expect(screen.getByLabelText('数据状态说明')).toHaveTextContent('在线任务')
+    expect(screen.getByLabelText('数据状态说明')).toHaveTextContent('run_shared_42')
+    expect(screen.getByText('运行中 · run_shared_42')).toBeInTheDocument()
+    expect(screen.getByLabelText('数据状态说明')).not.toHaveTextContent('标准场景演示')
 
     fireEvent.click(screen.getByRole('button', { name: '策略评估' }))
     expect(screen.getAllByText('run_shared_42').length).toBeGreaterThan(0)
@@ -51,6 +55,9 @@ describe('App shared run root', () => {
 
     fireEvent.click(screen.getByRole('button', { name: '结果追溯' }))
     expect(screen.getByText('run_shared_42')).toBeInTheDocument()
+
+    fireEvent.click(screen.getAllByRole('button', { name: '智能研判' })[0])
+    expect(screen.getByText('在线任务已连接')).toBeInTheDocument()
   })
 
   it('refreshes an active shared run globally without requiring a specific page', async () => {

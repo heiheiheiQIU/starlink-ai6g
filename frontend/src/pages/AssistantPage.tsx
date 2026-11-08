@@ -4,6 +4,7 @@ import {
   answerFixtureQuestion,
   type FixtureAnswer,
 } from '../domain/assistant'
+import { useOptionalSharedRun } from '../state/RunContext'
 
 const INITIAL_ANSWER: FixtureAnswer = {
   isFixture: true,
@@ -19,6 +20,8 @@ const SUGGESTED_QUESTIONS = [
 ]
 
 export function AssistantPage() {
+  const sharedRun = useOptionalSharedRun()
+  const online = sharedRun?.state.kind === 'online'
   const [question, setQuestion] = useState('')
   const [lastQuestion, setLastQuestion] = useState('当前有哪些回答边界？')
   const [answer, setAnswer] = useState<FixtureAnswer>(INITIAL_ANSWER)
@@ -109,7 +112,9 @@ export function AssistantPage() {
               </li>
               <li>
                 <span>在线任务实例</span>
-                <strong className="pending">待接入</strong>
+                <strong className={online ? undefined : 'pending'}>
+                  {online ? '在线任务已连接' : '当前未连接'}
+                </strong>
               </li>
             </ul>
           </div>

@@ -37,15 +37,36 @@ function spyApi() {
 describe('useRun', () => {
   it('resumes a stored run without creating a new one', async () => {
     const api = spyApi()
+    const resumedEvent: Event = {
+      event_id: 3,
+      run_id: 'run-9',
+      policy_id: 'learned',
+      sim_time_s: 24,
+      event_type: 'decision',
+      task_id: 'T-009',
+      block_id: null,
+      payload_bytes: 512,
+      overhead_bytes: 24,
+      energy_Wh: 0.004,
+      reason_code: null,
+      data: null,
+    }
     api.getRunStatus.mockResolvedValue(runningStatus('run-9'))
+    api.getAllEvents.mockResolvedValue([resumedEvent])
 
     const { result } = renderHook(() => useRun({ api }))
     await act(() => result.current.resume('run-9'))
 
     expect(api.createRun).not.toHaveBeenCalled()
     await waitFor(() => {
-      expect(result.current.state).toMatchObject({ kind: 'online', runId: 'run-9', status: { status: 'running' } })
+      expect(result.current.state).toMatchObject({
+        kind: 'online',
+        runId: 'run-9',
+        status: { status: 'running' },
+        events: [resumedEvent],
+      })
     })
+    expect(api.getAllEvents).toHaveBeenCalledWith('run-9', 500)
   })
 
   it('marks transport failure as offline and keeps the last known status', async () => {

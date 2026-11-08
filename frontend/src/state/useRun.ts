@@ -152,11 +152,16 @@ export function useRun(options: UseRunOptions = {}): RunController {
     try {
       const status = await api.getRunStatus(runId)
       lastStatusRef.current = status
-      setOnline(runId, { status, offline: false, error: null })
+      const events = await fetchEvents(runId)
+      setOnline(runId, {
+        status,
+        ...(events === null ? {} : { events }),
+        offline: false,
+        error: null,
+      })
       if (status.status === 'completed') {
         const results = await api.getResults(runId)
-        const events = await fetchEvents(runId)
-        setOnline(runId, { results, events })
+        setOnline(runId, { results })
       }
     } catch (error) {
       const offline = error instanceof TransportError

@@ -1,4 +1,5 @@
 import type { PageId } from '../domain/navigation'
+import { useOptionalSharedRun } from '../state/RunContext'
 
 const CHAIN_NODES = [
   { id: 'arrival', label: '任务到达', sub: '数据入星上队列' },
@@ -14,6 +15,17 @@ interface OverviewPageProps {
 }
 
 export function OverviewPage({ onNavigate }: OverviewPageProps) {
+  const sharedRun = useOptionalSharedRun()
+  const online = sharedRun?.state.kind === 'online' ? sharedRun.state : null
+  const onlineStatus = online?.status?.status === 'queued'
+    ? '排队中'
+    : online?.status?.status === 'running'
+      ? '运行中'
+      : online?.status?.status === 'completed'
+        ? '已完成'
+        : online?.status?.status === 'failed'
+          ? '运行失败'
+          : '状态同步中'
   return (
     <section className="console-page">
       <header className="console-page__intro">
@@ -39,15 +51,23 @@ export function OverviewPage({ onNavigate }: OverviewPageProps) {
             ))}
           </div>
           <p className="panel-note">
-            六步与“任务决策”页面一一对应；当前展示为标准场景演示，不作为实验结果。
+            {online
+              ? '六步与“任务决策”页面一一对应；当前阶段由在线事件推进，最终指标仅在任务完成后显示。'
+              : '六步与“任务决策”页面一一对应；当前展示为标准场景演示，不作为实验结果。'}
           </p>
         </div>
 
         <div className="overview-cards">
           <div className="ov-card">
             <h3>当前任务实例</h3>
-            <p className="mono">demo_fixture_001 · completed（占位）</p>
-            <p className="table-note">EDF（规则）+ Learned（AI）· 同配置同随机种子 · 演示数据</p>
+            <p className="mono">
+              {online ? `${online.runId} · ${onlineStatus}` : '标准场景快照 · 已加载'}
+            </p>
+            <p className="table-note">
+              {online
+                ? `${online.status?.active_policies.join(' + ') || '策略加载中'} · 在线任务状态与事件`
+                : 'EDF（规则）+ Learned（AI）· 同配置同随机种子 · 演示数据'}
+            </p>
             <button className="link-button" type="button" onClick={() => onNavigate('flow')}>
               进入驾驶舱 ▸
             </button>

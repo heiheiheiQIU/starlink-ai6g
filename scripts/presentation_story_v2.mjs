@@ -124,7 +124,7 @@ export const MAIN_SLIDES = Object.freeze([
     evidence: [figure(FIG.formal, '冻结与配对', '正式输入、三策略运行、配对统计和门禁')],
     supportingFacts: ['预登记180条唯一输入，种子范围600000—600179', '三策略共540个唯一运行；两组比较复用同一Learned结果', '模型、配置、统计规则和数据划分进入冻结对象'],
     businessMeaning: '评委看到的不只是结果数字，还能看到结果如何生成、为何可比较。',
-    sourceNote: 'B冻结前交接与A复核；当前输入0条、正式运行0次，生成仍待A/B/C签核。',
+    sourceNote: 'C已批准B生成180条候选输入；尚无候选交付与三方冻结回执，当前可计入材料的输入0条、正式运行0次。',
   },
   {
     id: 'S11', section: '04 正式结果', layout: 'experiment-protocol', status: '未完成',
