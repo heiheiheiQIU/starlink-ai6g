@@ -8,7 +8,7 @@ import {
   FIXTURE_SERIES,
   type PolicyMetricRow,
 } from '../domain/compare'
-import { useOptionalSharedRun } from '../state/RunContext'
+import { useOptionalRunHistory, useOptionalSharedRun } from '../state/RunContext'
 import { useRun } from '../state/useRun'
 
 function seriesPath(values: readonly number[], width: number, height: number): string {
@@ -73,6 +73,7 @@ export function ComparePage() {
   const [stale, setStale] = useState(false)
   const [created, setCreated] = useState(false)
   const sharedRun = useOptionalSharedRun()
+  const history = useOptionalRunHistory()
   const ownedRun = useRun()
   const run = sharedRun ?? ownedRun
 
@@ -95,6 +96,29 @@ export function ComparePage() {
       </header>
 
       <RealRunPanel controller={run} />
+
+      {history?.current.kind === 'online' ? (
+        <section className="run-history-strip" aria-label="运行对比上下文">
+          <div>
+            <span>当前任务</span>
+            <strong className="mono">{history.current.runId}</strong>
+            <small>{history.current.status?.status ?? '状态待同步'} · {history.current.results ? '结果可用' : '结果未完成'}</small>
+          </div>
+          <span className="run-history-strip__arrow" aria-hidden="true">⇄</span>
+          <div>
+            <span>上一任务</span>
+            {history.previous?.kind === 'online' ? (
+              <>
+                <strong className="mono">{history.previous.runId}</strong>
+                <small>{history.previous.status?.status ?? '状态待同步'} · {history.previous.results ? '结果可用' : '结果未完成'}</small>
+              </>
+            ) : (
+              <strong>暂无上一任务</strong>
+            )}
+          </div>
+          <p>仅对比后端已返回的状态与结果；配置差异等待权威请求摘要，不从页面控件反推。</p>
+        </section>
+      ) : null}
 
       <div className="compare-config" aria-label="评估配置（标准场景演示）">
         <label>

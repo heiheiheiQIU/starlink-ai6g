@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import type { ReactNode } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { RunProvider, useSharedRun } from './RunContext'
+import { RunProvider, useRunHistory, useSharedRun } from './RunContext'
 import type { RunController } from './useRun'
 
 function fakeController(runId = 'run_shared_001'): RunController {
@@ -33,6 +33,13 @@ function Boundary({ children }: { children: ReactNode }) {
   return <>{children}</>
 }
 
+function HistoryReader() {
+  const history = useRunHistory()
+  const current = history.current.kind === 'online' ? history.current.runId : history.current.kind
+  const previous = history.previous?.kind === 'online' ? history.previous.runId : 'none'
+  return <output aria-label="run-history">{current}|{previous}</output>
+}
+
 describe('RunProvider', () => {
   it('provides one run controller to every page consumer', () => {
     const controller = fakeController()
@@ -52,5 +59,20 @@ describe('RunProvider', () => {
     console.error = vi.fn()
     expect(() => render(<Boundary><Reader name="orphan" /></Boundary>)).toThrow(/RunProvider/)
     console.error = original
+  })
+
+  it('retains the last run when a new run id becomes current', async () => {
+    const first = fakeController('run-old')
+    const { rerender } = render(
+      <RunProvider controller={first}><HistoryReader /></RunProvider>,
+    )
+    expect(screen.getByLabelText('run-history')).toHaveTextContent('run-old|none')
+
+    const second = fakeController('run-new')
+    rerender(<RunProvider controller={second}><HistoryReader /></RunProvider>)
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('run-history')).toHaveTextContent('run-new|run-old')
+    })
   })
 })

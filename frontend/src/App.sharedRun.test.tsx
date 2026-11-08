@@ -46,7 +46,8 @@ describe('App shared run root', () => {
     expect(controller.resume).toHaveBeenCalledWith('run_saved_99')
 
     fireEvent.click(screen.getByRole('button', { name: '策略评估' }))
-    expect(screen.getByText('run_shared_42')).toBeInTheDocument()
+    expect(screen.getAllByText('run_shared_42').length).toBeGreaterThan(0)
+    expect(screen.getByText('暂无上一任务')).toBeInTheDocument()
 
     fireEvent.click(screen.getByRole('button', { name: '结果追溯' }))
     expect(screen.getByText('run_shared_42')).toBeInTheDocument()
