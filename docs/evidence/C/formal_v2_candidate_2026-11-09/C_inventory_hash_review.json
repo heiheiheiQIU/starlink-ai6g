@@ -1,0 +1,59 @@
+{
+  "schema_version": "c-candidate-inventory-review-v1",
+  "reviewer": "member-C",
+  "reviewed_at": "2026-11-09T23:41:38+08:00",
+  "source_branch": "codex/b-formal-handoff-20261109",
+  "source_commit": "b4faac9d687c3a5b47db19d06f9e5b72cd185e05",
+  "generation_code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "status": "accepted_with_notes",
+  "review_scope": "candidate_inventory_hashes_cell_balance_and_shared_input",
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "checks": {
+    "trajectory_count": 180,
+    "cell_count": 18,
+    "trajectories_per_cell": 10,
+    "seed_range": [
+      600000,
+      600179
+    ],
+    "unique_counts": {
+      "trajectory_id": 180,
+      "config_path": 180,
+      "config_sha256": 180,
+      "input_hash": 180,
+      "content_hash": 180
+    },
+    "config_files_opened_and_checked": 180,
+    "config_sha256_errors": 0,
+    "config_seed_errors": 0,
+    "channel_seed_errors": 0,
+    "scenario_id_errors": 0,
+    "policy_contamination_errors": 0,
+    "policy_ids": [
+      "edf",
+      "value",
+      "learned"
+    ],
+    "planned_policy_run_keys": 540,
+    "unique_policy_run_keys": 540,
+    "shared_config_and_input_across_three_policies": 180,
+    "excluded_seed_count": 390,
+    "excluded_content_hash_count": 374,
+    "candidate_excluded_seed_overlap": 0,
+    "candidate_excluded_content_hash_overlap": 0,
+    "source_copy_count": 7,
+    "source_copy_hash_errors": 0,
+    "sha256_index_entries": 204,
+    "sha256_index_errors": 0,
+    "formal_policy_runs_executed": 0
+  },
+  "formal_runs_authorized": false,
+  "formal_review_receipt_modified": false,
+  "notes": [
+    "C accepts the actual candidate inventory, hashes, 18x10 balance and the one-config-per-trajectory shared-input design.",
+    "A must still review provenance, data splits and the legacy teacher-observation boundary.",
+    "The final review/leakage.json bytes and digest have not been jointly frozen; review/C.json therefore remains pending.",
+    "This receipt does not authorize 540 formal runs, any policy-performance claim, model replacement or Hybrid inclusion."
+  ],
+  "next_gate": "A provenance and split review, then A/C agreement on final leakage bytes and A/B/C post-generation receipts"
+}
