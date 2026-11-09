@@ -1,0 +1,1814 @@
+{
+  "$defs": {
+    "Action": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Id"
+        },
+        "mode": {
+          "enum": [
+            "idle",
+            "robust",
+            "fast"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "scheduled_bytes": {
+          "maximum": 1024,
+          "minimum": 0,
+          "title": "Scheduled Bytes",
+          "type": "integer"
+        },
+        "reason_codes": {
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        },
+        "fallback": {
+          "title": "Fallback",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "task_id",
+        "mode",
+        "scheduled_bytes",
+        "reason_codes",
+        "fallback"
+      ],
+      "title": "Action",
+      "type": "object"
+    },
+    "CandidateScore": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "task_id": {
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "idle"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "task_id": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "task_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Id"
+        },
+        "mode": {
+          "enum": [
+            "idle",
+            "robust",
+            "fast"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        }
+      },
+      "required": [
+        "task_id",
+        "mode",
+        "score"
+      ],
+      "title": "CandidateScore",
+      "type": "object"
+    },
+    "ConstraintCheck": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Code",
+          "type": "string"
+        },
+        "passed": {
+          "title": "Passed",
+          "type": "boolean"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "passed",
+        "details"
+      ],
+      "title": "ConstraintCheck",
+      "type": "object"
+    },
+    "Decision": {
+      "additionalProperties": false,
+      "description": "Python decoder return type; explicitly converted to wire event data.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/Action"
+        },
+        "candidate_scores": {
+          "items": {
+            "$ref": "#/$defs/CandidateScore"
+          },
+          "title": "Candidate Scores",
+          "type": "array"
+        },
+        "constraint_checks": {
+          "items": {
+            "$ref": "#/$defs/ConstraintCheck"
+          },
+          "title": "Constraint Checks",
+          "type": "array"
+        },
+        "decision_latency_ms": {
+          "minimum": 0,
+          "title": "Decision Latency Ms",
+          "type": "number"
+        },
+        "fallback": {
+          "title": "Fallback",
+          "type": "boolean"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Model Version"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Policy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "candidate_scores",
+        "constraint_checks",
+        "decision_latency_ms",
+        "fallback",
+        "model_version",
+        "policy_version"
+      ],
+      "title": "Decision",
+      "type": "object"
+    },
+    "DecisionData": {
+      "additionalProperties": false,
+      "description": "Wire payload, with the latency_ms field required by manual 09.",
+      "properties": {
+        "action": {
+          "$ref": "#/$defs/Action"
+        },
+        "candidate_scores": {
+          "items": {
+            "$ref": "#/$defs/CandidateScore"
+          },
+          "title": "Candidate Scores",
+          "type": "array"
+        },
+        "constraint_checks": {
+          "items": {
+            "$ref": "#/$defs/ConstraintCheck"
+          },
+          "title": "Constraint Checks",
+          "type": "array"
+        },
+        "latency_ms": {
+          "minimum": 0,
+          "title": "Latency Ms",
+          "type": "number"
+        },
+        "fallback": {
+          "title": "Fallback",
+          "type": "boolean"
+        },
+        "model_version": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Model Version"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Policy Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "action",
+        "candidate_scores",
+        "constraint_checks",
+        "latency_ms",
+        "fallback",
+        "model_version",
+        "policy_version"
+      ],
+      "title": "DecisionData",
+      "type": "object"
+    },
+    "EnergyBandPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "time_s": {
+          "minimum": 0,
+          "title": "Time S",
+          "type": "number"
+        },
+        "energy_lower_Wh": {
+          "minimum": 0,
+          "title": "Energy Lower Wh",
+          "type": "number"
+        },
+        "energy_upper_Wh": {
+          "minimum": 0,
+          "title": "Energy Upper Wh",
+          "type": "number"
+        }
+      },
+      "required": [
+        "time_s",
+        "energy_lower_Wh",
+        "energy_upper_Wh"
+      ],
+      "title": "EnergyBandPoint",
+      "type": "object"
+    },
+    "ErrorBody": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "INVALID_CONFIG",
+            "RUN_NOT_FOUND",
+            "RUN_NOT_COMPLETE",
+            "CAPACITY_BUSY",
+            "INTERNAL_RUN_ERROR"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Message",
+          "type": "string"
+        },
+        "details": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Details",
+          "type": "object"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "details"
+      ],
+      "title": "ErrorBody",
+      "type": "object"
+    },
+    "EvaluationTruth": {
+      "additionalProperties": false,
+      "properties": {
+        "label": {
+          "const": "posthoc_simulation",
+          "title": "Label",
+          "type": "string"
+        },
+        "soc_true": {
+          "title": "Soc True",
+          "type": "number"
+        },
+        "energy_true_Wh": {
+          "title": "Energy True Wh",
+          "type": "number"
+        },
+        "capacity_true_Wh": {
+          "exclusiveMinimum": 0,
+          "title": "Capacity True Wh",
+          "type": "number"
+        }
+      },
+      "required": [
+        "label",
+        "soc_true",
+        "energy_true_Wh",
+        "capacity_true_Wh"
+      ],
+      "title": "EvaluationTruth",
+      "type": "object"
+    },
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "event_id": {
+          "exclusiveMinimum": 0,
+          "title": "Event Id",
+          "type": "integer"
+        },
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "policy_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "sim_time_s": {
+          "minimum": 0,
+          "title": "Sim Time S",
+          "type": "number"
+        },
+        "event_type": {
+          "enum": [
+            "arrived",
+            "sent",
+            "received",
+            "acked",
+            "dropped",
+            "fallback",
+            "decision",
+            "snapshot",
+            "window_changed"
+          ],
+          "title": "Event Type",
+          "type": "string"
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Id"
+        },
+        "block_id": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Block Id"
+        },
+        "payload_bytes": {
+          "minimum": 0,
+          "title": "Payload Bytes",
+          "type": "integer"
+        },
+        "overhead_bytes": {
+          "minimum": 0,
+          "title": "Overhead Bytes",
+          "type": "integer"
+        },
+        "energy_Wh": {
+          "minimum": 0,
+          "title": "Energy Wh",
+          "type": "number"
+        },
+        "reason_code": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reason Code"
+        },
+        "data": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DecisionData"
+            },
+            {
+              "$ref": "#/$defs/SnapshotData"
+            },
+            {
+              "$ref": "#/$defs/WindowChangedData"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data"
+        }
+      },
+      "required": [
+        "event_id",
+        "run_id",
+        "policy_id",
+        "sim_time_s",
+        "event_type",
+        "task_id",
+        "block_id",
+        "payload_bytes",
+        "overhead_bytes",
+        "energy_Wh",
+        "reason_code",
+        "data"
+      ],
+      "title": "Event",
+      "type": "object",
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "decision"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/DecisionData"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "snapshot"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/SnapshotData"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "const": "window_changed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "$ref": "#/$defs/WindowChangedData"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "event_type": {
+                "enum": [
+                  "arrived",
+                  "sent",
+                  "received",
+                  "acked",
+                  "dropped",
+                  "fallback"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "data": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "EventsPage": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "events": {
+          "items": {
+            "$ref": "#/$defs/Event"
+          },
+          "title": "Events",
+          "type": "array"
+        },
+        "next_after": {
+          "minimum": 0,
+          "title": "Next After",
+          "type": "integer"
+        },
+        "has_more": {
+          "title": "Has More",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "run_id",
+        "events",
+        "next_after",
+        "has_more"
+      ],
+      "title": "EventsPage",
+      "type": "object"
+    },
+    "EventsQuery": {
+      "additionalProperties": false,
+      "properties": {
+        "after": {
+          "default": 0,
+          "minimum": 0,
+          "title": "After",
+          "type": "integer"
+        },
+        "limit": {
+          "default": 500,
+          "maximum": 2000,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        }
+      },
+      "title": "EventsQuery",
+      "type": "object"
+    },
+    "HealthEstimate": {
+      "additionalProperties": false,
+      "properties": {
+        "soc_est": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Soc Est",
+          "type": "number"
+        },
+        "soc_lower": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Soc Lower",
+          "type": "number"
+        },
+        "capacity_Wh_est": {
+          "exclusiveMinimum": 0,
+          "title": "Capacity Wh Est",
+          "type": "number"
+        },
+        "capacity_lower_Wh": {
+          "minimum": 0,
+          "title": "Capacity Lower Wh",
+          "type": "number"
+        },
+        "energy_lower_Wh": {
+          "minimum": 0,
+          "title": "Energy Lower Wh",
+          "type": "number"
+        },
+        "rul_est": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rul Est"
+        },
+        "rul_unit": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rul Unit"
+        },
+        "uncertainty_method": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Uncertainty Method",
+          "type": "string"
+        },
+        "model_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Model Version",
+          "type": "string"
+        },
+        "observed_at_s": {
+          "minimum": 0,
+          "title": "Observed At S",
+          "type": "number"
+        },
+        "available_at_s": {
+          "minimum": 0,
+          "title": "Available At S",
+          "type": "number"
+        },
+        "reason_codes": {
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "soc_est",
+        "soc_lower",
+        "capacity_Wh_est",
+        "capacity_lower_Wh",
+        "energy_lower_Wh",
+        "rul_est",
+        "rul_unit",
+        "uncertainty_method",
+        "model_version",
+        "observed_at_s",
+        "available_at_s",
+        "reason_codes"
+      ],
+      "title": "HealthEstimate",
+      "type": "object"
+    },
+    "InFlight": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "block_id": {
+          "minimum": 0,
+          "title": "Block Id",
+          "type": "integer"
+        },
+        "payload_bytes": {
+          "exclusiveMinimum": 0,
+          "maximum": 1024,
+          "title": "Payload Bytes",
+          "type": "integer"
+        },
+        "mode": {
+          "enum": [
+            "robust",
+            "fast"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "sent_at_s": {
+          "minimum": 0,
+          "title": "Sent At S",
+          "type": "number"
+        },
+        "timeout_at_s": {
+          "minimum": 0,
+          "title": "Timeout At S",
+          "type": "number"
+        },
+        "retries": {
+          "minimum": 0,
+          "title": "Retries",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "task_id",
+        "block_id",
+        "payload_bytes",
+        "mode",
+        "sent_at_s",
+        "timeout_at_s",
+        "retries"
+      ],
+      "title": "InFlight",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "LossPoint": {
+      "additionalProperties": false,
+      "properties": {
+        "time_s": {
+          "minimum": 0,
+          "title": "Time S",
+          "type": "number"
+        },
+        "robust_loss_prob": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Robust Loss Prob",
+          "type": "number"
+        },
+        "fast_loss_prob": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Fast Loss Prob",
+          "type": "number"
+        }
+      },
+      "required": [
+        "time_s",
+        "robust_loss_prob",
+        "fast_loss_prob"
+      ],
+      "title": "LossPoint",
+      "type": "object"
+    },
+    "Observation": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "policy_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "sim_time_s": {
+          "minimum": 0,
+          "title": "Sim Time S",
+          "type": "number"
+        },
+        "tasks": {
+          "items": {
+            "$ref": "#/$defs/Task"
+          },
+          "title": "Tasks",
+          "type": "array"
+        },
+        "forecast_windows": {
+          "items": {
+            "$ref": "#/$defs/Window"
+          },
+          "title": "Forecast Windows",
+          "type": "array"
+        },
+        "health": {
+          "$ref": "#/$defs/HealthEstimate"
+        },
+        "inflight": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/InFlight"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "cache_bytes": {
+          "minimum": 0,
+          "title": "Cache Bytes",
+          "type": "integer"
+        },
+        "forecast_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Forecast Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "policy_id",
+        "sim_time_s",
+        "tasks",
+        "forecast_windows",
+        "health",
+        "inflight",
+        "cache_bytes",
+        "forecast_version"
+      ],
+      "title": "Observation",
+      "type": "object"
+    },
+    "PolicyResult": {
+      "additionalProperties": false,
+      "properties": {
+        "policy_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Policy Id",
+          "type": "string"
+        },
+        "model_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-fA-F]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Model Hash"
+        },
+        "sample_count": {
+          "minimum": 0,
+          "title": "Sample Count",
+          "type": "integer"
+        },
+        "evaluation_end_s": {
+          "minimum": 0,
+          "title": "Evaluation End S",
+          "type": "number"
+        },
+        "pending_task_count": {
+          "minimum": 0,
+          "title": "Pending Task Count",
+          "type": "integer"
+        },
+        "weighted_on_time_rate": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Weighted On Time Rate"
+        },
+        "critical_task_success_rate": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Critical Task Success Rate"
+        },
+        "goodput_bps": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Goodput Bps"
+        },
+        "minimum_soc_true": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Minimum Soc True"
+        },
+        "energy_violation_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Energy Violation Count"
+        },
+        "energy_violation_duration_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Energy Violation Duration S"
+        },
+        "success_payload_bytes": {
+          "minimum": 0,
+          "title": "Success Payload Bytes",
+          "type": "integer"
+        },
+        "joule_per_success_bit": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Joule Per Success Bit"
+        },
+        "wait_p50_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Wait P50 S"
+        },
+        "wait_p95_s": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Wait P95 S"
+        },
+        "decision_p50_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decision P50 Ms"
+        },
+        "decision_p95_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Decision P95 Ms"
+        },
+        "timeout_rate": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Timeout Rate"
+        },
+        "parameter_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parameter Count"
+        },
+        "memory_bytes": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Bytes"
+        },
+        "metric_reasons": {
+          "additionalProperties": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Metric Reasons",
+          "type": "object"
+        }
+      },
+      "required": [
+        "policy_id",
+        "model_hash",
+        "sample_count",
+        "evaluation_end_s",
+        "pending_task_count",
+        "weighted_on_time_rate",
+        "critical_task_success_rate",
+        "goodput_bps",
+        "minimum_soc_true",
+        "energy_violation_count",
+        "energy_violation_duration_s",
+        "success_payload_bytes",
+        "joule_per_success_bit",
+        "wait_p50_s",
+        "wait_p95_s",
+        "decision_p50_ms",
+        "decision_p95_ms",
+        "timeout_rate",
+        "parameter_count",
+        "memory_bytes",
+        "metric_reasons"
+      ],
+      "title": "PolicyResult",
+      "type": "object"
+    },
+    "RatePoint": {
+      "additionalProperties": false,
+      "properties": {
+        "time_s": {
+          "minimum": 0,
+          "title": "Time S",
+          "type": "number"
+        },
+        "robust_bps": {
+          "minimum": 0,
+          "title": "Robust Bps",
+          "type": "number"
+        },
+        "fast_bps": {
+          "minimum": 0,
+          "title": "Fast Bps",
+          "type": "number"
+        }
+      },
+      "required": [
+        "time_s",
+        "robust_bps",
+        "fast_bps"
+      ],
+      "title": "RatePoint",
+      "type": "object"
+    },
+    "RunCreated": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "status": {
+          "const": "queued",
+          "title": "Status",
+          "type": "string"
+        },
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "run_id",
+        "status",
+        "schema_version"
+      ],
+      "title": "RunCreated",
+      "type": "object"
+    },
+    "RunRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "config": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "title": "Config",
+          "type": "object"
+        },
+        "policy_ids": {
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Policy Ids",
+          "type": "array"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "schema_version",
+        "config",
+        "policy_ids",
+        "seed"
+      ],
+      "title": "RunRequest",
+      "type": "object"
+    },
+    "RunResult": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "const": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "status": {
+          "const": "completed",
+          "title": "Status",
+          "type": "string"
+        },
+        "config_hash": {
+          "pattern": "^[0-9a-fA-F]{64}$",
+          "title": "Config Hash",
+          "type": "string"
+        },
+        "input_hash": {
+          "pattern": "^[0-9a-fA-F]{64}$",
+          "title": "Input Hash",
+          "type": "string"
+        },
+        "model_hash": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-fA-F]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Model Hash"
+        },
+        "code_revision": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Code Revision",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "by_policy": {
+          "items": {
+            "$ref": "#/$defs/PolicyResult"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "By Policy",
+          "type": "array"
+        },
+        "metric_definitions": {
+          "additionalProperties": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Metric Definitions",
+          "type": "object"
+        },
+        "artifact_paths": {
+          "additionalProperties": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Artifact Paths",
+          "type": "object"
+        }
+      },
+      "required": [
+        "schema_version",
+        "run_id",
+        "status",
+        "config_hash",
+        "input_hash",
+        "model_hash",
+        "code_revision",
+        "seed",
+        "by_policy",
+        "metric_definitions",
+        "artifact_paths"
+      ],
+      "title": "RunResult",
+      "type": "object"
+    },
+    "RunStatusResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "run_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "queued",
+            "running",
+            "completed",
+            "failed",
+            "cancelled"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "progress": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Progress"
+        },
+        "active_policies": {
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "maxItems": 2,
+          "title": "Active Policies",
+          "type": "array"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ErrorBody"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "run_id",
+        "status",
+        "progress",
+        "active_policies",
+        "error"
+      ],
+      "title": "RunStatusResponse",
+      "type": "object"
+    },
+    "SnapshotData": {
+      "additionalProperties": false,
+      "properties": {
+        "soc_est": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Soc Est",
+          "type": "number"
+        },
+        "energy_est_Wh": {
+          "minimum": 0,
+          "title": "Energy Est Wh",
+          "type": "number"
+        },
+        "energy_lower_Wh": {
+          "minimum": 0,
+          "title": "Energy Lower Wh",
+          "type": "number"
+        },
+        "queue_count": {
+          "minimum": 0,
+          "title": "Queue Count",
+          "type": "integer"
+        },
+        "forecast_energy_band": {
+          "anyOf": [
+            {
+              "items": {
+                "$ref": "#/$defs/EnergyBandPoint"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Forecast Energy Band"
+        },
+        "policy_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Policy Version",
+          "type": "string"
+        },
+        "evaluation_truth": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EvaluationTruth"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason_codes": {
+          "items": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "title": "Reason Codes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "soc_est",
+        "energy_est_Wh",
+        "energy_lower_Wh",
+        "queue_count",
+        "forecast_energy_band",
+        "policy_version",
+        "evaluation_truth",
+        "reason_codes"
+      ],
+      "title": "SnapshotData",
+      "type": "object"
+    },
+    "Task": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "arrival_s": {
+          "minimum": 0,
+          "title": "Arrival S",
+          "type": "number"
+        },
+        "deadline_s": {
+          "minimum": 0,
+          "title": "Deadline S",
+          "type": "number"
+        },
+        "payload_bytes": {
+          "exclusiveMinimum": 0,
+          "title": "Payload Bytes",
+          "type": "integer"
+        },
+        "remaining_bytes": {
+          "minimum": 0,
+          "title": "Remaining Bytes",
+          "type": "integer"
+        },
+        "priority_weight": {
+          "exclusiveMinimum": 0,
+          "title": "Priority Weight",
+          "type": "number"
+        },
+        "business_class": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Business Class",
+          "type": "string"
+        },
+        "data_location": {
+          "const": "satellite_1",
+          "title": "Data Location",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "arrival_s",
+        "deadline_s",
+        "payload_bytes",
+        "remaining_bytes",
+        "priority_weight",
+        "business_class",
+        "data_location"
+      ],
+      "title": "Task",
+      "type": "object"
+    },
+    "TeacherCandidateScore": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "else": {
+            "properties": {
+              "task_id": {
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          },
+          "if": {
+            "properties": {
+              "mode": {
+                "const": "idle"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "task_id": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "task_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Id"
+        },
+        "mode": {
+          "enum": [
+            "idle",
+            "robust",
+            "fast"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "feasible": {
+          "title": "Feasible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "task_id",
+        "mode",
+        "score",
+        "feasible"
+      ],
+      "title": "TeacherCandidateScore",
+      "type": "object"
+    },
+    "TeacherResult": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_scores": {
+          "items": {
+            "$ref": "#/$defs/TeacherCandidateScore"
+          },
+          "minItems": 1,
+          "title": "Candidate Scores",
+          "type": "array"
+        },
+        "solver_status": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Solver Status",
+          "type": "string"
+        },
+        "gap": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Gap"
+        },
+        "elapsed_ms": {
+          "minimum": 0,
+          "title": "Elapsed Ms",
+          "type": "number"
+        }
+      },
+      "required": [
+        "candidate_scores",
+        "solver_status",
+        "gap",
+        "elapsed_ms"
+      ],
+      "title": "TeacherResult",
+      "type": "object"
+    },
+    "Window": {
+      "additionalProperties": false,
+      "properties": {
+        "window_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Window Id",
+          "type": "string"
+        },
+        "start_s": {
+          "minimum": 0,
+          "title": "Start S",
+          "type": "number"
+        },
+        "end_s": {
+          "minimum": 0,
+          "title": "End S",
+          "type": "number"
+        },
+        "rate_profile": {
+          "items": {
+            "$ref": "#/$defs/RatePoint"
+          },
+          "minItems": 1,
+          "title": "Rate Profile",
+          "type": "array"
+        },
+        "loss_profile": {
+          "items": {
+            "$ref": "#/$defs/LossPoint"
+          },
+          "minItems": 1,
+          "title": "Loss Profile",
+          "type": "array"
+        },
+        "source": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Source",
+          "type": "string"
+        },
+        "forecast_version": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Forecast Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "window_id",
+        "start_s",
+        "end_s",
+        "rate_profile",
+        "loss_profile",
+        "source",
+        "forecast_version"
+      ],
+      "title": "Window",
+      "type": "object"
+    },
+    "WindowChangedData": {
+      "additionalProperties": false,
+      "properties": {
+        "window_id": {
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Window Id",
+          "type": "string"
+        },
+        "is_visible": {
+          "title": "Is Visible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "window_id",
+        "is_visible"
+      ],
+      "title": "WindowChangedData",
+      "type": "object"
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/$defs/Task"
+    },
+    {
+      "$ref": "#/$defs/RatePoint"
+    },
+    {
+      "$ref": "#/$defs/LossPoint"
+    },
+    {
+      "$ref": "#/$defs/Window"
+    },
+    {
+      "$ref": "#/$defs/HealthEstimate"
+    },
+    {
+      "$ref": "#/$defs/InFlight"
+    },
+    {
+      "$ref": "#/$defs/Observation"
+    },
+    {
+      "$ref": "#/$defs/CandidateScore"
+    },
+    {
+      "$ref": "#/$defs/Action"
+    },
+    {
+      "$ref": "#/$defs/ConstraintCheck"
+    },
+    {
+      "$ref": "#/$defs/Decision"
+    },
+    {
+      "$ref": "#/$defs/DecisionData"
+    },
+    {
+      "$ref": "#/$defs/EnergyBandPoint"
+    },
+    {
+      "$ref": "#/$defs/EvaluationTruth"
+    },
+    {
+      "$ref": "#/$defs/SnapshotData"
+    },
+    {
+      "$ref": "#/$defs/WindowChangedData"
+    },
+    {
+      "$ref": "#/$defs/Event"
+    },
+    {
+      "$ref": "#/$defs/EventsQuery"
+    },
+    {
+      "$ref": "#/$defs/EventsPage"
+    },
+    {
+      "$ref": "#/$defs/ErrorBody"
+    },
+    {
+      "$ref": "#/$defs/RunRequest"
+    },
+    {
+      "$ref": "#/$defs/RunCreated"
+    },
+    {
+      "$ref": "#/$defs/RunStatusResponse"
+    },
+    {
+      "$ref": "#/$defs/PolicyResult"
+    },
+    {
+      "$ref": "#/$defs/RunResult"
+    },
+    {
+      "$ref": "#/$defs/TeacherCandidateScore"
+    },
+    {
+      "$ref": "#/$defs/TeacherResult"
+    }
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:starlink-ai6g:contracts:1.0",
+  "title": "Starlink AI6G H00 candidate contracts 1.0"
+}

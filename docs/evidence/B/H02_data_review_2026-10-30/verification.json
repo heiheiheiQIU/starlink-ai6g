@@ -1,0 +1,282 @@
+{
+  "candidate": "866df43d124e62a77081a7acd2e095c98b34c172",
+  "artifact_sha256": {
+    "data/teacher/a_n3_20/samples.jsonl": "32f09ebc03005a64327d86a58d6b15aa519f17c27060a96b522655437cc3aa58",
+    "data/teacher/a_n3_20/summary.json": "1d435bd1ea0934cb5c5c85ee5f89525a90e1110f8554fcd730976b3404bb4df1",
+    "data/teacher/a_n3_20/manifest.json": "c1f57d34e5fd2b93418d88106cb8b805b7b260cdb5f9258d1aca969b691d70cd",
+    "data/teacher/a_n3_20/splits.json": "ce2f3f62fd01bd16cb65359ceb56d0b9a097ede718f5989fad20a0b3ca8dd213",
+    "docs/evidence/B/H02_2026-10-29/samples.jsonl": "3eec464b6cef0389458a8927b32b6e60d521cb295498722321a4ab533c43c062",
+    "configs/teacher.json": "1497a5f02754f76a3f355893d3f2cd9178525fc0d9d329eba03466faee62c795",
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/policies/teacher.py": "8e6178726bb763ddc28563bf382ec3b1cc5ddf9d7636e5ed6525cf144444d573",
+    "training/policy_features.py": "a2cfc11172f6fe7141d2d27f773c052cb642409eaf017e24ccd762d520e8b204"
+  },
+  "recomputed_count": 20,
+  "label_matches": 20,
+  "nominal_split_counts": {
+    "train": 12,
+    "validation": 4,
+    "test": 4
+  },
+  "nominal_split_disjoint": true,
+  "unique_semantic_observations": 12,
+  "duplicates_ignoring_run_and_policy_id": [
+    [
+      {
+        "sample_id": "r4_00",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_12",
+        "split": "train"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_01",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_13",
+        "split": "validation"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_02",
+        "split": "test"
+      },
+      {
+        "sample_id": "r4_14",
+        "split": "train"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_03",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_15",
+        "split": "validation"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_04",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_16",
+        "split": "train"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_05",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_17",
+        "split": "validation"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_06",
+        "split": "test"
+      },
+      {
+        "sample_id": "r4_18",
+        "split": "test"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_07",
+        "split": "test"
+      },
+      {
+        "sample_id": "r4_19",
+        "split": "validation"
+      }
+    ]
+  ],
+  "cross_split_duplicates": [
+    [
+      {
+        "sample_id": "r4_01",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_13",
+        "split": "validation"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_02",
+        "split": "test"
+      },
+      {
+        "sample_id": "r4_14",
+        "split": "train"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_03",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_15",
+        "split": "validation"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_05",
+        "split": "train"
+      },
+      {
+        "sample_id": "r4_17",
+        "split": "validation"
+      }
+    ],
+    [
+      {
+        "sample_id": "r4_07",
+        "split": "test"
+      },
+      {
+        "sample_id": "r4_19",
+        "split": "validation"
+      }
+    ]
+  ],
+  "normalization": "deferred-until-training",
+  "training_enabled": false,
+  "details": [
+    {
+      "sample_id": "r4_00",
+      "status": "OPTIMAL",
+      "elapsed_ms": 11.220300002605654,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_01",
+      "status": "OPTIMAL",
+      "elapsed_ms": 1.9079000048805028,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_02",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.8458000015234575,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_03",
+      "status": "OPTIMAL",
+      "elapsed_ms": 3.5314999986439943,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_04",
+      "status": "OPTIMAL",
+      "elapsed_ms": 9.163299997453578,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_05",
+      "status": "OPTIMAL",
+      "elapsed_ms": 1.9991000008303672,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_06",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.512400009436533,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_07",
+      "status": "OPTIMAL",
+      "elapsed_ms": 3.5924999974668026,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_08",
+      "status": "OPTIMAL",
+      "elapsed_ms": 9.270099995774217,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_09",
+      "status": "OPTIMAL",
+      "elapsed_ms": 1.9227000011596829,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_10",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.5049999967450276,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_11",
+      "status": "OPTIMAL",
+      "elapsed_ms": 3.5090000019408762,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_12",
+      "status": "OPTIMAL",
+      "elapsed_ms": 9.356700000353158,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_13",
+      "status": "OPTIMAL",
+      "elapsed_ms": 1.9385000050533563,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_14",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.3686000058660284,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_15",
+      "status": "OPTIMAL",
+      "elapsed_ms": 3.7124000082258135,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_16",
+      "status": "OPTIMAL",
+      "elapsed_ms": 9.367899998323992,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_17",
+      "status": "OPTIMAL",
+      "elapsed_ms": 1.9269000040367246,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_18",
+      "status": "OPTIMAL",
+      "elapsed_ms": 2.658299999893643,
+      "label_matches": true
+    },
+    {
+      "sample_id": "r4_19",
+      "status": "OPTIMAL",
+      "elapsed_ms": 3.676899999845773,
+      "label_matches": true
+    }
+  ],
+  "scope": "synthetic teacher data only"
+}

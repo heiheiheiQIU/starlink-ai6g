@@ -1,0 +1,20 @@
+{
+  "schema_version": "formal-analysis-protocol-v1",
+  "metric": "weighted_on_time_rate",
+  "policies": ["edf", "value", "learned"],
+  "comparisons": ["learned-edf", "learned-value"],
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 20261104,
+  "confidence": 0.95,
+  "interval": "percentile",
+  "aggregation": "equal_weight_18_cells_stratified_paired",
+  "sampling_unit": "trajectory_within_cell",
+  "numpy_version": "2.1.3",
+  "sort_order": "cell_id,trajectory_id,policy_id,attempt",
+  "multiplicity": "pointwise_intervals_no_familywise_claim",
+  "max_retries": 1,
+  "retry_selection": "first_success_keep_all_attempts",
+  "missing_policy": "incomplete_no_imputation_no_cell_dropping",
+  "domain": "synthetic_out_of_zero_loss_training_domain",
+  "release_gate": "ABC_result_receipts_required"
+}

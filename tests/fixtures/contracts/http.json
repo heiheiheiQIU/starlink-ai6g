@@ -1,0 +1,112 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "type": "RunRequest",
+      "valid": true,
+      "payload": {
+        "schema_version": "1.0",
+        "config": {
+          "scenario_id": "fixture_only"
+        },
+        "policy_ids": [
+          "edf",
+          "value"
+        ],
+        "seed": 0
+      }
+    },
+    {
+      "type": "RunCreated",
+      "valid": true,
+      "payload": {
+        "run_id": "fixture_run",
+        "status": "queued",
+        "schema_version": "1.0"
+      }
+    },
+    {
+      "type": "RunStatusResponse",
+      "valid": true,
+      "payload": {
+        "run_id": "fixture_run",
+        "status": "running",
+        "progress": 0.5,
+        "active_policies": [
+          "edf",
+          "value"
+        ],
+        "error": null
+      }
+    },
+    {
+      "type": "RunStatusResponse",
+      "valid": true,
+      "payload": {
+        "run_id": "fixture_run",
+        "status": "failed",
+        "progress": null,
+        "active_policies": [],
+        "error": {
+          "code": "INTERNAL_RUN_ERROR",
+          "message": "契约错误样例",
+          "details": {}
+        }
+      }
+    },
+    {
+      "type": "ErrorBody",
+      "valid": true,
+      "payload": {
+        "code": "INVALID_CONFIG",
+        "message": "契约错误样例",
+        "details": {}
+      },
+      "http_status": 422
+    },
+    {
+      "type": "ErrorBody",
+      "valid": true,
+      "payload": {
+        "code": "RUN_NOT_FOUND",
+        "message": "契约错误样例",
+        "details": {}
+      },
+      "http_status": 404
+    },
+    {
+      "type": "ErrorBody",
+      "valid": true,
+      "payload": {
+        "code": "RUN_NOT_COMPLETE",
+        "message": "契约错误样例",
+        "details": {
+          "status": "running"
+        }
+      },
+      "http_status": 409
+    },
+    {
+      "type": "ErrorBody",
+      "valid": true,
+      "payload": {
+        "code": "CAPACITY_BUSY",
+        "message": "契约错误样例",
+        "details": {}
+      },
+      "http_status": 429
+    },
+    {
+      "type": "ErrorBody",
+      "valid": true,
+      "payload": {
+        "code": "INTERNAL_RUN_ERROR",
+        "message": "契约错误样例",
+        "details": {}
+      },
+      "http_status": 500
+    }
+  ]
+}

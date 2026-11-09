@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-02",
+  "refs": {
+    "HEAD": "69847d8fa07fe566bcf39bc1fb909bd27d7a7367",
+    "origin/main": "75f1c52b558f5b1e9545d5659bb3a2c3588b109e",
+    "origin/feature/simulator-r2": "d4716bf24e9745fd85802e0fe01938812b3683a1",
+    "origin/feature/simulator-r3": "cac4b909e2ba3ffdcb6e89e177213bd2055a81f0",
+    "origin/feature/policies-r4": "930476667933ca5d307a11e2003a7a263541baa9",
+    "origin/codex/a-n3-learned": "1c90246376b91fb789154b22530b25bab2142b7e",
+    "origin/codex/a-r2-r5-receipts": "ddcca9c3a732be0027e3826cf4a19199c72149f6",
+    "origin/feature/frontend": "49d93850556a0712cc1cb54a2351fe81482145a0"
+  },
+  "ancestor_chain": [
+    {
+      "base": "75f1c52b558f5b1e9545d5659bb3a2c3588b109e",
+      "head": "d4716bf24e9745fd85802e0fe01938812b3683a1",
+      "ancestor": true
+    },
+    {
+      "base": "d4716bf24e9745fd85802e0fe01938812b3683a1",
+      "head": "cac4b909e2ba3ffdcb6e89e177213bd2055a81f0",
+      "ancestor": true
+    },
+    {
+      "base": "cac4b909e2ba3ffdcb6e89e177213bd2055a81f0",
+      "head": "930476667933ca5d307a11e2003a7a263541baa9",
+      "ancestor": true
+    },
+    {
+      "base": "930476667933ca5d307a11e2003a7a263541baa9",
+      "head": "69847d8fa07fe566bcf39bc1fb909bd27d7a7367",
+      "ancestor": true
+    }
+  ],
+  "receipts": {
+    "B_N2_R2_A_2026-10-31.md": {
+      "commit": "ddcca9c3a732be0027e3826cf4a19199c72149f6",
+      "sha256": "566805dbf141d1873023ff57f9479629ac7ddc2b830a25b417621d4082f4175f"
+    },
+    "B_R5_A_2026-10-31.md": {
+      "commit": "ddcca9c3a732be0027e3826cf4a19199c72149f6",
+      "sha256": "78160396fa29711930cc1d151188c15dfd14aa0f5d61599520425e533ba9b5dd"
+    },
+    "C_audit_A_fix_and_receipts_2026-11-02.md": {
+      "commit": "49d93850556a0712cc1cb54a2351fe81482145a0",
+      "sha256": "e461fffcf75f3561664543512e027033705ffc7216a43b1ad655906c2159be36"
+    }
+  },
+  "merge_preview": {
+    "exit_code": 1,
+    "conflicts": [
+      "docs/task_board.csv"
+    ],
+    "actual_merge_performed": false
+  },
+  "PRs": [
+    {
+      "baseRefName": "codex/a-next",
+      "headRefName": "codex/a-n3-learned",
+      "isDraft": true,
+      "number": 8,
+      "title": "feat(ai): deliver A-N3 learned scorer and API lock retry"
+    },
+    {
+      "baseRefName": "feature/ai",
+      "headRefName": "codex/a-next",
+      "isDraft": false,
+      "number": 7,
+      "title": "fix(ai): resubmit leakage-safe H02 teacher data v2"
+    },
+    {
+      "baseRefName": "feature/policies-r4",
+      "headRefName": "feature/shared-channel-r5",
+      "isDraft": true,
+      "number": 6,
+      "title": "feat(B): add shared stochastic channel and 180 paired rule trials"
+    },
+    {
+      "baseRefName": "feature/simulator-r3",
+      "headRefName": "feature/policies-r4",
+      "isDraft": true,
+      "number": 5,
+      "title": "feat(B): deliver guarded policies, H02 teacher and five run APIs"
+    },
+    {
+      "baseRefName": "feature/simulator-r2",
+      "headRefName": "feature/simulator-r3",
+      "isDraft": true,
+      "number": 4,
+      "title": "B-R3：接收ACK重传去重与可复现合成运行"
+    },
+    {
+      "baseRefName": "main",
+      "headRefName": "feature/simulator-r2",
+      "isDraft": true,
+      "number": 3,
+      "title": "B-N2/R2首轮：确定性任务、窗口、能量与发送环境"
+    }
+  ],
+  "scope": "Preparation only; no main merge or learned API integration",
+  "unchanged_from_previous_candidate": {
+    "artifacts/models/a_n3_policy_v1/weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+    "artifacts/models/a_n3_policy_v1/normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+    "artifacts/models/a_n3_policy_v1/training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+    "artifacts/models/a_n3_policy_v1/model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+    "artifacts/models/a_n3_policy_v1/manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+    "configs/learned_policy.json": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+    "configs/policy_train.json": "788e361c5b204c85b232be51482323e66c03442849120c3eafcec57179a7503d"
+  },
+  "B_independent_tests": {
+    "corrupt_npz_green.xml": {
+      "tests": 1,
+      "failures_and_errors": 0
+    },
+    "targeted.xml": {
+      "tests": 48,
+      "failures_and_errors": 0
+    },
+    "full.xml": {
+      "tests": 503,
+      "failures_and_errors": 0
+    }
+  }
+}

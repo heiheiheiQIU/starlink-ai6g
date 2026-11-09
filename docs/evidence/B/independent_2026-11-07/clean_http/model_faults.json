@@ -1,0 +1,24 @@
+[
+  {
+    "mode": "missing",
+    "http_status": 422,
+    "body": {
+      "code": "INVALID_CONFIG",
+      "message": "Frozen learned model package is unavailable",
+      "details": {
+        "reason": "MODEL_UNAVAILABLE"
+      }
+    }
+  },
+  {
+    "mode": "corrupt",
+    "http_status": 422,
+    "body": {
+      "code": "INVALID_CONFIG",
+      "message": "Frozen learned model package is unavailable",
+      "details": {
+        "reason": "MODEL_UNAVAILABLE"
+      }
+    }
+  }
+]

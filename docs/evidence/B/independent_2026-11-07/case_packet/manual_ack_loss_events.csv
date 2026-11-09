@@ -1,0 +1,9 @@
+﻿event_id,sim_time_s,event_type,task_id,block_id,reason_code,energy_Wh,payload_bytes
+2,0.0,sent,T1,0,,0.0103125,1024
+4,1.03125,received,T1,0,,0.0,1024
+9,2.03125,dropped,T1,0,ACK_LOST_WINDOW_CLOSED,0.0,0
+11,3.03125,fallback,T1,0,ACK_TIMEOUT,0.0,0
+15,4.0,sent,T1,0,,0.0103125,1024
+16,5.03125,received,T1,0,DUPLICATE_BLOCK,0.0,1024
+17,5.03125,dropped,T1,,DEADLINE_EXPIRED,0.0,1024
+20,6.03125,acked,T1,0,,0.0,0

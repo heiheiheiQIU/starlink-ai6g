@@ -1,0 +1,33 @@
+{
+  "source_commit": "56e2cf8",
+  "status": "batch_verified_not_H02_accepted",
+  "targeted_passed": 40,
+  "full_passed": 282,
+  "dependencies": "pip check passed",
+  "teacher_samples": 20,
+  "teacher_optimal": 20,
+  "teacher_timeouts": 0,
+  "schema_sha256": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb",
+  "note": "Synthetic functional preflight only. Teacher full H02 handoff and API not complete. Logs contain historical workspace paths.",
+  "files_sha256": {
+    "final-full.xml": "02dbe359850f94714510e4c408d955b5f4945393555c278f15df254d2ef75802",
+    "final-targeted.xml": "90a185ec5769855048e837358dbe8c5c7cfe0dee3f2c235e4ca0f8a1566911eb",
+    "edf/config.json": "db9928a82cf8d5fc5a7be4b4d12401a4871ce12f7438b244178c07a9d6e6efe0",
+    "edf/energy_ledger.json": "00ac22d6f2cbda75362abded9b31e3bcac96f261e210c9d400f34f1616647f61",
+    "edf/events.jsonl": "6d4161cf196425f1b2a42f34a0c431d4b76720c2ebebf295e0b25466330aaacb",
+    "edf/execution.log": "5ea63f7236fdac4e78caf1ab10f7f39381f4d8b39ceefd8db70f8b634cb3098c",
+    "edf/manifest.json": "d3a5b4c0ee35a4dcf810a57cc69e143567b3b58a71f44be01775c6256b31bece",
+    "edf/results.json": "4aa75507f1a8948fbf61d22d21f9ad2eb4ae8e2d574525b1339fa0344a31f060",
+    "edf/status.json": "7a834e393d097395748e22295ca297300f643e69d57de34838c4b324b21d156a",
+    "teacher/manifest.json": "b59d97e48b1daa4c8d8ce70a4a19d2694cc0ae202c7c0e4b7f02355b87f223a1",
+    "teacher/samples.jsonl": "eea47812eba176adb288159c9b22ade93be4a741feed7c0c1d724b152f16b6c0",
+    "teacher/summary.json": "33d3cbfafa3423e38ae73139aeaccfa76cdc33bd4cd30289cec398ccec122453",
+    "value/config.json": "77b0fb61e67600ec36a4fd7640a51de3213c392788e2ea8a32d4721d52474361",
+    "value/energy_ledger.json": "00ac22d6f2cbda75362abded9b31e3bcac96f261e210c9d400f34f1616647f61",
+    "value/events.jsonl": "570096a5b4d726570ff5467cfbd38523011a0aacb6ac15529fe9274c05fff395",
+    "value/execution.log": "5ea63f7236fdac4e78caf1ab10f7f39381f4d8b39ceefd8db70f8b634cb3098c",
+    "value/manifest.json": "139f424669b547411626b2a05eb5beea4ba7c82abc3c19b26c658b09136ea064",
+    "value/results.json": "42699de824cf94ffafd6096551e1888e20abeed7d2e76d33022790f02417f645",
+    "value/status.json": "689e3cbf245dce6d184db3f53936df97e569ecc7d588fea56da6ac923d7b24ed"
+  }
+}

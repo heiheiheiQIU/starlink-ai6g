@@ -1,5 +1,6 @@
 # 运行环境
 .venv/
+configs/legacy_assets.local.json
 __pycache__/
 *.py[cod]
 .pytest_cache/
@@ -11,6 +12,11 @@ __pycache__/
 *.npz
 *.zip
 models/
+!artifacts/
+!artifacts/models/
+!artifacts/models/a_n3_policy_v1/
+!artifacts/models/a_n3_policy_v1/weights.npz
+交付包/
 
 # 实验与运行产物
 runs/
@@ -18,6 +24,7 @@ experiments/runs/
 
 # AI 协作工具痕迹
 .superpowers/
+.worktrees/
 
 # 前端（未来）
 node_modules/

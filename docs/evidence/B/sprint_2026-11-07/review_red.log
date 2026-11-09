@@ -1,0 +1,35 @@
+..............FFFF.....F                                                 [100%]
+================================== FAILURES ===================================
+______ test_source_evidence_and_receipt_binding_enforced[missing_source] ______
+tests\test_formal_freeze.py:122: in test_source_evidence_and_receipt_binding_enforced
+    with pytest.raises(ValueError): freeze_inputs(*args, tmp_path/'frozen')
+E   Failed: DID NOT RAISE <class 'ValueError'>
+_____ test_source_evidence_and_receipt_binding_enforced[source_tampered] ______
+tests\test_formal_freeze.py:122: in test_source_evidence_and_receipt_binding_enforced
+    with pytest.raises(ValueError): freeze_inputs(*args, tmp_path/'frozen')
+E   Failed: DID NOT RAISE <class 'ValueError'>
+_____ test_source_evidence_and_receipt_binding_enforced[leakage_replaced] _____
+tests\test_formal_freeze.py:122: in test_source_evidence_and_receipt_binding_enforced
+    with pytest.raises(ValueError): freeze_inputs(*args, tmp_path/'frozen')
+E   Failed: DID NOT RAISE <class 'ValueError'>
+_____________________ test_freeze_without_git_executable ______________________
+tests\test_formal_freeze.py:130: in test_freeze_without_git_executable
+    assert module.freeze_binding(args[0], args[2], args[3])['code_revision'] is None
+backend\formal_freeze.py:88: in freeze_binding
+    ???
+backend\formal_freeze.py:78: in _binding
+    revision = None
+tests\test_formal_freeze.py:128: in missing
+    def missing(*args, **kwargs): raise FileNotFoundError('git')
+E   FileNotFoundError: git
+__________ test_runner_rejects_actual_horizon_different_from_frozen ___________
+tests\test_formal_experiments.py:96: in test_runner_rejects_actual_horizon_different_from_frozen
+    with pytest.raises(ValueError, match='config'):
+E   Failed: DID NOT RAISE <class 'ValueError'>
+=========================== short test summary info ===========================
+FAILED tests/test_formal_freeze.py::test_source_evidence_and_receipt_binding_enforced[missing_source]
+FAILED tests/test_formal_freeze.py::test_source_evidence_and_receipt_binding_enforced[source_tampered]
+FAILED tests/test_formal_freeze.py::test_source_evidence_and_receipt_binding_enforced[leakage_replaced]
+FAILED tests/test_formal_freeze.py::test_freeze_without_git_executable - File...
+FAILED tests/test_formal_experiments.py::test_runner_rejects_actual_horizon_different_from_frozen
+5 failed, 19 passed in 53.61s

@@ -1,0 +1,307 @@
+{
+  "kind": "WP5_preparation_not_frozen_experiment",
+  "runtime_commit": "8ccbd1eeaf80673f4c403b7b7442bc5b83fdfe25",
+  "refs": {
+    "origin/main": "75f1c52b558f5b1e9545d5659bb3a2c3588b109e",
+    "origin/feature/frontend": "b1d5e8be1eace49ab90f8c7a0b6a4e261684d8ea",
+    "origin/codex/a-n4-data-audit": "657f39ceccc1cb1385541b1b7eb1fe0d5aad99dc",
+    "origin/codex/b-wp2-learned-20261104": "6051d348d5bc2a8d01a6507cc0aa1328a85f4c1b"
+  },
+  "tests": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "553",
+    "time": "62.122",
+    "timestamp": "2026-11-04T17:07:30.521245+08:00",
+    "hostname": "DESKTOP-AAVK2DR"
+  },
+  "frontend_tests": 70,
+  "frontend_build": true,
+  "browser_verified": false,
+  "http": {
+    "kind": "synthetic_WP2_integration_not_formal_AI_benchmark",
+    "runs": [
+      {
+        "run_id": "run_65ea95bcfeab4b99b1e651f63e79e37c",
+        "policies": [
+          "edf",
+          "value"
+        ],
+        "input_hash": "79e9e2b06443b9525e325fceb3a8b5ca2e00e87108e3eacedc870754deb6707d",
+        "seed": 7,
+        "code_revision": "8ccbd1eeaf80673f4c403b7b7442bc5b83fdfe25",
+        "by_policy": [
+          {
+            "policy_id": "edf",
+            "model_hash": null,
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 1.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 1170.2857142857142,
+            "minimum_soc_true": 0.49597048611111116,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": 0.0354156494140625,
+            "wait_p50_s": 0.0,
+            "wait_p95_s": 0.0,
+            "decision_p50_ms": 0.7191999902715907,
+            "decision_p95_ms": 1.6292300031636837,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          },
+          {
+            "policy_id": "value",
+            "model_hash": null,
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 1.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 1170.2857142857142,
+            "minimum_soc_true": 0.49597048611111116,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": 0.0354156494140625,
+            "wait_p50_s": 0.0,
+            "wait_p95_s": 0.0,
+            "decision_p50_ms": 0.702900011674501,
+            "decision_p95_ms": 1.3457299850415436,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          }
+        ],
+        "model": null,
+        "inference": null,
+        "event_count": 36,
+        "event_pages": 18,
+        "zip_sha256": "17a093287a75c0365d1e93d72eb685a2832c86a0befcda1e6a70ff433cc185e8"
+      },
+      {
+        "run_id": "run_ffdb452e61ce4572ab7921e39932aeac",
+        "policies": [
+          "edf",
+          "learned"
+        ],
+        "input_hash": "79e9e2b06443b9525e325fceb3a8b5ca2e00e87108e3eacedc870754deb6707d",
+        "seed": 7,
+        "code_revision": "8ccbd1eeaf80673f4c403b7b7442bc5b83fdfe25",
+        "by_policy": [
+          {
+            "policy_id": "edf",
+            "model_hash": null,
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 1.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 1170.2857142857142,
+            "minimum_soc_true": 0.49597048611111116,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 1024,
+            "joule_per_success_bit": 0.0354156494140625,
+            "wait_p50_s": 0.0,
+            "wait_p95_s": 0.0,
+            "decision_p50_ms": 0.711599990609102,
+            "decision_p95_ms": 1.659074981580488,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          },
+          {
+            "policy_id": "learned",
+            "model_hash": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+            "sample_count": 1,
+            "evaluation_end_s": 7.0,
+            "pending_task_count": 0,
+            "weighted_on_time_rate": 0.0,
+            "critical_task_success_rate": null,
+            "goodput_bps": 0.0,
+            "minimum_soc_true": 0.49650000000000005,
+            "energy_violation_count": 0,
+            "energy_violation_duration_s": null,
+            "success_payload_bytes": 0,
+            "joule_per_success_bit": null,
+            "wait_p50_s": null,
+            "wait_p95_s": null,
+            "decision_p50_ms": 1.9635999924503267,
+            "decision_p95_ms": 4.141455003991722,
+            "timeout_rate": 0.0,
+            "parameter_count": null,
+            "memory_bytes": null,
+            "metric_reasons": {
+              "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+              "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+              "joule_per_success_bit": "NO_DELIVERY",
+              "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+              "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION",
+              "wait_p50_s": "NOT_MEASURED_MANUAL_VALIDATION",
+              "wait_p95_s": "NOT_MEASURED_MANUAL_VALIDATION"
+            }
+          }
+        ],
+        "model": {
+          "artifacts_sha256": {
+            "manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+            "model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+            "normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+            "training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+            "weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+          },
+          "feature_schema_version": "policy-features-v1",
+          "model_hash": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+          "model_version": "a-n3-mlp-v1",
+          "normalization_sha256": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449"
+        },
+        "inference": {
+          "cold_load_ms": 86.48600001470186,
+          "fallback_count": 0,
+          "fallback_reasons": {},
+          "requests": 4,
+          "retry_override_count": 0,
+          "successful_model_decisions": 4,
+          "warm_budget_ms": 100.0
+        },
+        "event_count": 30,
+        "event_pages": 15,
+        "zip_sha256": "026a8a85f2399fc6955812243f4b1bc9e4b0931614145ff9e3b41a83365c5f51"
+      }
+    ],
+    "paired_inputs": true,
+    "max_two_policies_preserved": true,
+    "all_artifact_hashes_verified": true,
+    "real_http_and_vite_proxy": true,
+    "owned_servers_stopped": true
+  },
+  "frozen_sha256": {
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "configs/schema.json": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb",
+    "backend/policies/learned.py": "74278d6a5a7a1e106ea179e526b206ae9d77526dda24c3c93a036630e6e15785",
+    "configs/learned_policy.json": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+    "configs/policy_train.json": "788e361c5b204c85b232be51482323e66c03442849120c3eafcec57179a7503d",
+    "data/teacher/a_n3_20_v2/samples.jsonl": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+    "artifacts/models/a_n3_policy_v1/manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+    "artifacts/models/a_n3_policy_v1/model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+    "artifacts/models/a_n3_policy_v1/normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+    "artifacts/models/a_n3_policy_v1/training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+    "artifacts/models/a_n3_policy_v1/weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "old_data_file_count": 4,
+  "c_source_files_unchanged": 73,
+  "old_data_audit": {
+    "schema_version": "policy-dataset-audit-v1",
+    "observation_count": 20,
+    "label_quality": {
+      "task_action_all_zero": {
+        "count": 13,
+        "fraction": 0.65
+      },
+      "idle_in_optimal_set": {
+        "count": 19,
+        "fraction": 0.95
+      },
+      "tied_optimal_set": {
+        "count": 6,
+        "fraction": 0.3
+      },
+      "unique_non_idle_best": {
+        "count": 1,
+        "fraction": 0.05
+      },
+      "optimal_set_size_counts": {
+        "1": 14,
+        "2": 1,
+        "3": 3,
+        "5": 2
+      },
+      "feasible_top_two_margin": {
+        "defined_count": 7,
+        "undefined_count": 13,
+        "zero_count": 6,
+        "min": 0.0,
+        "mean": 0.04761904761904762,
+        "median": 0.0,
+        "p95_nearest_rank": 0.33333333333333337,
+        "max": 0.33333333333333337
+      }
+    },
+    "coverage": {
+      "low_energy_at_or_below_reserve": {
+        "count": 0,
+        "fraction": 0.0,
+        "reserve_Wh": 0.5
+      },
+      "no_forecast_window": {
+        "count": 0,
+        "fraction": 0.0
+      },
+      "deadline_before_or_at_first_window": {
+        "count": 0,
+        "fraction": 0.0
+      },
+      "all_task_actions_infeasible": {
+        "count": 13,
+        "fraction": 0.65
+      },
+      "any_task_without_feasible_mode": {
+        "count": 13,
+        "fraction": 0.65
+      }
+    },
+    "teacher": {
+      "solver_status_counts": {
+        "OPTIMAL": 20
+      },
+      "elapsed_ms": {
+        "count": 20,
+        "min": 2.2981000074651092,
+        "mean": 12.946554999507498,
+        "median": 6.761149998055771,
+        "p95_nearest_rank": 34.48740000021644,
+        "max": 42.866500007221475
+      }
+    }
+  },
+  "teacher_card_row_mismatches": [],
+  "attachment": {
+    "filename": "A_N4b数据作战指令_2026-11-04.md",
+    "sha256": "9bb3447a67136a50121060dd18060b4af46573fb9a3ffdafb3a7c5b84310df0e",
+    "normalized_matches_repository": true
+  },
+  "formal_runs_executed": 0,
+  "new_model_received": false,
+  "raw_evidence_sha256": {
+    "backend.xml": "8a78fc30e56727ac97af236ce0c945496bf69ecc2d33f649aee25b209e9df469",
+    "backend.log": "631ddc703529f24216b1e9249a80c419a6a909d8c81e8472a6ca9a38b27640f0",
+    "frontend.log": "cde5424497ed0769982429bb0eabc400215c7d2a07edcf581d6940dbbe931814",
+    "http/verification.json": "20bbc99d1164af7be2554293593ab55e459027d1aa14dbe3ea1b23df599deccd",
+    "http.log": "61fe9d6673392b531cd600118613e25ec7e945ea6bed09c3037a43d00e33a6e0"
+  }
+}

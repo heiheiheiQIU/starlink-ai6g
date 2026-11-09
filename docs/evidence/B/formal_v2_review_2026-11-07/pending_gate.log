@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\�˹�������ս��\starlink-ai6g\backend\formal_v2.py", line 142, in <module>
+    materialize(args.receipts, args.output)
+  File "D:\�˹�������ս��\starlink-ai6g\backend\formal_v2.py", line 112, in materialize
+    check_receipts(receipts)
+  File "D:\�˹�������ս��\starlink-ai6g\backend\formal_v2.py", line 61, in check_receipts
+    raise ValueError('Invalid pre-generation receipt for '+role)
+ValueError: Invalid pre-generation receipt for A

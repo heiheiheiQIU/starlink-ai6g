@@ -1,0 +1,41 @@
+$ pnpm test:run && pnpm build
+$ vitest run
+
+ RUN  v2.1.9 D:/人工智能挑战赛/starlink-ai6g/frontend
+
+ ✓ src/domain/navigation.test.ts (2 tests) 3ms
+ ✓ src/domain/flow.test.ts (2 tests) 3ms
+ ✓ src/domain/assistant.test.ts (2 tests) 4ms
+ ✓ src/domain/contractView.test.ts (9 tests) 5ms
+ ✓ src/domain/presets.test.ts (3 tests) 4ms
+ ✓ src/api/runs.test.ts (11 tests) 71ms
+ ✓ src/pages/AssetsPage.test.tsx (3 tests) 54ms
+ ✓ src/components/TeacherAuditCard.test.tsx (2 tests) 80ms
+ ✓ src/components/EventStreamCard.test.tsx (3 tests) 84ms
+ ✓ src/state/useRun.test.ts (4 tests) 100ms
+ ✓ src/pages/MatrixPage.test.tsx (2 tests) 158ms
+ ✓ src/pages/EvidencePage.test.tsx (4 tests) 186ms
+ ✓ src/pages/OverviewPage.test.tsx (3 tests) 235ms
+ ✓ src/pages/ComparePage.test.tsx (2 tests) 243ms
+ ✓ src/App.test.tsx (1 test) 166ms
+ ✓ src/pages/AssistantPage.test.tsx (1 test) 343ms
+   ✓ evidence-grounded assistant page > refuses unsupported questions and keeps local citations visible 342ms
+ ✓ src/components/RealRunPanel.test.tsx (4 tests) 308ms
+ ✓ src/components/RunSourceBadge.test.tsx (6 tests) 383ms
+ ✓ src/pages/FlowWorkspace.test.tsx (6 tests) 1312ms
+
+ Test Files  19 passed (19)
+      Tests  70 passed (70)
+   Start at  17:07:36
+   Duration  7.68s (transform 1.91s, setup 16.55s, collect 17.75s, tests 3.74s, environment 59.45s, prepare 8.69s)
+
+$ tsc --noEmit && vite build
+vite v6.4.3 building for production...
+transforming...
+✓ 64 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.50 kB │ gzip:  0.36 kB
+dist/assets/index-06l5KHaw.css   38.05 kB │ gzip:  8.67 kB
+dist/assets/index-CMGj7oWr.js   327.29 kB │ gzip: 98.97 kB
+✓ built in 653ms

@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "minimal_send_only_synthetic",
+  "source": "synthetic",
+  "capacity_Wh": 20.0,
+  "initial_energy_Wh": 10.0,
+  "reserve_Wh": 0.5,
+  "max_power_W": 150.0,
+  "powers": {
+    "base_W": 36.0,
+    "solar_W": 0.0,
+    "compute_W": 0.0
+  },
+  "tx_power_W": {
+    "robust": 36.0,
+    "fast": 72.0
+  },
+  "slot_s": 1.0,
+  "forecast_version": "r2-synthetic-v1",
+  "tasks": [
+    {
+      "task_id": "T1",
+      "arrival_s": 0.0,
+      "deadline_s": 120.0,
+      "payload_bytes": 1024,
+      "remaining_bytes": 1024,
+      "priority_weight": 1.0,
+      "business_class": "synthetic",
+      "data_location": "satellite_1"
+    }
+  ],
+  "true_windows": [
+    {
+      "window_id": "W1",
+      "start_s": 0.0,
+      "end_s": 120.0,
+      "rate_profile": [
+        {
+          "time_s": 0.0,
+          "robust_bps": 8192.0,
+          "fast_bps": 16384.0
+        }
+      ],
+      "loss_profile": [
+        {
+          "time_s": 0.0,
+          "robust_loss_prob": 0.0,
+          "fast_loss_prob": 0.0
+        }
+      ],
+      "source": "synthetic",
+      "forecast_version": "r2-synthetic-v1"
+    }
+  ],
+  "forecast_windows": [
+    {
+      "window_id": "W1",
+      "start_s": 0.0,
+      "end_s": 120.0,
+      "rate_profile": [
+        {
+          "time_s": 0.0,
+          "robust_bps": 8192.0,
+          "fast_bps": 16384.0
+        }
+      ],
+      "loss_profile": [
+        {
+          "time_s": 0.0,
+          "robust_loss_prob": 0.0,
+          "fast_loss_prob": 0.0
+        }
+      ],
+      "source": "synthetic",
+      "forecast_version": "r2-synthetic-v1"
+    }
+  ],
+  "health_observations": [
+    {
+      "soc_est": 0.5,
+      "soc_lower": 0.45,
+      "capacity_Wh_est": 20.0,
+      "capacity_lower_Wh": 20.0,
+      "energy_lower_Wh": 9.0,
+      "rul_est": null,
+      "rul_unit": null,
+      "uncertainty_method": "synthetic_fixed_bounds",
+      "model_version": "synthetic-r2-v1",
+      "observed_at_s": 0.0,
+      "available_at_s": 0.0,
+      "reason_codes": [
+        "RUL_UNAVAILABLE"
+      ]
+    }
+  ]
+}

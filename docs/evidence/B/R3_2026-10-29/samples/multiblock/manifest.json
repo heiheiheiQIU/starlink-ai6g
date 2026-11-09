@@ -1,0 +1,35 @@
+{
+  "artifacts_sha256": {
+    "config.json": "57ba6c5e0d12f3b2e04e301fd25a959c33dc8c58bd6de24e74ec8844bf242c83",
+    "energy_ledger.json": "eaf7993cfdb5cbd9229a2e388d0ae76e661c05aa625259a3947a8f62bf3bc218",
+    "events.jsonl": "5679ff4b6366f5918ab9da10a2335dec6ea7d688ddfac263f29acf36dd7b682f",
+    "execution.log": "7d3efa9986e636bebad967c445610bc471a5f01eee0d0f740c7c3238eea63118",
+    "results.json": "cf2490afea42647e67a95b8e10cf0a6dd8e1a5b5affee863ca49a80b03968564"
+  },
+  "code_revision": "0c18f6d8bf70cb709ff3aea3d461aad463d3bb35",
+  "config_hash": "57ba6c5e0d12f3b2e04e301fd25a959c33dc8c58bd6de24e74ec8844bf242c83",
+  "input_hash": "ef174f558d5e4b9d00549c13ea3e3d2e6f950d3c97dca9373f63603da9d2789e",
+  "is_policy_benchmark": false,
+  "is_real_satellite_measurement": false,
+  "kind": "manual_validation",
+  "model_hash": null,
+  "policy_id": "manual",
+  "policy_version": "manual-r3-v1",
+  "protocol_stage": "receive_ack_retry_dedup",
+  "run_id": "r3_428ba615edfd4b2091fadfa54e74865d",
+  "source": "synthetic",
+  "source_sha256": {
+    "backend/cli.py": "62ab172cee2275580b2c8a5124129cc6880e2344215102af4be872bc700af5cc",
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/evaluation.py": "2805b3cd7af8fff39cde8ad9183d7fd8efe1e6eac3337a2565697db5059ea459",
+    "backend/simulator/__init__.py": "b94dc8d98b60b9219d00698c6622023dc45e6853436edbb0ae2c344c9492d59f",
+    "backend/simulator/energy.py": "b1afe137f9284647face8f3cfc86d4594d7843191ae5f2c1ccc630537d64bef3",
+    "backend/simulator/engine.py": "af19271a5f1616e84ef0f9219164ae01370c6d0994f35d490a98ed9f68a80dad",
+    "backend/simulator/link.py": "90556f6431f90423b888f9060c826f638dc2086445e331909ff9d95ff1e34b49",
+    "backend/simulator/protocol.py": "7dd4aa6f04b23d03b7408f53f1ebd6ac5fb1fde55a64320ad9424acfdadb337f",
+    "backend/simulator/queue.py": "059099298309f5c34a8051e198a6ec62729537118b32d7a8409d40a0044ee852",
+    "backend/simulator/r3_engine.py": "4b54bae2029ed9815ec2108f25e07f35eb07d9179089267ad18b85e31d999d7a"
+  },
+  "status_hash_note": "status written last; manifest and status excluded from self-referential hashes",
+  "trace_hash": "ef174f558d5e4b9d00549c13ea3e3d2e6f950d3c97dca9373f63603da9d2789e"
+}

@@ -1,0 +1,39 @@
+$ pnpm test:run && pnpm build
+$ vitest run
+
+ RUN  v2.1.9 D:/人工智能挑战赛/starlink-ai6g/frontend
+
+ ✓ src/domain/navigation.test.ts (2 tests) 4ms
+ ✓ src/domain/assistant.test.ts (2 tests) 4ms
+ ✓ src/domain/flow.test.ts (2 tests) 5ms
+ ✓ src/domain/contractView.test.ts (9 tests) 6ms
+ ✓ src/api/runs.test.ts (11 tests) 68ms
+ ✓ src/pages/AssetsPage.test.tsx (3 tests) 56ms
+ ✓ src/state/useRun.test.ts (4 tests) 79ms
+ ✓ src/components/EventStreamCard.test.tsx (3 tests) 83ms
+ ✓ src/pages/MatrixPage.test.tsx (2 tests) 120ms
+ ✓ src/pages/OverviewPage.test.tsx (3 tests) 235ms
+ ✓ src/pages/EvidencePage.test.tsx (4 tests) 202ms
+ ✓ src/pages/ComparePage.test.tsx (2 tests) 237ms
+ ✓ src/App.test.tsx (1 test) 191ms
+ ✓ src/pages/AssistantPage.test.tsx (1 test) 359ms
+   ✓ evidence-grounded assistant page > refuses unsupported questions and keeps local citations visible 358ms
+ ✓ src/components/RunSourceBadge.test.tsx (6 tests) 391ms
+ ✓ src/pages/FlowWorkspace.test.tsx (6 tests) 1266ms
+   ✓ six-step operations stage > navigates the fixed steps and reveals traceable engineer details 303ms
+
+ Test Files  16 passed (16)
+      Tests  61 passed (61)
+   Start at  00:33:31
+   Duration  4.92s (transform 1.20s, setup 8.09s, collect 8.87s, tests 3.31s, environment 26.69s, prepare 3.74s)
+
+$ tsc --noEmit && vite build
+vite v6.4.3 building for production...
+transforming...
+✓ 57 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.50 kB │ gzip:  0.36 kB
+dist/assets/index-HpEDOgt_.css   37.37 kB │ gzip:  8.58 kB
+dist/assets/index-CiYQLQAV.js   309.26 kB │ gzip: 96.03 kB
+✓ built in 622ms

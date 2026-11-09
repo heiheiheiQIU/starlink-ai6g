@@ -1,0 +1,237 @@
+{
+  "scope": "WP1 integration candidate; main unchanged; learned API not implemented",
+  "base": "75f1c52b558f5b1e9545d5659bb3a2c3588b109e",
+  "runtime_commit": "87a42208ffdc3404313950ac6a5a224263005aa9",
+  "layers": [
+    {
+      "stage": "R2",
+      "head": "a0254f89ae32af337eda236e6f712b15d4e5af47",
+      "exit_code": 0,
+      "command": "D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe -m pytest tests -q --tb=short --noconftest -p no:cacheprovider --basetemp=runs\\wp1_20261103/R2_tmp --junitxml=runs\\wp1_20261103/R2.xml",
+      "log": "runs\\wp1_20261103\\R2.log"
+    },
+    {
+      "stage": "R3",
+      "head": "d554472e8a56989bfacacfcbd8ccf2eb2e6c8744",
+      "exit_code": 0,
+      "command": "D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe -m pytest tests -q --tb=short --noconftest -p no:cacheprovider --basetemp=runs\\wp1_20261103/R3_tmp --junitxml=runs\\wp1_20261103/R3.xml",
+      "log": "runs\\wp1_20261103\\R3.log"
+    },
+    {
+      "stage": "R4",
+      "head": "32b7662056edcb37e7c92d1efd09eaeb5e13525d",
+      "exit_code": 0,
+      "command": "D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe -m pytest tests -q --tb=short --noconftest -p no:cacheprovider --basetemp=runs\\wp1_20261103/R4_tmp --junitxml=runs\\wp1_20261103/R4.xml",
+      "log": "runs\\wp1_20261103\\R4.log"
+    },
+    {
+      "stage": "R5",
+      "head": "0d376f5302715fb9da32554b83141db41dbdc36d",
+      "exit_code": 0,
+      "command": "D:\\人工智能挑战赛\\starlink-ai6g\\.venv\\Scripts\\python.exe -m pytest tests -q --tb=short --noconftest -p no:cacheprovider --basetemp=runs\\wp1_20261103/R5_tmp --junitxml=runs\\wp1_20261103/R5.xml",
+      "log": "runs\\wp1_20261103\\R5.log"
+    }
+  ],
+  "tests": {
+    "baseline": {
+      "tests": "312",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "31.269"
+    },
+    "R2": {
+      "tests": "219",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "8.975"
+    },
+    "R3": {
+      "tests": "248",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "10.123"
+    },
+    "R4": {
+      "tests": "293",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "17.310"
+    },
+    "R5": {
+      "tests": "312",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "28.433"
+    },
+    "A": {
+      "tests": "519",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "37.133"
+    },
+    "final": {
+      "tests": "519",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "37.678"
+    }
+  },
+  "sources": {
+    "origin/feature/simulator-r2": "d4716bf24e9745fd85802e0fe01938812b3683a1",
+    "origin/feature/simulator-r3": "cac4b909e2ba3ffdcb6e89e177213bd2055a81f0",
+    "origin/feature/policies-r4": "930476667933ca5d307a11e2003a7a263541baa9",
+    "origin/feature/shared-channel-r5": "971f221ae9a2cc2ed59f34046e6826d2de5acaab",
+    "origin/codex/a-n3-learned": "1c90246376b91fb789154b22530b25bab2142b7e",
+    "origin/codex/a-r2-r5-receipts": "ddcca9c3a732be0027e3826cf4a19199c72149f6",
+    "origin/feature/frontend": "49d93850556a0712cc1cb54a2351fe81482145a0"
+  },
+  "source_checks": {
+    "backend/contracts.py": {
+      "matches": "B 971f221",
+      "sha256": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814"
+    },
+    "configs/schema.json": {
+      "matches": "B 971f221",
+      "sha256": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb"
+    },
+    "backend/api/service.py": {
+      "matches": "B 971f221",
+      "sha256": "456947d82dd3c8dfd7848e4411cb28e03a1e3216b1cb7f1e304eb66e650ee740"
+    },
+    "backend/api/worker.py": {
+      "matches": "B 971f221",
+      "sha256": "62427c8dbf900129b1bf135ef224145bf9481be71144caa5b8a0f3cb2196d93b"
+    },
+    "backend/health/": {
+      "files_checked": 4,
+      "matches": "origin/codex/a-n3-learned",
+      "CRLF_checkout_only": [],
+      "excluded": []
+    },
+    "backend/policies/learned.py": {
+      "files_checked": 1,
+      "matches": "origin/codex/a-n3-learned",
+      "CRLF_checkout_only": [],
+      "excluded": []
+    },
+    "training/": {
+      "files_checked": 9,
+      "matches": "origin/codex/a-n3-learned",
+      "CRLF_checkout_only": [],
+      "excluded": []
+    },
+    "artifacts/models/": {
+      "files_checked": 5,
+      "matches": "origin/codex/a-n3-learned",
+      "CRLF_checkout_only": [],
+      "excluded": []
+    },
+    "frontend/": {
+      "files_checked": 61,
+      "matches": "origin/feature/frontend",
+      "CRLF_checkout_only": [
+        "frontend/index.html",
+        "frontend/src/App.test.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/api/runs.test.ts",
+        "frontend/src/api/runs.ts",
+        "frontend/src/components/AppSidebar.tsx",
+        "frontend/src/components/CountUp.tsx",
+        "frontend/src/components/DemoOverlay.tsx",
+        "frontend/src/components/EngineerDetails.tsx",
+        "frontend/src/components/EventStreamCard.test.tsx",
+        "frontend/src/components/EventStreamCard.tsx",
+        "frontend/src/components/FixtureBanner.tsx",
+        "frontend/src/components/FloatingAssistant.tsx",
+        "frontend/src/components/FlowStepper.tsx",
+        "frontend/src/components/PagePlaceholder.tsx",
+        "frontend/src/components/RunSourceBadge.test.tsx",
+        "frontend/src/components/RunSourceBadge.tsx",
+        "frontend/src/components/StageExperience.tsx",
+        "frontend/src/components/StagePanel.tsx",
+        "frontend/src/components/StepContextPanel.tsx",
+        "frontend/src/domain/assistant.test.ts",
+        "frontend/src/domain/assistant.ts",
+        "frontend/src/domain/compare.ts",
+        "frontend/src/domain/contractView.test.ts",
+        "frontend/src/domain/contractView.ts",
+        "frontend/src/domain/eventView.ts",
+        "frontend/src/domain/flow.test.ts",
+        "frontend/src/domain/flow.ts",
+        "frontend/src/domain/matrix.ts",
+        "frontend/src/domain/navigation.test.ts",
+        "frontend/src/domain/navigation.ts",
+        "frontend/src/fixtures/contracts.ts",
+        "frontend/src/main.tsx",
+        "frontend/src/pages/AssetsPage.test.tsx",
+        "frontend/src/pages/AssetsPage.tsx",
+        "frontend/src/pages/AssistantPage.test.tsx",
+        "frontend/src/pages/AssistantPage.tsx",
+        "frontend/src/pages/ComparePage.test.tsx",
+        "frontend/src/pages/ComparePage.tsx",
+        "frontend/src/pages/EvidencePage.test.tsx",
+        "frontend/src/pages/EvidencePage.tsx",
+        "frontend/src/pages/FlowWorkspace.test.tsx",
+        "frontend/src/pages/FlowWorkspace.tsx",
+        "frontend/src/pages/MatrixPage.test.tsx",
+        "frontend/src/pages/MatrixPage.tsx",
+        "frontend/src/pages/OverviewPage.test.tsx",
+        "frontend/src/pages/OverviewPage.tsx",
+        "frontend/src/state/useRun.test.ts",
+        "frontend/src/state/useRun.ts",
+        "frontend/src/styles/global.css",
+        "frontend/src/styles/tokens.css",
+        "frontend/src/test/setup.ts",
+        "frontend/src/types/contracts.ts",
+        "frontend/src/vite-env.d.ts",
+        "frontend/vite.config.ts"
+      ],
+      "excluded": [
+        "frontend/README.md"
+      ]
+    }
+  },
+  "http": {
+    "kind": "WP1_synthetic_integration_not_AI_benchmark",
+    "checks": {
+      "frontend_html": true,
+      "real_http": true,
+      "vite_proxy": true,
+      "completed_results": true,
+      "paging_matches_zip": true,
+      "artifact_hashes": true,
+      "child_seeds": true,
+      "learned_api_explicitly_unavailable": true,
+      "frozen_model_complete_finite_scores": true,
+      "frozen_model_hashes": true
+    },
+    "run_id": "run_152f00fd26b74a2ea86cf2a31308c88b",
+    "code_revision": "87a42208ffdc3404313950ac6a5a224263005aa9",
+    "input_hash": "79e9e2b06443b9525e325fceb3a8b5ca2e00e87108e3eacedc870754deb6707d",
+    "event_count": 36,
+    "event_pages": 18,
+    "seed": 7,
+    "zip_sha256": "d5e6028cedc220804fdb69f33fa5da2e515cb749fc737de2dd96c6a72f1f3055",
+    "smoke_servers_stopped": true
+  },
+  "frontend": {
+    "install": "pnpm --dir frontend install --frozen-lockfile",
+    "install_exit_code": 0,
+    "check": "pnpm --dir frontend check",
+    "check_exit_code": 0,
+    "tests": 61,
+    "test_files": 16,
+    "build": "TypeScript noEmit + Vite production build",
+    "node": "24.15.0",
+    "pnpm": "11.25.0",
+    "lock_unchanged": true,
+    "browser_visual_acceptance": false
+  }
+}

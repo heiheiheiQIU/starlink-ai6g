@@ -1,0 +1,7 @@
+# H02 首版实际交付证据
+
+源代码为 cccca9892086522624a5979216d7a2ab73209803。samples.jsonl / summary.json / manifest.json是固定版本真实预跑：20个合成初始状态、20 OPTIMAL、0 timeout。one-label.json是按H02说明独立调用并通过validate_teacher_result校验的一条标签。
+
+这证明接口及明确支持范围内的首版功能可运行，不是成熟强优化器、批量训练、每场景4状态采样或策略性能结论。无Git预跑由test_preflight_without_git_records_source_hashes失败先行回归覆盖。
+
+targeted.xml为H02/API联合26项；full.xml为293项完整回归。独立审查发现的Windows发布读锁和中断目录恢复问题均已RED→GREEN修复。verification.json列出实际版本和文件哈希；接收方仍需自己调用生成标签并填写回执。

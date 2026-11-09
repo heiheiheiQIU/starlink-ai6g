@@ -1,0 +1,22 @@
+{
+  "status": "waiting_for_C_original",
+  "formal_freeze_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "A_sha256": "0f8fd89034231b2152f409b9e8acb5f70b6e800d4982d1b27b9c95ee25fa0535",
+  "B_sha256": "e222957914e2613f95d343c4dcf6d27744b712e9a05eeb454e936fa5db04e597",
+  "seed_audit": {
+    "registered_count": 180,
+    "registered_range": [
+      600000,
+      600179
+    ],
+    "retired_count": 180,
+    "retired_range": [
+      200000,
+      200179
+    ],
+    "development_count": 180,
+    "pilot_count": 30,
+    "overlap": [],
+    "old_teacher_namespace": "Observation sources have no full scenario seeds; A source review required"
+  }
+}

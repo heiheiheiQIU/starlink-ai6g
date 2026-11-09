@@ -1,0 +1,20 @@
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 30%]
+........................................................................ [ 41%]
+........................................................................ [ 51%]
+...........................................s............................ [ 61%]
+........................................................................ [ 71%]
+........................................................................ [ 82%]
+........................................................................ [ 92%]
+......................................................                   [100%]
+============================== warnings summary ===============================
+.venv\Lib\site-packages\starlette\testclient.py:40
+  D:\�˹�������ս��\starlink-ai6g\.venv\Lib\site-packages\starlette\testclient.py:40: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = typing.Callable[[], typing.ContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+--- generated xml file: D:\�˹�������ս��\starlink-ai6g\runs\b_review_v2\final.xml ---
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_inference_lifecycle.py:97: Linux zombie state
+701 passed, 1 skipped, 1 warning in 172.07s (0:02:52)

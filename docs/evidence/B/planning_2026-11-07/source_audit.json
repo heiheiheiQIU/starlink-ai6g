@@ -1,0 +1,196 @@
+{
+  "schema_version": "planning-source-audit-v1",
+  "checked_at": "2026-11-07T11:19:45.977698+08:00",
+  "scope": "Read-only source and hash inspection; not experimental, visual or acceptance verification",
+  "git": {
+    "refs": {
+      "HEAD": "d4f7012d630858459fcb23a100f1c98380d5a829",
+      "origin/codex/b-formal-inputs-20261104": "710f1415161097d6fb1b0a4f7e3974f9d2c03fa0",
+      "origin/feature/frontend": "cfcf0f26c6d19da63e2df27e42873a80605e32e5",
+      "origin/codex/a-n4b-pilot": "64db43c9e895e1910c1ab4170ee6bfe4eb73e33e",
+      "origin/main": "75f1c52b558f5b1e9545d5659bb3a2c3588b109e"
+    },
+    "current_branch": "codex/b-formal-inputs-20261104",
+    "pull_result": "Already up to date.",
+    "local_ahead_of_upstream": 5,
+    "head_vs_c_unique_commits": [
+      135,
+      24
+    ],
+    "other_branches_merged": false
+  },
+  "attachments": [
+    {
+      "file": "ABC_最终冲刺实施方案_2026-11-07.md",
+      "repository_path": "docs/team/ABC_最终冲刺实施方案_2026-11-07.md",
+      "bytes_equal": true,
+      "sha256": "a420fa1a813ca24b589d82c09f3e3bed21c27edb529e64f4a83d78a9ddef5405"
+    },
+    {
+      "file": "星地智调_三人统一图表生成任务书_2026-11-07.md",
+      "repository_path": "docs/materials/星地智调_三人统一图表生成任务书_2026-11-07.md",
+      "bytes_equal": true,
+      "sha256": "6a77c39c3cccde0c909e1b2c815010afa4c5ce83928a1e991b869975ab639aaf"
+    },
+    {
+      "file": "README.md",
+      "repository_path": "docs/figures/generated/v1/README.md",
+      "bytes_equal": true,
+      "sha256": "9ff481f9ef072729f0b51a07d2f6c8f0d0256c403095b25073c06cccab46c235"
+    },
+    {
+      "file": "manifest.json",
+      "repository_path": "docs/figures/generated/v1/manifest.json",
+      "bytes_equal": true,
+      "sha256": "52681961d1d8dbfa245f87502f6eb28623406c2c931881f4ad8bb42ef69aa283"
+    }
+  ],
+  "figure_hash_checks": [
+    {
+      "file": "C-F01_6G星地业务冲突.svg",
+      "expected_sha256": "241072e9f53fdf7e606810892e2b8f37bb798e14f6f05b3473a0e975749a9957",
+      "actual_sha256": "241072e9f53fdf7e606810892e2b8f37bb798e14f6f05b3473a0e975749a9957",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F02_四层架构六步闭环.svg",
+      "expected_sha256": "8535a52604efe2eedfeb0cbe2ee5110ba51526fb219fa033449c521d1af10ad8",
+      "actual_sha256": "8535a52604efe2eedfeb0cbe2ee5110ba51526fb219fa033449c521d1af10ad8",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F03_AI与6G双向耦合.svg",
+      "expected_sha256": "57944d0abccbf9efe8ebc03dac7d27e267e0145f01cbfa4af5de0efb321abe65",
+      "actual_sha256": "57944d0abccbf9efe8ebc03dac7d27e267e0145f01cbfa4af5de0efb321abe65",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F01_公开特征教师标注学习评分器.svg",
+      "expected_sha256": "af1efd1b7e24f3bf1d997fc55e80698cea746480ddae47e9325182d821f50aeb",
+      "actual_sha256": "af1efd1b7e24f3bf1d997fc55e80698cea746480ddae47e9325182d821f50aeb",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F02_教师标签质量审计.svg",
+      "expected_sha256": "3aec5e3b85939122c71e9e4210d8c23f5bca4dd086b13b1cfd00fc0e0178a235",
+      "actual_sha256": "3aec5e3b85939122c71e9e4210d8c23f5bca4dd086b13b1cfd00fc0e0178a235",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F03_小样本模型对照.svg",
+      "expected_sha256": "31adbecf5af1cba2309774ee5d14f371a48e77fc1767e2864767091af909d514",
+      "actual_sha256": "31adbecf5af1cba2309774ee5d14f371a48e77fc1767e2864767091af909d514",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "A-F05_公开信息与真值隔离.svg",
+      "expected_sha256": "141a52a0353d7f656a364adf79b41ece9c5eb5b074ec6121f7332b3e0bb746bb",
+      "actual_sha256": "141a52a0353d7f656a364adf79b41ece9c5eb5b074ec6121f7332b3e0bb746bb",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F01_发送确认重传去重时序.svg",
+      "expected_sha256": "fafc03e2656719fefc45dc37b2c8ec337f740c4987098671f827c09b2355b1d2",
+      "actual_sha256": "fafc03e2656719fefc45dc37b2c8ec337f740c4987098671f827c09b2355b1d2",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F02_能量账本校核.svg",
+      "expected_sha256": "b0a47eead44c57aafc06f797ba17a6b8b69afcb9e10f2717fe0cff5260287f9f",
+      "actual_sha256": "b0a47eead44c57aafc06f797ba17a6b8b69afcb9e10f2717fe0cff5260287f9f",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F03_开发期18工况规则矩阵.svg",
+      "expected_sha256": "ea7557ec2afe5dc104e4b7df80c12d2de4460063b1680b39c5cb89b3bcf2881d",
+      "actual_sha256": "ea7557ec2afe5dc104e4b7df80c12d2de4460063b1680b39c5cb89b3bcf2881d",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F04_正式实验公平比较协议.svg",
+      "expected_sha256": "d46e6963379165d3c343cb3dadd0a62e8b8b4e40f2aa07baee6d2f13d0933018",
+      "actual_sha256": "d46e6963379165d3c343cb3dadd0a62e8b8b4e40f2aa07baee6d2f13d0933018",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F04_证据链.svg",
+      "expected_sha256": "1a92dfeaffb7102cf6fac0d5adee58299dbad2e2c2e815e84b8f1176f820ce91",
+      "actual_sha256": "1a92dfeaffb7102cf6fac0d5adee58299dbad2e2c2e815e84b8f1176f820ce91",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F05_三阶段落地路线.svg",
+      "expected_sha256": "aa5934a90d3da61ef5b80dc664d770615d8209d7af6e4b32697a56d2290e693b",
+      "actual_sha256": "aa5934a90d3da61ef5b80dc664d770615d8209d7af6e4b32697a56d2290e693b",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "C-F08_产业规模与应用价值.svg",
+      "expected_sha256": "235cbfa0af3b914b39dc2d8d5e4b19888b81347725bd0bd537608af6e8b9a673",
+      "actual_sha256": "235cbfa0af3b914b39dc2d8d5e4b19888b81347725bd0bd537608af6e8b9a673",
+      "matched": true,
+      "status": "ready_for_review"
+    },
+    {
+      "file": "B-F05_正式结果未完成模板.svg",
+      "expected_sha256": "633219ccc580921c1c660b624f30af8fa9b4e930711f20824b992fda4d817657",
+      "actual_sha256": "633219ccc580921c1c660b624f30af8fa9b4e930711f20824b992fda4d817657",
+      "matched": true,
+      "status": "template_only"
+    },
+    {
+      "file": "C-F00_星地智调主题背景_v1.png",
+      "expected_sha256": "ab4849cfdabd76f24b1809fe8c30010ec065e0fd8239249be1e1fe81e31c9548",
+      "actual_sha256": "ab4849cfdabd76f24b1809fe8c30010ec065e0fd8239249be1e1fe81e31c9548",
+      "matched": true,
+      "status": "non_data_background"
+    }
+  ],
+  "figure_counts": {
+    "svg": 15,
+    "pdf": 0,
+    "png": 16
+  },
+  "per_figure_manifest_count": 0,
+  "formal_candidate": {
+    "status": "candidate_pending_review",
+    "model": null,
+    "cells": 18,
+    "trajectories": 180
+  },
+  "pending_claims": [
+    "claim-A1",
+    "claim-X1",
+    "claim-X2",
+    "claim-X3",
+    "claim-R1"
+  ],
+  "missing_in_current_worktree": [
+    "backend/formal_freeze.py",
+    "backend/formal_experiments.py",
+    "experiments/analyze_formal.py"
+  ],
+  "not_performed": [
+    "cross-branch integration",
+    "training",
+    "formal runs",
+    "full test suite",
+    "scientific figure acceptance",
+    "clean-machine verification",
+    "external messages",
+    "commit or push"
+  ]
+}

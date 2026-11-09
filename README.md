@@ -1,68 +1,100 @@
-# 星地智调产品集成目录
+# 星地智调
 
-更新：2026-10-27。此目录是本工作区接收成员成果后的开发入口。当前仅集成成员A的A1旧资产审计/离线前向模块，不是完整通信产品。
+> 2026-11-07 最新裁决：原 formal_v1 的 180 条输入统一归档为 engineering_regression_v1。正式实验使用预登记的 formal_v2，生成前等待三方冻结。分支、复验记录和当前命令见[远端复验交接](docs/handoffs/B_remote_review_2026-11-07.md)。
 
-团队先读：[协作规则](CONTRIBUTING.md)、[公共接口合同](docs/contracts/README.md)、[下一阶段任务](docs/team/NEXT_TASKS_2026-10-27.md)和[任务板](docs/task_board.csv)。三人只在本仓库协作，不再通过反复制作ZIP同步日常代码。
+更新：2026-11-04，当前为 **B 的 WP2 learned集成候选**。learned已接入Runner/Guard及五接口，暖评分100ms预算、超时/异常EDF回退与Windows进程回收已验证。后端552通过、1项Linux专用跳过；前端61及构建通过。真实HTTP三策略配对运行完成，属于开发验证，尚无正式AI收益结论。接收与复跑见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。
 
-远程私有仓库：<https://github.com/heiheiheiQIU/starlink-ai6g>。成员获得访问权限后执行：
+当前候选以WP1统一版本为基础，已纳入A审计657f39c和C复核63c7740。A可按[B确认的教师支持域](docs/handoffs/B_teacher_support_2026-11-04.md)开展新版本小批生成与审计；此前进度见[B接续记录](docs/handoffs/B_next_readiness_2026-11-04.md)。原始分支与回执保留，共享main尚未更新。
 
-```powershell
-git clone https://github.com/heiheiheiQIU/starlink-ai6g.git
-cd starlink-ai6g
-git switch feature/ai          # A
-git switch feature/simulator   # B（在自己的克隆目录执行）
-git switch feature/frontend    # C（在自己的克隆目录执行）
-```
+## 当前能力与边界
 
-不要三人共用同一个本地目录；每人独立克隆，只向自己的角色分支提交，再通过Pull Request合入`main`。
+- 规则链路：任务/窗口/能量 → EDF 或 value → Guard → 发送/接收/ACK/重传/去重 → 事件、指标和 ZIP。
+- learned：可独立加载冻结权重并调用 `score_actions`；Runner/API 已支持 `edf`、`value`、`learned`，异常与结构全mask回退保持可追溯。
+- 健康：正式适配器使用显式 synthetic 观测误差界；旧权重支持冻结 NPZ 离线推理。raw_fraction 不能作为 SOC、容量或在线原生 RUL。
+- 前端：离线流程演示、历史规则矩阵、按已有 run_id 读取状态、事件和结果。对比页的新建运行和 learned 对比仍为明确标识的契约样例，尚未完成现场重算闭环。
+- 旧矩阵为 180 轨迹×两规则共 360 次合成运行；正式 AI 实验、成熟优化器与真实卫星验证尚未完成。
 
-## 当前验收状态
+WP1集成顺序与历史验证见 [WP1 交接](docs/handoffs/B_WP1_integration_2026-11-03.md)。
 
-- A1离线资产审计和严格权重推理：accepted_with_notes；本机原47项测试通过，增加14项边界测试并修复后61项通过。
-- H01正式HealthEstimate交接：未通过完整验收；当前返回内部LegacyPrediction，无estimate_health(history, now_s)。需B的H00合同和A2适配。
-- A2健康估计、A3通信评分器、A4消融与技术供稿：未交付。
-- B仿真/API、C前端：当前目录未实现。
+## 环境与安装
 
-原始交付保留在工作区`星地智调/`。不要在原件继续开发；后续A/B/C在此目录按各自所有权协作。
-
-## 输入与环境
-
-`configs/legacy_assets.json`已适配本工作区，指向`../交付包/星地智调_团队研发包_2026-10-26_v3/assets/legacy_battery`。使用v3是为了保持A原始审计的资产基准，不表示v3是最新团队说明。不要移动或改写冻结资产。
-
-推荐独立环境（需机器安装Python 3.12；安装依赖需要网络/本地轮子）：
+Python 3.12；Node.js 20—24；pnpm 9—11。前端唯一锁文件为 `frontend/pnpm-lock.yaml`。后端依赖见 `requirements.lock.txt`，它不包含全部轮子来源和哈希；换机需独立验收。在仓库根目录执行：
 
 ```powershell
 py -3.12 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.lock.txt
-.\.venv\Scripts\python.exe -m pytest tests -q --noconftest -p no:cacheprovider
-.\.venv\Scripts\python.exe -m training.inspect_legacy --config configs/legacy_assets.json --output-root runs/a1_review
+pnpm --dir frontend install --frozen-lockfile
 ```
 
-以上独立安装流程是推荐操作，本轮没有执行联网安装。`requirements.lock.txt`只固定三个直接依赖，没有锁住全部传递依赖、轮子来源和哈希，不能宣称完整环境锁。
+本机已有环境可直接使用；不要复制其他电脑绑定解释器的 `.venv`。
 
-本轮实际验证使用本机Python 3.12.14解释器，借用原交付`.venv/Lib/site-packages`中的NumPy 2.1.3、PyTorch 2.5.1+cpu、pytest 8.3.5；没有启动失效的队友venv解释器。复现本轮验证可在本目录PowerShell运行：
+## 启动后端与前端
+
+终端一，在仓库根目录启动：
 
 ```powershell
-$pythonExe = Join-Path $env:USERPROFILE '.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe'
-$env:PYTHONPATH = (Resolve-Path '../星地智调/.venv/Lib/site-packages').Path
-$env:PYTHONIOENCODING = 'utf-8'
-& $pythonExe -m pytest tests -q --tb=short --noconftest -p no:cacheprovider
-& $pythonExe -m training.inspect_legacy --config configs/legacy_assets.json --output-root runs/a1_review
-Remove-Item Env:PYTHONPATH
+.\.venv\Scripts\python.exe -m uvicorn backend.api.main:app --host 127.0.0.1 --port 8000 --workers 1
 ```
 
-这种借用方式依赖当前交付文件的Python版本及二进制包兼容性，不作为最终换机安装验收。B接管后建立干净环境并补完整依赖记录。
+终端二，在仓库根目录启动：
 
-## 文件归属与证据
+```powershell
+pnpm --dir frontend dev --host 127.0.0.1
+```
 
-- `backend/health/legacy_adapter.py`：离线冻结NPZ推理，不是在线健康接口。
-- `backend/health/legacy_models.py`：与旧权重对应的LSTM/BiLSTM架构。
-- `training/legacy_audit.py`、`training/inspect_legacy.py`：资产/标签审计及证据生成。
-- `tests/`：原测试与集成审查补充回归。
-- `docs/evidence/A1/`：A交付的历史证据原样保留。
-- 新审查日志及重新生成的证据在工作区`审查输出/成员A验收_2026-10-27/`，不要混淆作者原日志与本机重跑日志。
-- 审查结论见`../审查输出/成员A验收_2026-10-27/审查与合并报告.md`。
+按 Vite 输出地址打开页面。开发和预览服务器默认将 `/runs` 代理到 `http://127.0.0.1:8000`，无需跨域配置。页面“证据链”可输入已存在的 run_id，读取后端真实运行。未接入的页面内容保持 FIXTURE 标识。
 
-原目录的`.git`指向队友电脑worktree，原`.venv`绑定队友解释器；两者均未复制。本站已为集成目录重新初始化独立Git仓库，并建立`main`、`feature/ai`、`feature/simulator`、`feature/frontend`；当前提交以`git rev-parse HEAD`为准。这不是恢复队友提交历史。远程`origin`为上述私有仓库，协作与合并以远程分支和Pull Request记录为准。
+API 文档：<http://127.0.0.1:8000/docs>。目前可通过 API 提交新规则运行；页面创建真实运行属于后续联调。接口详见 [H03](docs/handoffs/H03_api_2026-10-29.md)：
 
-禁止把raw_fraction直接当SOC、容量、能量或在线原生RUL；允许预测大于1，不私自裁剪。旧CSV标签吻合只能证明标签对应，不证明全部X、标准化器和原始数据谱系已经重建。
+- `POST /runs`：提交规则或learned配置，返回 run_id；每请求一至两策略。
+- `GET /runs/{id}`：状态和进度。
+- `GET /runs/{id}/events?after=0&limit=500`：分页事件。
+- `GET /runs/{id}/results`：仅完成后提供正式结果。
+- `GET /runs/{id}/export`：仅完成后提供 ZIP。
+
+页面刷新恢复 run_id，不应重复提交。failed/未完成运行不展示正式指标。
+
+## 独立规则运行与模型检查
+
+以下输出目录必须是新的或空的：
+
+```powershell
+.\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy edf --output runs/example_edf
+.\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy value --output runs/example_value
+.\.venv\Scripts\python.exe -m backend.cli policy-run --config configs/scenarios/r3_multiblock.json --policy learned --output runs/example_learned
+```
+
+learned也可将下列policy-run命令的`--policy edf`改为`--policy learned`独立运行；模型权重由服务端冻结配置提供。模型校验包含在下文使用工作区临时目录的全库验证中。模型五文件在 `artifacts/models/a_n3_policy_v1/`，运行配置为 `configs/learned_policy.json`。权重和归一化 SHA 必须与配置及 manifest 一致；不要以重新训练替代恢复冻结模型。模型包、训练数据与模型卡均随候选版本保存。加载和评分成功不代表调度效果成立。
+
+## 旧资产恢复
+
+旧资产保持只读，按以下相对布局放置：
+
+```text
+<项目父目录>/
+  starlink-ai6g/
+  交付包/星地智调_团队研发包_2026-10-26_v3/
+    PACKAGE_MANIFEST.csv
+    assets/legacy_battery/
+```
+
+`configs/legacy_assets.json` 的 `legacy_root` 指向上述兄弟目录。恢复整个 v3 包及其清单，核对包内来源/哈希；这些旧资产不随代码仓库发布。其他机器从团队冻结研发包恢复相同文件，不依赖作者绝对 D 盘路径。若调整本机路径，请保留来源、哈希及变更记录，不修改旧资产内容。A 原分支内部“交付包”布局在本候选中已按 B 的现有布局解决，详见 WP1 交接。
+
+## 验证
+
+全库测试需要先恢复旧资产。PowerShell 中创建工作区临时目录，避开系统 Temp 权限问题：
+
+```powershell
+$reviewRoot = Join-Path 'runs' ('verify_' + (Get-Date -Format 'yyyyMMdd_HHmmss'))
+New-Item -ItemType Directory -Path $reviewRoot | Out-Null
+.\.venv\Scripts\python.exe -m pytest tests -q --tb=short --noconftest -p no:cacheprovider --basetemp "$reviewRoot/pytest" --junitxml "$reviewRoot/tests.xml"
+pnpm --dir frontend check
+```
+
+测试、构建、真实 HTTP 和浏览器视觉验收分别记录，不能相互替代。WP1证据见 [集成验证目录](docs/evidence/B/WP1_integration_2026-11-03/README.md)。
+
+## 协作与后续工作
+
+[协作规则](CONTRIBUTING.md)、[公共合同](docs/contracts/README.md)、[任务板](docs/task_board.csv)、[优化方案](docs/superpowers/plans/2026-11-02-project-optimization.md)。B 下一项为接收人复验及正式实验冻结；A 推进数据与标签有效性；C 推进真实请求和页面联调。合同变更按三方确认规则执行。
+
+旧日期记录保留在 [本轮集成前 README](docs/history/README_before_WP1_2026-11-03.md)，当前能力以本文件与最新交接为准。

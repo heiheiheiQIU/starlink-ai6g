@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-28",
+  "task": "H00",
+  "status": "ready_for_review",
+  "base_commit": "70c5064",
+  "schema_version": "1.0",
+  "tests": [
+    {
+      "name": "contracts-delivery",
+      "tests": 75,
+      "passed": 75,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 1.03,
+      "exit_code": 0
+    },
+    {
+      "name": "full-default-delivery",
+      "tests": 136,
+      "passed": 111,
+      "failed": 5,
+      "errors": 20,
+      "seconds": 2.924,
+      "exit_code": 1
+    },
+    {
+      "name": "full-delivery",
+      "tests": 136,
+      "passed": 136,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 10.443,
+      "exit_code": 0
+    }
+  ],
+  "default_failure_set_matches_R0": true,
+  "default_failures_reason": "Existing default legacy asset path missing; A-owned code/config untouched",
+  "snapshot_only_override": "configs/legacy_assets.json legacy_root",
+  "fixture_behavior_verified": false,
+  "independent_review_findings": 1,
+  "important_findings_fixed": 1,
+  "A_C_accepted": false,
+  "line_ending_regression_fixed": true
+}

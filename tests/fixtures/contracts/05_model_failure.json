@@ -1,0 +1,106 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "手工契约样例；非实验结果；仅校验格式，不证明环境/策略/API行为已实现。",
+  "examples": [
+    {
+      "type": "DecisionData",
+      "valid": true,
+      "payload": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "MODEL_UNAVAILABLE"
+          ],
+          "fallback": true
+        },
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [
+          {
+            "code": "MODEL_UNAVAILABLE",
+            "passed": false,
+            "details": {}
+          }
+        ],
+        "latency_ms": 0.1,
+        "fallback": true,
+        "model_version": null,
+        "policy_version": "edf_v1"
+      }
+    },
+    {
+      "type": "Event",
+      "valid": true,
+      "payload": {
+        "event_id": 1,
+        "run_id": "fixture_run",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "event_type": "fallback",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": "MODEL_UNAVAILABLE",
+        "data": null
+      }
+    },
+    {
+      "type": "DecisionData",
+      "valid": true,
+      "payload": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "INVALID_SCORE"
+          ],
+          "fallback": true
+        },
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [
+          {
+            "code": "INVALID_SCORE",
+            "passed": false,
+            "details": {}
+          }
+        ],
+        "latency_ms": 0.1,
+        "fallback": true,
+        "model_version": null,
+        "policy_version": "edf_v1"
+      }
+    },
+    {
+      "type": "CandidateScore",
+      "valid": false,
+      "payload": {
+        "task_id": "T1",
+        "mode": "robust",
+        "score": "NaN"
+      }
+    }
+  ],
+  "scenario_id": "model_failure",
+  "expected_behavior": {
+    "note": "标准JSON不写NaN数值；运行时NaN/Inf另由pytest直接构造。",
+    "implementation_owner": "R4/R6"
+  },
+  "behavior_verified": false
+}

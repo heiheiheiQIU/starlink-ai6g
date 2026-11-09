@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "keys": [
+    "weighted_on_time_rate",
+    "success_payload_bytes",
+    "goodput_bps",
+    "joule_per_success_bit",
+    "energy_violation_count"
+  ],
+  "run_ids": [
+    "sandbox_run_5bc5191b2e5048fab07986e850b6edae",
+    "sandbox_run_1f181a8e845c4405b16f3ee1897979fb"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "analysis_protocol_sha256": "649ecfc8c94c37f8118ae4996947df215ce6c7ed13a8e2ee55db267a5e0c1e1f",
+  "archive_sha256": "f8c9e9068fc0efecc59e3ea96fa5cd8edaebee0d2cb36c7fe0053efccbc342e4",
+  "audit_files_sha256": {
+    "data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+    "data/teacher/a_n4_pilot_v1/source_splits.json": "aaa5c558c83e9d2dcec0c9637f74dc5dc431de9109874a85f17cba2eb87c2e95",
+    "scripts/prepare_formal_v2_review.py": "50e4090fec611906eae58f7255fe5e1649d240e3211e7117ae150c9a9c611628"
+  },
+  "code_sha256": "88e44ec10e33e7f15e81b335894762197d8aec95698e932b1ef314f894cc9889",
+  "design_sha256": "2df33c1291b3aabeaa81dbe139e2740f54432cd7e4b629ea2d1bd67c1cbbd29c",
+  "model": {
+    "artifacts_sha256": {
+      "manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+      "model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+      "normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+      "training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+      "weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+    },
+    "feature_schema_version": "policy-features-v1",
+    "model_hash": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+    "model_version": "a-n3-mlp-v1",
+    "normalization_sha256": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449"
+  },
+  "model_config_sha256": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+  "registration_sha256": "ce91579098ea388d0a337c77d9ca6946569381cd24d3334c1303c67bf1373bdf",
+  "seed_audit": {
+    "development_count": 180,
+    "old_teacher_namespace": "Observation sources have no full scenario seeds; A source review required",
+    "overlap": [],
+    "pilot_count": 30,
+    "registered_count": 180,
+    "registered_range": [
+      600000,
+      600179
+    ],
+    "retired_count": 180,
+    "retired_range": [
+      200000,
+      200179
+    ]
+  },
+  "source_inputs": {
+    "data/teacher/a_n4_pilot_v1/sources.jsonl": "c62b66856d352611feaae57bffca65bd27a71b4a4e1cb3a39d821767201ce788",
+    "data/teacher/sources/a_n3_20_v2.jsonl": "6f099d8845dfa997c271399db5b43c348fa330c7a2b7316d8a5aaa20d89caf8d",
+    "experiments/test_matrix.json": "740525e9c91874fb57012b57a86839a269d40733b6f4633f87c8950e75307c34"
+  },
+  "stage": "before_formal_v2_generation",
+  "template_sha256": "6e9c71e2940752c82b807f9110806b6b3a558cb224255bdbaa5480d4e31ded6a"
+}

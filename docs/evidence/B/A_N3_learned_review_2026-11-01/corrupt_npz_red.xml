@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="0.414" timestamp="2026-11-01T17:42:53.465889+08:00" hostname="DESKTOP-AAVK2DR"><testcase classname="docs.evidence.B.A_N3_learned_review_2026-11-01.test_corrupt_npz" name="test_damaged_zip_is_controlled_model_format" time="0.027"><failure message="zipfile.BadZipFile: File is not a zip file">tmp_path = WindowsPath('D:/人工智能挑战赛/starlink-ai6g/runs/b_learned_intake_20261101/corrupt_npz_tmp/test_damaged_zip_is_controlled0')
+
+    def test_damaged_zip_is_controlled_model_format(tmp_path):
+        package = tmp_path/'model'
+        shutil.copytree(SOURCE/'artifacts/models/a_n3_policy_v1', package)
+        # Valid ZIP signature followed by a damaged archive, not plain non-ZIP text.
+        raw = b'PK\x03\x04broken archive payload'
+        (package/'weights.npz').write_bytes(raw)
+        config = json.loads((SOURCE/'configs/learned_policy.json').read_bytes())
+        config.update(package_dir=str(package), weights_sha256=hashlib.sha256(raw).hexdigest())
+        row = json.loads((SOURCE/'data/teacher/a_n3_20_v2/samples.jsonl').read_text(encoding='utf-8').splitlines()[0])
+        with pytest.raises(LearnedPolicyError) as error:
+&gt;           score_actions(Observation.model_validate(row['observation']), config=config)
+
+docs\evidence\B\A_N3_learned_review_2026-11-01\test_corrupt_npz.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+runs\b_learned_intake_20261101\source\backend\policies\learned.py:212: in score_actions
+    bundle = _bundle(config)
+runs\b_learned_intake_20261101\source\backend\policies\learned.py:191: in _bundle
+    return _load_bundle(
+runs\b_learned_intake_20261101\source\backend\policies\learned.py:160: in _load_bundle
+    with np.load(weights_path, allow_pickle=False) as archive:
+.venv\Lib\site-packages\numpy\lib\_npyio_impl.py:476: in load
+    ret = NpzFile(fid, own_fid=own_fid, allow_pickle=allow_pickle,
+.venv\Lib\site-packages\numpy\lib\_npyio_impl.py:192: in __init__
+    _zip = zipfile_factory(fid)
+.venv\Lib\site-packages\numpy\lib\_npyio_impl.py:103: in zipfile_factory
+    return zipfile.ZipFile(file, *args, **kwargs)
+C:\Users\yuzzz\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\zipfile\__init__.py:1371: in __init__
+    self._RealGetContents()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = &lt;zipfile.ZipFile [closed]&gt;
+
+    def _RealGetContents(self):
+        """Read in the table of contents for the ZIP file."""
+        fp = self.fp
+        try:
+            endrec = _EndRecData(fp)
+        except OSError:
+            raise BadZipFile("File is not a zip file")
+        if not endrec:
+&gt;           raise BadZipFile("File is not a zip file")
+E           zipfile.BadZipFile: File is not a zip file
+
+C:\Users\yuzzz\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\zipfile\__init__.py:1438: BadZipFile</failure></testcase></testsuite></testsuites>

@@ -225,4 +225,67 @@ const heroPath=path.join(OUT,'C-F00_星地智调主题背景_v1.png');
 const manifest={schema_version:'visual-pack-v2',generated_at:'2026-11-07',generator:'scripts/generate_visual_pack.mjs',canvas:'1600x900 SVG',palette:C,fonts:['Noto Sans SC','Source Han Sans SC','Microsoft YaHei','Arial'],source_revision:'64db43c for R5 evidence lookup',external_assets:fs.existsSync(heroPath)?[{file:path.basename(heroPath),sha256:crypto.createHash('sha256').update(fs.readFileSync(heroPath)).digest('hex'),method:'OpenAI built-in image generation',scope:'non-data thematic background only'}]:[],figures:[]};
 for(const [name,raw] of Object.entries(figs)){const content=decorate(raw,name);const p=path.join(OUT,name);fs.writeFileSync(p,content,'utf8');manifest.figures.push({file:name,sha256:crypto.createHash('sha256').update(content).digest('hex'),status:name.includes('未完成模板')?'draft':'review_pending'});}
 fs.writeFileSync(path.join(OUT,'manifest.json'),JSON.stringify(manifest,null,2)+'\n','utf8');
+
+const sourceGitSha=execFileSync('git',['rev-parse','HEAD'],{cwd:ROOT,encoding:'utf8'}).trim();
+const aFigureManifests = [
+  {
+    figure_id:'A-F01',
+    title_cn:'公开特征、教师标注与学习评分器数据链',
+    file:'A-F01_公开特征教师标注学习评分器.svg',
+    source_files:['docs/report/report_v2.md','docs/contracts/README.md','docs/report/claim_values.json'],
+    claim_ids:['claim-D1','claim-D3','claim-E2'],
+    data_scope:'mechanism_from_signed_contracts',
+    limitations:['模型只输出候选评分，不直接执行动作','正式域含随机丢失，属于零损失训练域外评估'],
+  },
+  {
+    figure_id:'A-F02',
+    title_cn:'教师标签质量与困难工况覆盖审计',
+    file:'A-F02_教师标签质量审计.svg',
+    source_files:['docs/report/claim_values.json'],
+    claim_ids:['claim-D1'],
+    data_scope:'frozen_old_20_samples_pipeline_regression_only',
+    limitations:['仅旧20样本冻结包','不得据此声称AI优于规则或A-N4b扩样成功'],
+  },
+  {
+    figure_id:'A-F03',
+    title_cn:'小样本模型对照',
+    file:'A-F03_小样本模型对照.svg',
+    source_files:['docs/report/claim_values.json'],
+    claim_ids:['claim-D3'],
+    data_scope:'small_test_set_n4_not_scheduling_gain',
+    limitations:['测试观测仅4条','MSE不构成调度收益、提升率或泛化证据'],
+  },
+  {
+    figure_id:'A-F05',
+    title_cn:'公开信息与真值隔离',
+    file:'A-F05_公开信息与真值隔离.svg',
+    source_files:['docs/report/report_v2.md','docs/contracts/README.md'],
+    claim_ids:[],
+    data_scope:'mechanism_public_observation_boundary',
+    limitations:['机制图不包含实验结果','完整事件链和未来真值仅供事后评估，评分器不得回读'],
+  },
+];
+for(const spec of aFigureManifests){
+  const preview=`docs/figures/generated/v1/previews/${spec.file.replace(/\.svg$/,'.png')}`;
+  const outputs=[`docs/figures/generated/v1/${spec.file}`];
+  if(fs.existsSync(path.join(ROOT,preview))) outputs.push(preview);
+  const figureManifest={
+    schema_version:'figure-manifest-v1',
+    figure_id:spec.figure_id,
+    title_cn:spec.title_cn,
+    owner:'A',
+    reviewers:['B','C'],
+    source_files:spec.source_files,
+    claim_ids:spec.claim_ids,
+    data_scope:spec.data_scope,
+    script:'scripts/generate_visual_pack.mjs',
+    outputs,
+    source_git_sha:sourceGitSha,
+    git_sha:sourceGitSha,
+    generated_at:'2026-11-07',
+    status:'review_pending',
+    limitations:[...spec.limitations,'嵌字PDF与600 DPI PNG尚待C统一导出'],
+  };
+  fs.writeFileSync(path.join(OUT,`${spec.figure_id}_manifest.json`),JSON.stringify(figureManifest,null,2)+'\n','utf8');
+}
 console.log(`generated ${manifest.figures.length} SVG figures in ${OUT}`);

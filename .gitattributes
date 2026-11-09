@@ -8,6 +8,57 @@
 *.py text eol=lf
 *.md text eol=lf
 *.json text eol=lf
+*.jsonl text eol=lf
+docs/evidence/B/R3_review_2026-10-29/*/execution.log text eol=lf
+docs/evidence/B/R3_2026-10-29/samples/*/execution.log -text -diff
 *.csv text eol=lf
 *.yaml text eol=lf
 *.yml text eol=lf
+/requirements.lock.txt text eol=lf
+/.gitattributes text eol=lf
+/pyproject.toml text eol=lf
+docs/evidence/B/R4_batch_2026-10-29/**/execution.log text eol=lf
+
+# Preserve exact bytes of the recorded HTTP validation logs
+docs/evidence/B/B_N3_2026-10-29/**/*.log -text -diff
+docs/evidence/B/B_N3_2026-10-29/server.log -text -diff
+
+docs/evidence/B/R5_2026-10-29/**/*.log -text -diff
+docs/evidence/B/R5_2026-10-29/*.xml -text -diff
+docs/evidence/B/H01_review_2026-10-30/** -text -diff
+docs/evidence/B/seed_P2_2026-10-30/** -text -diff
+docs/evidence/B/C_review_2026-10-30/** -text -diff
+docs/evidence/B/R3_integration_2026-10-30/** -text -diff
+docs/evidence/B/release_provenance_2026-10-30/** -text -diff
+docs/evidence/B/R0_2026-10-28/** -text -diff
+docs/evidence/B/audit_followup_2026-10-30/** -text -diff
+docs/evidence/B/H02_data_review_2026-10-30/** -text -diff
+docs/evidence/B/A_N3_v2_review_2026-10-31/** -text -diff
+docs/evidence/B/B1_push_2026-10-31/** -text -diff
+docs/evidence/B/R2_R5_premerge_2026-10-31/** -text -diff
+docs/evidence/B/API_lock_2026-11-01/** -text -diff
+docs/evidence/B/A_N3_learned_intake_2026-11-01/** -text -diff
+docs/evidence/B/A_N3_learned_review_2026-11-01/** -text -diff
+docs/evidence/B/A_N3_learned_recheck_2026-11-02/** -text -diff
+
+# Keep WP1 command reports byte-identical across Windows checkouts
+docs/evidence/B/WP1_integration_2026-11-03/*.xml -text -diff
+docs/evidence/B/WP1_integration_2026-11-03/*.log -text -diff
+
+docs/evidence/B/A_N4_readiness_2026-11-04/*.xml -text -diff
+
+docs/evidence/B/WP2_learned_2026-11-04/*.xml -text -diff
+docs/evidence/B/WP2_learned_2026-11-04/*.log -text -diff
+
+docs/evidence/B/WP5_readiness_2026-11-04/*.xml -text -diff
+
+docs/evidence/B/WP5_readiness_2026-11-04/*.log -text -diff
+
+docs/evidence/B/formal_inputs_2026-11-04/*.log -text -diff
+docs/evidence/B/formal_inputs_2026-11-04/*.xml -text -diff
+
+# Preserve B sprint validation and raw event evidence bytes across checkouts.
+docs/evidence/B/sprint_2026-11-07/** -text -diff
+docs/evidence/B/independent_2026-11-07/** -text -diff
+docs/evidence/B/formal_v2_review_2026-11-07/*.log -text -diff
+docs/evidence/B/sprint_2026-11-09/** -text -diff

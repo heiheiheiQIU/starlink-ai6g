@@ -1,0 +1,229 @@
+{
+  "case": "constraint_reject",
+  "run_id": "development_B_20261107_constraint_reject",
+  "policy_id": "learned",
+  "input_hash": "4208da24935dd54705297cfe0a78f60dbfba56f48dcf568e44f182689a970825",
+  "event_ids": [
+    3
+  ],
+  "description": "注入高分探针候选被能量保留约束拒绝。非训练模型决策证据。",
+  "data_scope": "development_only",
+  "explanation": "注入高分探针候选被能量保留约束拒绝。非训练模型决策证据。",
+  "event_range": [
+    3,
+    3
+  ],
+  "events": [
+    {
+      "event_id": 3,
+      "run_id": "development_B_20261107_constraint_reject",
+      "policy_id": "learned",
+      "sim_time_s": 0.0,
+      "event_type": "decision",
+      "task_id": null,
+      "block_id": null,
+      "payload_bytes": 0,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": null,
+      "data": {
+        "action": {
+          "task_id": null,
+          "mode": "idle",
+          "scheduled_bytes": 0,
+          "reason_codes": [
+            "ENERGY_RESERVE"
+          ],
+          "fallback": false
+        },
+        "candidate_scores": [
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 10.0
+          },
+          {
+            "task_id": "T1",
+            "mode": "fast",
+            "score": 10.0
+          },
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0
+          }
+        ],
+        "constraint_checks": [
+          {
+            "code": "TASK_NOT_AVAILABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "INFLIGHT_BLOCK",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "NO_VISIBLE_WINDOW",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "INSUFFICIENT_LINK_TIME",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "DEADLINE_UNREACHABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "POWER_LIMIT",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "CONTROL_BUDGET",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "ENERGY_RESERVE",
+            "passed": false,
+            "details": {
+              "task_id": "T1",
+              "mode": "robust"
+            }
+          },
+          {
+            "code": "TASK_NOT_AVAILABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "INFLIGHT_BLOCK",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "NO_VISIBLE_WINDOW",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "INSUFFICIENT_LINK_TIME",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "DEADLINE_UNREACHABLE",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "POWER_LIMIT",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "CONTROL_BUDGET",
+            "passed": true,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          },
+          {
+            "code": "ENERGY_RESERVE",
+            "passed": false,
+            "details": {
+              "task_id": "T1",
+              "mode": "fast"
+            }
+          }
+        ],
+        "latency_ms": 0.8645999987493269,
+        "fallback": false,
+        "model_version": "injected-high-score-probe-not-trained-AI",
+        "policy_version": "learned-r4-v1"
+      }
+    }
+  ],
+  "public_snapshots": [
+    {
+      "event_id": 4,
+      "sim_time_s": 2.0,
+      "soc_est": 0.0245,
+      "energy_est_Wh": 0.49,
+      "energy_lower_Wh": 0.49,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "learned-r4-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    }
+  ],
+  "initial_tasks": [
+    {
+      "task_id": "T1",
+      "payload_bytes": 1024,
+      "remaining_bytes": 1024
+    }
+  ],
+  "source_files": {
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/config.json": "52473768fe22cd00f9485ec7aba9884228a35b951a3afcf038b5d8917c74a887",
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/energy_ledger.json": "aaced833853b876b36b8ff7a7cab11d29b126c1a30a39d42b16d93c61fc94523",
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/events.jsonl": "f71e895fb4752f1a32d5436fe31031d8499c675739c11cbd496f074ebb930cfc",
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/execution.log": "f2ca33eb4b4aea66270df434f6dd7ffb8315fcff81b02d60ea062bc0c2d90c5b",
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/manifest.json": "57ca983bf48939029ea3a30241b05fa4d0d799be730d2f9983c7493d378c856e",
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/results.json": "e5f46cf4e510b4cd4f7b410f50fce14b15039f55b9c6eb6e4295ad18ce7c387c",
+    "docs/evidence/B/sprint_2026-11-07/cases/constraint_reject/status.json": "cedd7f93f736312e989084175f49250fd8d85020d86d2ccfdb5ad5959292bddc"
+  },
+  "notes": [
+    "energy_Wh in events is event energy, not battery state",
+    "Remaining bytes shown only where provided by actual events; never inferred from retransmission count",
+    "Injected high-score probe is not trained AI output"
+  ]
+}

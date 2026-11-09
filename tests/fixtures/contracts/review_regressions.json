@@ -1,0 +1,294 @@
+{
+  "kind": "contract_fixture",
+  "is_experimental_result": false,
+  "note": "A/C审查回归样例；非实验结果。schema_rejects=false表示需Python跨字段或集合校验。",
+  "examples": [
+    {
+      "case_id": "teacher_valid",
+      "type": "TeacherResult",
+      "valid": true,
+      "payload": {
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0,
+            "feasible": true
+          },
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0,
+            "feasible": false
+          }
+        ],
+        "solver_status": "optimal",
+        "gap": 0.0,
+        "elapsed_ms": 1.0
+      }
+    },
+    {
+      "case_id": "teacher_empty",
+      "type": "TeacherResult",
+      "valid": false,
+      "payload": {
+        "candidate_scores": [],
+        "solver_status": "optimal",
+        "gap": 0.0,
+        "elapsed_ms": 1.0
+      },
+      "schema_rejects": true
+    },
+    {
+      "case_id": "teacher_no_idle",
+      "type": "TeacherResult",
+      "valid": false,
+      "payload": {
+        "candidate_scores": [
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0,
+            "feasible": false
+          }
+        ],
+        "solver_status": "optimal",
+        "gap": 0.0,
+        "elapsed_ms": 1.0
+      },
+      "schema_rejects": false
+    },
+    {
+      "case_id": "teacher_two_idle",
+      "type": "TeacherResult",
+      "valid": false,
+      "payload": {
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0,
+            "feasible": true
+          },
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0,
+            "feasible": false
+          },
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 2.0,
+            "feasible": true
+          }
+        ],
+        "solver_status": "optimal",
+        "gap": 0.0,
+        "elapsed_ms": 1.0
+      },
+      "schema_rejects": false
+    },
+    {
+      "case_id": "teacher_duplicate_send",
+      "type": "TeacherResult",
+      "valid": false,
+      "payload": {
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0,
+            "feasible": true
+          },
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0,
+            "feasible": false
+          },
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 2.0,
+            "feasible": true
+          }
+        ],
+        "solver_status": "optimal",
+        "gap": 0.0,
+        "elapsed_ms": 1.0
+      },
+      "schema_rejects": false
+    },
+    {
+      "case_id": "teacher_infeasible_idle",
+      "type": "TeacherResult",
+      "valid": false,
+      "payload": {
+        "candidate_scores": [
+          {
+            "task_id": null,
+            "mode": "idle",
+            "score": 0.0,
+            "feasible": false
+          },
+          {
+            "task_id": "T1",
+            "mode": "robust",
+            "score": 1.0,
+            "feasible": false
+          }
+        ],
+        "solver_status": "optimal",
+        "gap": 0.0,
+        "elapsed_ms": 1.0
+      },
+      "schema_rejects": false
+    },
+    {
+      "case_id": "mixed_forecast_versions",
+      "type": "Observation",
+      "valid": false,
+      "payload": {
+        "schema_version": "1.0",
+        "run_id": "fixture_run",
+        "policy_id": "edf",
+        "sim_time_s": 0.0,
+        "tasks": [
+          {
+            "task_id": "T1",
+            "arrival_s": 0.0,
+            "deadline_s": 20.0,
+            "payload_bytes": 2048,
+            "remaining_bytes": 2048,
+            "priority_weight": 2.0,
+            "business_class": "periodic",
+            "data_location": "satellite_1"
+          }
+        ],
+        "forecast_windows": [
+          {
+            "window_id": "W1",
+            "start_s": 0.0,
+            "end_s": 20.0,
+            "rate_profile": [
+              {
+                "time_s": 0.0,
+                "robust_bps": 8192.0,
+                "fast_bps": 16384.0
+              }
+            ],
+            "loss_profile": [
+              {
+                "time_s": 0.0,
+                "robust_loss_prob": 0.1,
+                "fast_loss_prob": 0.2
+              }
+            ],
+            "source": "synthetic",
+            "forecast_version": "other_batch"
+          }
+        ],
+        "health": {
+          "soc_est": 0.6,
+          "soc_lower": 0.5,
+          "capacity_Wh_est": 10.0,
+          "capacity_lower_Wh": 8.0,
+          "energy_lower_Wh": 4.0,
+          "rul_est": null,
+          "rul_unit": null,
+          "uncertainty_method": "synthetic_bounds",
+          "model_version": "synthetic_v1",
+          "observed_at_s": 0.0,
+          "available_at_s": 0.0,
+          "reason_codes": [
+            "RUL_UNAVAILABLE"
+          ]
+        },
+        "inflight": null,
+        "cache_bytes": 2048,
+        "forecast_version": "forecast_v1"
+      },
+      "schema_rejects": false
+    },
+    {
+      "case_id": "nonnull_metric_with_reason",
+      "type": "PolicyResult",
+      "valid": false,
+      "payload": {
+        "policy_id": "edf",
+        "model_hash": null,
+        "sample_count": 2,
+        "evaluation_end_s": 20.0,
+        "pending_task_count": 0,
+        "weighted_on_time_rate": 0.5,
+        "critical_task_success_rate": null,
+        "goodput_bps": 0.0,
+        "minimum_soc_true": 0.5,
+        "energy_violation_count": 0,
+        "energy_violation_duration_s": 0.0,
+        "success_payload_bytes": 1024,
+        "joule_per_success_bit": null,
+        "wait_p50_s": null,
+        "wait_p95_s": null,
+        "decision_p50_ms": null,
+        "decision_p95_ms": null,
+        "timeout_rate": null,
+        "parameter_count": null,
+        "memory_bytes": null,
+        "metric_reasons": {
+          "critical_task_success_rate": "NOT_MEASURED_IN_FIXTURE",
+          "joule_per_success_bit": "NOT_MEASURED_IN_FIXTURE",
+          "wait_p50_s": "NOT_MEASURED_IN_FIXTURE",
+          "wait_p95_s": "NOT_MEASURED_IN_FIXTURE",
+          "decision_p50_ms": "NOT_MEASURED_IN_FIXTURE",
+          "decision_p95_ms": "NOT_MEASURED_IN_FIXTURE",
+          "timeout_rate": "NOT_MEASURED_IN_FIXTURE",
+          "parameter_count": "NOT_MEASURED_IN_FIXTURE",
+          "memory_bytes": "NOT_MEASURED_IN_FIXTURE",
+          "goodput_bps": "NO_DATA"
+        }
+      },
+      "schema_rejects": false
+    },
+    {
+      "case_id": "null_metric_with_reason",
+      "type": "PolicyResult",
+      "valid": true,
+      "payload": {
+        "policy_id": "edf",
+        "model_hash": null,
+        "sample_count": 2,
+        "evaluation_end_s": 20.0,
+        "pending_task_count": 0,
+        "weighted_on_time_rate": 0.5,
+        "critical_task_success_rate": null,
+        "goodput_bps": null,
+        "minimum_soc_true": 0.5,
+        "energy_violation_count": 0,
+        "energy_violation_duration_s": 0.0,
+        "success_payload_bytes": 1024,
+        "joule_per_success_bit": null,
+        "wait_p50_s": null,
+        "wait_p95_s": null,
+        "decision_p50_ms": null,
+        "decision_p95_ms": null,
+        "timeout_rate": null,
+        "parameter_count": null,
+        "memory_bytes": null,
+        "metric_reasons": {
+          "critical_task_success_rate": "NOT_MEASURED_IN_FIXTURE",
+          "joule_per_success_bit": "NOT_MEASURED_IN_FIXTURE",
+          "wait_p50_s": "NOT_MEASURED_IN_FIXTURE",
+          "wait_p95_s": "NOT_MEASURED_IN_FIXTURE",
+          "decision_p50_ms": "NOT_MEASURED_IN_FIXTURE",
+          "decision_p95_ms": "NOT_MEASURED_IN_FIXTURE",
+          "timeout_rate": "NOT_MEASURED_IN_FIXTURE",
+          "parameter_count": "NOT_MEASURED_IN_FIXTURE",
+          "memory_bytes": "NOT_MEASURED_IN_FIXTURE",
+          "goodput_bps": "NO_DATA"
+        }
+      }
+    }
+  ]
+}

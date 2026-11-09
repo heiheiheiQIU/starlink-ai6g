@@ -1,0 +1,297 @@
+{
+  "case": "manual_ack_loss",
+  "run_id": "development_B_manual_ack_loss",
+  "policy_id": "manual",
+  "input_hash": "a58fad9d8cda6100d35f2e0b80f391ce07893c08899facc6fcf6c5dcf3a6bb32",
+  "event_ids": [
+    9,
+    11,
+    16,
+    17
+  ],
+  "description": "ACK丢失后同块重传与地面去重。开发期手动动作脚本，非正式实验。",
+  "data_scope": "development_only",
+  "explanation": "ACK丢失后同块重传与地面去重。开发期手动动作脚本，非正式实验。",
+  "event_range": [
+    2,
+    20
+  ],
+  "events": [
+    {
+      "event_id": 2,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 0.0,
+      "event_type": "sent",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 1024,
+      "overhead_bytes": 32,
+      "energy_Wh": 0.0103125,
+      "reason_code": null,
+      "data": null
+    },
+    {
+      "event_id": 4,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 1.03125,
+      "event_type": "received",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 1024,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": null,
+      "data": null
+    },
+    {
+      "event_id": 9,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 2.03125,
+      "event_type": "dropped",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 0,
+      "overhead_bytes": 16,
+      "energy_Wh": 0.0,
+      "reason_code": "ACK_LOST_WINDOW_CLOSED",
+      "data": null
+    },
+    {
+      "event_id": 11,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 3.03125,
+      "event_type": "fallback",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 0,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "ACK_TIMEOUT",
+      "data": null
+    },
+    {
+      "event_id": 15,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 4.0,
+      "event_type": "sent",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 1024,
+      "overhead_bytes": 32,
+      "energy_Wh": 0.0103125,
+      "reason_code": null,
+      "data": null
+    },
+    {
+      "event_id": 16,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 5.03125,
+      "event_type": "received",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 1024,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "DUPLICATE_BLOCK",
+      "data": null
+    },
+    {
+      "event_id": 17,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 5.03125,
+      "event_type": "dropped",
+      "task_id": "T1",
+      "block_id": null,
+      "payload_bytes": 1024,
+      "overhead_bytes": 0,
+      "energy_Wh": 0.0,
+      "reason_code": "DEADLINE_EXPIRED",
+      "data": null
+    },
+    {
+      "event_id": 20,
+      "run_id": "development_B_manual_ack_loss",
+      "policy_id": "manual",
+      "sim_time_s": 6.03125,
+      "event_type": "acked",
+      "task_id": "T1",
+      "block_id": 0,
+      "payload_bytes": 0,
+      "overhead_bytes": 16,
+      "energy_Wh": 0.0,
+      "reason_code": null,
+      "data": null
+    }
+  ],
+  "public_snapshots": [
+    {
+      "event_id": 5,
+      "sim_time_s": 1.03125,
+      "soc_est": 0.49896874999999996,
+      "energy_est_Wh": 9.979375,
+      "energy_lower_Wh": 8.979375,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 6,
+      "sim_time_s": 1.90625,
+      "soc_est": 0.49853125,
+      "energy_est_Wh": 9.970625,
+      "energy_lower_Wh": 8.970625,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 8,
+      "sim_time_s": 2.0,
+      "soc_est": 0.4984739583333333,
+      "energy_est_Wh": 9.969479166666666,
+      "energy_lower_Wh": 8.969479166666666,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 10,
+      "sim_time_s": 2.03125,
+      "soc_est": 0.49845833333333334,
+      "energy_est_Wh": 9.969166666666666,
+      "energy_lower_Wh": 8.969166666666666,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 12,
+      "sim_time_s": 3.03125,
+      "soc_est": 0.49795833333333334,
+      "energy_est_Wh": 9.959166666666667,
+      "energy_lower_Wh": 8.959166666666667,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 14,
+      "sim_time_s": 4.0,
+      "soc_est": 0.4974739583333333,
+      "energy_est_Wh": 9.949479166666666,
+      "energy_lower_Wh": 8.949479166666666,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 18,
+      "sim_time_s": 5.03125,
+      "soc_est": 0.49644270833333326,
+      "energy_est_Wh": 9.928854166666666,
+      "energy_lower_Wh": 8.928854166666666,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 19,
+      "sim_time_s": 5.90625,
+      "soc_est": 0.49600520833333334,
+      "energy_est_Wh": 9.920104166666667,
+      "energy_lower_Wh": 8.920104166666667,
+      "queue_count": 1,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 21,
+      "sim_time_s": 6.03125,
+      "soc_est": 0.49592881944444445,
+      "energy_est_Wh": 9.918576388888889,
+      "energy_lower_Wh": 8.918576388888889,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 22,
+      "sim_time_s": 7.03125,
+      "soc_est": 0.49542881944444445,
+      "energy_est_Wh": 9.90857638888889,
+      "energy_lower_Wh": 8.90857638888889,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    },
+    {
+      "event_id": 23,
+      "sim_time_s": 8.0,
+      "soc_est": 0.49494444444444446,
+      "energy_est_Wh": 9.898888888888889,
+      "energy_lower_Wh": 8.898888888888889,
+      "queue_count": 0,
+      "forecast_energy_band": null,
+      "policy_version": "manual-r3-v1",
+      "reason_codes": [
+        "R3_FORECAST_BAND_UNAVAILABLE"
+      ]
+    }
+  ],
+  "initial_tasks": [
+    {
+      "task_id": "T1",
+      "payload_bytes": 1024,
+      "remaining_bytes": 1024
+    }
+  ],
+  "source_files": {
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/config.json": "5dd5017c1db2e1474631edcdb4abaef56f9d1ac0966fefef1cc637e087b1e56d",
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/energy_ledger.json": "3c68693f1ac65d488176c761fd56da26cfa1a0e0a6819d1080febd8f9b7487d8",
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/events.jsonl": "562fb90cf893fc9b7b711506ff97a3af89af21169d43b1fa410471c8b18b6f5a",
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/execution.log": "8a92d04f1b87186a2bcb6ea2fb5e63f1c98ad1ebf6861773aca064ceeb19eec8",
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/manifest.json": "ef7a28fd7c57579ecb4074ec922379cf8a7cc95252a4a399ea6d685fd7224ee6",
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/results.json": "946faf45124d8815cdaa5669386cbc5abd7a990136fc802c6a2b8e827d90633d",
+    "docs/evidence/B/sprint_2026-11-07/cases/manual_ack_loss/status.json": "f55176c53db72916c7597aecb2b7c9c0aa2c0c59b23bdbdffc1fe2ce63836bb8"
+  },
+  "notes": [
+    "Development validation only; no formal performance claim"
+  ]
+}

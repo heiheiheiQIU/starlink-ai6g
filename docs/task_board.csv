@@ -1,16 +1,30 @@
 task_id,owner,status,due,artifact_path,reviewer,review_result,blocker,next_action
-B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,accepted_with_notes（A已签收）,资产布局方案待B复核,与A确认"仓库内gitignore交付包目录"vs环境变量的团队标准
-A-N1,A,accepted,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,"A交付+B主验+C复核三方闭环",完成,F1遗留证据仍挂账（低优先）
-A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,依赖A-N1,按run_id冻结划分与校准边界；资产台账补F4许可字段
-A-N3,A,accepted_with_notes,2026-11-02T22:00:00+08:00,backend/policies/learned.py,B,"PR#8修复版B已升级签收（accepted_with_notes）；模型包已纳入WP1集成（五SHA实测一致）",learned接入（WP2 B主）,注意：线性基线test MSE0.161优于MLP0.356、idle 4/4——learned目前无证据优于简单基线，WP5口径为硬边界
-A-N4,A,completed,2026-11-05T20:00:00+08:00,docs/contributions/A/,B,"标签审计C复核全吻合；B已确认reserve语义与首批扩样支持域（teacher_support）",A-N4b建新数据集,A按支持域做小批生成+审计；±1e-6采样两侧；来源准入防私有对象泄漏
-B-N1,B,accepted,2026-10-28T18:00:00+08:00,backend/contracts.py,A+C,A/C均accepted（c54c79d）H00已合main,无,H00冻结完成；B推进B-N2/教师接口
-B-N2,B,in_progress,2026-10-30T20:00:00+08:00,backend/simulator/,A,,共享信道+180轨迹规则矩阵已交付（PR#6）,R2-R5依序合main；成熟优化器与AI接入仍待后续
-B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,backend/api/,A+C,"A已accepted+C已accepted_with_notes+seed P2已修",等合入main,完整HTTP复跑并入11/08换机验收
-B-N4,B,in_progress,2026-11-07T20:00:00+08:00,experiments/,A+C,"WP5正式输入候选PR#13（710f141）：180输入确定性/防篡改/pending门禁，C复核通过；正式环境全含随机丢失=learned域外评估",A-N4b交包或旧包落位→B冻结→运行+统计,A：今晚交包（含与200000-200179种子无交集证明）；11/06 20:00冻结硬线；域外评估必须写入材料口径
-B-R2,B,ready_for_review,2026-10-30T20:00:00+08:00,feature/simulator-r2,A+C,"预合并回归219过；待A四项手算签收范围确认",main合并前提之一,A补R2四项手算范围确认回执；C可复核send-only轨迹
-B-R3,B,accepted,2026-10-30T20:00:00+08:00,feature/simulator-r3,A+C,"A+C均accepted（cac4b90）三方对齐",待R2先合main,按R2→R3→R4→R5顺序合入
-C-N1,C,ready_for_review,2026-10-28T22:00:00+08:00,docs/ui_structure.md,B,,,B复核v5设计文档与草图
-C-N2,C,ready_for_review,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,,待B复核镜像语义,类型镜像+展示守卫+7项语义测试已提交（3c55815）
-C-N3,C,in_progress,2026-11-02T20:00:00+08:00,frontend/src/api/runs.ts,B,,API客户端+useRun+数据源徽章已交付,真实HTTP联调待本机起uvicorn；新建run等场景预设接口
-C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/evidence_index.md,A+B,,,建立空证据索引和材料章节
+B-R0,B,accepted_with_notes,2026-10-28,docs/evidence/B/R0_2026-10-28/README.md,A,恢复3329284历史状态;A原回执见origin/feature/ai的R0_A_2026-10-28,仅限环境与冻结旧资产;不是新系统效果,保留本地配置与哈希恢复说明
+A-N1,A,accepted_with_notes,2026-10-29T22:00:00+08:00,backend/health/estimator.py,B,B主验正式synthetic适配器158通过;见H01_B_2026-10-30,,已纳入WP1候选并通过组合回归;真实健康校准另验
+A-N2,A,not_started,2026-10-30T22:00:00+08:00,data/manifests/split_manifest.json,B,,待健康数据冻结交付核验;H01已有限签收,按电池和同源窗口冻结划分;补F4许可与哈希
+A-N3,A,accepted_with_notes,2026-11-02T22:00:00+08:00,docs/acceptance/A_N3_learned_B_2026-11-02.md,B,B复验1c90246;48定向503全库及原坏ZIP1项通过;冻结五文件和配置不变,仅小样本包与评分接口;不代表API接入或效果,冻结五文件已完整集成并独立评分;B推进WP2;A配合适用域与扩样
+A-N3-DATA,A,accepted_with_notes,,data/teacher/a_n3_20_v2/splits.json,B,20标签一致;20内容唯一;四维身份12/4/4无交集;130定向471全库通过,仅20条合成管线数据;扩样与模型效果另验,按A_N3_v2_data_B_2026-10-31冻结数据和来源组
+A-N4,A,in_progress,2026-11-05T20:00:00+08:00,docs/contributions/A/,C,A冻结审计经B独立复验及C独立复算确认,A-N4b新版本生成/审计/模型尚未见远端交付,按B支持域先交10状态试算;C作战指令扩量与预算为申请项
+B-N1,B,accepted,2026-10-28T18:00:00+08:00,docs/contracts/FREEZE_2026-10-29.md,A+C,A/C对c54c79d均accepted;干净范围已复核,,H00冻结版本保持;组合合同与Schema逐字节核对通过
+B-N2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A,A ddcca9c明确签收d4716bf四项手算和发送能量;41定向219全库为A实测,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
+B-R2,B,accepted,2026-10-30T20:00:00+08:00,docs/handoffs/B_N2_R2_2026-10-29.md,A+C,A专门回执已到ddcca9c;覆盖d4716bf四项手算,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
+B-N3,B,ready_for_review,2026-10-31T20:00:00+08:00,docs/handoffs/H03_api_2026-10-29.md,C,C的B1_C_2026-10-31已accepted;新API读侧对齐补丁13/474及B17/312通过;WP1组合519项及真实HTTP/代理/18页事件/ZIP通过,页面完整联调与learned仍待后续;统一候选待复核,已支持edf/value/learned各至多两策略;接收人复验分页/ZIP/故障恢复
+B-N4,B,in_progress,2026-11-07T20:00:00+08:00,docs/handoffs/B_N4_learned_API_plan_2026-10-31.md,A+C,WP2 C代码级复核通过;WP5输入710f141经C代码级复核通过;见C_audit_WP5_inputs_2026-11-05,A独立复测与模型落位/最终冻结/运行统计待完成,11/06 20:00冻结硬线;正式随机丢失环境属learned域外评估;540与900运行口径待三方统一
+C-N1,C,accepted_with_notes,2026-10-28T22:00:00+08:00,frontend/,B,B技术语义复核完成;视觉浏览器验收另做,,沿用v5;新增观察或助手接口另提需求
+C-N2,C,accepted_with_notes,2026-10-30T22:00:00+08:00,frontend/src/types/contracts.ts,B,原27结构镜像复核保留;WP1冻结pnpm安装成功;61项前端测试及类型/构建通过,换机及浏览器视觉验收另做,保持pnpm唯一锁文件;复核本轮README代理说明
+C-N3,C,ready_for_review,2026-11-02T20:00:00+08:00,frontend/src/components/RealRunPanel.tsx,B,C b1d5e8b已提交三预设/配对请求/ZIP及测试;B本轮纳入组合候选,真实浏览器视觉及操作闭环尚未验收,B组合测试与HTTP复验;C完成真实浏览器截图/刷新/下载闭环
+C-N4,C,in_progress,2026-11-05T20:00:00+08:00,docs/materials/material_skeleton_v2_2026-11-04.md,A+B,C已提交材料v0-v2及claims流水线,claims数值来源与signed_off需按实际证据复核,保留正式结果占位;等11/07签核后填数字
+B-R3,B,ready_for_review,,docs/handoffs/B_R3_protocol_2026-10-29.md,A+C,A/C既有回执齐;此前B复跑70定向248全库,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
+B-R4,B,accepted_with_notes,,docs/handoffs/H02_teacher_2026-10-29.md,A,A的H02_A_2026-10-30签收已取得;本轮原候选293全库通过,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
+B-R5,B,accepted_with_notes,,docs/handoffs/B_R5_channel_2026-10-29.md,A+C,A ddcca9c签收50f441a公平性与矩阵;C B1 accepted及49d9385补充认可,WP1本地候选已按层集成并回归;尚未合main,复核统一候选及证据后按PR合入main;保留原始验收范围
+B-API-LOCK,B,accepted_with_notes,,docs/handoffs/B_API_lock_2026-11-01.md,A+C,A已应用3ea06f6并在11c00374交接accepted;B核三路径SHA一致,限短锁读取缓解;持续锁有界失败保留,在固定learned候选做B组合复验
+B-WP1,B,ready_for_review,2026-11-03,docs/handoffs/B_WP1_integration_2026-11-03.md,A+C,R2 219/R3 248/R4 293/R5 312/A及最终519通过;前端61及构建;真实HTTP和模型评分通过;C63c7740给无阻断推进意见,C回执已纳入;新main合并授权与执行仍未完成,保留原始验收范围;main合并另按协作规则处理
+B-NEXT-1104,B,ready_for_review,2026-11-04,docs/handoffs/B_next_readiness_2026-11-04.md,A+C,A审计及C回执已整合;524通过;6能量和10支持域探针通过,历史准备回执已由WP2实现推进;A新数据仍待交付,按B_WP5_readiness_2026-11-04准备正式实验
+B-WP2,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP2_learned_2026-11-04.md,A+C,C代码级复核通过;B原552通过1跳过及HTTP配对证据保留,A独立复测尚缺;C页面组合复验本轮进行,保留ready_for_review;准备WP5;不将代码复核写成A/C全量复测
+B-WP5-PREP,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_WP5_readiness_2026-11-04.md,A+C,整合C b1d5e8b;552通过1跳过;前端70构建;实际HTTP及ZIP通过,A新模型未交付;formal输入与统计待实施;未三方冻结,先按WP5计划物化180独立轨迹;三策略540运行;收到A包独立验收
+B-WP5-INPUTS,B,ready_for_review,2026-11-06T20:00:00+08:00,docs/handoffs/B_formal_inputs_2026-11-04.md,A+C,180独立输入/内容哈希;18定向;C对710f141代码级复核通过;见C_audit_WP5_inputs_2026-11-05,A来源交集复核与模型落位待完成;model pending,A核对来源/种子与内容交集;B继续模型验包与运行统计入口;保留域外评估边界
+B-SPRINT-INTAKE,B,ready_for_review,2026-11-07T23:30:00+08:00,docs/handoffs/B_sprint_intake_2026-11-07.md,A+C,A/C无冲突集成;A诊断verify退出0;集成659通过1跳过;前端77及构建,正式来源与模型冻结仍待三方,见首轮工程交接
+B-SPRINT-ENGINEERING,B,ready_for_review,2026-11-08T23:00:00+08:00,docs/handoffs/B_sprint_delivery_2026-11-07.md,A+C,冻结/三策略追加台账/等权配对统计工程完成;独立审查三项修复,来源审查及回执待签;trace00工程测试暴露已披露;未跑正式全矩阵,先审holdout和统计协议再冻结
+B-SPRINT-FIGURES,B,changes_requested,2026-11-10T18:00:00+08:00,docs/acceptance/B_figures_review_2026-11-07.md,C,54格开发矩阵复算通过;三个开发失败案例可追溯,B-F01方向/B-F02硬编码阶梯/C-F02回灌/C-F03域外与决策措辞需改,C按图逐项修订后复核
+B-INDEPENDENT-1107,B,ready_for_review,2026-11-07,docs/handoffs/B_independent_checks_2026-11-07.md,A+C,真实HTTP与Vite代理两组通过;新venv本地16依赖安装;无Git运行/故障门禁通过;案例包和离线后端包完成,同机非换机;浏览器按钮/刷新视觉未验收;非正式输入,接收人核SHA后按包README复跑
+B-REMOTE-REVIEW,B,ready_for_review,2026-11-07,docs/handoffs/B_remote_review_2026-11-07.md,A+C,独立分支已推送;701通过1平台跳过;前端77及构建;图件合同4通过,旧180条归档;新600000–600179仅预登记;代码待独立验收;换机待完成,复验提交及签核生成前对象

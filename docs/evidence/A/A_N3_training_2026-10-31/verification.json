@@ -1,0 +1,133 @@
+{
+  "artifact_status": "ready_for_B_review",
+  "code_revision_used_for_training": "ff0589bfa465585158f76818a422ce6def3efc15",
+  "data": {
+    "kind": "synthetic_teacher_small_sample",
+    "samples_sha256": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "source_revision": "38a1a7463bfe0c8eaecf1bb729b98aa74ae0040b",
+    "split_counts": {
+      "test": 4,
+      "train": 12,
+      "validation": 4
+    },
+    "split_sha256": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+    "test_evaluated_once_after_seed_selection": true
+  },
+  "training_environment": {
+    "numpy": "2.1.3",
+    "pip_check": "No broken requirements found.",
+    "pydantic": "2.12.3",
+    "pytest": "8.3.5",
+    "python": "3.12.9",
+    "torch": "2.5.1",
+    "venv_python": "D:/pro2/.venv/Scripts/python.exe"
+  },
+  "feature_schema_version": "policy-features-v1",
+  "frozen_interfaces": {
+    "contracts_sha256": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "schema_sha256": "d1a19c098b8c69ba7ebefc19db60c1e3f0f321c38b5f669518e7f05676b89fcb"
+  },
+  "inference": {
+    "all_complete_finite": true,
+    "budget_ms": 100.0,
+    "cold_load_and_first_score_ms": 2.6264999905833974,
+    "observations_checked": 20,
+    "warm_calls": 1000,
+    "warm_max_ms": 1.1595999967539683,
+    "warm_median_ms": 0.5244499916443601,
+    "warm_p95_ms": 0.6848650038591585
+  },
+  "limitations": "synthetic small-sample validation; no generalization or policy-superiority claim",
+  "model": {
+    "architecture": "23-32-16 shared trunk with utility sigmoid and feasibility-logit heads",
+    "model_version": "a-n3-mlp-v1",
+    "normalization_source": "train split only",
+    "selected_seed": 20261033,
+    "selection_rule": "minimum validation total_loss; lower seed tie-break",
+    "training_loss": "soft-target utility BCE + 0.25 * feasibility BCEWithLogits"
+  },
+  "package_sha256": {
+    "manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+    "model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+    "normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+    "training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+    "weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "runtime_config_sha256": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+  "seeds": {
+    "20261031": {
+      "train_optimal_set_hits": 12,
+      "train_utility_mse": 0.000010617785846989136,
+      "validation_total_loss": 7.004932403564453
+    },
+    "20261032": {
+      "train_optimal_set_hits": 12,
+      "train_utility_mse": 4.000937775527902e-11,
+      "validation_total_loss": 6.559873700141907
+    },
+    "20261033": {
+      "train_optimal_set_hits": 12,
+      "train_utility_mse": 5.849076778474682e-11,
+      "validation_total_loss": 5.407445311546326
+    }
+  },
+  "selected_test_metrics": {
+    "feasibility_accuracy": 0.6666667461395264,
+    "optimal_set_hits": 4,
+    "observation_count": 4,
+    "utility_mse": 0.356253057718277
+  },
+  "training_config_sha256": "788e361c5b204c85b232be51482323e66c03442849120c3eafcec57179a7503d",
+  "verification_environment": {
+    "numpy": "2.1.3",
+    "pip_check": "No broken requirements found.",
+    "pydantic": "2.12.3",
+    "pytest": "8.3.5",
+    "python": "3.12.14",
+    "torch": "2.5.1+cpu",
+    "venv_python": "D:/pro2/.venv/Scripts/python.exe"
+  },
+  "verification_results": {
+    "full_suite_green_run": {
+      "passed": 498,
+      "seconds": 27.83,
+      "warnings": 1
+    },
+    "full_suite_repeat_run": {
+      "failed": 1,
+      "failure_owner": "B API runtime",
+      "failure_test": "tests/test_api.py::test_real_comparison_paging_export_and_refresh",
+      "passed": 497,
+      "reason": "intermittent Windows PermissionError reading status.json",
+      "seconds": 27.68
+    },
+    "gateway_and_runtime_targeted_passed": 20,
+    "final_A_owned_targeted": {
+      "passed": 79,
+      "seconds": 6.17
+    },
+    "model_training_dataset_feature_targeted_passed": 55,
+    "model_package_commit": "7f18ff240201ce7954f71df2238bf28123ab54dc",
+    "training_config_and_gateway_test_commit": "e15048dcb97b155fb85e9ffa3967e3f429b99639",
+    "api_read_retry_receipt": {
+      "A_application_commit": "3ea06f60b13cb036ca96ddd133345bf229d80aa0",
+      "B_source_commit": "576eb48f5d87abf8a0969b7c54df417523a39ee0",
+      "api_targeted_passed": 13,
+      "combined_full_suite_passed": 501,
+      "combined_full_suite_seconds": 26.05,
+      "combined_targeted_passed": 92,
+      "combined_targeted_seconds": 12.22
+    },
+    "corrupt_npz_review_fix": {
+      "B_review_commit": "69847d8fa07fe566bcf39bc1fb909bd27d7a7367",
+      "A_fix_commit": "d97ff5b0a9707bdbad01cac5b5d21b70d03ef7c2",
+      "combined_full_suite_passed": 503,
+      "combined_full_suite_seconds": 23.52,
+      "combined_targeted_passed": 94,
+      "combined_targeted_seconds": 12.32,
+      "expected_error_code": "MODEL_FORMAT",
+      "red_regressions_failed": 2,
+      "green_regressions_passed": 2
+    }
+  }
+}

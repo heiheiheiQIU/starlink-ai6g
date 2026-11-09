@@ -1,0 +1,2 @@
+﻿event_id,sim_time_s,event_type,task_id,block_id,reason_code,energy_Wh,payload_bytes
+3,0.0,decision,,,,0.0,0

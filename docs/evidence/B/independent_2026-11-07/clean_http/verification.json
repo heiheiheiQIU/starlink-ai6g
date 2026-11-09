@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "scope": "local_development_HTTP_not_formal",
+  "without_git": true,
+  "via_vite_proxy": false,
+  "runs": [
+    {
+      "policies": [
+        "edf",
+        "value"
+      ],
+      "run_id": "run_a81398c0d2284d9098102ddc958fb037",
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+      "code_revision": "unversioned-source-sha256:bed3990bc6d1c02871cc41e4679885e46f3c7722702de04ea280fa9814acace8",
+      "events": 36,
+      "pages": 12,
+      "export": {
+        "files": 19,
+        "root_hashed_files": 17,
+        "zip_sha256": "533e27c9c6183e1a55cbe0c6b133e5d846b1eece6cc243b7d71f7d1b8f19789a"
+      }
+    },
+    {
+      "policies": [
+        "edf",
+        "learned"
+      ],
+      "run_id": "run_87a1856ace8e4c1c97642a5ea3b9be47",
+      "input_hash": "0a541b489abfc3fef4dac971f6e45351903d7be862269b23e9053ece28870706",
+      "code_revision": "unversioned-source-sha256:bed3990bc6d1c02871cc41e4679885e46f3c7722702de04ea280fa9814acace8",
+      "events": 30,
+      "pages": 10,
+      "export": {
+        "files": 19,
+        "root_hashed_files": 17,
+        "zip_sha256": "e7b05b934b9ba881532ad06bf60e0702c225fd4d2aa8386e33e8ff85e927b100"
+      }
+    }
+  ],
+  "checks": [
+    "real HTTP creation/status/results",
+    "small-page event completeness",
+    "reconnect read-only by run_id",
+    "ZIP root and child SHA verification",
+    "invalid input and unknown run rejection"
+  ],
+  "limitations": [
+    "No browser visual or click acceptance",
+    "No other physical machine",
+    "No formal holdout inputs used"
+  ]
+}

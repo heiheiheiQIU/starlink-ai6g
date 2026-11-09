@@ -1,0 +1,37 @@
+{
+  "schema_version": "policy-train-config-v1",
+  "dataset_path": "data/teacher/a_n3_20_v2/samples.jsonl",
+  "dataset_summary_path": "data/teacher/a_n3_20_v2/summary.json",
+  "dataset_manifest_path": "data/teacher/a_n3_20_v2/manifest.json",
+  "split_manifest_path": "data/teacher/a_n3_20_v2/splits.json",
+  "teacher_version": "bounded-forecast-r4-v1",
+  "teacher_budget_ms": 1000,
+  "feature_schema_version": "policy-features-v1",
+  "global_feature_names": ["sim_time_s", "cache_bytes", "energy_lower_Wh", "soc_lower", "capacity_lower_Wh", "visible_task_count", "inflight_present", "next_window_start_delta_s", "next_window_duration_s", "next_robust_bps", "next_fast_bps", "next_robust_loss_prob", "next_fast_loss_prob", "has_forecast_window"],
+  "candidate_feature_names": ["is_idle", "is_robust", "is_fast", "time_since_arrival_s", "time_to_deadline_s", "payload_bytes", "remaining_bytes", "remaining_fraction", "priority_weight"],
+  "split_algorithm_version": "source-group-sha256-v2",
+  "split_seed": 20261031,
+  "split_counts": {"train": 12, "validation": 4, "test": 4},
+  "eligible_solver_status": "OPTIMAL",
+  "required_gap": 0.0,
+  "normalization": "train-split-fitted",
+  "training_seeds": [20261031, 20261032, 20261033],
+  "model": {
+    "input_width": 23,
+    "hidden_widths": [32, 16]
+  },
+  "optimizer": {
+    "name": "Adam",
+    "learning_rate": 0.01,
+    "weight_decay": 0.0,
+    "epochs": 2000,
+    "utility_loss": "binary_cross_entropy_soft_target",
+    "feasibility_loss_weight": 0.25
+  },
+  "overfit_gate": {
+    "max_train_utility_mse": 0.001,
+    "required_train_optimal_set_hits": 12
+  },
+  "artifact_output": "artifacts/models/a_n3_policy_v1",
+  "training_enabled": true
+}

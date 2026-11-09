@@ -1,0 +1,74 @@
+FFFFFFFFFFFFFF                                                           [100%]
+================================== FAILURES ===================================
+____ test_known_paired_differences_and_unsigned_public_verdict[0.1-\u80dc] ____
+tests\test_formal_analysis.py:27: in test_known_paired_differences_and_unsigned_public_verdict
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+___ test_known_paired_differences_and_unsigned_public_verdict[-0.1-\u8d1f] ____
+tests\test_formal_analysis.py:27: in test_known_paired_differences_and_unsigned_public_verdict
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_ test_known_paired_differences_and_unsigned_public_verdict[0-\u672a\u68c0\u51fa\u7a33\u5b9a\u5dee\u5f02] _
+tests\test_formal_analysis.py:27: in test_known_paired_differences_and_unsigned_public_verdict
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+________ test_zero_endpoint_and_crossing_interval_are_not_equivalence _________
+tests\test_formal_analysis.py:39: in test_zero_endpoint_and_crossing_interval_are_not_equivalence
+    from experiments.analyze_formal import classify
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+___________ test_input_order_does_not_change_fixed_seed_statistics ____________
+tests\test_formal_analysis.py:45: in test_input_order_does_not_change_fixed_seed_statistics
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+____________ test_invalid_success_records_are_rejected[duplicate] _____________
+tests\test_formal_analysis.py:55: in test_invalid_success_records_are_rejected
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_______________ test_invalid_success_records_are_rejected[nan] ________________
+tests\test_formal_analysis.py:55: in test_invalid_success_records_are_rejected
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_______________ test_invalid_success_records_are_rejected[null] _______________
+tests\test_formal_analysis.py:55: in test_invalid_success_records_are_rejected
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_____________ test_invalid_success_records_are_rejected[unknown] ______________
+tests\test_formal_analysis.py:55: in test_invalid_success_records_are_rejected
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+___________ test_invalid_success_records_are_rejected[out_of_range] ___________
+tests\test_formal_analysis.py:55: in test_invalid_success_records_are_rejected
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_______ test_missing_cell_remains_in_denominator_and_verdict_incomplete _______
+tests\test_formal_analysis.py:64: in test_missing_cell_remains_in_denominator_and_verdict_incomplete
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+____ test_unequal_available_sample_counts_do_not_change_equal_cell_weight _____
+tests\test_formal_analysis.py:77: in test_unequal_available_sample_counts_do_not_change_equal_cell_weight
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_____________ test_failure_and_retry_are_not_independent_samples ______________
+tests\test_formal_analysis.py:89: in test_failure_and_retry_are_not_independent_samples
+    from experiments.analyze_formal import summarize_pairs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+_______ test_analyzer_reads_actual_run_artifacts_and_exports_incomplete _______
+tests\test_formal_analysis.py:103: in test_analyzer_reads_actual_run_artifacts_and_exports_incomplete
+    from experiments.analyze_formal import analyze_runs
+E   ModuleNotFoundError: No module named 'experiments.analyze_formal'
+=========================== short test summary info ===========================
+FAILED tests/test_formal_analysis.py::test_known_paired_differences_and_unsigned_public_verdict[0.1-\u80dc]
+FAILED tests/test_formal_analysis.py::test_known_paired_differences_and_unsigned_public_verdict[-0.1-\u8d1f]
+FAILED tests/test_formal_analysis.py::test_known_paired_differences_and_unsigned_public_verdict[0-\u672a\u68c0\u51fa\u7a33\u5b9a\u5dee\u5f02]
+FAILED tests/test_formal_analysis.py::test_zero_endpoint_and_crossing_interval_are_not_equivalence
+FAILED tests/test_formal_analysis.py::test_input_order_does_not_change_fixed_seed_statistics
+FAILED tests/test_formal_analysis.py::test_invalid_success_records_are_rejected[duplicate]
+FAILED tests/test_formal_analysis.py::test_invalid_success_records_are_rejected[nan]
+FAILED tests/test_formal_analysis.py::test_invalid_success_records_are_rejected[null]
+FAILED tests/test_formal_analysis.py::test_invalid_success_records_are_rejected[unknown]
+FAILED tests/test_formal_analysis.py::test_invalid_success_records_are_rejected[out_of_range]
+FAILED tests/test_formal_analysis.py::test_missing_cell_remains_in_denominator_and_verdict_incomplete
+FAILED tests/test_formal_analysis.py::test_unequal_available_sample_counts_do_not_change_equal_cell_weight
+FAILED tests/test_formal_analysis.py::test_failure_and_retry_are_not_independent_samples
+FAILED tests/test_formal_analysis.py::test_analyzer_reads_actual_run_artifacts_and_exports_incomplete
+14 failed in 0.36s
