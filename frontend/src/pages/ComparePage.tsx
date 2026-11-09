@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { RealRunPanel } from '../components/RealRunPanel'
 import { RunResultComparison } from '../components/RunResultComparison'
+import { FormalResultsSource } from '../components/FormalResultsPanel'
 import {
   COMPARE_AXIS,
   COMPARE_SCENARIO_LABELS,
@@ -97,6 +98,8 @@ export function ComparePage() {
       </header>
 
       <RealRunPanel controller={run} />
+
+      <FormalResultsSource url={import.meta.env.VITE_FORMAL_SUMMARY_URL} />
 
       {history?.current.kind === 'online' ? (
         <section className="run-history-strip" aria-label="运行对比上下文">

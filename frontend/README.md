@@ -41,3 +41,17 @@ B端冻结场景预设合同；前端不会自行拼装或推测通用仿真配�
 
 页面规则：只有后端返回 `completed` 后才读取并展示正式结果；`queued`、`running`、
 `failed`、`cancelled`、离线和合同错误都不展示最终指标。
+
+## 接入formal_v2正式分析
+
+策略评估页可读取由正式分析与三方结果签核流程生成的只读JSON：
+
+```powershell
+$env:VITE_FORMAL_SUMMARY_URL='/evidence/formal_v2/summary.json'
+pnpm dev
+```
+
+未设置变量时页面明确显示“未完成”，不产生占位结果。配置后若文件无法读取、结构不符合
+`formal-analysis-summary-v1`、18格/540次计数不一致或签核门禁冲突，页面失败封闭，不回退到
+fixture。原始`experiments/analyze_formal.py`输出在三方结果签核前必然保持
+`result_signoff=pending`、`formal_verdict=未完成`；禁止人工修改JSON冒充签核结果。
