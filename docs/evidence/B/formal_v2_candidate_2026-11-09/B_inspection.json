@@ -1,0 +1,100 @@
+{
+  "analysis": {
+    "aggregation": "equal_weight_18_cells_stratified_paired",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20261104,
+    "comparisons": [
+      "learned-edf",
+      "learned-value"
+    ],
+    "confidence": 0.95,
+    "domain": "synthetic_out_of_zero_loss_training_domain",
+    "interval": "percentile",
+    "max_retries": 1,
+    "metric": "weighted_on_time_rate",
+    "missing_policy": "incomplete_no_imputation_no_cell_dropping",
+    "multiplicity": "pointwise_intervals_no_familywise_claim",
+    "numpy_version": "2.1.3",
+    "policies": [
+      "edf",
+      "value",
+      "learned"
+    ],
+    "release_gate": "ABC_result_receipts_required",
+    "retry_selection": "first_success_keep_all_attempts",
+    "sampling_unit": "trajectory_within_cell",
+    "schema_version": "formal-analysis-protocol-v1",
+    "sort_order": "cell_id,trajectory_id,policy_id,attempt"
+  },
+  "analysis_protocol_sha256": "649ecfc8c94c37f8118ae4996947df215ce6c7ed13a8e2ee55db267a5e0c1e1f",
+  "binding_sha256": "d2b596d852758c9514f2aa7b735f4cd1f31dbfbee0c23af50619fd51ecad5e2a",
+  "candidate_files": 182,
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "candidate_unique_observation_projections": 180,
+  "cell_counts": {
+    "cell_00": 10,
+    "cell_01": 10,
+    "cell_02": 10,
+    "cell_03": 10,
+    "cell_04": 10,
+    "cell_05": 10,
+    "cell_06": 10,
+    "cell_07": 10,
+    "cell_08": 10,
+    "cell_09": 10,
+    "cell_10": 10,
+    "cell_11": 10,
+    "cell_12": 10,
+    "cell_13": 10,
+    "cell_14": 10,
+    "cell_15": 10,
+    "cell_16": 10,
+    "cell_17": 10
+  },
+  "code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "code_sha256": "88e44ec10e33e7f15e81b335894762197d8aec95698e932b1ef314f894cc9889",
+  "excluded_unique_content": 374,
+  "excluded_unique_seeds": 390,
+  "formal_policy_runs_executed": 0,
+  "formal_result": "pending",
+  "inspected_at": "2026-11-09T11:46:20+08:00",
+  "legacy_observations": 20,
+  "legacy_unique_observation_projections": 20,
+  "model_artifacts_sha256": {
+    "manifest.json": "949370f65165437a95b5858b23103b6cac892913592d1a4b54a3d3d4d27445a8",
+    "model_card.md": "7574292556c2500451b326ecf0ab4e924790dc84924b2dab253d380fdfaf87d7",
+    "normalization.json": "5c5fd7e843817a63ed6c486ed1c2a525243a724a6573b01681e0aa53811d2449",
+    "training_summary.json": "fc011b87f2fdeaa0c0cd74b1de7f573d352902098ea0ca83c06f182faab672a3",
+    "weights.npz": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "model_config_sha256": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+  "observed_content_overlap": 0,
+  "observed_legacy_projection_overlap": 0,
+  "observed_seed_overlap": 0,
+  "pending_leakage_sha256": "8bc1909e6d83f51c9a54813d989f4388c0d4aeb64ea5e00e793e717b06dbe0e8",
+  "planned_unique_policy_keys": 540,
+  "policy_ids": [
+    "edf",
+    "value",
+    "learned"
+  ],
+  "reviewer": "member-B",
+  "role": "B",
+  "seed_range": [
+    600000,
+    600179
+  ],
+  "shared_config_and_input_across_three_policies": 180,
+  "source_copies_checked": 7,
+  "source_file_count": 49,
+  "status": "B_checks_passed_pending_final_leakage_digest",
+  "unique_counts": {
+    "config_path": 180,
+    "config_sha256": 180,
+    "content_hash": 180,
+    "input_hash": 180,
+    "seed": 180,
+    "trajectory_id": 180
+  },
+  "validated_run_config_files": 180
+}
