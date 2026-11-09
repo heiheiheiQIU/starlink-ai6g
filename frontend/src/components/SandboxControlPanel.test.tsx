@@ -86,7 +86,7 @@ describe('SandboxControlPanel', () => {
       events: [], offline: false, error: null,
     }
     render(<SandboxControlPanel controller={online} />)
-    expect(screen.getByText('0.0%')).toBeInTheDocument()
+    expect(screen.getAllByText('0.0%').length).toBeGreaterThan(0)
     expect(screen.getByText(/实测结果，不代表增益/)).toBeInTheDocument()
     expect(screen.getByText('本工况Learned较低')).toBeInTheDocument()
   })

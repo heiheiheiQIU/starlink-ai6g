@@ -55,3 +55,6 @@ pnpm dev
 `formal-analysis-summary-v1`、18格/540次计数不一致或签核门禁冲突，页面失败封闭，不回退到
 fixture。原始`experiments/analyze_formal.py`输出在三方结果签核前必然保持
 `result_signoff=pending`、`formal_verdict=未完成`；禁止人工修改JSON冒充签核结果。
+
+场景验证页的沙盒结果画像只读取当前`run_id`的后端`results`。调整工程参数或seed并重新运行后，
+条形、指标与策略差值按真实结果更新；它只用于单次合成工况解释，不作为formal_v2总体增益结论。

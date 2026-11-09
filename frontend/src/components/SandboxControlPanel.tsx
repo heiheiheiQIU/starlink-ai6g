@@ -11,6 +11,7 @@ import {
   type SandboxPolicyPair,
 } from '../domain/sandbox'
 import type { RunController } from '../state/useRun'
+import { SandboxResultVisual } from './SandboxResultVisual'
 
 interface SandboxControlPanelProps { controller: RunController }
 
@@ -112,6 +113,7 @@ export function SandboxControlPanel({ controller }: SandboxControlPanelProps) {
           {online.error ? <div className="sandbox-error"><p className="real-run-error">{online.error}</p><button type="button" onClick={() => void run()} disabled={busy || errors.length > 0}>按当前配置重试</button></div> : null}
           {online.results ? <>
             <table className="console-table" aria-label="沙盒策略对照结果"><thead><tr><th>策略</th><th>加权按时交付率</th><th>成功载荷</th><th>能量违规</th></tr></thead><tbody>{online.results.by_policy.map((result) => <tr key={result.policy_id}><td className="mono">{result.policy_id}</td><td>{result.weighted_on_time_rate === null ? '—' : `${(result.weighted_on_time_rate * 100).toFixed(1)}%`}</td><td>{result.success_payload_bytes} B</td><td>{result.energy_violation_count ?? '—'}</td></tr>)}</tbody></table>
+            <SandboxResultVisual policies={online.results.by_policy} />
             {explanation ? <div className={`sandbox-explanation sandbox-explanation--${explanation.classification}`}><strong>{explanation.title}</strong><p>{explanation.detail}</p></div> : null}
             <p className="panel-note">以上为该合成工况的实测结果，不代表增益；Learned 为 0 或落后时原样保留。</p>
             <button className="link-button" type="button" onClick={() => void controller.exportZip()}>导出本次配置、哈希、事件与结果</button>
