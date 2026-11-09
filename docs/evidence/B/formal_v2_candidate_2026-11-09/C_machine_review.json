@@ -1,0 +1,41 @@
+{
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "cell_count": 18,
+  "formal_runs_authorized": false,
+  "generation_receipts": {
+    "A": {
+      "reviewer": "member-A",
+      "status": "accepted"
+    },
+    "B": {
+      "reviewer": "member-B",
+      "status": "accepted"
+    },
+    "C": {
+      "reviewer": "member-C",
+      "status": "accepted"
+    }
+  },
+  "human_review_required": true,
+  "next_gate": "A/B/C post-generation candidate and leakage review",
+  "policy_ids": [
+    "edf",
+    "value",
+    "learned"
+  ],
+  "schema_version": "c-formal-v2-candidate-review-v1",
+  "seed_range": [
+    600000,
+    600179
+  ],
+  "status": "machine_verified_human_pending",
+  "trajectories_per_cell": 10,
+  "trajectory_count": 180,
+  "unique_counts": {
+    "config_sha256": 180,
+    "content_hash": 180,
+    "input_hash": 180,
+    "seed": 180,
+    "trajectory_id": 180
+  }
+}
