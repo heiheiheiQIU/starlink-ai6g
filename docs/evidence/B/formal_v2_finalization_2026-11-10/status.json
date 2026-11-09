@@ -1,0 +1,44 @@
+{
+  "status": "B_signed_AC_pending",
+  "formal_freeze_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "binding_sha256": "d2b596d852758c9514f2aa7b735f4cd1f31dbfbee0c23af50619fd51ecad5e2a",
+  "final_leakage_sha256": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018",
+  "final_leakage_bytes": 33328,
+  "B_receipt_sha256": "54c147d8ac7c2435ad9be0b290e231d070a320aa460eea255e566332d44c9066",
+  "A_receipt_status": "pending",
+  "C_receipt_status": "pending",
+  "formal_runs_authorized": false,
+  "formal_runs_executed": 0,
+  "source_receipts": {
+    "A_provenance_review.json": {
+      "commit": "11666cc6a4076a2f62f01d104b855321b0590a3e",
+      "path": "docs/acceptance/A_formal_v2_candidate_provenance_review_2026-11-10.json",
+      "sha256": "80b7ce17ed5f9cc5511b8fc00460bbb7c028f96ea08ad4480e8548b835946df6"
+    },
+    "A_provenance_review.md": {
+      "commit": "11666cc6a4076a2f62f01d104b855321b0590a3e",
+      "path": "docs/acceptance/A_formal_v2_candidate_provenance_review_2026-11-10.md",
+      "sha256": "b0155602b0b704833a12b164a754279466f92c00e7bf51a948666d22a4bb6162"
+    },
+    "C_inventory_review.json": {
+      "commit": "637c573e3800a73707145ec7716ce24e42cf69ea",
+      "path": "docs/evidence/C/formal_v2_candidate_2026-11-09/C_inventory_hash_review.json",
+      "sha256": "c53090ab3c920c0b4a7b9b93fc5a1e4a46b2b4ab8176cb8fedf52d4c7b9e0f00"
+    },
+    "C_A_audit.md": {
+      "commit": "637c573e3800a73707145ec7716ce24e42cf69ea",
+      "path": "docs/audits/C_A_formal_v2_provenance_review_2026-11-10.md",
+      "sha256": "1513d07e5758476403dcb8629ab347794baac0a8c5d73cac4e1423b4a0d20e36"
+    },
+    "C_leakage_proposal.json": {
+      "commit": "637c573e3800a73707145ec7716ce24e42cf69ea",
+      "path": "docs/evidence/C/formal_v2_candidate_2026-11-10/final_leakage_proposal.json",
+      "sha256": "5db6decb26020ee5df6ee7dbc0dd7e459187f0e6ef997b8173b1a1369a651c5c"
+    }
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0"
+  }
+}

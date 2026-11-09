@@ -1,0 +1,36 @@
+{
+  "schema_version": "c-final-leakage-proposal-v1",
+  "prepared_by": "member-C",
+  "prepared_at": "2026-11-10T00:35:48+08:00",
+  "status": "awaiting_A_and_B_confirmation",
+  "source": {
+    "b_candidate_commit": "b4faac9d687c3a5b47db19d06f9e5b72cd185e05",
+    "a_provenance_review_commit": "11666cc6a4076a2f62f01d104b855321b0590a3e",
+    "c_inventory_review_commit": "d98052d03db0246c2280143744e1dd7c68fafdb5",
+    "generation_code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d"
+  },
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "binding_sha256": "d2b596d852758c9514f2aa7b735f4cd1f31dbfbee0c23af50619fd51ecad5e2a",
+  "base_leakage": {
+    "status": "pending",
+    "bytes": 33327,
+    "sha256": "8bc1909e6d83f51c9a54813d989f4388c0d4aeb64ea5e00e793e717b06dbe0e8"
+  },
+  "proposed_final_leakage": {
+    "status": "accepted",
+    "bytes": 33328,
+    "sha256": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018"
+  },
+  "deterministic_transformation": {
+    "semantic_changes": 1,
+    "change": "Set top-level status from pending to accepted; keep every other key and value unchanged; serialize with ensure_ascii=false, sort_keys=true, indent=2, allow_nan=false, UTF-8 and one trailing LF."
+  },
+  "c_position": "ready_to_bind_after_A_confirms_exact_proposed_sha256",
+  "formal_runs_authorized": false,
+  "required_next_actions": [
+    "A confirms the proposed final leakage SHA256 and exact transformation.",
+    "B materializes the exact final leakage bytes in the canonical review directory.",
+    "A, B and C each author their own formal-freeze receipt binding the same leakage SHA256.",
+    "The index and freeze tools accept the three receipts before any formal policy run."
+  ]
+}

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\人工智能挑战赛\formal-frozen-verification-20261109\scripts\prepare_formal_v2_review.py", line 106, in <module>
+    index(args.index)
+  File "D:\人工智能挑战赛\formal-frozen-verification-20261109\scripts\prepare_formal_v2_review.py", line 92, in index
+    raise ValueError('Receipt pending or subject mismatch: '+role)
+ValueError: Receipt pending or subject mismatch: A

@@ -1,0 +1,22 @@
+{
+  "A_provenance_review.json": "80b7ce17ed5f9cc5511b8fc00460bbb7c028f96ea08ad4480e8548b835946df6",
+  "A_provenance_review.md": "b0155602b0b704833a12b164a754279466f92c00e7bf51a948666d22a4bb6162",
+  "C_A_audit.md": "1513d07e5758476403dcb8629ab347794baac0a8c5d73cac4e1423b4a0d20e36",
+  "C_inventory_review.json": "c53090ab3c920c0b4a7b9b93fc5a1e4a46b2b4ab8176cb8fedf52d4c7b9e0f00",
+  "C_leakage_proposal.json": "5db6decb26020ee5df6ee7dbc0dd7e459187f0e6ef997b8173b1a1369a651c5c",
+  "index_gate.log": "0971eb96617aefd67cd3e3d41c744d7afa07d5dd0381e2a2a7ad4368dd9029d8",
+  "readiness_verification.json": "19b62b8e9ab3f9852a29f2981db6dab2d9cb94829d66f072375d99e1d707c459",
+  "status.json": "968b12bd910d9a1d324e039bb5227139fab20263c3fda83c35af19b1c9707310",
+  "proposed_review/A.json": "d795bc51dbe2a9da8c996dce919ef7a44dc769bd03b74b2bd6d4ae5a0e4691a9",
+  "proposed_review/B.json": "54c147d8ac7c2435ad9be0b290e231d070a320aa460eea255e566332d44c9066",
+  "proposed_review/binding.json": "d2b596d852758c9514f2aa7b735f4cd1f31dbfbee0c23af50619fd51ecad5e2a",
+  "proposed_review/C.json": "ef97b04afff7f225df32fbd8d8354c4383a24d9c50b3d4fee6a900f7bb96cf11",
+  "proposed_review/leakage.json": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018",
+  "proposed_review/sources/experiments/test_matrix.json": "740525e9c91874fb57012b57a86839a269d40733b6f4633f87c8950e75307c34",
+  "proposed_review/sources/scripts/prepare_formal_v2_review.py": "50e4090fec611906eae58f7255fe5e1649d240e3211e7117ae150c9a9c611628",
+  "proposed_review/sources/data/teacher/a_n3_20_v2/splits.json": "8826732869e9452d2f8e59889240b034e393d7c748429f3dc1020cf90967d1f8",
+  "proposed_review/sources/data/teacher/a_n4_pilot_v1/sources.jsonl": "c62b66856d352611feaae57bffca65bd27a71b4a4e1cb3a39d821767201ce788",
+  "proposed_review/sources/data/teacher/a_n4_pilot_v1/source_splits.json": "aaa5c558c83e9d2dcec0c9637f74dc5dc431de9109874a85f17cba2eb87c2e95",
+  "proposed_review/sources/data/teacher/sources/a_n3_20_v2.jsonl": "6f099d8845dfa997c271399db5b43c348fa330c7a2b7316d8a5aaa20d89caf8d",
+  "proposed_review/sources/experiments/formal_v1/input_manifest.json": "f8c9e9068fc0efecc59e3ea96fa5cd8edaebee0d2cb36c7fe0053efccbc342e4"
+}

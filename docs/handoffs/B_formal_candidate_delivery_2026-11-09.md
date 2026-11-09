@@ -1,6 +1,8 @@
 # B 正式候选交接 · 2026-11-09
 
-状态为 candidate_pending_review。已同步 C 的 8556ead 和 A 的 a261a34，三份生成前 accepted 回执已核实，实际候选审核包已交付。B 的技术核查为 accepted_with_notes，等待 A/C 对实际候选及来源完成第二阶段签核。
+最新进展见 [11 月 10 日最终来源与冻结回执交接](B_formal_finalization_2026-11-10.md)。A/C 人工复核已收到，B 已绑定 C 提出的最终来源 SHA，等待 A 最终确认及 A/C 正式回执。
+
+以下保留 11 月 9 日交接记录。状态为 candidate_pending_review。已同步 C 的 8556ead 和 A 的 a261a34，三份生成前 accepted 回执已核实，实际候选审核包已交付。B 的技术核查为 accepted_with_notes，等待 A/C 对实际候选及来源完成第二阶段签核。
 
 ## 实际执行与证据
 

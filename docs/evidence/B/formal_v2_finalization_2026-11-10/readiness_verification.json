@@ -1,0 +1,12 @@
+{
+  "status": "B_validation_passed_AC_gate_blocks_runs",
+  "generation_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "candidate_count": 180,
+  "source_files_verified": 7,
+  "binding_matches_frozen_code": true,
+  "model_and_statistics_match": true,
+  "B_receipt_matches_final_leakage": true,
+  "index_return_code": 1,
+  "index_blocker": "A receipt pending; C receipt pending",
+  "formal_runs_authorized": false
+}
