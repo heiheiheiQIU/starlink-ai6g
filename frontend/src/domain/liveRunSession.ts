@@ -21,7 +21,11 @@ const EVENT_STAGE: Record<Event['event_type'], { stepIndex: number; phase: RunPh
  */
 export function liveRunSession(source: Extract<RunSource, { kind: 'online' }>): RunSessionState {
   const events = normalizeReplayEvents(source.events ?? [])
-  const latest = events.at(-1)
+  // active_policies may contain the whole requested policy set. The newest published
+  // event is the authoritative completed batch/progress cursor; its policy clock is local.
+  const activePolicy = events.at(-1)?.policy_id ?? source.status?.active_policies[0] ?? null
+  const policyEvents = activePolicy === null ? [] : events.filter((event) => event.policy_id === activePolicy)
+  const latest = policyEvents.at(-1)
   const stage = latest ? EVENT_STAGE[latest.event_type] : EVENT_STAGE.arrived
   const backendStatus = source.status?.status
   const completed = backendStatus === 'completed'
@@ -35,7 +39,7 @@ export function liveRunSession(source: Extract<RunSource, { kind: 'online' }>): 
     phase: completed ? 'complete' : failed ? 'failed' : stage.phase,
     stepIndex: completed ? 5 : stage.stepIndex,
     runId: source.runId,
-    lastSync: latest ? `e=${latest.event_id} · t=${latest.sim_time_s}s` : backendStatus ?? null,
+    lastSync: latest ? `${latest.policy_id} · e=${latest.event_id} · t=${latest.sim_time_s}s` : backendStatus ?? null,
     evidence: completed ? 'frozen' : 'unfrozen',
   }
 }

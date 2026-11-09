@@ -79,4 +79,15 @@ describe('live run session projection', () => {
     })
     expect(failed).toMatchObject({ phase: 'failed', playback: 'failed', evidence: 'unfrozen' })
   })
+
+  it('uses the backend active policy instead of mixing policy-local clocks', () => {
+    const oldPolicy = { ...event(9, 'sent'), policy_id: 'edf', sim_time_s: 9 }
+    const activePolicy = { ...event(10, 'decision'), policy_id: 'learned', sim_time_s: 0 }
+    const session = liveRunSession({
+      kind: 'online', runId: 'run_live_7',
+      status: { run_id: 'run_live_7', status: 'running', progress: 0.6, active_policies: ['learned'], error: null },
+      results: null, events: [oldPolicy, activePolicy], offline: false, error: null,
+    })
+    expect(session).toMatchObject({ stepIndex: 3, phase: 'guarding', lastSync: 'learned · e=10 · t=0s' })
+  })
 })

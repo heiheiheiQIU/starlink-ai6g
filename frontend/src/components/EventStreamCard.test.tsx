@@ -100,4 +100,20 @@ describe('EventStreamCard', () => {
     expect(screen.getByRole('button', { name: '2×' })).toHaveAttribute('aria-pressed', 'true')
     expect(screen.getByText(/仅改变前端回放速度/)).toBeInTheDocument()
   })
+
+  it('splits replay clocks by policy before building frames', async () => {
+    const user = userEvent.setup()
+    const mixed = [
+      makeEvent({ event_id: 1, policy_id: 'edf', sim_time_s: 0, event_type: 'sent' }),
+      makeEvent({ event_id: 2, policy_id: 'edf', sim_time_s: 1, event_type: 'acked' }),
+      makeEvent({ event_id: 3, policy_id: 'learned', sim_time_s: 0, event_type: 'decision' }),
+    ]
+    render(<EventStreamCard runId="run-1" events={mixed} />)
+
+    expect(screen.getByRole('button', { name: 'EDF 回放' })).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.getByText('2 / 2 帧')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'LEARNED 回放' }))
+    expect(screen.getByText('1 / 1 帧')).toBeInTheDocument()
+    expect(screen.getByText(/策略内独立时间轴/)).toBeInTheDocument()
+  })
 })

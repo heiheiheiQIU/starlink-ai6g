@@ -27,17 +27,27 @@ function toSvgPoints(points: { time: number; value: number }[], minTime: number,
 }
 
 export function EventStreamCard({ runId, events }: EventStreamCardProps) {
+  const policyIds = useMemo(() => [...new Set(events.map((event) => event.policy_id))], [events])
+  const [selectedPolicy, setSelectedPolicy] = useState<string | null>(policyIds[0] ?? null)
+  const selectedEvents = useMemo(
+    () => selectedPolicy === null ? [] : events.filter((event) => event.policy_id === selectedPolicy),
+    [events, selectedPolicy],
+  )
   const replay = useMemo(() => {
     try {
-      return { frames: buildReplayFrames(events), error: null }
+      return { frames: buildReplayFrames(selectedEvents), error: null }
     } catch (error) {
       return { frames: [], error: error instanceof Error ? error.message : String(error) }
     }
-  }, [events])
+  }, [selectedEvents])
   const [visibleFrames, setVisibleFrames] = useState(replay.frames.length)
   const [playing, setPlaying] = useState(false)
   const [speed, setSpeed] = useState<0.5 | 1 | 2 | 4>(1)
-  const replayIdentity = `${runId}:${replay.frames.length}:${replay.frames.at(-1)?.events.at(-1)?.event_id ?? 0}`
+  const replayIdentity = `${runId}:${selectedPolicy ?? 'none'}:${replay.frames.length}:${replay.frames.at(-1)?.events.at(-1)?.event_id ?? 0}`
+
+  useEffect(() => {
+    if (selectedPolicy === null || !policyIds.includes(selectedPolicy)) setSelectedPolicy(policyIds[0] ?? null)
+  }, [policyIds, selectedPolicy])
 
   useEffect(() => {
     setVisibleFrames(replay.frames.length)
@@ -69,6 +79,22 @@ export function EventStreamCard({ runId, events }: EventStreamCardProps) {
       <p className="panel-note" style={{ marginBottom: 12 }}>
         来源：GET /runs/{'{id}'}/events（分页全量，run_id={runId}）；只读展示，页面不重算指标。
       </p>
+
+      {policyIds.length > 0 ? (
+        <div className="event-policy-tabs" aria-label="回放策略选择">
+          {policyIds.map((policyId) => (
+            <button
+              type="button"
+              key={policyId}
+              aria-pressed={selectedPolicy === policyId}
+              onClick={() => { setSelectedPolicy(policyId); setPlaying(false) }}
+            >
+              {policyId.toUpperCase()} 回放
+            </button>
+          ))}
+          <small>策略内独立时间轴；不同策略的仿真时钟不交叉拼接。</small>
+        </div>
+      ) : null}
 
       {replay.error ? (
         <div className="stale-banner" role="alert">

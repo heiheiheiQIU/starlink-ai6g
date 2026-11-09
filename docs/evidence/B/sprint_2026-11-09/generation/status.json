@@ -1,8 +1,10 @@
 {
-  "status": "waiting_for_C_original",
+  "status": "ready_for_candidate_generation",
   "formal_freeze_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
   "A_sha256": "0f8fd89034231b2152f409b9e8acb5f70b6e800d4982d1b27b9c95ee25fa0535",
   "B_sha256": "e222957914e2613f95d343c4dcf6d27744b712e9a05eeb454e936fa5db04e597",
+  "C_sha256": "05b23e70551c2001b87240cc1d8e254cc00b27cf20cc94c09e70d1713387e867",
+  "authorization_boundary": "A/B/C accepted permits only generation of 180 formal_v2 candidate inputs; candidate review, formal freeze and 540 policy runs remain unauthorized",
   "seed_audit": {
     "registered_count": 180,
     "registered_range": [

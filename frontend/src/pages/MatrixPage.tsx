@@ -1,4 +1,5 @@
 import { CountUp } from '../components/CountUp'
+import { SandboxControlPanel } from '../components/SandboxControlPanel'
 import { TeacherAuditCard } from '../components/TeacherAuditCard'
 import {
   DISTURBANCE_LABELS,
@@ -9,6 +10,7 @@ import {
   heatColor,
   loadMatrixSummary,
 } from '../domain/matrix'
+import { useOptionalSharedRun } from '../state/RunContext'
 
 const LOAD_ORDER = ['low', 'near_capacity', 'overload'] as const
 const ENERGY_ORDER = ['low', 'medium', 'ample'] as const
@@ -18,6 +20,7 @@ const POLICY_ORDER = ['edf', 'value'] as const
 const summary = loadMatrixSummary()
 
 export function MatrixPage() {
+  const sharedRun = useOptionalSharedRun()
   return (
     <section className="console-page">
       <header className="console-page__intro">
@@ -48,6 +51,8 @@ export function MatrixPage() {
           <small>3 × 3 × 2</small>
         </div>
       </div>
+
+      {sharedRun ? <SandboxControlPanel controller={sharedRun} /> : null}
 
       <div className="console-card">
         <h2>18 工况热力网格</h2>
