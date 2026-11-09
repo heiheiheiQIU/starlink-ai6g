@@ -8,7 +8,7 @@
 - 18 工况每格 10 条，共 180 条，种子严格为 600000–600179。trajectory_id、seed、config_sha256、input_hash、content_hash 五类各有 180 个唯一值。每条轨迹的 EDF、Value、原始 Learned 使用相同配置，共 540 个规划运行键。
 - 候选清单 SHA256 为 `2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f`。重新生成的 182 个文件与交付包逐字节一致，复验见 [冻结提交重生成记录](../evidence/B/formal_v2_candidate_2026-11-09/frozen_commit_regeneration.json)。
 - 与退役、开发和 A-N4b 的 390 个不同种子、374 个不同内容哈希均无交集，与旧教师的 20 个初始公开观测投影也无交集。旧教师缺少完整种子，来源组及划分仍由 A 复核。[B 实际检查](../evidence/B/formal_v2_candidate_2026-11-09/B_inspection.json)
-- 原有两个候选核验入口通过，C 的审核工具通过并输出 machine_verified_human_pending。C 工具测试 7 项通过，冻结代码的候选、冻结、运行与统计回归 45 项通过。[机器审查输出](../evidence/B/formal_v2_candidate_2026-11-09/C_machine_review.json)
+- 原有两个候选核验入口通过，C 的审核工具通过并输出 machine_verified_human_pending。C 工具测试 7 项通过，冻结代码的候选、冻结、运行与统计回归 63 项通过。[机器审查输出](../evidence/B/formal_v2_candidate_2026-11-09/C_machine_review.json)
 
 ## A/C 接收入口
 

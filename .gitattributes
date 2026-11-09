@@ -65,3 +65,5 @@ docs/evidence/B/sprint_2026-11-09/** -text -diff
 
 # Preserve the original line endings of the signed formal-v2 generation receipts.
 docs/evidence/B/formal_v2_candidate_2026-11-09/generation/*.json -text
+
+docs/evidence/B/formal_v2_candidate_2026-11-09/** -text -diff
