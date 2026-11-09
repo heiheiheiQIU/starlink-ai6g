@@ -2,9 +2,9 @@
 
 ## 1. 裁定
 
-状态：`changes_requested`。
+状态：`accepted_with_notes`。
 
-S1资源充足、S2低能量期限冲突、S3 ACK丢失重传的责任边界和预期语义可确认；B现有代码也分别具备评分、Guard、协议与重试机制证据。但复核提交中尚无 `compile_sandbox_axes(axes, seed)` 或等价唯一构造器，也没有按新版S1/S2/S3协议交付的真实sandbox run包，因此A只签“场景预期语义”，不签“黄金场景运行验收”。
+S1资源充足、S2低能量期限冲突、S3 ACK丢失重传的责任边界和预期语义可确认。B于2026-11-09交付的离线包包含唯一 `compile_sandbox_axes(axes, seed)` 构造器、S1/S2/S3真实sandbox run、健康对照和S3重复运行；A独立复算外层清单、事件语义与定向测试后，签收“黄金场景沙盒运行”。该签收不等于正式180条输入或540次策略运行完成，不证明Learned优于EDF/Value。
 
 复核对象：
 
@@ -12,6 +12,7 @@ S1资源充足、S2低能量期限冲突、S3 ACK丢失重传的责任边界和�
 - A2语义：`docs/handoffs/A_interactive_ai_event_semantics_2026-11-09.md`；
 - B机制实现：`training/policy_features.py`、`backend/policies/common.py`、`backend/policies/guard.py`、`backend/policies/runner.py`、`backend/simulator/protocol.py`、`backend/simulator/r3_engine.py`；
 - 旧开发证据：`configs/scenarios/r3_*.json`、`docs/evidence/B/independent_2026-11-07/case_packet/`。
+- B离线沙盒附件：`B_sandbox_offline_20261109.zip`，SHA256 `d637e638fcf1cf7baa4c178e3843afbd4847d85102df68ea2f6ef8d7ac08dc34`，`24,845,651` bytes。
 
 旧 `r3_*` 手动场景及开发案例可以证明机制存在，但不能替代新版sandbox轴编译、配置哈希、run_id、事件和结果验收。
 
@@ -137,44 +138,51 @@ runner可根据公开协议事件产生 `RETRY_REQUIRED`，强制重传尚未确
 
 三场景必须至少在输入哈希、事件序列或一个合法后端指标上形成可解释差异。若某两策略动作一致，应明确显示一致；不得通过前端颜色、随机数字或预制事件制造差异。
 
-## 7. 当前证据能证明与不能证明的内容
+## 7. 本次运行复验
 
-当前可证明：
+| 场景 | run_id | input / config hash | 事件与结果 | A裁定 |
+|---|---|---|---|---|
+| S1 | `sandbox_run_9809baca65f847d58fa961ccea9b635e` | `ba94d97c...` / `eec9e160...` | 103事件；EDF准时率1.0，Learned 0.0；两者能量违规均0 | 资源充足机制通过，保留Learned负结果 |
+| S2 | `sandbox_run_245f69ffa2d54915a20b4574502dfd21` | `22b5eb46...` / `b4b6ff02...` | 96事件；两策略准时率均0；临界健康令发送候选能量检查失败 | 低能量/期限冲突机制通过 |
+| S3 | `sandbox_run_5bc5191b2e5048fab07986e850b6edae` | `07363f4e...` / `79910cd8...` | 135事件；4次ACK丢失、5次超时、3次重复块、1次DATA丢失 | 协议闭环通过，不能归因于AI |
+| S2健康对照 | `sandbox_run_1131f427c8f447ebadfcfdccb122b3eb` | `a7601619...` / `2579088c...` | 除健康轴外与S2一致；评分与Guard变化，Learned仍idle | A2机器门禁通过 |
+| S3重复 | `sandbox_run_1f181a8e845c4405b16f3ee1897979fb` | 与S3一致 | 排除run_id与实测决策延迟后事件语义一致 | 确定性复验通过 |
 
-- 低健康能量下界能触发规则运行中的低能量行为；
-- Guard实现了 `ENERGY_RESERVE`；
-- 协议实现了ACK丢失、超时、同块重传和去重；
-- runner可在公开ACK超时事件后维持重传义务；
-- 冻结模型能输出完整候选集，Guard保持最终权威。
+S3可追踪到同一 `task_id/block_id` 的发送、ACK丢失、`ACK_TIMEOUT`、同块重传和 `DUPLICATE_BLOCK`；重复块没有被重复计入有效载荷。该链条属于协议与重试控制器，不属于Learned能力。
 
-当前不能证明：
+A还完成以下独立检查：
 
-- 新版S1/S2/S3已由统一sandbox轴构造器生成；
-- 三个黄金场景已有受签run_id、哈希和结果包；
-- S1与S2不同HealthEstimate已通过真实Learned sandbox运行；
-- S3在新版自动策略场景中已按规定触发；
-- 任何场景证明Learned优于EDF或Value。
+1. 外层 `SHA256SUMS.json` 的51个文件全部复算一致；
+2. S1/S2/S3的axes、编译配置、run结果、事件和导出ZIP均存在；
+3. `compile_sandbox_axes` 确实生成完整 `RunConfig`，并校验非法轴、seed、reserve和额外字段；
+4. 在离线源码上运行沙盒、Learned API、Learned集成、策略runner与协议测试，结果 `54 passed, 1 warning`；
+5. 包内旧 `offline_package.json` 记录的旧SHA/字节数与当前附件不同，列为归档来源备注；当前附件本体与外层交接单一致。
 
-## 8. B补证与A复验步骤
+## 8. 当前证据能证明与不能证明的内容
 
-B交付三场景包后，A按以下顺序复核：
+可以证明：
 
-1. 对照axes、compiled config和构造器版本；
-2. 核对S1/S2的HealthEstimate差异及内部一致性；
-3. 核对差异进入评分或Guard，而不是只改变前端标签；
-4. 核对S3事件的task_id、block_id、ACK原因、重传与去重；
-5. 确认协议行为没有被写成模型能力；
-6. 确认RUL null、公开Observation和事后真值边界；
-7. 核对两策略指标来自后端results；
-8. 输出 `accepted`、`accepted_with_notes`、`changes_requested` 或 `blocked`。
+- 新版S1/S2/S3由统一沙盒轴构造器生成，并具有受核run_id、输入/config哈希、事件和结果包；
+- 不同HealthEstimate真实进入Learned评分和Guard；
+- S3自动策略运行真实触发ACK丢失、超时、同块重传与去重；
+- 冻结模型真实参与评分，但在本批S1/S2/S3中均选择idle或无交付；
+- Guard和协议边界在该合成沙盒范围内成立。
+
+仍不能证明：
+
+- Learned优于EDF或Value；本批恰好提供了反例和负结果；
+- 180条正式候选输入已经生成或三方签核；
+- 540次正式运行已经执行；
+- 该机器上的沙盒结果等同于换机复现或正式实验；
+- Hybrid等新策略已经冻结、接入或通过预登记评估。
 
 ## 9. 交接状态
 
 - S1预期语义：`accepted_with_notes`；
 - S2预期语义：`accepted_with_notes`；
 - S3预期语义：`accepted_with_notes`；
-- 黄金场景运行验收：`changes_requested`；
-- 综合状态：`changes_requested`；
-- B下一步：交付唯一构造器及三场景真实run包；
-- C可先做：场景说明、责任边界、真实事件映射和一致动作提示；
-- C暂不可做：使用旧fixture或开发案例宣称新版黄金场景已通过。
+- 黄金场景沙盒运行验收：`accepted_with_notes`；
+- 综合状态：`accepted_with_notes`；
+- B下一步：保留本批负结果，等待C原始生成前回执后再进入180条候选生成与三方签核；
+- C可做：使用本批真实沙盒事件呈现场景说明、责任边界、一致动作与负结果；
+- C仍不可做：将沙盒运行写成正式效果结果，或将协议重传写成AI能力。

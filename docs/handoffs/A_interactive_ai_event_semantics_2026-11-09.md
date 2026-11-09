@@ -2,9 +2,9 @@
 
 ## 1. 裁定
 
-状态：`changes_requested`。
+状态：`accepted_with_notes`。
 
-AI事件的字段语义、冻结模型身份、评分—Guard—协议边界及三个开发期样例已有可追溯依据；但A2机器验收尚未通过。B当前发布的Learned HTTP证据均使用同一份 `HealthEstimate`，没有形成“两条不同健康输入的真实sandbox run，并证明差异进入Observation及评分或Guard”的证据。因此本文可供C实现P0显示语义，不构成A2最终签收，也不构成formal结果签收。
+AI事件的字段语义、冻结模型身份、评分—Guard—协议边界及三个开发期样例已有可追溯依据。B于2026-11-09交付的离线沙盒包又提供了S2临界健康与同配置健康对照：除健康轴外输入一致，公开 `HealthEstimate`、冻结评分和 `ENERGY_RESERVE` 检查均发生可核对变化，因此A2机器门禁通过。两条Learned最终动作仍为idle，本文只签“健康差异真实到达评分/Guard”，不签“Learned产生更优动作”，也不构成formal结果签收。
 
 复核对象：
 
@@ -14,6 +14,8 @@ AI事件的字段语义、冻结模型身份、评分—Guard—协议边界及�
 - 约束解码：`backend/policies/guard.py`、`backend/policies/common.py`；
 - 特征编码：`training/policy_features.py`；
 - 开发期事件证据：`docs/evidence/B/independent_2026-11-07/`。
+- B离线沙盒交付：`B_sandbox_offline_20261109.zip`，SHA256 `d637e638fcf1cf7baa4c178e3843afbd4847d85102df68ea2f6ef8d7ac08dc34`，`24,845,651` bytes；
+- 离线源码标识：包外说明登记 `71c40b0842ac9547895874288a1633d1f4fdb5ac`，功能提交 `3bd22a30d864eb0bdd0a32b8efea426e1673b803`，并发清理修复 `3f09926e78478c0ec235117d70fa605406977078`。
 
 边界：本文不训练A-N4b、不生成新权重、不替换冻结模型、不修改B/C接口。`claim-A1`和正式效果claims继续保持 `pending`。
 
@@ -220,29 +222,31 @@ Learned运行的受信路径不是只显示一个“AI”标签，而是执行�
 
 解释：隔离故障注入使评分回调不可用，runner使用EDF候选并继续通过Guard。受信HTTP入口面对缺失/损坏冻结包会在run创建前返回422，因此此例不能被解释为“生产入口允许坏模型继续运行”。
 
-## 8. A2机器验收缺口与B补证清单
+## 8. A2机器验收复验结果
 
-当前证据盘点：
+复验对象为离线包中的 `golden_runs/S2/` 与 `golden_runs/health_control/`。A独立解包、比对JSON及事件，结果如下：
 
-| Learned HTTP证据 | HealthEstimate | 结果 |
-|---|---|---|
-| `clean_http/run_87a...` | `soc_est=0.5`、`soc_lower=0.45`、`capacity=20Wh`、`energy_lower=9Wh` | 与下一条相同 |
-| `http_proxy/run_9261...` | `soc_est=0.5`、`soc_lower=0.45`、`capacity=20Wh`、`energy_lower=9Wh` | 与上一条相同 |
+| 项 | S2 临界健康 | 健康对照 | 裁定 |
+|---|---|---|---|
+| seed / policies | `7` / `edf,learned` | `7` / `edf,learned` | 一致 |
+| 除健康轴外配置 | 任务、期限、权重、能量、储备、扰动、速率相同 | 同左 | 一致 |
+| health axis | `critical` | `healthy` | 唯一主动变化 |
+| `soc_est` | `0.04` | `0.04` | 相同 |
+| `soc_lower` | `0.037142857142857144` | `0.0392` | 不同 |
+| `capacity_lower_Wh` | `14.0` | `20.0` | 不同 |
+| `energy_lower_Wh` | `0.52` | `0.784` | 不同 |
+| `rul_est` / reason | `null` / `RUL_UNAVAILABLE` | `null` / `RUL_UNAVAILABLE` | null语义保持 |
+| Learned评分 | 与对照不同 | 与S2不同 | 健康差异到达评分器 |
+| Learned Guard | 四个发送候选均 `ENERGY_RESERVE=false` | 对应能量检查均为true | 健康差异到达Guard |
+| 最终动作 | idle | idle | 真实一致，不挑选结果 |
 
-因此不能用现有证据宣称健康差异已经进入评分或Guard。
+此外：
 
-B需提供两个真实sandbox Learned run，且必须：
-
-1. 使用B唯一场景构造器生成，记录完整SHA、run_id、seed、config hash和input hash；
-2. 除健康轴外尽量保持任务、链路、seed与策略一致；
-3. 两条run的 `HealthEstimate` 至少在 `energy_lower_Wh`、`soc_lower`或 `capacity_lower_Wh`之一不同；
-4. 证明两份Observation确实携带不同健康值；
-5. 证明差异至少到达一处：`candidate_scores`不同，或 `ENERGY_RESERVE`等Guard检查结果不同；
-6. 保留完整decision事件、run结果和ZIP哈希；
-7. 若 `rul_est=null`，两条均保留null及reason code；
-8. 若最终动作仍一致，如实说明，不得重跑挑选“更好看”的动作。
-
-A收到后按上述八项复核，并将本回执更新为 `accepted`、`accepted_with_notes` 或继续 `changes_requested`。
+1. `compile_sandbox_axes` 是唯一编译入口，健康下界满足 `energy_lower_Wh=soc_lower×capacity_lower_Wh`；
+2. reserve上限、非法轴、非法seed、额外字段和目录逃逸均有校验或测试；
+3. A在离线源码上独立运行 `test_sandbox.py`、`test_learned_api.py`、`test_learned_integration.py`、`test_policy_runner.py`、`test_protocol.py`，结果为 `54 passed, 1 warning`；
+4. 外层 `SHA256SUMS.json` 登记的51个文件全部独立复算一致；
+5. 离线包内部 `docs/evidence/B/sprint_2026-11-09/offline_package.json` 仍记录旧包 `36de40f1...` / `24,770,339` bytes / source `3f09926...`，与本次附件不一致；当前附件本体与外层交接说明一致，因此列为来源元数据备注，不推翻机器语义验收。B后续归档应删除或明确标注该旧收据，避免将其误作当前附件证明。
 
 ## 9. 给C的最小显示合同
 
@@ -257,8 +261,8 @@ A收到后按上述八项复核，并将本回执更新为 `accepted`、`accepte
 ## 10. 交接状态
 
 - A语义复核：`accepted_with_notes`；
-- A2机器验收：`changes_requested`；
-- 综合状态：`changes_requested`；
-- B下一步：按第8节补两条不同健康输入的sandbox Learned run证据；
-- C可先做：字段映射、来源标签、null/fallback/Guard显示；
-- C暂不可做：宣称健康差异机器验收已通过，或用前端预设等级补写RUL和模型哈希。
+- A2机器验收：`accepted_with_notes`；
+- 综合状态：`accepted_with_notes`；
+- B下一步：归档时修正或隔离包内旧 `offline_package.json`，不得用旧收据证明当前附件；
+- C可做：字段映射、来源标签、null/fallback/Guard显示，并使用S2/健康对照说明“评分与约束变化、最终动作仍一致”；
+- C仍不可做：把该沙盒对照写成正式效果结果，或用前端预设等级补写RUL和模型哈希。
