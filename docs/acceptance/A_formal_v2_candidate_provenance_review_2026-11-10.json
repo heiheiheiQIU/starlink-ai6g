@@ -1,0 +1,57 @@
+{
+  "schema_version": "a-formal-v2-candidate-provenance-review-v1",
+  "reviewer": "member-A",
+  "reviewed_at": "2026-11-10T00:12:15+08:00",
+  "status": "accepted_with_notes",
+  "review_scope": "training_provenance_splits_exclusions_and_observation_projection_overlap",
+  "source": {
+    "b_branch": "codex/b-formal-handoff-20261109",
+    "b_commit": "b4faac9d687c3a5b47db19d06f9e5b72cd185e05",
+    "c_review_commit": "d98052d03db0246c2280143744e1dd7c68fafdb5",
+    "generation_code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d"
+  },
+  "binding": {
+    "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+    "leakage_draft_sha256": "8bc1909e6d83f51c9a54813d989f4388c0d4aeb64ea5e00e793e717b06dbe0e8",
+    "binding_sha256": "d2b596d852758c9514f2aa7b735f4cd1f31dbfbee0c23af50619fd51ecad5e2a",
+    "code_sha256": "88e44ec10e33e7f15e81b335894762197d8aec95698e932b1ef314f894cc9889",
+    "model_config_sha256": "518c447945783600060ab6c404186f9dc2e78f107be317fa9b26b62a448fdee2",
+    "analysis_protocol_sha256": "649ecfc8c94c37f8118ae4996947df215ce6c7ed13a8e2ee55db267a5e0c1e1f",
+    "weights_sha256": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "checks": {
+    "generation_receipts_same_subject": true,
+    "candidate_trajectories": 180,
+    "cells": 18,
+    "trajectories_per_cell": 10,
+    "seed_range": [600000, 600179],
+    "unique_trajectory_ids": 180,
+    "unique_config_hashes": 180,
+    "unique_input_hashes": 180,
+    "unique_content_hashes": 180,
+    "planned_policy_run_keys": 540,
+    "formal_policy_runs_executed": 0,
+    "regenerated_files_byte_identical": 182,
+    "formal_chain_tests_passed": 124,
+    "a_n3_source_rows": 20,
+    "a_n3_split_counts": [12, 4, 4],
+    "a_n3_source_group_overlap": 0,
+    "a_n3_complete_legacy_seeds": 0,
+    "a_n4b_source_rows": 30,
+    "a_n4b_split_counts": [18, 6, 6],
+    "a_n4b_seed_range": [410000, 410029],
+    "a_n4b_source_group_overlap": 0,
+    "excluded_unique_seeds": 390,
+    "excluded_unique_content_hashes": 374,
+    "candidate_excluded_seed_overlap": 0,
+    "candidate_excluded_content_overlap": 0,
+    "candidate_legacy_observation_projection_overlap": 0
+  },
+  "limitations": [
+    "Legacy A-N3 teacher records do not contain complete scenario seeds; the independent check uses source groups, split identities, source bytes and public-observation projections instead of claiming a seed-level comparison.",
+    "The delivered leakage file is still a pending draft. Its final accepted bytes and SHA256 require joint A/C confirmation before the formal freeze receipts can be signed."
+  ],
+  "formal_runs_authorized": false,
+  "formal_result": "pending",
+  "next_gate": "jointly freeze final accepted leakage bytes, bind the same digest in A/B/C post-generation receipts, then pass index and freeze verification"
+}
