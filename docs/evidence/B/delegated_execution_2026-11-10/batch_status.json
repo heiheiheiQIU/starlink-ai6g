@@ -1,0 +1,11 @@
+{
+  "attempt_count": 540,
+  "completed_policy_runs": 540,
+  "data_scope": "formal",
+  "expected_policy_runs": 540,
+  "failed_policy_runs": 0,
+  "formal_verdict": "未完成",
+  "missing_policy_runs": 0,
+  "result_signoff": "pending",
+  "status": "runs_complete"
+}

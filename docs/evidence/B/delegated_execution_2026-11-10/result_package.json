@@ -1,0 +1,12 @@
+{
+  "path": "docs/evidence/B/delegated_execution_2026-11-10/formal_v2_delegated_results_20261110.zip",
+  "bytes": 13617292,
+  "sha256": "efa801d9dde6a9eb340ca0a27b873027248edbcadd7b85c82cdd3847ab5f9e86",
+  "member_count": 4009,
+  "all_member_hashes_verified": true,
+  "source_archive_sha256": "520a898e4e121bde855f3ec935eb516036115ae552e8873713f038ed75a7dffd",
+  "completed_runs": 540,
+  "failed_runs": 0,
+  "missing_runs": 0,
+  "result_signoff": "pending"
+}

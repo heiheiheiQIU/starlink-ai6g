@@ -1,15 +1,15 @@
 {
-  "status": "B_signed_AC_pending",
+  "status": "delegated_review_frozen_540_complete_results_pending_release",
   "formal_freeze_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
   "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
   "binding_sha256": "d2b596d852758c9514f2aa7b735f4cd1f31dbfbee0c23af50619fd51ecad5e2a",
   "final_leakage_sha256": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018",
   "final_leakage_bytes": 33328,
   "B_receipt_sha256": "54c147d8ac7c2435ad9be0b290e231d070a320aa460eea255e566332d44c9066",
-  "A_receipt_status": "pending",
-  "C_receipt_status": "pending",
-  "formal_runs_authorized": false,
-  "formal_runs_executed": 0,
+  "A_receipt_status": "accepted_with_notes",
+  "C_receipt_status": "accepted_with_notes",
+  "formal_runs_authorized": true,
+  "formal_runs_executed": 540,
   "source_receipts": {
     "A_provenance_review.json": {
       "commit": "11666cc6a4076a2f62f01d104b855321b0590a3e",
@@ -40,5 +40,12 @@
   "environment": {
     "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
     "platform": "Windows-11-10.0.26200-SP0"
-  }
+  },
+  "review_mode": "user_authorized_independent_agent_reviews",
+  "A_actual_reviewer": "codex-delegated-A-source-review",
+  "C_actual_reviewer": "codex-delegated-C-inventory-review",
+  "result_signoff": "pending",
+  "user_authorization": "../delegated_execution_2026-11-10/authorization.json",
+  "result_summary": "../delegated_execution_2026-11-10/analysis/summary.json",
+  "human_AC_final_signatures": "absent; replaced for input review by explicitly authorized delegated agents"
 }

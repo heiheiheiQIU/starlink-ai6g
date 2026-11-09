@@ -1,0 +1,16 @@
+{
+  "recorded_at": "2026-11-10T01:46:07.316960+08:00",
+  "smoke_runs": 3,
+  "smoke_wall_seconds": 2.622643100010464,
+  "cell_cumulative_runs": 30,
+  "cell_additional_runs": 27,
+  "cell_wall_seconds": 10.948135500017088,
+  "observed_seconds_per_unique_run_including_stage_validation": 0.45235928666758507,
+  "peak_simulation_concurrency": 1,
+  "observed_batch_bytes": 1811156,
+  "estimated_full_batch_bytes": 32600808,
+  "estimated_remaining_seconds": 230.70323620046838,
+  "remaining_time_budget_seconds": 461.40647240093676,
+  "available_disk_bytes": 57258377216,
+  "decision": "proceed coverage then full with existing frozen inputs and sequential runner"
+}

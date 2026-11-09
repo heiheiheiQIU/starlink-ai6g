@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "source_has_git": false,
+  "environment": "isolated CPU runtime installed earlier from pinned offline wheelhouse",
+  "python": "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\starlink-ai6g\\runs\\guarded_clean_20261109\\env\\Scripts\\python.exe",
+  "command": "python -m experiments.analyze_formal --manifest ../packet/frozen/manifest.json --run-index ../packet/batch/run_index.jsonl --output ../recomputed_analysis",
+  "byte_identical_files": {
+    "summary.json": "872a71029783ca4100ed8d4e6cfec79261f9c7eaaca65b10362ce53a9ffdbae9",
+    "paired_deltas.csv": "353f7f589739d2d760ffab415aeb3d79cb59317956e3c6d44ad21134cb2efcf9",
+    "failure_ledger.csv": "cbf4f349d9c1d17d214a2d2d9970ea57039052a8a4ae220b45df292e39d65900"
+  },
+  "completed_policy_runs": 540,
+  "result_signoff": "pending"
+}

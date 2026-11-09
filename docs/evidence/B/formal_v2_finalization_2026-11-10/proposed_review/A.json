@@ -64,11 +64,20 @@
     }
   },
   "data_scope": "formal",
-  "leakage_sha256": null,
-  "notes": "",
-  "reviewed_at": null,
-  "reviewer": null,
+  "delegation": {
+    "audit_report": "../../delegated_execution_2026-11-10/A_audit.json",
+    "audit_script": "../../delegated_execution_2026-11-10/A_audit.py",
+    "authorization_text": "能不能替ac进行检查，直接推进下一步",
+    "authorized_by": "user",
+    "human_member_A_signature": false,
+    "reviewer_type": "independent_codex_agent_machine_review",
+    "scope": "A_training_provenance_splits_exclusions_frozen_bindings"
+  },
+  "leakage_sha256": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018",
+  "notes": "User-authorized independent delegated A-scope machine review, performed by a separate Codex agent. This is an actual machine review and is not a human member-A signature. Recomputed actual A-N3 training-source binding and 12/4/4 splits, A-N4b 18/6/6 splits and seeds 410000-410029, 390 excluded seeds and 374 excluded contents, 20 legacy observation projections against 180 candidate initial observations, and frozen code/model/statistics/candidate bindings. Exact final accepted leakage bytes match C proposal e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018. Legacy sources lack full scenario seeds; no legacy seed-level comparison claimed. A-N4b stays blocked and training-disabled. No policies or training executed by this review; no policy-superiority or formal-result approval.",
+  "reviewed_at": "2026-11-10T01:44:29+08:00",
+  "reviewer": "codex-delegated-A-source-review",
   "role": "A",
   "schema_version": "formal-freeze-receipt-v1",
-  "status": "pending"
+  "status": "accepted_with_notes"
 }

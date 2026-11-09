@@ -1,0 +1,8 @@
+{
+  "actual_cases": [
+    "ack_retry",
+    "learned_idle"
+  ],
+  "model_fault_injection": "Historical injected corruption evidence remains separately labelled engineering evidence.",
+  "formal_model_fault_observed": false
+}

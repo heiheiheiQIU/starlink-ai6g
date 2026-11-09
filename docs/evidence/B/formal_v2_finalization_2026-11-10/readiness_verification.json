@@ -8,5 +8,7 @@
   "B_receipt_matches_final_leakage": true,
   "index_return_code": 1,
   "index_blocker": "A receipt pending; C receipt pending",
-  "formal_runs_authorized": false
+  "formal_runs_authorized": false,
+  "record_scope": "historical_pre_delegation_gate_check",
+  "superseded_by": "../delegated_execution_2026-11-10/authorization.json"
 }

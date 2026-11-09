@@ -1,0 +1,18 @@
+{
+  "status": "execution_prepared_waiting_review",
+  "execution_root": "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\formal-frozen-verification-20261109",
+  "run_root": "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\formal-frozen-verification-20261109\\runs\\formal_v2_delegated_20261110",
+  "python": "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\starlink-ai6g\\.venv\\Scripts\\python.exe",
+  "code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "stage_order": [
+    "smoke",
+    "cell",
+    "coverage",
+    "full",
+    "retry_if_required",
+    "analysis"
+  ],
+  "peak_simulation_concurrency": 1,
+  "machine_work": "CPU simulation and frozen NumPy inference"
+}

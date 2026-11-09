@@ -1,0 +1,18 @@
+{
+  "stage": "analysis",
+  "command": [
+    "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\starlink-ai6g\\.venv\\Scripts\\python.exe",
+    "-m",
+    "experiments.analyze_formal",
+    "--manifest",
+    "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\formal-frozen-verification-20261109\\runs\\formal_v2_delegated_20261110\\frozen\\manifest.json",
+    "--run-index",
+    "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\formal-frozen-verification-20261109\\runs\\formal_v2_delegated_20261110\\batch\\run_index.jsonl",
+    "--output",
+    "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\formal-frozen-verification-20261109\\runs\\formal_v2_delegated_20261110\\analysis"
+  ],
+  "execution_root": "D:\\\u4eba\u5de5\u667a\u80fd\u6311\u6218\u8d5b\\formal-frozen-verification-20261109",
+  "code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "wall_seconds": 17.99743839999428,
+  "exit_code": 0
+}

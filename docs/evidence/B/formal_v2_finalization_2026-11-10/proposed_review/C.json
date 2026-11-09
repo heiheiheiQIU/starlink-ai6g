@@ -64,11 +64,20 @@
     }
   },
   "data_scope": "formal",
-  "leakage_sha256": null,
-  "notes": "",
-  "reviewed_at": null,
-  "reviewer": null,
+  "delegation": {
+    "agent_role": "independent_C_inventory_reviewer",
+    "audit_path": "docs/evidence/B/delegated_execution_2026-11-10/C_audit.json",
+    "authorization_path": "docs/evidence/B/delegated_execution_2026-11-10/authorization.json",
+    "authorization_sha256": "ff1b542e8d78b1ccc3b78c36b2c9446112d4d4d6302985d96a422079fd060eb0",
+    "human_member_C_signature": false,
+    "kind": "user_authorized_agent_substitution",
+    "user_instruction": "能不能替ac进行检查，直接推进下一步"
+  },
+  "leakage_sha256": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018",
+  "notes": "User authorized delegated A/C checks and next-step progression. This separate-context Codex agent independently opened and validated all 180 actual configs, recomputed file/input/content hashes, identities and seeds, confirmed 18x10 balance and 540 shared-input run keys, checked the current 204+ entry SHA index, all seven original/final/frozen source copies, fresh frozen-code binding and exact C-proposed leakage byte transformation. Accepted only for the inventory/hash scope. This is an actual machine review by codex-delegated-C-inventory-review, not a signature by human member-C. Provenance/split/legacy-boundary approval is delegated A scope. Formal result signoff and claim release remain separate subsequent gates.",
+  "reviewed_at": "2026-11-10T01:44:39.277826+08:00",
+  "reviewer": "codex-delegated-C-inventory-review",
   "role": "C",
   "schema_version": "formal-freeze-receipt-v1",
-  "status": "pending"
+  "status": "accepted_with_notes"
 }

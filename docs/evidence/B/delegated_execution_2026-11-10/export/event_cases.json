@@ -1,0 +1,3129 @@
+{
+  "ack_retry": {
+    "scope": "registered_inputs_delegated_review_execution",
+    "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+    "policy_id": "edf",
+    "seed": 600000,
+    "trajectory_id": "formal_v2_cell_00_trace_00",
+    "input_hash": "c95c7bb4475a0a3d03afa3e81b3c08b34cf4cbe44c3193bc6551325c20cc6064",
+    "source_file": "batch/runs/formal_v2_cell_00_trace_00/edf/attempt_1/events.jsonl",
+    "source_sha256": "cdf190f8aa43480e8e834dd1912f2c86ec029f6ddb2a6dd3ebc07b1ab46a9b11",
+    "anchor_event_id": 26,
+    "event_range": [
+      23,
+      38
+    ],
+    "events": [
+      {
+        "event_id": 23,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 4.515625,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.00515625,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.036167534722222214,
+          "energy_est_Wh": 0.7233506944444443,
+          "energy_lower_Wh": 0.7233506944444443,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03616753472222223,
+            "energy_true_Wh": 0.7233506944444446,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 24,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 6.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.01484375,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.03542534722222221,
+          "energy_est_Wh": 0.7085069444444442,
+          "energy_lower_Wh": 0.7085069444444442,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03542534722222222,
+            "energy_true_Wh": 0.7085069444444445,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 25,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 6.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [
+              "INFLIGHT_BLOCK"
+            ],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 1.0
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 1.0
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.0
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": false,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": false,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 0.9307000145781785,
+          "fallback": false,
+          "model_version": null,
+          "policy_version": "edf-r4-v1"
+        }
+      },
+      {
+        "event_id": 26,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 6.515625,
+        "event_type": "fallback",
+        "task_id": "T01",
+        "block_id": 0,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": "ACK_TIMEOUT",
+        "data": null
+      },
+      {
+        "event_id": 27,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 6.515625,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.00515625,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.03516753472222221,
+          "energy_est_Wh": 0.7033506944444443,
+          "energy_lower_Wh": 0.7033506944444443,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03516753472222223,
+            "energy_true_Wh": 0.7033506944444445,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 28,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 8.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.01484375,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.03442534722222221,
+          "energy_est_Wh": 0.6885069444444442,
+          "energy_lower_Wh": 0.6885069444444442,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03442534722222222,
+            "energy_true_Wh": 0.6885069444444445,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 29,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 8.0,
+        "event_type": "decision",
+        "task_id": "T01",
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": "T01",
+            "mode": "fast",
+            "scheduled_bytes": 1024,
+            "reason_codes": [
+              "RETRY_REQUIRED"
+            ],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 1.0
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 1.0
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.0
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 1.3762000016868114,
+          "fallback": false,
+          "model_version": null,
+          "policy_version": "edf-r4-v1"
+        }
+      },
+      {
+        "event_id": 30,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 8.0,
+        "event_type": "sent",
+        "task_id": "T01",
+        "block_id": 0,
+        "payload_bytes": 1024,
+        "overhead_bytes": 32,
+        "energy_Wh": 0.0103125,
+        "reason_code": null,
+        "data": null
+      },
+      {
+        "event_id": 31,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 8.515625,
+        "event_type": "received",
+        "task_id": "T01",
+        "block_id": 0,
+        "payload_bytes": 1024,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": null
+      },
+      {
+        "event_id": 32,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 8.515625,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.00515625,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.033651909722222206,
+          "energy_est_Wh": 0.6730381944444441,
+          "energy_lower_Wh": 0.6730381944444441,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03365190972222223,
+            "energy_true_Wh": 0.6730381944444446,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 33,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 9.390625,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.00875,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.033214409722222206,
+          "energy_est_Wh": 0.6642881944444441,
+          "energy_lower_Wh": 0.6642881944444441,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03321440972222223,
+            "energy_true_Wh": 0.6642881944444445,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 34,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 9.515625,
+        "event_type": "acked",
+        "task_id": "T01",
+        "block_id": 0,
+        "payload_bytes": 0,
+        "overhead_bytes": 16,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": null
+      },
+      {
+        "event_id": 35,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 9.515625,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0015277777777777779,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.033138020833333316,
+          "energy_est_Wh": 0.6627604166666663,
+          "energy_lower_Wh": 0.6627604166666663,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03313802083333334,
+            "energy_true_Wh": 0.6627604166666667,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 36,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 10.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.00484375,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.03289583333333331,
+          "energy_est_Wh": 0.6579166666666663,
+          "energy_lower_Wh": 0.6579166666666663,
+          "queue_count": 1,
+          "forecast_energy_band": null,
+          "policy_version": "edf-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.03289583333333333,
+            "energy_true_Wh": 0.6579166666666667,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 37,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 10.0,
+        "event_type": "decision",
+        "task_id": "T01",
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": "T01",
+            "mode": "fast",
+            "scheduled_bytes": 1024,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 1.0
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 1.0
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.0
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 0.9968999947886914,
+          "fallback": false,
+          "model_version": null,
+          "policy_version": "edf-r4-v1"
+        }
+      },
+      {
+        "event_id": 38,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_edf_1",
+        "policy_id": "edf",
+        "sim_time_s": 10.0,
+        "event_type": "sent",
+        "task_id": "T01",
+        "block_id": 1,
+        "payload_bytes": 1024,
+        "overhead_bytes": 32,
+        "energy_Wh": 0.0103125,
+        "reason_code": null,
+        "data": null
+      }
+    ]
+  },
+  "learned_idle": {
+    "scope": "registered_inputs_delegated_review_execution",
+    "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+    "policy_id": "learned",
+    "seed": 600000,
+    "trajectory_id": "formal_v2_cell_00_trace_00",
+    "input_hash": "c95c7bb4475a0a3d03afa3e81b3c08b34cf4cbe44c3193bc6551325c20cc6064",
+    "source_file": "batch/runs/formal_v2_cell_00_trace_00/learned/attempt_1/events.jsonl",
+    "source_sha256": "73b6239a9492a95d673f3823bba8a58b0ff95b6fde37fc8acf41223c87b1918d",
+    "anchor_event_id": 4,
+    "event_range": [
+      1,
+      16
+    ],
+    "events": [
+      {
+        "event_id": 1,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 0.0,
+        "event_type": "arrived",
+        "task_id": "T00",
+        "block_id": null,
+        "payload_bytes": 2048,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": null
+      },
+      {
+        "event_id": 2,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 0.0,
+        "event_type": "arrived",
+        "task_id": "T01",
+        "block_id": null,
+        "payload_bytes": 2048,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": null
+      },
+      {
+        "event_id": 3,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 0.0,
+        "event_type": "window_changed",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "window_id": "W1",
+          "is_visible": true
+        }
+      },
+      {
+        "event_id": 4,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 0.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.9959571957588196
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9998971223831177
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.166560560464859
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9620653390884399
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999998807907104
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 6.5762999875005335,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      },
+      {
+        "event_id": 5,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 2.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.02,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.039,
+          "energy_est_Wh": 0.78,
+          "energy_lower_Wh": 0.78,
+          "queue_count": 2,
+          "forecast_energy_band": null,
+          "policy_version": "learned-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.039,
+            "energy_true_Wh": 0.78,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 6,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 2.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.9953376650810242
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9999028444290161
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.6250938177108765
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9877684116363525
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999998807907104
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 2.7036000101361424,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      },
+      {
+        "event_id": 7,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 4.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.02,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.038,
+          "energy_est_Wh": 0.76,
+          "energy_lower_Wh": 0.76,
+          "queue_count": 2,
+          "forecast_energy_band": null,
+          "policy_version": "learned-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.038,
+            "energy_true_Wh": 0.76,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 8,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 4.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.9913739562034607
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9999251365661621
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.859585165977478
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9954424500465393
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999997615814209
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 2.191600011428818,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      },
+      {
+        "event_id": 9,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 6.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.02,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.037,
+          "energy_est_Wh": 0.74,
+          "energy_lower_Wh": 0.74,
+          "queue_count": 2,
+          "forecast_energy_band": null,
+          "policy_version": "learned-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.037,
+            "energy_true_Wh": 0.74,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 10,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 6.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.9597824215888977
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9999668598175049
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.9065554141998291
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9978078603744507
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999996423721313
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 2.3367000103462487,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      },
+      {
+        "event_id": 11,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 8.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.02,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.036,
+          "energy_est_Wh": 0.72,
+          "energy_lower_Wh": 0.72,
+          "queue_count": 2,
+          "forecast_energy_band": null,
+          "policy_version": "learned-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.036,
+            "energy_true_Wh": 0.72,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 12,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 8.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.7889368534088135
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9999632835388184
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.8473985195159912
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9982155561447144
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999996423721313
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 2.107900014379993,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      },
+      {
+        "event_id": 13,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 10.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.02,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.034999999999999996,
+          "energy_est_Wh": 0.7,
+          "energy_lower_Wh": 0.7,
+          "queue_count": 2,
+          "forecast_energy_band": null,
+          "policy_version": "learned-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.034999999999999996,
+            "energy_true_Wh": 0.7,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 14,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 10.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.24463056027889252
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9999146461486816
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.42290738224983215
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9979695677757263
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999996423721313
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 2.191000006860122,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      },
+      {
+        "event_id": 15,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 12.0,
+        "event_type": "snapshot",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.02,
+        "reason_code": null,
+        "data": {
+          "soc_est": 0.033999999999999996,
+          "energy_est_Wh": 0.6799999999999999,
+          "energy_lower_Wh": 0.6799999999999999,
+          "queue_count": 2,
+          "forecast_energy_band": null,
+          "policy_version": "learned-r4-v1",
+          "evaluation_truth": {
+            "label": "posthoc_simulation",
+            "soc_true": 0.033999999999999996,
+            "energy_true_Wh": 0.6799999999999999,
+            "capacity_true_Wh": 20.0
+          },
+          "reason_codes": [
+            "R3_FORECAST_BAND_UNAVAILABLE"
+          ]
+        }
+      },
+      {
+        "event_id": 16,
+        "run_id": "formal_903b1f80816a424f9568169f8c9296a5_formal_v2_cell_00_trace_00_learned_1",
+        "policy_id": "learned",
+        "sim_time_s": 12.0,
+        "event_type": "decision",
+        "task_id": null,
+        "block_id": null,
+        "payload_bytes": 0,
+        "overhead_bytes": 0,
+        "energy_Wh": 0.0,
+        "reason_code": null,
+        "data": {
+          "action": {
+            "task_id": null,
+            "mode": "idle",
+            "scheduled_bytes": 0,
+            "reason_codes": [
+              "DEADLINE_UNREACHABLE"
+            ],
+            "fallback": false
+          },
+          "candidate_scores": [
+            {
+              "task_id": "T00",
+              "mode": "robust",
+              "score": 0.09311068803071976
+            },
+            {
+              "task_id": "T00",
+              "mode": "fast",
+              "score": 0.9998382329940796
+            },
+            {
+              "task_id": "T01",
+              "mode": "robust",
+              "score": 0.019608506932854652
+            },
+            {
+              "task_id": "T01",
+              "mode": "fast",
+              "score": 0.9936007857322693
+            },
+            {
+              "task_id": null,
+              "mode": "idle",
+              "score": 0.9999997615814209
+            }
+          ],
+          "constraint_checks": [
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": false,
+              "details": {
+                "task_id": "T00",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": false,
+              "details": {
+                "task_id": "T00",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "robust"
+              }
+            },
+            {
+              "code": "TASK_NOT_AVAILABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INFLIGHT_BLOCK",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "NO_VISIBLE_WINDOW",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "INSUFFICIENT_LINK_TIME",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "DEADLINE_UNREACHABLE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "POWER_LIMIT",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "CONTROL_BUDGET",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            },
+            {
+              "code": "ENERGY_RESERVE",
+              "passed": true,
+              "details": {
+                "task_id": "T01",
+                "mode": "fast"
+              }
+            }
+          ],
+          "latency_ms": 2.2708000033162534,
+          "fallback": false,
+          "model_version": "a-n3-mlp-v1",
+          "policy_version": "learned-r4-v1"
+        }
+      }
+    ]
+  }
+}

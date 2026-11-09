@@ -1,0 +1,26 @@
+{
+  "edf": {
+    "runs": 180,
+    "decisions": 2160,
+    "idle_decisions": 900,
+    "fallback_decisions": 0,
+    "ack_timeouts": 368,
+    "duplicate_blocks": 16
+  },
+  "learned": {
+    "runs": 180,
+    "decisions": 2160,
+    "idle_decisions": 2160,
+    "fallback_decisions": 0,
+    "ack_timeouts": 0,
+    "duplicate_blocks": 0
+  },
+  "value": {
+    "runs": 180,
+    "decisions": 2160,
+    "idle_decisions": 947,
+    "fallback_decisions": 0,
+    "ack_timeouts": 355,
+    "duplicate_blocks": 32
+  }
+}

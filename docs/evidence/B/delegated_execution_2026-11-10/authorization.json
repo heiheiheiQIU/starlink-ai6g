@@ -1,0 +1,18 @@
+{
+  "schema_version": "user-authorized-delegated-review-v1",
+  "recorded_at": "2026-11-10T01:42:32.321480+08:00",
+  "user_instruction": "能不能替ac进行检查，直接推进下一步",
+  "scope": "User delegates A-source and C-inventory checks and authorizes the next experiment steps after successful checks.",
+  "review_method": "Two separate-context Codex agents independently check the actual A/C scope and author receipts using explicit delegated reviewer identities. B executes the frozen code and retains complete evidence.",
+  "human_team_signatures": "A/C original human final signatures remain absent; delegated receipts identify the actual machine reviewers.",
+  "generation_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "candidate_manifest_sha256": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+  "leakage_sha256": "e8da2be7968020eb9d1e974ae1cd5b46d3ca89ebec3fab466750bc4df7747018",
+  "policy_ids": [
+    "edf",
+    "value",
+    "learned"
+  ],
+  "statistical_protocol": "existing frozen analysis protocol",
+  "result_release": "result_signoff remains pending until result audit, claim registration and release review"
+}

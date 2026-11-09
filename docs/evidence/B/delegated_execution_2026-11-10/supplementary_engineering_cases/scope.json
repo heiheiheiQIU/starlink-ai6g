@@ -1,0 +1,10 @@
+{
+  "scope": "historical_engineering_and_sandbox_examples",
+  "included_in_540": false,
+  "source_files": {
+    "guard_rejection_sandbox.json": "docs\\evidence\\B\\sprint_2026-11-09\\cases\\guard_reject.json",
+    "injected_model_corruption.json": "docs\\evidence\\B\\independent_2026-11-07\\case_packet\\corrupt_npz.json",
+    "injected_model_corruption_events.csv": "docs\\evidence\\B\\independent_2026-11-07\\case_packet\\corrupt_npz_events.csv"
+  },
+  "notes": "Registered 540-run batch contains ACK recovery and Learned idle cases. Model-fault and Guard-rejection examples are preserved historical probes with their original source labels."
+}
