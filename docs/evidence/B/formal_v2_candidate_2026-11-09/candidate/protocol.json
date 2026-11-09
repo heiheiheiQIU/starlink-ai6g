@@ -1,0 +1,12 @@
+{
+  "version": "formal_v2",
+  "seed_start": 600000,
+  "seed_end": 600179,
+  "cells": 18,
+  "trajectories_per_cell": 10,
+  "policy_ids": ["edf", "value", "learned"],
+  "design_protocol": "experiments/formal_v1/protocol.json",
+  "analysis_protocol": "experiments/formal_v1/analysis_protocol.json",
+  "model_config": "configs/learned_policy.json",
+  "archive": "experiments/formal_v1/input_manifest.json"
+}
