@@ -1,0 +1,17 @@
+{
+  "status": "B_original_package_integrity_verified",
+  "file": "deliveries/B_final_demo_20261110.zip",
+  "bytes": 17532109,
+  "sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+  "identical_to_previous_local_delivery": true,
+  "zip_members": 111,
+  "verified_payload_files": 110,
+  "source_commit": "fc44e252394c350a0bbc65a626b4f1dbb18327c0",
+  "model_sha256": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+  "recipient_C_received": "pending",
+  "recipient_C_independent_hash": "pending",
+  "second_physical_machine_acceptance": "pending",
+  "A_data_expansion_approval": "not_found_in_fetched_repository",
+  "training_enabled": false,
+  "hybrid_enabled": false
+}

@@ -1,0 +1,38 @@
+{
+  "schema_version": "c-offline-package-receipt-v1",
+  "status": "pending",
+  "reviewer": null,
+  "physical_machine_description": null,
+  "executed_on_distinct_physical_machine": null,
+  "executed_at": null,
+  "package": {
+    "repository_path": "deliveries/B_final_demo_20261110.zip",
+    "expected_bytes": 17532109,
+    "actual_bytes": null,
+    "expected_sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+    "independently_computed_sha256": null,
+    "status": "pending"
+  },
+  "automatic_acceptance": {
+    "status": "pending",
+    "acceptance_json_path": null,
+    "acceptance_json_sha256": null,
+    "complete_evidence_directory": null
+  },
+  "manual_checks": {
+    "S1": {"status": "pending", "run_id": null, "evidence": []},
+    "S2": {"status": "pending", "run_id": null, "evidence": []},
+    "S3": {"status": "pending", "run_id": null, "evidence": []},
+    "parameter_change_and_new_run_id": {"status": "pending", "evidence": []},
+    "stale_results_notice": {"status": "pending", "evidence": []},
+    "shared_run_id_across_pages": {"status": "pending", "evidence": []},
+    "policy_separated_replay": {"status": "pending", "evidence": []},
+    "paged_events_match_export": {"status": "pending", "evidence": []},
+    "browser_export_download": {"status": "pending", "evidence": []},
+    "engineering_and_negative_AI_results_distinguished": {"status": "pending", "evidence": []}
+  },
+  "failures_and_notes": [],
+  "formal_result_release_authorized": false,
+  "model_training_authorized": false,
+  "hybrid_authorized": false
+}

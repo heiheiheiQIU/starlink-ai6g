@@ -2,6 +2,8 @@
 
 > 2026-11-10 最新状态：formal_v2 的 180 条冻结输入、540 次策略运行已完成并封存，Learned 结果为负，结果发布签核仍按原流程门控。最终离线演示候选包通过本机全新环境验收；30 条新开发轨迹、60 个状态通过重算，训练仍禁用。详见 [B 本轮交付报告](docs/team/B_交付报告_演示与开发试点_2026-11-10.md)、[演示操作与录屏交接](docs/handoffs/B_演示操作与录屏交接_2026-11-10.md)及[正式结果交接](docs/handoffs/B_delegated_formal_results_2026-11-10.md)。另一台物理电脑验收尚待实际执行。
 
+审计后补交：[原始离线 ZIP 与独立哈希说明](deliveries/README.md)、[C 第二台电脑验收交接单](docs/handoffs/B_C_原包与第二机验收_2026-11-10.md)。运行包保持原字节，A 批准前不扩充训练数据。
+
 本轮验证：后端全库 730 通过、1 项 Linux 专用跳过；前端 124 测试、TypeScript 与生产构建通过。learned 已接入 Runner/Guard 及五接口，异常 EDF 回退与 Windows 进程回收保留。原 WP2 集成历史见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。
 
 当前候选以WP1统一版本为基础，已纳入A审计657f39c和C复核63c7740。A可按[B确认的教师支持域](docs/handoffs/B_teacher_support_2026-11-04.md)开展新版本小批生成与审计；此前进度见[B接续记录](docs/handoffs/B_next_readiness_2026-11-04.md)。原始分支与回执保留，共享main尚未更新。
