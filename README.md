@@ -1,8 +1,8 @@
 # 星地智调
 
-> 2026-11-07 最新裁决：原 formal_v1 的 180 条输入统一归档为 engineering_regression_v1。正式实验使用预登记的 formal_v2，生成前等待三方冻结。分支、复验记录和当前命令见[远端复验交接](docs/handoffs/B_remote_review_2026-11-07.md)。
+> 2026-11-10 最新状态：formal_v2 的 180 条冻结输入、540 次策略运行已完成并封存，Learned 结果为负，结果发布签核仍按原流程门控。最终离线演示候选包通过本机全新环境验收；30 条新开发轨迹、60 个状态通过重算，训练仍禁用。详见 [B 本轮交付报告](docs/team/B_交付报告_演示与开发试点_2026-11-10.md)、[演示操作与录屏交接](docs/handoffs/B_演示操作与录屏交接_2026-11-10.md)及[正式结果交接](docs/handoffs/B_delegated_formal_results_2026-11-10.md)。另一台物理电脑验收尚待实际执行。
 
-更新：2026-11-04，当前为 **B 的 WP2 learned集成候选**。learned已接入Runner/Guard及五接口，暖评分100ms预算、超时/异常EDF回退与Windows进程回收已验证。后端552通过、1项Linux专用跳过；前端61及构建通过。真实HTTP三策略配对运行完成，属于开发验证，尚无正式AI收益结论。接收与复跑见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。
+本轮验证：后端全库 730 通过、1 项 Linux 专用跳过；前端 124 测试、TypeScript 与生产构建通过。learned 已接入 Runner/Guard 及五接口，异常 EDF 回退与 Windows 进程回收保留。原 WP2 集成历史见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。
 
 当前候选以WP1统一版本为基础，已纳入A审计657f39c和C复核63c7740。A可按[B确认的教师支持域](docs/handoffs/B_teacher_support_2026-11-04.md)开展新版本小批生成与审计；此前进度见[B接续记录](docs/handoffs/B_next_readiness_2026-11-04.md)。原始分支与回执保留，共享main尚未更新。
 
@@ -11,8 +11,8 @@
 - 规则链路：任务/窗口/能量 → EDF 或 value → Guard → 发送/接收/ACK/重传/去重 → 事件、指标和 ZIP。
 - learned：可独立加载冻结权重并调用 `score_actions`；Runner/API 已支持 `edf`、`value`、`learned`，异常与结构全mask回退保持可追溯。
 - 健康：正式适配器使用显式 synthetic 观测误差界；旧权重支持冻结 NPZ 离线推理。raw_fraction 不能作为 SOC、容量或在线原生 RUL。
-- 前端：离线流程演示、历史规则矩阵、按已有 run_id 读取状态、事件和结果。对比页的新建运行和 learned 对比仍为明确标识的契约样例，尚未完成现场重算闭环。
-- 旧矩阵为 180 轨迹×两规则共 360 次合成运行；正式 AI 实验、成熟优化器与真实卫星验证尚未完成。
+- 前端：离线流程演示、历史规则矩阵、八项参数真实沙盒运行、共享 run_id、按策略事件回放、真实结果比较和 ZIP 导出；历史示例与真实来源分别标识。
+- 旧矩阵为 180 轨迹×两规则共 360 次开发运行；formal_v2 为另行冻结的 180 轨迹×三策略共 540 次，Learned 加权按时交付率为 0，EDF 为 46.54%，Value 为 51.15%。成熟优化器与真实卫星验证尚未完成。
 
 WP1集成顺序与历史验证见 [WP1 交接](docs/handoffs/B_WP1_integration_2026-11-03.md)。
 

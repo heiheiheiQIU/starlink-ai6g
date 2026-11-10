@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "package_sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+  "immutable_files": 110,
+  "all_packaged_source_equals_git_commit": "fc44e252394c350a0bbc65a626b4f1dbb18327c0",
+  "formal_and_model_paths_unchanged_from": "a489057",
+  "pilot_recompute_checks": 1703
+}

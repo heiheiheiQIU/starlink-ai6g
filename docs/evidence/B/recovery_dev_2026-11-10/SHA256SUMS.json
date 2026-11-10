@@ -1,0 +1,13 @@
+{
+  "audit.json": "7d9139d8a6793543e86f75056b2a8e68f13deb14e0661c2c4c0120022c787dff",
+  "pilot/attempts.jsonl": "994cf2504ab28a6f784d6b84fb51ebd069ad19e60a9e0ffd04dea128401e43e7",
+  "pilot/config.json": "204af11c07bad04fb25e085c733b63415306d0eb48bfc14c6bed657b99ed9c8c",
+  "pilot/diagnostics.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "pilot/leakage.json": "09049fa30729e613968f8c43f1e7b40582ff4d29d7b55b2c407b3629a9a20294",
+  "pilot/manifest.json": "01be0d640ffdde85f30856ea03e73f548575217a9eba513971c0cc7a579f7e90",
+  "pilot/samples.jsonl": "994cf2504ab28a6f784d6b84fb51ebd069ad19e60a9e0ffd04dea128401e43e7",
+  "pilot/source_splits.json": "2b23a9b586183964c8d1d311edcf319f6a4efe36813a2594aa67bd32aad22714",
+  "pilot/sources.jsonl": "332168dcdafdc9730030d499196e319c1c327dccdb637adf68970a5a30a9948e",
+  "pilot/summary.json": "7e6b8d4628fd8869c56bd6ac31df2817d5a7afd7c45137c44fd31481dffe4549",
+  "pilot/teacher_config.json": "c75eb37ba7bf55de2ed8efc9bdcf9c03fb17a866b2bccd2019e1cea590c72353"
+}

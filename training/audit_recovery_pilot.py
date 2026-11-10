@@ -36,9 +36,9 @@ def audit(output):
     by_id = {r['state_id']:r for r in attempts}
     require(len(by_id)==60,'duplicate state identity')
     teacher = load('teacher_config.json')
-    teacher_sha = hashlib.sha256((output/'teacher_config.json').read_bytes()).hexdigest()
     # The copied pretty JSON bytes may differ from the original config; bind values and original hash separately.
     require(teacher==json.loads((ROOT/'configs/teacher.json').read_text(encoding='utf-8')),'teacher configuration changed')
+    require(load('config.json')==json.loads((ROOT/'configs/recovery_pilot.json').read_text(encoding='utf-8')),'pilot configuration changed')
     teacher_sha = hashlib.sha256((ROOT/'configs/teacher.json').read_bytes()).hexdigest()
     require(teacher_sha==manifest['teacher_config_sha256'],'teacher binding')
     semantic_hashes = set()
@@ -55,7 +55,9 @@ def audit(output):
             require(row['split']==splits[source['source_id']],'state split leaked')
             require(row['dataset_version']==VERSION,'dataset version')
             result = label_state(record,teacher_config=teacher,teacher_config_sha256=teacher_sha,budget_ms=load('config.json')['teacher_budget_ms'])
-            for key in ('candidate_scores','solver_status','gap','label_eligible'):
+            for key in result:
+                if key in {'elapsed_ms','dataset_version','label_content_sha256'}:
+                    continue
                 require(result[key]==row[key],'teacher replay: '+key)
             require(row['decision_class']==classify(row),'decision classification')
             require(row['label_content_sha256']==sha256_json({k:v for k,v in row.items() if k not in {'label_content_sha256','elapsed_ms'}}),'label content hash')

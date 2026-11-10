@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "command": "pnpm --dir frontend check",
+  "tests": 124,
+  "test_files": 34,
+  "typescript": "passed",
+  "vite": "passed",
+  "evidence_origin": "observed tool output on 2026-11-10; repeated production build archived in build.log"
+}

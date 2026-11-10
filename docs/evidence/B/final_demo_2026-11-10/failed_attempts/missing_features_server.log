@@ -1,0 +1,72 @@
+INFO:     Started server process [67844]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8031 (Press CTRL+C to quit)
+INFO:     127.0.0.1:58424 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58424 - "POST /runs HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\anyio\to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2706, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1100, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\source\backend\api\main.py", line 40, in submit
+    try: return service.submit(payload)
+                ^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\source\backend\api\service.py", line 140, in submit
+    try: inspect_model(self.model_config)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\source\backend\api\inference.py", line 26, in inspect_model
+    from backend.policies import learned
+  File "D:\人工智能挑战赛\starlink-ai6g\runs\final_demo_clean_v2_retry_20261110\source\backend\policies\learned.py", line 17, in <module>
+    from training.policy_features import (
+ModuleNotFoundError: No module named 'training'

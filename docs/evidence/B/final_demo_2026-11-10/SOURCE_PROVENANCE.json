@@ -1,0 +1,16 @@
+{
+  "schema_version": "b-final-demo-v1",
+  "source_commit": "fc44e252394c350a0bbc65a626b4f1dbb18327c0",
+  "formal_source_commit": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "frontend_source_commit": "fc44e252394c350a0bbc65a626b4f1dbb18327c0",
+  "runtime": "Windows x64 / Python 3.12",
+  "scope": "synthetic_sandbox",
+  "trained_model_replaced": false,
+  "model_sha256": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+  "frontend_sha256": {
+    "assets/index-Bj3nS8jR.css": "ee1f437d94a405baa20d4dd4de1a8a5e56dd8594bd0d58105b4de22af146717a",
+    "assets/index-l2PoHPoH.js": "175835c94e3e9ab1727ae2d14dcb90a4808b58b39f6ff9cd3293176ebc4b1c49",
+    "index.html": "1d47232b22c2e0002fe7182382253c1d6489b0cf0dd0cecad14ebb776e91e8aa",
+    "visuals/orbital-command-backdrop-v1.png": "353e2dce7b6594996de249791ce237549cc93f405dba56be067690b7b6b7aa40"
+  }
+}

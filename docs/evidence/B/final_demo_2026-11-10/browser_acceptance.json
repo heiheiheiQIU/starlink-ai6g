@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "url": "http://127.0.0.1:8032",
+  "package_source_commit": "fc44e252394c350a0bbc65a626b4f1dbb18327c0",
+  "runs": {
+    "S1": "sandbox_run_7c3c5d7ee7044f70bba67d1852b92144",
+    "S2": "sandbox_run_cf6218c4424b46cd953a6d928d3cda11",
+    "S3": "sandbox_run_ee08ac4878e34ec788ac1655b3a8116c"
+  },
+  "checks": [
+    "S1 EDF100/Learned0",
+    "S2 both0",
+    "S3 EDF100/Learned0",
+    "parameter changes visibly mark previous results stale",
+    "comparison and evidence pages retain same run id",
+    "EDF playback shows ACK_TIMEOUT and DUPLICATE_BLOCK",
+    "browser download succeeded; all exported artifact hashes verified"
+  ],
+  "export_sha256": "05844034ed4a0c8199d488ee4d7ab8366167383deae875bc77881d985b7c9a5c",
+  "events": 135,
+  "physical_machine_scope": "same machine as offline clean acceptance"
+}

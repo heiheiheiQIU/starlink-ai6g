@@ -1,0 +1,11 @@
+{
+  "status": "failed",
+  "scope": "single_machine_offline_acceptance",
+  "machine_fingerprint": "762bc09c48498bc65b9dc5efa3b269c52460ca213e288d134f165bdb4e7b22d1",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "immutable_files": 108,
+  "started_at": "2026-11-10T11:41:39+0800",
+  "error": "CalledProcessError: Command '['D:\\\\人工智能挑战赛\\\\starlink-ai6g\\\\runs\\\\final_demo_clean_v2_20261110\\\\env\\\\Scripts\\\\python.exe', '-m', 'ensurepip', '--upgrade', '--default-pip']' returned non-zero exit status 1.",
+  "wall_seconds": 0.48182380001526326
+}

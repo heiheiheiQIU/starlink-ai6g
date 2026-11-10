@@ -58,3 +58,25 @@ def test_audit_replays_labels_even_if_tamper_hash_is_refreshed(tmp_path):
     manifest_path.write_text(json.dumps(manifest),encoding='utf-8')
     with pytest.raises(ValueError):
         audit(output)
+
+
+def test_audit_rejects_forged_teacher_identity_and_deleted_solver_diagnostics(tmp_path):
+    from training.recovery_pilot import generate
+    from training.audit_recovery_pilot import audit
+    import hashlib
+    output = tmp_path/'pilot'
+    generate(output)
+    manifest = json.loads((output/'manifest.json').read_text(encoding='utf-8'))
+    for name in ('attempts.jsonl','samples.jsonl'):
+        path = output/name
+        rows = [json.loads(line) for line in path.read_text(encoding='utf-8').splitlines()]
+        for row in rows:
+            row['teacher_config_sha256'] = '0'*64
+            row['teacher_version'] = 'nonexistent-teacher-v999'
+            row['diagnostics']['candidates'] = []
+            row['label_content_sha256'] = sha256_json({k:v for k,v in row.items() if k not in {'label_content_sha256','elapsed_ms'}})
+        path.write_text(''.join(json.dumps(r)+'\n' for r in rows),encoding='utf-8')
+        manifest['output_sha256'][name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    (output/'manifest.json').write_text(json.dumps(manifest),encoding='utf-8')
+    with pytest.raises(ValueError,match='teacher replay'):
+        audit(output)
