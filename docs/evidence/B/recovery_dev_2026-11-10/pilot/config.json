@@ -1,0 +1,19 @@
+{
+  "dataset_version": "b-recovery-dev-v1",
+  "purpose": "development_label_review_only",
+  "training_enabled": false,
+  "source_count": 30,
+  "seed_start": 710000,
+  "source_split_counts": {
+    "train": 18,
+    "validation": 6,
+    "test": 6
+  },
+  "states_per_source": 2,
+  "teacher_budget_ms": 1000,
+  "minimum_send_better_states": 8,
+  "minimum_no_feasible_states": 8,
+  "ordering": "round_robin_four_families",
+  "stop_policy": "record_all_60_attempts_including_solver_limits",
+  "label_scope": "zero_loss_protocol_clean_short_horizon"
+}

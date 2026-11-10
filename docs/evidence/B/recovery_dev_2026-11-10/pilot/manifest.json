@@ -1,0 +1,38 @@
+{
+  "dataset_version": "b-recovery-dev-v1",
+  "training_enabled": false,
+  "teacher_config_sha256": "1497a5f02754f76a3f355893d3f2cd9178525fc0d9d329eba03466faee62c795",
+  "code_sha256": {
+    "training/recovery_pilot.py": "a379268c6897571bd98e94fd8d21511c8e41a83e32b7bb7e236c602dac264a78",
+    "training/generate_policy_pilot.py": "1f4b57a8146f9c078e5e8a95b5a52d624f584b684b552a7a69e618bccb04a331",
+    "training/pilot_scenarios.py": "fd0ffec6674881386d3952d39d2c7e03e5c00779d516b9f5389f6615ec940251",
+    "backend/contracts.py": "78f783e8fb1f3ea25bf001a474eb4467e1bfcaee74888597901f2a4f352fd814",
+    "backend/simulator/__init__.py": "b94dc8d98b60b9219d00698c6622023dc45e6853436edbb0ae2c344c9492d59f",
+    "backend/simulator/channel.py": "daa29238890640701bf3ecb83185c265bae48706dc4ac40c92e12f8504be2743",
+    "backend/simulator/energy.py": "b1afe137f9284647face8f3cfc86d4594d7843191ae5f2c1ccc630537d64bef3",
+    "backend/simulator/engine.py": "032a18b8968f813af5baf8a001229b8e549c85021d9fac947f7cb5d3825618d5",
+    "backend/simulator/link.py": "90556f6431f90423b888f9060c826f638dc2086445e331909ff9d95ff1e34b49",
+    "backend/simulator/protocol.py": "7379badc0fa1e796e53a82b325e3ce29b05cf99eba57272dc5ce119975a304fa",
+    "backend/simulator/queue.py": "059099298309f5c34a8051e198a6ec62729537118b32d7a8409d40a0044ee852",
+    "backend/simulator/r3_engine.py": "3851f772840b2efb8a2dc23e7bf15f935ad3beb45f095598589c075200f16789",
+    "backend/policies/__init__.py": "76940b2a453bc01e9b8844a1e61c4ecc11ab69f6beb2fc88f94a48d2e8e06d26",
+    "backend/policies/common.py": "ee035d8547a63437fcd09fa3f521e9cafacf97dc26f042f0b05e2d69cb97f6cb",
+    "backend/policies/edf.py": "9806c2a9e9da72104f7a1e102f4d4e84f4ef02133510a073086e49cfbc97827c",
+    "backend/policies/guard.py": "d241aaa4e04db42bf0fca53faaacf1b5cb12b95938629245b2007c74744d049e",
+    "backend/policies/learned.py": "74278d6a5a7a1e106ea179e526b206ae9d77526dda24c3c93a036630e6e15785",
+    "backend/policies/runner.py": "deff5360b712b7a0307a5b09f4cee56f1d0d68dd288e6ac5fe6c42b08a40e489",
+    "backend/policies/teacher.py": "88c124b1c710dc0c607f03cd903a0de046b4e2c18e9fc7c8e770db05b72e75f8",
+    "backend/policies/value.py": "1d9be9699746cff53b80f75d5f8c77c679b9b947db52835099efb6ac3f52a817"
+  },
+  "output_sha256": {
+    "attempts.jsonl": "994cf2504ab28a6f784d6b84fb51ebd069ad19e60a9e0ffd04dea128401e43e7",
+    "config.json": "204af11c07bad04fb25e085c733b63415306d0eb48bfc14c6bed657b99ed9c8c",
+    "diagnostics.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "leakage.json": "09049fa30729e613968f8c43f1e7b40582ff4d29d7b55b2c407b3629a9a20294",
+    "samples.jsonl": "994cf2504ab28a6f784d6b84fb51ebd069ad19e60a9e0ffd04dea128401e43e7",
+    "source_splits.json": "2b23a9b586183964c8d1d311edcf319f6a4efe36813a2594aa67bd32aad22714",
+    "sources.jsonl": "332168dcdafdc9730030d499196e319c1c327dccdb637adf68970a5a30a9948e",
+    "summary.json": "7e6b8d4628fd8869c56bd6ac31df2817d5a7afd7c45137c44fd31481dffe4549",
+    "teacher_config.json": "c75eb37ba7bf55de2ed8efc9bdcf9c03fb17a866b2bccd2019e1cea590c72353"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "dataset_version": "b-recovery-dev-v1",
+  "status": "ready_for_A_label_review",
+  "training_enabled": false,
+  "sources": 30,
+  "states": 60,
+  "eligible": 60,
+  "ineligible": 0,
+  "source_split_counts": {
+    "train": 18,
+    "validation": 6,
+    "test": 6
+  },
+  "state_split_counts": {
+    "train": 36,
+    "validation": 12,
+    "test": 12
+  },
+  "family_counts": {
+    "wait_then_send": 8,
+    "last_chance": 8,
+    "task_conflict": 7,
+    "must_wait": 7
+  },
+  "decision_counts": {
+    "tied": 8,
+    "send_strictly_better": 30,
+    "no_feasible_send": 22
+  },
+  "solver_status_counts": {
+    "OPTIMAL": 60
+  },
+  "family_decision_counts": {
+    "wait_then_send": {
+      "tied": 8,
+      "send_strictly_better": 8
+    },
+    "last_chance": {
+      "send_strictly_better": 8,
+      "no_feasible_send": 8
+    },
+    "task_conflict": {
+      "send_strictly_better": 14
+    },
+    "must_wait": {
+      "no_feasible_send": 14
+    }
+  },
+  "failures": [],
+  "wall_seconds": 0.41031330003170297,
+  "formal_results_reused": false
+}

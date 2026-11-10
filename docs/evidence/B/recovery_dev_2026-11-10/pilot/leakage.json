@@ -1,0 +1,37 @@
+{
+  "status": "passed",
+  "seed_overlap": 0,
+  "source_content_overlap": 0,
+  "semantic_observation_overlap": 0,
+  "prior_observations": 248,
+  "exclusion_evidence": {
+    "docs/evidence/B/formal_v2_candidate_2026-11-09/candidate/manifest.json": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+    "docs/evidence/B/delegated_execution_2026-11-10/formal_v2_delegated_results_20261110.zip": "efa801d9dde6a9eb340ca0a27b873027248edbcadd7b85c82cdd3847ab5f9e86",
+    "data/teacher/a_n3_20/samples.jsonl": "32f09ebc03005a64327d86a58d6b15aa519f17c27060a96b522655437cc3aa58",
+    "data/teacher/a_n3_20_v2/samples.jsonl": "2df964e78a6bf6220b4c48c92b29f4838d01af13281f41f666a306e96c5b8957",
+    "data/teacher/a_n4_pilot_v1/attempts.jsonl": "45d74c2058fd167770cffaa4665eeba60efc0450d8800d348dc1abd111fd59c1",
+    "data/teacher/a_n4_pilot_v1/diagnostics.jsonl": "cd065e73d70ef77e7df2226615171727f92c0632ea7ca8754a62805feb0250ef",
+    "data/teacher/a_n4_pilot_v1/samples.jsonl": "08d131dd916e088940c86d765466645bece7f28a982e7c3a0da503ad0b9ff1f1",
+    "data/teacher/a_n4_pilot_v1/sources.jsonl": "c62b66856d352611feaae57bffca65bd27a71b4a4e1cb3a39d821767201ce788",
+    "data/teacher/sources/a_n3_20_v2.jsonl": "6f099d8845dfa997c271399db5b43c348fa330c7a2b7316d8a5aaa20d89caf8d"
+  },
+  "excluded_seed_ranges_inclusive": [
+    [
+      10000,
+      10179
+    ],
+    [
+      200000,
+      200179
+    ],
+    [
+      410000,
+      410029
+    ],
+    [
+      600000,
+      600179
+    ]
+  ],
+  "scope": "all repository teacher JSONL public observations, all 30 old pilot initial observations, 180 hash-verified formal initial observations and excluded seed ranges"
+}
