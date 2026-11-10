@@ -8,9 +8,14 @@ import platform
 import re
 import subprocess
 import sys
+import sysconfig
 import time
 from urllib.request import build_opener, ProxyHandler
 import venv
+
+
+def runtime_supported():
+    return sys.version_info[:2] == (3,12) and sysconfig.get_platform() == 'win-amd64'
 
 
 def verify_integrity(root):
@@ -39,7 +44,7 @@ def run(root, port, output):
     if output.exists():
         raise ValueError('Acceptance output already exists; keep each attempt separately')
     count = verify_integrity(root)
-    if sys.version_info[:2] != (3, 12) or platform.machine().lower() not in {'amd64','x86_64'}:
+    if not runtime_supported():
         raise ValueError('Offline wheels require Python 3.12 / Windows x64')
     output.mkdir(parents=True)
     report = dict(status='running', scope='single_machine_offline_acceptance',
