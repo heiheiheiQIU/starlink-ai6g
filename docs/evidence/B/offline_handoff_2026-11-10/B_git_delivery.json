@@ -1,0 +1,15 @@
+{
+  "status": "original_package_uploaded_to_git",
+  "authorization": "先交付 Git 原包，C 随后在自己电脑验收",
+  "remote": "https://github.com/heiheiheiQIU/starlink-ai6g.git",
+  "branch": "codex/b-finalize-receipts-20261110",
+  "uploaded_commit": "eccdf42",
+  "package_path": "deliveries/B_final_demo_20261110.zip",
+  "package_bytes": 17532109,
+  "package_sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+  "C_receipt": "pending",
+  "C_independent_hash": "pending",
+  "second_physical_machine_acceptance": "pending",
+  "A_data_expansion_approval": "pending",
+  "training_enabled": false
+}
