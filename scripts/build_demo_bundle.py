@@ -10,12 +10,17 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def runtime_paths(tracked):
+    return [p for p in tracked if p.startswith(('backend/','configs/','artifacts/','scripts/'))
+            or p in {'training/__init__.py','training/policy_features.py'}]
+
+
 def build(output, wheels):
     if output.exists() or output.with_suffix('.zip').exists():
         raise ValueError('Use a new output path')
     commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     tracked = subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
-    runtime = [p for p in tracked if p.startswith(('backend/','configs/','artifacts/','scripts/'))]
+    runtime = runtime_paths(tracked)
     changed = subprocess.check_output(['git','diff','HEAD','--name-only','--',*runtime,'frontend/'],cwd=ROOT,text=True).strip()
     if changed:
         raise ValueError('Commit runtime changes before packaging: '+changed)

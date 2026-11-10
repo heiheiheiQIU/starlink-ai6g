@@ -30,3 +30,18 @@ def test_integrity_gate_detects_corruption_missing_and_unlisted_payload(tmp_path
     (tmp_path/'injected.py').write_bytes(b'print(3)')
     with pytest.raises(ValueError, match='unlisted'):
         verify_integrity(tmp_path)
+
+
+def test_isolated_runtime_contains_learned_scorer_dependency_closure(tmp_path):
+    from scripts.build_demo_bundle import ROOT, runtime_paths
+    import subprocess
+    import sys
+    tracked = subprocess.check_output(['git','ls-files'],cwd=ROOT,text=True).splitlines()
+    for name in runtime_paths(tracked):
+        dest = tmp_path/name
+        dest.parent.mkdir(parents=True,exist_ok=True)
+        dest.write_bytes((ROOT/name).read_bytes())
+    code = "import sys; sys.path.insert(0, sys.argv[1]); from backend.api.inference import inspect_model; print(inspect_model()['model_hash'])"
+    result = subprocess.run([sys.executable,'-I','-c',code,str(tmp_path)],cwd=tmp_path,capture_output=True,text=True)
+    assert result.returncode==0,result.stderr
+    assert 'a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a' in result.stdout
