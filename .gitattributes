@@ -71,3 +71,7 @@ docs/evidence/B/formal_v2_candidate_2026-11-09/** -text -diff
 docs/evidence/B/formal_v2_finalization_2026-11-10/** -text -diff
 
 docs/evidence/B/delegated_execution_2026-11-10/** -text -diff
+
+# Hash-bound development and final-demo evidence must retain exact bytes.
+docs/evidence/B/recovery_dev_2026-11-10/** -text -diff
+docs/evidence/B/final_demo_2026-11-10/** -text -diff
