@@ -32,6 +32,12 @@ def digest(raw):
     return hashlib.sha256(raw).hexdigest()
 
 
+def declared_sha256(value, name):
+    require(isinstance(value, str) and re.fullmatch(r'[0-9a-fA-F]{64}', value) is not None,
+            'Invalid SHA256 declaration: ' + name)
+    return value.lower()
+
+
 def content_hash(value):
     return digest(json.dumps(value, ensure_ascii=False, sort_keys=True,
                              separators=(',', ':'), allow_nan=False).encode('utf-8'))
@@ -83,17 +89,20 @@ def audit(pilot, root, source_commit):
     result = dict(status='failed', source_commit=source_commit, training_enabled=False,
                   training_approved=False, file_sha256={}, checks={}, gaps=[])
     hashes = result['file_sha256']
+    unbound = object()
 
-    def read(base, name, expected=None):
+    def read(base, name, expected=unbound):
+        if expected is not unbound:
+            expected = declared_sha256(expected, name)
         path = (base / name).resolve()
         require(path.is_relative_to(base.resolve()), 'Evidence path escapes root: ' + name)
         raw = path.read_bytes()
         sha = digest(raw)
         hashes[('pilot/' if base == pilot else 'repo/') + name] = sha
-        require(expected is None or expected == sha, 'SHA256 mismatch: ' + name)
+        require(expected is unbound or expected == sha, 'SHA256 mismatch: ' + name)
         return raw
 
-    def load(base, name, expected=None):
+    def load(base, name, expected=unbound):
         return json.loads(read(base, name, expected))
 
     def rows(raw):
@@ -111,7 +120,8 @@ def audit(pilot, root, source_commit):
         for name, sha in manifest['code_sha256'].items():
             read(root, name, sha)
         require(bool(manifest['code_sha256']), 'Missing code evidence')
-        teacher_raw = read(root, 'configs/teacher.json', manifest['teacher_config_sha256'])
+        teacher_sha = declared_sha256(manifest['teacher_config_sha256'], 'teacher_config_sha256')
+        teacher_raw = read(root, 'configs/teacher.json', teacher_sha)
         teacher = json.loads(teacher_raw)
         require(teacher == json.loads(outputs['teacher_config.json']), 'Teacher config content binding')
         result['checks']['manifest_hashes'] = 'passed'
@@ -169,9 +179,9 @@ def audit(pilot, root, source_commit):
                 member = 'frozen/candidate/' + row['config_path']
                 raw = package.read(member)
                 hashes['zip/' + member] = digest(raw)
-                require(digest(raw) == row['config_sha256'], 'Formal exclusion member hash')
+                require(digest(raw) == declared_sha256(row['config_sha256'], member), 'Formal exclusion member hash')
                 prior_seeds.add(row['seed'])
-                prior_content.add(row['content_hash'])
+                prior_content.add(declared_sha256(row['content_hash'], member + ' content_hash'))
                 prior_semantics.add(semantic_hash(public_observation(json.loads(raw)['scenario'])))
         ranges = [[10000, 10179], [200000, 200179], [410000, 410029], [600000, 600179]]
         require(leakage['excluded_seed_ranges_inclusive'] == ranges, 'Excluded seed ranges')
@@ -199,7 +209,7 @@ def audit(pilot, root, source_commit):
             require(row['label_content_sha256'] == content_hash({k: v for k, v in row.items() if k not in ('elapsed_ms', 'label_content_sha256')}), 'Label content hash')
             require(row['solver_status'] == 'OPTIMAL' and row['gap'] == 0.0 and row['label_eligible'] is True
                     and row['exclusion_reasons'] == [], 'Solver status/eligibility')
-            require(row['teacher_config_sha256'] == manifest['teacher_config_sha256'] and row['teacher_version'] == teacher['version']
+            require(row['teacher_config_sha256'] == teacher_sha and row['teacher_version'] == teacher['version']
                     and row['diagnostics']['teacher_version'] == teacher['version'] and row['dataset_version'] == VERSION, 'Teacher binding')
             require(all(c['limited'] is None for c in row['diagnostics']['candidates']), 'Limited solver candidate')
             scores = row['candidate_scores']

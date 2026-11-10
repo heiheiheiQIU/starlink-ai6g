@@ -118,6 +118,53 @@ class AuditTests(unittest.TestCase):
             self.assertEqual(result.returncode, 1)
             self.assertEqual(json.loads(result.stdout)['status'], 'failed')
 
+    def test_invalid_declared_sha256_fails_at_format_gate(self):
+        declarations = ('output', 'code', 'teacher', 'exclusion')
+        invalid_values = (None, 0, False, [], {}, 'a'*63, 'a'*65, 'g'*64)
+        for declaration in declarations:
+            for invalid in invalid_values:
+                with self.subTest(declaration=declaration, invalid=invalid), tempfile.TemporaryDirectory() as directory:
+                    pilot = Path(directory) / 'pilot'
+                    shutil.copytree(SNAPSHOT / PILOT, pilot)
+                    manifest = json.loads((pilot / 'manifest.json').read_text(encoding='utf-8'))
+                    if declaration == 'output':
+                        manifest['output_sha256']['samples.jsonl'] = invalid
+                    elif declaration == 'code':
+                        manifest['code_sha256']['training/recovery_pilot.py'] = invalid
+                    elif declaration == 'teacher':
+                        manifest['teacher_config_sha256'] = invalid
+                    else:
+                        path = pilot / 'leakage.json'
+                        leakage = json.loads(path.read_text(encoding='utf-8'))
+                        leakage['exclusion_evidence']['data/teacher/a_n3_20/samples.jsonl'] = invalid
+                        path.write_text(json.dumps(leakage), encoding='utf-8')
+                        manifest['output_sha256']['leakage.json'] = hashlib.sha256(path.read_bytes()).hexdigest()
+                    (pilot / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+                    result = self.run_audit(pilot)
+                    self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+                    report = json.loads(result.stdout)
+                    self.assertEqual(report['status'], 'failed')
+                    self.assertFalse(report['training_approved'])
+                    self.assertIn('Invalid SHA256 declaration:', report['error'])
+
+    def test_valid_uppercase_sha256_declarations_are_still_verified(self):
+        with tempfile.TemporaryDirectory() as directory:
+            pilot = Path(directory) / 'pilot'
+            shutil.copytree(SNAPSHOT / PILOT, pilot)
+            manifest = json.loads((pilot / 'manifest.json').read_text(encoding='utf-8'))
+            for mapping in ('output_sha256', 'code_sha256'):
+                manifest[mapping] = {name: sha.upper() for name, sha in manifest[mapping].items()}
+            manifest['teacher_config_sha256'] = manifest['teacher_config_sha256'].upper()
+            path = pilot / 'leakage.json'
+            leakage = json.loads(path.read_text(encoding='utf-8'))
+            leakage['exclusion_evidence'] = {name: sha.upper() for name, sha in leakage['exclusion_evidence'].items()}
+            path.write_text(json.dumps(leakage), encoding='utf-8')
+            manifest['output_sha256']['leakage.json'] = hashlib.sha256(path.read_bytes()).hexdigest().upper()
+            (pilot / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+            result = self.run_audit(pilot)
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertEqual(json.loads(result.stdout)['status'], 'passed')
+
 
 if __name__ == '__main__':
     unittest.main()
