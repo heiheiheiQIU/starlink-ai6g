@@ -73,6 +73,16 @@
     "repo/data/teacher/sources/a_n3_20_v2.jsonl": "6f099d8845dfa997c271399db5b43c348fa330c7a2b7316d8a5aaa20d89caf8d",
     "repo/docs/evidence/B/delegated_execution_2026-11-10/formal_v2_delegated_results_20261110.zip": "efa801d9dde6a9eb340ca0a27b873027248edbcadd7b85c82cdd3847ab5f9e86",
     "repo/docs/evidence/B/formal_v2_candidate_2026-11-09/candidate/manifest.json": "2b0814db44b7c70cd94e44608e34c762ffaa86969ea6f955e4736b7b3cdcd31f",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/attempts.jsonl": "994cf2504ab28a6f784d6b84fb51ebd069ad19e60a9e0ffd04dea128401e43e7",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/config.json": "204af11c07bad04fb25e085c733b63415306d0eb48bfc14c6bed657b99ed9c8c",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/diagnostics.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/leakage.json": "09049fa30729e613968f8c43f1e7b40582ff4d29d7b55b2c407b3629a9a20294",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/manifest.json": "01be0d640ffdde85f30856ea03e73f548575217a9eba513971c0cc7a579f7e90",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/samples.jsonl": "994cf2504ab28a6f784d6b84fb51ebd069ad19e60a9e0ffd04dea128401e43e7",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/source_splits.json": "2b23a9b586183964c8d1d311edcf319f6a4efe36813a2594aa67bd32aad22714",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/sources.jsonl": "332168dcdafdc9730030d499196e319c1c327dccdb637adf68970a5a30a9948e",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/summary.json": "7e6b8d4628fd8869c56bd6ac31df2817d5a7afd7c45137c44fd31481dffe4549",
+    "repo/docs/evidence/B/recovery_dev_2026-11-10/pilot/teacher_config.json": "c75eb37ba7bf55de2ed8efc9bdcf9c03fb17a866b2bccd2019e1cea590c72353",
     "repo/training/generate_policy_pilot.py": "1f4b57a8146f9c078e5e8a95b5a52d624f584b684b552a7a69e618bccb04a331",
     "repo/training/pilot_scenarios.py": "fd0ffec6674881386d3952d39d2c7e03e5c00779d516b9f5389f6615ec940251",
     "repo/training/recovery_pilot.py": "a379268c6897571bd98e94fd8d21511c8e41a83e32b7bb7e236c602dac264a78",
@@ -271,6 +281,14 @@
     "test": 6,
     "train": 18,
     "validation": 6
+  },
+  "source_verification": {
+    "manifest_path": "docs/evidence/B/recovery_dev_2026-11-10/pilot/manifest.json",
+    "manifest_sha256": "01be0d640ffdde85f30856ea03e73f548575217a9eba513971c0cc7a579f7e90",
+    "method": "pinned frozen manifest and complete code/output evidence",
+    "scope": "Consumed pilot records and code match frozen reference; equivalent JSON formatting and hash letter case allowed; not an attestation of unrelated repository files",
+    "source_commit": "a2e0be4b579b5d4cb797bdc826c077e551d985f6",
+    "status": "verified"
   },
   "state_count": 60,
   "state_split_counts": {

@@ -19,6 +19,10 @@ EXPECTED_SPLITS = {"train": 18, "validation": 6, "test": 6}
 EXPECTED_SEEDS = set(range(710000, 710030))
 REQUIRED_FAMILIES = {"wait_then_send", "last_chance", "task_conflict", "must_wait"}
 VERSION = 'b-recovery-dev-v1'
+FROZEN_SOURCE_COMMIT = 'a2e0be4b579b5d4cb797bdc826c077e551d985f6'
+FROZEN_MANIFEST = 'docs/evidence/B/recovery_dev_2026-11-10/pilot/manifest.json'
+# Trust anchor independently obtained from git archive of FROZEN_SOURCE_COMMIT.
+FROZEN_MANIFEST_SHA256 = '01be0d640ffdde85f30856ea03e73f548575217a9eba513971c0cc7a579f7e90'
 FORMAL_MANIFEST = 'docs/evidence/B/formal_v2_candidate_2026-11-09/candidate/manifest.json'
 FORMAL_ZIP = 'docs/evidence/B/delegated_execution_2026-11-10/formal_v2_delegated_results_20261110.zip'
 
@@ -108,9 +112,19 @@ def audit(pilot, root, source_commit):
     def rows(raw):
         return [json.loads(line) for line in raw.decode('utf-8').splitlines() if line.strip()]
 
+    def mapping(value, name):
+        require(isinstance(value, dict), 'Expected mapping: ' + name)
+        return value
+
     try:
         require(re.fullmatch(r'[0-9a-f]{40}', source_commit) is not None, 'Expected full source commit SHA')
+        require(source_commit == FROZEN_SOURCE_COMMIT, 'Frozen source commit mismatch')
+        trusted = load(root, FROZEN_MANIFEST, FROZEN_MANIFEST_SHA256)
         manifest = load(pilot, 'manifest.json')
+        mapping(manifest, 'manifest')
+        mapping(manifest['output_sha256'], 'output_sha256')
+        mapping(manifest['code_sha256'], 'code_sha256')
+        require(set(manifest['code_sha256']) == set(trusted['code_sha256']), 'Code evidence completeness')
         require(manifest['dataset_version'] == VERSION and manifest['training_enabled'] is False,
                 'Manifest dataset/training binding')
         expected_outputs = {'attempts.jsonl', 'config.json', 'diagnostics.jsonl', 'leakage.json',
@@ -119,10 +133,11 @@ def audit(pilot, root, source_commit):
         outputs = {name: read(pilot, name, sha) for name, sha in manifest['output_sha256'].items()}
         for name, sha in manifest['code_sha256'].items():
             read(root, name, sha)
-        require(bool(manifest['code_sha256']), 'Missing code evidence')
+            require(declared_sha256(sha, name) == trusted['code_sha256'][name], 'Frozen code hash binding: ' + name)
         teacher_sha = declared_sha256(manifest['teacher_config_sha256'], 'teacher_config_sha256')
         teacher_raw = read(root, 'configs/teacher.json', teacher_sha)
         teacher = json.loads(teacher_raw)
+        require(teacher_sha == trusted['teacher_config_sha256'], 'Frozen teacher binding')
         require(teacher == json.loads(outputs['teacher_config.json']), 'Teacher config content binding')
         result['checks']['manifest_hashes'] = 'passed'
         sources = rows(outputs['sources.jsonl'])
@@ -158,7 +173,7 @@ def audit(pilot, root, source_commit):
         result['checks']['source_identity_split_uniqueness'] = 'passed'
 
         prior_seeds, prior_content, prior_semantics = set(), set(), set()
-        evidence = leakage['exclusion_evidence']
+        evidence = mapping(leakage['exclusion_evidence'], 'exclusion_evidence')
         needed = {FORMAL_MANIFEST, FORMAL_ZIP} | {p.relative_to(root).as_posix() for p in (root / 'data/teacher').rglob('*.jsonl')}
         require(set(evidence) == needed, 'Exclusion evidence completeness')
         excluded = {name: read(root, name, sha) for name, sha in evidence.items()}
@@ -211,10 +226,17 @@ def audit(pilot, root, source_commit):
                     and row['exclusion_reasons'] == [], 'Solver status/eligibility')
             require(row['teacher_config_sha256'] == teacher_sha and row['teacher_version'] == teacher['version']
                     and row['diagnostics']['teacher_version'] == teacher['version'] and row['dataset_version'] == VERSION, 'Teacher binding')
-            require(all(c['limited'] is None for c in row['diagnostics']['candidates']), 'Limited solver candidate')
             scores = row['candidate_scores']
+            require(isinstance(scores, list) and scores and all(isinstance(s, dict) for s in scores), 'Candidate score list')
             keys = {(s['task_id'], s['mode']) for s in scores}
             require(len(keys) == len(scores) and keys == {(None, 'idle')} | {(t['task_id'], mode) for t in obs['tasks'] for mode in ('robust', 'fast')}, 'Candidate identity/completeness')
+            candidates = row['diagnostics']['candidates']
+            require(isinstance(candidates, list) and candidates and all(isinstance(c, dict) for c in candidates), 'Candidate diagnostics list must be nonempty')
+            diagnostic_keys = {(c['task_id'], c['mode']) for c in candidates}
+            feasible_keys = {(s['task_id'], s['mode']) for s in scores if s['feasible'] is True}
+            require(feasible_keys and len(diagnostic_keys) == len(candidates) and diagnostic_keys == feasible_keys, 'Candidate diagnostics identity/completeness')
+            require(all('limited' in c for c in candidates), 'Candidate diagnostics limited field missing')
+            require(all(c['limited'] is None for c in candidates), 'Limited solver candidate')
             require(all(type(s['feasible']) is bool and isinstance(s['score'], (float, int)) and math.isfinite(s['score']) for s in scores), 'Candidate score validity')
             idle = next(s for s in scores if s['mode'] == 'idle')
             require(idle['feasible'], 'Idle must be feasible')
@@ -242,6 +264,19 @@ def audit(pilot, root, source_commit):
                 and summary['solver_status_counts'] == {'OPTIMAL': len(states)}, 'Summary independent reconciliation')
         require(leakage['status'] == 'passed' and leakage['prior_observations'] == len(prior_semantics)
                 and all(leakage[k] == 0 for k in ('seed_overlap', 'source_content_overlap', 'semantic_observation_overlap')), 'Leakage declaration reconciliation')
+        # Bind all audited records to the pinned frozen reference, after the
+        # independent gates so corruptions produce the specific integrity error.
+        # Equivalent JSON formatting and hex letter case carry no source change.
+        for name, sha in trusted['output_sha256'].items():
+            frozen_raw = read(root, str(Path(FROZEN_MANIFEST).parent.as_posix()) + '/' + name, sha)
+            actual = rows(outputs[name]) if name.endswith('.jsonl') else json.loads(outputs[name])
+            frozen = rows(frozen_raw) if name.endswith('.jsonl') else json.loads(frozen_raw)
+            if name == 'leakage.json':
+                actual['exclusion_evidence'] = {k: declared_sha256(v, k) for k, v in actual['exclusion_evidence'].items()}
+            require(actual == frozen, 'Frozen output content binding: ' + name)
+        result['source_verification'] = dict(status='verified', method='pinned frozen manifest and complete code/output evidence',
+            source_commit=FROZEN_SOURCE_COMMIT, manifest_path=FROZEN_MANIFEST, manifest_sha256=FROZEN_MANIFEST_SHA256,
+            scope='Consumed pilot records and code match frozen reference; equivalent JSON formatting and hash letter case allowed; not an attestation of unrelated repository files')
         result['checks'].update(state_identity='passed', source_level_split='passed', unique_seed='passed',
                                 unique_content_hash='passed', semantic_observation_leakage='passed',
                                 label_content_hash='passed', solver_status='passed', teacher_binding='passed',

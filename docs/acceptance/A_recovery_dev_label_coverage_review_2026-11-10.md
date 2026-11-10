@@ -1,10 +1,14 @@
 # A recovery 开发试点标签、覆盖与训练门禁裁定（2026-11-10）
 
+`A_ruling=accepted_with_notes`；`machine_audit.status=passed`。
+
 裁定对象是 B 开发试点快照 `a2e0be4b579b5d4cb797bdc826c077e551d985f6`，不是正式 540 结果。A 仅接受已审计范围内的标签/完整性一致性；覆盖不足，`training_enabled=false`、`training_approved=false`，训练门禁继续关闭。
 
 ## 1. 证据边界与事实表
 
-唯一机器事实接口：[A_recovery_dev_audit.json](../evidence/A/recovery_dev_2026-11-10/A_recovery_dev_audit.json)。该接口 SHA256 为 `a2e788ec6b4d42c39a24daefdf0808e961a3ca9eb04f83a639c2993fced10f31`。下表转录 A 独立机器审计的重算/核对结果；本裁定未重新运行 B 的生成器或求解器。B 自报的 `1703` checks 只作为自报背景，不等于 A 独立重算的检查数量，不用于扩大验收范围。
+唯一机器事实接口：[A_recovery_dev_audit.json](../evidence/A/recovery_dev_2026-11-10/A_recovery_dev_audit.json)。该接口 SHA256 为 `d99eaa2209007b2be1870eb3f7a188326d111c792e3134d3e34f1c8e253e744e`。下表转录 A 独立机器审计的重算/核对结果；本裁定未重新运行 B 的生成器或求解器。B 自报的 `1703` checks 只作为自报背景，不等于 A 独立重算的检查数量，不用于扩大验收范围。
+
+来源门禁固定上述 B commit，并以冻结 manifest 的 SHA256 `01be0d640ffdde85f30856ea03e73f548575217a9eba513971c0cc7a579f7e90` 为可信锚。机器接口 `source_verification.status=verified` 表示完整代码清单及所消费试点输出与该冻结引用相符（允许等价 JSON 排版及哈希字母大小写）；不证明无关仓库文件的来源。错误 commit、删去代码清单条目或改写引用 manifest 均拒绝。候选诊断必须非空、无重复，与 `feasible=true` 评分候选身份集合精确一致，每项 `limited` 必须存在且为 null；不可行发送的评分仍保留作决策证据，不要求其拥有求解诊断。
 
 | 项目 | A 审计结果 |
 | --- | --- |

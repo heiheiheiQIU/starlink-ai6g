@@ -17,9 +17,9 @@ COMMIT = 'a2e0be4b579b5d4cb797bdc826c077e551d985f6'
 
 
 class AuditTests(unittest.TestCase):
-    def run_audit(self, pilot, root=SNAPSHOT):
+    def run_audit(self, pilot, root=SNAPSHOT, commit=COMMIT):
         result = subprocess.run([sys.executable, str(SCRIPT), '--pilot-dir', str(pilot),
-                                 '--repo-root', str(root), '--source-commit', COMMIT],
+                                 '--repo-root', str(root), '--source-commit', commit],
                                 capture_output=True, text=True)
         return result
 
@@ -36,6 +36,8 @@ class AuditTests(unittest.TestCase):
                                                        no_feasible_send=22, wait_strictly_better=0))
         self.assertEqual(result['coverage_counts'], dict(non_zero_loss=0, in_flight=0, long_horizon=0))
         self.assertFalse(result['training_approved'])
+        self.assertEqual(result['source_verification']['status'], 'verified')
+        self.assertEqual(result['source_verification']['source_commit'], COMMIT)
         self.assertTrue(result['gaps'])
 
     def test_corruption_is_rejected_even_when_output_hash_is_resealed(self):
@@ -77,7 +79,7 @@ class AuditTests(unittest.TestCase):
             root = Path(directory)
             manifest = json.loads((SNAPSHOT / PILOT / 'manifest.json').read_text(encoding='utf-8'))
             leakage = json.loads((SNAPSHOT / PILOT / 'leakage.json').read_text(encoding='utf-8'))
-            for name in list(manifest['code_sha256']) + ['configs/teacher.json'] + list(leakage['exclusion_evidence']):
+            for name in list(manifest['code_sha256']) + ['configs/teacher.json', (PILOT / 'manifest.json').as_posix()] + list(leakage['exclusion_evidence']):
                 target = root / name
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copyfile(SNAPSHOT / name, target)
@@ -164,6 +166,81 @@ class AuditTests(unittest.TestCase):
             result = self.run_audit(pilot)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             self.assertEqual(json.loads(result.stdout)['status'], 'passed')
+
+    def test_wrong_commit_is_rejected(self):
+        result = self.run_audit(SNAPSHOT / PILOT, commit='0'*40)
+        self.assertEqual(result.returncode, 1, result.stdout)
+        self.assertIn('Frozen source commit mismatch', json.loads(result.stdout)['error'])
+
+    def test_code_evidence_set_and_mapping_types_are_required(self):
+        for field, value in [('code_sha256', 'delete_teacher'), ('code_sha256', []),
+                             ('code_sha256', None), ('output_sha256', [])]:
+            with self.subTest(field=field, value=value), tempfile.TemporaryDirectory() as directory:
+                pilot = Path(directory) / 'pilot'
+                shutil.copytree(SNAPSHOT / PILOT, pilot)
+                path = pilot / 'manifest.json'
+                manifest = json.loads(path.read_text(encoding='utf-8'))
+                if value == 'delete_teacher':
+                    del manifest[field]['backend/policies/teacher.py']
+                else:
+                    manifest[field] = value
+                path.write_text(json.dumps(manifest), encoding='utf-8')
+                result = self.run_audit(pilot)
+                self.assertEqual(result.returncode, 1)
+                report = json.loads(result.stdout)
+                self.assertEqual(report['status'], 'failed')
+                self.assertFalse(report['training_approved'])
+                self.assertIn('Code evidence completeness' if value == 'delete_teacher' else 'Expected mapping', report['error'])
+
+    def test_missing_mismatched_or_duplicate_candidate_diagnostics_are_rejected(self):
+        cases = ('empty', 'missing_one', 'wrong_identity', 'duplicate', 'not_list', 'extra_infeasible', 'missing_limited')
+        for case in cases:
+            with self.subTest(case=case), tempfile.TemporaryDirectory() as directory:
+                pilot = Path(directory) / 'pilot'
+                shutil.copytree(SNAPSHOT / PILOT, pilot)
+                records = [json.loads(line) for line in (pilot / 'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+                record = (next(r for r in records if any(not s['feasible'] for s in r['candidate_scores']))
+                          if case == 'extra_infeasible' else records[0])
+                candidates = record['diagnostics']['candidates']
+                if case == 'empty':
+                    candidates.clear()
+                elif case == 'missing_one':
+                    candidates.pop()
+                elif case == 'wrong_identity':
+                    candidates[0]['task_id'] = 'unknown'
+                elif case == 'duplicate':
+                    candidates.append(copy.deepcopy(candidates[0]))
+                elif case == 'extra_infeasible':
+                    score = next(s for s in record['candidate_scores'] if not s['feasible'])
+                    candidates.append(dict(task_id=score['task_id'], mode=score['mode'], limited=None, nodes=0))
+                elif case == 'missing_limited':
+                    del candidates[0]['limited']
+                else:
+                    record['diagnostics']['candidates'] = {}
+                payload = {k: v for k, v in record.items() if k not in ('elapsed_ms', 'label_content_sha256')}
+                record['label_content_sha256'] = hashlib.sha256(json.dumps(payload, ensure_ascii=False,
+                    sort_keys=True, separators=(',', ':'), allow_nan=False).encode()).hexdigest()
+                raw = ''.join(json.dumps(row) + '\n' for row in records).encode()
+                manifest = json.loads((pilot / 'manifest.json').read_text(encoding='utf-8'))
+                for name in ('attempts.jsonl', 'samples.jsonl'):
+                    (pilot / name).write_bytes(raw)
+                    manifest['output_sha256'][name] = hashlib.sha256(raw).hexdigest()
+                (pilot / 'manifest.json').write_text(json.dumps(manifest), encoding='utf-8')
+                result = self.run_audit(pilot)
+                self.assertEqual(result.returncode, 1, result.stdout)
+                report = json.loads(result.stdout)
+                self.assertEqual(report['status'], 'failed')
+                self.assertIn('Candidate diagnostics', report['error'])
+
+    def test_reference_manifest_is_pinned(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / PILOT / 'manifest.json'
+            path.parent.mkdir(parents=True)
+            path.write_text('{}', encoding='utf-8')
+            result = self.run_audit(SNAPSHOT / PILOT, root)
+            self.assertEqual(result.returncode, 1)
+            self.assertIn('SHA256 mismatch:', json.loads(result.stdout)['error'])
 
 
 if __name__ == '__main__':
