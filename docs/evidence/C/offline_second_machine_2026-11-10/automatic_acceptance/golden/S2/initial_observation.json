@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "run_id": "r2_minimal_validation",
+  "policy_id": "manual",
+  "sim_time_s": 0.0,
+  "tasks": [
+    {
+      "task_id": "T1",
+      "arrival_s": 0.0,
+      "deadline_s": 8.0,
+      "payload_bytes": 3072,
+      "remaining_bytes": 3072,
+      "priority_weight": 1.0,
+      "business_class": "synthetic",
+      "data_location": "satellite_1"
+    },
+    {
+      "task_id": "T4",
+      "arrival_s": 0.0,
+      "deadline_s": 8.0,
+      "payload_bytes": 1024,
+      "remaining_bytes": 1024,
+      "priority_weight": 1.0,
+      "business_class": "synthetic",
+      "data_location": "satellite_1"
+    }
+  ],
+  "forecast_windows": [
+    {
+      "window_id": "W1",
+      "start_s": 0.0,
+      "end_s": 32.0,
+      "rate_profile": [
+        {
+          "time_s": 0.0,
+          "robust_bps": 16384.0,
+          "fast_bps": 32768.0
+        }
+      ],
+      "loss_profile": [
+        {
+          "time_s": 0.0,
+          "robust_loss_prob": 0.0,
+          "fast_loss_prob": 0.0
+        }
+      ],
+      "source": "synthetic",
+      "forecast_version": "sandbox-axis-v1"
+    }
+  ],
+  "health": {
+    "soc_est": 0.04,
+    "soc_lower": 0.037142857142857144,
+    "capacity_Wh_est": 20.0,
+    "capacity_lower_Wh": 14.0,
+    "energy_lower_Wh": 0.52,
+    "rul_est": null,
+    "rul_unit": null,
+    "uncertainty_method": "synthetic_fixed_bounds",
+    "model_version": "sandbox-axis-v1",
+    "observed_at_s": 0.0,
+    "available_at_s": 0.0,
+    "reason_codes": [
+      "RUL_UNAVAILABLE"
+    ]
+  },
+  "inflight": null,
+  "cache_bytes": 4096,
+  "forecast_version": "sandbox-axis-v1"
+}

@@ -1,12 +1,14 @@
 # C 对 B 原始离线包补交的跟进审计
 
-日期：2026-11-10  
-审计对象：`origin/codex/b-finalize-receipts-20261110@a2e0be4`  
+日期：2026-11-10
+
+审计对象：`origin/codex/b-finalize-receipts-20261110@a2e0be4`
+
 前序审计：`docs/audits/C_B_demo_recovery_pilot_audit_2026-11-10.md`
 
 ## 结论
 
-**B 的原始离线包补交可以签收；C 侧第二台物理电脑的自动离线验收已通过。** 当前仍需完成浏览器手工检查并提交C正式回执。A对开发数据扩充的批准仍未到位，因此训练、Hybrid和正式模型替换继续禁止。
+**B 的原始离线包补交可以签收；C 侧第二台物理电脑的自动离线验收、浏览器手工检查和正式回执均已完成。** A对开发数据扩充的批准仍未到位，因此训练、Hybrid和正式模型替换继续禁止。
 
 ## 远端提交核验
 
@@ -52,12 +54,10 @@ python.exe .\accept.py --port 8042 --output .\acceptance\C_20261110_a2e0be4
 
 本次验收仍如实复现Learned为0%的负结果，只证明发行包和真实沙盒工程链能够在第二台机器运行，不证明AI收益。
 
-## 尚未关闭的事项
+## 后续未关闭事项
 
-1. **C手工浏览器验收**：逐一运行S1/S2/S3，记录三个新`run_id`，检查参数变化、旧结果失效、跨页共享、策略分流、事件分页及页面导出。
-2. **C正式回执**：手工项完成后，基于 `docs/evidence/B/offline_handoff_2026-11-10/C_receipt.template.json` 生成C拥有的回执；不得修改B模板或照抄expected字段充当actual。
-3. **证据入库**：将本机自动验收目录、手工截图、实际下载ZIP及哈希归档至C审计分支，再由A/B复核。
-4. **A数据裁决**：等待A审查60个教师标签与覆盖缺口。当前“等待严格更好=0”，且非零丢包、在途重传、长时域不在旧教师支持域，B不得自行扩样或训练。
+1. **A数据裁决**：等待A审查60个教师标签与覆盖缺口。当前“等待严格更好=0”，且非零丢包、在途重传、长时域不在旧教师支持域，B不得自行扩样或训练。
+2. **三方复核C回执**：A/B只需复核 `docs/evidence/C/offline_second_machine_2026-11-10/` 的字节、哈希与口径，不得把工程验收升级为AI收益授权。
 
 ## 当前状态更新
 
@@ -66,8 +66,7 @@ python.exe .\accept.py --port 8042 --output .\acceptance\C_20261110_a2e0be4
 | B原包进入远端 | accepted |
 | C独立复算原包SHA | accepted |
 | C第二机自动离线验收 | accepted |
-| C浏览器手工验收 | pending |
-| C正式回执与证据入库 | pending |
+| C浏览器手工验收 | accepted |
+| C正式回执与证据入库 | accepted_with_notes |
 | A批准数据扩充合同 | pending |
 | 新模型训练 / Hybrid / 正式替换 | prohibited |
-

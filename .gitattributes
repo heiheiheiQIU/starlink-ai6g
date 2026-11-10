@@ -71,3 +71,6 @@ docs/evidence/B/formal_v2_candidate_2026-11-09/** -text -diff
 docs/evidence/B/formal_v2_finalization_2026-11-10/** -text -diff
 
 docs/evidence/B/delegated_execution_2026-11-10/** -text -diff
+
+# Preserve C second-machine acceptance evidence byte-for-byte across checkouts.
+docs/evidence/C/offline_second_machine_2026-11-10/** -text -diff

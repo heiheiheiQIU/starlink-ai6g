@@ -1,7 +1,9 @@
 # C 对 B 最终演示与开发数据试点的独立审计
 
-日期：2026-11-10  
-审计对象：`origin/codex/b-finalize-receipts-20261110@2b86ff0ef03032ab9de02855932c6ceab4c9234d`  
+日期：2026-11-10
+
+审计对象：`origin/codex/b-finalize-receipts-20261110@2b86ff0ef03032ab9de02855932c6ceab4c9234d`
+
 审计结论：**accepted_with_notes（限本轮“演示工程闭环 + 开发数据试点”范围）**。本结论不等于正式模型获益通过、不等于离线发行包完成双机验收，也不授权训练、Hybrid 接入、覆盖正式结果或合入 `main`。
 
 ## 1. 独立复验结果
