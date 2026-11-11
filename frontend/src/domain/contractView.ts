@@ -25,12 +25,12 @@ export function metricDisplay(policy: PolicyResult, name: NullableMetricName): M
 
   if (value === null) {
     if (reason === undefined) {
-      return { kind: 'conflict', value: null, reason: '缺失指标未提供原因（合同错误态）' }
+      return { kind: 'conflict', value: null, reason: '缺失指标未提供原因（接口数据错误）' }
     }
     return { kind: 'missing', reason }
   }
   if (reason !== undefined) {
-    return { kind: 'conflict', value, reason: '已测数值同时携带缺测原因（合同错误态）' }
+    return { kind: 'conflict', value, reason: '已测数值同时携带缺测原因（接口数据错误）' }
   }
   return { kind: 'measured', value }
 }
@@ -43,7 +43,7 @@ export function formatMetricValue(display: MetricDisplay): string {
     case 'missing':
       return `N/A（${display.reason}）`
     case 'conflict':
-      return display.value === null ? `合同错误（${display.reason}）` : `${display.value} ⚠合同错误（${display.reason}）`
+      return display.value === null ? `接口数据错误（${display.reason}）` : `${display.value} ⚠接口数据错误（${display.reason}）`
   }
 }
 
@@ -56,7 +56,7 @@ export function forecastBatchConflict(obs: Observation): string | null {
     (window) => window.forecast_version !== obs.forecast_version,
   )
   return mismatch
-    ? `窗口 ${mismatch.window_id} 预测版本 ${mismatch.forecast_version} 与顶层 ${obs.forecast_version} 不一致（合同错误态）`
+    ? `窗口 ${mismatch.window_id} 预测版本 ${mismatch.forecast_version} 与顶层 ${obs.forecast_version} 不一致（接口数据错误）`
     : null
 }
 

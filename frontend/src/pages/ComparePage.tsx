@@ -94,12 +94,12 @@ export function ComparePage() {
       <header className="console-page__intro">
         <p className="eyebrow">FAIR COMPARISON BENCH</p>
         <h1>策略评估</h1>
-        <p>在相同配置、随机种子、外部轨迹与评价口径下并排评估两种策略；参数变更后，历史结果立即失效。</p>
+        <p>在相同配置、随机种子、外部轨迹与评价口径下评估策略。上方展示可追溯的正式技术结果，下方沙盒用于观察参数变化如何改变单次运行。</p>
       </header>
 
       <RealRunPanel controller={run} />
 
-      <FormalResultsSource url={import.meta.env.VITE_FORMAL_SUMMARY_URL} />
+      <FormalResultsSource url={import.meta.env.VITE_FORMAL_SUMMARY_URL ?? '/data/formal_v2_technical_summary.json'} />
 
       {history?.current.kind === 'online' ? (
         <section className="run-history-strip" aria-label="运行对比上下文">
@@ -203,8 +203,7 @@ export function ComparePage() {
           轴刻度（秒）：{COMPARE_AXIS.join(' / ')} · 两策略事件按 policy_id 严格隔离 · 全部为演示数据，不作为实验结果。
         </p>
         <div className="negative-note">
-          工程化原则：低负载/能量充足工况若两策略无显著差异，必须如实展示并注明"该工况下额外预测无益"，
-          不删除负结果；相对优化器的配对统计仅在预先锁定的 54 条子集上报告。
+          结果解释：沙盒用于验证交互与单次运行链路，不替代上方180条轨迹的正式配对实验。参数、随机种子或策略版本变化都会形成新的运行记录，系统保留负结果和异常事件。
         </div>
       </div>
     </section>

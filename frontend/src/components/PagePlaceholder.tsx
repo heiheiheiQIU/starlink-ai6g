@@ -7,7 +7,7 @@ const PAGE_SUMMARIES: Record<PageId, string> = {
   assistant: '围绕异常、策略依据和结果来源进行可追溯问答。',
   compare: '在同一观测快照下对比多种遥测调度策略。',
   matrix: '18 工况 × 10 轨迹的规则基线场景验证热力图。',
-  evidence: '核验输入、预测版本、决策版本与执行回执。',
+  evidence: '核验输入、预测版本、决策版本与执行结果。',
   assets: '管理标准场景、模型版本与平台可视化资源。',
 }
 

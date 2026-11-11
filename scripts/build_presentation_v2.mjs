@@ -6,9 +6,9 @@ import { Presentation, PresentationFile } from '@oai/artifact-tool';
 import { MAIN_SLIDES, BACKUP_SLIDES } from './presentation_story_v2.mjs';
 import { RENDERERS, ROOT } from './presentation_layouts_v2.mjs';
 
-export const BUILD = path.join(ROOT, '.presentation-build', 'v2');
+export const BUILD = path.join(ROOT, '.presentation-build', 'v3');
 export const MAIN_TALK_SLIDE_COUNT = 15;
-export const FINAL_DECK_PATH = path.join(ROOT, 'docs', 'presentation', 'generated', '星地智调_主讲稿_v2_高信息密度版.pptx');
+export const FINAL_DECK_PATH = path.join(ROOT, 'docs', 'presentation', 'generated', '星地智调_主讲稿_v3_正式结果工程化版.pptx');
 
 export function validateStoryResources(slides) {
   const manifest = [];
@@ -76,7 +76,7 @@ export async function renderPreviews(presentation, mode = 'main') {
   const storySlides = mode === 'main' ? MAIN_SLIDES : [...MAIN_SLIDES, ...BACKUP_SLIDES];
   const manifest = {
     schema: 'presentation-v2-manifest',
-    generatedAt: '2026-11-08',
+    generatedAt: '2026-11-11',
     mode,
     slideCount: presentation.slides.items.length,
     mainTalkSlideCount: MAIN_TALK_SLIDE_COUNT,
@@ -96,7 +96,7 @@ export async function buildFullPreview() {
 export async function exportFinalDeck() {
   const { presentation, paths } = await buildFullPreview();
   await fsp.mkdir(path.dirname(FINAL_DECK_PATH), { recursive: true });
-  const draftPath = path.join(BUILD, '星地智调_主讲稿_v2_draft.pptx');
+  const draftPath = path.join(BUILD, '星地智调_主讲稿_v3_draft.pptx');
   await (await PresentationFile.exportPptx(presentation)).save(draftPath);
   if (fs.existsSync(FINAL_DECK_PATH)) {
     throw new Error(`Refusing to overwrite existing final deck: ${FINAL_DECK_PATH}`);
@@ -107,7 +107,7 @@ export async function exportFinalDeck() {
   let validation = { status: 'skipped', reason: 'Presentation finalizer environment is not configured.' };
   if (skillDir && runtimePython) {
     const { finalizePresentation } = await import(pathToFileURL(path.join(skillDir, 'container_tools', 'artifact_tool_utils.mjs')).href);
-    const receiptPath = path.join(BUILD, '星地智调_主讲稿_v2.validation.json');
+    const receiptPath = path.join(BUILD, '星地智调_主讲稿_v3.validation.json');
     validation = await finalizePresentation({
       workspaceDir: ROOT,
       candidatePath: draftPath,

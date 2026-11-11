@@ -71,7 +71,7 @@ function ComparisonCard({ id, comparison, signed }: {
         <div><span>总体95% CI</span><strong className="mono">{interval(comparison.overall.ci95)}</strong></div>
       </div>
       <p className="formal-statistical-verdict">
-        统计结论：{comparison.statistical_verdict}{signed ? ' · 三方签核已完成' : ' · 待三方签核'}
+        统计结论：{comparison.statistical_verdict}{signed ? ' · 结果已发布' : ' · 发布复核中'}
       </p>
       <CellTable id={id} comparison={comparison} />
     </article>
@@ -82,12 +82,12 @@ function PendingPanel() {
   return (
     <section className="console-card formal-results" role="region" aria-label="正式实验结果">
       <header className="formal-results__head">
-        <div><p className="eyebrow">FORMAL V2 · EVIDENCE GATED</p><h2>正式配对实验</h2></div>
+        <div><p className="eyebrow">FORMAL V2 · PAIRED EVALUATION</p><h2>正式配对实验</h2></div>
         <strong className="formal-verdict formal-verdict--pending">未完成</strong>
       </header>
       <div className="formal-empty">
-        <strong>尚未接入正式分析文件</strong>
-        <p>180条冻结轨迹与540次策略运行完成并经A/B/C三方签核后，才在此显示结果；当前不填入任何推测数值。</p>
+        <strong>尚未接入技术结果摘要</strong>
+        <p>系统仅展示通过结构、计数和来源校验的分析文件；未接入时不使用演示数字替代正式结果。</p>
       </div>
     </section>
   )
@@ -97,10 +97,10 @@ function LoadingPanel() {
   return (
     <section className="console-card formal-results" role="region" aria-label="正式实验结果">
       <header className="formal-results__head">
-        <div><p className="eyebrow">FORMAL V2 · EVIDENCE GATED</p><h2>正式配对实验</h2></div>
+        <div><p className="eyebrow">FORMAL V2 · PAIRED EVALUATION</p><h2>正式配对实验</h2></div>
         <strong className="formal-verdict formal-verdict--pending">校验中</strong>
       </header>
-      <div className="formal-empty"><strong>正在读取正式证据</strong><p>完成结构、计数、结论和来源哈希校验前不展示结果。</p></div>
+      <div className="formal-empty"><strong>正在读取实验摘要</strong><p>完成结构、运行计数、结论和来源指纹校验前不展示结果。</p></div>
     </section>
   )
 }
@@ -111,16 +111,16 @@ function EvidencePanel({ analysis }: { analysis: FormalAnalysis }) {
     <section className="console-card formal-results" role="region" aria-label="正式实验结果">
       <header className="formal-results__head">
         <div>
-          <p className="eyebrow">FORMAL V2 · PAIRED EVIDENCE</p><h2>正式配对实验</h2>
+          <p className="eyebrow">FORMAL V2 · PAIRED EVALUATION</p><h2>正式配对实验</h2>
           <p>{analysis.data_scope} · {analysis.domain} · 18工况×10轨迹×3策略</p>
         </div>
-        <span className={`chip ${signed ? 'chip--safe' : ''}`}>{signed ? '三方已签核' : '签核待完成'}</span>
+        <span className={`chip ${signed ? 'chip--safe' : ''}`}>{signed ? '结果已发布' : '技术结果完成 · 发布复核中'}</span>
       </header>
       <div className="formal-progress" aria-label="正式运行完成度">
         <div><span>已完成</span><strong>{analysis.completed_policy_runs}/540</strong></div>
-        <div><span>失败策略运行</span><strong>{analysis.failed_policy_runs}</strong></div>
-        <div><span>未生成/未运行</span><strong>{analysis.missing_policy_runs}</strong></div>
-        <div><span>失败尝试</span><strong>{analysis.failed_attempts}</strong></div>
+        <div><span>异常运行</span><strong>{analysis.failed_policy_runs}</strong></div>
+        <div><span>待补运行</span><strong>{analysis.missing_policy_runs}</strong></div>
+        <div><span>重试记录</span><strong>{analysis.failed_attempts}</strong></div>
       </div>
       <div className="formal-comparison-grid">
         {(['learned-edf', 'learned-value'] as const).map((id) => (
@@ -128,12 +128,12 @@ function EvidencePanel({ analysis }: { analysis: FormalAnalysis }) {
         ))}
       </div>
       <aside className="formal-provenance" aria-label="正式证据来源">
-        <div><span>冻结清单 SHA-256</span><code>{shortHash(analysis.provenance.frozen_manifest_sha256)}</code></div>
-        <div><span>运行索引 SHA-256</span><code>{shortHash(analysis.provenance.run_index_sha256)}</code></div>
+        <div><span>实验版本指纹</span><code>{shortHash(analysis.provenance.frozen_manifest_sha256)}</code></div>
+        <div><span>运行记录指纹</span><code>{shortHash(analysis.provenance.run_index_sha256)}</code></div>
         <div><span>推理口径</span><code>{analysis.inference.scope}</code></div>
       </aside>
       <p className="negative-note">
-        “未检出稳定差异”表示当前预注册检验未发现稳定方向，不等同于统计等效；负结果与缺失结果均原样保留。
+        “未检出稳定差异”表示当前预登记检验未发现稳定方向，不等同于统计等效。负结果与缺失结果均按原始记录展示。
       </p>
     </section>
   )
@@ -145,8 +145,8 @@ export function FormalResultsPanel({ analysis }: FormalResultsPanelProps) {
   if (!parsed.ok) {
     return (
       <section className="console-card formal-results formal-results--rejected" role="region" aria-label="正式实验结果">
-        <header className="formal-results__head"><h2>正式配对实验</h2><strong>证据拒绝</strong></header>
-        <p>输入文件未通过结构与一致性校验，不展示任何结论。原因：{parsed.error}</p>
+        <header className="formal-results__head"><h2>正式配对实验</h2><strong>数据校验未通过</strong></header>
+        <p>输入文件未通过结构与一致性校验，系统不展示结论。原因：{parsed.error}</p>
       </section>
     )
   }
@@ -193,8 +193,8 @@ export function FormalResultsSource({ url }: FormalResultsSourceProps) {
   if (state.kind === 'failed') {
     return (
       <section className="console-card formal-results formal-results--rejected" role="region" aria-label="正式实验结果">
-        <header className="formal-results__head"><h2>正式配对实验</h2><strong>证据读取失败</strong></header>
-        <p>已配置正式证据源，但未能读取；不回退到演示数据。原因：{state.message}</p>
+        <header className="formal-results__head"><h2>正式配对实验</h2><strong>结果摘要读取失败</strong></header>
+        <p>已配置技术结果源但未能读取。系统不会回退到演示数据。原因：{state.message}</p>
       </section>
     )
   }

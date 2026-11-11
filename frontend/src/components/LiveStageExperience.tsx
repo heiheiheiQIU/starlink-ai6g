@@ -36,7 +36,7 @@ export function LiveStageExperience({ stepId, events }: LiveStageExperienceProps
   try {
     ordered = normalizeReplayEvents(events)
   } catch (error) {
-    return <div className="live-stage live-stage--error" role="alert">事件合同错误：{error instanceof Error ? error.message : String(error)}</div>
+    return <div className="live-stage live-stage--error" role="alert">事件数据不符合接口规范：{error instanceof Error ? error.message : String(error)}</div>
   }
   const relevant = relevantEvents(stepId, ordered)
   const latest = relevant.at(-1)
@@ -53,7 +53,7 @@ export function LiveStageExperience({ stepId, events }: LiveStageExperienceProps
 
   if (stepId === 'score' || stepId === 'decode') {
     const data = decisionData(latest)
-    if (!data) return <div className="live-stage live-stage--error" role="alert">decision事件缺少合同内决策数据。</div>
+    if (!data) return <div className="live-stage live-stage--error" role="alert">decision事件缺少接口要求的决策数据。</div>
     const candidates = [...data.candidate_scores].sort((a, b) => b.score - a.score)
     return (
       <div className="live-stage live-stage--decision">

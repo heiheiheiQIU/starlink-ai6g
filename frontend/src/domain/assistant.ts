@@ -16,7 +16,7 @@ export function answerFixtureQuestion(question: string): FixtureAnswer {
     return {
       isFixture: true,
       content:
-        '当前页面数字为标准场景演示数据，用于说明字段、交互和结果追溯流程，并非真实实验结果。正式指标必须由版本锁定的在线任务生成，并在结果依据索引中完成签核后才能引用。',
+        '当前页面数字为标准场景演示数据，用于说明字段、交互和结果追溯流程，并非真实实验结果。正式指标必须由版本锁定的在线任务生成，并在结果依据索引中完成独立复核后才能引用。',
       citations: [EVIDENCE_INDEX, 'contracts/schemas/'],
     }
   }

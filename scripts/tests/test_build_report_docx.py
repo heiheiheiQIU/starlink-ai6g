@@ -124,14 +124,21 @@ class ReportBuilderTests(unittest.TestCase):
         self.assertNotIn("图(fig:flow)", reference.text)
         self.assertIn("REF fig_flow", reference._p.xml)
 
-    def test_v3_report_has_twelve_bound_figures_and_honest_status(self):
+    def test_v3_report_has_twelve_bound_figures_and_current_formal_status(self):
         source = MODULE.REPORT_DIR / "report_v3.md"
         text = source.read_text(encoding="utf-8")
         figures = MODULE.extract_figure_labels(source)
         self.assertEqual(len(figures), 12)
         self.assertEqual(len({label for label, _ in figures}), 12)
-        self.assertIn("正式策略运行仍为0次", text)
-        self.assertIn("训练门禁未通过", text)
+        self.assertIn("540/540", text)
+        self.assertIn("46.54%", text)
+        self.assertIn("51.15%", text)
+        self.assertIn("2160", text)
+        self.assertIn("技术结果已完成", text)
+        self.assertNotIn("当前可计入材料的输入仍为0条", text)
+        self.assertNotIn("正式策略运行仍为0次", text)
+        self.assertNotIn("换机验收尚待完成", text)
+        self.assertIn("恢复性数据试验没有达到训练条件", text)
         self.assertNotIn("后端570项", text)
         self.assertNotIn("前端71项", text)
         self.assertNotIn("可在干净环境按清单完整复现", text)
