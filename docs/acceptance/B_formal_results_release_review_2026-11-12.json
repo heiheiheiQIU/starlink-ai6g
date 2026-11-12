@@ -1,0 +1,27 @@
+{
+  "schema_version": "b-formal-result-release-review-v1",
+  "role": "B",
+  "reviewer": "member-B (Codex-assisted release execution)",
+  "ruling": "accepted_with_notes",
+  "scope": "generate_separate_gated_synthetic_negative_result_release",
+  "release_generation_approved": true,
+  "A_review_commit": "dbf0c17",
+  "C_review_commit": "d967312",
+  "source_summary_sha256": "872a71029783ca4100ed8d4e6cfec79261f9c7eaaca65b10362ce53a9ffdbae9",
+  "result_zip_sha256": "efa801d9dde6a9eb340ca0a27b873027248edbcadd7b85c82cdd3847ab5f9e86",
+  "frozen_manifest_sha256": "3ad4bfeaf5398012bae17cab4bf684fb5a80ce0b5e341bf5e9eda4d179104d30",
+  "run_index_sha256": "5d9c58585cd6782c3d898f2fc690829ae3a04956f9844e9ad6c389ea7d408ade",
+  "model_weights_sha256": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+  "constraints": {
+    "original_summary_unchanged": true,
+    "original_result_signoff": "pending",
+    "original_formal_verdict": "未完成",
+    "statistical_verdict": "负",
+    "domain": "synthetic_out_of_zero_loss_training_domain",
+    "superiority_claim": false,
+    "real_satellite_claim": false,
+    "training_enabled": false,
+    "hybrid_enabled": false,
+    "rerun_formal_experiments": false
+  }
+}

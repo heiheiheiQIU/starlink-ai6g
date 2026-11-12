@@ -1,3 +1,15 @@
+import approvedRelease from '../../public/data/formal_v2_release.json'
+
+const APPROVED_RELEASE_SHA256 = 'c26a97658b0bf366d241f23ee79c7e9dc8e304661f851cc15f3eb29ef52cfb29'
+
+function stable(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(stable).join(',')}]`
+  if (value !== null && typeof value === 'object') {
+    return `{${Object.entries(value).sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${JSON.stringify(k)}:${stable(v)}`).join(',')}}`
+  }
+  return JSON.stringify(value)
+}
+
 export const FORMAL_VERDICTS = ['胜', '负', '未检出稳定差异', '未完成'] as const
 export type FormalVerdict = (typeof FORMAL_VERDICTS)[number]
 export type FormalComparisonId = 'learned-edf' | 'learned-value'
@@ -23,6 +35,7 @@ export interface FormalComparison {
 }
 
 export interface FormalAnalysis {
+  publication?: { version: string; object_sha256: string }
   schema_version: 'formal-analysis-summary-v1'
   expected_policy_runs: 540
   completed_policy_runs: number
@@ -162,6 +175,20 @@ export function parseFormalAnalysis(value: unknown): FormalAnalysisParseResult {
     && (learnedEdf.value.formal_verdict !== learnedEdf.value.statistical_verdict
       || learnedValue.value.formal_verdict !== learnedValue.value.statistical_verdict)) {
     return { ok: false, error: '已发布正式结论必须与版本锁定的统计结论一致' }
+  }
+  if (value.publication !== undefined && (!isRecord(value.publication)
+    || typeof value.publication.version !== 'string' || value.publication.version.length === 0
+    || typeof value.publication.object_sha256 !== 'string'
+    || !/^[a-f0-9]{64}$/.test(value.publication.object_sha256))) {
+    return { ok: false, error: '统一发布对象的版本或来源指纹无效' }
+  }
+  if (value.result_signoff === 'accepted') {
+    const { publication, ...analysis } = value
+    if (!isRecord(publication) || publication.version !== approvedRelease.release_version
+      || publication.object_sha256 !== APPROVED_RELEASE_SHA256
+      || stable(analysis) !== stable(approvedRelease.analysis)) {
+      return { ok: false, error: '派生摘要与已批准的统一发布对象不一致' }
+    }
   }
   if (!isRecord(value.provenance) || typeof value.provenance.frozen_manifest_sha256 !== 'string'
     || typeof value.provenance.run_index_sha256 !== 'string' || !isRecord(value.provenance.binding)

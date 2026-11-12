@@ -127,13 +127,13 @@ export const MAIN_SLIDES = Object.freeze([
     sourceNote: '证据：180条唯一输入与540个完成运行；失败、缺失和重试均为0；C已独立复算核心统计产物。',
   },
   {
-    id: 'S11', section: '04 正式结果', layout: 'experiment-protocol', status: '未完成',
+    id: 'S11', section: '04 正式结果', layout: 'experiment-protocol', status: '负结果已发布',
     title: '域外实验暴露冻结模型的全 idle 退化',
-    claim: '540/540次运行已经完成，技术统计为负，正式四档结论处于发布复核阶段。',
+    claim: '540/540次运行完成，A/C复核与B统一发布检查通过，两组统计结论均为负。',
     evidence: [figure(FIG.formal, '配对结果', '180条共享轨迹上的三策略配对实验与发布状态')],
     supportingFacts: ['EDF 46.54%，Value 51.15%，Learned 0%', '2160次Learned决策全部选择idle，推理回退0次', 'Learned−EDF为−46.54个百分点，Learned−Value为−51.15个百分点'],
     businessMeaning: '系统没有删除失败样本或临时换模。规则基线继续提供可用调度，发布流程阻止失效模型被包装成可上线结果。',
-    sourceNote: 'B正式摘要SHA 872a7102…；C独立复算一致。A的现实成员结果复核完成前，正式口径保持“未完成”。',
+    sourceNote: '统一发布版本 formal-v2-release-20261112-v1；发布对象SHA c26a97658b0b…；原始摘要SHA 872a7102…保持不变。',
   },
   {
     id: 'S12', section: '05 工程演示', layout: 'product-evidence', status: '已实现',
@@ -169,7 +169,7 @@ export const MAIN_SLIDES = Object.freeze([
     evidence: [figure(FIG.architecture, '闭环总览', '健康感知、智能评分、可行性校验、协议执行与证据反馈')],
     supportingFacts: ['通信状态直接进入task×mode估值', '评分与协议执行解耦，异常时由规则策略接管', '预登记实验和版本证据使负结果同样可复查'],
     businessMeaning: '作品的核心价值是让有限连接优先服务更重要的任务，同时诚实呈现模型适用范围。',
-    sourceNote: '当前结论范围：合成仿真与工程验证；540次技术结果已复算，正式发布复核中。',
+    sourceNote: '当前结论范围：登记合成域与工程验证；540次结果完成，统一发布结论为负。',
   },
 ]);
 

@@ -187,7 +187,7 @@
           "n": 10
         }
       ],
-      "formal_verdict": "未完成",
+      "formal_verdict": "负",
       "overall": {
         "aggregation": "equal_weight_18_cells_stratified_paired",
         "ci95": [
@@ -382,7 +382,7 @@
           "n": 10
         }
       ],
-      "formal_verdict": "未完成",
+      "formal_verdict": "负",
       "overall": {
         "aggregation": "equal_weight_18_cells_stratified_paired",
         "ci95": [
@@ -667,7 +667,11 @@
     "frozen_manifest_sha256": "3ad4bfeaf5398012bae17cab4bf684fb5a80ce0b5e341bf5e9eda4d179104d30",
     "run_index_sha256": "5d9c58585cd6782c3d898f2fc690829ae3a04956f9844e9ad6c389ea7d408ade"
   },
-  "result_signoff": "pending",
+  "publication": {
+    "object_sha256": "c26a97658b0bf366d241f23ee79c7e9dc8e304661f851cc15f3eb29ef52cfb29",
+    "version": "formal-v2-release-20261112-v1"
+  },
+  "result_signoff": "accepted",
   "safety_energy_violation_segments": {
     "edf": 0,
     "learned": 0,

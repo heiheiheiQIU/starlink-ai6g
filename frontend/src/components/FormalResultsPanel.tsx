@@ -128,6 +128,10 @@ function EvidencePanel({ analysis }: { analysis: FormalAnalysis }) {
         ))}
       </div>
       <aside className="formal-provenance" aria-label="正式证据来源">
+        {analysis.publication ? <>
+          <div><span>统一发布版本</span><code>{analysis.publication.version}</code></div>
+          <div><span>发布对象指纹</span><code>{shortHash(analysis.publication.object_sha256)}</code></div>
+        </> : null}
         <div><span>实验版本指纹</span><code>{shortHash(analysis.provenance.frozen_manifest_sha256)}</code></div>
         <div><span>运行记录指纹</span><code>{shortHash(analysis.provenance.run_index_sha256)}</code></div>
         <div><span>推理口径</span><code>{analysis.inference.scope}</code></div>

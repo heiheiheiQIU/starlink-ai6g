@@ -76,6 +76,7 @@ docs/evidence/B/delegated_execution_2026-11-10/** -text -diff
 docs/evidence/B/recovery_dev_2026-11-10/** -text -diff
 docs/evidence/B/final_demo_2026-11-10/** -text -diff
 docs/evidence/B/offline_handoff_2026-11-10/** -text -diff
+docs/evidence/B/unified_release_2026-11-12/** -text -diff
 deliveries/*.zip -text -diff
 # Preserve C second-machine acceptance evidence byte-for-byte across checkouts.
 docs/evidence/C/offline_second_machine_2026-11-10/** -text -diff

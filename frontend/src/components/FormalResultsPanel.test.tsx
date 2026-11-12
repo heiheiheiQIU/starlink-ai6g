@@ -1,38 +1,23 @@
+import publishedSummary from '../../public/data/formal_v2_technical_summary.json'
 import { render, screen, waitFor, within } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import { FormalResultsPanel, FormalResultsSource } from './FormalResultsPanel'
 
 function signedSummary() {
-  const cells = Array.from({ length: 18 }, (_, index) => ({
-    cell_id: `load-${Math.floor(index / 6) + 1}_energy-${Math.floor((index % 6) / 2) + 1}_link-${index % 2 + 1}`,
-    n: 10,
-    missing: 0,
-    mean_delta: index === 0 ? -0.02 : 0,
-    ci95: index === 0 ? [-0.04, -0.01] : [-0.01, 0.01],
-  }))
-  const comparison = {
-    cells,
-    paired_count: 180,
-    overall: { mean_delta: -0.001, ci95: [-0.01, 0.01], aggregation: 'equal_cell_weight' },
-    statistical_verdict: '未检出稳定差异',
-    formal_verdict: '未检出稳定差异',
-  }
-  return {
-    schema_version: 'formal-analysis-summary-v1', expected_policy_runs: 540,
-    completed_policy_runs: 540, missing_policy_runs: 0, failed_policy_runs: 0, failed_attempts: 0,
-    result_signoff: 'accepted', data_scope: 'formal_v2', domain: 'lossy_random_link',
-    multiplicity: 'two_primary_comparisons', policy_ids: ['edf', 'value', 'learned'],
-    comparisons: { 'learned-edf': comparison, 'learned-value': comparison },
-    provenance: { frozen_manifest_sha256: 'a'.repeat(64), run_index_sha256: 'b'.repeat(64), binding: { code_sha256: 'c'.repeat(64) } },
-    inference: { requests: 20, fallback_count: 0, fallback_rate: 0, cold_load_ms: [], decision_latency_count: 20,
-      decision_latency_median_ms: 2.1, decision_latency_p95_ms: 3.4,
-      scope: 'local_CPU_end_to_end_decision_not_pure_model_forward' },
-  }
+  return structuredClone(publishedSummary)
 }
 
 describe('formal results panel', () => {
   afterEach(() => vi.unstubAllGlobals())
+
+  it('shows the separately published release version and object fingerprint', () => {
+    render(<FormalResultsPanel analysis={{ ...signedSummary(), publication: {
+      version: 'formal-v2-release-20261112-v1', object_sha256: 'c26a97658b0bf366d241f23ee79c7e9dc8e304661f851cc15f3eb29ef52cfb29',
+    } }} />)
+    expect(screen.getByText('formal-v2-release-20261112-v1')).toBeInTheDocument()
+    expect(screen.getByText('c26a97658b0b…fb29')).toBeInTheDocument()
+  })
 
   it('shows only a pending publication state when no technical summary is connected', () => {
     render(<FormalResultsPanel />)
@@ -45,6 +30,7 @@ describe('formal results panel', () => {
   it('keeps unsigned statistical win subordinate to the incomplete formal verdict', () => {
     const summary = signedSummary()
     summary.result_signoff = 'pending'
+    for (const comparison of Object.values(summary.comparisons)) comparison.formal_verdict = '未完成'
     summary.comparisons['learned-edf'].statistical_verdict = '胜'
     summary.comparisons['learned-edf'].formal_verdict = '未完成'
     summary.comparisons['learned-edf'].overall = { mean_delta: 0.02, ci95: [0.01, 0.03], aggregation: 'equal_cell_weight' }
@@ -58,9 +44,9 @@ describe('formal results panel', () => {
 
   it('renders the signed wording, all 18 cells, and provenance', () => {
     render(<FormalResultsPanel analysis={signedSummary()} />)
-    expect(screen.getAllByText('未检出稳定差异').length).toBeGreaterThanOrEqual(2)
+    expect(screen.getAllByText('负').length).toBeGreaterThanOrEqual(2)
     expect(screen.getByTestId('formal-cell-table-learned-edf').querySelectorAll('tbody tr')).toHaveLength(18)
-    expect(screen.getByText('aaaaaaaaaaaa…aaaa')).toBeInTheDocument()
+    expect(screen.getByText('3ad4bfeaf539…4d30')).toBeInTheDocument()
     expect(screen.getByText(/不等同于统计等效/)).toBeInTheDocument()
   })
 
@@ -80,6 +66,7 @@ describe('formal results panel', () => {
   it('renders completed technical evidence while keeping an unsigned formal verdict pending', () => {
     const summary = signedSummary()
     summary.result_signoff = 'pending'
+    for (const comparison of Object.values(summary.comparisons)) comparison.formal_verdict = '未完成'
     summary.completed_policy_runs = 540
     summary.failed_policy_runs = 0
     summary.missing_policy_runs = 0

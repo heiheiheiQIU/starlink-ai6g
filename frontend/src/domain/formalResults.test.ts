@@ -1,8 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { createHash } from 'node:crypto'
 
 import { parseFormalAnalysis } from './formalResults'
+
+it('rejects malformed publication provenance rather than presenting it as verified', () => {
+  const summary = makeSummary({ publication: { version: 'release', object_sha256: 'invalid' } })
+  expect(parseFormalAnalysis(summary).ok).toBe(false)
+})
 
 function makeSummary(overrides: Record<string, unknown> = {}) {
   const cells = Array.from({ length: 18 }, (_, index) => ({
@@ -94,15 +100,36 @@ describe('formal analysis parser', () => {
     expect(parsed).toEqual(expect.objectContaining({ ok: false }))
   })
 
-  it('accepts the bundled formal v2 technical summary without upgrading its publication status', () => {
+  it('keeps the original pending while accepting the separately reviewed published summary', () => {
     const summary = JSON.parse(readFileSync(resolve(process.cwd(), 'public/data/formal_v2_technical_summary.json'), 'utf8'))
     const parsed = parseFormalAnalysis(summary)
     expect(parsed.ok).toBe(true)
     if (parsed.ok) {
       expect(parsed.value.completed_policy_runs).toBe(540)
-      expect(parsed.value.result_signoff).toBe('pending')
+      expect(parsed.value.result_signoff).toBe('accepted')
       expect(parsed.value.comparisons['learned-edf'].statistical_verdict).toBe('负')
-      expect(parsed.value.comparisons['learned-edf'].formal_verdict).toBe('未完成')
+      expect(parsed.value.comparisons['learned-edf'].formal_verdict).toBe('负')
     }
+    const original = JSON.parse(readFileSync(resolve(process.cwd(), '../docs/evidence/B/delegated_execution_2026-11-10/analysis/summary.json'), 'utf8'))
+    expect(original.result_signoff).toBe('pending')
+    expect(original.comparisons['learned-edf'].formal_verdict).toBe('未完成')
+    const releaseRaw = readFileSync(resolve(process.cwd(), 'public/data/formal_v2_release.json'))
+    expect(createHash('sha256').update(releaseRaw).digest('hex')).toBe(summary.publication.object_sha256)
+    const { publication: _publication, ...derived } = summary
+    expect(derived).toEqual(JSON.parse(releaseRaw.toString('utf8')).analysis)
+  })
+
+  it.each(['missing', 'hash', 'version', 'positive'])('rejects publication binding mutation %s', (mutation) => {
+    const summary = JSON.parse(readFileSync(resolve(process.cwd(), 'public/data/formal_v2_technical_summary.json'), 'utf8'))
+    if (mutation === 'missing') delete summary.publication
+    if (mutation === 'hash') summary.publication.object_sha256 = '0'.repeat(64)
+    if (mutation === 'version') summary.publication.version = 'unapproved-version'
+    if (mutation === 'positive') {
+      for (const c of Object.values(summary.comparisons) as Record<string, unknown>[]) {
+        c.overall = { mean_delta: .5, ci95: [.4, .6], aggregation: 'equal_cell_weight' }
+        c.formal_verdict = '胜'; c.statistical_verdict = '胜'
+      }
+    }
+    expect(parseFormalAnalysis(summary).ok).toBe(false)
   })
 })

@@ -6,9 +6,9 @@ import { Presentation, PresentationFile } from '@oai/artifact-tool';
 import { MAIN_SLIDES, BACKUP_SLIDES } from './presentation_story_v2.mjs';
 import { RENDERERS, ROOT } from './presentation_layouts_v2.mjs';
 
-export const BUILD = path.join(ROOT, '.presentation-build', 'v3');
+export const BUILD = path.join(ROOT, '.presentation-build', 'v4');
 export const MAIN_TALK_SLIDE_COUNT = 15;
-export const FINAL_DECK_PATH = path.join(ROOT, 'docs', 'presentation', 'generated', '星地智调_主讲稿_v3_正式结果工程化版.pptx');
+export const FINAL_DECK_PATH = path.join(ROOT, 'docs', 'presentation', 'generated', '星地智调_主讲稿_v4_统一发布版.pptx');
 
 export function validateStoryResources(slides) {
   const manifest = [];
@@ -76,7 +76,7 @@ export async function renderPreviews(presentation, mode = 'main') {
   const storySlides = mode === 'main' ? MAIN_SLIDES : [...MAIN_SLIDES, ...BACKUP_SLIDES];
   const manifest = {
     schema: 'presentation-v2-manifest',
-    generatedAt: '2026-11-11',
+    generatedAt: '2026-11-12',
     mode,
     slideCount: presentation.slides.items.length,
     mainTalkSlideCount: MAIN_TALK_SLIDE_COUNT,

@@ -21,7 +21,7 @@ test('main deck contract keeps hero endpoints and critical boundaries', async ()
   assert.equal(MAIN_SLIDES[14].layout, 'hero');
   assert.match(JSON.stringify(MAIN_SLIDES[7]), /观测条件/);
   assert.match(JSON.stringify(MAIN_SLIDES[7]), /仿真真值/);
-  assert.equal(MAIN_SLIDES[10].status, '未完成');
+  assert.equal(MAIN_SLIDES[10].status, '负结果已发布');
 });
 
 test('builder exposes 15-page main deck and deterministic preview paths', async () => {
@@ -62,5 +62,5 @@ test('final export contract keeps main talk order separate from answer backups',
   const { FINAL_DECK_PATH, MAIN_TALK_SLIDE_COUNT, exportFinalDeck } = await import('../scripts/build_presentation_v2.mjs');
   assert.equal(MAIN_TALK_SLIDE_COUNT, 15);
   assert.equal(typeof exportFinalDeck, 'function');
-  assert.match(FINAL_DECK_PATH, /星地智调_主讲稿_v3_正式结果工程化版\.pptx$/);
+  assert.match(FINAL_DECK_PATH, /星地智调_主讲稿_v4_统一发布版\.pptx$/);
 });

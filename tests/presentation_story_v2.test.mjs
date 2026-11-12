@@ -33,8 +33,8 @@ test('visible copy preserves evidence and safety boundaries', async () => {
   }
   assert.deepEqual(SLIDE_GUARDRAILS.formalResultVocabulary, ['胜', '等效', '负', '未完成']);
   const result = MAIN_SLIDES[10];
-  assert.equal(result.status, '未完成');
-  assert.match(`${result.title}${result.claim}${result.businessMeaning}`, /发布复核/);
+  assert.equal(result.status, '负结果已发布');
+  assert.match(`${result.title}${result.claim}${result.businessMeaning}`, /统一发布检查通过/);
   assert.match(JSON.stringify(SLIDE_GUARDRAILS.formalResultVocabulary), /胜.*等效.*负.*未完成/);
   assert.match(JSON.stringify(result), /540\/540/);
   assert.match(JSON.stringify(result), /46\.54%/);
