@@ -269,7 +269,7 @@ $$ \max_{\mathbf{a}} \sum_{i} u_i(\mathbf{a}) $$
 
 ### （七）系统组成与部署方案
 
-后端（Python 3.12）包含协议仿真、约束解码器、教师求解器、学习评分器和五类服务接口；前端（React/TypeScript）包含任务配置、流程主舞台、策略评估、实验矩阵、结果追溯和资产管理等七个页面。冻结模型包由manifest绑定weights、normalization、training_summary和model_card，运行包进一步绑定输入、配置、代码与统计版本。系统采用本机服务加浏览器访问方式部署，已经在第二台电脑完成离线包安装、后端调用和浏览器关键路径验收；该结果证明当前交付包可迁移复现，但不外推为目标星载硬件性能。
+后端（Python 3.12）包含协议仿真、约束解码器、教师求解器、学习评分器和五类服务接口；前端（React/TypeScript）包含任务配置、流程主舞台、策略评估、实验矩阵、结果追溯和资产管理等七个页面。冻结模型包由manifest绑定weights、normalization、training_summary和model_card，运行包进一步绑定输入、配置、代码与统计版本。系统采用本机服务加浏览器访问方式部署，11月10日原离线包已在C的第二台电脑完成安装、后端调用和浏览器关键路径验收。统一发布交付包为B_final_release_20261112_v1，本机集成检查单独记录；不把原包的异机回执扩展为新版本已获C验收，也不外推为目标星载硬件性能。
 
 ### （八）任务生命周期逐步走查（数值示例）
 
@@ -553,8 +553,8 @@ $$ \max_{\mathbf{a}} \sum_{i} u_i(\mathbf{a}) $$
 <!-- tab:reproduction | 提交包结构与复现入口 -->
 | 资产组 | 目录/入口 | 验收动作 | 当前证据 |
 |---|---|---|---|
-| 后端与接口 | `backend/`、`contracts.py` | 冻结依赖后运行全库测试，启动五接口服务 | 接口定义SHA 78f783e8…；最终测试数待集成版冻结 |
-| 前端平台 | `frontend/` | `pnpm install --frozen-lockfile` → `pnpm test` → `pnpm build` | 最终测试数与构建状态待集成版冻结 |
+| 后端与接口 | `backend/`、`contracts.py` | 冻结依赖后运行全库测试，启动五接口服务 | 741通过、1项Linux专用跳过；接口定义SHA 78f783e8… |
+| 前端平台 | `frontend/` | `pnpm install --frozen-lockfile` → `pnpm test` → `pnpm build` | 132测试通过，TypeScript检查与生产构建通过 |
 | 正式实验 | `experiments/formal_v2/`、`backend/formal_v2.py` | 核对180条输入、540次运行、配对统计和结果包 | 540次结果完成，A/C复核与B统一发布检查通过 |
 | 证据与材料 | `docs/evidence/`、`docs/acceptance/`、`docs/materials/` | 独立复算、版本绑定和发布状态核对 | 发布版本 formal-v2-release-20261112-v1；发布对象SHA c26a97658b0b…；原始摘要SHA 872a7102… |
 
