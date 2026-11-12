@@ -62,5 +62,5 @@ test('final export contract keeps main talk order separate from answer backups',
   const { FINAL_DECK_PATH, MAIN_TALK_SLIDE_COUNT, exportFinalDeck } = await import('../scripts/build_presentation_v2.mjs');
   assert.equal(MAIN_TALK_SLIDE_COUNT, 15);
   assert.equal(typeof exportFinalDeck, 'function');
-  assert.match(FINAL_DECK_PATH, /星地智调_主讲稿_v2_高信息密度版\.pptx$/);
+  assert.match(FINAL_DECK_PATH, /星地智调_主讲稿_v3_正式结果工程化版\.pptx$/);
 });

@@ -156,12 +156,12 @@ export function parseFormalAnalysis(value: unknown): FormalAnalysisParseResult {
   if (!learnedValue.ok) return learnedValue
   if (value.result_signoff !== 'accepted'
     && (learnedEdf.value.formal_verdict !== '未完成' || learnedValue.value.formal_verdict !== '未完成')) {
-    return { ok: false, error: '三方签核前正式结论必须保持未完成' }
+    return { ok: false, error: '结果发布完成前正式结论必须保持未完成' }
   }
   if (value.result_signoff === 'accepted'
     && (learnedEdf.value.formal_verdict !== learnedEdf.value.statistical_verdict
       || learnedValue.value.formal_verdict !== learnedValue.value.statistical_verdict)) {
-    return { ok: false, error: '已签核正式结论必须与冻结统计结论一致' }
+    return { ok: false, error: '已发布正式结论必须与版本锁定的统计结论一致' }
   }
   if (!isRecord(value.provenance) || typeof value.provenance.frozen_manifest_sha256 !== 'string'
     || typeof value.provenance.run_index_sha256 !== 'string' || !isRecord(value.provenance.binding)

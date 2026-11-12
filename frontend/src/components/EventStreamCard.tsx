@@ -98,7 +98,7 @@ export function EventStreamCard({ runId, events }: EventStreamCardProps) {
 
       {replay.error ? (
         <div className="stale-banner" role="alert">
-          事件合同错误：{replay.error}。已停止回放，未合并冲突事件。
+          事件数据不符合接口规范：{replay.error}。系统已停止回放，未合并冲突事件。
         </div>
       ) : (
         <div className="event-replay-controls" aria-label="事件回放控制">

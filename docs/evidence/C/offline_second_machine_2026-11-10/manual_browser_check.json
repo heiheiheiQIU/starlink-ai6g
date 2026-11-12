@@ -1,0 +1,83 @@
+{
+  "schema_version": "c-browser-manual-check-v1",
+  "status": "accepted",
+  "executed_at": "2026-11-10T14:18:00+08:00",
+  "environment": "C-side Windows 11 x64 workstation; localhost offline package service",
+  "package_sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+  "checks": {
+    "S1": {
+      "status": "accepted",
+      "run_id": "sandbox_run_5e9348088d304621bbdfc55fe129e368",
+      "observed": {
+        "edf_weighted_on_time_rate": 1.0,
+        "learned_weighted_on_time_rate": 0.0,
+        "edf_success_payload_bytes": 4096,
+        "learned_success_payload_bytes": 0,
+        "energy_violation_count": {"edf": 0, "learned": 0}
+      },
+      "browser_export": "browser_exports/S1_sandbox_run_5e9348088d304621bbdfc55fe129e368.zip",
+      "browser_export_sha256": "96f380aef8702bb1042057757bf755586ada0378f14d9c3d8ed49c2c451e34e2"
+    },
+    "S2": {
+      "status": "accepted",
+      "run_id": "sandbox_run_e1c84ab7b77c4264ac95183091de42db",
+      "observed": {
+        "edf_weighted_on_time_rate": 0.0,
+        "learned_weighted_on_time_rate": 0.0,
+        "edf_success_payload_bytes": 0,
+        "learned_success_payload_bytes": 0,
+        "energy_violation_count": {"edf": 0, "learned": 0}
+      }
+    },
+    "S3": {
+      "status": "accepted",
+      "run_id": "sandbox_run_d495bcf1178447bcb9359cd49959e132",
+      "observed": {
+        "edf_weighted_on_time_rate": 1.0,
+        "learned_weighted_on_time_rate": 0.0,
+        "edf_success_payload_bytes": 4096,
+        "learned_success_payload_bytes": 0,
+        "energy_violation_count": {"edf": 0, "learned": 0},
+        "edf_replay_frames": 46,
+        "learned_replay_frames": 19
+      },
+      "browser_export": "browser_exports/S3_sandbox_run_d495bcf1178447bcb9359cd49959e132.zip",
+      "browser_export_sha256": "ab260843437c217f6433ecddb89f10772faa6abcc2cb500413024bca5dbd5917"
+    },
+    "parameter_change_and_new_run_id": {
+      "status": "accepted",
+      "evidence": "S1→S2 and S2→S3 parameter changes showed a stale-result warning before rerun; reruns produced three distinct run_ids."
+    },
+    "stale_results_notice": {
+      "status": "accepted",
+      "evidence": "UI explicitly displayed: 参数已变更；下方仍是上一配置的历史结果，请重新运行。"
+    },
+    "shared_run_id_across_pages": {
+      "status": "accepted",
+      "evidence": "sandbox_run_d495bcf1178447bcb9359cd49959e132 remained current on 场景验证、结果追溯、策略评估."
+    },
+    "policy_separated_replay": {
+      "status": "accepted",
+      "evidence": "S3 replay switched between EDF 46 frames and LEARNED 19 frames; the UI stated that policy timelines are isolated."
+    },
+    "paged_events_match_export": {
+      "status": "accepted",
+      "evidence": "automatic_acceptance/golden/verification.json passed pagination, continuous event IDs and export comparison for all five runs."
+    },
+    "browser_export_download": {
+      "status": "accepted",
+      "evidence": [
+        "browser_exports/S1_sandbox_run_5e9348088d304621bbdfc55fe129e368.zip",
+        "browser_exports/S3_sandbox_run_d495bcf1178447bcb9359cd49959e132.zip"
+      ]
+    },
+    "engineering_and_negative_AI_results_distinguished": {
+      "status": "accepted",
+      "evidence": "UI labeled the sandbox as synthetic/non-formal and explicitly preserved Learned=0 or lower results without treating them as gains."
+    }
+  },
+  "notes": [
+    "A transient 61.58% value appeared while CountUp animation was still running on the results page; after 1.8 seconds the same run_id settled at 100.00%, matching GET /runs/{id}/results. This was an animation frame, not a data mismatch.",
+    "The acceptance proves second-machine packaging and engineering execution only. It does not authorize an AI benefit claim, retraining, Hybrid, or formal model replacement."
+  ]
+}

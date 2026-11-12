@@ -108,7 +108,7 @@ export const FLOW_STEPS: readonly FlowStep[] = [
     narration: '星地链路：光束=数据发送，1024B=数据块，ACK=网关确认回传。注入 ACK 丢失后，系统在下一窗口重传同一块并去重——业务以首次完整接收为准。',
     input: 'ScheduleDecision + TeacherQueue',
     method: '离散事件仿真与幂等确认',
-    output: '执行回执 · ExecutionReceipt',
+    output: '链路执行状态 · TransmissionStatus',
     artifact: 'events.jsonl',
     status: 'evidence',
   },

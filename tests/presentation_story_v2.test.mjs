@@ -34,9 +34,14 @@ test('visible copy preserves evidence and safety boundaries', async () => {
   assert.deepEqual(SLIDE_GUARDRAILS.formalResultVocabulary, ['胜', '等效', '负', '未完成']);
   const result = MAIN_SLIDES[10];
   assert.equal(result.status, '未完成');
-  assert.match(`${result.title}${result.claim}${result.businessMeaning}`, /未完成/);
-  assert.match(visible, /胜.*等效.*负.*未完成/);
-  assert.doesNotMatch(JSON.stringify(result), /\d+(?:\.\d+)?%/);
+  assert.match(`${result.title}${result.claim}${result.businessMeaning}`, /发布复核/);
+  assert.match(JSON.stringify(SLIDE_GUARDRAILS.formalResultVocabulary), /胜.*等效.*负.*未完成/);
+  assert.match(JSON.stringify(result), /540\/540/);
+  assert.match(JSON.stringify(result), /46\.54%/);
+  assert.match(JSON.stringify(result), /51\.15%/);
+  assert.match(JSON.stringify(result), /2160/);
+  assert.doesNotMatch(visible, /当前可计入材料的输入0条|正式运行0次|换机验收尚待完成/);
+  assert.doesNotMatch(JSON.stringify(MAIN_SLIDES), /合同Schema|三方验收记录|主张门禁/);
 });
 
 test('guard slide distinguishes observed feasibility from simulated truth', async () => {

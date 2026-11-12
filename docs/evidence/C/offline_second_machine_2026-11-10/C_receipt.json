@@ -1,0 +1,41 @@
+{
+  "schema_version": "c-offline-package-receipt-v1",
+  "status": "accepted_with_notes",
+  "reviewer": "member_C (Codex-assisted independent acceptance)",
+  "physical_machine_description": "C-side Windows 11 x64 workstation; Python 3.12.14",
+  "executed_on_distinct_physical_machine": true,
+  "executed_at": "2026-11-10T14:13:40+08:00",
+  "package": {
+    "repository_path": "deliveries/B_final_demo_20261110.zip",
+    "expected_bytes": 17532109,
+    "actual_bytes": 17532109,
+    "expected_sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+    "independently_computed_sha256": "8b79351f35447fd8764451bfa0151447316dbd90f16b0be1d8f15bbd212664f4",
+    "status": "accepted"
+  },
+  "automatic_acceptance": {
+    "status": "accepted",
+    "acceptance_json_path": "docs/evidence/C/offline_second_machine_2026-11-10/automatic_acceptance/acceptance.json",
+    "acceptance_json_sha256": "07cc47c38c351cf3538f63e0a81d54f9ba61bd8edb6e328fef91c81f400d6eab",
+    "complete_evidence_directory": "docs/evidence/C/offline_second_machine_2026-11-10/automatic_acceptance"
+  },
+  "manual_checks": {
+    "S1": {"status": "accepted", "run_id": "sandbox_run_5e9348088d304621bbdfc55fe129e368", "evidence": ["manual_browser_check.json", "browser_exports/S1_sandbox_run_5e9348088d304621bbdfc55fe129e368.zip"]},
+    "S2": {"status": "accepted", "run_id": "sandbox_run_e1c84ab7b77c4264ac95183091de42db", "evidence": ["manual_browser_check.json"]},
+    "S3": {"status": "accepted", "run_id": "sandbox_run_d495bcf1178447bcb9359cd49959e132", "evidence": ["manual_browser_check.json", "browser_exports/S3_sandbox_run_d495bcf1178447bcb9359cd49959e132.zip"]},
+    "parameter_change_and_new_run_id": {"status": "accepted", "evidence": ["manual_browser_check.json"]},
+    "stale_results_notice": {"status": "accepted", "evidence": ["manual_browser_check.json"]},
+    "shared_run_id_across_pages": {"status": "accepted", "evidence": ["manual_browser_check.json"]},
+    "policy_separated_replay": {"status": "accepted", "evidence": ["manual_browser_check.json"]},
+    "paged_events_match_export": {"status": "accepted", "evidence": ["automatic_acceptance/golden/verification.json"]},
+    "browser_export_download": {"status": "accepted", "evidence": ["browser_exports/S1_sandbox_run_5e9348088d304621bbdfc55fe129e368.zip", "browser_exports/S3_sandbox_run_d495bcf1178447bcb9359cd49959e132.zip"]},
+    "engineering_and_negative_AI_results_distinguished": {"status": "accepted", "evidence": ["manual_browser_check.json"]}
+  },
+  "failures_and_notes": [
+    "Learned remained 0% in S1/S2/S3; the negative result is preserved and is not interpreted as an AI gain.",
+    "This receipt closes package receipt and second-machine engineering acceptance only. A's data-expansion approval remains independent."
+  ],
+  "formal_result_release_authorized": false,
+  "model_training_authorized": false,
+  "hybrid_authorized": false
+}

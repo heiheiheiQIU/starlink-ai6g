@@ -31,7 +31,7 @@ describe('metric display semantics (null + reason / measured 0)', () => {
   it('flags a non-null metric carrying a missing reason as a contract conflict', () => {
     const display = metricDisplay(FIXTURE_CONFLICT_POLICY, 'goodput_bps')
     expect(display.kind).toBe('conflict')
-    expect(formatMetricValue(display)).toContain('合同错误')
+    expect(formatMetricValue(display)).toContain('接口数据错误')
   })
 })
 
@@ -42,7 +42,7 @@ describe('forecast batch semantics', () => {
 
   it('flags mixed forecast versions as a contract conflict without choosing one', () => {
     expect(forecastBatchConflict(FIXTURE_OBSERVATION_MIXED)).toMatch(/W-2/)
-    expect(forecastBatchConflict(FIXTURE_OBSERVATION_MIXED)).toMatch(/合同错误态/)
+    expect(forecastBatchConflict(FIXTURE_OBSERVATION_MIXED)).toMatch(/接口数据错误/)
   })
 })
 

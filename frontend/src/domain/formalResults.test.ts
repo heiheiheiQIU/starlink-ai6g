@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 
 import { parseFormalAnalysis } from './formalResults'
 
@@ -90,5 +92,17 @@ describe('formal analysis parser', () => {
     comparisons['learned-edf'].formal_verdict = '胜'
     const parsed = parseFormalAnalysis(summary)
     expect(parsed).toEqual(expect.objectContaining({ ok: false }))
+  })
+
+  it('accepts the bundled formal v2 technical summary without upgrading its publication status', () => {
+    const summary = JSON.parse(readFileSync(resolve(process.cwd(), 'public/data/formal_v2_technical_summary.json'), 'utf8'))
+    const parsed = parseFormalAnalysis(summary)
+    expect(parsed.ok).toBe(true)
+    if (parsed.ok) {
+      expect(parsed.value.completed_policy_runs).toBe(540)
+      expect(parsed.value.result_signoff).toBe('pending')
+      expect(parsed.value.comparisons['learned-edf'].statistical_verdict).toBe('负')
+      expect(parsed.value.comparisons['learned-edf'].formal_verdict).toBe('未完成')
+    }
   })
 })
