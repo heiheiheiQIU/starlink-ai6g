@@ -1,0 +1,19 @@
+✔ main deck builder registers every layout and resource (521.3024ms)
+✔ main deck contract keeps hero endpoints and critical boundaries (0.3423ms)
+✔ builder exposes 15-page main deck and deterministic preview paths (0.3863ms)
+✔ main deck avoids shrinking master plates and uses real product evidence (0.1888ms)
+✔ hero title and claim geometry do not overlap (0.1684ms)
+✔ full deck appends five answer-backup pages after the 15-page talk (0.8708ms)
+✔ final export contract keeps main talk order separate from answer backups (0.1547ms)
+✔ story contract defines 15 main slides and 5 backup slides (2.7925ms)
+✔ body slides carry evidence explanation and business meaning (0.3489ms)
+✔ visible copy preserves evidence and safety boundaries (0.482ms)
+✔ guard slide distinguishes observed feasibility from simulated truth (0.1585ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 601.6606

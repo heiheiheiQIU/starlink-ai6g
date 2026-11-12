@@ -1,0 +1,10 @@
+{
+  "delivery_version": "B_final_release_20261112_v1",
+  "archive": "deliveries/B_final_release_20261112_v1.zip",
+  "bytes": 23422352,
+  "sha256": "d07c79b4151f129bf35d043924468714a92b8047e167ec59ece7b9ad65138201",
+  "source_commit": "3a5e5cd07f766f27967dda35f24178da643bf692",
+  "release_sha256": "c26a97658b0bf366d241f23ee79c7e9dc8e304661f851cc15f3eb29ef52cfb29",
+  "payload_files": 122,
+  "C_new_version_acceptance": "pending"
+}

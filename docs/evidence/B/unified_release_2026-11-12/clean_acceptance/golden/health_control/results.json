@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "run_id": "sandbox_run_38f38456e4c1482da804273751d54d25",
+  "status": "completed",
+  "config_hash": "2579088ca3affe1a9f0caaac453c82d1eec8cdb8032a47b943c0d82978fea10e",
+  "input_hash": "a760161901361d9d57ec754ec5e8677b7bb78aab67d9b766dbc5ccee7af4907b",
+  "model_hash": null,
+  "code_revision": "unversioned-source-sha256:bed3990bc6d1c02871cc41e4679885e46f3c7722702de04ea280fa9814acace8",
+  "seed": 7,
+  "by_policy": [
+    {
+      "policy_id": "edf",
+      "model_hash": null,
+      "sample_count": 6,
+      "evaluation_end_s": 32.0,
+      "pending_task_count": 0,
+      "weighted_on_time_rate": 0.25,
+      "critical_task_success_rate": null,
+      "goodput_bps": 1280.0,
+      "minimum_soc_true": 0.022641493055555538,
+      "energy_violation_count": 0,
+      "energy_violation_duration_s": null,
+      "success_payload_bytes": 5120,
+      "joule_per_success_bit": 0.03051300048828125,
+      "wait_p50_s": 6.0,
+      "wait_p95_s": 6.9,
+      "decision_p50_ms": 0.6957000005058944,
+      "decision_p95_ms": 2.924974985944573,
+      "timeout_rate": 0.0,
+      "parameter_count": null,
+      "memory_bytes": null,
+      "metric_reasons": {
+        "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+        "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+        "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+        "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION"
+      }
+    },
+    {
+      "policy_id": "learned",
+      "model_hash": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a",
+      "sample_count": 6,
+      "evaluation_end_s": 32.0,
+      "pending_task_count": 0,
+      "weighted_on_time_rate": 0.0,
+      "critical_task_success_rate": null,
+      "goodput_bps": 0.0,
+      "minimum_soc_true": 0.023999999999999987,
+      "energy_violation_count": 0,
+      "energy_violation_duration_s": null,
+      "success_payload_bytes": 0,
+      "joule_per_success_bit": null,
+      "wait_p50_s": null,
+      "wait_p95_s": null,
+      "decision_p50_ms": 1.3763500028289855,
+      "decision_p95_ms": 4.5523750013671815,
+      "timeout_rate": 0.0,
+      "parameter_count": null,
+      "memory_bytes": null,
+      "metric_reasons": {
+        "critical_task_success_rate": "NO_CRITICAL_TASK_SET",
+        "energy_violation_duration_s": "EXACT_DURATION_NOT_MEASURED",
+        "joule_per_success_bit": "NO_DELIVERY",
+        "memory_bytes": "NOT_MEASURED_MANUAL_VALIDATION",
+        "parameter_count": "NOT_MEASURED_MANUAL_VALIDATION",
+        "wait_p50_s": "NOT_MEASURED_MANUAL_VALIDATION",
+        "wait_p95_s": "NOT_MEASURED_MANUAL_VALIDATION"
+      }
+    }
+  ],
+  "metric_definitions": {
+    "details": "docs/metrics.md; synthetic manual validation; no comparative performance claim",
+    "energy_violation_count": "Count of negative unclipped energy ledger segments; not independent episodes",
+    "goodput_bps": "Unique payload bits / evaluation_end_s",
+    "joule_per_success_bit": "All satellite consumption J / unique received payload bits",
+    "pending_task_count": "Arrived tasks with deadline after evaluation end, regardless of early receipt",
+    "success_payload_bytes": "Unique received payload bytes including partial tasks and late data",
+    "weighted_on_time_rate": "Sum on-time complete task weights / all arrived due task weights"
+  },
+  "artifact_paths": {
+    "config.json": "config.json",
+    "events.jsonl": "events.jsonl",
+    "manifest.json": "manifest.json",
+    "results.json": "results.json",
+    "status.json": "status.json"
+  }
+}

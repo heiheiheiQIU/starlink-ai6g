@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "PPT_final_sha256": "5c11105e1cf47ada0956964e6724b47dbe8e4b3c689dcb942519e440902ae4af",
+  "PPT_native_open": true,
+  "PPT_native_rendered_slides": 20,
+  "Word_native_PDF_pages": 23,
+  "visual_review": "updated experiment/publication page, final evidence index, updated PPT result/closing slides and deck flow inspected",
+  "first_party_PPT_import": true,
+  "lossless_duplicate_media_optimization": true,
+  "source_image_bytes_changed": false
+}

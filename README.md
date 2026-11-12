@@ -2,6 +2,8 @@
 
 > 2026-11-12 最新状态：A/C结果复核已合并，B生成了[独立统一发布对象](docs/evidence/B/unified_release_2026-11-12/release.json)，两组正式合成域结论均为负。原始540次结果、模型和summary字节保持不变，原始pending字段不改写。前端、报告与PPT读取独立发布状态。C已完成11月10日原包异机验收，新封版包另行记录验收。新训练和Hybrid均未启用。
 
+定稿接手入口：[B统一发布与封版交付](docs/handoffs/B_统一发布与封版交付_2026-11-12.md)、[新版离线交付包](deliveries/B_final_release_20261112_v1.zip)。
+
 审计后补交：[原始离线 ZIP 与独立哈希说明](deliveries/README.md)、[C 第二台电脑验收交接单](docs/handoffs/B_C_原包与第二机验收_2026-11-10.md)。运行包保持原字节，A 批准前不扩充训练数据。
 
 本轮集成验证：后端全库 741 通过、1 项 Linux 专用跳过；前端 132 测试、TypeScript 与生产构建通过；材料检查11项通过。learned 已接入 Runner/Guard 及五接口，异常 EDF 回退与 Windows 进程回收保留。原 WP2 集成历史见[WP2交接](docs/handoffs/B_WP2_learned_2026-11-04.md)。

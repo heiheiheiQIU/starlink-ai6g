@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "delivery_package_sha256": "d07c79b4151f129bf35d043924468714a92b8047e167ec59ece7b9ad65138201",
+  "payload_files": 122,
+  "source_commit": "3a5e5cd07f766f27967dda35f24178da643bf692",
+  "full_offline_acceptance": "passed",
+  "acceptance_wall_seconds": 40.70080449999659,
+  "live_publication_hash_and_analysis": "matched",
+  "browser": "540/540; both negative; release version and fingerprint displayed",
+  "original_summary_sha256": "872a71029783ca4100ed8d4e6cfec79261f9c7eaaca65b10362ce53a9ffdbae9",
+  "C_new_package_acceptance": "pending"
+}

@@ -1,0 +1,464 @@
+{
+  "A_ruling": "pending",
+  "applicability": {
+    "domain": "synthetic_out_of_zero_loss_training_domain",
+    "is_policy_benchmark": false,
+    "is_real_satellite_measurement": false,
+    "multiplicity": "pointwise_intervals_no_familywise_claim",
+    "source": "synthetic",
+    "superiority_claim": false
+  },
+  "comparisons": {
+    "learned-edf": {
+      "cells": [
+        {
+          "cell_id": "cell_00",
+          "ci95": [
+            -1.0,
+            -1.0
+          ],
+          "mean_delta": -1.0,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_01",
+          "ci95": [
+            -0.707850716581187,
+            -0.21786016075402329
+          ],
+          "mean_delta": -0.4550111015102427,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_02",
+          "ci95": [
+            -1.0,
+            -1.0
+          ],
+          "mean_delta": -1.0,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_03",
+          "ci95": [
+            -0.815908208019515,
+            -0.35575199046529477
+          ],
+          "mean_delta": -0.5988987648425246,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_04",
+          "ci95": [
+            -1.0,
+            -0.8556171972062231
+          ],
+          "mean_delta": -0.9518723990687411,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_05",
+          "ci95": [
+            -0.7310556546412996,
+            -0.26047076258974655
+          ],
+          "mean_delta": -0.4966663375019828,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_06",
+          "ci95": [
+            -0.5916336052150681,
+            -0.40916617122842686
+          ],
+          "mean_delta": -0.5064892606446657,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_07",
+          "ci95": [
+            -0.2834258168202614,
+            -0.14504041549786423
+          ],
+          "mean_delta": -0.21424650225083114,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_08",
+          "ci95": [
+            -0.7499702758969428,
+            -0.49010771071289394
+          ],
+          "mean_delta": -0.6180273469323583,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_09",
+          "ci95": [
+            -0.3794994999659139,
+            -0.13492287074951237
+          ],
+          "mean_delta": -0.2494646295018445,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_10",
+          "ci95": [
+            -0.6446776690829582,
+            -0.3846067470447974
+          ],
+          "mean_delta": -0.5123730622207405,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_11",
+          "ci95": [
+            -0.32119868356392517,
+            -0.14966919801214582
+          ],
+          "mean_delta": -0.23633471171153494,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_12",
+          "ci95": [
+            -0.43789444051035714,
+            -0.3219692469882849
+          ],
+          "mean_delta": -0.3829939344050792,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_13",
+          "ci95": [
+            -0.2026260452849859,
+            -0.1039882135217322
+          ],
+          "mean_delta": -0.15047963626947858,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_14",
+          "ci95": [
+            -0.5188745393178625,
+            -0.2954589071506535
+          ],
+          "mean_delta": -0.41036526749026586,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_15",
+          "ci95": [
+            -0.19671408084613065,
+            -0.0714607801358628
+          ],
+          "mean_delta": -0.1294590812615997,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_16",
+          "ci95": [
+            -0.4301763413037238,
+            -0.3027638477213882
+          ],
+          "mean_delta": -0.36809722869114747,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_17",
+          "ci95": [
+            -0.13936596947768468,
+            -0.05469958156823302
+          ],
+          "mean_delta": -0.09619265997536189,
+          "missing": 0,
+          "n": 10
+        }
+      ],
+      "formal_verdict": "未完成",
+      "overall": {
+        "aggregation": "equal_weight_18_cells_stratified_paired",
+        "ci95": [
+          -0.49422782912931634,
+          -0.43592598002654237
+        ],
+        "mean_delta": -0.4653873291265777
+      },
+      "paired_count": 180,
+      "statistical_verdict": "负"
+    },
+    "learned-value": {
+      "cells": [
+        {
+          "cell_id": "cell_00",
+          "ci95": [
+            -1.0,
+            -0.7923072562047901
+          ],
+          "mean_delta": -0.9164129376464306,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_01",
+          "ci95": [
+            -0.7312308689843317,
+            -0.2450297694995553
+          ],
+          "mean_delta": -0.48541391671273815,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_02",
+          "ci95": [
+            -1.0,
+            -0.8308991578973659
+          ],
+          "mean_delta": -0.9318692995371064,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_03",
+          "ci95": [
+            -0.8655092366541286,
+            -0.4867000692361886
+          ],
+          "mean_delta": -0.6867000692361886,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_04",
+          "ci95": [
+            -1.0,
+            -0.8556171972062231
+          ],
+          "mean_delta": -0.9518723990687411,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_05",
+          "ci95": [
+            -0.7654084173615366,
+            -0.3603813051888164
+          ],
+          "mean_delta": -0.5726726381804282,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_06",
+          "ci95": [
+            -0.6762212981155468,
+            -0.4662936376973159
+          ],
+          "mean_delta": -0.571114109167126,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_07",
+          "ci95": [
+            -0.3235105228715653,
+            -0.20485604588621292
+          ],
+          "mean_delta": -0.2582618403026543,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_08",
+          "ci95": [
+            -0.6848742303103136,
+            -0.5427384055223309
+          ],
+          "mean_delta": -0.6161248943473352,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_09",
+          "ci95": [
+            -0.4373684186344419,
+            -0.2122919315013976
+          ],
+          "mean_delta": -0.3215490542536147,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_10",
+          "ci95": [
+            -0.630205158474783,
+            -0.43009619130374277
+          ],
+          "mean_delta": -0.5291623468516095,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_11",
+          "ci95": [
+            -0.467165481913225,
+            -0.20882837898004206
+          ],
+          "mean_delta": -0.34382579701032195,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_12",
+          "ci95": [
+            -0.49840727678549007,
+            -0.4166829551400095
+          ],
+          "mean_delta": -0.46157576512685344,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_13",
+          "ci95": [
+            -0.3318877959814748,
+            -0.22231651428644922
+          ],
+          "mean_delta": -0.27708827929719043,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_14",
+          "ci95": [
+            -0.5416266573008084,
+            -0.3820229327026587
+          ],
+          "mean_delta": -0.46555247986190534,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_15",
+          "ci95": [
+            -0.25852255086897835,
+            -0.12003588457673527
+          ],
+          "mean_delta": -0.18886913378482334,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_16",
+          "ci95": [
+            -0.5087725757439289,
+            -0.3636586675162993
+          ],
+          "mean_delta": -0.4361379146606811,
+          "missing": 0,
+          "n": 10
+        },
+        {
+          "cell_id": "cell_17",
+          "ci95": [
+            -0.25087525472703315,
+            -0.13091555854121908
+          ],
+          "mean_delta": -0.19230462661165654,
+          "missing": 0,
+          "n": 10
+        }
+      ],
+      "formal_verdict": "未完成",
+      "overall": {
+        "aggregation": "equal_weight_18_cells_stratified_paired",
+        "ci95": [
+          -0.5385503136194323,
+          -0.4831265616824756
+        ],
+        "mean_delta": -0.511472638980967
+      },
+      "paired_count": 180,
+      "statistical_verdict": "负"
+    }
+  },
+  "frozen_code_revision": "48157a8f4a1cdd7770685b79deb3fe4524b1bf7d",
+  "frozen_manifest_sha256": "3ad4bfeaf5398012bae17cab4bf684fb5a80ce0b5e341bf5e9eda4d179104d30",
+  "learned": {
+    "decisions": 2160,
+    "fallbacks": 0,
+    "idle_actions": 2160,
+    "score_margin": {
+      "count": 2009,
+      "definition": "idle_score_minus_best_send_score",
+      "idle_only_decisions": 151,
+      "maximum": 1.0,
+      "median": 0.1785290241241455,
+      "minimum": 4.4170640478569105e-08,
+      "p05": 6.294707475262842e-08,
+      "p95": 0.9999999957268818,
+      "zero_count": 0
+    }
+  },
+  "machine_audit": {
+    "checks": {
+      "applicability": true,
+      "bootstrap_10000_stratified": true,
+      "finite_maximum_scores": true,
+      "immutable_bindings": true,
+      "learned_decisions": true,
+      "metrics_from_540_rows": true,
+      "paired_360_rows": true,
+      "pending_negative_verdicts": true,
+      "run_lifecycle": true
+    },
+    "status": "passed"
+  },
+  "model": {
+    "version": "a-n3-mlp-v1",
+    "weights_sha256": "a5226264d3a60f7d858e4d410595668b44b8dbd4c9a8bfa05191c1fd80461e4a"
+  },
+  "policy_weighted_on_time_rate": {
+    "edf": 0.4653873291265777,
+    "learned": 0.0,
+    "value": 0.511472638980967
+  },
+  "release_approved": false,
+  "result_zip_sha256": "efa801d9dde6a9eb340ca0a27b873027248edbcadd7b85c82cdd3847ab5f9e86",
+  "run_index_sha256": "5d9c58585cd6782c3d898f2fc690829ae3a04956f9844e9ad6c389ea7d408ade",
+  "runs": {
+    "attempt": 1,
+    "cells": 18,
+    "completed": 540,
+    "failures": 0,
+    "missing": 0,
+    "per_policy": {
+      "edf": 180,
+      "learned": 180,
+      "value": 180
+    },
+    "retries": 0,
+    "trajectories": 180,
+    "trajectories_per_cell": 10
+  },
+  "source_commit": "a4890579f1d4a2cfb5be9246db6ca46a306fcd39",
+  "summary_sha256": "872a71029783ca4100ed8d4e6cfec79261f9c7eaaca65b10362ce53a9ffdbae9"
+}

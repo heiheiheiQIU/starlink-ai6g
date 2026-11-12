@@ -1,0 +1,25 @@
+{
+  "status": "passed_after_fixes",
+  "reviewer": "independent_codex_reviewer",
+  "scope": "unified release logic, pinned evidence, frontend binding and publication scope",
+  "findings": [
+    {
+      "priority": "P2",
+      "problem": "Frontend publication metadata accepted arbitrary hashes or missing binding",
+      "fix": "Published state now requires approved version/fingerprint and exact derived-analysis contents; four mutation cases red then green"
+    },
+    {
+      "priority": "P2",
+      "problem": "Bundled summary test still expected original pending status",
+      "fix": "Original and derived states tested separately; original raw pending and published accepted both checked"
+    }
+  ],
+  "verification": {
+    "backend_passed": 741,
+    "backend_skipped": 1,
+    "frontend_passed": 132,
+    "material_node_passed": 11,
+    "docx_builder_passed": 11
+  },
+  "deferred_minors": []
+}
